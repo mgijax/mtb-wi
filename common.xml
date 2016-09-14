@@ -135,8 +135,6 @@ object files in the appropriate location in the build directory.
             debug="${compile.debug}"
       deprecation="${compile.deprecation}"
          optimize="${compile.optimize}"
-           source="${javac.source}" 
-           target="${javac.target}" 
 memoryInitialSize="256m"
 memoryMaximumSize="1024m"
              fork="true">
