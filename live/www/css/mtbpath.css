@@ -1,0 +1,288 @@
+/* Defaults */
+body {
+background-color: #ffffff;
+color: #000000;
+font-family: Verdana,Arial,Helvetica;
+font-size: 12px;
+}
+td {
+font-family: Verdana,Arial,Helvetica;
+font-size: 12px;
+}
+
+/* Form Elements */
+input {
+color: #000000;
+font-family: Verdana,Arial,Helvetica;
+font-size: 11px
+}
+select {
+color: #000000;
+font-family: Verdana,Arial,Helvetica;
+font-size: 11px;
+}
+textarea.readOnly {
+height:100px;
+width:100%;
+border:none;
+font-family: Verdana,Arial,Helvetica;
+font-size: 12px;
+}
+/* Index Page */
+.text {
+font-family: Verdana,Arial,Helvetica;
+color: #000001
+}
+.indexTitle {
+font-size: 20px;
+font-family: Arial,Helvetica;
+vertical-align: middle;
+color: #000001;
+font-weight: bold;
+text-align: center;
+background-color: #D0E0F0
+}
+
+/* Headers */
+.pageTitle {
+font-size: 18px;
+font-family: Arial,Helvetica;
+vertical-align: middle;
+color: #000001;
+font-weight: bold;
+text-align: center;
+background-color: #D0E0F0
+}
+.label {
+font-size: 12px;
+font-family: Arial,Helvetica;
+text-align: right;
+color: #000001;
+font-weight: bold;
+}
+td.headerLabel {
+font-size: 12px;
+font-family: Arial,Helvetica;
+text-align: right;
+color: #000001;
+font-weight: bold;
+vertical-align: middle;
+text-align: center;
+background-color: #dddddd
+}
+td.headerLabelSmall {
+font-size: 9px;
+font-family: Arial,Helvetica;
+text-align: right;
+color: #000001;
+font-weight: bold;
+vertical-align: middle;
+text-align: center;
+width: 50px;
+background-color: #dddddd
+}
+
+/* Anchor Tags */
+a: visited {
+color: #2222FF;
+} 
+a: link {
+color: #2222FF;
+} 
+a: hover {
+text-decoration: none;
+color: #FF2222;
+} 
+a: active {
+color: #2222FF;
+} 
+a.help {
+cursor: help
+}
+
+/* Tool Bar */
+.toolBar {
+font-size: 12px;
+font-family: Verdana,Arial,Helvetica;
+vertical-align: middle;
+background-color: #ffffff
+}
+.toolBarSearch {
+font-size: 12px;
+font-family: Verdana,Arial,Helvetica;
+vertical-align: middle;
+color: #000000;
+background-color: #D0E0F0;
+width: 100%
+}
+.toolBarSearchTitle {
+font-weight: bold
+}
+.toolBarSmall {
+font-size: 11px;
+font-weight: normal;
+}
+.toolBarTitle {
+font-weight: bold;
+font-size: 14px
+}
+.toolBarSelect {
+color: #000000;
+font-family: Verdana,Arial,Helvetica;
+font-size: 11px;
+width: 100%
+}
+
+/* Striping */
+/* Complete Rows */
+tr.stripe1 {
+background-color: #ffffff
+}
+tr.stripe2 {
+background-color: #F0F0F0
+}
+/* TableData Label Categories (Left Side)*/
+td.cat1 {
+font-size: 12px;
+font-family: Arial,Helvetica;
+vertical-align: top;
+text-align: right;
+color: #000001;
+background-color: #DFEFFF;
+font-weight: bold;
+width: 120px;
+padding: 8px
+}
+td.cat2 {
+font-size: 12px;
+font-family: Arial,Helvetica;
+vertical-align: top;
+text-align: right;
+color: #000001;
+background-color: #D0E0F0;
+font-weight: bold;
+width: 120px;
+padding: 8px
+}
+/* TableData Data (Right Side)*/
+td.data1 {
+font-size: 12px;
+font-family: Verdana,Arial,Helvetica;
+vertical-align: top;
+color: #000001;
+}
+td.data2 {
+font-size: 12px;
+font-family: Verdana,Arial,Helvetica;
+vertical-align: top;
+color: #000001;
+}
+td.sortHeader {
+white-space: nowrap;
+text-align: right;
+}
+/* Search Results */
+tr.summary {
+background-color: #ffffff
+}
+td.resultsHeader {
+font-size: 12px;
+font-family: Arial,Helvetica;
+vertical-align: middle;
+color: #000001;
+background-color: #D0E0F0;
+font-weight: bold;
+text-align: center;
+white-space: nowrap;  
+}
+td.resultsHeaderLeft {
+font-size: 12px;
+font-family: Arial,Helvetica;
+vertical-align: middle;
+color: #000001;
+background-color: #D0E0F0;
+font-weight: bold;
+text-align: left
+}
+td.resultsHeaderSmall {
+font-size: 9px;
+font-family: Arial,Helvetica;
+text-align: right;
+color: #000001;
+font-weight: bold;
+vertical-align: middle;
+text-align: center;
+width: 50px;
+background-color: #D0E0F0
+}
+
+/* Miscellaneous */ 
+table.results {
+background-color: #3344AA
+}
+tr.buttons {
+vertical-align: middle;
+text-align: left;
+background-color: #ffffff
+}
+tr.pageInfo {
+vertical-align: middle;
+text-align: left;
+background-color: #ffffff
+}
+td.hilite {
+background-color: #FDFDDD
+}
+.enhance {
+font-size: 14px;
+font-weight: bold;
+vertical-align: middle
+}
+.error {
+color: red
+}
+.nowrap {
+white-space: nowrap;
+} 
+.larger {
+font-size: 14px;
+font-weight: bold
+}
+.normal {
+font-size: 12px;
+font-weight: normal
+}
+.quickSearch {
+font-size: 12px;
+font-family: Verdana,Arial,Helvetica;
+vertical-align: middle;
+color: #000000;
+background-color: #D0E0F0
+}
+.smallCenter {
+font-size: 10px;
+text-align: center
+}
+hr {
+color: #3344AA;
+background-color: #3344AA;
+height: 1px;
+border: 0
+}
+
+/*  ToolBar / Main Data Seperator */
+td.separator {
+background-color: #888888;
+width: 1px
+} 
+
+/* Definitions */
+.definitionsTitle {
+font-size: 12px;
+font-family: Arial,Helvetica;
+vertical-align: middle;
+color: #000001;
+font-weight: bold;
+text-align: center;
+background-color: #D0E0F0
+}

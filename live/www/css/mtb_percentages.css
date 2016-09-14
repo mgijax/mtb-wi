@@ -1,0 +1,64 @@
+/* Defaults */
+body {background-color:#ffffff;color:#000000;font-family:Verdana,Arial,Helvetica;font-size:90%;}
+td {font-family:Verdana,Arial,Helvetica;font-size:90%;}
+
+/* Form Elements */
+input {color:#222288;font-family:Verdana,Arial,Helvetica;}
+select {color:#222288;font-family:Verdana,Arial,Helvetica;}
+
+/* Index Page */
+.text {font-family:Verdana,Arial,Helvetica;color:#000001}
+.indexTitle {font-size:160%;font-family:Arial,Helvetica;vertical-align:middle;color:#000001;font-weight:bold;text-align:center;background-color:#D0E0F0}
+
+/* Headers */
+.pageTitle {font-size:140%;font-family:Arial,Helvetica;vertical-align:middle;color:#000001;font-weight:bold;text-align:center;background-color:#D0E0F0}
+.label {font-size:90%;font-family:Arial,Helvetica;text-align:right;color:#000001;font-weight:bold;}
+td.headerLabel {font-size:90%;font-family:Arial,Helvetica;vertical-align:top;text-align:right;color:#000001;font-weight:bold;vertical-align:middle;text-align:center;background-color:#dddddd}
+td.headerLabelSmall {font-size:80%;font-family:Arial,Helvetica;vertical-align:top;text-align:right;color:#000001;font-weight:bold;vertical-align:middle;text-align:center;width:50px;background-color:#dddddd}
+
+/* Anchor Tags */
+a:visited {color: #2222FF;} 
+a:link {color: #2222FF;} 
+a:hover {text-decoration: none;color: #FF2222;} 
+a:active {color: #2222FF;} 
+a.help {cursor:help}
+
+/* Tool Bar */
+.toolBar {font-size:90%;font-family:Verdana,Arial,Helvetica;vertical-align:middle;background-color:#ffffff}
+.toolBarSearch {font-size:90%;font-family:Verdana,Arial,Helvetica;vertical-align:middle;color:#000000;background-color:#D0E0F0}
+.toolBarSearchTitle {font-weight:bold}
+.toolBarSmall {font-size:80%;font-weight:normal;}
+.toolBarTitle {font-weight:bold;font-size:112%}
+
+/* Striping */
+/* Complete Rows */
+tr.stripe1 {background-color:#ffffff}
+tr.stripe2 {background-color:#F0F0F0}
+/* TableData Label Categories (Left Side)*/
+td.cat1 {font-size:90%;font-family:Arial,Helvetica;vertical-align:top;text-align:right;color:#000001;background-color:#DFEFFF;font-weight:bold;width:120px;padding:8px}
+td.cat2 {font-size:90%;font-family:Arial,Helvetica;vertical-align:top;text-align:right;color:#000001;background-color:#D0E0F0;font-weight:bold;width:120px;padding:8px}
+/* TableData Data (Right Side)*/
+td.data1 {font-size:90%;font-family:Verdana,Arial,Helvetica;vertical-align:top;color:#000001;}
+td.data2 {font-size:90%;font-family:Verdana,Arial,Helvetica;vertical-align:top;color:#000001;}
+
+/* Search Results */
+tr.summary {background-color:#ffffff}
+td.resultsHeader {font-size:90%;font-family:Arial,Helvetica;vertical-align:middle;color:#000001;background-color:#D0E0F0;font-weight:bold;text-align:center}
+td.resultsHeaderLeft {font-size:90%;font-family:Arial,Helvetica;vertical-align:middle;color:#000001;background-color:#D0E0F0;font-weight:bold;text-align:left}
+td.resultsHeaderSmall {font-size:70%;font-family:Arial,Helvetica;vertical-align:top;text-align:right;color:#000001;font-weight:bold;vertical-align:middle;text-align:center;width:50px;background-color:#D0E0F0}
+
+/* Miscellaneous */ 
+table.results {background-color:#3344AA}
+tr.buttons {vertical-align:middle;text-align:left;background-color:#ffffff}
+td.hilite {background-color:#FDFDDD}
+.enhance {font-size:112%;font-weight:bold;vertical-align:middle}
+.error {color:red}
+.nowrap {white-space: nowrap;} 
+.larger {font-size:112%;font-weight:bold}
+.quickSearch {font-size:90%;font-family:Verdana,Arial,Helvetica;vertical-align:middle;color:#000000;background-color:#D0E0F0}
+
+/*  ToolBar / Main Data Seperator */
+td.separator {background-color:#888888;width:1px} 
+
+/* Definitions */
+.definitionsTitle {font-size:90%;font-family:Arial,Helvetica;vertical-align:middle;color:#000001;font-weight:bold;text-align:center;background-color:#D0E0F0}

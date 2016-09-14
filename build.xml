@@ -1,0 +1,238 @@
+<?xml version="1.0" standalone="yes"?>
+<!--
+===============================================================================
+                          MTBWI Library build file
+===============================================================================
+-->
+<project name="mtbwi" default="debug" basedir=".">
+
+<description>
+    mtbwi is the Java Web Interface into the MTB system.
+</description>
+
+<!--===================== Property Definitions =============================-->
+<property name="tomcat.root"      value="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/"/>
+<property name="deploy.root"      value="/home/mjv/deploy/apps"/>
+<property name="app.version"      value="1"/>
+<property name="app.name"         value="mtbwi"/>
+<property name="app.path"         value="/mtbwi"/>
+<property name="src.java.home"    value="${basedir}/src/java"/>
+<property name="web.xml"          value="build/WEB-INF/web.xml"/>
+<property name="dist.war.name"    value="${app.name}.war"/>
+<property name="dist.zip.name"    value="${app.name}.zip"/>
+
+<property file="build.properties"/>
+
+<!-- Import here to inherit the properties set from above. 
+<import file="../common.xml"/>  -->
+
+<!--===================== External Dependencies ============================-->
+<property name="JavaToHTML.jar"   value="lib/JavaToHTML.jar"/>
+<property name="mtbdao.jar"       value="lib/mtbdao.jar"/>
+<property name="mtbutils.jar"     value="lib/mtbutils.jar"/>
+<property name="CacheFilter.jar"  value="lib/CacheFilter.jar"/>
+<property name="context.xml"      value="conf/context.xml"/>
+
+<!--===================== Custom Classpath =================================-->
+
+<path id="project.classpath">
+    <fileset dir="${tomcat.root}/lib">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="lib/jstl-1.1.2">
+        <include name="**/*.jar"/>
+    </fileset> 
+    <fileset dir="lib/struts-1.2.8">
+        <include name="**/*.jar"/>
+    </fileset>
+     <fileset dir="lib/axis2">
+        <include name="**/*.jar"/>
+    </fileset>
+</path>
+
+<!-- Import here to inherit the properties set from above. -->
+<import file="../common.xml"/>   
+
+<!--
+===============================================================================
+                        Prepare Target
+===============================================================================
+The "prepare" target is used to create the necessary build directory
+structure and copy the static contents of your web application to it.  If you
+need to copy static files from external dependencies, you can customize the
+contents of this task.  Normally, this task is executed indirectly when needed.
+The prepareCalled property ensures that clean will only be called once per
+invocation even though it may be called more than once.
+-->
+<target name="prepare" depends="clean,compile"
+        if="ant.project.name" unless="prepareCalled">
+    <echo message="Preparing file structure..."/>
+
+    <mkdir dir="${build.home}"/>
+    <mkdir dir="${build.home}/META-INF"/>
+    <mkdir dir="${build.home}/WEB-INF"/>
+    <mkdir dir="${build.home}/WEB-INF/classes"/>
+    <mkdir dir="${build.home}/WEB-INF/lib"/>
+    <mkdir dir="${build.home}/WEB-INF/tags"/>
+
+    <available file="${build.home}"
+               type="dir"
+               property="prepareCalled"/>
+
+    <copy todir="${build.home}">
+      <fileset dir="${web.home}"/>
+    </copy>
+
+    <echo message="CLASSES.HOME = ${classes.home}"/>
+    <move todir="${build.home}/WEB-INF/classes">
+        <fileset dir="${classes.home}"/>
+    </move>
+
+    <copy flatten="true" todir="${build.home}/WEB-INF/lib">
+        <fileset dir="${lib.home}">
+            <include name="**/*.jar" />
+            <include name="**/*.zip" />
+            <exclude name="**/servlet-api.jar" />
+            <exclude name="**/jsp-api.jar" />
+        </fileset>
+    </copy>
+	
+	 <copy todir="${build.home}/live">
+        <fileset dir="live">
+            <include name="**/*" />
+            <exclude name="**/mtbwi.properties"/>
+         </fileset>
+    </copy>
+
+   
+
+</target>
+
+<!--===================== Custom Prepare Target ============================-->
+<target name="projectPrepare" depends="prepare"
+        description="Prepare the web application.">
+
+    <mkdir dir="${build.home}"/>
+    <loadproperties srcFile="conf/build.properties"/>
+    <echo message="Preparing file structure specifically for project..."/>
+    <echo message="BUILDING ${build.version}"/>
+
+    <!-- copy and replace -->
+    <copy file="conf/context.xml" todir="build/META-INF" overwrite="true"/>
+    <replace file="build/META-INF/context.xml"
+             replacefilterfile="conf/build.properties"/>
+
+    <copy file="conf/security.xml" todir="build/META-INF" overwrite="true"/>
+    <replace file="build/META-INF/security.xml"
+             replacefilterfile="conf/build.properties"/>
+
+    <copy file="${src.java.home}/log4j.properties" todir="${build.home}/WEB-INF/classes" overwrite="true"/>
+    <replace file="${build.home}/WEB-INF/classes/log4j.properties"
+             replacefilterfile="conf/build.properties"/>
+
+    <copy file="web/WEB-INF/web.xml" todir="build/WEB-INF" overwrite="true"/>
+    <replace file="build/WEB-INF/web.xml"
+             replacefilterfile="conf/build.properties"/>
+           
+    <copy file="live/mtbwi.properties" todir="build/live" overwrite="true"/>
+    <replace file="build/live/mtbwi.properties"
+             replacefilterfile="conf/build.properties"/>           
+ 
+
+
+    <!-- Copy the TAG libraries -->
+    <mkdir dir="build/WEB-INF/tags"/>
+    <copy todir="build/WEB-INF/tags"
+          overwrite="true"
+          file="web/WEB-INF/tags/TimerTag.tag"/>
+
+    <copy todir="build/WEB-INF"
+          overwrite="true"
+          file="lib/MTBWebUtils.tld"/>
+          
+    <copy todir="build/WEB-INF">
+        <fileset dir="lib/struts-1.2.8">
+            <include name="**/*.dtd"/>
+            <include name="**/*.tld"/>
+            <include name="**/*.xml"/>
+        </fileset>
+        <fileset dir="lib/jstl-1.1.2">
+            <include name="**/*.dtd"/>
+            <include name="**/*.tld"/>
+            <include name="**/*.xml"/>
+        </fileset>
+    </copy>
+</target>
+
+<!--===================== Custom Dist Target ===============================-->
+<target name="projectDeployLocal" description="Prepare the web application.">
+   <echo message="Preparing WAR file for DEVELOPMENT..."/>
+   <echo message="Copying conf/build.dev.properties to conf/build.properties"/>
+   <copy file="conf/build.local.properties"
+         tofile="conf/build.properties"
+         overwrite="true"/>
+   <antcall target="projectPrepare"/>
+   <antcall target="webdist"/>
+   <copy file="dist/mtbwi.war" 
+         tofile="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/webapps/mtbwi.war"
+         overwrite="true"/>
+   <tstamp>
+    <format property="current.time" pattern="MM/dd/yyyy hh:mm:ss aa" />
+  </tstamp>
+
+  <echo message="finished at ${current.time}" />      
+   
+</target>
+
+<target name="projectDeployLocal2" description="Prepare the web application.">
+   <echo message="Preparing WAR file for DEVELOPMENT..."/>
+   <echo message="Copying conf/build.dev.properties to conf/build.properties"/>
+   <copy file="conf/build.local.properties"
+         tofile="conf/build.properties"
+         overwrite="true"/>
+   <antcall target="projectPrepare"/>
+   <antcall target="webdist"/>
+   <copy file="dist/mtbwi.war" 
+         tofile="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/webapps/mtbwi2.war"
+         overwrite="true"/>
+   <tstamp>
+    <format property="current.time" pattern="MM/dd/yyyy hh:mm:ss aa" />
+  </tstamp>
+
+  <echo message="finished at ${current.time}" />      
+   
+</target>
+
+<target name="projectDistDev" description="Prepare the web application.">
+   <echo message="Preparing WAR file for DEVELOPMENT..."/>
+   <echo message="Copying conf/build.dev.properties to conf/build.properties"/>
+   <copy file="conf/build.dev.properties"
+         tofile="conf/build.properties"
+         overwrite="true"/>
+   <antcall target="projectPrepare"/>
+   <antcall target="webdist"/>
+</target>
+
+<target name="projectDistProd" description="Prepare the web application.">
+   <echo message="Preparing WAR file for PRODUCTION..."/>
+   <echo message="Copying conf/build.prod.properties to conf/build.properties"/>
+   <copy file="conf/build.prod.properties"
+         tofile="conf/build.properties"
+         overwrite="true"/>
+   <antcall target="projectPrepare"/>
+   <antcall target="webdist"/>
+</target>
+
+<target name="projectDistPub" description="Prepare the web application.">
+   <echo message="Preparing WAR file for PUBLIC..."/>
+   <echo message="Copying conf/build.pub.properties to conf/build.properties"/>
+   <copy file="conf/build.pub.properties"
+         tofile="conf/build.properties"
+         overwrite="true"/>
+   <antcall target="projectPrepare"/>
+   <antcall target="webdist"/>
+</target>
+
+
+</project>
+

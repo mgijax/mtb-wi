@@ -1,0 +1,9 @@
+##gff-version 3 								
+7	.	QTL	58658647	58658845	.	.	.	mgiID=MGI:3577289;color=0xC4C3D0;group=bone;description=osteosarcoma susceptibility 1;Name=Ossc1;track=R1
+9	.	QTL	88128964	88129073	.	.	.	mgiID=MGI:2389037;color=0xC4C3D0;group=bone;description=osteosarcoma suppressor 1;Name=Oss1;track=R1
+9	.	QTL	83100631	83100729	.	.	.	mgiID=MGI:2389038;color=0xC4C3D0;group=bone;description=osteosarcoma suppressor 2;Name=Oss2;track=R1
+14	.	QTL	91557327	91557444	.	.	.	mgiID=MGI:3577290;color=0xC4C3D0;group=bone;description=osteosarcoma susceptibility 2;Name=Ossc2;track=R1
+8	.	QTL	17032610	100081465	.	.	.	mgiID=MGI:3775514;color=0xF5DEB3;group=adrenal gland;description=post-ovarectomy adrenal tumor susceptibility 1;Name=Poats1;track=R1
+1	.	MyRegion	174629360	164247887	.	.	.	group=user defined;description=mr1;Name=MyRegion1;track=L1
+6	. 	Gene	17256335	17291452	.	+	.	mgiID=MGI:102709;color=green;Name=Cav1;track=R1
+2	.	microRNA	10422454	10422526	.	+	.	mgiID=MGI:3719578;color=black;description=Mir467a-8;track=R1

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.ant.freeform</type>
+    <configuration>
+        <general-data xmlns="http://www.netbeans.org/ns/freeform-project/1">
+            <name>mtbwi</name>
+        </general-data>
+        <general-data xmlns="http://www.netbeans.org/ns/freeform-project/2">
+            <!--Do not use Project Properties customizer when editing this file manually.-->
+            <name>mtbwi</name>
+            <properties/>
+            <folders>
+                <source-folder>
+                    <label>mtbwi</label>
+                    <location>.</location>
+                    <encoding>windows-1252</encoding>
+                </source-folder>
+                <source-folder>
+                    <label>java</label>
+                    <type>java</type>
+                    <location>src/java</location>
+                    <encoding>windows-1252</encoding>
+                </source-folder>
+                <source-folder>
+                    <label>web</label>
+                    <type>doc_root</type>
+                    <location>web</location>
+                </source-folder>
+                <source-folder>
+                    <label>WEB-INF</label>
+                    <type>web_inf</type>
+                    <location>web/WEB-INF</location>
+                </source-folder>
+            </folders>
+            <ide-actions>
+                <action name="build">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>compile</target>
+                </action>
+                <action name="clean">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>clean</target>
+                </action>
+                <action name="javadoc">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>javadoc</target>
+                </action>
+                <action name="run">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>start</target>
+                </action>
+                <action name="redeploy">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>deploy</target>
+                </action>
+                <action name="rebuild">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>clean</target>
+                    <target>compile</target>
+                </action>
+                <action name="run.single">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>run-selected-file-in-java</target>
+                    <context>
+                        <property>run.class</property>
+                        <folder>src/java</folder>
+                        <pattern>\.java$</pattern>
+                        <format>java-name</format>
+                        <arity>
+                            <one-file-only/>
+                        </arity>
+                    </context>
+                </action>
+                <action name="compile.single">
+                    <script>nbproject/nbjdk.xml</script>
+                    <target>compile-selected-files-in-java</target>
+                    <context>
+                        <property>files</property>
+                        <folder>src/java</folder>
+                        <pattern>\.java$</pattern>
+                        <format>relative-path</format>
+                        <arity>
+                            <separated-files>,</separated-files>
+                        </arity>
+                    </context>
+                </action>
+            </ide-actions>
+            <export>
+                <type>folder</type>
+                <location>classes</location>
+                <script>nbproject/nbjdk.xml</script>
+                <build-target>compile</build-target>
+            </export>
+            <view>
+                <items>
+                    <source-folder style="tree">
+                        <label>Web Pages</label>
+                        <location>web</location>
+                    </source-folder>
+                    <source-folder style="tree">
+                        <label>WEB-INF Content</label>
+                        <location>web/WEB-INF</location>
+                    </source-folder>
+                    <source-folder style="packages">
+                        <label>java</label>
+                        <location>src/java</location>
+                    </source-folder>
+                    <source-file>
+                        <location>build.xml</location>
+                    </source-file>
+                </items>
+                <context-menu>
+                    <ide-action name="build"/>
+                    <ide-action name="clean"/>
+                    <ide-action name="javadoc"/>
+                    <ide-action name="run"/>
+                    <ide-action name="redeploy"/>
+                    <ide-action name="rebuild"/>
+                </context-menu>
+            </view>
+            <subprojects/>
+        </general-data>
+        <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/4">
+            <compilation-unit>
+                <package-root>src/java</package-root>
+                <classpath mode="compile">lib/dao.jar;lib/log4j-1.2.8.jar;lib/mtbdao.jar;lib/struts-1.2.8/struts.jar;lib/struts-1.2.8;lib/mtbutils.jar;lib/mailapi.jar;lib/commons-lang3-3.1.jar;lib/jettison-1.3.3.jar;lib;lib/axis2;lib/axis2/axiom-api-1.2.13.jar;lib/axis2/axis2-adb-1.6.2.jar;lib/axis2/axis2-kernel-1.6.2.jar;lib/axis2/XmlSchema-1.4.7.jar;lib/axis2/axiom-api-1.2.13.jar;lib/axis2/axiom-impl-1.2.13.jar;lib/axis2/axis2-adb-1.6.2.jar;lib/axis2/axis2-kernel-1.6.2.jar;lib/axis2/axis2-transport-http-1.6.2.jar;lib/axis2/axis2-transport-local-1.6.2.jar;lib/axis2/commons-codec-1.3.jar;lib/axis2/commons-httpclient-3.1.jar;lib/axis2/commons-logging-1.1.1.jar;lib/axis2/httpcore-4.0.jar;lib/axis2/jaxws-tools-2.1.3.jar;lib/axis2/log4j-1.2.15.jar;lib/axis2/neethi-3.0.2.jar;lib/axis2/wsdl4j-1.6.2.jar;lib/MTB_ws-test-client.jar;C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\lib;C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\lib\catalina.jar;C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\lib\jsp-api.jar;C:\Program Files\Apache Software Foundation\Apache Tomcat 8.0.27\lib\servlet-api.jar</classpath>
+                <built-to>classes</built-to>
+                <source-level>1.8</source-level>
+            </compilation-unit>
+        </java-data>
+        <preferences xmlns="http://www.netbeans.org/ns/auxiliary-configuration-preferences/1">
+            <module name="org-netbeans-modules-html-editor-lib">
+                <property name="default-html-public-id" value="HTML5"/>
+            </module>
+            <module name="org-netbeans-modules-editor-indent">
+                <node name="CodeStyle"/>
+            </module>
+        </preferences>
+        <web-data xmlns="http://www.netbeans.org/ns/freeform-project-web/1">
+            <web-module>
+                <doc-root>web</doc-root>
+                <classpath>lib;lib/axis2</classpath>
+                <context-path>/mtbwi</context-path>
+                <j2ee-spec-level>1.4</j2ee-spec-level>
+            </web-module>
+        </web-data>
+    </configuration>
+</project>

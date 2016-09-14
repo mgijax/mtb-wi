@@ -1,0 +1,28 @@
+[{text:'all feature types',checked:false, iconCls:'no-icon',id:'6238159',leaf:false,children:[{text:'gene',checked:false, iconCls:'no-icon',id:'6238160',leaf:false,children:[{text:'protein coding gene',checked:false, iconCls:'no-icon',id:'6238161',leaf:true},
+{text:'non-coding RNA gene',checked:false, iconCls:'no-icon',id:'6238162',leaf:false,children:[{text:'rRNA gene',checked:false, iconCls:'no-icon',id:'6238163',leaf:true},
+{text:'tRNA gene',checked:false, iconCls:'no-icon',id:'6238164',leaf:true},
+{text:'snRNA gene',checked:false, iconCls:'no-icon',id:'6238165',leaf:true},
+{text:'snoRNA gene',checked:false, iconCls:'no-icon',id:'6238166',leaf:true},
+{text:'miRNA gene',checked:false, iconCls:'no-icon',id:'6238167',leaf:true},
+{text:'scRNA gene',checked:false, iconCls:'no-icon',id:'6238168',leaf:true},
+{text:'lincRNA gene',checked:false, iconCls:'no-icon',id:'6238169',leaf:true},
+{text:'SRP RNA gene',checked:false, iconCls:'no-icon',id:'6238180',leaf:true},
+{text:'RNase P RNA gene',checked:false, iconCls:'no-icon',id:'6238181',leaf:true},
+{text:'RNase MRP RNA gene',checked:false, iconCls:'no-icon',id:'6238182',leaf:true},
+{text:'telomerase RNA gene',checked:false, iconCls:'no-icon',id:'6238183',leaf:true},
+{text:'unclassified non-coding RNA gene',checked:false, iconCls:'no-icon',id:'6238186',leaf:true}]}
+,
+{text:'heritable phenotypic marker',checked:false, iconCls:'no-icon',id:'6238170',leaf:true},
+{text:'gene segment',checked:false, iconCls:'no-icon',id:'6238171',leaf:true},
+{text:'unclassified gene',checked:false, iconCls:'no-icon',id:'6238184',leaf:true}]}
+,
+{text:'other feature type',checked:false, iconCls:'no-icon',id:'6238185',leaf:false,children:[{text:'pseudogene',checked:false, iconCls:'no-icon',id:'6238172',leaf:true},
+{text:'QTL',checked:false, iconCls:'no-icon',id:'6238173',leaf:true},
+{text:'transgene',checked:false, iconCls:'no-icon',id:'6238174',leaf:true},
+{text:'complex/cluster/region',checked:false, iconCls:'no-icon',id:'6238175',leaf:true},
+{text:'cytogenetic marker',checked:false, iconCls:'no-icon',id:'6238176',leaf:true},
+{text:'BAC/YAC end',checked:false, iconCls:'no-icon',id:'6238177',leaf:true},
+{text:'other genome feature',checked:false, iconCls:'no-icon',id:'6238178',leaf:true},
+{text:'DNA segment',checked:false, iconCls:'no-icon',id:'6238179',leaf:true}]}
+]}
+]

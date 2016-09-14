@@ -1,0 +1,10 @@
+**/classes
+**/CVS/
+**/build/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/*.class
+**/mtbwi.properties
+**/.cvsignore
+**/nbproject/private/

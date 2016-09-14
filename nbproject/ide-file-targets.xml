@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir=".." name="mtbwi-IDE">
+    <!-- TODO: edit the following target according to your needs -->
+    <!-- (more info: http://www.netbeans.org/kb/41/freeform-config.html#runsingle) -->
+    <target name="run-selected-file-in-java">
+        <property name="run.class" value="QTLParserDeux"/>
+        <fail unless="run.class">Must set property 'run.class'</fail>
+        <java classname="H:/mgi/mtb/mtbwi/test/${run.class}" failonerror="true" fork="true">
+            <classpath>
+                <pathelement path="lib/servlet-api.jar;lib/jsp-api.jar;lib/dao.jar;lib/mtbdao.jar;lib/mtbutils.jar;lib/mtbwebutils.jar;lib/struts-1.2.8/struts.jar;lib/struts-1.2.8/antlr.jar;lib/struts-1.2.8/commons-beanutils.jar;lib/struts-1.2.8/commons-digester.jar;lib/struts-1.2.8/commons-fileupload.jar;lib/struts-1.2.8/commons-logging.jar;lib/struts-1.2.8/commons-validator.jar;lib/struts-1.2.8/jakarta-oro.jar;lib/log4j-1.2.8.jar;../mtbdao/src;../mtbutils/src"/>
+            </classpath>
+        </java>
+    </target>
+    <!-- TODO: edit the following target according to your needs -->
+    <!-- (more info: http://www.netbeans.org/kb/41/freeform-config.html#compilesingle) -->
+    <target name="compile-selected-files-in-java">
+        <fail unless="files">Must set property 'files'</fail>
+        <!-- TODO decide on and define some value for ${build.classes.dir} -->
+        <mkdir dir="test"/>
+        <javac destdir="test" includes="${files}" source="1.5" srcdir="src/java">
+            <classpath path="lib/servlet-api.jar;lib/jsp-api.jar;lib/dao.jar;lib/mtbdao.jar;lib/mtbutils.jar;lib/mtbwebutils.jar;lib/struts-1.2.8/struts.jar;lib/struts-1.2.8/antlr.jar;lib/struts-1.2.8/commons-beanutils.jar;lib/struts-1.2.8/commons-digester.jar;lib/struts-1.2.8/commons-fileupload.jar;lib/struts-1.2.8/commons-logging.jar;lib/struts-1.2.8/commons-validator.jar;lib/struts-1.2.8/jakarta-oro.jar;lib/log4j-1.2.8.jar;../mtbdao/src;../mtbutils/src"/>
+        </javac>
+    </target>
+</project>

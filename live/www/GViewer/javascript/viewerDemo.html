@@ -1,0 +1,111 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
+    <script type="text/javascript" src="../../adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="../../ext-all-debug.js"></script>
+    <script type="text/javascript" src="Karyotype-canvas.js"></script>
+  </head>
+  
+  
+  <script type="text/javascript">
+    
+    var featureStore, karyoPanel
+    var UCSCBandLink='http://genome.ucsc.edu/cgi-bin/hgTracks?org=Mouse&position=';
+   
+    Ext.onReady(function(){
+      
+      featureStore = new Ext.data.XmlStore({
+        autoDestroy: true,
+        url:'toConfigureProxy',  // place holder that configures the data proxy for the store
+        record: 'feature', 
+        autoLoad: false,
+        autoSave:false,
+        fields: [        // any store (json, array, xml) with the required fields will work 
+          'chromosome',  // required
+          'start',       // required
+          'end',         // required
+          'type',
+          'color',
+          'label',
+          'link',
+          'mgiid',
+          'name',
+          'group',
+          'track'
+        ]	
+      });	
+        
+      karyoPanel = new org.jax.mgi.kmap.KaryoPanel({
+        id:'kPanel',
+        bandingFile:'mouse_ideo.xml',
+        maxKaryoSize:100,
+        bandLink:UCSCBandLink,
+        localLink:'',
+        chromosomeWidth:11,
+        columns:12,
+        featureGap:2,
+        fCanvasHeight:250,
+        fCanvasWidth:20,
+        renderTo:'viewer',
+        bandMaskDiv:'viewer',
+        boxMaxHeight:1000,
+        maxBoxWidth:1600,
+        minWidth:300,
+        hideEmptyChr:false,
+        expandFeatures:false
+      });
+      
+      karyoPanel.getTopToolbar().hide();
+      karyoPanel.setFeatureStore(featureStore);
+      karyoPanel.loadBands();  // parses the banding file and displays the chromosomes
+    
+    
+    }); // end of on ready
+   
+    // the url should provide xml defining features 
+    // needs to be same as originating domain (host and port)
+    function loadFromURL(url){
+      featureStore.proxy.setUrl(url);
+      featureStore.load({add:true});  // although add is true, MGI IDs are used to exclude duplicate features
+      
+    }
+    
+    function createFeature(){
+      var data = {
+        chromosome:'1',
+        start:'10000000',
+        end:'110000000',
+        label:'my feature',  // not require but will appear on mouse over
+        name:'a name'        // ditto
+      };
+      // no MGI ID means multiple instances of this feature will be displayed  
+      feature = new featureStore.recordType(data);
+      featureStore.add(feature);
+    
+    }
+    
+    function loadLungTumorQTLs(){
+      url = "lungTumorQTLs.xml"
+      loadFromURL(url);
+      
+      }
+      
+    function clearFeatures(){
+      featureStore.removeAll();  // karyoPanel responds to store events
+     
+    }
+ 
+  </script>
+  <body >
+  <table width="700" align="center">
+    <tr><td id="viewer"></td></tr>
+    <tr><td>
+      <input type="button" value="create feature" onclick="createFeature();">
+      <input type="button" value="load lung tumor QTLs" onclick="loadLungTumorQTLs();">
+      <input type="button" value="clear features" onclick="clearFeatures();">
+    </td></tr>
+  </table>
+  
+</html>
+</body>
