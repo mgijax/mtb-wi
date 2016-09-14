@@ -1,0 +1,542 @@
+<?xml version="1.0"?>
+
+<project name="common" default="debug">
+
+<property name="app.name"            value="${ant.project.name}"/>
+<property name="app.path"            value="/${app.name}"/>
+<property name="app.version"         value="1"/>
+<property name="build.home"          value="${basedir}/build"/>
+<property name="classes.home"        value="${basedir}/classes"/>
+<property name="conf.home"           value="${basedir}/conf"/>
+<property name="dist.home"           value="${basedir}/dist"/>
+<property name="docs.home"           value="${basedir}/docs"/>
+<property name="lib.home"            value="${basedir}/lib"/>
+<property name="src.home"            value="${basedir}/src"/>
+<property name="web.home"            value="${basedir}/web"/>
+<!-- Compiler Options -->
+<property name="compile.debug"       value="true"/>
+<property name="compile.deprecation" value="true"/>
+<property name="compile.optimize"    value="true"/>
+<!-- Override your Java library here -->
+<property name="java.lib"            value="${java.home}/jre/lib/rt.jar"/>
+<!-- Global "magic" property for <javac> -->
+<property name="build.compiler"      value="modern"/>
+
+<!--
+===============================================================================
+                        Compilation Classpath
+===============================================================================
+Rather than relying on the CLASSPATH environment variable, Ant includes 
+features that makes it easy to dynamically construct the classpath you need for
+each compilation.
+-->
+<path id="defaultClasspath">
+    <fileset dir="${lib.home}">
+        <include name="*.jar"/>
+    </fileset>
+</path>
+
+<!--
+===============================================================================
+                        Debug Target
+===============================================================================
+Lists the properties for debugging purposes.
+-->
+<target name="debug"
+        description="List debugging information">
+        
+    <echo message="Lists the properties for debugging purposes."/>
+    <echo message="Application:"/>
+    <echo message="  Name                      ${app.name}"/>
+    <echo message="  Major Version             ${app.version}"/>
+    <echo message="  Source directory          ${src.home}"/>
+    <echo message="  Build directory           ${build.home}"/>
+    <echo message="  Distribution directory    ${dist.home}"/>
+    <echo message="  Distribution library name ${dist.war.name}"/>        
+    <echo message=""/>
+    <echo message="Environment:"/>
+    <echo message="  Base Directory            ${basedir}"/>
+    <echo message="  Java Home                 ${java.home}"/>
+    <echo message="  Java Version              ${ant.java.version}"/>
+    <echo message="  User Home                 ${user.home}"/>
+    <echo message="  Ant Home                  ${ant.home}"/>
+    <echo message="  Build Properties          ${conf.home}/build.properties"/>
+    <echo message=""/>
+    <echo message="${build.home} options:"/>
+    <echo message="  Generate debugging info   ${compile.debug}"/>
+    <echo message="  Display deprecation info  ${compile.deprecation}"/>
+    <echo message="  Optimize                  ${compile.optimize}"/>
+    <echo message=" Default classpath          ${lib.home}"/>
+    <echo message=" Project classpath          ${project.classpath}"/>
+</target>   
+
+<!--
+===============================================================================
+                        Clean Target
+===============================================================================
+The "clean" target deletes any previous "build" and "dist" directory, so that 
+you can be ensured the application can be built from scratch.  The cleanCalled
+property ensures that clean will only be envoked once per invocation even 
+though it may be called more than once.
+-->
+<target name="clean" unless="cleanCalled">
+     
+    <available file="${build.home}"
+               type="dir" 
+               property="cleanCalled"/>
+    <echo message="Deleting ${build.home}"/>
+    <delete dir="${build.home}"/>
+    <echo message="Deleting ${dist.home}"/>
+    <delete dir="${dist.home}"/>
+    <echo message="Deleting ${classes.home}"/>
+    <delete dir="${classes.home}"/>
+</target>
+
+<!--
+===============================================================================
+                        Prepare Target
+===============================================================================
+The "prepare" target is used to create the necessary build directory 
+structure and copy the static contents of your web application to it.  If you 
+need to copy static files from external dependencies, you can customize the
+contents of this task.  Normally, this task is executed indirectly when needed.
+The prepareCalled property ensures that clean will only be called once per 
+invocation even though it may be called more than once.
+-->
+<target name="prepare" depends="clean,compile" 
+        if="ant.project.name" unless="prepareCalled">
+
+    <echo message="Preparing file structure..."/>
+    
+    <mkdir dir="${build.home}"/>
+
+</target>
+
+
+<!--
+===============================================================================
+                        Compile Target
+===============================================================================
+The "compile" target transforms source files (from your "src" directory) into 
+object files in the appropriate location in the build directory. 
+-->
+<target name="compile" if="ant.project.name" description="compile">
+    
+    <echo message="Compiling..."/>
+    <echo message="Compiling from ${src.java.home} to ${classes.home}"/>
+
+
+    <mkdir dir="${build.home}"/>
+    <mkdir dir="${classes.home}"/>
+    
+    <!-- Compile Java classes -->
+    <javac srcdir="${src.java.home}"
+          destdir="${classes.home}"
+            debug="${compile.debug}"
+      deprecation="${compile.deprecation}"
+         optimize="${compile.optimize}"
+           source="${javac.source}" 
+           target="${javac.target}" 
+memoryInitialSize="256m"
+memoryMaximumSize="1024m"
+             fork="true">
+        <classpath refid="defaultClasspath"/>
+        <classpath refid="project.classpath"/>
+        <compilerarg line="${javac.compilerargs}"/>
+    </javac>
+</target>
+
+
+<!--
+===============================================================================
+                        Web Build Target
+===============================================================================
+The "webbuild" target creates the build directory and file structure.
+-->
+<target name="webbuild" depends="prepare">
+    <echo message="Copying ${classes.home} to ${build.home}/WEB-INF/classes"/>
+    <copy todir="${build.home}/WEB-INF/classes">
+        <fileset dir="${classes.home}"/>
+    </copy>
+</target>
+
+<!--
+===============================================================================
+                        Web Dist Target
+===============================================================================
+The "webdist" target creates a binary distribution of your application in a 
+directory structure ready to be archived in a tar.gz or zip file.
+-->
+<target name="webdist">
+    <mkdir dir="${dist.home}"/>
+    <available file="${build.home}/WEB-INF/web.xml"
+               type="file" 
+               property="hasWebXML"/>
+    <antcall target="war"/>
+</target>
+  
+<!--
+===============================================================================
+                        War Target
+===============================================================================
+The "war" target creates the war distributable file.
+-->
+<target name="war" if="hasWebXML">
+    <tstamp/>
+    <buildnumber/>
+    
+    <war destfile="${dist.home}/${dist.war.name}" 
+         webxml="${web.xml}">
+      <fileset dir="${build.home}" excludes="**/WEB-INF/web.xml"/> 
+    </war>
+</target>
+
+<!--
+===============================================================================
+                        Archive Target
+===============================================================================
+The "archive" target creates an archive distributable file.
+-->
+<target name="archive" description="Create an archive">
+    <tar tarfile="${basedir}/${app.name}.tar" 
+      basedir="${basedir}"/>
+    <gzip zipfile="${basedir}/${app.name}.tar.gz" 
+      src="${basedir}/${app.name}.tar"/>
+    <delete file="${basedir}/${app.name}.tar"/>
+</target>
+
+<!--
+===============================================================================
+                        Build Jar Target
+===============================================================================
+The "buildjar" target creates a jar file.
+-->
+<target name="jar" depends="compile" description="JAR">
+    <copy todir="${build.home}">
+      <fileset dir="classes"/>
+    </copy>
+    <mkdir dir="${dist.home}"/>
+    <delete file="${dist.home}/${app.name}.jar"/>
+    <jar jarfile="${dist.home}/${app.name}.jar" 
+         basedir="${build.home}" includes="**/*.class">
+        <manifest>
+            <attribute name="Built-By" value="${user.name}"/>
+        </manifest>         
+    </jar>
+</target>
+
+<!--
+===============================================================================
+                        Javadoc Target
+===============================================================================
+The "javadoc" target creates Javadoc API documentation for the Java classes 
+included in your application.  Normally, this is only required when preparing 
+a distribution release, but is available as a separate target in case the 
+developer wants to create Javadocs independently.
+-->
+<target name="javadoc" depends="compile"
+        description="Create Javadoc API documentation">
+
+    <!-- Recreate the directory -->
+    <delete dir="${dist.home}/docs"/>
+    <mkdir dir="${dist.home}/docs/api"/>
+
+    <javadoc sourcepath="${src.java.home}" 
+             destdir="${dist.home}/docs/api"
+             author="true" 
+             doctitle="&lt;h1&gt;${app.name}&lt;/h1&gt;" 
+             packagenames="*" 
+             use="true" 
+             verbose="no" 
+             version="true" 
+             windowtitle="${app.name}">
+        <classpath refid="defaultClasspath"/>
+        <classpath refid="project.classpath"/>
+        <bottom>
+            Copyright © 2009 The Jackson Laboratory. All Rights Reserved.
+        </bottom>
+    </javadoc>
+
+    <!-- Overwrite the stylesheet
+    <copy file="${docs.home}/stylesheet.css" 
+          tofile="${dist.home}/docs/api/stylesheet.css"
+          overwrite="true"/>   -->
+</target>
+
+<!--
+===============================================================================
+                        Custom Ant Task Definitions
+===============================================================================
+These properties define custom tasks for the Ant build tool that interact
+with the "/manager" web application installed with Tomcat 5.  Before they
+can be successfully utilized, you must perform the following steps:
+    - Copy the file "server/lib/catalina-ant.jar" from your Tomcat 5
+      installation into the "lib" directory of your Ant installation.
+    - Create a "build.properties" file in your application's top-level
+      source directory (or your user login home directory) that defines
+      appropriate values for the "manager.password", "manager.url", and
+      "manager.username" properties described above.
+For more information about the Manager web application, and the functionality
+of these tasks, see <http://localhost:8080/tomcat-docs/manager-howto.html>.
+-->
+
+<available classname="org.apache.catalina.ant.DeployTask" 
+           property="DeployTask.present"/>
+<available classname="org.apache.catalina.ant.ListTask" 
+           property="ListTask.present"/>
+<available classname="org.apache.catalina.ant.ReloadTask" 
+           property="ReloadTask.present"/>
+<available classname="org.apache.catalina.ant.ResourcesTask" 
+           property="ResourcesTask.present"/>
+<available classname="org.apache.catalina.ant.RolesTask" 
+           property="RolesTask.present"/>
+<available classname="org.apache.catalina.ant.ServerinfoTask" 
+           property="ServerinfoTask.present"/>
+<available classname="org.apache.catalina.ant.SessionsTask" 
+           property="SessionsTask.present"/>
+<available classname="org.apache.catalina.ant.StartTask" 
+           property="StartTask.present"/>
+<available classname="org.apache.catalina.ant.StopTask" 
+           property="StopTask.present"/>
+<available classname="org.apache.catalina.ant.UndeployTask" 
+           property="UndeployTask.present"/>
+<available classname="org.apache.catalina.ant.ValidatorTask" 
+           property="ValidatorTask.present"/>
+
+<!--
+===============================================================================
+                        Deploy Target
+===============================================================================
+The "deploy" target tells the specified Tomcat 5 installation to dynamically
+install this web application and make it available for execution.  It does
+*not* cause the existence of this web application to be remembered across
+Tomcat restarts; if you restart the server, you will need to re-install all
+this web application.
+
+If you have already installed this application, and simply want Tomcat to
+recognize that you have updated Java classes (or the web.xml file), use the
+"reload" target instead.
+-->
+<target name="deploy" if="DeployTask.present">
+    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask"/>
+    
+    <loadproperties srcFile="conf/build.properties"/>
+    
+    <echo message="Deploying ${dist.home}/${dist.war.name} to ${manager.url}"/>
+    <echo message="${app.path}"/>
+    
+    <deploy url="${manager.url}"
+            username="${manager.username}"
+            password="${manager.password}"
+            path="${app.path}"
+            war="${dist.home}/${dist.war.name}"/>
+</target>
+  
+<!--
+===============================================================================
+                        List Target
+===============================================================================
+The "list" target asks the specified Tomcat 5 installation to list the
+currently running web applications, either loaded at startup time or installed
+dynamically.  It is useful to determine whether or not the application you are 
+currently developing has been installed.
+-->
+<target name="list" if="ListTask.present">
+    <taskdef name="list" classname="org.apache.catalina.ant.ListTask">
+        <classpath refid="defaultClasspath"/>
+    </taskdef>
+
+    <list url="${manager.url}" 
+          username="${manager.username}" 
+          password="${manager.password}"/>
+</target>
+
+<!--
+===============================================================================
+                        Reload Target
+===============================================================================
+The "reload" target tells the specified Tomcat 5 installation to dynamically
+reload this web application, to reflect changes in the underlying classes or
+the "web.xml" deployment descriptor.
+-->
+<target name="reload" if="ReloadTask.present">
+    <taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask">
+        <classpath refid="defaultClasspath"/>
+    </taskdef>
+    
+    <reload url="${manager.url}" 
+            username="${manager.username}" 
+            password="${manager.password}" 
+            path="${app.path}"/>
+</target>
+
+<!--
+===============================================================================
+                        Resources Target
+===============================================================================
+The "resources" target lists the resources of the Tomcat server.
+-->
+<target name="resources" if="ResourcesTask.present">
+    <taskdef name="resources" classname="org.apache.catalina.ant.ResourcesTask">
+        <classpath refid="defaultClasspath"/>
+    </taskdef>
+    
+    <resources url="${manager.url}" 
+               username="${manager.username}" 
+               password="${manager.password}"/> 
+</target>
+
+<!--
+===============================================================================
+                        Roles Target
+===============================================================================
+The "roles" target lists the roles of the Tomcat server.
+-->
+<target name="roles" if="RolesTask.present">
+    <taskdef name="roles" classname="org.apache.catalina.ant.RolesTask">
+        <classpath refid="defaultClasspath"/>
+    </taskdef>
+
+    <roles url="${manager.url}" 
+           username="${manager.username}" 
+           password="${manager.password}"/> 
+</target>
+
+<!--
+===============================================================================
+                        Server Info Target
+===============================================================================
+The "serverinfo" target lists the Tomcat server information.
+-->
+<target name="serverinfo" if="ServerinfoTask.present">
+    <taskdef name="serverinfo" classname="org.apache.catalina.ant.ServerinfoTask">
+        <classpath refid="defaultClasspath"/>
+    </taskdef>
+
+    <serverinfo url="${manager.url}" 
+                username="${manager.username}" 
+                password="${manager.password}"/> 
+</target>
+
+<!--
+===============================================================================
+                        Sessions Target
+===============================================================================
+The "sessions" target lists the session info of the webapp on the Tomcat server.
+-->
+<target name="sessions" if="SessionsTask.present">
+    <taskdef name="sessions" classname="org.apache.catalina.ant.SessionsTask">
+        <classpath refid="defaultClasspath"/>
+    </taskdef>
+
+    <sessions url="${manager.url}" 
+              username="${manager.username}" 
+              password="${manager.password}" 
+              path="${app.path}"/>
+</target>
+
+<!--
+===============================================================================
+                        Start Target
+===============================================================================
+The "start" target tells the specified Tomcat 5 installation to start this
+webapp.
+-->
+<target name="start" if="StartTask.present">
+    <taskdef name="start" classname="org.apache.catalina.ant.StartTask">
+        <classpath refid="defaultClasspath"/>
+    </taskdef>
+    
+    <start url="${manager.url}" 
+           username="${manager.username}" 
+           password="${manager.password}" 
+           path="${app.path}"/>
+</target>
+
+<!--
+===============================================================================
+                        Stop Target
+===============================================================================
+The "stop" target tells the specified Tomcat 5 installation to stop this
+webapp.
+-->
+<target name="stop" if="StopTask.present">
+    <taskdef name="stop" classname="org.apache.catalina.ant.StopTask">
+        <classpath refid="defaultClasspath"/>
+    </taskdef>
+    
+    <stop url="${manager.url}" 
+          username="${manager.username}" 
+          password="${manager.password}" 
+          path="${app.path}"/>
+</target>
+
+<!--
+===============================================================================
+                        Undeploy Target
+===============================================================================
+The "undeploy" target tells the specified Tomcat 5 installation to dynamically
+remove this web application from service.
+-->
+<target name="undeploy" if="UndeployTask.present">
+    <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask"/>
+    
+    <loadproperties srcFile="conf/build.properties"/>
+    
+    <echo message="Undeploying ${ant.project.name}.war at ${manager.url}"/>
+    
+    <undeploy url="${manager.url}" 
+              username="${manager.username}" 
+              password="${manager.password}" 
+              path="${app.path}"/>
+</target>
+
+<!--
+===============================================================================
+                        Validator Target
+===============================================================================
+The "validator" target ...
+-->
+<target name="validator" if="ValidatorTask.present">
+    <taskdef name="validator" classname="org.apache.catalina.ant.ValidatorTask">
+        <classpath refid="defaultClasspath"/>
+    </taskdef>
+    
+    <validator path="/build"/>
+</target>
+
+<!--
+===============================================================================
+                        Redeploy Target
+===============================================================================
+The "redeploy" target calls "undploy" then "deploy".
+-->
+<target name="redeploy">
+    <antcall target="undeploy"/>
+    <sleep seconds="1"/>
+    <antcall target="deploy"/>
+</target>
+
+<!--===================== Java Source Target ===============================-->
+<target name="javasrc" depends="compile"
+        description="Creates Java Source HTML files.">
+    <!-- Remake the directory in order to start fresh -->
+    <delete dir="${docs.home}/src"/>
+    <delete dir="build/docs/src"/>
+    <mkdir dir="build/docs/src"/>
+
+    <java jar="${JavaToHTML.jar}"
+          fork="true"
+          failonerror="true"
+          maxmemory="128m">
+        <arg line="-i ${src.home} -o build/docs/src"/>
+    </java>
+      
+    <copy todir="${docs.home}/src">
+        <fileset dir="build/docs/src"/>
+    </copy>
+       
+</target>
+
+</project>
+
