@@ -320,9 +320,10 @@ public class PDXMouseStore {
      */
     public ArrayList<PDXMouse> findStaticMouseByID(String ID) {
         ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
-        for (PDXMouse mouse : this.allMice) {
-            if (mouse.getModelID().equals(ID)) {
+        loop: for (PDXMouse mouse : this.allMice) {
+            if (mouse.getModelID().equalsIgnoreCase(ID)) {
                 mice.add(mouse);
+                break loop;
             }
         }
 

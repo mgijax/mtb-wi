@@ -181,7 +181,7 @@
                                         <br>
                                         <br>
                                         <br>
-                                        <b>PLEASE NOTE</b> that the reference basis for the analysis of PDX genomics is changing to GRCh38.<br> During this process, the model details may contain summary output with genomic coordinates that differ depending on platform.
+                                      
                                     </td>
 
                                     <td>

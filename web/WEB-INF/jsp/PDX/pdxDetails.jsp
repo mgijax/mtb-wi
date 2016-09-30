@@ -607,7 +607,7 @@
                         Variant Summary
                     </td>
                     <td class="data2">
-                        <b>PLEASE NOTE</b> that PDX genomics is changing to reference GRCh38. Genomic coordinates differ depending on platform.<br> CTP, TruSeq JAX and whole exome use GRCh38. CNV and RNA-Seq are in GRCh37 (hg19) coordinates. 
+                        
                         <table id="noVariantSummary" style="display: none" border=0 cellpadding=5 cellspacing=0 width="100%">
                             <tr>
                                 <td class="normal">
@@ -618,7 +618,6 @@
 
                         <div id="variantSummary"></div>
                         <br>
-                  <!--      <input id="variantData" type="button" value="Download summary data in CSV format" onClick="popSizedPathWin('pdxDetails.do?csvSummary=true&modelID=${modelID}', '',120,120);return false;">   -->
                         <input id="variantData" type="button" value="Download summary data in CSV format" onClick="window.location='pdxDetails.do?csvSummary=true&modelID=${modelID}'">
                     </td>
                 </tr>

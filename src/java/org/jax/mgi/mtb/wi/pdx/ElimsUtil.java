@@ -203,6 +203,9 @@ public class ElimsUtil {
 
     }
 
+    private static final String STATUS_COLUMNS = "Model ID,Project Type,Model Status,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,Specimen Site,Primary Site,Initial Diagnosis,Clinical Diagnosis,Other Diagnosis Info,"+
+                "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,Engraftment Site,Collecting Site,Shipped Date, Received Date, Accession Date, Implantation Date, P1 Creation Date, Engraftment Success Date, Engraftment Termination Date";
+                
     public String getPDXStatusReport() {
         StringBuffer report = new StringBuffer();
         try {
@@ -219,8 +222,9 @@ public class ElimsUtil {
 
             if (result.length > 0) {
 
-                report.append("Model ID,Project Type,Model Status,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,Specimen Site,Primary Site,Initial Diagnosis,Clinical Diagnosis,Other Diagnosis Info,");
-                report.append("Tumor Type,Grades,Markers,Model Tags,Stages,Sample Type,Stock Num,Strain,Mouse Sex,Engraftment Site,Collecting Site,Shipped Date, Received Date, Accession Date, Implantation Date, P1 Creation Date, Engraftment Success Date, Engraftment Termination Date\n");
+                //report.append("Model ID,Project Type,Model Status,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,Specimen Site,Primary Site,Initial Diagnosis,Clinical Diagnosis,Other Diagnosis Info,");
+                //report.append("Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,Engraftment Site,Collecting Site,Shipped Date, Received Date, Accession Date, Implantation Date, P1 Creation Date, Engraftment Success Date, Engraftment Termination Date\n");
+                report.append(STATUS_COLUMNS).append("/n");
                 for (int i = 0; i < result.length; i++) {
 
                     String id = result[i].getIdentifier();
@@ -249,7 +253,10 @@ public class ElimsUtil {
                     report.append(clean(result[i].getGrades())).append(",");
                     report.append(clean(result[i].getMarkers())).append(","); 
                     report.append(clean(result[i].getModelTags())).append(",");
-                    report.append(clean(result[i].getStages())).append(",");
+                    report.append(clean(result[i].getTumor_Stage())).append(",");
+                    report.append(clean(result[i].getTumor_M_Stage())).append(",");
+                    report.append(clean(result[i].getTumor_N_Stage())).append(",");
+                    report.append(clean(result[i].getTumor_T_Stage())).append(",");
                     report.append(clean(result[i].getSample_Type())).append(",");
                     report.append(clean(result[i].getStockNumber())).append(",");
                     report.append(clean(result[i].getStrain())).append(",");
@@ -263,6 +270,7 @@ public class ElimsUtil {
                     report.append(cleanDate(result[i].getP1_Creation_Date())).append(",");
                     report.append(cleanDate(result[i].getEngraftment_Success_Date())).append(",");
                     report.append(cleanDate(result[i].getEngraftment_Termination_Date())).append("\n");
+                   
 
                 }
 
@@ -289,16 +297,18 @@ public class ElimsUtil {
 
             Pdx_model_status[] result = stub.getPDXStatusReport_sessionless(soapRequest).getGetPDXStatusReport_sessionlessResult().getPdx_model_status();
 
+            /*
             String[] columns = {"modelID", "projectType", "modelStatus", "model", "modelAKA",
                 "mRN", "gender", "age", "race", "ethnicity", "specimenSite",
                 "primarySite", "initialDiagnosis", "clinicalDiagnosis",
                 "otherDiagnosisInfo", "tumorType", "grades", "markers",
-                "stages", "sampleType", "stockNum", "strain", "mouseSex",
+                "stages","m-stage","n-stage","t-stage", "sampleType", "stockNum", "strain", "mouseSex",
                 "engraftmentSite", "collectingSite", "shippedDate",
                 "receivedDate", "accessionDate", "implantationDate",
                 "p1CreationDate", "engraftmentSuccessDate",
                 "engraftmentTerminationDate", "modelTag"};
-
+             */
+            String[] columns = STATUS_COLUMNS.split(",");
             report.append("{\"pdxStatus\":[");
             if (result.length > 0) {
                 for (int i = 0; i < result.length; i++) {
@@ -323,9 +333,12 @@ public class ElimsUtil {
                     report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getOther_Diagnosis_Info())).append(",\n");
                     report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_Type())).append(",\n");
                     report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getGrades())).append(",\n");
-
-                    report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMarkers())).append(",\n");  
-                    report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getStages())).append(",\n");
+                    report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMarkers())).append(",\n");
+                    report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getModelTags())).append(",\n");
+                    report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_Stage())).append(",\n");
+                    report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_M_Stage())).append(",\n");
+                    report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_N_Stage())).append(",\n");
+                    report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_T_Stage())).append(",\n");
                     report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getSample_Type())).append(",\n");
                     report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getStockNumber())).append(",\n");
                     report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getStrain())).append(",\n");
@@ -338,9 +351,8 @@ public class ElimsUtil {
                     report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getImplantation_Date())).append("\",\n");
                     report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP1_Creation_Date())).append("\",\n");
                     report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getEngraftment_Success_Date())).append("\",\n");
-                    report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getEngraftment_Termination_Date())).append("\",\n");
-                    report.append("\"").append(columns[j++]).append("\":\"").append((result[i].getModelTags())).append("\"},\n");// need to replace last , with a }
-
+                    report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getEngraftment_Termination_Date())).append("\"},\n");
+                    
                 }
             }
         } catch (Exception e) {
