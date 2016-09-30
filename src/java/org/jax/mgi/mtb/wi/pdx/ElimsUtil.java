@@ -224,7 +224,7 @@ public class ElimsUtil {
 
                 //report.append("Model ID,Project Type,Model Status,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,Specimen Site,Primary Site,Initial Diagnosis,Clinical Diagnosis,Other Diagnosis Info,");
                 //report.append("Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,Engraftment Site,Collecting Site,Shipped Date, Received Date, Accession Date, Implantation Date, P1 Creation Date, Engraftment Success Date, Engraftment Termination Date\n");
-                report.append(STATUS_COLUMNS).append("/n");
+                report.append(STATUS_COLUMNS).append("\n");
                 for (int i = 0; i < result.length; i++) {
 
                     String id = result[i].getIdentifier();
