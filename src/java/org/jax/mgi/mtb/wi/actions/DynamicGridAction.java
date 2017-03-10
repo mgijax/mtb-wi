@@ -19,7 +19,7 @@ import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.wi.forms.DynamicGridForm;
 
 /**
- * Action for the Dynamic Tumor Freuqency Grid
+ * Action for the Dynamic Tumor Frequency Grid
  * Generates a new grid from selected rows and columns
  * or keeps track of which rows and columns have been expanded or collapsed
  * @author sbn
@@ -189,9 +189,16 @@ public class DynamicGridAction extends Action {
     String csv = null;
     if (vals != null) {
       StringBuffer buff = new StringBuffer();
-      buff.append(vals[0]);
       for (int i = 1; i < vals.length; i++) {
-        buff.append(", " + vals[i]);
+          try{
+              if(buff.length()==0){
+                buff.append(new Integer(vals[i]));
+              }else{
+                buff.append(", " + new Integer(vals[i]));
+              }
+          }catch(Exception e){
+             
+          }
       }
       csv = buff.toString();
     }

@@ -22,6 +22,7 @@ import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
 
 /**
  * Collects data for PDX details page and sends it along
+ *
  * @author sbn
  */
 public class PDXDetailsAction extends Action {
@@ -46,29 +47,23 @@ public class PDXDetailsAction extends Action {
 
         String modelID = request.getParameter("modelID");
 
-       
-        String variants = "paged variants";
-
         if (request.getParameter("csvSummary") != null) {
-            
+
             String filter = "FALSE";
-            
-             String header = "Model,Sample,Gene,Platform,Chromosome,Seq Position,Ref Allele,Alt Allele,"+
-                    "Consequence,Amino Acid Change,RS Variants,Read Depth,Allele Frequency,Transcript ID,Filtered Rationale,"+
-                    "Passage Num,Gene ID,CKB Evidence,Actionable Cancer Types,Drug Class,"+
-                    "Variant Num Trials,Variant NCT IDs\n";
-            
-             if(WIConstants.getInstance().getPublicDeployment()){
-               filter = "TRUE";
-           }
 
+            String header = "Model,Sample,Gene,Platform,Chromosome,Seq Position,Ref Allele,Alt Allele,"
+                    + "Consequence,Amino Acid Change,RS Variants,Read Depth,Allele Frequency,Transcript ID,Filtered Rationale,"
+                    + "Passage Num,Gene ID,CKB Evidence,Actionable Cancer Types,Drug Class,Count Human Reads,PCT Human Reads,"
+                    + "Variant Num Trials,Variant NCT IDs\n";
 
-            variants = store.getVariationData(modelID, "-1", "0", "gene_symbol", "ASC",filter);
+            if (WIConstants.getInstance().getPublicDeployment()) {
+                filter = "TRUE";
+            }
+
+            String variants = store.getVariationData(modelID, "-1", "0", "gene_symbol", "ASC", filter);
             variants = variants.substring(variants.indexOf("["));
 
-            variants = variants.replaceAll("'", "").replaceAll("\\],\\[", "\n").replaceAll("\\[\\[", "").replaceAll("\\]\\]", "").replace(",],]}","");
-        
-          
+            variants = variants.replaceAll("'", "").replaceAll("\\],\\[", "\n").replaceAll("\\[\\[", "").replaceAll("\\]\\]", "").replace(",],]}", "");
 
             response.setContentType("text/csv");
             response.setHeader("Content-disposition", "attachment; filename=" + modelID + "-Variant-Summary.csv");
@@ -76,19 +71,7 @@ public class PDXDetailsAction extends Action {
             response.flushBuffer();
 
             return null;
-
-
         }
-        // variants can't be empty for javascript reasons.
-        // addtional showVariants is used to control display
-        if (variants.length() < 10) {
-            variants = "''";
-        } else {
-            request.setAttribute("showVariants", "showVariants");
-        }
-        request.setAttribute("variants", variants);
-
-
 
         String gene = (String) request.getParameter("gene");
         if ("null".equals(gene)) {
@@ -98,7 +81,6 @@ public class PDXDetailsAction extends Action {
         if ("null".equals(variant)) {
             variant = null;
         }
-
 
         ArrayList<PDXMouse> mice = store.findStaticMouseByID(modelID);
 
@@ -112,7 +94,6 @@ public class PDXDetailsAction extends Action {
             mouse.setVariant(variant);
 
             // collections of additional data
-
             ArrayList<PDXGraphic> histology = new ArrayList<PDXGraphic>();
             ArrayList<PDXComment> tumorMarkers = new ArrayList<PDXComment>();
             ArrayList<PDXLink> geneExpressionLinks = new ArrayList<PDXLink>();
@@ -129,7 +110,6 @@ public class PDXDetailsAction extends Action {
             PDXComment pathologist = null;
 
             // split data types into characterizations
-
             for (PDXGraphic g : store.getGraphics(modelID)) {
                 switch (g.getCharacterization()) {
                     case PDXContent.HISTOLOGY:
@@ -193,7 +173,6 @@ public class PDXDetailsAction extends Action {
                 }
             }
 
-
             if (histology.size() > 0) {
                 request.setAttribute("histology", histology);
             }
@@ -219,7 +198,6 @@ public class PDXDetailsAction extends Action {
                 request.setAttribute("geneExpression", true);
                 request.setAttribute("geneExpressionImages", geneExpressionImages);
             }
-
 
             if (cnvLinks.size() > 0) {
                 request.setAttribute("cnv", true);
@@ -260,42 +238,63 @@ public class PDXDetailsAction extends Action {
             }
 
             String expData = store.getModelExpression(modelID);
+
+            int split = expData.indexOf("[");
+            if (split > 0) {
+                String platforms = expData.substring(0, split);
+                expData = expData.substring(split);
+
+                request.setAttribute("platforms", platforms);
+            }
+
             request.setAttribute("geneExpressionData", expData);
 
             // 3500px is about right for the 350 or so genes in the exome panel
             // some models will have multiple samples 
             // adjust the 3500px as necessary 
-
             int pxPerBar = 15;
             int expChartSize = 100;
             int samples = expData.split("]").length;
-            
+
             if (samples > 0) {
 
-                expChartSize  +=  (int) Math.floor(pxPerBar * samples);
+                expChartSize += (int) Math.floor(pxPerBar * samples);
             }
 
             request.setAttribute("expChartSize", expChartSize + "");
 
-
             String cnvData = store.getModelCNV(modelID);
-            cnvData = cnvData.replaceAll("Amplification", "orange");
-            cnvData = cnvData.replaceAll("Deletion", "blue");
-            cnvData = cnvData.replaceAll("Normal", "grey");
-            request.setAttribute("geneCNVData", cnvData);
+            if (cnvData != null && cnvData.length() > 0) {
+                String[] parts = cnvData.split("\\|");
+                String ploidy = parts[0];
+                ploidy = ploidy.substring(0, ploidy.length() - 1);
+                if (ploidy.indexOf(",") == -1) {
+                    String[] pieces = ploidy.split(":");
+                    request.setAttribute("ploidy", pieces[1]);
+                } else {
+                    request.setAttribute("ploidy", "false");
+                }
+                request.setAttribute("samplePloidy", ploidy);
+                cnvData = parts[1];
 
+                //cnvData = cnvData.replaceAll("Amplification", "orange");
+                //cnvData = cnvData.replaceAll("Deletion", "blue");
+                //cnvData = cnvData.replaceAll("Normal", "grey");
+                // cnvData = cnvData.replaceAll("Sample Ploidy", "Sample Ploidy");
+                request.setAttribute("geneCNVData", cnvData);
 
-            int cnvChartSize = 250;
-            samples = cnvData.split("]").length;
-            
-            if (samples > 1) {
+                int cnvChartSize = 250;
+                samples = cnvData.split("]").length;
 
-                // there are multiple samples
-                cnvChartSize += (int) Math.floor(pxPerBar * samples);
+                if (samples > 1) {
+
+                    // there are multiple samples
+                    cnvChartSize += (int) Math.floor(pxPerBar * samples);
+                }
+
+                request.setAttribute("cnvChartSize", cnvChartSize + "");
+                // will need to set cnv data here
             }
-
-            request.setAttribute("cnvChartSize", cnvChartSize + "");
-            // will need to set cnv data here
 
             request.setAttribute("modelID", modelID);
 

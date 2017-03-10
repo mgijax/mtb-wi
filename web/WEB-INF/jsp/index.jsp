@@ -58,8 +58,10 @@
 <c:catch var="exception">
     <!--
     ${applicationScope.urlBase}/html/announcement.html
+   
+    <c:import url="${applicationScope.urlBase}/html/announcement.html"/> 
     //-->
-    <c:import url="${applicationScope.urlBase}/html/announcement.html"/>
+    
 </c:catch>
 <!--======================= End Announcement Section =======================-->
 
@@ -84,7 +86,7 @@
     <p>
     <hr width="100%">
     <p>
-
+<%--
     <center>
     <html:form action="tumorSearchResults" method="GET">
     <html:hidden property="maxItems" value="No Limit"/>
@@ -114,13 +116,21 @@
                 </table>
             </td>
         </tr>
+       
     </table>
     </html:form>
-    </center>
-
+    </center>--%>
+    <p>
+        
+    <center>
+      ${modelCounts}
+    </center> 
+    
     <p>
     <hr width="100%">
     <p>
+        
+    
 
 
     <font class="toolBarTitle">What's new in MTB?</font>

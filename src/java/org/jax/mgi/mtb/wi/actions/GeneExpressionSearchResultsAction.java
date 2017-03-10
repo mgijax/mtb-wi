@@ -17,6 +17,7 @@ import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBSeriesSampleSearchDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBSeriesSampleUtilDAO;
 import org.jax.mgi.mtb.dao.gen.mtb.SampleDTO;
+import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.wi.forms.GeneExpressionForm;
 import org.jax.mgi.mtb.wi.utils.WIUtils;
 
@@ -31,8 +32,6 @@ public class GeneExpressionSearchResultsAction extends Action{
             Logger.getLogger(GeneExpressionSearchResultsAction.class.getName());
    
    
-   
-   
     public ActionForward execute(ActionMapping mapping,
                                  ActionForm form,
                                  HttpServletRequest request,
@@ -41,23 +40,49 @@ public class GeneExpressionSearchResultsAction extends Action{
       
       GeneExpressionForm geForm = (GeneExpressionForm) form;
       
-      List<String> organs = WIUtils.arrayToCleanList(geForm.getOrgan());
+      List<String> organs = WIUtils.arrayToCleanKeyList(geForm.getOrgan());
       List<String> platforms = WIUtils.arrayToCleanList(geForm.getPlatform());
-      List<String> tumorClassifications = WIUtils.arrayToCleanList(geForm.getTumorClassification());
+      // need to sanitize the platforms string.
+      
+      List<String> tumorClassifications = WIUtils.arrayToCleanKeyList(geForm.getTumorClassification());
       
       String tfKey = geForm.getTfKey()+"";
+     
       String seriesId = geForm.getSeriesId();
      
-      String strainLikeClause = geForm.getLikeClause();
+     
       String strainName = geForm.getStrainName();
       
+      String strainLikeClause = geForm.getLikeClause();
+      
+      // make sure the list of keys is a list of keys not anything else
       if(request.getParameter("tfKeys")!=null){
-          tfKey = request.getParameter("tfKeys");
+          StringBuilder keyList = new StringBuilder();
+          String[] keys = request.getParameter("tfKeys").split(",");
+          for(int i=0; i < keys.length; i++){
+              try{
+                  String key = new Integer(keys[i]).toString();
+              
+              if(keyList.length()>0){
+                  keyList.append(",");
+              }
+              keyList.append(key);
+              }catch(Exception e){}
+          }
       }
      
       MTBSeriesSampleUtilDAO ssuDAO = MTBSeriesSampleUtilDAO.getInstance();
       
-      ArrayList<MTBSeriesSampleSearchDTO> results = ssuDAO.searchSeries(tumorClassifications, organs ,platforms,strainName,strainLikeClause,tfKey, seriesId);
+      ArrayList<LabelValueBean<String,String>> realPlatforms = ssuDAO.getPlatforms();
+      ArrayList<String> cleanPlatforms = new ArrayList<String>();
+      for(LabelValueBean<String,String> lvb : realPlatforms){
+          if(platforms.contains(lvb.getLabel())){
+              cleanPlatforms.add(lvb.getLabel());
+          }
+      } 
+       
+      
+      ArrayList<MTBSeriesSampleSearchDTO> results = ssuDAO.searchSeries(tumorClassifications, organs ,cleanPlatforms,strainName,strainLikeClause,tfKey, seriesId);
       String samplesWOSeries = null;
       String seriesWSamples = null;
       int resultsSize = results.size();
@@ -82,7 +107,7 @@ public class GeneExpressionSearchResultsAction extends Action{
       request.setAttribute("results", results);
       request.setAttribute("organs",WIUtils.organKeysToLabel(organs));
       request.setAttribute("tumorClassifications", WIUtils.tumorclassificationKeysToLabel(tumorClassifications));
-      request.setAttribute("platforms",platforms);
+      request.setAttribute("platforms",cleanPlatforms);
       
       if(seriesId != null && seriesId.length()>0){
         request.setAttribute("seriesId",seriesId);

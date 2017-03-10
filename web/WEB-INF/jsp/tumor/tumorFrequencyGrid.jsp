@@ -51,26 +51,7 @@
 </table>
 <!--======================= End Form Header ================================-->
 <!--======================= Start Detail Section ===========================-->
-<%--
-<c:forEach var="organ" items="${organs}" varStatus="status">
 
-    <img:image src="http://aragorn:8000/www/mtb/image/empty.png"
-           refresh="no"
-           name="${organ.label}.${organ.value}.png"
-           quality="1.0"
-           dir="generated">
-        <img:text 
-            text="${organ.label}" 
-            x="0" 
-            y="0" 
-            font="Arial" 
-            bold="true" 
-            size="10" 
-            color="0x000000"/> 
-        <img:rotate degrees="-90"/>
-    </img:image>		
-</c:forEach>
---%>
 <font class="larger">Tumor Frequency Grid (Inbred Strain Family x Organ)</font>
 <br><br>
 Clicking in a colored box will take you to a summary of the records for

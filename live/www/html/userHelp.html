@@ -2272,6 +2272,9 @@ The expression data are analyzed from microarray or RNAseq platforms.<br><br>
         RNAseq data is first processed with Xenome to extract human sequences.<br>
         The human sequences are aligned to the transcriptome with Bowtie, and then expression levels are estimated by RSEM.<br>
         RSEM estimated counts are finally upper quantile normalized.
+        <br>
+        <br>
+        Fusion gene is analyzed using Xenome to extract human sequences and SOAPfuse.
     </li>
 </ul>
 
@@ -2279,7 +2282,13 @@ The expression data are analyzed from microarray or RNAseq platforms.<br><br>
 Gene expression of the CTP panel genes is displayed as a chart of percentile rank z-score,<br>
 which measures each gene's model-specific expression in comparison with that gene in all models assayed by the same platform.<br>
 The mean and standard deviation for z-score calculation is obtained based on a fixed set of PDX samples for each platform.<br>
-Other forms of expression values (e.g. z-score, normalized expression) and expression of other genes not listed on the MTB site can be made available upon request.
+Other forms of expression values (e.g. z-score, normalized expression) and expression of other genes not listed on the MTB site can be made available upon request.<br>
+
+<br>
+For gene fusion, the gene symbols upstream and downstream of the fusion are reported and whether the downstream fusion partner is frame-shift or in-frame-shift.<br> 
+Detected fusion genes are annotated with the clinical information from the JAX CKB database (similar to variant annotation described above),
+and only those with associated drug efficacy or cancer-related evidences are reported to minimize false-positives.<br>
+Other detected fusions and additional information (e.g. breakpoint coordinates) can be made available upon request.<br>
 <br>
 <br>
 <b>Copy number</b>
@@ -2289,8 +2298,7 @@ PennCNV-Affy and ASCAT 2.2 is used to predict allele-specific copy number and pl
 Gene-level copy number is obtained by intersecting copy number segments with genome coordinates of Ensembl genes.  <br>
 In cases where a segment boundary is contained within a gene's coordinates, the most conservative estimate of copy number is used. <br>
 <br>
-The copy number of the CTP panel genes is displayed as a chart of absolute copy number, regardless of the ploidy of the sample.<br>
-Copy number gain is defined as copy number > 2.5 and copy number loss is defined as copy number < 1.5. <br>
+The copy number of the CTP panel genes is displayed as a chart of log2(cn raw / sample ploidy).<br>
 Other forms of copy number values (e.g. gain and loss relative to ploidy, loss of heterozygosity)<br>
 and copy number of other genes not listed on the MTB site can be made available upon request.
 

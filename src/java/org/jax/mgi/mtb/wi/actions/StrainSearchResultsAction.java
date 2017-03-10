@@ -115,7 +115,7 @@ public class StrainSearchResultsAction extends Action {
             arrSiteNames.add(WIConstants.getInstance().getLongSiteName(i));
         }
 
-        arrStrainTypes = WIUtils.arrayToCleanList(arrStrStrainTypes);
+        arrStrainTypes = WIUtils.arrayToCleanKeyList(arrStrStrainTypes);
         long lMaxItems = WIUtils.stringToLong(strMaxItems, -1l);
 
         StrainSearchParams strainParams = new StrainSearchParams();

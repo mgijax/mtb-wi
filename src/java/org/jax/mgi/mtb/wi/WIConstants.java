@@ -148,7 +148,8 @@ public class WIConstants {
     private final static String PDX_EDITOR = "pdx.editor";
     private final static String PDX_PASSWORD = "pdx.password";
     private final static String SOLR_URL = "solr.url";
-    
+    private final static String SOC_DB = "soc.db"; 
+    private final static String SOC_URL = "soc.url"; 
     
  
     /* ----------------------------------------------------- Instance Variables */
@@ -200,7 +201,8 @@ public class WIConstants {
    private String pdxEditor;
    private String pdxPassword;
    private String solrURL;
-
+   private String socDB;
+   private String socURL;
     // ----------------------------------------------------------- Constructors
     /**
      * Constructor.  This is private so the object cannot be instantiated
@@ -740,6 +742,9 @@ public class WIConstants {
         return this.solrURL;
     }
   
+    public String getSOCDB(){
+        return this.socDB;
+    }
 
     /**
      * Initialize the data used through out the WI.
@@ -803,6 +808,7 @@ public class WIConstants {
             // init the TFGRID
             log.info("Initializing tumor frequency grid...");
             initTFGrid();
+            log.info("Finished initializing tumor frequency grid.");
 
             initReferenceOrgans();
     
@@ -857,7 +863,9 @@ public class WIConstants {
             
             this.solrURL = props.getProperty(SOLR_URL);
 
-          
+            this.socDB = props.getProperty(SOC_DB);
+            
+            this.socURL = props.getProperty(SOC_URL);
             
         }catch(Exception e){
             log.error("Failed to initialize WIConstants",e);
@@ -1117,12 +1125,14 @@ public class WIConstants {
 
     private void initTumorClassifications() {
         try {
-            // get the tumor classifications
+            /* get the tumor classifications --- This way returns TC's with no TF's
             TumorClassificationDAO tumorClassificationDAO = TumorClassificationDAO.getInstance();
-            List<TumorClassificationDTO> listTumorClassifications = tumorClassificationDAO.loadAll();
-
+            List<TumorClassificationDTO> listTumorClassifications = tumorClassificationDAO.loadAll();           
+            */  
+            List<TumorClassificationDTO> listTumorClassifications = MTBTumorUtilDAO.getInstance().getTumorClassifications();
+            
             Collections.sort(listTumorClassifications, new TumorClassificationComparator(TumorClassificationDAO.ID_NAME));
-
+             
             for (TumorClassificationDTO dto : listTumorClassifications) {
                 mapTumorClassifications.put(dto.getTumorClassificationKey(),
                         new LabelValueBean<String, Long>(dto.getName(),
@@ -1131,5 +1141,19 @@ public class WIConstants {
         } catch (Exception e) {
             log.error("Error initializing tumor classifications", e);
         }
+    }
+
+    /**
+     * @return the socURL
+     */
+    public String getSocURL() {
+        return socURL;
+    }
+
+    /**
+     * @param socURL the socURL to set
+     */
+    public void setSocURL(String socURL) {
+        this.socURL = socURL;
     }
 }

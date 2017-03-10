@@ -6,6 +6,7 @@ package org.jax.mgi.mtb.wi.actions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -18,6 +19,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBPathologyImageHelperDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBPathologyImageSearchDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBPathologyImageUtilDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceUtilDAO;
+import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.utils.Timer;
 import org.jax.mgi.mtb.wi.WIConstants;
@@ -121,9 +123,17 @@ public class PathologyImageSearchResultsAction extends Action {
                 log.error("Error retrieving accession id by reference", e);
             }
 
-            arrOrganOrigin = WIUtils.arrayToCleanList(arrStrOrganTissuesOrigin);
-            arrTumorClass = WIUtils.arrayToCleanList(arrStrTumorClassifications);
-            arrAntibodies = WIUtils.arrayToCleanList(arrStrAntibodies);
+            arrOrganOrigin = WIUtils.arrayToCleanKeyList(arrStrOrganTissuesOrigin);
+            arrTumorClass = WIUtils.arrayToCleanKeyList(arrStrTumorClassifications);
+            arrAntibodies = WIUtils.arrayToCleanKeyList(arrStrAntibodies);
+            
+            Map<String,LabelValueBean<String,String>> mapMethods =
+                WIConstants.getInstance().getMethods();
+            if(mapMethods.get(strMethod)!=null){
+                //method is valid
+            }else{
+                strMethod = null;
+            }
 
             Timer daoTimer = new Timer();
             daoTimer.start();

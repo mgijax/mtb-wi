@@ -33,16 +33,16 @@ import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.wi.WIConstants;
 
 /**
- * Manages PDX data
- * Initialized on startup; loads mice, reports and vocabularies
- * Gets data from web services, and through DAOs from both caTissue and MTB databases
- * 
+ * Manages PDX data Initialized on startup; loads mice, reports and vocabularies
+ * Gets data from web services, and through DAOs from both caTissue and MTB
+ * databases
+ *
  * @author sbn
  */
 public class PDXMouseStore {
 
-    private static final Logger log =
-            Logger.getLogger(PDXMouseStore.class.getName());
+    private static final Logger log
+            = Logger.getLogger(PDXMouseStore.class.getName());
     private static ArrayList<PDXMouse> allMice;
     // use the numeric part of the model id as an index to the mouse object
     //  private static HashMap<Integer,PDXMouse> mouseMap = new HashMap<Integer,PDXMouse>();
@@ -87,22 +87,21 @@ public class PDXMouseStore {
         "SOCS1", "SOS1", "SOX9", "SPOP", "SRC", "SRSF2", "STAG2", "STK11", "STK3", "SUV39H1", "TARBP2", "TBL1XR1", "TBP", "TBX3", "TCF7L2", "TEAD1", "TEAD2", "TEAD4", "TET2", "TGFBR2",
         "TLE6", "TMEM82", "TNFAIP3", "TP53", "TP63", "TP73", "TRAF7", "TSC1", "TSHR", "TTC5", "TTN", "U2AF1", "UBC", "USH2A", "VHL", "WHSC1", "WHSC1L1", "WNT7A", "WT1", "WWTR1", "XRCC2",
         "XRCC3", "YAP1", "YES1", "ZFP36L1", "ZMYND19"};
-    // Variant web service this should be in a properties file....
-    private static String variationURI = "http://bhpdx01:8080/pdxqueryservices/REST/pdx-variation/";
-    // test
-    // private static String variationURI = "http://cga-test.jax.org:8080/pdxqueryservices/REST/pdx-variation/";
-    // new test?
-    //private static String variationURI = "http://cga-test:8080/pdxqueryservices/REST/pdx-variation/";
-    
-    // for fusion genes
-    private static final String fusionBaseURI = "http://bhpdx01:8080/pdxqueryservices/REST/pdx-fusion/";
-    private static final String fusionModels = fusionBaseURI+"models-for-fusion-gene-?.json"; // replace ? with gene
-    private static final String fusionGenes = fusionBaseURI+"all-fusion-genes.json";
-    private static final String allFusionModels = fusionBaseURI+"all-fusion-models.json";
-    private static final String fusionsForModel = fusionBaseURI+"fusions-for-model-?.json"; // replace ? with id
 
-    private static HashMap<String,String> fusionModelsMap = new HashMap<String,String>();
-   
+    private static String baseURI = "http://bhpdx01:8080/pdxqueryservices/REST";
+    // test
+    // private String baseURI = "http://bhpdxdev01:8080/pdxqueryservices/REST";
+
+    private static String variationURI = baseURI + "/pdx-variation/";
+    private static final String fusionURI = baseURI + "/pdx-fusion/";
+
+    private static final String fusionModels = fusionURI + "models-for-fusion-gene-?.json"; // replace ? with gene
+    private static final String fusionGenes = fusionURI + "all-fusion-genes.json";
+    private static final String allFusionModels = fusionURI + "all-fusion-models.json";
+    private static final String fusionsForModel = fusionURI + "fusions-for-model-?.json"; // replace ? with id
+
+    private static HashMap<String, String> fusionModelsMap = new HashMap<String, String>();
+
     private static final String any = "models-with-variants-in-any.json";
     private static final String allGenes = "all-genes.json";
     private static final String modelsWithVariant = "models-with-specific-variant.json"; //  {"gene_symbol": "FGFR2", "variant": "K296R"}
@@ -112,14 +111,21 @@ public class PDXMouseStore {
 
     public PDXMouseStore() {
 
+        try{
         if (allMice == null || allMice.isEmpty()) {
             synchronized (PDXMouseStore.class) {
                 loadData();
             }
         }
+        }catch(Exception e){ 
+            log.error("Unable to initalize pdx mouse store",e);
+            allMice = new ArrayList<>();
+            
+          
+        }
     }
 
-    private void loadData() {
+    private void loadData() throws Exception {
 
         log.info("Loading eLIMS-PDX Data");
 
@@ -134,7 +140,6 @@ public class PDXMouseStore {
         tagsLVB.clear();
         exomePanelGenesLVB.clear();
         fusionGenesLVB.clear();
-
 
         log.info("loading mice from eLIMS");
         ElimsUtil eu = new ElimsUtil();
@@ -165,13 +170,21 @@ public class PDXMouseStore {
             LabelValueBean lvb = new LabelValueBean(gene, gene);
             exomePanelGenesLVB.add(lvb);
         }
-        
+
         loadFusionGenes();
         loadFusionModels();
-
+        
+       
         if (allMice != null && allMice.size() > 0) {
+            
+             HashMap<String,String> socGraphs = SOCLoader.loadSOCModels();
+
             assocData = PDXDAO.getInstance().getPDXAdditionalContent();
             for (PDXMouse mouse : allMice) {
+                
+                if(socGraphs.containsKey(mouse.getModelID())){
+                    mouse.setSocGraph(true);
+                }
                 mouse.setAssocData(assocData.get(mouse.getModelID()));
                 String id = mouse.getModelID();
                 Integer num = null;
@@ -186,14 +199,13 @@ public class PDXMouseStore {
                 if (num == null) {
                     log.error("model id " + id + " cant be parsed into an integer");
                 }
-                
-                if(fusionModelsMap.get(num.toString()) != null){    
+
+                if (fusionModelsMap.get(num.toString()) != null) {
                     mouse.setFusionGenes(fusionModelsMap.get(num.toString()));
-                    System.out.println("Setting fusion gene "+mouse.getFusionGenes()+" for mouse " + num);
+
                 }
-                
+
                 //   mouseMap.put(num,mouse);
-                
             }
             log.info("Loading genes from webservice.");
             getAllGenes();
@@ -201,13 +213,11 @@ public class PDXMouseStore {
             StringBuffer genesBuffer = new StringBuffer();
             genesBuffer.append("[");
 
-            
             for (String gene : allGenesList) {
                 genesBuffer.append("[\"").append(gene).append("\",\"").append(gene).append("\"],");
-                
+
             }
-            genesBuffer.replace(genesBuffer.length()-1, genesBuffer.length(), "]");
-      
+            genesBuffer.replace(genesBuffer.length() - 1, genesBuffer.length(), "]");
 
             allGenesWebFormat = genesBuffer.toString();
 
@@ -222,7 +232,6 @@ public class PDXMouseStore {
                 }
                 genesBuffer.append("'" + gene + "'");
 
-
             }
             genesBuffer.append("]");
             exomePanelGenesWebFormat = genesBuffer.toString();
@@ -231,16 +240,13 @@ public class PDXMouseStore {
 
     /**
      * Pre load reports for dashboard, small but may take a few minutes to load
-     * Can be reloaded by refresh button on dashboard 
+     * Can be reloaded by refresh button on dashboard
      */
     private void loadReports() {
         Date d = new Date();
 
-
-
         log.info(d + " Loading reports from eLIMS");
         ElimsUtil eu = new ElimsUtil();
-
 
         String temp = "";
 
@@ -252,9 +258,6 @@ public class PDXMouseStore {
         } else {
             log.error("PDX Engraftment Status Summary was not loaded!");
         }
-
-
-
 
         d = new Date();
         log.info(d + " Loading Family History");
@@ -273,7 +276,6 @@ public class PDXMouseStore {
 
         // old name
         //temp = eu.getPDXCustomerReport();
-
         if (temp.length() > 0) {
             pdxPTClinical = temp;
         } else {
@@ -288,7 +290,6 @@ public class PDXMouseStore {
         } else {
             log.error("PDX Status Report not loaded!");
         }
-
 
         d = new Date();
         log.info(d + " Loading Consortium Report");
@@ -306,21 +307,22 @@ public class PDXMouseStore {
             log.error("PDX Model Status not loaded!");
         }
 
-
         d = new Date();
         log.info(d + " Done loading reports");
         reportFreshnessDate = d;
     }
 
     /**
-     * Return the mouse model with ID using cached mouse list
-     * Result will be a single mouse or empty. ArrayList for consistency with other find methods
+     * Return the mouse model with ID using cached mouse list Result will be a
+     * single mouse or empty. ArrayList for consistency with other find methods
+     *
      * @param ID String TM#####
-     * @return ArrayList<PDXMouse> 
+     * @return ArrayList<PDXMouse>
      */
     public ArrayList<PDXMouse> findStaticMouseByID(String ID) {
         ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
-        loop: for (PDXMouse mouse : this.allMice) {
+        loop:
+        for (PDXMouse mouse : this.allMice) {
             if (mouse.getModelID().equalsIgnoreCase(ID)) {
                 mice.add(mouse);
                 break loop;
@@ -332,6 +334,7 @@ public class PDXMouseStore {
 
     /**
      * Return a list of PDXMice that match the search parameters
+     *
      * @param modelID String
      * @param tissues ArrayList<String>
      * @param diagnoses ArrayList<String>
@@ -340,107 +343,61 @@ public class PDXMouseStore {
      * @param genes ArrayList<String>
      * @param variants ArrayList<String>
      * @param drugResponse boolean drugResponse data required
-     * @param tumorGrowth  boolean tumorGrowth data required
+     * @param tumorGrowth boolean tumorGrowth data required
      * @return ArrayList<PDXMouse> mice matching search parameters
      */
     public ArrayList<PDXMouse> findMice(String modelID, ArrayList<String> tissues,
             ArrayList<String> diagnoses, ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers,
             ArrayList<String> genes, ArrayList<String> variants, boolean drugResponse, boolean tumorGrowth, ArrayList<String> tags, String fusionGenes) {
 
+        // may need to do 3 searches
+        // findStaticMice
+        // find by fusion gene
+        // find by gene variant --> populate variants and consequence if variant is used
         ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
-        mice = findStaticMice(modelID, tissues, diagnoses, tumorTypes, tumorMarkers, tags);
 
-       
-        // get ids of mice with gene and variant criteria
-        // these IDs are not prefixed with TM
+        // get a list of mice based on search criteria that are in ELIMS
+        mice = findStaticMice(modelID, tissues, diagnoses, tumorTypes, tumorMarkers, tags, drugResponse, tumorGrowth);
 
-        ArrayList<String> ids = getModelIDs(genes, variants);
-        // filter mice on that.
-        
-        if(fusionGenes != null && fusionGenes.trim().length()>0){
-            
-            if(fusionGenes.equalsIgnoreCase("any")){
-                for(String id : fusionModelsMap.keySet()){
+        ArrayList<String> ids = new ArrayList<>();
+
+        if (fusionGenes != null && fusionGenes.trim().length() > 0) {
+
+            if (fusionGenes.equalsIgnoreCase("any")) {
+                for (String id : fusionModelsMap.keySet()) {
                     ids.add(id);
                 }
-            }else{
-                // you either get fusions or variants not both  !maybe let the user know this?!
-               // ids = getFusionModels(fusionGenes);
+            } else {
+
                 ids.addAll(getFusionModels(fusionGenes));
             }
-                
+
         }
-        
+
         Collections.sort(ids);
 
         ArrayList<PDXMouse> mice2 = new ArrayList<PDXMouse>();
 
-        // if the only criteria is gene/vairant this is a slow approach 
-        int count = 0;
-        // not sure how to optimize  the real cost is the 2 webservice calls per model not the loop
         if (ids.isEmpty()) {
             mice2.addAll(mice);
         } else {
             for (PDXMouse sMouse : mice) {
-
-                // because search specific values are set clone the static mouse
+                // because search specific values will be set clone the static mouse
                 PDXMouse mouse = sMouse.clone();
-
-                inner:
                 for (String id : ids) {
-
                     if (compareIDs(mouse.getModelID(), id)) {
-                        String variant = null;
-                        mouse.setVariant(""); // default no value rather than null
-                        if (genes != null && !genes.isEmpty()) {
-                            mouse.setGene(genes.get(0));
-
-                            if (variants != null && !variants.isEmpty()) {
-                                mouse.setVariant(variants.get(0));
-                                variant = mouse.getVariant();
-                            } else {
-                                mouse.setVariant(this.getVariantsForGeneModel(mouse.getGene(), mouse.getModelID()));
-                            }
-                        }
-
-
-                        mouse.setConsequence(this.getConsequence(mouse.getModelID(), mouse.getGene(), variant));
-
                         mice2.add(mouse);
-                        // break here 
-                        break inner;
+
                     }
-                    count++;
                 }
             }
         }
-        System.out.println("search took " + count + " loops");
-        mice.clear();
-        mice.addAll(mice2);
-        mice2.clear();
 
-
-        if (drugResponse) {
-            for (PDXMouse mouse : mice) {
-                if (mouse.getAssocData() != null && mouse.getAssocData().contains("Drug")) {
-                    mice2.add(mouse);
-                }
-            }
-            mice.retainAll(mice2);
-            mice2.clear();
-
-        }
-        if (tumorGrowth) {
-            for (PDXMouse mouse : mice) {
-                if (mouse.getAssocData() != null && mouse.getAssocData().contains("Tumor")) {
-                    mice2.add(mouse);
-                }
-            }
-            mice.retainAll(mice2);
-            mice2.clear();
+        if (genes != null && genes.size() > 0 && genes.get(0).trim().length() > 0) {
+            mice2 = getMiceByGeneVariant(mice2, genes, variants);
         }
 
-        return mice;
+        return mice2;
     }
 
     private boolean compareIDs(String display, String numeric) {
@@ -487,15 +444,16 @@ public class PDXMouseStore {
     /**
      * Use the cached list of mice to get models matching the search criteria
      * This getting pretty lame
+     *
      * @param modelID String TM#####
-     * @param tissues ArrayList<String> 
+     * @param tissues ArrayList<String>
      * @param diagnoses ArrayList<String>
      * @param tumorTypes ArrayList<String>
      * @param tumorMarkers ArrayList<String>
      * @return ArrayList<PDXMouse> matching mice
      */
     private ArrayList<PDXMouse> findStaticMice(String modelID, ArrayList<String> tissues, ArrayList<String> diagnoses,
-            ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers, ArrayList<String> tags) {
+            ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers, ArrayList<String> tags, boolean drugResponse, boolean tumorGrowth) {
 
         ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
         ArrayList<PDXMouse> mice2 = new ArrayList<PDXMouse>();
@@ -505,8 +463,6 @@ public class PDXMouseStore {
         } else {
             mice.addAll(allMice);
         }
-        
-       
 
         if (tissues != null && tissues.size() > 0) {
             for (PDXMouse mouse : mice) {
@@ -522,7 +478,28 @@ public class PDXMouseStore {
 
         mice.clear();
 
+        if (drugResponse) {
+            for (PDXMouse mouse : mice2) {
+                if (mouse.getAssocData() != null && mouse.getAssocData().contains("Drug")) {
+                    mice.add(mouse);
+                }
+            }
+        } else {
+            mice.addAll(mice2);
+        }
 
+        mice2.clear();
+
+        if (tumorGrowth) {
+            for (PDXMouse mouse : mice) {
+                if (mouse.getAssocData() != null && mouse.getAssocData().contains("Tumor")) {
+                    mice2.add(mouse);
+                }
+            }
+        } else {
+            mice2.addAll(mice);
+        }
+        mice.clear();
 
         if (diagnoses != null && diagnoses.size() > 0) {
             for (PDXMouse mouse : mice2) {
@@ -582,13 +559,11 @@ public class PDXMouseStore {
         }
         mice.clear();
 
-
         // deduplicate
         HashMap<String, PDXMouse> mouseMap = new HashMap<String, PDXMouse>();
         for (PDXMouse mouse : mice2) {
             mouseMap.put(mouse.getModelID(), mouse);
         }
-
 
         mice.addAll(mouseMap.values());
 
@@ -599,7 +574,11 @@ public class PDXMouseStore {
     // slight misnomer also refreshes models for public search
     public void refreshReports() {
         loadReports();
-        loadData();
+        try{
+            loadData();
+        }catch(Exception e){
+            log.error("Unable to load elims PDX search data",e);
+        }
     }
 
     public String getReportFreshnessDate() {
@@ -675,7 +654,7 @@ public class PDXMouseStore {
     public ArrayList<LabelValueBean<String, String>> getExomePanelGenesLVB() {
         return (ArrayList<LabelValueBean<String, String>>) exomePanelGenesLVB;
     }
-    
+
     public ArrayList<LabelValueBean<String, String>> getFusionGenesLVB() {
         return (ArrayList<LabelValueBean<String, String>>) fusionGenesLVB;
     }
@@ -881,75 +860,95 @@ public class PDXMouseStore {
         return PDXDAO.getInstance().getComparisonData(models, genes);
     }
 
-    // Web service methods
-    private ArrayList<String> getModelIDs(ArrayList<String> genes, ArrayList<String> variants) {
+    private ArrayList<PDXMouse> getMiceByGeneVariant(ArrayList<PDXMouse> mice, ArrayList<String> genes, ArrayList<String> variants) {
 
-        ArrayList<String> ids = new ArrayList<String>();
-
-
-        if ((variants == null || variants.isEmpty())
-                && (genes == null || genes.isEmpty())) {
-            return ids;
-        }
-        try {
-            JSONArray params = null;
-            JSONObject job = null;
-            if (variants == null || variants.isEmpty()) {
-
-                params = new JSONArray(genes);
-                job = new JSONObject("{\"data\":" + getJSON(variationURI + any, params.toString()) + "}");
-            } else {
-                String param;
-                if (genes != null && !genes.isEmpty()) {
-                    param = "{\"gene_symbol\":\"" + genes.get(0) + "\",\"variant\":\"" + variants.get(0) + "\"}";
-                } else {
-                    param = "{\"gene_symbol\":\"\",\"variant\":\"" + variants.get(0) + "\"}";
-                }
-                job = new JSONObject("{\"data\":" + getJSON(variationURI + modelsWithVariant, param) + "}");
-
-            }
-
-            JSONArray array = (JSONArray) job.get("data");
-
-
-            for (int i = 0; i < array.length(); i++) {
-                ids.add(String.format("%05d", array.getInt(i)));
-            }
-        } catch (Exception e) {
-            log.error("Error getting model IDs", e);
-        }
-        return ids;
-    }
-
-    public String getVariantsForGeneModel(String gene, String model) {
-
-        StringBuffer variants = new StringBuffer();
-        try {
-
-            String id = model.substring(2);
+        // turn model ids into an array of ints
+        // use the all-variants.json service to return all matching models
+        // populate matching models with gene, 
+        // if variants the populate consequence
+        ArrayList<PDXMouse> matchingMice = new ArrayList<>();
+        JSONArray jsonIds = new JSONArray();
+        for (PDXMouse m : mice) {
+            String id = m.getModelID().substring(2);
             Integer idInt = new Integer(id);
+            jsonIds.put(idInt.toString());
 
-            JSONObject job = null;
+        }
+        JSONArray jsonGenes = new JSONArray(genes);
+        JSONArray jsonVariants = new JSONArray(variants);
+        StringBuilder params = new StringBuilder();
 
-            String param;
-            param = "{\"model_id\":\"" + idInt.toString() + "\",\"gene_symbol\":\"" + gene + "\"}";
-
-            job = new JSONObject("{\"data\":" + getJSON(variationURI + variantsForGeneModel, param) + "}");
-
-            JSONArray array = (JSONArray) job.get("data");
-            for (int i = 0; i < array.length(); i++) {
-                if (i > 0) {
-                    variants.append(", ");
-                }
-                variants.append(array.getString(i));
-            }
-
-        } catch (Exception e) {
-            log.error("Errog getting variants for model " + model + " and gene " + gene, e);
+        params.append("{\"model\":").append(jsonIds.toString()).append(",\"gene_symbol\":").append(jsonGenes.toString());
+        if (variants != null && variants.size() > 0) {
+            params.append(",\"amino_acid_change\":").append(jsonVariants.toString());
         }
 
-        return variants.toString();
+        String filter = "FALSE";
+        if (WIConstants.getInstance().getPublicDeployment()) {
+            filter = "TRUE";
+        }
+        params.append(",\"skip\": \"0\", \"limit\": \"-1\", \"sort_by\": \"consequence\", \"sort_dir\": \"DESC\", \"filter\": \"");
+        params.append(filter).append("\"}");
 
+        // need to turn the json in to a map key of model id
+        // values variants, consequences
+        HashMap<String, ArrayList<StringBuilder>> data = new HashMap<>();
+        try {
+            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + allVariants, params.toString()) + "}");
+
+            JSONArray jarray = ((JSONObject) job.get("data")).getJSONArray("data");
+            for (int i = 0; i < jarray.length(); i++) {
+
+                String id = getField(jarray.getJSONObject(i), "model_id");
+                String consequence = getField(jarray.getJSONObject(i), "consequence").replace("\"", "");
+                String aaChange = getField(jarray.getJSONObject(i), "amino_acid_change");
+
+                ArrayList<StringBuilder> list = data.get(id);
+                if (list != null) {
+                    // skip duplicates
+                    if (list.get(0).indexOf(consequence) == -1) {
+                        if (list.get(0).length() > 0) {
+                            list.get(0).append(", ");
+                        }
+
+                        list.get(0).append(consequence);
+                    }
+
+                    // skip duplicates
+                    if (list.get(1).indexOf(aaChange) == -1) {
+                        if (list.get(1).length() > 0) {
+                            list.get(1).append(", ");
+                        }
+
+                        list.get(1).append(aaChange);
+                    }
+                } else {
+                    list = new ArrayList<>();
+                    list.add(new StringBuilder(consequence));
+                    list.add(new StringBuilder(aaChange));
+                    data.put(id, list);
+                }
+            }
+
+            // now for each id in the map get the mouse from mice
+            // the add the appropriate conseqeunce and variant
+            for (String id : data.keySet()) {
+                for (PDXMouse mouse : mice) {
+                    if (id.equals(mouse.getModelID())) {
+                        mouse.setConsequence(data.get(id).get(0).toString());
+                        mouse.setVariant(data.get(id).get(1).toString());
+                        mouse.setGene(genes.get(0));
+                        matchingMice.add(mouse);
+                    }
+                }
+            }
+
+        } catch (JSONException e) {
+            log.error("Error getting mice by gene variants", e);
+
+        }
+
+        return matchingMice;
     }
 
     public ArrayList<String> getVariants(String gene) {
@@ -970,14 +969,11 @@ public class PDXMouseStore {
             log.error("Error getting variants for gene " + gene, e);
         }
 
-
-
         return variants;
 
     }
 
     public String getVariationData(String model, String limit, String start, String sort, String dir, String filter) {
-
 
         String params = "{\"model\":[\"" + model + "\"],\"skip\": \"" + start + "\", \"limit\": \"" + limit + "\", \"sort_by\": \"" + sort + "\", \"sort_dir\": \"" + dir + "\", \"filter\": \"" + filter + "\"}";
 
@@ -990,8 +986,6 @@ public class PDXMouseStore {
 
             String total = ((Integer) job.get("total_rows")).toString();
             result.append(total);
-
-            //  System.out.println(model +" has "+total+" variation rows");
 
             JSONArray array = (JSONArray) job.get("data");
 
@@ -1019,8 +1013,10 @@ public class PDXMouseStore {
                 result.append("'").append(getField(array.getJSONObject(i), "ckb_evidence_types")).append("',");
                 result.append("'").append(getField(array.getJSONObject(i), "cancer_types_actionable")).append("',");
                 result.append("'").append(getField(array.getJSONObject(i), "drug_class")).append("',");
+                result.append("'").append(getField(array.getJSONObject(i), "count_human_reads")).append("',");
+                result.append("'").append(getField(array.getJSONObject(i), "pct_human_reads")).append("',");
                 result.append("'").append(getField(array.getJSONObject(i), "variant_num_trials")).append("',");
-
+                
 
                 if (i < array.length()) {
                     result.append("'").append(getField(array.getJSONObject(i), "variant_nct_ids")).append("'],");
@@ -1028,20 +1024,16 @@ public class PDXMouseStore {
                     result.append("'").append(getField(array.getJSONObject(i), "variant_nct_ids")).append("']");
                 }
 
-
             }
 
             result.append("]}");
 
-
-
         } catch (Exception e) {
             log.error("Error !!!! " + model, e);
+            result.append("0}");
         }
 
         String resultStr = result.toString().replaceAll("null", " ");
-
-
 
         return resultStr;
     }
@@ -1059,140 +1051,85 @@ public class PDXMouseStore {
             //  log.error("Unable to get value for " + field + " from json object");
         }
 
-
         return val;
     }
 
-    /**
-     * Get the consequence for a gene and possibly variant for a given model
-     * This is always filtered: there is no reason to show false positive consequences
-     * @param id String the model ID required
-     * @param gene String the gene in question required
-     * @param variant String the specific variant of the gene optional
-     * @return String the consequence of the variant
-     */
-    private String getConsequence(String model, String gene, String variant) {
-
-        String id = model.substring(2);
-        Integer idInt = new Integer(id);
-        id = idInt.toString();
-
-        StringBuffer buff = new StringBuffer();
-        String consequence, params;
-
-        if (variant != null && variant.trim().length() > 0) {
-            params = "{\"model\":[\"" + id + "\"],\"gene_symbol\": [\"" + gene + "\"], \"amino_acid_change\": [\"" + variant + "\"],\"skip\": \"0\", \"limit\": \"-1\", \"sort_by\": \"consequence\", \"sort_dir\": \"DESC\", \"filter\": \"TRUE\"}";
-        } else {
-            params = "{\"model\":[\"" + id + "\"],\"gene_symbol\": [\"" + gene + "\"],\"skip\": \"0\", \"limit\": \"-1\", \"sort_by\": \"consequence\", \"sort_dir\": \"DESC\", \"filter\": \"TRUE\"}";
-        }
-        try {
-            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + allVariants, params) + "}");
-
-            JSONArray jarray = ((JSONObject) job.get("data")).getJSONArray("data");
-            for (int i = 0; i < jarray.length(); i++) {
-                consequence = (getField(jarray.getJSONObject(i), "consequence"));
-
-                // skip duplicates
-                if (buff.indexOf(consequence) == -1) {
-                    if (buff.length() > 0) {
-                        buff.append(", ");
-                    }
-
-                    buff.append(consequence);
-                }
-            }
-
-
-
-        } catch (JSONException e) {
-            log.error("Error getting consequence for model " + model + " and gene " + gene + ", variant " + variant, e);
-
-        }
-        // for some reason some consequences are quoted, remove the quotes
-        return buff.toString().replace("\"", "");
-    }
-    
     // example response
     //{"genes":[{"gene":"ALK","models":[{"model":"206","samples":[{"sample":"LG0812PE1330P0_206","fusions":["EML4 - ALK"]},{"sample":"LG0812PE1332P0_206","fusions":["EML4 - ALK"]}]}]}]}
-    
-    private ArrayList<String> getFusionModels(String fusionGenes){
+    private ArrayList<String> getFusionModels(String fusionGenes) {
         ArrayList<String> models = new ArrayList<String>();
-        try{
+        try {
             String url = this.fusionModels.replace("?", fusionGenes);
             JSONObject job = new JSONObject(getJSON(url));
             JSONArray jarray = (JSONArray) job.get("genes");
             job = jarray.getJSONObject(0);
             jarray = job.getJSONArray("models");
-            for(int i =0; i < jarray.length(); i++){
-               models.add(jarray.getJSONObject(i).getString("model"));
+            for (int i = 0; i < jarray.length(); i++) {
+                models.add(jarray.getJSONObject(i).getString("model"));
             }
-            
-            
-            
-        }catch(Exception e){
-            log.error("Unable to load fusion modles for "+fusionGenes,e);
+
+        } catch (Exception e) {
+            log.error("Unable to load fusion modles for " + fusionGenes, e);
         }
-    
+
         return models;
     }
-    
-    
-    private void loadFusionModels(){
-        
-        try{
-         
+
+    private void loadFusionModels() {
+
+        try {
+
             JSONObject job = new JSONObject(getJSON(allFusionModels));
             JSONArray jarray = (JSONArray) job.get("models");
-            for(int i =0; i < jarray.length(); i++){
-               String model = jarray.getJSONObject(i).getString("model");
-               StringBuilder value = new StringBuilder();
-               JSONArray samples = jarray.getJSONObject(i).getJSONArray("samples");
-               for(int j = 0; j < samples.length(); j++){
-                   value.append("Sample ").append(samples.getJSONObject(j).getString("sample"));
-                   value.append(" has fusion gene");
-                   JSONArray fusions = samples.getJSONObject(j).getJSONArray("fusions");
-                   if(fusions.length()>1){
-                       value.append("s ");
-                   }else{
-                       value.append(" ");
-                   }
-                   for(int k = 0; k < fusions.length(); k++){
-                       if(k>0) value.append(", ");
-                       value.append(fusions.get(k));
-                   }
-                   // oh the horror HTML
-                   value.append("<br>");
+            for (int i = 0; i < jarray.length(); i++) {
+                String model = jarray.getJSONObject(i).getString("model");
+                StringBuilder value = new StringBuilder();
+                JSONArray samples = jarray.getJSONObject(i).getJSONArray("samples");
+                for (int j = 0; j < samples.length(); j++) {
+                    value.append("Sample ").append(samples.getJSONObject(j).getString("sample"));
+                    value.append(" has fusion gene");
+                    JSONArray fusions = samples.getJSONObject(j).getJSONArray("fusions");
+                    if (fusions.length() > 1) {
+                        value.append("s ");
+                    } else {
+                        value.append(" ");
+                    }
+                    for (int k = 0; k < fusions.length(); k++) {
+                        if (k > 0) {
+                            value.append(", ");
+                        }
+                        value.append(fusions.get(k));
+                    }
+                    // oh the horror HTML
+                    value.append("<br>");
                 }
-               System.out.println(model+":"+value.toString());
-                fusionModelsMap.put(model,value.toString());
+                System.out.println(model + ":" + value.toString());
+                fusionModelsMap.put(model, value.toString());
             }
-        }catch(Exception e){
-            log.error("Unable to load fusion models",e);
+        } catch (Exception e) {
+            log.error("Unable to load fusion models", e);
         }
     }
-    
-    private void loadFusionGenes(){
-        try{
+
+    private void loadFusionGenes() {
+        try {
             JSONObject job = new JSONObject(getJSON(this.fusionGenes));
             JSONArray jarray = (JSONArray) job.get("fusion_genes");
-            for(int i =0; i < jarray.length(); i++){
-                LabelValueBean bean = new LabelValueBean<String,String>();
+            for (int i = 0; i < jarray.length(); i++) {
+                LabelValueBean bean = new LabelValueBean<String, String>();
                 bean.setLabel(jarray.getString(i).trim());
                 bean.setValue(jarray.getString(i).trim());
-               
+
                 fusionGenesLVB.add(bean);
             }
-            
-            
-            
-        }catch(Exception e){
-            log.error("Unable to load fusion genes",e);
+
+        } catch (Exception e) {
+            log.error("Unable to load fusion genes", e);
         }
     }
 
     // this is slow and should be done once on load.
     private void getAllGenes() {
-
 
         ArrayList<String> genes = new ArrayList<String>();
 
@@ -1225,8 +1162,6 @@ public class PDXMouseStore {
 
     private String getJSON(String uri, String json) {
 
-
-
         boolean post = true;
         if (json == null || json.length() == 0) {
             post = false;
@@ -1238,8 +1173,8 @@ public class PDXMouseStore {
         HttpURLConnection connection = null;
         try {
             URL url = new URL(uri);
-            connection =
-                    (HttpURLConnection) url.openConnection();
+            connection
+                    = (HttpURLConnection) url.openConnection();
             if (post) {
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true); // sending stuff
@@ -1284,7 +1219,6 @@ public class PDXMouseStore {
             } catch (IOException e) {
 
                 log.error("Error reading from webservice " + uri, e);
-
 
             } finally {
                 if (in != null) {

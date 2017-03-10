@@ -63,7 +63,7 @@ public class SolrAction extends Action {
         }
         
        
-    //        System.out.println(url);
+        log.debug(url);
         HttpURLConnection connection =
                 (HttpURLConnection) url.openConnection();
 

@@ -65,6 +65,27 @@ public class WIUtils {
 
         return ret;
     }
+    
+    
+    /**
+     * Convert an array of <code>String</code> objects to a <code>List of valid integer strings</code>
+     * and remove any empty values.
+     */
+    public static List<String> arrayToCleanKeyList(String[] arr) {
+        List<String> ret = new ArrayList<String>();
+
+        if (arr != null) {
+            for(int i = 0; i < arr.length; i++){
+               try{
+                ret.add(new Integer(arr[i].trim()).toString());
+               }catch(Exception e){
+                  
+               }
+            }
+        }
+
+        return ret;
+    }
 
     /**
      * Convert a <code>String</code> to an integer.

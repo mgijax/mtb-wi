@@ -41,6 +41,14 @@ public class PDXSearchAction extends Action {
             response.flushBuffer();
             return null;
         }
+        
+         if ("gimme".equals(request.getParameter("pdxInfoJSON"))) {
+            ElimsUtil eu = new ElimsUtil();
+            response.setContentType("application/json");
+            response.getWriter().write(eu.getPDXInfo());
+            response.flushBuffer();
+            return null;
+        }
 
         PDXForm pdxForm = (PDXForm) form;
 

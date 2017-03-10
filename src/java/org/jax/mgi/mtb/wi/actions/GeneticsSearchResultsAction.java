@@ -104,8 +104,11 @@ public class GeneticsSearchResultsAction extends Action {
     long lMaxItems = -1;
 
     // convert the arrays to collections
-    colChromosomes = WIUtils.arrayToCleanList(arrStrChromosomes);
-    colMutations = WIUtils.arrayToCleanList(arrStrMutations);
+    colChromosomes = WIUtils.arrayToCleanKeyList(arrStrChromosomes);
+    colMutations = WIUtils.arrayToCleanKeyList(arrStrMutations);
+    
+    
+    // need to sanitize strMarker, and strAllele
 
 
     lMaxItems = WIUtils.stringToLong(strMaxItems, -1l);

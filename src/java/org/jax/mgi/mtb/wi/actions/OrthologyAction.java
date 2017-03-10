@@ -148,31 +148,37 @@ public class OrthologyAction extends Action {
   // get the details to display the associated marker symbols as a list (symbol entregene id, name)
   private ArrayList<LabelValueDataBean<String,String,String>> getSymbolDetailsForRef(String ref){
     ArrayList<LabelValueDataBean<String,String,String>> list = new ArrayList<LabelValueDataBean<String,String,String>>();
-    
-    ArrayList<MarkerDTO> dtos = MTBReferenceUtilDAO.getInstance().getHumanMarkers(new Long(ref).longValue());
-    for(MarkerDTO dto : dtos){
-      list.add(new LabelValueDataBean(dto.getSymbol(),(String)dto.getDataBean().get(MTBReferenceUtilDAO.EGID),dto.getName()));
-    }
-    
+    try{
+        ArrayList<MarkerDTO> dtos = MTBReferenceUtilDAO.getInstance().getHumanMarkers(new Long(ref).longValue());
+        for(MarkerDTO dto : dtos){
+          list.add(new LabelValueDataBean(dto.getSymbol(),(String)dto.getDataBean().get(MTBReferenceUtilDAO.EGID),dto.getName()));
+        }
+    }catch(Exception e){}
     return list;
   }
   
   // get a comma seperated list of symbols for the reference
   // if there is an entrez gene id use that rather than the symbol
   private String getSymbolListForRef(String ref){
-    
-    ArrayList<MarkerDTO> dtos = MTBReferenceUtilDAO.getInstance().getHumanMarkers(new Long(ref).longValue());
     StringBuffer str = new StringBuffer();
     String id = null;
-    for(MarkerDTO dto : dtos){
-      id = (String)dto.getDataBean().get(MTBReferenceUtilDAO.EGID);
-      if(id != null && id.length() >0){
-       str.append(id).append(",");
-      }else{
-      
-        str.append(dto.getSymbol()).append(",");
-      }
+    try{
+        ArrayList<MarkerDTO> dtos = MTBReferenceUtilDAO.getInstance().getHumanMarkers(new Long(ref).longValue());
+
+        for(MarkerDTO dto : dtos){
+          id = (String)dto.getDataBean().get(MTBReferenceUtilDAO.EGID);
+          if(id != null && id.length() >0){
+           str.append(id).append(",");
+          }else{
+
+            str.append(dto.getSymbol()).append(",");
+          }
+        }
+    }catch(Exception e){
+        
     }
+        
+    
     return str.toString();
   }
     

@@ -106,7 +106,22 @@ public class TumorSearchResultsAction extends Action {
         // allelePairKey,organTissueOrigin,tumorClassification,agentType
         ///////////////////////////////////////////////////////////////////////
         String strAllelePairKeys = request.getParameter("allelePairKey");
-        
+        if(strAllelePairKeys != null){
+            String[] apKeys = strAllelePairKeys.split(",");
+            StringBuilder apSB = new StringBuilder();
+            for(int i = 0; i < apKeys.length; i++ ){
+                try{
+                    if(apSB.length()>0){
+                        apSB.append(",").append(new Long(apKeys[i].trim()).toString());
+                    }else{
+                        apSB.append(new Long(apKeys[i].trim()).toString());
+                    }
+                }catch(Exception e){
+                    // ignore bad characters
+                }
+            }
+            strAllelePairKeys = apSB.toString();
+        }
         ///////////////////////////////////////////////////////////////////////
         // from the reference detail page
         // referenceKey
@@ -157,6 +172,7 @@ public class TumorSearchResultsAction extends Action {
         long lStrainFamilyKey = -1;
         long lOrganOriginKey = -1;
         long lOrganOriginParentKey = -1;
+        int  sexKey = -1;
         boolean bExcludeMets = false;
         boolean bExactStrainTypes = false;
         List<String> listStrainTypes = new ArrayList<String>();
@@ -177,12 +193,51 @@ public class TumorSearchResultsAction extends Action {
             lOrganOriginKey = WIUtils.stringToLong(strOrganOriginKey, -1);
             lOrganOriginParentKey = WIUtils.stringToLong(strOrganOriginParentKey, -1);
         }
+        
+        
+        // need to expand options for marker grid ie add params
+        // sex key
+        // marker grid
+        // difference between 2 and 3 is only setting strAgentType
+        if ("2".equalsIgnoreCase(strGrid)) {
+         //   listStrainTypes.add("8");
+            bExcludeMets = true;
+         //   bExactStrainTypes = true;
+            bExcludePlasias = true;
+            lAgentType = 0;
+            strAgentType = "-1";  // any
+            strMaxItems = "No Limit";
+
+            // parse the string to numerics
+            lStrainKey = WIUtils.stringToLong(strStrainKey, -1);
+            lStrainFamilyKey = WIUtils.stringToLong(strStrainFamilyKey, -1);
+            lOrganOriginKey = WIUtils.stringToLong(strOrganOriginKey, -1);
+            lOrganOriginParentKey = WIUtils.stringToLong(strOrganOriginParentKey, -1);
+        }
+        
+         // marker grid
+        if ("3".equalsIgnoreCase(strGrid)) {
+         //   listStrainTypes.add("8");
+            bExcludeMets = true;
+         //   bExactStrainTypes = true;
+            bExcludePlasias = true;
+            lAgentType = 0;
+            strAgentType = "0";  //  only spontaneous
+            strMaxItems = "No Limit";
+
+            // parse the string to numerics
+            lStrainKey = WIUtils.stringToLong(strStrainKey, -1);
+            lStrainFamilyKey = WIUtils.stringToLong(strStrainFamilyKey, -1);
+            lOrganOriginKey = WIUtils.stringToLong(strOrganOriginKey, -1);
+            lOrganOriginParentKey = WIUtils.stringToLong(strOrganOriginParentKey, -1);
+        }
+        
 
         // convert the arrays to Lists and remove the empty values
-        arrOrganTissueOrigin = WIUtils.arrayToCleanList(arrStrOrganTissueOrigin);
-        arrTumorClassification = WIUtils.arrayToCleanList(arrStrTumorClassification);
+        arrOrganTissueOrigin = WIUtils.arrayToCleanKeyList(arrStrOrganTissueOrigin);
+        arrTumorClassification = WIUtils.arrayToCleanKeyList(arrStrTumorClassification);
         // this is only for metastisis apparently
-        arrOrganTissueAffected = WIUtils.arrayToCleanList(arrStrOrganTissueAffected);
+        arrOrganTissueAffected = WIUtils.arrayToCleanKeyList(arrStrOrganTissueAffected);
 
         // parse the string to numerics
       
@@ -216,14 +271,16 @@ public class TumorSearchResultsAction extends Action {
         tfParams.setColonySizeComparison(nColonySizeComparison);
         tfParams.setFrequency(dFrequency);
         tfParams.setFrequencyComparison(nFrequencyComparison);
-
+        tfParams.setSexKey(sexKey);
+        
+        
         StrainSearchParams strainParams = new StrainSearchParams();
         strainParams.setStrainKey(lStrainKey);
         strainParams.setStrainFamilyKey(lStrainFamilyKey);
         strainParams.setStrainTypes(listStrainTypes);
         strainParams.setExactStrainTypes(bExactStrainTypes);
         strainParams.setStrainKeyComparison("=");
-
+        
         // time the dao
         Timer timerDao = new Timer();
         timerDao.start();
@@ -257,7 +314,6 @@ public class TumorSearchResultsAction extends Action {
           asJason(result.getList(), response);
           return null;
         }
-        
         
         if (result != null) {
             colTumors = result.getList();

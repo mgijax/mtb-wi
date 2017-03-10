@@ -77,7 +77,7 @@ public class PDXDashboardAction extends Action {
         
         if (request.getParameter("familyHistory") != null) {
             report = store.getPDXFamilyHistory(delimiter);
-            fileName = source + "PDXFamilyHistory";
+            fileName = source + "PDXPatientHistory";
         }
         if (request.getParameter("patientClinical") != null) {
             report = store.getPDXPTClinical(delimiter);

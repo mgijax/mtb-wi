@@ -520,18 +520,25 @@
         </action>
         
         <action path="/facetedSearch"
-            forward="/WEB-INF/jsp/solr/facetedSearch_2.jsp">
+            forward="/WEB-INF/jsp/solr/facetedSearch.jsp">
         </action>
         
          <action path="/facetedSearchOMF"
-            forward="/WEB-INF/jsp/solr/facetedSearchOMF.jsp">
+            forward="/WEB-INF/jsp/solr/facetedSearch.jsp">
         </action>
         
         <!-- This always returns null since its for an XmlHTTPReq so forward path is moot -->
          <action path="/solrQuery"
             type="org.jax.mgi.mtb.wi.actions.SolrAction"
             scope="request">
-            <forward path="/WEB-INF/jsp/solr/facetedSearch_2.jsp"/>
+            <forward path="/WEB-INF/jsp/solr/facetedSearch.jsp"/>
+        </action>
+        
+        
+          <action path="/markerGrid"
+            type="org.jax.mgi.mtb.wi.actions.MarkerGridAction"
+            scope="request">
+            <forward name="success" path="/WEB-INF/jsp/solr/markerGrid.jsp"/>
         </action>
     
     </action-mappings>

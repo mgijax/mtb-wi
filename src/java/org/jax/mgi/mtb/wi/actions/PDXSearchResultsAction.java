@@ -70,10 +70,7 @@ public class PDXSearchResultsAction extends Action {
             hideGene = "true";
         }
         
-        if(fusionGenes != null && fusionGenes.trim().length() > 0){
-            
-        }
-        
+       
         ArrayList<PDXMouse> mice = null;
 
         // this is just for the Active status report
@@ -146,6 +143,7 @@ public class PDXSearchResultsAction extends Action {
                     int size = 50 + lines.length * 15;
                     request.setAttribute("chartSize", size + "");
                     size = size + 200;
+                    request.setAttribute("gene2", genesCNV);
                     request.setAttribute("divSize", size + "");
                     request.setAttribute("message", "Orange bars indicate gene amplification (copy number > 2.5).<br>Blue bars indicate gene deletion (copy number < 1.5).<br>Grey bars indicate no significant copy number change.");
                 } else {
@@ -156,7 +154,7 @@ public class PDXSearchResultsAction extends Action {
                 //no models
                 request.setAttribute("noResults", "No models matched the search criteria.");
             }
-            request.setAttribute("genesCNV", genesCNV);
+            
 
             result = "expression";
 

@@ -36,6 +36,7 @@
             document.forms[1].gene.value="";
             document.forms[1].genes2.value="";
             document.forms[1].genesCNV.value="";
+         
             
         }
         
@@ -353,7 +354,7 @@
                     <td>
                         <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select one or more variants as search criteria', CAPTION, 'Variants');" onmouseout="return nd();">Variants</a></b>
                         <br> 
-                    <html:select property="variants" size="8" multiple="true" styleId="variantSelect">
+                    <html:select property="variants" size="8" multiple="false" styleId="variantSelect">
                         <html:option value="">ANY</html:option> <!-- UNTESTED WOW!-->
                         <html:options collection="variantsValues" property="value" labelProperty="label"/>
                     </html:select>

@@ -20,6 +20,7 @@ import org.jax.mgi.mtb.dao.mtb.DAOManagerMTB;
 import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.wi.pdx.ElimsUtil;
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
+import org.jax.mgi.mtb.wi.pdx.SOCLoader;
 
 /**
  * The servlet that starts when the server starts.  Configured via the web.xml
@@ -125,6 +126,8 @@ public class InitializationServlet extends HttpServlet {
                         properties.getProperty(PDX_JDBC_PWD),
                         properties.getProperty(PDX_JDBC_USER));
 
+                
+                
                 log.info("set pdx info");
 
                 try{
@@ -150,6 +153,7 @@ public class InitializationServlet extends HttpServlet {
                 log.info("=> Setting global properties...");
                 WIConstants.getInstance().setProperties(properties);
                 log.info("==> Global properties initialized!");
+              
             } else {
                 log.error("=> ERROR: Unable to find \"propertiesFile\" [" + fileName + "] specified in web.xml!");
             }
@@ -216,6 +220,9 @@ public class InitializationServlet extends HttpServlet {
 
         getServletContext().setAttribute("publicDeployment",
                 WIConstants.getInstance().getPublicDeployment());
+        
+        getServletContext().setAttribute("socURL",
+                WIConstants.getInstance().getSocURL());
 
         // google analytics only on public
         // fyi not all pages include the meta.jsp which is where the google snippet is
@@ -227,9 +234,9 @@ public class InitializationServlet extends HttpServlet {
 
         // loads static mice
     
-        PDXMouseStore init = new PDXMouseStore();
+        new PDXMouseStore();
 
-   
+        log.info("MTBWI up.");
         System.out.println("MTBWI up.");
     }
 

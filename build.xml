@@ -166,8 +166,8 @@ invocation even though it may be called more than once.
 
 <!--===================== Custom Dist Target ===============================-->
 <target name="projectDeployLocal" description="Prepare the web application.">
-   <echo message="Preparing WAR file for DEVELOPMENT..."/>
-   <echo message="Copying conf/build.dev.properties to conf/build.properties"/>
+   <echo message="Preparing WAR file for Local Deployment..."/>
+   <echo message="Copying conf/build.local.properties to conf/build.properties"/>
    <copy file="conf/build.local.properties"
          tofile="conf/build.properties"
          overwrite="true"/>

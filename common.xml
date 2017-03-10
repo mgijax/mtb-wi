@@ -135,6 +135,8 @@ object files in the appropriate location in the build directory.
             debug="${compile.debug}"
       deprecation="${compile.deprecation}"
          optimize="${compile.optimize}"
+		   source="1.7" 
+           target="1.7" 
 memoryInitialSize="256m"
 memoryMaximumSize="1024m"
              fork="true">

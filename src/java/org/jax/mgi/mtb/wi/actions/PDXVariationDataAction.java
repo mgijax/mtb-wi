@@ -40,7 +40,7 @@ public class PDXVariationDataAction extends Action {
         }
         
         if(limit == null || limit.trim().length()==0){
-            limit = "30";
+            limit = "-1";
         }
         
        String sort = request.getParameter("sort");

@@ -129,7 +129,8 @@ public class PDXComparisonAction extends Action {
                     ArrayList<String> samplesList = new ArrayList<String>();
                     samplesList.addAll(keySet);
                     Collections.sort(samplesList);
-
+                    // would be nice to sort on expression for a specific gene
+                    // no idea how at this point
 
 
                     StringBuffer expr = new StringBuffer();

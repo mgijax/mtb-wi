@@ -103,20 +103,19 @@ public class AdvancedSearchResultsAction extends Action {
         }
 
         if (arrStrStrainTypes != null) {
-            arrStrainTypes = new ArrayList<String>(Arrays.asList(arrStrStrainTypes));
+            arrStrainTypes = WIUtils.arrayToCleanKeyList(arrStrStrainTypes);
             // we added an "ANY" to the strain type list box and others so
             // now we need to remove it if it exists
             arrStrainTypes.remove("");
         }
 
         if (arrStrOrganTissueOrigin != null) {
-            arrOrganTissueOrigin = new ArrayList<String>(Arrays.asList(arrStrOrganTissueOrigin));
-            arrOrganTissueOrigin.remove("");
+            arrOrganTissueOrigin = WIUtils.arrayToCleanKeyList(arrStrOrganTissueOrigin);
         }
 
         if (arrStrTumorClassification != null) {
-            arrTumorClassification = new ArrayList<String>(Arrays.asList(arrStrTumorClassification));
-            arrTumorClassification.remove("");
+            arrTumorClassification = WIUtils.arrayToCleanKeyList(arrStrTumorClassification);
+            
         }
 
 

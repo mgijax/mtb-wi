@@ -70,6 +70,15 @@
                             <input type="button" value="Open PDX Sample Name Checker" onClick="window.open('http://pdx-dashboard/elims/submission-lookup/')">
                         </td>
                     </tr>
+                    
+                      <tr>
+                     <td align="center">
+                            <input type="button" value="Open PDX Sample Sheet Generator" onClick="window.open('http://pdx-dashboard/elims/generate-sheet/')">
+                        </td>
+                    </tr>
+                    <tr>
+
+                    
                     <tr>
                         <td align="center">
                     <c:choose>

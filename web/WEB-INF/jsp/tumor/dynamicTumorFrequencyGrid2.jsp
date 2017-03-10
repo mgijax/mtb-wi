@@ -262,7 +262,7 @@ cell. <i>(Requires JavaScript support.)</i>
         <img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" border="0"><br>
         <img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" border="0" alt=" "><br>
         <input type ="checkbox" name="organChk" value="${organ.organKey}" 
-               </th>
+        </th>
         
       </c:forEach>
       

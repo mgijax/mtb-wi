@@ -227,7 +227,7 @@
                     width    : 100,
                     sortable : true,
                     dataIndex: 'consequence',
-                    hidden   : ${hideGene}
+                    hidden   : true //${hideGene}
                     
                 },
                 {

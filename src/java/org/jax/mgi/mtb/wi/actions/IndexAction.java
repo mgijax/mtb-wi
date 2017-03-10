@@ -21,6 +21,7 @@ import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.utils.Timer;
 import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.utils.URLDownloader;
+import org.jax.mgi.mtb.wi.pdx.ModelCounts;
 
 /**
  * Retrieve the required information needed on the home page.
@@ -76,7 +77,14 @@ public class IndexAction extends Action {
         int nTFCount = WIConstants.getInstance().getTumorFrequencyCount();
         NumberFormat nfFormatter = new DecimalFormat("#,###,###");
         String strTFCount = nfFormatter.format(nTFCount);
-
+        
+        
+        
+        
+        ModelCounts mc = new ModelCounts();
+        String modelCounts = mc.getHTML();
+        
+        
         // set the target to failure if we could not retrieve the organ list
         if (arrOrganTissues == null) {
             strTarget = "error";
@@ -85,6 +93,7 @@ public class IndexAction extends Action {
             request.setAttribute("whatsNewText", strWhatsNew);
             request.setAttribute("organTissueValues", arrOrganTissues);
             request.setAttribute("tumorFrequencyCount", strTFCount);
+            request.setAttribute("modelCounts",modelCounts);
         }
 
         timer.stop();
