@@ -31,21 +31,19 @@ public class PDXSearchAction extends Action {
             throws Exception {
 
 
-        // fyi
-        // the json result is used by Roger Liu via a cron job to populate some fields in his database
+           PDXMouseStore pdxMouseStore = new PDXMouseStore();
 
         if (request.getParameter("pdxStatusJSON") != null && !WIConstants.getInstance().getPublicDeployment()) {
-            ElimsUtil eu = new ElimsUtil();
+           
             response.setContentType("application/json");
-            response.getWriter().write(eu.getJSONPDXStatusReport());
+            response.getWriter().write(pdxMouseStore.getJSONPDXStatus());
             response.flushBuffer();
             return null;
         }
         
          if ("gimme".equals(request.getParameter("pdxInfoJSON"))) {
-            ElimsUtil eu = new ElimsUtil();
             response.setContentType("application/json");
-            response.getWriter().write(eu.getPDXInfo());
+            response.getWriter().write(pdxMouseStore.getJSONPDXInfo());
             response.flushBuffer();
             return null;
         }
@@ -53,8 +51,6 @@ public class PDXSearchAction extends Action {
         PDXForm pdxForm = (PDXForm) form;
 
         String result = "success";
-
-        PDXMouseStore pdxMouseStore = new PDXMouseStore();
 
         // click on update variants button
         ArrayList<LabelValueBean<String, String>> variantsLVB = new ArrayList<LabelValueBean<String, String>>();

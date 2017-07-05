@@ -148,6 +148,12 @@
                 var markerURL = 'wt=json&indent=on&facet=true&facet.field=strainMarker&facet.sort=name&fq=metastatic:false&q=humanTissue:*&facet.mincount=1&rows=1&start=0&facet.limit=-1';
 
                 doXMLReq();
+                
+                
+                // might be sorting on a column off the screen, focus on it
+                if(document.getElementById("sorted")){
+                    document.getElementById("sorted").scrollIntoView();
+                }
 
                 function doXMLReq() {
 

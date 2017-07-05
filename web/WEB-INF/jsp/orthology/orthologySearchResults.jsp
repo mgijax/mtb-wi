@@ -109,7 +109,7 @@
     
     
     <td valign="top"><c:out value="${rec.humanGS}" default="&nbsp;" escapeXml="false"/></td>
-    <td valign="top"><a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=markerDetail&key=${rec.mgiGSKey}">${rec.mouseGS}</a></td>
+    <td valign="top"><a href="http://www.informatics.jax.org/marker/key/${rec.mgiGSKey}">${rec.mouseGS}</a></td>
     <td valign="top">${rec.symbol}</td>
     <c:choose>
     <c:when test="${rec.strains!='0'}">

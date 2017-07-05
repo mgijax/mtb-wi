@@ -545,7 +545,7 @@
                             <tr>
                                 <td class="normal" style="width:100%; text-align:center" colspan=2>
                                     <c:if test="${not empty unavailable}">
-                                        <b> This PDX model is no longer available <br>(no inventory remaining).</b>
+                                        <b> This PDX model is not available. (No inventory)</b>
                                         </c:if>
                                 </td>
                                 <td class="normal" ></td><td class="normal" ></td>
@@ -650,7 +650,8 @@
                     <td class="data1">
                         <c:choose>
                             <c:when test="${not empty geneExpressionData}">
-                                Platforms:${platforms}
+                                Platforms:${platforms} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hatched bars indicate genes with expression levels determined to be mildly affected by alignment calculations. See <a href="userHelp.jsp#pdxdetails"> this list</a>.
+                                                                                                                                                                                                        
                                 <div id="geneExpressionDiv"></div>
                             </c:when>
                             <c:otherwise>
@@ -696,7 +697,7 @@
                     <td class="data1">
                         <table  border=0 cellpadding=5 cellspacing=0 width="100%">
 
-                            <!--- Histology --->                
+                            <!-- Histology -->                
                             <c:choose>
                                 <c:when test="${not empty histology  ||  not empty sessionScope.pdxEditor || not empty histologySummary}">
                                     <tr>
@@ -778,7 +779,7 @@
                             </c:choose>        
 
 
-                            <!---  Tumor Markers ---->
+                            <!--  Tumor Markers -->
 
                             <c:choose>
                                 <c:when test="${not empty tumorMarkers  ||  not empty sessionScope.pdxEditor}">
@@ -817,7 +818,7 @@
                             </c:choose>        
 
 
-                            <!--- Gene Expresssion --->                 
+                            <!-- Gene Expresssion -->                 
 
                             <c:choose>
                                 <c:when test="${not empty geneExpression  || not empty sessionScope.pdxEditor}">
@@ -1153,16 +1154,26 @@
                     </td>
                 </tr>
                 <c:choose>
-                    <c:when test="${mouse.socGraph}">
+                    <c:when test="${mouse.socGraph > 0}">
+                         <c:forEach var="socGraph" begin="1" end="${mouse.socGraph}" >
                         <tr class="stripe1">
                             <td class="cat1">
                                 SOC Plots:
                             </td>
                             <td style="border:0px none">
-                                <iframe width="100%" height="700px" src='${applicationScope.socURL}${mouse.modelID}.html' style="border:0px none">
-                                </iframe>
+                                <c:choose>
+                                    <c:when test="${mouse.socGraph == 1}">
+                                        <iframe width="100%" height="700px" src='${applicationScope.socURL}${mouse.modelID}.html' style="border:0px none">
+                                        </iframe>
+                                    </c:when>
+                                    <c:otherwise>  
+                                        <iframe width="100%" height="700px" src='${applicationScope.socURL}${mouse.modelID}_${socGraph}.html' style="border:0px none">
+                                        </iframe>
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                         </tr>
+                         </c:forEach>
 
                     </c:when>
                 </c:choose>

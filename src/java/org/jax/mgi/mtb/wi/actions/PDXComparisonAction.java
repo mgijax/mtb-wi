@@ -21,8 +21,9 @@ import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
 import org.jax.mgi.mtb.wi.utils.WIUtils;
 
 /**
- * Two main tasks: Provide the vocab lists for the pdxComparison page
- * And turn the search criteria into an html display
+ * Two main tasks: Provide the vocab lists for the pdxComparison page And turn
+ * the search criteria into an html display
+ *
  * @author sbn
  */
 public class PDXComparisonAction extends Action {
@@ -32,7 +33,6 @@ public class PDXComparisonAction extends Action {
             HttpServletRequest request,
             HttpServletResponse response)
             throws Exception {
-
 
         String result = "display";
 
@@ -45,16 +45,14 @@ public class PDXComparisonAction extends Action {
         // this list of genes contains a lot that have no expression or cnv data  (bad?)
         ArrayList<String> genes = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getGenes());
         String savedGenes = request.getParameter("savedGenesList");
-        if(savedGenes != null && savedGenes.length()>0){
+        if (savedGenes != null && savedGenes.length() > 0) {
             genes = (ArrayList<String>) WIUtils.arrayToCleanList(savedGenes.split(","));
         }
 
         if (genes.isEmpty()) {
-            
-            // provide the data for the search for selections
-            
-            result = "searchForm";
 
+            // provide the data for the search for selections
+            result = "searchForm";
 
             primarySites = pdxMouseStore.getPrimarySitesList();
             diagnoses = pdxMouseStore.getDiagnosesList();
@@ -84,20 +82,17 @@ public class PDXComparisonAction extends Action {
             request.setAttribute("genesValues", genesLVB);
         } else {
             try {
-                
-               
-                
-                // build a big ole html table for the data
 
+                // build a big ole html table for the data
                 ArrayList<String> no = new ArrayList<String>();
 
                 ArrayList<PDXMouse> mice = null;
 
-                mice = pdxMouseStore.findMice("", primarySites, diagnoses, no, no, no, no, false, false,no,"");
-                
+                mice = pdxMouseStore.findMice("", primarySites, diagnoses, no, no, no, no, false, false, no, "");
+
                 StringBuffer table = new StringBuffer("<table><tr><td></td>");
-                  
-                if(mice.size()>0){
+
+                if (mice.size() > 0) {
                     ArrayList<String> modelIDs = new ArrayList<String>();
                     ArrayList<String> modelNames = new ArrayList<String>();
                     HashMap<String, ArrayList<String>> clinicalPresenting = new HashMap<String, ArrayList<String>>(mice.size());
@@ -118,7 +113,7 @@ public class PDXComparisonAction extends Action {
                     }
 
                     HashMap<String, HashMap<String, ArrayList<String>>> data = pdxMouseStore.getComparisonData(modelIDs, genes);
-                  
+
                     Set<String> keySet = data.keySet();
                     ArrayList<String> genesList = new ArrayList<String>();
                     genesList.addAll(keySet);
@@ -132,7 +127,6 @@ public class PDXComparisonAction extends Action {
                     // would be nice to sort on expression for a specific gene
                     // no idea how at this point
 
-
                     StringBuffer expr = new StringBuffer();
                     StringBuffer cnv = new StringBuffer();
                     StringBuffer mutation = new StringBuffer();
@@ -143,20 +137,24 @@ public class PDXComparisonAction extends Action {
                     StringBuffer smoking = new StringBuffer("\n<tr><td>Smoking</td>");
                     StringBuffer treatment = new StringBuffer("\n<tr><td>T. Naive</td>");
 
-
                     for (String sample : samplesList) {
                         String[] modSamp = sample.split("-");
                         table.append("<td style=\"vertical-align:bottom; text-align:center;\">").append("<a href=\"pdxDetails.do?modelID=").append(modSamp[0]);
                         table.append("\"><img src=\"dynamicText?text=").append(sample).append("&amp;size=11\" alt=\"X\"></a></td>");
                         ArrayList<String> cp = clinicalPresenting.get(modSamp[0]);
-                       
-                        if("unspecified".equals(cp.get(1))){
-                            cp.set(1,"?");
-                        }
-                        if(cp.get(6).length()<1) cp.set(6,"  ");
-                        if(cp.get(7).length()<1) cp.set(7,"  ");
-                        if(cp.get(8).length()<1) cp.set(8,"  ");
 
+                        if ("unspecified".equals(cp.get(1))) {
+                            cp.set(1, "?");
+                        }
+                        if (cp.get(6).length() < 1) {
+                            cp.set(6, "  ");
+                        }
+                        if (cp.get(7).length() < 1) {
+                            cp.set(7, "  ");
+                        }
+                        if (cp.get(8).length() < 1) {
+                            cp.set(8, "  ");
+                        }
 
                         age.append("<td style=\"text-align:center;\">").append(cp.get(1)).append("</td>");
                         race.append("<td style=\"text-align:center;\">").append(cp.get(2)).append("/").append(cp.get(3)).append("</td>");
@@ -165,14 +163,12 @@ public class PDXComparisonAction extends Action {
                         treatment.append("<td style=\"text-align:center;\">").append(cp.get(8).charAt(0)).append("</td>");
                     }
                     table.append("</tr><tr><td></td><td style=\"text-align:center\" colspan=\"");
-                    table.append(samplesList.size() ).append("\">Gene Expression</td></tr><td></td>");
-
-                   
+                    table.append(samplesList.size()).append("\">Gene Expression</td></tr><td></td>");
 
                     for (String gene : genesList) {
                         expr.append("\n<tr><td>").append(gene).append("</td>");
                         cnv.append("\n<tr><td>").append(gene).append("</td>");
-                        mutation.append("\n<tr><td name=\"mtGene\" style=\"cursor:replace_me\" onclick=\"showMutations('"+gene+"');\">").append(gene).append("</td>");
+                        mutation.append("\n<tr><td name=\"mtGene\" style=\"cursor:replace_me\" onclick=\"showMutations('" + gene + "');\">").append(gene).append("</td>");
                         HashMap<String, ArrayList<String>> sampleData = data.get(gene);
                         String mutationCursor = "auto";
                         for (String sample : samplesList) {
@@ -184,13 +180,13 @@ public class PDXComparisonAction extends Action {
                                 vals.add("noValue");
                                 vals.add(" ");
                             }
-                            expr.append("<td style=\"background-color:").append(expLevelToColor( vals.get(0))).append("\">&nbsp;</td>");
+                            expr.append("<td style=\"background-color:").append(expLevelToColor(vals.get(0))).append("\">&nbsp;</td>");
                             cnv.append("<td style=\"background-color:").append(ampDelToColor(vals.get(1))).append("\">&nbsp</td>");
-                            if(vals.get(2)!= null &&  vals.get(2).trim().length()>0){
+                            if (vals.get(2) != null && vals.get(2).trim().length() > 0) {
                                 mutation.append("<td style=\"background-color:#000000; text-decoration:none;\" onmouseover=\"return overlib('");
-                                mutation.append(vals.get(2)).append("', CAPTION, '"+gene+" mutation');\" onmouseout=\"return nd();\" name=\""+gene+"\" mutation=\""+vals.get(2)+"\">&nbsp;</td>");
+                                mutation.append(vals.get(2)).append("', CAPTION, '" + gene + " mutation');\" onmouseout=\"return nd();\" name=\"" + gene + "\" mutation=\"" + vals.get(2) + "\">&nbsp;</td>");
                                 mutationCursor = "pointer";
-                            }else{
+                            } else {
                                 mutation.append("<td>&nbsp</td>");
                             }
                         }
@@ -198,7 +194,7 @@ public class PDXComparisonAction extends Action {
                         expr.append("</tr>");
                         cnv.append("</tr>");
                         mutation.append("</tr>");
-                        mutation.replace(mutation.indexOf("replace_me"), mutation.indexOf("replace_me")+"replace_me".length(), mutationCursor);
+                        mutation.replace(mutation.indexOf("replace_me"), mutation.indexOf("replace_me") + "replace_me".length(), mutationCursor);
                     }
 
                     table.append(expr);
@@ -207,32 +203,31 @@ public class PDXComparisonAction extends Action {
                     table.append(cnv);
 
                     // don't include thie hide show feature if there are no mutations
-                    if(mutation.indexOf("mutation")!=-1){
-                      table.append("<tr><td onmouseover=\"return overlib('Click to show / hide all mutation details.',CAPTION, 'Show mutation details');\" onmouseout=\"return nd();\" style=\"font-size:25px; cursor:pointer;\" id=\"showAll\" onclick=\"showAllMutations();\" >+</td>");
-                    }else{
+                    if (mutation.indexOf("mutation") != -1) {
+                        table.append("<tr><td onmouseover=\"return overlib('Click to show / hide all mutation details.',CAPTION, 'Show mutation details');\" onmouseout=\"return nd();\" style=\"font-size:25px; cursor:pointer;\" id=\"showAll\" onclick=\"showAllMutations();\" >+</td>");
+                    } else {
                         table.append("<tr><td>&nbsp;</td>");
                     }
-                     table.append("<td style=\"text-align:center\" colspan=\"");
+                    table.append("<td style=\"text-align:center\" colspan=\"");
                     table.append(samplesList.size()).append("\">Mutations</td></tr>");
                     table.append(mutation);
 
-                      table.append("<tr><td></td><td style=\"text-align:center\" colspan=\"");
-                    table.append(samplesList.size() ).append("\">Patient Data</td></tr>");
+                    table.append("<tr><td></td><td style=\"text-align:center\" colspan=\"");
+                    table.append(samplesList.size()).append("\">Patient Data</td></tr>");
 
                     table.append(age).append("</tr>");
-         //           table.append(race).append("</tr>");
+                    //           table.append(race).append("</tr>");
                     table.append(sex).append("</tr>");
-        //            table.append(variant).append("</tr>");
+                    //            table.append(variant).append("</tr>");
                     table.append(smoking).append("<td>Current/Former</td></tr>");
                     table.append(treatment).append("</tr>");
-                    
-                }else{
+
+                } else {
                     // no mice
                     table.append("<td>No PDX models match the search criteria</td></tr>");
                 }
 
-               table.append("</table>");
-
+                table.append("</table>");
 
                 request.setAttribute("table", table.toString());
                 request.setAttribute("gradient", this.htmlGradient(MIN_RANK_Z, MAX_RANK_Z));
@@ -244,10 +239,10 @@ public class PDXComparisonAction extends Action {
         }
         return mapping.findForward(result);
     }
-    
-     // hard coded min and max expected values for the rankZ expression
-     private static final int MIN_RANK_Z = -15;
-     private static final int MAX_RANK_Z = 15;
+
+    // hard coded min and max expected values for the rankZ expression
+    private static final int MIN_RANK_Z = -15;
+    private static final int MAX_RANK_Z = 15;
     private static final int HUE_LIMIT = 150; // 255 is max but beyond 150 it gets hard to tell them apart
     private static final String DELETION = "#0000FF";
     private static final String AMPLIFICATION = "#FFA500";
@@ -282,9 +277,9 @@ public class PDXComparisonAction extends Action {
         buf.append("<table><tr>\n");
         for (int j = min; j <= max; j++) {
             int i = j * multiplier;
-           
-             buf.append("<td style=\"text-align:center;color:#FFFFFF;background-color:");
-            
+
+            buf.append("<td style=\"text-align:center;color:#FFFFFF;background-color:");
+
             if (i < 0) {
                 buf.append("#00" + Integer.toHexString(255 - (i * -1)) + "00");
                 buf.append("\">" + j + "</td>");
@@ -302,19 +297,20 @@ public class PDXComparisonAction extends Action {
         buf.append("<td style=\"text-align:center;background-color:#FFFFFF\">No Value</td>\n");
         buf.append("</tr>\n</table>");
 
-
         return buf.toString();
     }
 
     /**
-     * Expression levels range from -15 to +15 (min max) but currently hard coded
-     * Turn that into a color range from green (lowest) to red with 0 as white.
+     * Expression levels range from -15 to +15 (min max) but currently hard
+     * coded Turn that into a color range from green (lowest) to red with 0 as
+     * white.
+     *
      * @param min -15
      * @param max 15
      * @param levelStr the level to convert
      * @return Hex color string
      */
-    private static String expLevelToColor( String levelStr) {
+    private static String expLevelToColor(String levelStr) {
 
         String color = NOVALUE;
         try {
@@ -329,8 +325,9 @@ public class PDXComparisonAction extends Action {
 
             int adjValue = (int) Math.round(level * multiplier);
 
-            // zero is GREY
-            color = NORMAL;
+            // zero is GREY 
+            // zero actually is no value
+            //color = NORMAL;
 
             if (adjValue < 0) {
                 color = "#00" + Integer.toHexString(255 - (adjValue * -1)) + "00";

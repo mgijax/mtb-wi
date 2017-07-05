@@ -381,3 +381,19 @@ p.pdxLink {
  text-decoration: underline;
  }
 
+
+li.realList{
+    list-style: disc;
+    list-style-position: inside;
+    margin-left:30px;
+}
+
+p.miTitle{
+    font-size: 140%;
+    color: orangered;
+}
+
+.miTable{
+    border-collapse: collapse;
+    border: 2px solid blue;
+}

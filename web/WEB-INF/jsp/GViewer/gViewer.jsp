@@ -22,7 +22,7 @@
   <script type="text/javascript">
 
          
-    var flashProxy = new FlashProxy(${uid},"${applicationScope.urlBase}/GViewer/javascript/JavaScriptFlashGateway.swf");
+    var flashProxy = new FlashProxy("1234","${applicationScope.urlBase}/GViewer/javascript/JavaScriptFlashGateway.swf");
         
     function doHighlight1(action) {
       var newMessage = document.textform.messageText.value;
@@ -117,7 +117,7 @@
               <!--======================= End Form Header ================================-->
 <!--======================= Start Detail Section ===========================-->
  
-              <html:form action="gViewer" method="GET">
+       <%--       <html:form action="gViewer" method="GET"> --%>
                 <tr class="stripe1">
                   <td colspan="2">
                                 
@@ -133,10 +133,10 @@
                                 onmouseover="return overlib('Select a type of QTL using a pick list. Ctrl+Click to select more than one.', CAPTION, 'QTL Type');" onmouseout="return nd();">
                         Select QTL Type(s) to view</a>:</b>
                         <br>
-                        <html:select property="selectedQTLTypes" size="8" multiple="true">
+            <%--            <html:select property="selectedQTLTypes" size="8" multiple="true">
                           <html:option value="ALL">ALL</html:option>
-                          <html:options collection="qtlTypes" property="value" labelProperty="label"/>
-                        </html:select>
+                          <html:options collection="qtlTypes" property="value" labelProperty="label"/> 
+                        </html:select> --%>
                       </td>
                     </tr>
                     
@@ -167,7 +167,7 @@
                       <param name="movie" value="${applicationScope.urlBase}/GViewer/GViewer2.swf" />
                       <param name="quality" value="high" />
                       <param name="bgcolor" value="#FFFFFF" />
-                      <param name="FlashVars" value="&lcId=${uid}&baseMapURL=${applicationScope.urlBase}/GViewer/data/mouse_ideo.xml&annotationXML=${data}&dimmedChromosomeAlpha=40&bandDisplayColor=0x0099FF&wedgeDisplayColor=0xCC0000&browserURL=gViewer.do?${linkParam}name=&" />
+                      <param name="FlashVars" value="&lcId=$1234&baseMapURL=${applicationScope.urlBase}/GViewer/data/mouse_ideo.xml&annotationXML=&dimmedChromosomeAlpha=40&bandDisplayColor=0x0099FF&wedgeDisplayColor=0xCC0000&browserURL=gViewer.do?${linkParam}name=&" />
                       <embed src="${applicationScope.urlBase}/GViewer/GViewer2.swf" quality="high" bgcolor="#FFFFFF" width="500" height="400" name="GViewer2" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" FlashVars="&lcId=${uid}&baseMapURL=${applicationScope.urlBase}/GViewer/data/mouse_ideo.xml&annotationXML=${data}&dimmedChromosomeAlpha=40&bandDisplayColor=0x0099FF&wedgeDisplayColor=0xCC0000&browserURL=gViewer.do?${linkParam}name=&"  pluginspage="http://www.macromedia.com/go/getflashplayer" />       
                     </object>
                   </td>
@@ -187,7 +187,7 @@
             </td>
             <tr>
                 
-              </html:form>
+      <%--        </html:form> --%>
             </table>
             </td>
           </tr>

@@ -301,7 +301,7 @@ public class PDXDetailsAction extends Action {
             request.setAttribute("mouse", mouse);
 
             // check if no inventory remaining
-            if (mouse.getModelStatus().indexOf("Inventory") != -1) {
+            if (mouse.getModelStatus().indexOf("Inventory") != -1 || mouse.getModelStatus().indexOf("Data") != -1) {
                 request.setAttribute("unavailable", "unavailable");
             }
 

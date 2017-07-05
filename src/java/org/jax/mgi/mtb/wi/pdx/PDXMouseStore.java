@@ -62,11 +62,13 @@ public class PDXMouseStore {
     private static HashMap<String, ArrayList<String>> assocData = new HashMap<String, ArrayList<String>>();
     private static ArrayList<ArrayList<String>> status = new ArrayList<ArrayList<String>>();
     private static String pdxEngraftmentStatusSummary = "The PDX Customer report could not be loaded;";
-    private static String pdxFamilyHistory = "The PDX Family History report could not be loaded";
+    private static String pdxPatientHistory = "The PDX Patient History report could not be loaded";
     private static String pdxPTClinical = "The PDX Patient Clinical report could not be loaded";
     private static String pdxStatusReport = "The PDX Status report could not be loaded";
     private static String pdxConsortiumReport = "The PDX Consortium report could not be loaded";
     private static Date reportFreshnessDate = null;
+    private static String JSON_PDX_STATUS ="Unable to load data from eLIMS";
+    private static String JSON_PDX_INFO="Unable to load data from eLIMS";
     public static final String[] exomePanelGeneList = {"A1CF", "ABL1", "ACVR1B", "ADAR", "ADARB1", "AFF2", "AICDA", "AKT1", "AKT2", "AKT3", "ALK", "APC", "APOBEC1", "APOBEC2", "APOBEC3A",
         "APOBEC3C", "APOBEC3D", "APOBEC3F", "APOBEC3G", "APOBEC4", "AR", "ARID1A", "ARID1B", "ARID2", "ASH1L", "ASXL1", "ATM", "ATN1", "ATP10B", "ATR", "ATRX", "AURKA", "AURKB",
         "AURKC", "AXIN1", "B2M", "BAP1", "BCL2", "BCOR", "BCR", "BID", "BRAF", "BRCA1", "BRCA2", "BRIP1", "BTK", "CARD11", "CARM1", "CASP8", "CBFB", "CBL", "CCND1", "CCNE1", "CCR2",
@@ -177,13 +179,13 @@ public class PDXMouseStore {
        
         if (allMice != null && allMice.size() > 0) {
             
-             HashMap<String,String> socGraphs = SOCLoader.loadSOCModels();
+             HashMap<String,Integer> socGraphs = SOCLoader.loadSOCModels();
 
             assocData = PDXDAO.getInstance().getPDXAdditionalContent();
             for (PDXMouse mouse : allMice) {
                 
                 if(socGraphs.containsKey(mouse.getModelID())){
-                    mouse.setSocGraph(true);
+                    mouse.setSocGraph(socGraphs.get(mouse.getModelID()));
                 }
                 mouse.setAssocData(assocData.get(mouse.getModelID()));
                 String id = mouse.getModelID();
@@ -260,22 +262,17 @@ public class PDXMouseStore {
         }
 
         d = new Date();
-        log.info(d + " Loading Family History");
-        temp = eu.getPDXFamilyHistory();
+        log.info(d + " Loading Patient History");
+        temp = eu.getPDXPatientHistory();
         if (temp.length() > 0) {
-            pdxFamilyHistory = temp;
+            pdxPatientHistory = temp;
         } else {
-            log.error("PDX Family History not loaded!");
+            log.error("PDX Patient History not loaded!");
         }
 
         d = new Date();
         log.info(d + " Loading Patient Clinical Report");
-
-        // new service name
         temp = eu.getPDXPatientClinicalReport();
-
-        // old name
-        //temp = eu.getPDXCustomerReport();
         if (temp.length() > 0) {
             pdxPTClinical = temp;
         } else {
@@ -310,6 +307,34 @@ public class PDXMouseStore {
         d = new Date();
         log.info(d + " Done loading reports");
         reportFreshnessDate = d;
+    }
+    
+    
+    // keep a cached copy of the PDXStatus JSON but use a new one if available
+    // used by pdx dashboard (external to MTB)
+    public String getJSONPDXStatus(){
+        ElimsUtil eu = new ElimsUtil();
+        String newData = eu.getJSONPDXStatusReport();
+        if(newData != null && newData.trim().length()!=80){
+            this.JSON_PDX_STATUS = newData;
+        }else{
+            log.error("Unable to load JSON for PDX status.");
+        }
+        return this.JSON_PDX_STATUS;
+    }
+    
+    // keep a cached copy of the PDXInfo JSON but use a new one if available
+    // used by the EBI PDXInfo project for loading JAX PDX data
+    public String getJSONPDXInfo(){
+        ElimsUtil eu = new ElimsUtil();
+        String newData  = eu.getPDXInfo();
+        if(newData != null && newData.trim().length()!=80){
+            this.JSON_PDX_INFO = newData;
+        }else{
+            log.error("Unable to load JSON form PDX info.");
+        }
+        return this.JSON_PDX_INFO;
+        
     }
 
     /**
@@ -593,8 +618,8 @@ public class PDXMouseStore {
         return pdxEngraftmentStatusSummary;
     }
 
-    public String getPDXFamilyHistory(String delimiter) {
-        return pdxFamilyHistory;
+    public String getPDXPatientHistory(String delimiter) {
+        return pdxPatientHistory;
     }
 
     public String getPDXPTClinical(String delimiter) {
@@ -1037,6 +1062,66 @@ public class PDXMouseStore {
 
         return resultStr;
     }
+    
+    
+     public String getVariationJSON(String model) {
+
+        String params = "{\"model\":[\"" + model + "\"],\"skip\": \"0\", \"limit\": \"-1\", \"sort_by\": \"gene_symbol\", \"sort_dir\": \"ASC\", \"filter\": \"TRUE\"}";
+
+        StringBuilder result = new StringBuilder("{\"variation\":[ ");
+        
+        try {
+
+            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + allVariants, params) + "}");
+
+            job = (JSONObject) job.get("data");
+
+            JSONArray array = (JSONArray) job.get("data");
+
+            for (int i = 0; i < array.length(); i++) {
+                
+                result.append("{\"model id\":\"").append(getField(array.getJSONObject(i), "model_id")).append("\",");
+                result.append("\"sample\":\"").append(getField(array.getJSONObject(i), "sample_name")).append("\",");
+                result.append("\"gene symbol\":\"").append(getField(array.getJSONObject(i), "gene_symbol")).append("\",");
+                result.append("\"platform\":\"").append(getField(array.getJSONObject(i), "platform")).append("\",");
+//                result.append("\"chromosome\":\"").append(getField(array.getJSONObject(i), "chromosome")).append("\",");
+//                result.append("\"seq position\":\"").append(getField(array.getJSONObject(i), "seq_position")).append("\",");
+//                result.append("\"ref allele\":\"").append(getField(array.getJSONObject(i), "ref_allele")).append("\",");
+//                result.append("\"alt allele\":\"").append(getField(array.getJSONObject(i), "alt_allele")).append("\",");
+//                result.append("\"consequence\":\"").append(getField(array.getJSONObject(i), "consequence")).append("\",");
+                result.append("\"amino acid change\":\"").append(getField(array.getJSONObject(i), "amino_acid_change")).append("\",");
+//                result.append("\"rs variants\":\"").append(getField(array.getJSONObject(i), "rs_variants")).append("\",");
+//                result.append("\"read depth\":\"").append(getField(array.getJSONObject(i), "read_depth")).append("\",");
+//                result.append("\"allele frequency\":\"").append(getField(array.getJSONObject(i), "allele_frequency")).append("\",");
+//                result.append("\"transcript id\":\"").append(getField(array.getJSONObject(i), "transcript_id")).append("\",");
+//                result.append("\"filtered rationale\":\"").append(getField(array.getJSONObject(i), "filtered_rationale")).append("\",");
+                result.append("\"passage num\":\"").append(getField(array.getJSONObject(i), "passage_num")).append("\"");  // will need a comma if not last field
+//                result.append("\"gene id\":\"").append(getField(array.getJSONObject(i), "gene_id")).append("\",");
+//                result.append("\"ckb evidence types\":\"").append(getField(array.getJSONObject(i), "ckb_evidence_types")).append("\",");
+//                result.append("\"cancer types actionable\":\"").append(getField(array.getJSONObject(i), "cancer_types_actionable")).append("\",");
+//                result.append("\"drug class\":\"").append(getField(array.getJSONObject(i), "drug_class")).append("\",");
+//                result.append("\"count human reads\":\"").append(getField(array.getJSONObject(i), "count_human_reads")).append("\",");
+//                result.append("\"pct human reads\":\"").append(getField(array.getJSONObject(i), "pct_human_reads")).append("\",");
+//                result.append("\"variant num trials\":\"").append(getField(array.getJSONObject(i), "variant_num_trials")).append("\",");
+//                result.append("\"variant nct ids\":\"").append(getField(array.getJSONObject(i), "variant_nct_ids")).append("\"");
+//               
+
+               result.append("},");
+
+            }
+
+            result.replace(result.length() - 1, result.capacity(), "]}");
+
+        } catch (Exception e) {
+            log.error("Error !!!! " + model, e);
+            result.append("]}");
+        }
+
+        String resultStr = result.toString().replaceAll("null", " ");
+
+        return resultStr;
+    }
+
 
     private String getField(JSONObject job, String field) {
         String val = "";

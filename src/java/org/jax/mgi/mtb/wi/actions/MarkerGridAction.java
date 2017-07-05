@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,12 +39,12 @@ import org.jax.mgi.mtb.wi.WIConstants;
 public class MarkerGridAction extends Action {
 
     // these two where the way it worked befor 01-10-17
-    // private final static String ORGAN_FIELD = "organOrigin";
-     private final static String ORGAN_SORT = "organAffected";
+   //  private final static String ORGAN_FIELD = "organOrigin";
+   //  private final static String ORGAN_SORT = "organAffected";
     
     // thought these two would be correct for parent organ but I think organ affected is what we want
     private final static String ORGAN_FIELD = "organParent"; 
-    //private final static String ORGAN_SORT = "organParent";
+    private final static String ORGAN_SORT = "organParent";
     
     private final static String solrURL = WIConstants.getInstance().getSolrURL();
 
@@ -138,8 +139,7 @@ public class MarkerGridAction extends Action {
                 */
                 
                 String query = "wt=json&indent=on&facet=false"
-                             + "&sort="+ORGAN_SORT+"%20asc,strain%20asc&&q=humanTissue:*&fq=metastatic:false&rows=" + rows + "&start=0&fq=strainMarker:" + marker;
-
+                             + "&sort="+ORGAN_SORT+"%20asc,strain%20asc&&q=humanTissue:*&rows=" + rows + "&start=0&fq=strainMarker:%22" + URLEncoder.encode(marker, "UTF-8")+"%22";
                 if (sponCB != null) {
                     query += spontaneous;
                     sponCB = "checked";
@@ -218,10 +218,10 @@ public class MarkerGridAction extends Action {
                 // strains now needs to be keyed to strain key not strain name.
                 if (sortOrgan != null) {
                     Object[] mess = sortByOrgan(mapMap, sortOrgan, strainKeysToNames);
-                    // mess is a list of sorted organ keys
-                    // the sorted list needs to be strainList;
-                    // strains needs to be a map of <strainkey, arraylist<name>>
+                   
+                    // strainList needs to be the sorted list of strainKeys
                     strainList = (ArrayList<String>) mess[0];
+                    // strains needs to be a map of <strainkey, arraylist<name>>
                     strains = (HashMap<String, ArrayList<String>>) mess[1];
 
                 } else {
@@ -295,9 +295,9 @@ public class MarkerGridAction extends Action {
                 }
 
                 if(sortOrgan != null && sortOrgan.equals(o)){
-                    html.append("<td class=\"mg\" style=\"vertical-align:bottom;\"><table class=\"mg\" ><tr><td class=\"sorted\" onclick=\"organSort('");
+                    html.append("<td class=\"mg\" style=\"vertical-align:bottom;\"><table class=\"mg\" ><tr><td id =\"sorted\" class=\"sorted\" title=\"Strains are sorted by decending tumor frequency for "+o+".\" onclick=\"organSort('");
                 }else{
-                    html.append("<td class=\"mg\" style=\"vertical-align:bottom;\"><table class=\"mg\" ><tr><td class=\"sort\" onclick=\"organSort('");
+                    html.append("<td class=\"mg\" style=\"vertical-align:bottom;\"><table class=\"mg\" ><tr><td class=\"sort\" title=\"Sort strains by tumor frequency for "+o+".\" onclick=\"organSort('");
                 }
                 html.append(o);
                 html.append("');\">&nbsp;</td></tr><tr><td class=\"organ\"><div class=\"vertical\">");
@@ -361,8 +361,8 @@ public class MarkerGridAction extends Action {
                                 html.append(grid);
                                 html.append("&strainKey=");
                                 html.append(strainKey);
-                                html.append("&organKey=");
-                                html.append(map.get(o).getInt("organOriginKey"));
+                                html.append("&organParentKey=");
+                                html.append(map.get(o).getInt("organParentKey"));
                                 html.append("\">");
                                 html.append("<div style=\"height:100%;width:100%\">" + val + "</div></a></td>");
                             } else {
@@ -508,7 +508,7 @@ public class MarkerGridAction extends Action {
                 e.printStackTrace();
             }
             // this shouldn't happen
-            log.error("failed to compare " + o1 + " to " + o2);
+            log.error("MarkerGridAction: failed to compare " + o1 + " to " + o2);
             return 0;
         }
     }
@@ -517,7 +517,7 @@ public class MarkerGridAction extends Action {
 
         URL url = new URL(solrURL + "?" + urlIn);
 
-        //System.out.println(url);
+ //       System.out.println(url);
         HttpURLConnection connection
                 = (HttpURLConnection) url.openConnection();
 
@@ -549,6 +549,8 @@ public class MarkerGridAction extends Action {
 
             }
         }
+        
+  //      System.out.println(responseStr.toString());
         return responseStr.toString();
     }
 

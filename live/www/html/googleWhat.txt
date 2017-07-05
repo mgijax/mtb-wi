@@ -1,0 +1,3 @@
+the file google5ca147c2d7390ec2.html was provided by google to verify site ownership for the MTB youtube video link.
+it needs to be available at tumor.informatics.jax.org/google5ca147c2d7390ec2.html
+this is done by putting it here and adding a rewrite rule to the httpd.conf file.

@@ -16,10 +16,10 @@
     <script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 
-
+ 
+  
+  
     <script  language="javascript">
-   
-    
     
         function updateVariants(){
             document.getElementById("variantResult").innerHTML="<br>Please wait..."
@@ -39,8 +39,6 @@
          
             
         }
-        
-      
         
         Ext.onReady(function(){
         
@@ -175,14 +173,23 @@
                             <table border=0 cellspacing=2 width="100%">
                                 <tr>
                                     <td>
-                                        Patient Derived Xenograft (PDX) models for cancer research are created by the implantation of human cells and tumor tissue into immune compromised mouse hosts.  PDX models provide a platform for in vivo cancer biology studies and pre-clinical cancer drug efficacy testing.  The current state of the art mouse host is the "NOD-SCID-Gamma2" (NSG) mouse. NSG mice lack mature T and B cells, have no functional natural killer cells, and are deficient in both innate immunity and cytokine signaling.   
+                                        &nbsp;Patient Derived Xenograft (PDX) models for cancer research are created by the implantation of human cells and tumor tissue into immune compromised mouse hosts.  PDX models provide a platform for in vivo cancer biology studies and pre-clinical cancer drug efficacy testing.  The current state of the art mouse host is the "NOD-SCID-Gamma2" (NSG) mouse. NSG mice lack mature T and B cells, have no functional natural killer cells, and are deficient in both innate immunity and cytokine signaling.   
                                         <br>
                                         &nbsp;
                                         <br>
                                         <br>
                                         <br>
-                                        <br>
-                                      
+                                        <table class="miTable">
+                                            <tr><td border="5px">
+                                                <p class="miTitle">Community Feedback Needed: Minimal Information Standards for PDX models</p>
+                                                <ul>
+                                                    <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a><br>
+                                                    <li class="realList"><a href="${applicationScope.urlBase}/html/PDX_MinimalInformation_version1_2017.xlsx">PDX Minimal Information Specification (xls)</a><br>
+                                                    <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a><br>
+                                                </ul>
+                                                <br>
+                                            </td></tr>
+                                        </table>
                                     </td>
 
                                     <td>

@@ -135,8 +135,12 @@ public class ReferenceSearchResultsAction extends Action {
             params.setAuthorsComparison(strAuthorsComparison);
             params.setJournal(strJournal);
             params.setJournalComparison(strJournalComparison);
-            params.setYear(strYear);
-            params.setYearComparison(strYearComparison);
+            
+            try{ 
+                params.setPubYear(new Integer(strYear));
+                params.setPubYearComparison(strYearComparison);
+            }catch(Exception e){}
+            
             params.setVolume(strVolume);
             params.setVolumeComparison(strVolumeComparison);
             params.setPages(strPages);

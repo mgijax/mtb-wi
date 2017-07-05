@@ -25,10 +25,10 @@ public class SOCLoader {
 
   
 
-    public static HashMap<String,String> loadSOCModels() {
+    public static HashMap<String,Integer> loadSOCModels() {
 
         String path = WIConstants.getInstance().getSOCDB();
-        HashMap<String,String> models = new HashMap<>();
+        HashMap<String,Integer> models = new HashMap<>();
 
         try {
             Connection liteCon = null;
@@ -36,9 +36,9 @@ public class SOCLoader {
             liteCon = DriverManager.getConnection("jdbc:sqlite:/" + path);
 
             Statement stmt = liteCon.createStatement();
-            ResultSet rs = stmt.executeQuery("select distinct model_TM from studies");
+            ResultSet rs = stmt.executeQuery("select model_TM, count(*) from studies group by model_TM");
             while (rs.next()) {
-                models.put(rs.getString(1),rs.getString(1));
+                models.put(rs.getString(1),rs.getInt(2));
                 
             }
         } catch (Exception e) {

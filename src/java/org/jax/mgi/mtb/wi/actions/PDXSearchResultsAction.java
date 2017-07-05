@@ -36,6 +36,9 @@ public class PDXSearchResultsAction extends Action {
 
         PDXForm pdxForm = (PDXForm) form;
         String modelID = pdxForm.getModelID();
+        if(modelID != null){
+            modelID = modelID.trim();
+        }
         ArrayList<String> primarySites = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getPrimarySites());
         ArrayList<String> diagnoses = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getDiagnoses());
         ArrayList<String> tags = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getTags());
@@ -220,7 +223,7 @@ public class PDXSearchResultsAction extends Action {
             if (mouse.getModelStatus() == null) {
                 mouse.setModelStatus("");
             }
-            if (mouse.getModelStatus().indexOf("Inventory") != -1) {
+            if (mouse.getModelStatus().indexOf("Inventory") != -1 || mouse.getModelStatus().indexOf("Data") != -1) {
                 unavailable.append(mouse.getModelID()).append(" ");
             }
 

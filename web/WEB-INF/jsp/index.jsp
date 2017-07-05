@@ -16,6 +16,8 @@
 <c:import url="../../meta.jsp">
     <c:param name="pageTitle" value="Mouse Tumor Biology System (MTB)"/>
 </c:import>
+    
+    
 
 </head>
 
@@ -84,6 +86,17 @@
         <li>links additional on-line cancer resources
     </ul>
     <p>
+    <table class="miTable">
+        <tr><td border="5px">
+            <p class="miTitle">Community Feedback Needed: Minimal Information Standards for PDX models</p>
+            <ul>
+                <li><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a>
+                <li><a href="${applicationScope.urlBase}/html/PDX_MinimalInformation_version1_2017.xlsx">PDX Minimal Information Specification (xls)</a>
+                <li><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a>
+            </ul>
+        </td></tr>
+    </table>
+   
     <hr width="100%">
     <p>
 <%--
