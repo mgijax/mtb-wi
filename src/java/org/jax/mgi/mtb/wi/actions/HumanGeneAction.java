@@ -15,7 +15,8 @@ import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
 
 /**
- * Provides data for paginated variation display 
+ * Provides data for paginated variation display
+ *
  * @author sbn
  */
 public class HumanGeneAction extends Action {
@@ -25,32 +26,27 @@ public class HumanGeneAction extends Action {
             HttpServletRequest request,
             HttpServletResponse response)
             throws Exception {
-  
+
         String query = request.getParameter("query");
         String page = request.getParameter("page");
-       String limit = request.getParameter("limit");
-        
-       
-        if(page == null || page.trim().length()==0){
+        String limit = request.getParameter("limit");
+
+        if (page == null || page.trim().length() == 0) {
             page = "0";
         }
-        
-        if(limit == null || limit.trim().length()==0){
+
+        if (limit == null || limit.trim().length() == 0) {
             limit = "1000";
         }
-    
-       
-        
+
         response.setContentType("application/json");
 
-          String json= PDXDAO.getInstance().getHumanGenes(query, page, limit);
-        
+        String json = PDXDAO.getInstance().getHumanGenes(query, page, limit);
+
         response.getWriter().write(json);
         response.flushBuffer();
-
 
         return null;
     }
 
-    
 }

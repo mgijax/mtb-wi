@@ -650,7 +650,7 @@
                     <td class="data1">
                         <c:choose>
                             <c:when test="${not empty geneExpressionData}">
-                                Platforms:${platforms} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hatched bars indicate genes with expression levels determined to be mildly affected by alignment calculations. See <a href="userHelp.jsp#pdxdetails"> this list</a>.
+                                Platforms:${platforms} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hatched bars indicate genes with expression levels determined to be mildly affected by alignment calculations.
                                                                                                                                                                                                         
                                 <div id="geneExpressionDiv"></div>
                             </c:when>

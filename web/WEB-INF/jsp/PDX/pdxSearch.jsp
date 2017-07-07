@@ -57,7 +57,7 @@
                 url: '/mtbwi/pdxHumanGenes.do'
             })
         
-            var store = new Ext.data.ArrayStore({
+            var humanGenestore = new Ext.data.ArrayStore({
                 id:'thestore',
      //           pageSize: 10, 
                 root:'data',
@@ -68,7 +68,7 @@
             });
             
             var combo = new Ext.form.ComboBox({
-                store: store,
+                store: humanGenestore,
                 minChars:2,
                 valueField:'symbol',
                 displayField:'display',
@@ -89,13 +89,23 @@
          
             combo.setValue('${gene}');
             
+            
+            var ctpStore = new Ext.data.ArrayStore({
+                            id: 0,
+                            fields: [
+                                'symbol'
+                            ],
+                            data: ${exomePanelGenes}
+                        })
+            
             var combo2 = new Ext.form.ComboBox({
-                 store: store,
-                minChars:2,
+                store: ctpStore,
+                minChars:1,
                 valueField:'symbol',
-                displayField:'display',
+                displayField:'symbol',
                 typeAhead: true,
-                mode: 'remote',
+                lazyRender:true,
+                mode: 'local',
                 forceSelection: false,
                 triggerAction: 'all',
                 selectOnFocus:true,
@@ -107,12 +117,13 @@
             });
             
             var combo3 = new Ext.form.ComboBox({
-                store: store,
-                minChars:2,
+                store: ctpStore,
+                minChars:1,
                 valueField:'symbol',
-                displayField:'display',
+                displayField:'symbol',
                 typeAhead: true,
-                mode: 'remote',
+                lazyRender:true,
+                mode: 'local',
                 forceSelection: false,
                 triggerAction: 'all',
                 selectOnFocus:true,

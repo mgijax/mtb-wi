@@ -100,15 +100,15 @@ public class PDXMouseStore {
     private static final String fusionModels = fusionURI + "models-for-fusion-gene-?.json"; // replace ? with gene
     private static final String fusionGenes = fusionURI + "all-fusion-genes.json";
     private static final String allFusionModels = fusionURI + "all-fusion-models.json";
-    private static final String fusionsForModel = fusionURI + "fusions-for-model-?.json"; // replace ? with id
+ //   private static final String fusionsForModel = fusionURI + "fusions-for-model-?.json"; // replace ? with id
 
     private static HashMap<String, String> fusionModelsMap = new HashMap<String, String>();
 
-    private static final String any = "models-with-variants-in-any.json";
+ //   private static final String any = "models-with-variants-in-any.json";
     private static final String allGenes = "all-genes.json";
-    private static final String modelsWithVariant = "models-with-specific-variant.json"; //  {"gene_symbol": "FGFR2", "variant": "K296R"}
+ //   private static final String modelsWithVariant = "models-with-specific-variant.json"; //  {"gene_symbol": "FGFR2", "variant": "K296R"}
     private static final String variantsForGene = "variants-for-gene-%.json";  // replace % with gene symbol
-    private static final String variantsForGeneModel = "variants-for-genemodel.json";
+//    private static final String variantsForGeneModel = "variants-for-genemodel.json";
     private static final String allVariants = "all-variants.json";
 
     public PDXMouseStore() {
@@ -232,7 +232,7 @@ public class PDXMouseStore {
                 if (genesBuffer.length() > 1) {
                     genesBuffer.append(",");
                 }
-                genesBuffer.append("'" + gene + "'");
+                genesBuffer.append("['" + gene + "']");
 
             }
             genesBuffer.append("]");
@@ -890,7 +890,7 @@ public class PDXMouseStore {
         // turn model ids into an array of ints
         // use the all-variants.json service to return all matching models
         // populate matching models with gene, 
-        // if variants the populate consequence
+        // if variants then populate consequence
         ArrayList<PDXMouse> matchingMice = new ArrayList<>();
         JSONArray jsonIds = new JSONArray();
         for (PDXMouse m : mice) {
