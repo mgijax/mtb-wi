@@ -373,7 +373,7 @@ public class PDXMouseStore {
      */
     public ArrayList<PDXMouse> findMice(String modelID, ArrayList<String> tissues,
             ArrayList<String> diagnoses, ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers,
-            ArrayList<String> genes, ArrayList<String> variants, boolean drugResponse, boolean tumorGrowth, ArrayList<String> tags, String fusionGenes) {
+            ArrayList<String> genes, ArrayList<String> variants, boolean dosingStudy, boolean tumorGrowth, ArrayList<String> tags, String fusionGenes) {
 
         // may need to do 3 searches
         // findStaticMice
@@ -382,7 +382,7 @@ public class PDXMouseStore {
         ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
 
         // get a list of mice based on search criteria that are in ELIMS
-        mice = findStaticMice(modelID, tissues, diagnoses, tumorTypes, tumorMarkers, tags, drugResponse, tumorGrowth);
+        mice = findStaticMice(modelID, tissues, diagnoses, tumorTypes, tumorMarkers, tags, dosingStudy, tumorGrowth);
 
         ArrayList<String> ids = new ArrayList<>();
 
@@ -478,7 +478,7 @@ public class PDXMouseStore {
      * @return ArrayList<PDXMouse> matching mice
      */
     private ArrayList<PDXMouse> findStaticMice(String modelID, ArrayList<String> tissues, ArrayList<String> diagnoses,
-            ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers, ArrayList<String> tags, boolean drugResponse, boolean tumorGrowth) {
+            ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers, ArrayList<String> tags, boolean dosingStudy, boolean tumorGrowth) {
 
         ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
         ArrayList<PDXMouse> mice2 = new ArrayList<PDXMouse>();
@@ -503,9 +503,9 @@ public class PDXMouseStore {
 
         mice.clear();
 
-        if (drugResponse) {
+        if (dosingStudy) {
             for (PDXMouse mouse : mice2) {
-                if (mouse.getAssocData() != null && mouse.getAssocData().contains("Drug")) {
+                if (mouse.getSocGraph()!=0) {
                     mice.add(mouse);
                 }
             }

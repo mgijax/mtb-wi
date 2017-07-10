@@ -39,7 +39,7 @@ public class PDXForm extends ActionForm {
     private boolean deletion = false;
     private boolean loh = false;
     private boolean tumorGrowth = false;
-    private boolean drugResponse = false;
+    private boolean dosingStudy = false;
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -336,17 +336,17 @@ public class PDXForm extends ActionForm {
     }
 
     /**
-     * @return the drugResponse
+     * @return the dosingStudy
      */
-    public boolean getDrugResponse() {
-        return drugResponse;
+    public boolean getDosingStudy() {
+        return dosingStudy;
     }
 
     /**
-     * @param drugResponse the drugResponse to set
+     * @param dosingStudy the dosingStudy to set
      */
-    public void setDrugResponse(boolean drugResponse) {
-        this.drugResponse = drugResponse;
+    public void setDosingStudy(boolean dosingStudy) {
+        this.dosingStudy = dosingStudy;
     }
 
     public String getGene() {

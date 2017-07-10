@@ -22,10 +22,7 @@ import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
  * @author sbn
  */
 public class PDXEditContentAction extends DispatchAction {
-    
- 
-    
-    
+
     public ActionForward document(ActionMapping mapping,
             ActionForm form,
             HttpServletRequest request,
@@ -36,23 +33,22 @@ public class PDXEditContentAction extends DispatchAction {
         String result = "edit";
         String modelID = request.getParameter("modelID");
         String action = request.getParameter("action");
-       
+
         int contentKey = 0;
-        try{
+        try {
             contentKey = new Integer(request.getParameter("contentKey")).intValue();
-        }catch(NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             // not much we can do it came from the url
         }
-        
+
         String user = validateUser(request);
-        
-        if(user == null){
-            
-            result = action  = "reject";
-            
+
+        if (user == null) {
+
+            result = action = "reject";
+
         }
-        
-        
+
         if ("delete".equals(action)) {
 
             store.deleteDocument(contentKey);
@@ -95,24 +91,24 @@ public class PDXEditContentAction extends DispatchAction {
             HttpServletResponse response)
             throws Exception {
 
-       PDXMouseStore store = new PDXMouseStore();
+        PDXMouseStore store = new PDXMouseStore();
         String result = "edit";
         String modelID = request.getParameter("modelID");
         String action = request.getParameter("action");
-        
+
         int contentKey = 0;
-        try{
+        try {
             contentKey = new Integer(request.getParameter("contentKey")).intValue();
-        }catch(NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             // not much we can do it came from the url
         }
         String user = validateUser(request);
-        if(user  == null){
-            
-            result = action  = "reject";
-            
+        if (user == null) {
+
+            result = action = "reject";
+
         }
-        
+
         if ("delete".equals(action)) {
 
             store.deleteGraphic(contentKey);
@@ -123,13 +119,11 @@ public class PDXEditContentAction extends DispatchAction {
         if ("update".equals(action)) {
 
             PDXGraphic graphic = new PDXGraphic();
-           graphic.setContentKey(contentKey);
-            graphic.setDescription(request.getParameter("graphicDescription").replace("'", "`"));
+            graphic.setContentKey(contentKey);
+            graphic.setDescription(request.getParameter("graphicDescription").replace("'", "`").replaceAll("[\\p{C}\\p{Z}]", " "));
             graphic.setUser(user);
 
-
             store.updateGraphic(graphic);
-
 
             returnSuccess(response);
             return null;
@@ -137,8 +131,7 @@ public class PDXEditContentAction extends DispatchAction {
 
         PDXGraphic graphic = store.getGraphic(contentKey);
 
-        request.setAttribute("graphicDescription", graphic.getDescription().replace("'","`"));
-
+        request.setAttribute("graphicDescription", graphic.getDescription().replace("'", "`"));
 
         request.setAttribute("contentKey", contentKey);
         request.setAttribute("modelID", modelID);
@@ -157,26 +150,26 @@ public class PDXEditContentAction extends DispatchAction {
             HttpServletResponse response)
             throws Exception {
 
-         PDXMouseStore store = new PDXMouseStore();
-         
+        PDXMouseStore store = new PDXMouseStore();
+
         String result = "edit";
 
         String modelID = request.getParameter("modelID");
         String action = request.getParameter("action");
-        
+
         int contentKey = 0;
-        try{
+        try {
             contentKey = new Integer(request.getParameter("contentKey")).intValue();
-        }catch(NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             // not much we can do it came from the url
         }
         String user = validateUser(request);
-        if(user  == null){
-            
-            result = action  = "reject";
-            
+        if (user == null) {
+
+            result = action = "reject";
+
         }
-        
+
         if ("delete".equals(action)) {
 
             store.deleteLink(contentKey);
@@ -191,16 +184,14 @@ public class PDXEditContentAction extends DispatchAction {
             link.setLinkText(request.getParameter("linkText"));
             link.setDescription(request.getParameter("linkDescription"));
             link.setUrl(request.getParameter("linkURL"));
-             link.setUser(user);
+            link.setUser(user);
             store.updateLink(link);
-
 
             returnSuccess(response);
             return null;
         }
 
         PDXLink link = store.getLink(contentKey);
-
 
         request.setAttribute("linkDescription", link.getDescription());
         request.setAttribute("linkText", link.getLinkText());
@@ -223,27 +214,26 @@ public class PDXEditContentAction extends DispatchAction {
             HttpServletResponse response)
             throws Exception {
 
+        PDXMouseStore store = new PDXMouseStore();
 
-         PDXMouseStore store = new PDXMouseStore();
-         
         String result = "edit";
 
         String modelID = request.getParameter("modelID");
         String action = request.getParameter("action");
-       
+
         int contentKey = 0;
-        try{
+        try {
             contentKey = new Integer(request.getParameter("contentKey")).intValue();
-        }catch(NumberFormatException nfe){
+        } catch (NumberFormatException nfe) {
             // not much we can do it came from the url
         }
-       String user = validateUser(request);
-        if(user  == null){
-            
-            result = action  = "reject";
-            
+        String user = validateUser(request);
+        if (user == null) {
+
+            result = action = "reject";
+
         }
-        
+
         if ("delete".equals(action)) {
 
             store.deleteComment(contentKey);
@@ -256,7 +246,7 @@ public class PDXEditContentAction extends DispatchAction {
 
             PDXComment comment = new PDXComment();
             comment.setContentKey(contentKey);
-            comment.setComment(request.getParameter("comment"));
+            comment.setComment(request.getParameter("comment").replace("'", "`").replaceAll("[\\p{C}\\p{Z}]", " "));
             comment.setUser(user);
             store.updateComment(comment);
 
@@ -266,7 +256,7 @@ public class PDXEditContentAction extends DispatchAction {
 
         PDXComment comment = store.getComment(contentKey);
 
-        request.setAttribute("comment", comment.getComment());
+        request.setAttribute("comment", comment.getComment().replaceAll("[\\p{C}\\p{Z}]", " "));
 
         request.setAttribute("contentKey", contentKey);
         request.setAttribute("modelID", modelID);
@@ -286,7 +276,6 @@ public class PDXEditContentAction extends DispatchAction {
 
             response.getWriter().write("{success:true}");
 
-
             response.flushBuffer();
 
             response.getWriter().close();
@@ -295,13 +284,12 @@ public class PDXEditContentAction extends DispatchAction {
         }
 
     }
-    
-    
-      private String validateUser(HttpServletRequest request){
-            
-            String user = (String) request.getSession().getAttribute("pdxUser");
-            
-            return user;
-        }
-    
+
+    private String validateUser(HttpServletRequest request) {
+
+        String user = (String) request.getSession().getAttribute("pdxUser");
+
+        return user;
+    }
+
 }

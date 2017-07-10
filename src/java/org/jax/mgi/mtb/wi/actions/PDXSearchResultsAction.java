@@ -53,7 +53,7 @@ public class PDXSearchResultsAction extends Action {
         
         String fusionGenes = pdxForm.getFusionGenes();
         
-        boolean drugResponse = pdxForm.getDrugResponse();
+        boolean dosingStudy = pdxForm.getDosingStudy();
         boolean tumorGrowth = pdxForm.getTumorGrowth();
 
         // include gene variant consequence in cvs
@@ -82,7 +82,7 @@ public class PDXSearchResultsAction extends Action {
             mice = pdxMouseStore.findStaticMiceByTissueOfOrigin(toa);
             request.setAttribute("tissuseOfOrigin", toa);
         } else {
-            mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, types, markers, genes, variants, drugResponse, tumorGrowth, tags, fusionGenes);
+            mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, types, markers, genes, variants, dosingStudy, tumorGrowth, tags, fusionGenes);
         }
 
         request.setAttribute("modelID", modelID);
@@ -96,8 +96,8 @@ public class PDXSearchResultsAction extends Action {
             hideFusionGenes = "false";
         }
 
-        if (drugResponse) {
-            request.setAttribute("drugResponse", "true");
+        if (dosingStudy) {
+            request.setAttribute("dosingStudy", "true");
         }
         if (tumorGrowth) {
             request.setAttribute("tumorGrowth", "true");

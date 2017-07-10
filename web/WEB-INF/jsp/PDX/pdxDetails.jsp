@@ -1158,7 +1158,7 @@
                          <c:forEach var="socGraph" begin="1" end="${mouse.socGraph}" >
                         <tr class="stripe1">
                             <td class="cat1">
-                                SOC Plots:
+                                Dosing Studies:
                             </td>
                             <td style="border:0px none">
                                 <c:choose>

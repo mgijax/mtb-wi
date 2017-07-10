@@ -283,7 +283,7 @@
                     <td>
                         <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Only return models with selected additional information.', CAPTION, 'Limit results');" onmouseout="return nd();">Limit results to models</a></b>     
                         <br>
-                <html:checkbox property="drugResponse"/>with drug response data, <html:checkbox property="tumorGrowth"/>with tumor growth graphs. 
+                <html:checkbox property="dosingStudy"/>with dosing study data, <html:checkbox property="tumorGrowth"/>with tumor growth graphs. 
                 <br><br>
                 <c:choose>
                     <c:when test="${not empty tagsValues}">
