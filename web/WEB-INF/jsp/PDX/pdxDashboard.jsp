@@ -171,6 +171,12 @@
                 <input type="submit" name="consortium" VALUE="PDX Consortium Report"> 
             </html:form>
             </td>
+            
+             <td>
+            
+                 <a class="none" href="http://bhmtbdb01.jax.org/usrlocalmgi/mtb/live/www/pdx/treatment_response_summary.xlsx"><input type="button"  VALUE="Drug Response Summary"></a>
+            
+            </td>
             </tr>
             <tr>
                 <td colspan=5>

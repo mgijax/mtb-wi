@@ -102,6 +102,10 @@ a.help {
 cursor: help
 }
 
+a.none {
+    text-decoration: none;
+}
+
 /* Tool Bar */
 .toolBar {
 font-size: 12px;

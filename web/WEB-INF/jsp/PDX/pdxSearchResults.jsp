@@ -488,8 +488,8 @@
                         <font class="label">Tumor Growth Data:</font> Required<br>
                     </c:if>    
                                     
-                     <c:if test="${not empty drugResponse}">
-                        <font class="label">Drug Response Graph:</font> Required<br>
+                     <c:if test="${not empty dosingStudy}">
+                        <font class="label">Dosing Studies:</font> Required<br>
                     </c:if>  
                         
                    

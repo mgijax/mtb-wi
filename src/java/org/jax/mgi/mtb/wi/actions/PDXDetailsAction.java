@@ -219,14 +219,16 @@ public class PDXDetailsAction extends Action {
                 request.setAttribute("mutationComments", mutationComments);
             }
 
-            if (drugSensitivity.size() > 0) {
-                request.setAttribute("drugSensitivityGraphics", drugSensitivity);
-                request.setAttribute("drugSensitivity", "true");
-            }
+            if(mouse.getSocGraph()==0){
+                if (drugSensitivity.size() > 0) {
+                    request.setAttribute("drugSensitivityGraphics", drugSensitivity);
+                    request.setAttribute("drugSensitivity", "true");
+                }
 
-            if (drugSDoc.size() > 0) {
-                request.setAttribute("drugSensitivityDocs", drugSDoc);
-                request.setAttribute("drugSensitivity", "true");
+                if (drugSDoc.size() > 0) {
+                    request.setAttribute("drugSensitivityDocs", drugSDoc);
+                    request.setAttribute("drugSensitivity", "true");
+                }
             }
 
             if (additionalGraphic.size() > 0) {

@@ -59,7 +59,7 @@ public class PDXSearchResultsAction extends Action {
         // include gene variant consequence in cvs
         boolean showGVC = false;
 
-        ArrayList<String> genes = new ArrayList<String>();
+        ArrayList<String> genes = new ArrayList<>();
 
         String hideGene = "false";
         

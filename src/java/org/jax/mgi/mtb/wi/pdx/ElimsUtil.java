@@ -82,6 +82,9 @@ public class ElimsUtil {
         try {
 
             HashMap<String, ArrayList<String>> statusMap = this.getModelStatusMap();
+            
+            ArrayList<String> emptyList = new ArrayList();
+            for(int k=0; k< 6; k++)emptyList.add("");
 
             MTB_wsStub stub = getStub();
 
@@ -121,11 +124,16 @@ public class ElimsUtil {
                     if (filterOnID(id)) {
                         report.append(clean(result[i].getParticipant_ID())).append(",");
                         report.append(clean(id)).append(",");
-                        report.append(clean(statusMap.get(result[i].getModel()).get(1))).append(",");
-                        report.append(clean(statusMap.get(result[i].getModel()).get(0))).append(",");
-                        report.append(clean(statusMap.get(result[i].getModel()).get(2))).append(",");
-                        report.append(clean(statusMap.get(result[i].getModel()).get(3))).append(",");
-                        report.append(clean(statusMap.get(result[i].getModel()).get(4))).append(",");
+                        ArrayList<String> statusList = statusMap.get(result[i].getModel());
+                        
+                        if(statusList == null){
+                            statusList = emptyList;    
+                        }
+                        report.append(clean(statusList.get(1))).append(",");
+                        report.append(clean(statusList.get(0))).append(",");
+                        report.append(clean(statusList.get(2))).append(",");
+                        report.append(clean(statusList.get(3))).append(",");
+                        report.append(clean(statusList.get(4))).append(",");
                        
                         report.append(clean(result[i].getOccupation_Information())).append(",");
                         report.append(clean(result[i].getPrior_Cancer_Diagnoses())).append(",");
@@ -148,7 +156,7 @@ public class ElimsUtil {
                         report.append(clean(result[i].getOther_Therapy_Details())).append(",");
                         report.append(clean(result[i].getTreatment_Outcome())).append(",");
                         report.append(clean(result[i].getPatient_History_Notes())).append(",");
-                        report.append(clean(statusMap.get(result[i].getModel()).get(5))).append("\n");
+                        report.append(clean(statusList.get(5))).append("\n");
 
                     }
 
@@ -835,7 +843,7 @@ public class ElimsUtil {
 
     private String clean(String in) {
         if (in != null) {
-            return "\"" + in.replaceAll("\"", "").replaceAll("'", "").replaceAll("\\p{C}", "").replaceAll("&#x.{1,4};", " ") + "\"";
+            return "\"" + in.replaceAll("\"", "").replaceAll("'", "").replaceAll("\\p{C}", "").replaceAll("&#x.{1,4};", " ").trim() + "\"";
         }
         return in;
     }
