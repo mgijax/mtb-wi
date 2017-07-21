@@ -136,6 +136,12 @@ public class PDXAddContentAction extends Action {
                     request.setAttribute("hideGraphic", "false");
 
                 }
+                   
+               if(request.getParameter("reference") != null){
+                   characterizationKey = PDXContent.REFERENCE;
+                   characterization = "Reference";
+                   request.setAttribute("hideLink", "false");
+               }
 
                 request.setAttribute("characterization", characterization);
                 request.setAttribute("characterizationKey", characterizationKey);

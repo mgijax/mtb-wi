@@ -14,6 +14,14 @@
                 background-color:  #ffe2e2 !important; 
                 color: #900; 
             } 
+            .x-panel-body{
+                border:0 none;
+                background-color: #F0F0F0;
+            }
+            
+            .x-panel-body-noheader{
+                border:0 none;
+            }
 
         </style>
 
@@ -460,8 +468,6 @@
 
                 if (document.getElementById("geneCNV") != null) {
 
-
-
                     panel3 = new Ext.Panel({
                         applyTo: 'geneCNV',
                         collapsible: true,
@@ -488,6 +494,44 @@
                     panel3.render();
                     panel3.doLayout();
                 }
+                
+                if(document.getElementById("references") != null){
+                
+                    panel4 = new Ext.Panel({
+                           applyTo: 'references',
+                           collapsible: true,
+                           collapsed: ${collapseReferences},
+                           collapseFirst: false,
+                           title: 'Click to expand/collapse',
+                           forceLayout: true,
+                           border:false,
+                           bodyBorder:false,
+                           header:${collapseReferences},
+                          
+                           layout: {
+                               type: 'fit',
+                               align: 'stretch',
+                               pack: 'start'
+                           },
+                           titleCollapse: true,
+                           hideCollapseTool: true,
+                           items: [{html:'<c:forEach var="link" items="${referenceLinks}" varStatus="status">
+                                             ${link.description}&nbsp;<a href="${link.url}">${link.linkText}</a>\
+                                             <c:if test="${not empty sessionScope.pdxEditor}">
+                                                  <a href="pdxEditContent.do?contentType=link&contentKey=${link.contentKey}&modelID=${modelID}" class="linkedButton">\
+                                                  <input type="button" value="Edit"/>\
+                                                  </a>\
+                                             </c:if>
+                                             <br>\
+                                        </c:forEach>'
+                                   }]
+
+                       });
+
+                       panel4.render();
+                       panel4.doLayout();
+                }
+                
             });
 
         </script>
@@ -637,27 +681,10 @@
                                                 Publications citing this model
                                             </td>
                                             <td class="data${a}">
-                                                <div style="overflow: auto; height:80px">
-                                                    <table>
+                                                <div id="references">
                                                          <c:if test="${not empty sessionScope.pdxEditor}" > 
-                                                             <tr><td>
                                                                     <input type="submit" name="reference" value="add">
-                                                                <td></tr>
                                                             </c:if>
-                                                        <tr><td>
-                                                        <c:forEach var="link" items="${referenceLinks}" varStatus="status">
-
-                                                            ${link.description}&nbsp;<a href="${link.url}">${link.linkText}</a>
-                                                            <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                <a href="pdxEditContent.do?contentType=link&contentKey=${link.contentKey}&modelID=${modelID}" class="linkedButton">  
-                                                                    <input type="button" value="Edit"/>
-                                                                </a>
-                                                            </c:if>
-                                                            <br>
-                                                        </c:forEach>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
                                                 </div>
                                             </td>
                                         </tr>

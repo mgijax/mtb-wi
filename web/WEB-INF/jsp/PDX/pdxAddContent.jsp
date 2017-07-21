@@ -178,12 +178,12 @@
                     name:'linkText'
                 }],
             buttons: [{
-                    text: 'Upload',
+                    text: 'Add Link',
                     handler: function(){
                         if(linkForm.getForm().isValid()){
                             linkForm.getForm().submit({
                                 url: 'pdxAddContent.do?submitContent=url&modelID=${modelID}&characterizationKey=${characterizationKey}',
-                                waitMsg: 'Uploading your link ...',
+                                waitMsg: 'Adding your link ...',
                                 success: function(form, o){
                                     Ext.Msg.alert('Success', 'Added link.', function(btn, text){
                                                     window.location.replace("pdxDetails.do?modelID=${modelID}&characterization=${characterization}");
@@ -367,12 +367,12 @@
                 }
                 ],
             buttons: [{
-                    text: 'Upload',
+                    text: 'Add Comment',
                     handler: function(){
                         if(commentForm.getForm().isValid()){
                             commentForm.getForm().submit({
                                 url: 'pdxAddContent.do?submitContent=comment&modelID=${modelID}&characterizationKey=${characterizationKey}',
-                                waitMsg: 'Uploading your comment ...',
+                                waitMsg: 'Adding your comment ...',
                                 success: function(form, o){
                                     Ext.Msg.alert('Success', 'Added comment.', function(btn, text){
                                                     window.location.replace("pdxDetails.do?modelID=${modelID}&characterization=${characterization}");

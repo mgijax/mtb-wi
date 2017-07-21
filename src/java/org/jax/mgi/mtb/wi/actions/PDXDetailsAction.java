@@ -106,6 +106,7 @@ public class PDXDetailsAction extends Action {
             ArrayList<PDXDocument> drugSDoc = new ArrayList<PDXDocument>();
             ArrayList<PDXGraphic> additionalGraphic = new ArrayList<PDXGraphic>();
             ArrayList<PDXGraphic> tumorGrowthRate = new ArrayList<PDXGraphic>();
+            ArrayList<PDXLink> referenceLinks = new ArrayList<PDXLink>();
             PDXComment histologySummary = null;
             PDXComment pathologist = null;
 
@@ -161,6 +162,9 @@ public class PDXDetailsAction extends Action {
                         break;
                     case PDXContent.MUTATION:
                         mutationLinks.add(link);
+                        break;
+                    case PDXContent.REFERENCE:
+                        referenceLinks.add(link);
                         break;
                 }
             }
@@ -219,7 +223,7 @@ public class PDXDetailsAction extends Action {
                 request.setAttribute("mutationComments", mutationComments);
             }
 
-            if(mouse.getSocGraph()==0){
+            if (mouse.getSocGraph() == 0) {
                 if (drugSensitivity.size() > 0) {
                     request.setAttribute("drugSensitivityGraphics", drugSensitivity);
                     request.setAttribute("drugSensitivity", "true");
@@ -238,6 +242,14 @@ public class PDXDetailsAction extends Action {
             if (tumorGrowthRate.size() > 0) {
                 request.setAttribute("tumorGrowthRate", tumorGrowthRate);
             }
+            
+            String collapseReferences = "false";
+            if(referenceLinks.size()>4){
+                collapseReferences = "true";
+            }
+
+            request.setAttribute("collapseReferences", collapseReferences);
+            request.setAttribute("referenceLinks", referenceLinks);
 
             String expData = store.getModelExpression(modelID);
 
