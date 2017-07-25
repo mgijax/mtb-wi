@@ -158,7 +158,7 @@
             fileCount:1,
             defaults: {
                 anchor: '95%',
-                allowBlank: false,
+                allowBlank: true,
                 msgTarget: 'side'
             },
             items: [{ xtype:'textfield',
@@ -169,8 +169,8 @@
                 ,{ xtype:'textfield',
                     id:'linkURL',
                     fieldLabel:'Link URL',
-                    name:'linkURL',
-                    vtype:'url'
+                    name:'linkURL'
+                    
                 }
                 ,{ xtype:'textfield',
                     id:'linkText',

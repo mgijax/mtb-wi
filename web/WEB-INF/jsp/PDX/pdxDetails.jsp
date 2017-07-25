@@ -22,6 +22,10 @@
             .x-panel-body-noheader{
                 border:0 none;
             }
+            
+            p{
+                margin-bottom: 2px;
+            }
 
         </style>
 
@@ -516,13 +520,13 @@
                            titleCollapse: true,
                            hideCollapseTool: true,
                            items: [{html:'<c:forEach var="link" items="${referenceLinks}" varStatus="status">
-                                             ${link.description}&nbsp;<a href="${link.url}">${link.linkText}</a>\
+                                            <p>${link.description}&nbsp;<a href="${link.url}" target="_blank">${link.linkText}</a>\
                                              <c:if test="${not empty sessionScope.pdxEditor}">
                                                   <a href="pdxEditContent.do?contentType=link&contentKey=${link.contentKey}&modelID=${modelID}" class="linkedButton">\
                                                   <input type="button" value="Edit"/>\
                                                   </a>\
                                              </c:if>
-                                             <br>\
+                                             </p>\
                                         </c:forEach>'
                                    }]
 
