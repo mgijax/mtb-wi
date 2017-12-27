@@ -403,6 +403,15 @@
             <forward name="noData" path="/WEB-INF/jsp/PDX/pdxNoData.jsp"/>
             <forward name="failure" path="appError.jsp"/>
         </action>
+        
+         <action path="/pdxMultiSearch"
+            type="org.jax.mgi.mtb.wi.actions.PDXMultiSearchAction"
+            name="PDXForm"
+            scope="request">
+            <forward name="success" path="/WEB-INF/jsp/PDX/pdxMultiSearch.jsp"/>  
+            <forward name="noData" path="/WEB-INF/jsp/PDX/pdxNoData.jsp"/>
+            <forward name="failure" path="appError.jsp"/>
+        </action>
     
         <action path="/pdxSearchResults"
             type="org.jax.mgi.mtb.wi.actions.PDXSearchResultsAction"

@@ -103,6 +103,7 @@
         var store = new Ext.data.ArrayStore({
             fields: [
                 {name: 'modelID'},
+                {name: 'status'},
                 {name: 'previousID'},
                 {name: 'tissue'},
                 {name: 'diagnosis'},
@@ -134,19 +135,10 @@
             initComponent: function(){
                 
                 org.jax.mgi.mtb.PDXGrid.superclass.initComponent.apply(this,arguments);
-                this.on("rowclick",this.rowClickHandler);
+             
                 this.setTitle(this.getStore().getTotalCount()+" matching PDX Model(s)");
                  
-            },
-            
-            rowClickHandler: function(grid, index, event){
-              
-                var record = grid.getStore().getAt(index);
-     
-                
             }
-            
-           
         }));
             
             
@@ -167,6 +159,12 @@
                     renderer: idRenderer
                 },
                 {
+                    header   : 'Status', 
+                    width    : 110, 
+                    sortable : true, 
+                    dataIndex: 'status'
+                },
+                {
                     header   : 'Previous ID', 
                     width    : 75, 
                     sortable : true, 
@@ -181,7 +179,7 @@
                 },
                 {
                     header   : 'Diagnosis (Initial : Final)', 
-                    width    : 140, 
+                    width    : 110, 
                     sortable : true, 
                     dataIndex: 'diagnosis'
                 },
@@ -238,7 +236,7 @@
                 },
                 {
                     header   : 'Age', 
-                    width    : 70, 
+                    width    : 60, 
                     sortable : true, 
                     dataIndex: 'age'
                 },
@@ -491,6 +489,18 @@
                      <c:if test="${not empty dosingStudy}">
                         <font class="label">Dosing Studies:</font> Required<br>
                     </c:if>  
+                        
+                    <c:if test="${not empty treatmentNaive}">
+                        <font class="label">Treatment Naive Patient:</font> Required<br>
+                    </c:if> 
+                        
+                    <c:if test="${not empty recistDrug}">
+                        <font class="label">RECIST Drug:</font> ${recistDrug}<br>
+                    </c:if>  
+                        
+                    <c:if test="${not empty recistResponse}">
+                        <font class="label">RECIST Response:</font> ${recistResponse}<br>
+                    </c:if> 
                         
                    
                    

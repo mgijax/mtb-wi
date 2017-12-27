@@ -82,9 +82,11 @@ public class ElimsUtil {
         try {
 
             HashMap<String, ArrayList<String>> statusMap = this.getModelStatusMap();
-            
+
             ArrayList<String> emptyList = new ArrayList();
-            for(int k=0; k< 6; k++)emptyList.add("");
+            for (int k = 0; k < 6; k++) {
+                emptyList.add("");
+            }
 
             MTB_wsStub stub = getStub();
 
@@ -97,44 +99,41 @@ public class ElimsUtil {
             PDXPatientClinicalReport[] result = stub.getPDXPatientClinicalReports_sessionless(soapRequest).getGetPDXPatientClinicalReports_sessionlessResult().getPDXPatientClinicalReport();
 
             if (result.length > 0) {
-                
-                
+
                 /*  Add these fields from the statusMap
                     list.add(result[i].getModel_Aka());
                     list.add(result[i].getGender());
                     list.add(result[i].getPatient_Age());
                     list.add(result[i].getRace());
                     list.add(result[i].getComments());
-                  */  
-
+                 */
                 report.append("Participant ID,Model,Model AKA,Model Status,Gender,Age,Race,Occupation Information,Prior Cancer Diagnosis,Risk Factors,Family History, Comorbidity Conditions,Exposures,");
                 report.append("Current Smoker,Former Smoker,Extimated Pack Years,Alcohol Use, Treatment Naive, Radiation Therapy, Radiation Therapy Details, Chemotherapy, Chemotherapy Details, Hormone Therapy, Hormone Therapy Details, Other Therapy, Other Therapy Details,");
                 report.append("Treatment Outcome,Patient History Notes,Comments\n");
                 for (int i = 0; i < result.length; i++) {
-                    
-                     String id = result[i].getModel();
+
+                    String id = result[i].getModel();
                     try {
                         int intID = new Integer(id).intValue();
                         id = ("TM" + String.format("%05d", intID));
                     } catch (NumberFormatException e) {
                         // this will happen for J##### ids which is ok
                     }
-                    
-                    
+
                     if (filterOnID(id)) {
                         report.append(clean(result[i].getParticipant_ID())).append(",");
                         report.append(clean(id)).append(",");
                         ArrayList<String> statusList = statusMap.get(result[i].getModel());
-                        
-                        if(statusList == null){
-                            statusList = emptyList;    
+
+                        if (statusList == null) {
+                            statusList = emptyList;
                         }
                         report.append(clean(statusList.get(1))).append(",");
                         report.append(clean(statusList.get(0))).append(",");
                         report.append(clean(statusList.get(2))).append(",");
                         report.append(clean(statusList.get(3))).append(",");
                         report.append(clean(statusList.get(4))).append(",");
-                       
+
                         report.append(clean(result[i].getOccupation_Information())).append(",");
                         report.append(clean(result[i].getPrior_Cancer_Diagnoses())).append(",");
                         report.append(clean(result[i].getRisk_Factors())).append(",");
@@ -342,7 +341,7 @@ public class ElimsUtil {
             Pdx_model_status[] result = stub.getPDXStatusReport_sessionless(soapRequest).getGetPDXStatusReport_sessionlessResult().getPdx_model_status();
 
             String[] columns = STATUS_COLUMNS.split(",");
-            
+
             if (result.length > 0) {
                 report.append("{\"pdxStatus\":[");
                 for (int i = 0; i < result.length; i++) {
@@ -394,7 +393,7 @@ public class ElimsUtil {
         } catch (Exception e) {
             log.error("Error gettting PDX Status Report as JSON", e);
         }
-       
+
         return report.toString();
     }
 
@@ -477,6 +476,7 @@ public class ElimsUtil {
         HashMap<String, String> diagnosisMap = new HashMap<String, String>();
         HashMap<String, String> primarySitesMap = new HashMap<String, String>();
         HashMap<String, String> tagsMap = new HashMap<String, String>();
+        HashMap<String, String> idMap = new HashMap<>();
 
         try {
 
@@ -509,6 +509,7 @@ public class ElimsUtil {
                             mouse.setCurrentSmoker(details.get(0));
                             mouse.setFormerSmoker(details.get(1));
                             mouse.setTreatmentNaive(details.get(2));
+
                         } else {
                             log.error("no clinical details for " + results[i].getIdentifier());
                         }
@@ -567,6 +568,8 @@ public class ElimsUtil {
                             if (tag.trim().length() > 0) {
                                 tagsMap.put(results[i].getModelTags(), "tag");
                             }
+
+                            idMap.put(mouse.getModelID(), mouse.getPrimarySite() + " " + mouse.getInitialDiagnosis());
                         } else {
                             log.debug("skipping suspended model " + mouse.getModelID());
                         }
@@ -586,6 +589,7 @@ public class ElimsUtil {
                 searchData.setPrimarySites(primarySites);
                 searchData.setTags(tags);
                 searchData.setMice(mice);
+                searchData.setIds(idMap);
 
                 // what about using linkedHashMaps so vocabs are sorted
                 // but use the values as sets of matching modelID's for search?
@@ -699,9 +703,18 @@ public class ElimsUtil {
 
     }
 
-    // JSON for the PDXInfo
-    public String getPDXInfo() {
-        StringBuilder report = new StringBuilder();
+   
+
+    // an extended version of the search results report including models with any status.
+    //contacts for this are Tony Marchetti and Julius Henderson
+    public String getPDXReportWithNoName(ArrayList<PDXMouse> allMice) {
+
+        // this should only happen once a week so we will just eat the overhead
+        HashMap<String, PDXMouse> mouseMap = new HashMap();
+        for (PDXMouse mouse : allMice) {
+            mouseMap.put(mouse.getModelID(), mouse);
+        }
+        StringBuffer report = new StringBuffer();
         try {
 
             MTB_wsStub stub = getStub();
@@ -712,56 +725,63 @@ public class ElimsUtil {
             soapRequest.setPwd(password);
             soapRequest.setUser(userName);
 
+            report.append("Model Status,");
+            report.append("Model ID,");
+            report.append("Previous ID,");
+            report.append("Tissue,");
+            report.append("Initial Diagnosis,");
+            report.append("Final Diagnosis,");
+            report.append("Location,");
+            report.append("Sample Type,");
+            report.append("Tumor Type,");
+            report.append("Primary Site,");
+            report.append("Tumor Markers,");
+            report.append("Sex,");
+            report.append("Age,");
+            report.append("Strain,");
+            report.append("Associated Data\n");
+
             Pdx_model_status[] result = stub.getPDXStatusReport_sessionless(soapRequest).getGetPDXStatusReport_sessionlessResult().getPdx_model_status();
 
-            String columns[] = {"Model ID", "Patient ID", "Gender", "Age", "Race", "Ethnicity", "Specimen Site", "Primary Site", "Initial Diagnosis", "Clinical Diagnosis",
-                "Tumor Type", "Grades", "Tumor Stage", "Markers", "Sample Type", "Strain", "Mouse Sex", "Engraftment Site"};
-
-           
             if (result.length > 0) {
-                report.append("{\"pdxInfo\":[");
                 for (int i = 0; i < result.length; i++) {
-                    
-                      String id = result[i].getIdentifier();
+                    String id = result[i].getIdentifier();
                     try {
                         int intID = new Integer(id).intValue();
                         id = ("TM" + String.format("%05d", intID));
                     } catch (NumberFormatException e) {
-                        // this will happen for J##### ids which is ok
                     }
 
-                    
-                    
-                    int j = 0;
-                    
-                    if (result[i].getModel_Status().equals("Active: Available")) {
-                        report.append("{");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(id)).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append("\"JAXPT" + i + "\"").append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getGender())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getPatient_Age())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getRace())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getEthnicity())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getSpecimen_Site())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getPrimary_Site())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getInitial_Diagnosis())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getClinical_Diagnosis())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_Type())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getGrades())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_Stage())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(parseMarkers(result[i].getMarkers())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getSample_Type())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getStrain())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMouseSex())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(fixEngraftment(result[i].getEngraftmentSite()))).append("},\n");
+                    if (filterOnID(id)) {
+                        report.append(noQuotesNoCommasClean(result[i].getModel_Status())).append(",");
+                        report.append(id).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getModel_Aka())).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getSpecimen_Site())).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getInitial_Diagnosis())).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getClinical_Diagnosis())).append(",");
+                        report.append(noQuotesNoCommasClean(fixEngraftment(result[i].getEngraftmentSite()))).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getSample_Type())).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getTumor_Type())).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getPrimary_Site())).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getMarkers()).replaceAll(",", ";")).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getGender())).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getPatient_Age())).append(",");
+                        report.append(noQuotesNoCommasClean(result[i].getStrain())).append(",");
+                        if (mouseMap.containsKey(id) && mouseMap.get(id).getAssocData() != null) {
+                            report.append(noQuotesNoCommasClean(mouseMap.get(id).getAssocData().replaceAll(",", ";"))).append("\n");
+                        } else {
+                            report.append(",\n");
+                        }
+
                     }
                 }
+
             }
-            report.replace(report.length() - 2, report.capacity(), "]}");
+
         } catch (Exception e) {
-            log.error("Error gettting PDX Info as JSON", e);
+            log.error("Error gettting PDX Report with no name", e);
         }
-        
+
         return report.toString();
     }
 
@@ -840,6 +860,14 @@ public class ElimsUtil {
         return stub;
 
     }
+    
+    // for fields that are parsed rather than loaded into Excel
+    private String noQuotesNoCommasClean(String in){
+        if(in != null){
+             in = in.replaceAll("\"", "").replaceAll("'", "").replaceAll("\\p{C}", "").replaceAll("&#x.{1,4};", " ").trim().replaceAll(",",";");
+        }
+        return in;
+    }
 
     private String clean(String in) {
         if (in != null) {
@@ -869,64 +897,5 @@ public class ElimsUtil {
         return in;
     }
 
-    // the marker field is comma seperated where each section contains a symbol then optionally positive|negivite and optionally (technology)
-    // some markers have two parts seperated by a space (yay)
-    private String parseMarkers(String in) {
-        StringBuilder sb = new StringBuilder("[");
-        in = in.replaceAll("\"", "");
-        if (in.trim().length() == 0) {
-            return (sb.append("]").toString());
-        }
-        String[] p = in.split(",");
-        String symbol, result, technology;
-        for (String part : p) {
-            
-            symbol = part;
-            result = "unknown";
-            technology = "unknown";
-
-            String[] parts = part.split(" ");
-            switch (parts.length) {
-                case 2: {
-                    if (pOrN(parts[1])) {
-                        result = parts[1];
-                        symbol = parts[0];
-                    } else {
-                        symbol = part;
-                    }
-                    break;
-                }
-                case 3: {
-                    if (pOrN(parts[1])) {
-                        result = parts[1];
-                        symbol = parts[0];
-                        technology = parts[2];
-                    } else if (pOrN(parts[2])) {
-                        result = parts[2];
-                        symbol = parts[0] + " " + parts[1];
-                    }
-                    break;
-                }
-                case 4: {
-                    result = parts[2];
-                    symbol = parts[0] + " " + parts[1];
-                    technology = parts[3];
-                    break;
-                }
-            }
-
-            technology = technology.replace("(", "").replace(")", "");
-            sb.append("{\"Symbol\":\"").append(symbol).append("\",");
-            sb.append("\"Result\":\"").append(result).append("\",");
-            sb.append("\"Technology\":\"").append(technology).append("\"},");
-
-        }
-        sb.replace(sb.length() - 1, sb.length(), "]");
-        
-        return sb.toString();
-    }
-
-    private boolean pOrN(String in) {
-        return (in.contains("negative") || in.contains("positive"));
-    }
+    
 }

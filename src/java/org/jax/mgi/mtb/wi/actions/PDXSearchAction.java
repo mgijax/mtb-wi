@@ -33,17 +33,11 @@ public class PDXSearchAction extends Action {
 
            PDXMouseStore pdxMouseStore = new PDXMouseStore();
 
+           // who uses this????
         if (request.getParameter("pdxStatusJSON") != null && !WIConstants.getInstance().getPublicDeployment()) {
            
             response.setContentType("application/json");
             response.getWriter().write(pdxMouseStore.getJSONPDXStatus());
-            response.flushBuffer();
-            return null;
-        }
-        
-         if ("gimme".equals(request.getParameter("pdxInfoJSON"))) {
-            response.setContentType("application/json");
-            response.getWriter().write(pdxMouseStore.getJSONPDXInfo());
             response.flushBuffer();
             return null;
         }
@@ -81,6 +75,9 @@ public class PDXSearchAction extends Action {
 
         request.setAttribute("genesArray", pdxMouseStore.getAllGenesWebFormat());
         request.setAttribute("fusionGenes", pdxMouseStore.getFusionGenesLVB());
+        
+        request.setAttribute("recistDrugs", pdxMouseStore.getRECISTDrugsLVB());
+        request.setAttribute("recistResponses", pdxMouseStore.getRECISTResponsesLVB());
 
         //  this is the list of genes used to populate MTB's pdxexpression table
         //   request.setAttribute("genesValues2", pdxMouseStore.getExomePanelGenesLVB());
@@ -93,6 +90,8 @@ public class PDXSearchAction extends Action {
 
         // these are mouse chromosome we need human
         request.setAttribute("chrValuesCNV", mapChromosomes.values());
+        
+        request.setAttribute("modelIDs", pdxMouseStore.getIds());
 
         return mapping.findForward(result);
     }

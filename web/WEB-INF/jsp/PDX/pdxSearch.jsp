@@ -51,6 +51,34 @@
                     this.clearValue();
             });
             
+              var idStore = new Ext.data.ArrayStore({
+                            id: 0,
+                            fields: [
+                                'id',
+                                'display'
+                            ],
+                            data:${modelIDs}
+                        })
+            
+             var modelIDcombo = new Ext.form.ComboBox({
+                store: idStore,
+                minChars:1,
+                valueField:'id',
+                displayField:'display',
+                typeAhead: true,
+                lazyRender:true,
+                mode: 'local',
+                forceSelection: false,
+                triggerAction: 'all',
+                selectOnFocus:true,
+                hideTrigger:false,
+                hiddenName:'modelID',
+                width:360,
+                listEmptyText:'no matching model',
+                renderTo: 'modelIDCombo'
+        //        ,pageSize:10
+            });
+            
           
             
             var dataProxy = new Ext.data.HttpProxy({
@@ -192,10 +220,10 @@
                                         <br>
                                         <table class="miTable">
                                             <tr><td border="5px">
-                                                <p class="miTitle">Community Feedback Needed: Minimal Information Standards for PDX models</p>
+                                                    <p class="miTitle">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
                                                 <ul>
                                                     <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a><br>
-                                                    <li class="realList"><a href="${applicationScope.urlBase}/html/PDX_MinimalInformation_version1_2017.xlsx">PDX Minimal Information Specification (xls)</a><br>
+                                                    <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a><br>
                                                     <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a><br>
                                                 </ul>
                                                 <br>
@@ -230,28 +258,23 @@
                         </td>
                     </tr>
 
-
-
-
                     <tr class="stripe1">
-
                         <td class="cat1">
                             Search by PDX model identifier
                         </td>
-
                         <td class="data1" >
-
                             <table border="0" cellspacing="5">
                                 <tr>
                                     <td></td><td></td>
                                 </tr>
 
-
                                 <tr>
                                     <td>
                                         <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Enter a Model ID (eg TM:00001) as search criteria.', CAPTION, 'Model ID');" onmouseout="return nd();">Model ID</a></b>
-                                        <br>
-                                <html:text property="modelID" size="30" maxlength="10"/>&nbsp;eg. TM00001
+                                      
+                             <!--   <html:text property="modelID" size="30" maxlength="10"/>&nbsp;eg. TM00001 -->
+                                <br>
+                                <div id ="modelIDCombo"></div>&nbsp;eg. TM00001
                         </td>
 
                     </tr>
@@ -283,8 +306,9 @@
                     <td>
                         <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Only return models with selected additional information.', CAPTION, 'Limit results');" onmouseout="return nd();">Limit results to models</a></b>     
                         <br>
-                <html:checkbox property="dosingStudy"/>with dosing study data, <html:checkbox property="tumorGrowth"/>with tumor growth graphs. 
-                <br><br>
+                <html:checkbox property="dosingStudy"/> with dosing study data, <html:checkbox property="tumorGrowth"/> with tumor growth graphs , <html:checkbox property="treatmentNaive"/> from treatment naive patients. 
+                <br>
+                <br>
                 <c:choose>
                     <c:when test="${not empty tagsValues}">
                         <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Only return models tagged as.', CAPTION, 'Limit results');" onmouseout="return nd();">Limit results to models tagged as</a></b>     
@@ -320,6 +344,36 @@
 </table>
 </td>
 </tr>
+
+
+<tr class="stripe2">
+    <td class="cat2">
+        Search by dosing study results
+    </td>
+    <td class="data2">
+        <table>
+            <tr>
+                <td>
+                    <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('RECIST drug.', CAPTION, 'RECIST drug');" onmouseout="return nd();">Drug</a></b>
+                    <br>
+            <html:select property="recistDrugs" size="4" >
+                <html:options collection="recistDrugs" property="value" labelProperty="label"/>
+            </html:select>
+                </td>
+                <td>
+                     <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('RECIST response.', CAPTION, 'RECIST response');" onmouseout="return nd();">Response</a></b>
+                    <br>
+                
+             <html:select property="recistResponses" size="4" >
+                <html:options collection="recistResponses" property="value" labelProperty="label"/>
+            </html:select>
+    </td>
+</tr>
+
+</table>
+</td>
+</tr>
+
 
 <tr class="stripe2">
     <td class="cat2">
@@ -373,7 +427,7 @@
                         <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select one or more variants as search criteria', CAPTION, 'Variants');" onmouseout="return nd();">Variants</a></b>
                         <br> 
                     <html:select property="variants" size="8" multiple="false" styleId="variantSelect">
-                        <html:option value="">ANY</html:option> <!-- UNTESTED WOW!-->
+                        <html:option value="">ANY</html:option>
                         <html:options collection="variantsValues" property="value" labelProperty="label"/>
                     </html:select>
                     </td>

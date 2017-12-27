@@ -138,8 +138,8 @@ public class MarkerGridAction extends Action {
                         + "&sort="+ORGAN_FACET+"%20asc,strain%20asc&&q=humanTissue:*&fq=metastatic:false&rows=" + rows + "&start=0&fq=strainMarker:" + marker;
                 */
                 
-                String query = "wt=json&indent=on&facet=false"
-                             + "&sort="+ORGAN_SORT+"%20asc,strain%20asc&&q=humanTissue:*&rows=" + rows + "&start=0&fq=strainMarker:%22" + URLEncoder.encode(marker, "UTF-8")+"%22";
+                String query = "wt=json&indent=on&facet=true&facet.field=strainMarker"
+                             + "&sort="+ORGAN_SORT+"%20asc,strain%20asc&&q=humanTissue:*&rows=" + rows + "&start=0&fq=singleMutant:true&fq=strainMarker:%22" + URLEncoder.encode(marker, "UTF-8")+"%22";
                 if (sponCB != null) {
                     query += spontaneous;
                     sponCB = "checked";
@@ -169,6 +169,7 @@ public class MarkerGridAction extends Action {
                 JSONArray docs = (JSONArray) ((JSONObject) job.get("response")).getJSONArray("docs");
 
                 HashMap<String, String> organs = new HashMap<>();
+                HashMap<String, String> strainMarkers = new HashMap<>();
 
                 HashMap<String, String> strainKeysToNames = new HashMap<>();
 
@@ -179,7 +180,9 @@ public class MarkerGridAction extends Action {
                     String organ = doc.getString(ORGAN_FIELD);
                     String strain = doc.getString("strain");
                     String strainKey = doc.getInt("strainKey") + "";
-
+                    String strainMarker = doc.getString("strainMarker");
+                    strainMarkers.put(strainMarker,strainMarker);
+                    
                     strainKeysToNames.put(strainKey, strain);
 
                     organs.put(organ, organ);
@@ -209,6 +212,8 @@ public class MarkerGridAction extends Action {
                     }
 
                 }
+                
+              
 
                 // if there is a sort organ:
                 // we need to hijack the strain list and the strains map
@@ -377,6 +382,8 @@ public class MarkerGridAction extends Action {
                 }
             }
             html.append("</table>");
+            
+            
 
         } catch (Exception e) {
 

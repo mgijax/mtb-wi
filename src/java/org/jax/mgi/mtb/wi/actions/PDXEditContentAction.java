@@ -121,6 +121,11 @@ public class PDXEditContentAction extends DispatchAction {
             PDXGraphic graphic = new PDXGraphic();
             graphic.setContentKey(contentKey);
             graphic.setDescription(request.getParameter("graphicDescription").replace("'", "`").replaceAll("[\\p{C}\\p{Z}]", " "));
+            try{    
+                graphic.setSortOrder(new Double(request.getParameter("graphicSort")));
+            }catch(Exception e){
+                log.error("Unable to create sort order from "+request.getParameter("graphicSort"),e);
+            }
             graphic.setUser(user);
 
             store.updateGraphic(graphic);
@@ -132,7 +137,7 @@ public class PDXEditContentAction extends DispatchAction {
         PDXGraphic graphic = store.getGraphic(contentKey);
 
         request.setAttribute("graphicDescription", graphic.getDescription().replace("'", "`"));
-
+        request.setAttribute("graphicSort",graphic.getSortOrder());
         request.setAttribute("contentKey", contentKey);
         request.setAttribute("modelID", modelID);
         request.setAttribute("hidePiForm", "true");

@@ -88,12 +88,18 @@
                     name:'source',
                     value:'${source}'
                 }
+                 ,
+                { xtype: 'numberfield',
+                    id: 'piSort',
+                    fieldLabel: 'Sort order',
+                    name: 'graphicSort',
+                    value: "${piSort}"
+                }
                 ,{ xtype: 'textfield',
                     id: 'piFilePath',
                     emptyText: 'Using existing image',
                     fieldLabel: 'Image',
                     name: 'piFilePath',
-                    
                     disabled:true
                     
                 }],
@@ -327,6 +333,13 @@
                     fieldLabel:'Description',
                     name:'graphicDescription',
                     value:"${graphicDescription}"
+                }
+                ,
+                { xtype: 'numberfield',
+                    id: 'graphicSort',
+                    fieldLabel: 'Sort order',
+                    name: 'graphicSort',
+                    value: "${graphicSort}"
                 }
                 ,
                 { xtype: 'textfield',

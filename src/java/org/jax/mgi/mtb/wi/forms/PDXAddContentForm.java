@@ -25,6 +25,7 @@ public class PDXAddContentForm  extends ActionForm {
     private String pathologist;
     private String source;
     private FormFile piFilePath;
+    private double piSort;
    
     // for links
     private String linkDescription;
@@ -39,6 +40,7 @@ public class PDXAddContentForm  extends ActionForm {
    // for graphics
    private String graphicDescription;
    private FormFile graphicFilePath;
+   private double graphicSort;
    
    
    // for comments
@@ -275,6 +277,34 @@ public class PDXAddContentForm  extends ActionForm {
      */
     public void setCharacterization(String characterization) {
         this.characterization = characterization;
+    }
+
+    /**
+     * @return the piSort
+     */
+    public double getPiSort() {
+        return piSort;
+    }
+
+    /**
+     * @param piSort the piSort to set
+     */
+    public void setPiSort(double piSort) {
+        this.piSort = piSort;
+    }
+
+    /**
+     * @return the graphicSort
+     */
+    public double getGraphicSort() {
+        return graphicSort;
+    }
+
+    /**
+     * @param graphicSort the graphicSort to set
+     */
+    public void setGraphicSort(double graphicSort) {
+        this.graphicSort = graphicSort;
     }
 
   

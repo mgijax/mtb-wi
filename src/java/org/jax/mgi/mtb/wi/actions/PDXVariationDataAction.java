@@ -55,11 +55,9 @@ public class PDXVariationDataAction extends Action {
         
         response.setContentType("application/json");
         
-        if(request.getParameter("asJSON")!= null){
-            response.getWriter().write(store.getVariationJSON(modelID));
-        }else{
-            response.getWriter().write(store.getVariationData(modelID, limit, start, sort, dir,filter));
-        }
+       
+        response.getWriter().write(store.getVariationData(modelID, limit, start, sort, dir,filter));
+        
         response.flushBuffer();
 
 

@@ -4,6 +4,7 @@
  */
 package org.jax.mgi.mtb.wi.actions;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,25 +50,10 @@ public class PDXDetailsAction extends Action {
 
         if (request.getParameter("csvSummary") != null) {
 
-            String filter = "FALSE";
-
-            String header = "Model,Sample,Gene,Platform,Chromosome,Seq Position,Ref Allele,Alt Allele,"
-                    + "Consequence,Amino Acid Change,RS Variants,Read Depth,Allele Frequency,Transcript ID,Filtered Rationale,"
-                    + "Passage Num,Gene ID,CKB Evidence,Actionable Cancer Types,Drug Class,Count Human Reads,PCT Human Reads,"
-                    + "Variant Num Trials,Variant NCT IDs\n";
-
-            if (WIConstants.getInstance().getPublicDeployment()) {
-                filter = "TRUE";
-            }
-
-            String variants = store.getVariationData(modelID, "-1", "0", "gene_symbol", "ASC", filter);
-            variants = variants.substring(variants.indexOf("["));
-
-            variants = variants.replaceAll("'", "").replaceAll("\\],\\[", "\n").replaceAll("\\[\\[", "").replaceAll("\\]\\]", "").replace(",],]}", "");
-
+            String csv = store.getCSVVariants(modelID);
             response.setContentType("text/csv");
             response.setHeader("Content-disposition", "attachment; filename=" + modelID + "-Variant-Summary.csv");
-            response.getWriter().write(header + variants);
+            response.getWriter().write(csv);
             response.flushBuffer();
 
             return null;
@@ -322,13 +308,16 @@ public class PDXDetailsAction extends Action {
         }//end of else for finding a model;
 
         return mapping.findForward(result);
+        
+        
 
     }
 
     private boolean canEdit(String pdxUser) {
         // if pdxUser is allowed to edit return true
         boolean canEdit = false;
-        if (pdxUser.trim().length() > 0 && pdxUser.equals(WIConstants.getInstance().getPDXEditor())) {
+        
+        if (pdxUser.trim().length() > 0 && WIConstants.getInstance().getPdxEditors().contains(pdxUser)) {
             canEdit = true;
         }
         return canEdit;

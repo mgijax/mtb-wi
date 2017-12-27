@@ -189,7 +189,7 @@ public class DynamicGridAction extends Action {
     String csv = null;
     if (vals != null) {
       StringBuffer buff = new StringBuffer();
-      for (int i = 1; i < vals.length; i++) {
+      for (int i = 0; i < vals.length; i++) {
           try{
               if(buff.length()==0){
                 buff.append(new Integer(vals[i]));

@@ -89,7 +89,9 @@
                                     </c:when>
                                     </c:choose>
                                     Please enter your <b>User ID</b> and <b>Password</b> below.
-                                    <br><br>
+                                    <br>
+                                     As of Sept 18, the password has changed. Please contact <a href="mailto:emily.jocoy@jax.org">Emily Jocoy</a> for the new password
+                                    <br>
 
                                     <html:form action="pdxLogin">
                                         <table border="0" cellpadding=0 cellspacing=1 class="results">

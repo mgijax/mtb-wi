@@ -19,12 +19,7 @@
            <a href="<c:url value='/index.do'/>">MTB Home</a>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/userHelp.jsp'/>">Help</a>
         </td>
     </tr>
-     <tr>
-       <td>
-           Your input matters.<br> Take our short online survey.<br>
-           <a href="https://docs.google.com/forms/d/1vwmq-qzk-FK7eRSNAoO7jWcKWIwD_-ilBgUV0Jb_x-w/viewform"><img height="100" width="200" class="survey" src="${applicationScope.urlImageDir}/survey.jpg"/></a>
-         </td>
-   </tr>
+     
     <tr>
     <tr>
         <td>

@@ -145,7 +145,7 @@
             Ext.onReady(function () {
 
                 var url = '/mtbwi/solrQuery.do';
-                var markerURL = 'wt=json&indent=on&facet=true&facet.field=strainMarker&facet.sort=name&fq=metastatic:false&q=humanTissue:*&facet.mincount=1&rows=1&start=0&facet.limit=-1';
+                var markerURL = 'wt=json&indent=on&facet=true&facet.field=strainMarker&facet.sort=name&fq=singleMutant:true&fq=metastatic:false&q=humanTissue:*&facet.mincount=1&rows=1&start=0&facet.limit=-1';
 
                 doXMLReq();
                 

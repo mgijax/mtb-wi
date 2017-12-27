@@ -6,7 +6,7 @@ package org.jax.mgi.mtb.wi;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,19 +49,15 @@ import org.jax.mgi.mtb.dao.gen.mtb.TumorClassificationDAO;
 import org.jax.mgi.mtb.dao.gen.mtb.TumorClassificationDTO;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 
-
 /**
  *
- * @author  mjv
+ * @author mjv
  */
 public class WIConstants {
 
     // -------------------------------------------------------------- Constants
     public static final String EOL = System.getProperty("line.separator");
     private final static Logger log = Logger.getLogger(WIConstants.class.getName());
-    private final long GENETIC = 1;
-    private final long CYTOGENETIC = 2;
-    private final long EPIGENETIC = 3;
     public final int DO_NOT_SEARCH = -1;
     public final int SEARCH = 0;
     public final static int TYPE_MARKER = 1;
@@ -100,7 +96,7 @@ public class WIConstants {
     public final String SEARCH_URL_GENETICS = "geneticsSearch.do";
     public final String SEARCH_RESULTS_GENETICS_URL = "geneticsSearchResults.do?maxItems=10&markerName=";
     public final String SEARCH_RESULTS_GENETICS_URL_ALL = "geneticsSearchResults.do?maxItems=No+Limit&markerName=";
-    public final String PUBLIC_DEPLOYMENT="public";
+    public final String PUBLIC_DEPLOYMENT = "public";
     // these strings are used by the quick search to pull out search results from jsps/urls
     //they must match the comments in the jsp (see tumorSearchResults.jsp)
     public final String SEARCH_SECTION_START = "<!--======================= Start Results ==================================-->";
@@ -144,18 +140,17 @@ public class WIConstants {
     private final static String PDX_FILE_URL = "pdx.file.url";
     private final static String PDX_EMAIL = "pdx.email";
     private final static String MTB_DEPLOYMENT = "mtb.deployment";
-     private final static String PDX_USER = "pdx.user";
-    private final static String PDX_EDITOR = "pdx.editor";
+    private final static String PDX_USER = "pdx.user";
+    private final static String PDX_EDITORS = "pdx.editors";
     private final static String PDX_PASSWORD = "pdx.password";
     private final static String SOLR_URL = "solr.url";
-    private final static String SOC_DB = "soc.db"; 
-    private final static String SOC_URL = "soc.url"; 
-    
- 
+    private final static String SOC_DB = "soc.db";
+    private final static String SOC_URL = "soc.url";
+
     /* ----------------------------------------------------- Instance Variables */
     private static WIConstants instance = new WIConstants();
     /* Q: Why use a map here instead of a hashtable? */
-    /* A: Because a LinkedHashMap keeps the order of insertion */
+ /* A: Because a LinkedHashMap keeps the order of insertion */
     private Map<Long, LabelValueBean<String, Long>> mapAgents = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
     private Map<Long, LabelValueBean<String, Long>> mapAgentTypes = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
     private Map<Long, LabelValueBean<String, Long>> mapAlleleGroupTypes = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
@@ -196,16 +191,16 @@ public class WIConstants {
     private String pdxFilePath;
     private String pdxFileURL;
     private String pdxEmail;
-   private String mtbDeployment;
-   private String pdxUser;
-   private String pdxEditor;
-   private String pdxPassword;
-   private String solrURL;
-   private String socDB;
-   private String socURL;
+    private String mtbDeployment;
+    private HashMap<String,String> pdxUserMap = new HashMap();
+    private ArrayList<String> pdxEditors = new ArrayList();
+    private String solrURL;
+    private String socDB;
+    private String socURL;
+
     // ----------------------------------------------------------- Constructors
     /**
-     * Constructor.  This is private so the object cannot be instantiated
+     * Constructor. This is private so the object cannot be instantiated
      * directly.
      */
     private WIConstants() {
@@ -232,27 +227,15 @@ public class WIConstants {
     public String getPDXFileURL() {
         return this.pdxFileURL;
     }
-    
-    public String getPDXEmail(){
+
+    public String getPDXEmail() {
         return this.pdxEmail;
     }
-    
-    
-    // PDX Dashboard access internal MTB sties only
-     public String getPDXPassword() {
-        return this.pdxPassword;
-    }
 
-    public String getPDXUser() {
-        return this.pdxUser;
+    // PDX Dashboard access internal MTB sties only
+    public HashMap<String,String> getPDXUserMap(){
+        return this.pdxUserMap;
     }
-    
-    // the username that allows additional PDX content to be edited
-    public String getPDXEditor(){
-        return this.pdxEditor;
-    }
-    
- 
 
     /**
      * Get a <code>Map</code> of <code>LabelValueBean</code> objects
@@ -733,16 +716,16 @@ public class WIConstants {
     public ArrayList<LabelValueBean<String, Long>> getReferenceOrgans() {
         return this.referenceOrgans;
     }
-    
-    public boolean getPublicDeployment(){
+
+    public boolean getPublicDeployment() {
         return "public".equals(this.mtbDeployment);
     }
-    
-    public String getSolrURL(){
+
+    public String getSolrURL() {
         return this.solrURL;
     }
-  
-    public String getSOCDB(){
+
+    public String getSOCDB() {
         return this.socDB;
     }
 
@@ -777,7 +760,6 @@ public class WIConstants {
             log.info("Initializing anatomical systems...");
             initAnatomicalSystems();
 
-
             // get the organs
             log.info("Initializing organs...");
             initOrgans();
@@ -800,7 +782,6 @@ public class WIConstants {
 
             // get the tumor frequency count
             //initTumorFrequencyCount();
-
             // init the database information
             log.info("Initializing database info...");
             initDatabaseInfo();
@@ -811,7 +792,6 @@ public class WIConstants {
             log.info("Finished initializing tumor frequency grid.");
 
             initReferenceOrgans();
-    
 
         } catch (Exception e) {
             log.error("Fatal Initialization Error", e);
@@ -826,8 +806,8 @@ public class WIConstants {
      * @param props the <code>Properties</code>
      */
     public void setProperties(Properties props) {
-        
-        try{
+
+        try {
             strWIVersion = props.getProperty(WI_VERSION);
 
             strURLBase = props.getProperty(URL_BASE);
@@ -836,12 +816,12 @@ public class WIConstants {
             strURLStylesheet = props.getProperty(URL_STYLESHEET);
             strURLZoomify = props.getProperty(URL_ZOOMIFY);
             strURLMTBPathWI = props.getProperty(URL_MTBPATHWI);
-            
+
             strJDBCDriver = props.getProperty(JDBC_DRIVER);
             strJDBCUrl = props.getProperty(JDBC_URL);
             strJDBCUser = props.getProperty(JDBC_USER);
             strJDBCPassword = props.getProperty(JDBC_PASSWORD);
-            
+
             strAssayImageURL = props.getProperty(ASSAY_IMAGE_URL);
             strAssayImagePath = props.getProperty(ASSAY_IMAGE_PATH);
 
@@ -854,21 +834,36 @@ public class WIConstants {
             this.pdxFilePath = props.getProperty(PDX_FILE_PATH);
             this.pdxFileURL = props.getProperty(PDX_FILE_URL);
             this.pdxEmail = props.getProperty(PDX_EMAIL);
+
             
-            this.pdxUser = props.getProperty(PDX_USER);
-            this.pdxEditor = props.getProperty(PDX_EDITOR);
-            this.pdxPassword = props.getProperty(PDX_PASSWORD);
+            try{
+                
+                String[] pdxUsers = props.getProperty(PDX_USER).split(",");
+                String[] pdxPwds = props.getProperty(PDX_PASSWORD).split(",");
+                
+                for(int i=0; i< pdxUsers.length; i++){
+                    this.pdxUserMap.put(pdxUsers[i].trim(),pdxPwds[i].trim());
+                }
+            
+                String[] pdxEds = props.getProperty(PDX_EDITORS).split(",");
+                for(String editor: pdxEds){
+                    this.pdxEditors.add(editor.trim());
+                }
+            }catch(Exception e){
+                log.error("Unable to create PDX user map");
+                
+            }
             
             this.mtbDeployment = props.getProperty(MTB_DEPLOYMENT);
-            
+
             this.solrURL = props.getProperty(SOLR_URL);
 
             this.socDB = props.getProperty(SOC_DB);
-            
+
             this.socURL = props.getProperty(SOC_URL);
-            
-        }catch(Exception e){
-            log.error("Failed to initialize WIConstants",e);
+
+        } catch (Exception e) {
+            log.error("Failed to initialize WIConstants", e);
         }
 
     }
@@ -884,7 +879,6 @@ public class WIConstants {
             arrOrgans = daoTumorUtil.getTFGridOrgans(null);
 
             arrStrains = daoTumorUtil.getTFGridStrains(null);
-
 
         } catch (Exception e) {
             log.error("Error getting grid data.", e);
@@ -995,7 +989,7 @@ public class WIConstants {
             for (AnatomicalSystemDTO dto : listAnatomicalSystems) {
                 mapAnatomicalSystems.put(dto.getAnatomicalSystemKey(),
                         new LabelValueBean<String, Long>(dto.getName(),
-                        dto.getAnatomicalSystemKey()));
+                                dto.getAnatomicalSystemKey()));
             }
         } catch (Exception e) {
             log.error("Error initializing anatomical systems", e);
@@ -1034,9 +1028,9 @@ public class WIConstants {
                     strDBVersion = dto.getMTBValue();
                 } else if (dto.getMTBProperty().equals(DB_LAST_UPDATE_DATE)) {
                     strDBLastUpdateDate = dto.getMTBValue();
-                    try{
+                    try {
                         strDBLastUpdateDate = strDBLastUpdateDate.trim().substring(0, strDBLastUpdateDate.trim().indexOf(" "));
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         // cant format date don't care
                     }
                 } else if (dto.getMTBProperty().equals(DB_LAST_UPDATE_TIME)) {
@@ -1085,8 +1079,6 @@ public class WIConstants {
 
         referenceOrgans = MTBReferenceUtilDAO.getInstance().getReferenceOrgans();
 
-
-
     }
 
     private void initProbes() {
@@ -1128,15 +1120,15 @@ public class WIConstants {
             /* get the tumor classifications --- This way returns TC's with no TF's
             TumorClassificationDAO tumorClassificationDAO = TumorClassificationDAO.getInstance();
             List<TumorClassificationDTO> listTumorClassifications = tumorClassificationDAO.loadAll();           
-            */  
+             */
             List<TumorClassificationDTO> listTumorClassifications = MTBTumorUtilDAO.getInstance().getTumorClassifications();
-            
+
             Collections.sort(listTumorClassifications, new TumorClassificationComparator(TumorClassificationDAO.ID_NAME));
-             
+
             for (TumorClassificationDTO dto : listTumorClassifications) {
                 mapTumorClassifications.put(dto.getTumorClassificationKey(),
                         new LabelValueBean<String, Long>(dto.getName(),
-                        dto.getTumorClassificationKey()));
+                                dto.getTumorClassificationKey()));
             }
         } catch (Exception e) {
             log.error("Error initializing tumor classifications", e);
@@ -1155,5 +1147,12 @@ public class WIConstants {
      */
     public void setSocURL(String socURL) {
         this.socURL = socURL;
+    }
+
+    /**
+     * @return the pdxEditors
+     */
+    public ArrayList<String> getPdxEditors() {
+        return pdxEditors;
     }
 }

@@ -197,6 +197,7 @@ public class PDXAddContentAction extends Action {
         image.setPathologist(contentForm.getPathologist());
         image.setSource(contentForm.getSource());
         image.setUser(userName);
+        image.setSortOrder(contentForm.getPiSort());
         
         String fileName = getFileName(contentForm.getPiFilePath(),contentForm.getModelID());
 
@@ -263,6 +264,7 @@ public class PDXAddContentAction extends Action {
         PDXGraphic gr = new PDXGraphic();
         
         gr.setDescription(contentForm.getGraphicDescription());
+        gr.setSortOrder(contentForm.getGraphicSort());
         gr.setModelID(contentForm.getModelID());
         gr.setCharacterization(contentForm.getCharacterizationKey());
         gr.setUser(userName);

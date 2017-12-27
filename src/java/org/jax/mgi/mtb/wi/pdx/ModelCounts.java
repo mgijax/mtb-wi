@@ -17,7 +17,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 
 /**
- * Get data and build data structure to generate the mouse models table. 
+ * Get data and build data structure to generate the mouse models table.
  *
  * Soft tissue is an issue
  *
@@ -25,8 +25,6 @@ import org.jax.mgi.mtb.wi.WIConstants;
  *
  */
 public class ModelCounts {
-
-    private final static String solrURL = WIConstants.getInstance().getSolrURL()+"?q=*%3A*&&fq=minFC:[1%20TO%201]&wt=json";
 
     private final static Logger log
             = Logger.getLogger(ModelCounts.class.getName());
@@ -59,6 +57,7 @@ public class ModelCounts {
         "Adrenal gland",
         "Bone"};
 
+    // for mouseover
     String[] labels = {"Lung, Bronchus, Larynx, Paranasal sinus, Trachea",
         "Leukemia, Lymphoma, Myeloma, Leukocyte, Blood, Bone marrow, Dendritic cell, Erythroblast, Erythrocyte, Hematopoietic stem cell, Lymph node, Lymphatic vessel, Lymphoid tissue, Peyer\\'s patch, Reticular cell, Reticulocyte, Spleen, Thymus",
         "Intestine, Small Intestine, Large Intestine, Duodenum, Jejunum, Ileum, Ileocecal Junction, Cecum, Colon, Rectum, Anus",
@@ -82,35 +81,47 @@ public class ModelCounts {
 
     // display tissue, rank, fatalaties, solr term
     String[] tissues = {
-        "Lung and other respiratory", "1", "162,510", "Lung",
-        "Lymphohematopoietic", "2", "58,320", "Lymphohematopoietic",
-        "Colon and other intestine", "3", "51,600", "Colon and other intestine",
-        "Pancreas", "4", "41,780", "Pancreas",
-        "Breast", "5", "40,890", "Breast",
-        "Liver and bile duct", "6", "27,170", "Liver and bile duct",
-        "Prostate", "7", "26,120", "Prostate",
-        "Urinary bladder", "8", "16,390", "Urinary bladder",
-        "Brain and other nervous system", "9", "16,050", "Brain and other nervous system",
+        "Lung and other respiratory", "1", "162,420", "Lung",
+        "Lymphohematopoietic", "2", "58,300", "Lymphohematopoietic",
+        "Colon and other intestine", "3", "52,750", "Colon and other intestine",
+        "Pancreas", "4", "43,090", "Pancreas",
+        "Breast", "5", "41,070", "Breast",
+        "Liver and bile duct", "6", "28,920", "Liver and bile duct",
+        "Prostate", "7", "26,730", "Prostate",
+        "Urinary bladder", "8", "16,870", "Urinary bladder",
+        "Brain and other nervous system", "9", "16,700", "Brain and other nervous system",
         "Esophagus", "10", "15,690", "Esophagus",
-        "Uterus and cervix", "11", "14,590", "Uterus and cervix",
-        "Kidney and renal pelvis", "12", "14,240", "Kidney and renal pelvis",
-        "Ovary", "12", "14,240", "Ovary",
-        "Skin", "14", "13,650", "Skin",
-        "Stomach", "15", "10,730", "Stomach",
-        "Oral cavity and pharynx", "16", "9,570", "Oral cavity",
+        "Uterus and cervix", "11", "15,130", "Uterus and cervix",
+        "Kidney and renal pelvis", "12", "14,400", "Kidney and renal pelvis",
+        "Ovary", "13", "14,080", "Ovary",
+        "Skin", "14", "13,590", "Skin",
+        "Stomach", "15", "10,960", "Stomach",
+        "Oral cavity and pharynx", "16", "9,700", "Oral cavity",
         "Soft tissue including heart", "17", "4,990", "Soft tissue including heart",
-        "Gallbladder", "18", "3,710", "Gallbladder",
-        "Endocrine system", "19", "2,940", "Endocrine system",
-        "Bone and joint", "20", "1,490", "Bone and joint"};
+        "Gallbladder", "18", "3,830", "Gallbladder",
+        "Endocrine system", "19", "3,100", "Endocrine system",
+        "Bone and joint", "20", "1,550", "Bone and joint"};
 
     ArrayList<ArrayList<String>> tissuesListList = new ArrayList<ArrayList<String>>();
 
+    private static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2017/cancer-facts-and-figures-2017.pdf";
+    private static final String YEAR = "2017";
+    private String solrURL;
+    private String minFC = "&fq=minFC:[1%20TO%201]";
     private static String HTML = "";
+    private static String HTMLALL = "";
 
     public ModelCounts() {
         if (HTML.length() == 0) {
+            solrURL = WIConstants.getInstance().getSolrURL() + "?q=*%3A*&&fq=minFC:[1%20TO%201]&wt=json";
             buildListList();
             HTML = buildHTML();
+
+            tissuesListList = new ArrayList<>();
+            solrURL = WIConstants.getInstance().getSolrURL() + "?q=*%3A*&&wt=json";
+            minFC = "";
+            buildListList();
+            HTMLALL = buildHTML();
         }
     }
 
@@ -124,6 +135,10 @@ public class ModelCounts {
 
     public String getHTML() {
         return HTML;
+    }
+
+    public String getHTMLAll() {
+        return HTMLALL;
     }
 
     private void buildListList() {
@@ -143,7 +158,6 @@ public class ModelCounts {
             list.add(getCounts(list.get(3), ModelCounts.MUTANT));
             list.add(getCounts(list.get(3), ModelCounts.NONMUTANT));
             list.add(getCounts(list.get(3), ModelCounts.ANY));
-           
 
             list.add(0, labels[cnt]);
             list.add(makePDXLink(pdxTerms[cnt]));
@@ -171,11 +185,14 @@ public class ModelCounts {
         ArrayList<String> variants = null;
 
         String fusionGenes = "";
-
+        String recist = "";
         boolean drugResponse = false;
         boolean tumorGrowth = false;
+        boolean treatmentNaive = false;
 
-        ArrayList<PDXMouse> mice = store.findMice(modelID, primarySites, diagnoses, types, markers, genes, variants, drugResponse, tumorGrowth, tags, fusionGenes);
+        ArrayList<PDXMouse> mice = store.findMice(modelID, primarySites, diagnoses,
+                types, markers, genes, variants, drugResponse, tumorGrowth, tags,
+                fusionGenes,treatmentNaive,recist,recist);
 
         return mice.size() + "";
     }
@@ -262,42 +279,56 @@ public class ModelCounts {
 
         StringBuilder html = new StringBuilder();
         html.append("<br><table cellpadding=\"4\" cellspacing=\"0\" width=\"750\" border=\"0\">\n");
-                html.append( "<tbody><tr>\n");
-                html.append( "<td rowspan=\"2\" valign=\"bottom\"><b>Cancer Site</b></td>\n");
-                html.append( "<td rowspan=\"2\" valign=\"bottom\"><font size=\"1\"><center><a target='_blank' href='http://www.cancer.org/acs/groups/content/@research/documents/document/acspc-047079.pdf'><b>2016<br>ACS Est.<br>Human<br>Mortality<br>Rank</b></a></center></font></td>\n");
-                html.append( "<td rowspan=\"2\" valign=\"bottom\"><font size=\"1\"><center><a target='_blank' href='http://www.cancer.org/acs/groups/content/@research/documents/document/acspc-047079.pdf'><b>No. of est.<br>deaths<br>USA 2016</b></a></center></font></td>\n");
-                html.append( "<td colspan=\"3\" bgcolor=\"#EEFFEE\"><b></b><center><b>Mouse Models of Human Cancer</b><br><font size=\"2\">(restricted to reports where <br><b>n&#8805;20 mice</b> and <b>tumor frequency&#8805;80%</b>)</font></center></td>\n");
-                html.append( "<!-- Potential models, in addition to being restricted by colony size and tumor frequency, also omitted records for the following: atypia, cyst, dysplasia, foci, hyperplasia, lesion, metaplasia, nevus, normal tissue (control), preneoplastic lesion, squamous cell hyperplasia, or transitional cell hyperplasia. -->\n");
-                html.append( "<td rowspan=\"2\" valign=\"bottom\" width=\"90\"><font size=\"2\"><b><center>");
-                
-                html.append("<a  href=\"javascript:void(0);\" style=\"text-decoration: none; cursor:help;\" \n");
-                html.append("	onmouseover=\"return overlib('Patient derived xenograft.', CAPTION, 'PDX Models.', TEXTSIZE,'2');\" \n");
-                html.append("	onmouseout=\"return nd();\">");
-                html.append("PDX Models</a></center></b></font></td></tr>\n");
-                
-                html.append("<tr><td width=\"90\" bgcolor=\"#EEFFEE\"><font size=\"2\"><center>");
-                html.append("<a  href=\"javascript:void(0);\" style=\"text-decoration: none; cursor:help;\" \n");
-                html.append("	onmouseover=\"return overlib('targeted, transgenic, gene trapped, chemically induced, radiation induced, etc.', CAPTION, 'Mutant strains.', TEXTSIZE,'2');\" \n");
-                html.append("	onmouseout=\"return nd();\">");
-                html.append("<b>Mutant<br>Strains</b>");
-                html.append("</a></center></font></td>\n");
-                
-                html.append("<!-- Models that have a strain with an attached allelepair except allelepairs that are normal/normal, allele not specified/normal, or that involve a QTL region. -->\n");
-                html.append("<td width=\"90\" bgcolor=\"#EEFFEE\"><font size=\"2\"><center>");
-                
-                html.append("<a  href=\"javascript:void(0);\" style=\"text-decoration: none; cursor:help;\" \n");
-                html.append("	onmouseover=\"return overlib('inbred, hybrid, outbred, fostered, chimeric, etc.', CAPTION, 'Non mutant strains.', TEXTSIZE,'2');\" \n");
-                html.append("	onmouseout=\"return nd();\">");
-                
-                html.append("<b>Other <br>Strains</b>");
-                
-                html.append("</a></center></font></td>\n");
-                html.append("<td width=\"90\" bgcolor=\"#EEFFEE\"><font size=\"2\"><center><b>All<br>Strains</b></center></font></td>\n");
-                html.append("</tr>\n");
-                html.append("<tr>\n<td><hr></td>\n<td><hr></td>\n<td><hr></td>\n");
-                html.append("<td colspan=\"3\" bgcolor=\"#EEFFEE\"><hr></td>\n");
-                html.append("<td><hr></td>\n");
-                html.append("</tr>");
+        html.append("<tbody><tr>\n<td rowspan=\"2\" valign=\"bottom\">");
+        
+        if(this.minFC.length() > 0){
+            html.append("<input type=\"button\" value=\"Don't restrict model counts\" onclick=\"toggle()\">");
+        }else{
+            html.append("<input type=\"button\" value=\"Restrict model counts\" onclick=\"toggle()\">");
+        }
+   
+        html.append("<br>&nbsp;<br><b>Cancer Site</b></td>\n");
+        html.append("<td rowspan=\"2\" valign=\"bottom\"><div style=\"font-size:90%\"><center><a target='_blank' href='"+PDF_LINK+"'><b>"+YEAR+"<br>ACS Est.<br>Human<br>Mortality<br>Rank</b></a></center></div></td>\n");
+        html.append("<td rowspan=\"2\" valign=\"bottom\"><div style=\"font-size:90%\"><center><a target='_blank' href='"+PDF_LINK+"'><b>No. of est.<br>deaths<br>USA "+YEAR+"</b></a></center></div></td>\n");
+        html.append("<td colspan=\"3\" bgcolor=\"#EEFFEE\"><b></b><center><b>Mouse Models of Human Cancer</b><br>");
+
+        if (this.minFC.length() > 0) {
+            html.append("<div style=\"font-size:105%\">(restricted to reports where <br><b>n&#8805;20 mice</b> and <b>tumor frequency&#8805;80%</b>)</div></center></td>\n");
+        }else{
+            html.append("<div style=\"font-size:105%; color:#EEFFEE\">(restricted to reports where <br><b>n&#8805;20 mice</b> and <b>tumor frequency&#8805;80%</b>)</div></center></td>\n");
+        }
+
+        html.append("<!-- Potential models, in addition to being restricted by colony size and tumor frequency, also omitted records for the following: atypia, cyst, dysplasia, foci, hyperplasia, lesion, metaplasia, nevus, normal tissue (control), preneoplastic lesion, squamous cell hyperplasia, or transitional cell hyperplasia. -->\n");
+        html.append("<td rowspan=\"2\" valign=\"bottom\" width=\"90\"><div style=\"font-size:105%\"><b><center>");
+
+        html.append("<a  href=\"javascript:void(0);\" style=\"text-decoration: none; cursor:help;\" \n");
+        html.append("	onmouseover=\"return overlib('Patient derived xenograft.', CAPTION, 'PDX Models.', TEXTSIZE,'2');\" \n");
+        html.append("	onmouseout=\"return nd();\">");
+        html.append("PDX Models</a></center></b></div></td></tr>\n");
+
+        html.append("<tr><td width=\"90\" bgcolor=\"#EEFFEE\"><div style=\"font-size:105%\"><center>");
+        html.append("<a  href=\"javascript:void(0);\" style=\"text-decoration: none; cursor:help;\" \n");
+        html.append("	onmouseover=\"return overlib('targeted, transgenic, gene trapped, chemically induced, radiation induced, etc.', CAPTION, 'Mutant strains.', TEXTSIZE,'2');\" \n");
+        html.append("	onmouseout=\"return nd();\">");
+        html.append("<b>Mutant<br>Strains</b>");
+        html.append("</a></center></div></td>\n");
+
+        html.append("<!-- Models that have a strain with an attached allelepair except allelepairs that are normal/normal, allele not specified/normal, or that involve a QTL region. -->\n");
+        html.append("<td width=\"90\" bgcolor=\"#EEFFEE\"><div style=\"font-size:105%\"><center>");
+
+        html.append("<a  href=\"javascript:void(0);\" style=\"text-decoration: none; cursor:help;\" \n");
+        html.append("	onmouseover=\"return overlib('inbred, hybrid, outbred, fostered, chimeric, etc.', CAPTION, 'Non mutant strains.', TEXTSIZE,'2');\" \n");
+        html.append("	onmouseout=\"return nd();\">");
+
+        html.append("<b>Other <br>Strains</b>");
+
+        html.append("</a></center></div></td>\n");
+        html.append("<td width=\"90\" bgcolor=\"#EEFFEE\"><div style=\"font-size:105%\"><center><b>All<br>Strains</b></center></div></td>\n");
+        html.append("</tr>\n");
+        html.append("<tr>\n<td><hr></td>\n<td><hr></td>\n<td><hr></td>\n");
+        html.append("<td colspan=\"3\" bgcolor=\"#EEFFEE\"><hr></td>\n");
+        html.append("<td><hr></td>\n");
+        html.append("</tr>");
 
         // iterate over object and create table rows
         String[] color1 = {"", "#e7e7e7"};
@@ -305,54 +336,50 @@ public class ModelCounts {
 
         int colorIndex = 0;
         for (ArrayList<String> vals : tissuesListList) {
-           
 
             html.append("<tr bgcolor=\"" + color1[colorIndex] + "\">\n");
-            html.append("<td><font size=\"2\">\n");
+            html.append("<td><div style=\"font-size:105%\">\n");
             html.append("<a  href=\"javascript:void(0);\" style=\"text-decoration: none; cursor:help;\" \n");
             html.append("	onmouseover=\"return overlib('" + vals.get(0) + "', CAPTION, 'Corresponding mouse tissues in MTB.', TEXTSIZE,'2');\" \n");
-            html.append("	onmouseout=\"return nd();\">" + vals.get(1) + "</a></font></td>\n");
-            html.append("<td><font size=\"2\"><center>[" + vals.get(2) + "]</center></font></td>\n");
-            html.append("<td><font size=\"2\"><center>" + vals.get(3) + "</center></font></td>\n");
+            html.append("	onmouseout=\"return nd();\">" + vals.get(1) + "</a></div></td>\n");
+            html.append("<td><div style=\"font-size:105%\"><center>[" + vals.get(2) + "]</center></div></td>\n");
+            html.append("<td><div style=\"font-size:105%\"><center>" + vals.get(3) + "</center></div></td>\n");
             html.append("<td bgcolor=\"" + color2[colorIndex] + "\"><font color=\"blue\" size=\"2\">\n");
-            
-            
+
             String solrTissue = vals.get(4).replaceAll(" ", "+");
             String[] links = {
-                "\"/mtbwi/facetedSearch.do?sort=hm&start=0&fq=minFC:[1%20TO%201]&fq=mutant:true&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
-                "\"/mtbwi/facetedSearch.do?sort=hm&start=0&fq=minFC:[1%20TO%201]&fq=mutant:false&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
-                "\"/mtbwi/facetedSearch.do?sort=hm&start=0&fq=minFC:[1%20TO%201]&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\""
+                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:true&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
+                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:false&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
+                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\""
             };
-            
-            
 
             if ("0".equals(vals.get(5))) {
-                html.append("	<center>" + vals.get(5) + "</center></font></td>\n");
+                html.append("	<center>" + vals.get(5) + "</center></div></td>\n");
             } else {
-                html.append("	<center><a target='_blank' href=" + links[0] + ">" + vals.get(5) + "</a></center></font></td>\n");
+                html.append("	<center><a target='_blank' href=" + links[0] + ">" + vals.get(5) + "</a></center></div></td>\n");
             }
             html.append("<td bgcolor=\"" + color2[colorIndex] + "\"><font color=\"blue\" size=\"2\">\n");
 
             if ("0".equals(vals.get(6))) {
-                html.append("	<center>" + vals.get(6) + "</center></font></td>\n");
+                html.append("	<center>" + vals.get(6) + "</center></div></td>\n");
             } else {
-                html.append("	<center><a target='_blank' href=" + links[1] + ">" + vals.get(6) + "</a></center></font></td>\n");
+                html.append("	<center><a target='_blank' href=" + links[1] + ">" + vals.get(6) + "</a></center></div></td>\n");
             }
 
             html.append("<td bgcolor=\"" + color2[colorIndex] + "\"><font color=\"blue\" size=\"2\">\n");
 
             if ("0".equals(vals.get(7))) {
-                html.append("	<center>" + vals.get(7) + "</center></font></td>\n");
+                html.append("	<center>" + vals.get(7) + "</center></div></td>\n");
             } else {
-                html.append("	<center><a target='_blank' href=" + links[2] + ">" + vals.get(7) + "</a></center></font></td>\n");
+                html.append("	<center><a target='_blank' href=" + links[2] + ">" + vals.get(7) + "</a></center></div></td>\n");
             }
 
             html.append("<td><font color=\"blue\" size=\"2\">\n");
 
             if ("0".equals(vals.get(9))) {
-                html.append("	<center>" + vals.get(9) + "</center></font></td>\n");
+                html.append("	<center>" + vals.get(9) + "</center></div></td>\n");
             } else {
-                html.append("	<center><a target='_blank' href=\"" + vals.get(8) + "\">" + vals.get(9) + "</a></center></font></td>\n");
+                html.append("	<center><a target='_blank' href=\"" + vals.get(8) + "\">" + vals.get(9) + "</a></center></div></td>\n");
             }
 
             html.append("</tr>");

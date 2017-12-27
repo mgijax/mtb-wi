@@ -23,9 +23,12 @@ public class PDXForm extends ActionForm {
     private String[] tumorMarkers = new String[0];
     private Collection tumorMarkersValues = new ArrayList();
     private String fusionGenes = null;
+    private String recistDrugs = null;
+    private String recistResponses = null;
     private String gene = null;
     private String genes2 = null;
     private String genesCNV = null;
+    private String variantGene = null;
     private String[] genes = new String[0];
     private String[] chrCNV = new String[0];
     private Collection chrValuesCNV = new ArrayList();
@@ -40,6 +43,7 @@ public class PDXForm extends ActionForm {
     private boolean loh = false;
     private boolean tumorGrowth = false;
     private boolean dosingStudy = false;
+    private boolean treatmentNaive = false;
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -434,5 +438,61 @@ public class PDXForm extends ActionForm {
      */
     public void setFusionGenes(String fusionGenes) {
         this.fusionGenes = fusionGenes;
+    }
+
+    /**
+     * @return the treatmentNaive
+     */
+    public boolean getTreatmentNaive() {
+        return treatmentNaive;
+    }
+
+    /**
+     * @param treatmentNaive the treatmentNaive to set
+     */
+    public void setTreatmentNaive(boolean treatmentNaive) {
+        this.treatmentNaive = treatmentNaive;
+    }
+
+    /**
+     * @return the recistDrugs
+     */
+    public String getRecistDrugs() {
+        return recistDrugs;
+    }
+
+    /**
+     * @param recistDrugs the recistDrugs to set
+     */
+    public void setRecistDrugs(String recistDrugs) {
+        this.recistDrugs = recistDrugs;
+    }
+
+    /**
+     * @return the recistResponse
+     */
+    public String getRecistResponses() {
+        return recistResponses;
+    }
+
+    /**
+     * @param recistResponse the recistResponse to set
+     */
+    public void setRecistResponses(String recistResponses) {
+        this.recistResponses = recistResponses;
+    }
+
+    /**
+     * @return the variantGene
+     */
+    public String getVariantGene() {
+        return variantGene;
+    }
+
+    /**
+     * @param variantGene the variantGene to set
+     */
+    public void setVariantGene(String variantGene) {
+        this.variantGene = variantGene;
     }
 }

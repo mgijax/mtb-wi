@@ -1,5 +1,6 @@
 package org.jax.mgi.mtb.wi.actions;
 
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
@@ -65,9 +66,8 @@ public class PDXLoginAction extends Action {
 
     private boolean validateUser(String userID, String password) {
         boolean valid = false;
-
-        if (((userID.equals(WIConstants.getInstance().getPDXUser()) || (userID.equals(WIConstants.getInstance().getPDXEditor())))) 
-                && (password.equals(WIConstants.getInstance().getPDXPassword()))) {
+        HashMap<String,String> usersMap = WIConstants.getInstance().getPDXUserMap();
+        if(password.equals(usersMap.get(userID))){
             valid = true;
         }
         

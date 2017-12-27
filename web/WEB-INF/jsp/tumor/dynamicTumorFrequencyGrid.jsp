@@ -23,39 +23,73 @@
   <script language="JavaScript"  >
     
     function checkChecks(){
-      var selected = false;
-      
-      for(i=0; i < document.DynamicGridForm.organGrpChk.length; i++){
-        if(document.DynamicGridForm.organGrpChk[i].checked){
-          selected = true;
+    var checked = false;
+    
+    try{
+        if(document.DynamicGridForm.organGrpChk.checked){
+            checked = true;
         }
-      }
-      
-      if(!selected){
-       
-       toggleOrgans();
-       
-      }
-      
-      selected = false;
-      
-      
-      for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
-        if(document.DynamicGridForm.strainFamilyChk[i].checked){
-          selected = true;
+    }catch(err){}
+    
+    try{
+        for(i=0; i < document.DynamicGridForm.organGrpChk.length; i++){
+          if(document.DynamicGridForm.organGrpChk[i].checked){
+            checked = true;   
+          }
         }
-          
-      }
-      
-      if(!selected){
-       
-       toggleStrains();
-          
-        
-      }
-      
-      document.DynamicGridForm.submit();
+    }catch(err){}
+    
+    if(!checked){
+     toggleOrgans();
     }
+    
+    checked = false;
+    
+    try{
+        if(document.DynamicGridForm.strainChk !== null){
+          for(i=0; i < document.DynamicGridForm.strainChk.length; i++){
+            if(document.DynamicGridForm.strainChk[i].checked){
+                checked = true;
+            }
+          }
+      }
+    }catch(err){}
+      
+    try{
+      if(document.DynamicGridForm.strainChk.length === null){
+        if(document.DynamicGridForm.strainChk.checked){
+          checked = true;
+        }
+      }
+    }catch(err){}
+
+    try{
+        if(document.DynamicGridForm.strainFamilyChk !== null){
+          for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
+            if(document.DynamicGridForm.strainFamilyChk[i].checked){
+                checked = true;
+            }
+          }
+        }
+    }catch(err){}
+        
+    try{    
+      if(document.DynamicGridForm.strainFamilyChk.length == null){
+        if(document.DynamicGridForm.strainFamilyChk.checked){
+            checked = true;
+        }
+      }
+    }catch(err){} 
+    
+    if(!checked){
+    
+      toggleStrains();
+     
+    }
+     
+    
+    document.DynamicGridForm.submit();  
+  }
     
     
     function submitFormOrgan(organKey){

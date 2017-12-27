@@ -15,9 +15,6 @@ import org.apache.struts.action.ActionMapping;
 
 public class PDXImageEditForm extends ActionForm {
     
-  
-    
-    
     private String tumorID;
     private String caption;
     private String description;

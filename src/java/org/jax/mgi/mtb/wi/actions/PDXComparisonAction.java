@@ -88,7 +88,7 @@ public class PDXComparisonAction extends Action {
 
                 ArrayList<PDXMouse> mice = null;
 
-                mice = pdxMouseStore.findMice("", primarySites, diagnoses, no, no, no, no, false, false, no, "");
+                mice = pdxMouseStore.findMice("", primarySites, diagnoses, no, no, no, no, false, false, no, "",false, null,null);
 
                 StringBuffer table = new StringBuffer("<table><tr><td></td>");
 

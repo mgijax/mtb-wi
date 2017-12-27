@@ -98,6 +98,12 @@
                     fieldLabel:'Source',
                     name:'source'
                 }
+                ,
+                { xtype: 'numberfield',
+                    id: 'piSort',
+                    fieldLabel: 'Sort order',
+                    name: 'piSort'
+                }
                 ,{ xtype: 'fileuploadfield',
                     id: 'piFilePath',
                     emptyText: 'Select an image',
@@ -300,6 +306,12 @@
                     id:'graphicDescription',
                     fieldLabel:'Description',
                     name:'graphicDescription'
+                }
+                ,
+                { xtype: 'numberfield',
+                    id: 'graphicSort',
+                    fieldLabel: 'Sort order',
+                    name: 'graphicSort'
                 }
                 ,
                 { xtype: 'fileuploadfield',

@@ -591,19 +591,17 @@
                                             <table border=0 cellpadding=5 cellspacing=0 width="100%">
 
                                                 <tr>
-                                                    <td class="normal" style="width:100%; text-align:center" colspan=2>
+                                                    <td colspan="6" class="normal" style="width:100%; text-align:center">
                                                         <c:if test="${not empty unavailable}">
                                                             <b> This PDX model is not available. (No inventory)</b>
                                                         </c:if>
                                                     </td>
-                                                    <td class="normal" ></td><td class="normal" ></td>
-                                                    <td class="normal" ></td><td class="normal" ></td>
                                                 <tr>
                                                     <td class="label" style="width:10%">Model ID:</td><td class="normal" style="width:22%">${mouse.modelID}</td>
 
                                                     <td class="label" style="width:10%">Previous ID:</td><td class="normal" style="width:18%">${mouse.previousID}</td>
 
-                                                    <td class="label" style="width:14%"></td><td class="normal" style="width:26%"></td>
+                                                    <td class="label" style="width:14%">Model Status</td><td class="normal" style="width:26%">${mouse.modelStatus}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="label">Primary Site:</td><td class="normal" >${mouse.primarySite}</td>
@@ -648,6 +646,11 @@
 
                                                     <td class="label" style="width:14%">Race / Ethnicity:</td><td class="normal" style="width:26%">${mouse.race} / ${mouse.ethnicity}</td>
 
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">Treatment Naive:</td><td class="normal">${mouse.treatmentNaive}</td>
+                                                    <td></td><td></td>
+                                                    <td></td><td></td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -711,7 +714,14 @@
 
                                             <div id="variantSummary"></div>
                                             <br>
-                                            <input id="variantData" type="button" value="Download summary data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">
+                                            <c:choose>
+                                                <c:when test="${applicationScope.publicDeployment == false}">
+                                                <input id="variantData" type="button" value="Download summary data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input id="variantData" type ="hidden"/>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </td>
                                     </tr>
 

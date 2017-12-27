@@ -5,23 +5,27 @@
 package org.jax.mgi.mtb.wi.pdx;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 
 /**
- * The collections for diagnosis and primary sites are built when loading the mice
- * This object makes passing the three lists easier for a single method
+ * The collections for diagnosis and primary sites are built when loading the
+ * mice This object makes passing the three lists easier for a single method
+ *
  * @author sbn
  */
 public class PDXMouseSearchData {
-     private ArrayList<String> diagnosis = new ArrayList<String>();
+
+    private ArrayList<String> diagnosis = new ArrayList<String>();
     private ArrayList<String> primarySites = new ArrayList<String>();
     private ArrayList<String> tags = new ArrayList<String>();
-    
+
     private ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
     
-    
-    PDXMouseSearchData(){}
-    
+    private HashMap<String, String> ids = new HashMap<>();
+
+    PDXMouseSearchData() {
+    }
 
     /**
      * @return diagnosis
@@ -78,5 +82,19 @@ public class PDXMouseSearchData {
     public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
-    
+
+    /**
+     * @return the ids
+     */
+    public HashMap<String, String> getIds() {
+        return ids;
+    }
+
+    /**
+     * @param ids the ids to set
+     */
+    public void setIds(HashMap<String, String> ids) {
+        this.ids = ids;
+    }
+
 }

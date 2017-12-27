@@ -83,6 +83,7 @@ public class IndexAction extends Action {
         
         ModelCounts mc = new ModelCounts();
         String modelCounts = mc.getHTML();
+        String allModelCounts = mc.getHTMLAll();
         
         
         // set the target to failure if we could not retrieve the organ list
@@ -94,6 +95,7 @@ public class IndexAction extends Action {
             request.setAttribute("organTissueValues", arrOrganTissues);
             request.setAttribute("tumorFrequencyCount", strTFCount);
             request.setAttribute("modelCounts",modelCounts);
+            request.setAttribute("allModelCounts",allModelCounts);
         }
 
         timer.stop();

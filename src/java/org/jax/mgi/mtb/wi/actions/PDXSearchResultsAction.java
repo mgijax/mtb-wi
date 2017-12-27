@@ -55,6 +55,10 @@ public class PDXSearchResultsAction extends Action {
         
         boolean dosingStudy = pdxForm.getDosingStudy();
         boolean tumorGrowth = pdxForm.getTumorGrowth();
+        boolean treatmentNaive = pdxForm.getTreatmentNaive();
+        
+        String recistDrug = pdxForm.getRecistDrugs();
+        String recistResponse = pdxForm.getRecistResponses();
 
         // include gene variant consequence in cvs
         boolean showGVC = false;
@@ -82,7 +86,9 @@ public class PDXSearchResultsAction extends Action {
             mice = pdxMouseStore.findStaticMiceByTissueOfOrigin(toa);
             request.setAttribute("tissuseOfOrigin", toa);
         } else {
-            mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, types, markers, genes, variants, dosingStudy, tumorGrowth, tags, fusionGenes);
+            mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, types,
+                    markers, genes, variants, dosingStudy, tumorGrowth, tags, 
+                    fusionGenes,treatmentNaive, recistDrug, recistResponse);
         }
 
         request.setAttribute("modelID", modelID);
@@ -101,6 +107,9 @@ public class PDXSearchResultsAction extends Action {
         }
         if (tumorGrowth) {
             request.setAttribute("tumorGrowth", "true");
+        }
+        if (treatmentNaive) {
+            request.setAttribute("treatmentNaive", "true");
         }
 
         // genes2 (right now always just 1 gene) is for expression results
@@ -162,11 +171,21 @@ public class PDXSearchResultsAction extends Action {
             result = "expression";
 
         } else {
-            if (request.getParameter("asCSV") != null) {
+            if (request.getParameter("asCSV") != null && WIConstants.getInstance().getPublicDeployment() != true) {
 
                 response.setContentType("text/csv");
                 response.setHeader("Content-disposition", "attachment; filename=PDXMice.csv");
                 response.getWriter().write(miceToCSV(mice, showGVC));
+
+                response.flushBuffer();
+                return null;
+
+            }
+            if (request.getParameter("asCSVPlus") != null && WIConstants.getInstance().getPublicDeployment() != true) {
+
+                response.setContentType("text/csv");
+                response.setHeader("Content-disposition", "attachment; filename=PDXMice.csv");
+                response.getWriter().write(pdxMouseStore.getPDXReportWithNoName());
 
                 response.flushBuffer();
                 return null;
@@ -182,9 +201,14 @@ public class PDXSearchResultsAction extends Action {
             request.setAttribute("hideFusionGenes", hideFusionGenes);
 
             request.setAttribute("variants", variants);
+            
+            request.setAttribute("recistDrug", recistDrug);
+            request.setAttribute("recistResponse", recistResponse);
 
             result = "table";
         }
+        
+        
         return mapping.findForward(result);
     }
 
@@ -199,6 +223,7 @@ public class PDXSearchResultsAction extends Action {
             }
             buffer.append("[");
             buffer.append("'" + mouse.getModelID() + "',");
+            buffer.append("'" + mouse.getModelStatus() + "',");
             buffer.append("'" + mouse.getPreviousID() + "',");
             buffer.append("'" + mouse.getTissue() + "',");
             buffer.append("'" + mouse.getInitialDiagnosis().replaceAll("'", ""));
