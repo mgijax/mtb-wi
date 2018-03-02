@@ -272,7 +272,7 @@
                                     <td>
                                         <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Enter a Model ID (eg TM:00001) as search criteria.', CAPTION, 'Model ID');" onmouseout="return nd();">Model ID</a></b>
                                       
-                             <!--   <html:text property="modelID" size="30" maxlength="10"/>&nbsp;eg. TM00001 -->
+                         
                                 <br>
                                 <div id ="modelIDCombo"></div>&nbsp;eg. TM00001
                         </td>
@@ -306,7 +306,7 @@
                     <td>
                         <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Only return models with selected additional information.', CAPTION, 'Limit results');" onmouseout="return nd();">Limit results to models</a></b>     
                         <br>
-                <html:checkbox property="dosingStudy"/> with dosing study data, <html:checkbox property="tumorGrowth"/> with tumor growth graphs , <html:checkbox property="treatmentNaive"/> from treatment naive patients. 
+                <html:checkbox property="dosingStudy"/> with dosing study data, <html:checkbox property="tumorGrowth"/> with tumor growth graphs, <html:checkbox property="treatmentNaive"/> from treatment naive patients.
                 <br>
                 <br>
                 <c:choose>

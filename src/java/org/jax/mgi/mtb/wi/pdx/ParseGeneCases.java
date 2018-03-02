@@ -30,19 +30,19 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
  */
 public class ParseGeneCases {
 
-    private static String baseURI = "http://bhpdx01:8080/pdxqueryservices/REST";
+   private static String baseURI = "http://bhpdx01:8080/pdxqueryservices/REST";
 
     private static String variationURI = baseURI + "/pdx-variation/";
 
     private static final String allVariants = "all-variants.json";
-    
+    private static final String specificVariant = "models-with-specific-variant.json";
     static PDXDAO pdxDAO = PDXDAO.getInstance();
-    
 
     HashMap<String, ArrayList<String>> allMice = new HashMap();
     HashMap<String,String>  detailsMap = new HashMap();
     
     boolean html = true;
+    boolean includeActionable = false;
 
     public static void main(String[] args) {
 
@@ -52,15 +52,16 @@ public class ParseGeneCases {
             Scanner s = new Scanner(buf);
             s.useDelimiter("\n");
              ParseGeneCases pgc = new ParseGeneCases();
-             System.out.println(pgc.parseCases(s,true));
+             System.out.println(pgc.parseCases(s,true, false));
             }catch(Exception e){
                 e.printStackTrace();
             }
 
     }
     
-    public String parseCases(Scanner s, boolean asHTML){
+    public String parseCases(Scanner s, boolean asHTML, boolean includeActionable){
         this.html = asHTML;
+        this.includeActionable = includeActionable;
 
         HashMap<String, ArrayList<String>> caseGenes = new HashMap();
         ArrayList<String> caseOrder = new ArrayList();
@@ -71,7 +72,7 @@ public class ParseGeneCases {
             while (line != null) {
                 if (line.trim().length() > 0) {
                     if (line.contains("CASE")) {
-                        caseNo = line;
+                        caseNo = line.trim();
                         caseOrder.add(caseNo);
                         line = s.next();
                         ArrayList<String> list = new ArrayList();
@@ -104,11 +105,10 @@ public class ParseGeneCases {
 
         getModelDetails();
 
-        int count =0;
+       
         for (String key : caseOrder) {
             result.append(buildTable(key, caseGenes.get(key)));
-            count++;
-            if(count>5)break;
+            
         }
 
        return result.toString();
@@ -153,15 +153,23 @@ public class ParseGeneCases {
         StringBuilder table = new StringBuilder();
         
 
+         ArrayList<String> uk = new ArrayList();
+         uk.addAll(u);
+         uk.addAll(k);
+        
+
         ArrayList<String> mice = null;
         String[] vals = null;
 
 
-         /// all this should ge moved to MM
+        
         if(html){
             table.append("<b>").append(caseNo).append( "</b><table border=\"1\" style=\"border-collapse:collapse\"><th></th><th colspan=\"");
-            table.append(k.size()).append("\">Known Significance</th><th colspan=\"").append(u.size()).append("\">Unknown Significance</th><tr>");
-            table.append("<td>Model ID</td>");
+            table.append(k.size()).append("\">Known Significance</th>");
+            if(u.size()>0){
+                table.append("<th colspan=\"").append(u.size()).append("\">Unknown Significance</th>");
+            }
+            table.append("</tr><tr><td>Model ID</td>");
             for (String kGenes : k) {
                 table.append("<td>").append(kGenes).append( "</td>");
             }
@@ -172,8 +180,8 @@ public class ParseGeneCases {
          
          
         }else{
-            table.append(caseNo);
-            table.append("\nModel Link, Model,");
+            
+            table.append("Case,Model, PDX Diagnosis:Tissue,");
             for (String kGenes : k) {
                 table.append(kGenes).append(",");
             }
@@ -181,11 +189,11 @@ public class ParseGeneCases {
                 table.append(uGenes).append(",");
             }
             table.append("\n");
-            // now the magic
+           
          }
 
 
-        for (String gene : k) {
+        for (String gene : uk) {
 
             vals = gene.split(" ");
             mice = getMice(vals[0], vals[1]);
@@ -199,22 +207,21 @@ public class ParseGeneCases {
                 }
             }
 
-        }
-        for (String gene : u) {
-
-            vals = gene.split(" ");
-            mice = getMice(vals[0], vals[1]);
-            for (String id : mice) {
+        if(includeActionable){
+         HashMap<String,ArrayList<String>> aMice = getMiceByActionableVariants(vals[0]);
+            for (String id : aMice.keySet()) {
                 if (modelsMap.containsKey(id)) {
-                    modelsMap.get(id).genes.add(vals[0] + vals[1]);
+                    modelsMap.get(id).addActionable(vals[0],aMice.get(id));
                 } else {
                     ModelRow mr = new ModelRow(id);
-                    mr.genes.add(vals[0] + vals[1]);
+                    mr.addActionable(vals[0],aMice.get(id));
                     modelsMap.put(id, mr);
                 }
             }
+        }
 
         }
+    
         ArrayList<ModelRow> modelsList = new ArrayList();
         for (ModelRow mr : modelsMap.values()) {
             modelsList.add(mr);
@@ -224,27 +231,43 @@ public class ParseGeneCases {
         if(html){
             table.append("\n<tr>");
             for (ModelRow mr : modelsList) {
-                table.append("<td><a href=\"http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID=");
-                table.append(mr.id).append("\">").append(mr.id);
-                table.append("</a><br>").append(detailsMap.get(mr.id)).append("</td>");
-                for (String gene : k) {
+                if(detailsMap.containsKey(mr.id)){
+                    table.append("<td><a href=\"http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID=");
+                    table.append(mr.id).append("\">").append(mr.id);
+                    table.append("</a><br>").append(detailsMap.get(mr.id)).append("</td>");
+                    for (String gene : k) {
 
-                    vals = gene.split(" ");
+                        vals = gene.split(" ");
 
-                    table.append("<td style=\"text-align:center\">");
-                    if (mr.genes.contains(vals[0] + vals[1])) {
-                        table.append("<b>X</b>");
+                        table.append("<td style=\"text-align:center\">");
+                        if (mr.genes.contains(vals[0] + vals[1])) {
+                            table.append("<b>X</b>");
+                        }
+                        if(mr.actionable.containsKey(vals[0])){
+                            table.append("<br>Actionable "+vals[0]+" variants<br>");
+                            for(String variant: mr.actionable.get(vals[0]).keySet()){
+                                table.append(variant+" ");
+                            }
+                        }
+                        table.append("</td>");
                     }
-                    table.append("</td>");
-                }
-                for (String gene : u) {
-                    vals = gene.split(" ");
-                    table.append("<td style=\"text-align:center\">");
-                    if (mr.genes.contains(vals[0] + vals[1])) {
-                        table.append("<b>X</b>");
-                    }
-                    table.append("</td>");
+                    for (String gene : u) {
+                        vals = gene.split(" ");
+                        table.append("<td style=\"text-align:center\">");
+                        if (mr.genes.contains(vals[0] + vals[1])) {
+                            table.append("<b>X</b>");
+                        }
+                         if(mr.actionable.containsKey(vals[0])){
+                            table.append("<br>Actionable "+vals[0]+" variants<br>");
 
+                            for(String variant: mr.actionable.get(vals[0]).keySet()){
+                                table.append(variant+" ");
+                            }
+                        }
+
+                        table.append("</td>");
+
+                    }
                 }
                 table.append("</tr>\n");
                
@@ -252,32 +275,45 @@ public class ParseGeneCases {
              table.append("</table><br><br>");
         }else{
             for (ModelRow mr : modelsList) {
-                table.append("=HYPERLINK(\"http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID=");
-                table.append(mr.id).append("\"),").append(mr.id);
-                table.append(" ").append(detailsMap.get(mr.id)).append(",");
-                for (String gene : k) {
-                    vals = gene.split(" ");
-                    if (mr.genes.contains(vals[0] + vals[1])) {
-                        table.append("X");
+                if(detailsMap.containsKey(mr.id)){
+                    table.append(caseNo).append(",");
+                    table.append("\"=HYPERLINK(\"\"http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID=");
+                    table.append(mr.id).append("\"\",\"\"").append(mr.id).append("\"\")\",");
+                    table.append(detailsMap.get(mr.id)).append(",");
+                    for (String gene : k) {
+                        vals = gene.split(" ");
+                        if (mr.genes.contains(vals[0] + vals[1])) {
+                            table.append("X ");
+                        }
+                         if(mr.actionable.containsKey(vals[0])){
+                                table.append("Actionable "+vals[0]+" variants ");
+                                for(String variant: mr.actionable.get(vals[0]).keySet()){
+                                    table.append(variant+" ");
+                                }
+                         }
+                        table.append(",");
                     }
-                    table.append(",");
-                }
-                for (String gene : u) {
-                    vals = gene.split(" ");
-                    if (mr.genes.contains(vals[0] + vals[1])) {
-                        table.append("X");
-                    }
-                    table.append(",");
+                    for (String gene : u) {
+                        vals = gene.split(" ");
+                        if (mr.genes.contains(vals[0] + vals[1])) {
+                            table.append("X ");
+                        }
+                        if(mr.actionable.containsKey(vals[0])){
+                                table.append("Actionable "+vals[0]+" variants ");
+                                for(String variant: mr.actionable.get(vals[0]).keySet()){
+                                    table.append(variant+" ");
+                                }
+                         }
+                        table.append(",");
 
-                }
+                    }
                 table.append("\n");
-            
+                }
             
             }
         }
         return table.toString();
     }
-        
 
     private ArrayList<String> getMice(String gene, String thing) {
         if (allMice.containsKey(gene + thing)) {
@@ -301,29 +337,67 @@ public class ParseGeneCases {
         }
 
     }
+    
+     private HashMap<String,ArrayList<String>> getMiceByActionableVariants(String gene){
+        
+                HashMap<String,ArrayList<String>> actionable = new HashMap();
+                // look for any actionable variant
+                StringBuilder params = new StringBuilder();
+                params.append("{\"gene_symbol\": \"["+gene+"]\", \"skip\":\"0\", \"limit\":\"-1\"}" );
+                try{
+                    JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + allVariants, params.toString()) + "}");
+                    JSONArray jarray = (JSONArray)((JSONObject)job.get("data")).get("data");
+                    for(int i = 0; i < jarray.length(); i++){
+                        job = jarray.getJSONObject(i);
+                        String types = "";
+                        try{
+                            types = job.getString("ckb_evidence_types");
+                        }catch(Exception e){}
+                        if("Actionable".equals(types)){
+                            String id = job.getString("model_name");
+                            String variant = job.getString("amino_acid_change");
+                            if(actionable.containsKey(id)){
+                                actionable.get(id).add(variant);
+                            }else{
+                                ArrayList<String> variants = new ArrayList();
+                                variants.add(variant);
+                                actionable.put(id,variants);
+                            }
+                        }
+                        
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            return actionable;
+    }
 
-    private ArrayList<String> getMiceByGeneVariant(String gene, String variant) {
+   private ArrayList<String> getMiceByGeneVariant(String gene, String variant) {
 
         HashMap<String, String> ids = new HashMap();
         StringBuilder params = new StringBuilder();
-        params.append("{\"gene_symbol\":[\"").append(gene);
-        params.append("\"],\"amino_acid_change\":[\"").append(variant);
-        String filter = "FALSE";
-        params.append("\"],\"skip\": \"0\", \"limit\": \"-1\", \"sort_by\": \"consequence\", \"sort_dir\": \"DESC\", \"filter\": \"");
-        params.append(filter).append("\"}");
+        
+        params.append("{\"gene_symbol\":\"").append(gene);
+        params.append("\",\"variant\":\"").append(variant);
+        params.append("\"}");
 
-        // need to turn the json in to a map key of model id
-        // values variants, consequences
         try {
-            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + allVariants, params.toString()) + "}");
+            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + specificVariant, params.toString()) + "}");
 
-            JSONArray jarray = ((JSONObject) job.get("data")).getJSONArray("data");
+             JSONArray jarray = (JSONArray) job.get("data");
             for (int i = 0; i < jarray.length(); i++) {
 
-                String id = jarray.getJSONObject(i).getString("model_name");
-
-                ids.put(id, id);
+                int modelInt = jarray.getInt(i);
+                String modelStr = "";
+                 if (modelInt < 1700) {
+                    modelStr = ("TM" + String.format("%05d", modelInt));
+                } else {
+                    modelStr = "J" + String.format("%09d", modelInt);
+                }
+                ids.put(modelStr,modelStr);
             }
+            
+            
 
         } catch (JSONException e) {
 
@@ -437,9 +511,31 @@ public class ParseGeneCases {
 
         String id;
         ArrayList<String> genes = new ArrayList();
+        // gene -> list of actionable variants
+        private HashMap<String,HashMap<String,String>> actionable = new HashMap();
 
         ModelRow(String id) {
             this.id = id;
+        }
+        
+        public void addActionable(String gene, ArrayList<String> variants){
+            if(actionable.containsKey(gene)){
+                for(String v: variants){
+                    actionable.get(gene).put(v,v);
+                }
+            }else{
+                HashMap<String,String> vars = new HashMap();
+                for(String v: variants){
+                    vars.put(v,v);
+                }
+                actionable.put(gene,vars);
+            }
+        }
+        
+        
+        
+        public int getSize(){
+            return (2 * this.genes.size())+  this.actionable.size();
         }
     }
 
@@ -447,10 +543,10 @@ public class ParseGeneCases {
 
         public int compare(ModelRow a, ModelRow b) {
 
-            if (a.genes.size() > b.genes.size()) {
+            if (a.getSize() > b.getSize()) {
                 return -1;
             }
-            if (a.genes.size() < b.genes.size()) {
+            if (a.getSize() < b.getSize()) {
                 return 1;
             }
             return a.id.compareTo(b.id);

@@ -87,7 +87,14 @@ public class AdvancedSearchResultsAction extends Action {
         List<String> arrOrganTissueOrigin = new ArrayList<String>();
         final String[] arrStrTumorClassification = formSearch.getTumorClassification();
         List<String> arrTumorClassification = new ArrayList<String>();
-        final String strGeneticName = formSearch.getGeneticName();
+        String strGeneticName = formSearch.getGeneticName();
+        
+        
+        // this doesn't stop SQL injection just makes it harder...
+        if(strGeneticName != null){
+            strGeneticName = strGeneticName.replaceAll("\"","").replaceAll("'","").replaceAll("\\\\", "").replaceAll(";","");
+        }
+        
         
         // temp we think
         int colonySize = -1;

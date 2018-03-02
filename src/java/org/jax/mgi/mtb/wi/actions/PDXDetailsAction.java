@@ -27,6 +27,9 @@ import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
  * @author sbn
  */
 public class PDXDetailsAction extends Action {
+    
+    private static final String BAYLOR = "Baylor College of Medicine";
+    private static final String DANA_FARBER = "Dana-Farber Cancer Institute";
 
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
@@ -237,8 +240,12 @@ public class PDXDetailsAction extends Action {
             request.setAttribute("collapseReferences", collapseReferences);
             request.setAttribute("referenceLinks", referenceLinks);
 
-            String expData = store.getModelExpression(modelID);
-
+            String expData ="";
+            if(DANA_FARBER.equals(mouse.getInstitution()) || BAYLOR.equals(mouse.getInstitution())){
+                expData = store.getModelTPM(modelID);
+            }else{
+                expData = store.getModelExpression(modelID);
+            }
             int split = expData.indexOf("[");
             if (split > 0) {
                 String platforms = expData.substring(0, split);

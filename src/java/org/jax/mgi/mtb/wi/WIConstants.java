@@ -143,6 +143,7 @@ public class WIConstants {
     private final static String PDX_USER = "pdx.user";
     private final static String PDX_EDITORS = "pdx.editors";
     private final static String PDX_PASSWORD = "pdx.password";
+    private final static String PDX_WEBSERVICE = "pdx.webservice";
     private final static String SOLR_URL = "solr.url";
     private final static String SOC_DB = "soc.db";
     private final static String SOC_URL = "soc.url";
@@ -197,6 +198,7 @@ public class WIConstants {
     private String solrURL;
     private String socDB;
     private String socURL;
+    private String pdxWebservice;
 
     // ----------------------------------------------------------- Constructors
     /**
@@ -834,6 +836,7 @@ public class WIConstants {
             this.pdxFilePath = props.getProperty(PDX_FILE_PATH);
             this.pdxFileURL = props.getProperty(PDX_FILE_URL);
             this.pdxEmail = props.getProperty(PDX_EMAIL);
+            this.pdxWebservice = props.getProperty(PDX_WEBSERVICE);
 
             
             try{
@@ -1154,5 +1157,9 @@ public class WIConstants {
      */
     public ArrayList<String> getPdxEditors() {
         return pdxEditors;
+    }
+    
+    public String getPDXWebservice(){
+        return this.pdxWebservice;
     }
 }

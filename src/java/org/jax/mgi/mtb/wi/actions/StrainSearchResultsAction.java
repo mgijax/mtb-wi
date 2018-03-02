@@ -89,10 +89,21 @@ public class StrainSearchResultsAction extends Action {
         String strSortBy = formStrainSearch.getSortBy();
         String strMaxItems = formStrainSearch.getMaxItems();
         String strAccId = null;
+        
+        
+        // this doesn't stop SQL injection just makes it harder...
+        if(strGeneticName != null){
+           strGeneticName = strGeneticName.replaceAll("\"","").replaceAll("'","").replaceAll("\\\\", "").replaceAll(";","");
+        }
 
         // make sure that the format is ###### with leading zeros
         if (StringUtils.hasValue(strJAXStockNumber)) {
-            strJAXStockNumber = StringUtils.padLeft(strJAXStockNumber, 6, '0');
+            String stockNo = "0";
+            try{
+                stockNo = new Integer(strJAXStockNumber).toString();
+            }catch(NumberFormatException nfe){}
+            
+            strJAXStockNumber = StringUtils.padLeft(stockNo, 6, '0');
         }
 
         long lReferenceKey = WIUtils.stringToLong(strReferenceKey, 0);

@@ -582,6 +582,19 @@
                                             </table>
                                         </td>
                                     </tr>
+                                    
+                                      <c:if test="${fn:contains(mouse.institution,'Dana-Farber')}">
+                                            <tr class="stripe2">
+                                                <td class="cat2">Notices</td>
+                                                <td class="data2" >
+                                                    The use of this material by a company is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCICompany.pdf">notice</a>.
+                                                    <br>
+                                                    The use of this material by an academic institution is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCIAcademic.pdf">notice</a>.
+                                                </td>
+                                            </tr>
+
+
+                                        </c:if>     
 
                                     <tr class="stripe1">
                                         <td class="cat1">
@@ -589,6 +602,8 @@
                                         </td>
                                         <td class="data1">
                                             <table border=0 cellpadding=5 cellspacing=0 width="100%">
+                                                
+                                                
 
                                                 <tr>
                                                     <td colspan="6" class="normal" style="width:100%; text-align:center">
@@ -628,6 +643,8 @@
                                                         <td class="label" style="vertical-align: top">Fusion Genes:</td><td colspan="5">${mouse.fusionGenes}</td>
                                                     </tr>    
                                                 </c:if>
+                                                    
+                                                  
 
                                             </table>   
                                         </td>
@@ -733,8 +750,16 @@
                                             <c:choose>
                                                 <c:when test="${not empty geneExpressionData}">
                                                     Platforms:${platforms} <br>
-                                                    Hatched bars indicate genes with expression levels determined to be mildly affected by alignment calculations. <a href="userHelp.jsp#pdxalternateloci">Details</a>.
-
+                                                    <c:choose>
+                                                        <c:when test="${fn:contains(platforms,'RNA_Seq')}">
+                                                            Hatched bars indicate genes with expression levels determined to be mildly affected by alignment calculations. <a href="userHelp.jsp#pdxalternateloci">Details</a>.
+                                                        </c:when>
+                                                    </c:choose>    
+                                                        <c:choose>
+                                                            <c:when test="${fn:contains(mouse.institution,'Dana-Farber') or fn:contains(mouse.institution,'Baylor')}">
+                                                                <br><b>Please Note:</b> Expression data for this model is calculated as Log2(TPM+1)    
+                                                            </c:when>
+                                                        </c:choose>        
                                                     <div id="geneExpressionDiv"></div>
                                                 </c:when>
                                                 <c:otherwise>
@@ -1246,11 +1271,11 @@
                                                     <td style="border:0px none">
                                                         <c:choose>
                                                             <c:when test="${mouse.socGraph == 1}">
-                                                                <iframe width="100%" height="700px" src='${applicationScope.socURL}${mouse.modelID}.html' style="border:0px none">
+                                                                <iframe width="100%" height="1300px" src='${applicationScope.socURL}${mouse.modelID}.html' style="border:0px none">
                                                                 </iframe>
                                                             </c:when>
                                                             <c:otherwise>  
-                                                                <iframe width="100%" height="700px" src='${applicationScope.socURL}${mouse.modelID}_${socGraph}.html' style="border:0px none">
+                                                                <iframe width="100%" height="1300px" src='${applicationScope.socURL}${mouse.modelID}_${socGraph}.html' style="border:0px none">
                                                                 </iframe>
                                                             </c:otherwise>
                                                         </c:choose>
@@ -1260,6 +1285,7 @@
 
                                         </c:when>
                                     </c:choose>
+                                                
 
 
                                     <!--======================= End Results ====================================-->

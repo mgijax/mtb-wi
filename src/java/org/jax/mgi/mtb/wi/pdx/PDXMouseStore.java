@@ -65,7 +65,6 @@ public class PDXMouseStore {
     private static String idList;
     private static HashMap<String, ArrayList<String>> assocData = new HashMap<String, ArrayList<String>>();
     private static ArrayList<ArrayList<String>> status = new ArrayList<ArrayList<String>>();
-    private static HashMap<String,HashMap<String,ArrayList<String>>> recistModels;
     private static String pdxEngraftmentStatusSummary = "The PDX Customer report could not be loaded;";
     private static String pdxPatientHistory = "The PDX Patient History report could not be loaded";
     private static String pdxPTClinical = "The PDX Patient Clinical report could not be loaded";
@@ -95,16 +94,14 @@ public class PDXMouseStore {
         "TLE6", "TMEM82", "TNFAIP3", "TP53", "TP63", "TP73", "TRAF7", "TSC1", "TSHR", "TTC5", "TTN", "U2AF1", "UBC", "USH2A", "VHL", "WHSC1", "WHSC1L1", "WNT7A", "WT1", "WWTR1", "XRCC2",
         "XRCC3", "YAP1", "YES1", "ZFP36L1", "ZMYND19"};
 
-    private static String baseURI = "http://bhpdx01:8080/pdxqueryservices/REST";
-    // test
-  //   private static String baseURI = "http://bhpdxdev01:8080/pdxqueryservices/REST";
+    private static String baseURL = WIConstants.getInstance().getPDXWebservice();
 
-    private static String variationURI = baseURI + "/pdx-variation/";
-    private static final String fusionURI = baseURI + "/pdx-fusion/";
+    private static String variationURL = baseURL + "/pdx-variation/";
+    private static final String fusionURL = baseURL + "/pdx-fusion/";
 
-    private static final String fusionModels = fusionURI + "models-for-fusion-gene-?.json"; // replace ? with gene
-    private static final String fusionGenes = fusionURI + "all-fusion-genes.json";
-    private static final String allFusionModels = fusionURI + "all-fusion-models.json";
+    private static final String fusionModels = fusionURL + "models-for-fusion-gene-?.json"; // replace ? with gene
+    private static final String fusionGenes = fusionURL + "all-fusion-genes.json";
+    private static final String allFusionModels = fusionURL + "all-fusion-models.json";
     private static HashMap<String, String> fusionModelsMap = new HashMap<String, String>();
 
     private static final String allGenes = "all-genes.json";
@@ -174,14 +171,14 @@ public class PDXMouseStore {
             LabelValueBean lvb = new LabelValueBean(gene, gene);
             exomePanelGenesLVB.add(lvb);
         }
-
         
         String[] idArray = searchData.getIds().keySet().toArray(new String[searchData.getIds().size()]);
+        // unfortunately this sorts by actual id not displayed id.... hrmph
         Arrays.sort(idArray);
 
         StringBuilder sb = new StringBuilder("[");
         for (String id : idArray) {
-            sb.append("['").append(id).append("','").append(id).append(" ").append(searchData.getIds().get(id).replaceAll("'", "")).append("'],");
+            sb.append("['").append(searchData.getIds().get(id)).append("','").append(id.replaceAll("'", "")).append("'],");
         }
         sb.replace(sb.length() - 1, sb.length(), "]");
         this.idList = sb.toString();
@@ -922,6 +919,11 @@ public class PDXMouseStore {
         return data;
 
     }
+    public String getModelTPM(String modelID) {
+        String data = PDXDAO.getInstance().getModelTPM(modelID);
+        return data;
+
+    }
 
     public String getModelCNV(String modelID) {
         String data = PDXDAO.getInstance().getModelCNV(modelID);
@@ -977,7 +979,7 @@ public class PDXMouseStore {
         // values variants, consequences
         HashMap<String, ArrayList<StringBuilder>> data = new HashMap<>();
         try {
-            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + allVariants, params.toString()) + "}");
+            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allVariants, params.toString()) + "}");
 
             JSONArray jarray = ((JSONObject) job.get("data")).getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
@@ -1039,7 +1041,7 @@ public class PDXMouseStore {
         String query = variantsForGene.replace("?", gene);
         ArrayList<String> variants = new ArrayList<String>();
         try {
-            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + query) + "}");
+            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + query) + "}");
 
             JSONArray array = (JSONArray) job.get("data");
 
@@ -1063,7 +1065,7 @@ public class PDXMouseStore {
         StringBuffer result = new StringBuffer("{'total':");
         try {
 
-            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + allVariants, params) + "}");
+            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allVariants, params) + "}");
 
             job = (JSONObject) job.get("data");
 
@@ -1115,7 +1117,7 @@ public class PDXMouseStore {
 
                 String params = "{\"model\":[\"" + model + "\"],\"skip\": \"" + start + "\", \"limit\": \"" + limit + "\", \"sort_by\": \"gene_symbol\", \"sort_dir\": \"ASC\", \"filter\": \"" + filter + "\"}";
 
-                JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + allVariants, params) + "}");
+                JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allVariants, params) + "}");
 
                 job = (JSONObject) job.get("data");
 
@@ -1272,7 +1274,7 @@ public class PDXMouseStore {
         ArrayList<String> genes = new ArrayList<String>();
 
         try {
-            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURI + allGenes) + "}");
+            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allGenes) + "}");
 
             JSONArray array = (JSONArray) job.get("data");
 

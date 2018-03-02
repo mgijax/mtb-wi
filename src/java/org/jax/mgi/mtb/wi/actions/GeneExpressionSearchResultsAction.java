@@ -42,7 +42,7 @@ public class GeneExpressionSearchResultsAction extends Action{
       
       List<String> organs = WIUtils.arrayToCleanKeyList(geForm.getOrgan());
       List<String> platforms = WIUtils.arrayToCleanList(geForm.getPlatform());
-      // need to sanitize the platforms string.
+     
       
       List<String> tumorClassifications = WIUtils.arrayToCleanKeyList(geForm.getTumorClassification());
       

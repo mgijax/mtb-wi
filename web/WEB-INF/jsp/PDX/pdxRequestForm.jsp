@@ -191,7 +191,7 @@
 
                                                 <option value="CookIslands" >Cook Islands</option>
                                                 <option value="CostaRica" >Costa Rica</option>
-                                                <option value="CtedIvoire" >Côte d ' Ivoire</option>
+                                                <option value="CotedIvoire" >Cote d ' Ivoire</option>
                                                 <option value="CroatiaHrvatska" >Croatia ( Hrvatska )</option>
                                                 <option value="Cuba" >Cuba</option>
                                                 <option value="Cyprus" >Cyprus</option>

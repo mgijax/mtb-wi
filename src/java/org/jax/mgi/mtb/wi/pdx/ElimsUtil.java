@@ -526,6 +526,7 @@ public class ElimsUtil {
 
                         mouse.setModelStatus(results[i].getModel_Status());
                         mouse.setPreviousID(results[i].getModel_Aka());
+                        mouse.setInstitution(results[i].getCollecting_Site());
                         mouse.setTissue(results[i].getSpecimen_Site());
                         mouse.setSex(results[i].getGender());  // patient sex, not mouse
                         mouse.setAge(results[i].getPatient_Age());
@@ -569,7 +570,13 @@ public class ElimsUtil {
                                 tagsMap.put(results[i].getModelTags(), "tag");
                             }
 
-                            idMap.put(mouse.getModelID(), mouse.getPrimarySite() + " " + mouse.getInitialDiagnosis());
+                            idMap.put( mouse.getModelID()+" "+mouse.getPrimarySite() + " " + mouse.getInitialDiagnosis(),mouse.getModelID());
+                            // we want to be able to search on previous IDs as well
+                            String pid = mouse.getPreviousID();
+                            if(pid != null && pid.trim().length()>0){
+                                // oh the humanity, the ExtJS widget won't work if IDs are duplicated so we need to pad these id with a space right here ---V
+                                idMap.put( pid+ " ("+mouse.getModelID()+") "+mouse.getPrimarySite() + " " + mouse.getInitialDiagnosis(),mouse.getModelID()+" ");
+                            }
                         } else {
                             log.debug("skipping suspended model " + mouse.getModelID());
                         }

@@ -4,6 +4,8 @@
  */
 package org.jax.mgi.mtb.wi.actions;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,8 @@ import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.wi.pdx.ParseGeneCases;
 
 /**
+ * Validation indicate invalid genes, invalid syntax, better formatting of
+ * results table
  *
  * @author sbn
  */
@@ -25,13 +29,27 @@ public class PDXMultiSearchAction extends Action {
             HttpServletResponse response)
             throws Exception {
 
+        boolean asHTML = !"asCSV".equals(request.getParameter("asCSV"));
+        boolean actionable = "actionable".equals(request.getParameter("actionable"));
+        System.out.println("asHTML:" + asHTML + " /n actionable:" + actionable);
+
         String cases = request.getParameter("cases");
-        if(cases != null && cases.trim().length()>0){
+        if (cases != null && cases.trim().length() > 0) {
             Scanner s = new Scanner(cases);
             s.useDelimiter("\n");
             ParseGeneCases pgc = new ParseGeneCases();
-            
-            request.setAttribute("table", pgc.parseCases(s,true));
+            if (asHTML) {
+                request.setAttribute("table", pgc.parseCases(s, asHTML, actionable));
+                request.setAttribute("cases", cases);
+            } else {
+                Date d = new Date(System.currentTimeMillis());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String date = sdf.format(d);
+                response.setContentType("text/csv");
+                response.setHeader("Content-disposition", "attachment; filename=PDXCaseReport-" + date + ".csv");
+                response.getWriter().write(pgc.parseCases(s, asHTML, actionable));
+                return null;
+            }
         }
 
         return mapping.findForward("success");
