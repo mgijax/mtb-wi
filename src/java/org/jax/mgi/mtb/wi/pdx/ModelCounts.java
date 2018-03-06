@@ -281,11 +281,11 @@ public class ModelCounts {
         html.append("<br><table cellpadding=\"4\" cellspacing=\"0\" width=\"750\" border=\"0\">\n");
         html.append("<tbody><tr>\n<td rowspan=\"2\" valign=\"bottom\">");
         
-        if(this.minFC.length() > 0){
-            html.append("<input type=\"button\" value=\"Don't restrict model counts\" onclick=\"toggle()\">");
-        }else{
-            html.append("<input type=\"button\" value=\"Restrict model counts\" onclick=\"toggle()\">");
-        }
+ //       if(this.minFC.length() > 0){
+ //           html.append("<input type=\"button\" value=\"Don't restrict model counts\" onclick=\"toggle()\">");
+ //       }else{
+ //           html.append("<input type=\"button\" value=\"Restrict model counts\" onclick=\"toggle()\">");
+ //       }
    
         html.append("<br>&nbsp;<br><b>Cancer Site</b></td>\n");
         html.append("<td rowspan=\"2\" valign=\"bottom\"><div style=\"font-size:90%\"><center><a target='_blank' href='"+PDF_LINK+"'><b>"+YEAR+"<br>ACS Est.<br>Human<br>Mortality<br>Rank</b></a></center></div></td>\n");
