@@ -158,12 +158,12 @@
                     dataIndex: 'modelID',
                     renderer: idRenderer
                 },
-                {
-                    header   : 'Status', 
-                    width    : 110, 
-                    sortable : true, 
-                    dataIndex: 'status'
-                },
+   //             {
+   //                 header   : 'Status', 
+   //                 width    : 110, 
+   //                 sortable : true, 
+   //                 dataIndex: 'status'
+   //             },
                 {
                     header   : 'Previous ID', 
                     width    : 75, 
