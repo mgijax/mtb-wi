@@ -111,7 +111,7 @@ public class PDXMouseStore {
     public PDXMouseStore() {
 
         try {
-            if (allMice == null || allMice.isEmpty()) {
+            if (allMice == null ) {
                 synchronized (PDXMouseStore.class) {
                     loadData();
                 }
@@ -142,9 +142,10 @@ public class PDXMouseStore {
         recistResponsesLVB.clear();
         
 
-        log.info("loading mice from eLIMS");
-        ElimsUtil eu = new ElimsUtil();
-        PDXMouseSearchData searchData = eu.getPDXMouseSearchData();
+        log.info("NOT loading mice from eLIMS");
+    //    ElimsUtil eu = new ElimsUtil();
+    //    PDXMouseSearchData searchData = eu.getPDXMouseSearchData();
+        PDXMouseSearchData searchData = new PDXMouseSearchData();
         allMice = searchData.getMice();
         log.info("loaded " + allMice.size() + " mice.");
 
