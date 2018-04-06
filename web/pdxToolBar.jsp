@@ -59,8 +59,12 @@
         <td>
             <div class="toolBarTitle">Additional Resources</div>
             
-             
+            
             <img src="${applicationScope.urlImageDir}/new.jpg" alt="new">
+            <a href="http://www.pdxfinder.org">PDX Finder</a> 
+            <br>
+             
+            
             <a href="<c:url value='/facetedSearch.do'/>">Faceted Tumor Search</a> 
             <br>
             

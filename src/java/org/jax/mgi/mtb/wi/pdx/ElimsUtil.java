@@ -15,7 +15,7 @@ import com.starlims.www.webservices.Pdx_model_status;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import org.apache.axiom.soap.SOAP11Constants;
+//import org.apache.axiom.soap.SOAP11Constants;
 import org.apache.log4j.Logger;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
@@ -246,8 +246,8 @@ public class ElimsUtil {
 
     // Any changes here need to get relayed to Al Simons as he comsumes this as JSON and these are field keys
     private static final String STATUS_COLUMNS = "Model ID,Project Type,Model Status,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,Specimen Site,Primary Site,Initial Diagnosis,Clinical Diagnosis,Other Diagnosis Info,"
-            + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,Engraftment Site,Collecting Site,Shipped Date,Received Date,Accession Date,Implantation Date,"
-            + "P1 Creation Date,Engraftment Success Date,Engraftment Termination Date,Comments";
+            + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,Engraftment Site,Collecting Site,Collection Date,Received Date,Accession Date,Implantation Date,"
+            + "P1 Creation Date,P2 Engraftment Date,Engraftment Success Date,Engraftment Termination Date,Comments";
 
     public String getPDXStatusReport() {
         StringBuffer report = new StringBuffer();
@@ -306,11 +306,12 @@ public class ElimsUtil {
                         report.append(clean(result[i].getMouseSex())).append(",");
                         report.append(clean(fixEngraftment(result[i].getEngraftmentSite()))).append(",");
                         report.append(clean(result[i].getCollecting_Site())).append(",");  // organization
-                        report.append(cleanDate(result[i].getShipped_Date())).append(",");
+                        report.append(clean(result[i].getCollection_Date())).append(",");
                         report.append(cleanDate(result[i].getReceived_Date())).append(",");
                         report.append(cleanDate(result[i].getAccession_Date())).append(",");
                         report.append(cleanDate(result[i].getImplantation_Date())).append(",");
                         report.append(cleanDate(result[i].getP1_Creation_Date())).append(",");
+                        report.append(cleanDate(result[i].getP2_Engraftment_Date())).append(",");
                         report.append(cleanDate(result[i].getEngraftment_Success_Date())).append(",");
                         report.append(cleanDate(result[i].getEngraftment_Termination_Date())).append(",");
                         report.append(clean(result[i].getComments())).append("\n");
@@ -378,11 +379,12 @@ public class ElimsUtil {
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMouseSex())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(fixEngraftment(result[i].getEngraftmentSite()))).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getCollecting_Site())).append(",\n");  // organization
-                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getShipped_Date())).append("\",\n");
+                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getCollection_Date())).append(",\n");  
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getReceived_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getAccession_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getImplantation_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP1_Creation_Date())).append("\",\n");
+                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP2_Engraftment_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getEngraftment_Success_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getEngraftment_Termination_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getComments())).append("},\n");
@@ -675,6 +677,7 @@ public class ElimsUtil {
     private HashMap<String, ArrayList<String>> getPDXClinicalDetails() {
         HashMap<String, ArrayList<String>> modelDetails = new HashMap<String, ArrayList<String>>();
 
+     
         try {
 
             MTB_wsStub stub = getStub();
@@ -685,9 +688,11 @@ public class ElimsUtil {
             soapRequest.setPwd(password);
             soapRequest.setUser(userName);
 
-            PDXPatientClinicalReport[] result
-                    = stub.getPDXPatientClinicalReports_sessionless(soapRequest).getGetPDXPatientClinicalReports_sessionlessResult().getPDXPatientClinicalReport();
+            PDXPatientClinicalReport[] result  = stub.getPDXPatientClinicalReports_sessionless(soapRequest).getGetPDXPatientClinicalReports_sessionlessResult().getPDXPatientClinicalReport();
 
+                    
+                    
+            
             if (result.length > 0) {
 
                 for (int i = 0; i < result.length; i++) {
@@ -702,7 +707,9 @@ public class ElimsUtil {
 
                 }
             }
-        } catch (Exception e) {
+        } catch (Error e) {
+            log.error("Error getting PDX Clinical Details", e);
+        } catch (Exception e){
             log.error("Error getting PDX Clinical Details", e);
         }
 
@@ -855,11 +862,11 @@ public class ElimsUtil {
         MTB_wsStub stub = null;
         try {
             stub = new MTB_wsStub();
+            
+            //stub._getServiceClient().getOptions().setSoapVersionURI(
+            //        SOAP11Constants.SOAP_ENVELOPE_NAMESPACE_URI);
 
-            stub._getServiceClient().getOptions().setSoapVersionURI(
-                    SOAP11Constants.SOAP_ENVELOPE_NAMESPACE_URI);
-
-            stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(300000);
+            //stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(300000);
         } catch (Error e) {
             e.printStackTrace();
             throw new Exception(e.fillInStackTrace());

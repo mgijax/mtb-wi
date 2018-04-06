@@ -302,24 +302,24 @@
                             sortable: true,
                             dataIndex: 'gene_id'
                         },
-                        {
-                            header: 'CKB Evidence Type',
-                            width: 70,
-                            sortable: true,
-                            dataIndex: 'ckb_evidence_types'
-                        },
-                        {
-                            header: 'Actionable Cancer Types',
-                            width: 120,
-                            sortable: true,
-                            dataIndex: 'cancer_types_actionable'
-                        },
-                        {
-                            header: 'Drug Class',
-                            width: 70,
-                            sortable: true,
-                            dataIndex: 'drug_class'
-                        },
+               //         {
+               //             header: 'CKB Evidence Type',
+               //             width: 70,
+               //             sortable: true,
+               //             dataIndex: 'ckb_evidence_types'
+               //         },
+               //        {
+               //             header: 'Actionable Cancer Types',
+               //             width: 120,
+               //             sortable: true,
+               //             dataIndex: 'cancer_types_actionable'
+               //         },
+               //         {
+               //             header: 'Drug Class',
+               //             width: 70,
+               //             sortable: true,
+               //             dataIndex: 'drug_class'
+               //         },
                         {
                             header: 'Count Human Reads',
                             width: 70,
@@ -331,19 +331,19 @@
                             width: 70,
                             sortable: true,
                             dataIndex: 'pct_human_reads'
-                        },
-                        {
-                            header: 'Variant Num Trials',
-                            width: 100,
-                            sortable: true,
-                            dataIndex: 'variant_num_trials'
-                        },
-                        {
-                            header: 'Variant NCT IDs',
-                            width: 100,
-                            sortable: true,
-                            dataIndex: 'variant_nct_ids'
-                        }
+                        }//,
+                //        {
+                //            header: 'Variant Num Trials',
+                //            width: 100,
+                //            sortable: true,
+                //            dataIndex: 'variant_num_trials'
+                //        },
+                //        {
+                //            header: 'Variant NCT IDs',
+                //            width: 100,
+                //            sortable: true,
+                //            dataIndex: 'variant_nct_ids'
+                //        }
 
                     ],
                     stripeRows: true,
@@ -387,13 +387,13 @@
                 colNames.push('filtered_rationale');
                 colNames.push('passage_num');
                 colNames.push('gene_id');
-                colNames.push('ckb_evidence_types');
-                colNames.push('cancer_types_actionable');
-                colNames.push('drug_class');
+      //          colNames.push('ckb_evidence_types');
+      //          colNames.push('cancer_types_actionable');
+      //          colNames.push('drug_class');
                 colNames.push('count_human_reads');
                 colNames.push('pct_human_reads');
-                colNames.push('variant_nct_ids');
-                colNames.push('variant_num_trials')
+      //          colNames.push('variant_nct_ids');
+      //          colNames.push('variant_num_trials')
 
 
 
@@ -418,7 +418,7 @@
                     collapsible: true,
                     collapsed: true,
                     collapseFirst: true,
-                    title: 'Click to expand/collapse',
+                    title: '<b>User Alert</b> (3/14/2018): We are in the process of updating annotations associated with mutations observed in PDX model tumors. These data are not currently available but will be restored soon. Visit the <a href="https://ckb.jax.org" target="_blank">JAX Clinical Knowledgebase </a>for information on clinical relevance of specific mutations.<br><br>Click to expand/collapse',
                     layout: {
                         type: 'fit',
                         align: 'stretch',
@@ -615,8 +615,13 @@
                                                     <td class="label" style="width:10%">Model ID:</td><td class="normal" style="width:22%">${mouse.modelID}</td>
 
                                                     <td class="label" style="width:10%">Previous ID:</td><td class="normal" style="width:18%">${mouse.previousID}</td>
-
-                                                    <td class="label" style="width:14%">Model Status</td><td class="normal" style="width:26%">${mouse.modelStatus}</td>
+                                                    
+                                                     <c:if test="${applicationScope.publicDeployment == true}">
+                                                           <td class="label" style="width:14%"></td><td class="normal" style="width:26%"></td>
+                                                     </c:if>
+                                                     <c:if test="${applicationScope.publicDeployment == false}">
+                                                        <td class="label" style="width:14%">Model Status</td><td class="normal" style="width:26%">${mouse.modelStatus}</td>
+                                                     </c:if>
                                                 </tr>
                                                 <tr>
                                                     <td class="label">Primary Site:</td><td class="normal" >${mouse.primarySite}</td>

@@ -43,6 +43,7 @@ public class SOCLoader {
                 models.put(rs.getString(1),rs.getInt(2));
                 
             }
+            log.error("Loaded "+models.size()+" pdx model with SOC data.");
         } catch (Exception e) {
             log.error("Unable to load SOC model data",e);
         }
