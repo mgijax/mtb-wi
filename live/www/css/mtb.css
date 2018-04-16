@@ -103,29 +103,114 @@ hr {
 	width:auto;
 }
 
+table {
+	border-collapse:collapse;
+	width:99.5%;
+	margin:1px;
+	
+}
+
 /* Tables for layout */
 
-table, thead, tbody, tfoot, tr, th, td {
+body > table,
+body > table > thead,
+body > table > tbody,
+body > table > tfoot,
+body > table > thead > tr,
+body > table > tbody > tr,
+body > table > tfoot > tr,
+body > table > thead > tr > td,
+body > table > thead > tr > th,
+body > table > tbody > tr > td,
+body > table > tfoot > tr > td,
+
+body > table > tbody > tr > td > table,
+body > table > tbody > tr > td > table > thead,
+body > table > tbody > tr > td > table > tbody,
+body > table > tbody > tr > td > table > tfoot,
+body > table > tbody > tr > td > table > thead > tr,
+body > table > tbody > tr > td > table > tbody > tr,
+body > table > tbody > tr > td > table > tfoot > tr,
+body > table > tbody > tr > td > table > thead > tr > td,
+body > table > tbody > tr > td > table > thead > tr > th,
+body > table > tbody > tr > td > table > tbody > tr > td,
+body > table > tbody > tr > td > table > tfoot > tr > td,
+
+tr.pageTitle > td > table,
+tr.pageTitle > td > table > thead,
+tr.pageTitle > td > table > tbody,
+tr.pageTitle > td > table > tfoot,
+tr.pageTitle > td > table tr,
+tr.pageTitle > td > table th,
+tr.pageTitle > td > table td,
+
+form table,
+form thead,
+form tbody,
+form tfoot,
+form tr,
+form th,
+form td,
+
+table.toolBar,
+table.toolBar thead,
+table.toolBar tbody,
+table.toolBar tfoot,
+table.toolBar tr,
+table.toolBar th,
+table.toolBar td {
+	
 	display:block;
 	background-color:transparent;
 	box-sizing:border-box;
 	margin:0;
 	padding:0;
+	border:0;
 	width:auto !important;
 }
 
-td.data1, td.data2,
-tr, td:only-child {
+body > table > thead > tr > td,
+body > table > thead > tr > th,
+body > table > tbody > tr > td,
+body > table > tfoot > tr > td,
+
+body > table > tbody > tr > td > table > thead > tr > td,
+body > table > tbody > tr > td > table > thead > tr > th,
+body > table > tbody > tr > td > table > tbody > tr > td,
+body > table > tbody > tr > td > table > tfoot > tr > td,
+
+form th,
+form td,
+
+table.toolBar th,
+table.toolBar td {	
+
+	float:left;
+}
+
+body > table > thead > tr,
+body > table > tbody > tr,
+body > table > tfoot > tr,
+
+body > table > tbody > tr > td > table > thead > tr,
+body > table > tbody > tr > td > table > tbody > tr,
+body > table > tbody > tr > td > table > tfoot > tr,
+
+form tr,
+table.toolBar tr {	
 	clear:both;
 	overflow:auto;
 	zoom:1;
 }
 
-td {
-	float:left;
+
+tr.pageTitle th,
+tr.pageTitle td {
+	border:0;
+	padding:0;
 }
 
-td.data1, td.data2,
+table.toolBarSearch td,
 td:only-child {
 	float:none;
 }
@@ -169,19 +254,22 @@ body > table > tbody > tr > td:first-child ~ td > table {
 		width:auto !important;
 		margin:0 12px;
 	}
+/*
 	body > table > tbody > tr > td:first-child {
 		width:20% !important;
 	}
 	
 	body > table > tbody > tr > td:first-child ~ td {
 		width:80% !important;
-	}	
+	}
+*/	
 }
 
 @media(max-width:992px) {	
 	body > table {
 		margin:0;
 	}	
+/*
 	body > table > tbody > tr > td:first-child {
 		width:25% !important;
 	}
@@ -189,6 +277,7 @@ body > table > tbody > tr > td:first-child ~ td > table {
 	body > table > tbody > tr > td:first-child ~ td {
 		width:75% !important;
 	}
+*/
 }
 
 @media(max-width:768px) {
@@ -220,114 +309,84 @@ th {
 	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;	
 }
 
-body > table > tbody > tr > td:last-child > table > tbody > tr > td > table,
-table[border="1"] {
-	display:table;
-	
-	border:1px solid #444;
-}
-
-body > table > tbody > tr > td:last-child > table > tbody > tr > td > table > thead,
-table[border="1"] > thead {
-	display:table-header-group;
-}
-
-body > table > tbody > tr > td:last-child > table > tbody > tr > td > table > tbody,
-table[border="1"] > tbody {
-	display:table-row-group;
-}
-
-body > table > tbody > tr > td:last-child > table > tbody > tr > td > table > tfoot,
-table[border="1"] > tfoot {
-	display:table-footer-group;
-}
-
-body > table > tbody > tr > td:last-child > table > tbody > tr > td > table > thead > tr,
-body > table > tbody > tr > td:last-child > table > tbody > tr > td > table > tbody > tr,
-body > table > tbody > tr > td:last-child > table > tbody > tr > td > table > tfoot > tr,
-body > table > tbody > tr > td:last-child > table > tbody > tr > td > table > tr,
-
-table[border="1"] > thead > tr,
-table[border="1"] > tbody > tr,
-table[border="1"] > tfoot > tr,
-table[border="1"] > tr {
-	display:table-row;
-	margin:0;
-	padding:0;
-}
-
-table[border="1"] > thead > tr > th,
-table[border="1"] > thead > tr > td,
-table[border="1"] > tr > th,
-table[border="1"] > tbody > tr > td,
-table[border="1"] > tbody > tr > th,
-table[border="1"] > tfoot > tr > td,
-table[border="1"] > tr > td {
-	display:table-cell;
-	float:none;
-	margin:0;
+th, td {
 	padding:0.5em 0.75em;
+/* 	word-break: break-all; */
+
 }
 
-table[border="1"] > tbody > tr > td,
-table[border="1"] > tfoot > tr > td,
-table[border="1"] > tr > td {
+td {
 	border-top:1px solid rgba(5,57,107,0.4);
 	border-right:1px solid rgba(5,57,107,0.2);
 	border-bottom:1px solid rgba(5,57,107,0.4);
 	border-left:1px solid rgba(5,57,107,0.2);
 }
 
-table[border="1"] > thead > tr > th,
-table[border="1"] > thead > tr > td,
-table[border="1"] > tr > th,
-table[border="1"] > tbody > tr > th {
+th,
+thead > tr > td,
+td.resultsHeader,
+td.resultsHeaderSmall {
 	border:1px solid white;
 	color:white;
 	background-color:rgba(5,57,107,1);	
 	font-size:1.2em;
 }
 
-table[border="1"] > thead > tr:first-child > th,
-table[border="1"] > thead > tr:first-child > td,
-table[border="1"] > tbody > tr:first-child > th,
-table[border="1"] > tbody > tr:first-child > td,
-table[border="1"] > tr:first-child > th,
-table[border="1"] > tr:first-child > td {
+@media(max-width:1224px) {
+	th, td {
+		padding:0.5em;
+	}
+	tr.stripe1 > td,
+	tr.stripe2 > td,
+	tr.results > td {
+		font-size:0.82em;
+	}
+}
+
+@media(max-width:992px) {
+	tr.stripe1 > td,
+	tr.stripe2 > td,
+	tr.results > td {
+		font-size:0.7em;
+	}
+}
+
+tr.summary:first-child > td,
+tr.stripe1:first-child > td,
+tr.stripe2:first-child > td,
+tr.results:first-child > th,
+tr.results:first-child > td {
 	border-top:1px solid rgba(5,57,107,1);	
 }
 
-table[border="1"] > tfoot > tr:last-child > td,
-table[border="1"] > tbody > tr:last-child > td,
-table[border="1"] > tr:last-child > td {
+tr.summary:last-child > td,
+tr.stripe1:last-child > td,
+tr.stripe2:last-child > td,
+tr.results:last-child > td {
 	border-bottom:1px solid rgba(5,57,107,1);	
 }
 
-table[border="1"] > thead > tr > th:first-child,
-table[border="1"] > thead > tr > td:first-child,
-table[border="1"] > tr > th:first-child,
-table[border="1"] > tbody > tr > td:first-child,
-table[border="1"] > tbody > tr > th:first-child,
-table[border="1"] > tfoot > tr > td:first-child,
-table[border="1"] > tr > td:first-child {
+tr.summary > td:first-child,
+tr.stripe1 > td:first-child,
+tr.stripe2 > td:first-child,
+tr.results > th:first-child,
+tr.results > td:first-child {
 	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;	
 	border-left:1px solid rgba(5,57,107,1);	
 }
 
-table[border="1"] > thead > tr > th:last-child,
-table[border="1"] > thead > tr > td:last-child,
-table[border="1"] > tr > th:last-child,
-table[border="1"] > tbody > tr > td:last-child,
-table[border="1"] > tbody > tr > th:last-child,
-table[border="1"] > tfoot > tr > td:last-child,
-table[border="1"] > tr > td:last-child {	
+tr.summary > td:last-child,
+tr.stripe1 > td:last-child,
+tr.stripe2 > td:last-child,
+tr.results > td:last-child,
+tr.results > th:last-child {	
 	border-right:1px solid rgba(5,57,107,1);	
 }
 
-table[border="1"] > tbody > tr:nth-child(odd) > td,
-table[border="1"] > tfoot > tr:nth-child(odd) > td,
-table[border="1"] > tr:nth-child(odd) > td {	
-	background-color:rgba(5,57,107,0.075);	
+tr.stripe1:nth-child(odd) > td,
+tr.stripe2:nth-child(odd) > td,
+tr.results:nth-child(odd) > td:not(.resultsHeader,.resultsHeaderSmall) {	
+	background-color:rgba(5,57,107,0.06);	
 }
 
 th > img {
@@ -335,13 +394,6 @@ th > img {
 	margin:0 auto;
 	width:25px;
 }
-
-
-
-
-
-
-
 
 
 /* Forms */
@@ -481,7 +533,24 @@ input[type="submit"]:hover {
 }
 */
 
+table.toolBarSearch {
+	margin:1em 0;
+}
 
+table.toolBarSearch select[multiple] {
+	width:98%;
+}
+
+table.toolBarSearch .toolBarInput {
+	height:34px;
+	margin:0 8px 4px 0;
+	border:1px solid rgba(5,57,107,0.5);
+}
+
+table.toolBarSearch .toolBarButton {
+	float:right;
+	margin:0;
+}
 
 
 
