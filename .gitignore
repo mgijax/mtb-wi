@@ -9,3 +9,4 @@
 **/.cvsignore
 **/nbproject/private/
 /doc
+.DS_Store
