@@ -69,37 +69,37 @@
 
                             <!--======================= Start Main Section =============================-->
 
-                            <p> The Mouse Tumor Biology (MTB) Database supports the use of the mouse as a model system of human cancers by providing access to information on and data for:
+                            <p> The Mouse Tumor Biology (MTB) Database supports the use of the mouse as a model system of human cancers by providing access to information on and data for:</p>
                             <ul>
-                                <li>spontaneous and induced tumors in mice,
-                                <li>genetically defined mice (inbred, hybrid, mutant, and genetically engineered strains of mice) in which tumors arise,
-                                <li>genetic factors associated with tumor susceptibility in mice,
-                                <li>somatic genetic-mutations observed in tumors,
-                                <li>Patient Derived Xenograft (PDX) models
+                                <li>spontaneous and induced tumors in mice,</li>
+                                <li>genetically defined mice (inbred, hybrid, mutant, and genetically engineered strains of mice) in which tumors arise,</li>
+                                <li>genetic factors associated with tumor susceptibility in mice,</li>
+                                <li>somatic genetic-mutations observed in tumors,</li>
+                                <li>Patient Derived Xenograft (PDX) models</li>
                             </ul>
-                            <p>Examples of the data accessible from MTB include:
+                            <p>Examples of the data accessible from MTB include:</p>
                             <ul>
-                                <li>tumor frequency & latency data,
-                                <li>tumor genomic data,
-                                <li>tumor pathology reports and images,
-                                <li>associations of models to the scientific literature,
-                                <li>links additional on-line cancer resources
+                                <li>tumor frequency & latency data,</li>
+                                <li>tumor genomic data,</li>
+                                <li>tumor pathology reports and images,</li>
+                                <li>associations of models to the scientific literature,</li>
+                                <li>links additional on-line cancer resources</li>
                             </ul>
-                            <p>
+
                             <table class="miTable">
                                 <tr><td border="5px">
                                         <p class="miTitle">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
                                         <ul>
-                                            <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a><br>
-                                            <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a><br>
-                                            <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a><br>
+                                            <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a></li>
+                                            <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a></li>
+                                            <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a></li>
                                         </ul>
                                         <br>
                                     </td></tr>
                             </table>
 
                             <hr width="100%">
-                            <p>
+                            <p></p>
                                 <%--
                                     <center>
                                     <html:form action="tumorSearchResults" method="GET">
@@ -134,7 +134,7 @@
                                     </table>
                                     </html:form>
                                     </center>--%>
-                            <p>
+                            <p></p>
                             <div id="mc">    
                                 <center>
                                     ${modelCounts}
@@ -145,9 +145,9 @@
                                     ${allModelCounts}
                                 </center>
                             </div>
-                            <p>
+                            <p></p>
                             <hr width="100%">
-                            <p>
+                            <p></p>
 
 
 
@@ -157,9 +157,9 @@
                                 <br>
                                 (<a href="whatsNew.jsp">View all...</a>)
 
-                            <p>
+                            <p></p>
                             <hr width="100%">
-                            <p>
+                            <p></p>
                                 <!--======================== End Main Section ==============================-->
                                
 

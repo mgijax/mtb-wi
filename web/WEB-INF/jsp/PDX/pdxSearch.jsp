@@ -165,7 +165,7 @@
         });
     
     </script>
-
+</head>
 
     <c:import url="../../../body.jsp">
         <c:param name="pageTitle" value="Patient Derived Xenograft Search Form"/>
@@ -369,11 +369,11 @@
              <html:select property="recistResponses" size="4" >
                 <html:options collection="recistResponses" property="value" labelProperty="label"/>
             </html:select>
-    </td>
-</tr>
+    			</td>
+			</tr>
 
-</table>
-</td>
+		</table>
+	</td>
 </tr>
 
 
@@ -511,14 +511,15 @@
         </table>
     </td>
 </tr>
-</html:form>
+
 </table>
+</html:form>
 <!--======================== End Main Section ==============================-->
 
-</td>
-</tr>
-</table>
-</td>
+				</td>
+			</tr>
+		</table>
+	</td>
 </tr>
 </table>
 <!-- If the page reloads to update variants don't go back to the top of the page -->
