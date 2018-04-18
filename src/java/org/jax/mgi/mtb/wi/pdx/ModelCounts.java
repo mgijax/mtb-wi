@@ -354,32 +354,32 @@ public class ModelCounts {
             };
 
             if ("0".equals(vals.get(5))) {
-                html.append("	<center>" + vals.get(5) + "</center></div></td>\n");
+                html.append("	<center>" + vals.get(5) + "</center></font></td>\n");
             } else {
-                html.append("	<center><a target='_blank' href=" + links[0] + ">" + vals.get(5) + "</a></center></div></td>\n");
+                html.append("	<center><a target='_blank' href=" + links[0] + ">" + vals.get(5) + "</a></center></font></td>\n");
             }
             html.append("<td bgcolor=\"" + color2[colorIndex] + "\"><font color=\"blue\" size=\"2\">\n");
 
             if ("0".equals(vals.get(6))) {
-                html.append("	<center>" + vals.get(6) + "</center></div></td>\n");
+                html.append("	<center>" + vals.get(6) + "</center></font></td>\n");
             } else {
-                html.append("	<center><a target='_blank' href=" + links[1] + ">" + vals.get(6) + "</a></center></div></td>\n");
+                html.append("	<center><a target='_blank' href=" + links[1] + ">" + vals.get(6) + "</a></center></font></td>\n");
             }
 
             html.append("<td bgcolor=\"" + color2[colorIndex] + "\"><font color=\"blue\" size=\"2\">\n");
 
             if ("0".equals(vals.get(7))) {
-                html.append("	<center>" + vals.get(7) + "</center></div></td>\n");
+                html.append("	<center>" + vals.get(7) + "</center></font></td>\n");
             } else {
-                html.append("	<center><a target='_blank' href=" + links[2] + ">" + vals.get(7) + "</a></center></div></td>\n");
+                html.append("	<center><a target='_blank' href=" + links[2] + ">" + vals.get(7) + "</a></center></font></td>\n");
             }
 
             html.append("<td><font color=\"blue\" size=\"2\">\n");
 
             if ("0".equals(vals.get(9))) {
-                html.append("	<center>" + vals.get(9) + "</center></div></td>\n");
+                html.append("	<center>" + vals.get(9) + "</center></font></td>\n");
             } else {
-                html.append("	<center><a target='_blank' href=\"" + vals.get(8) + "\">" + vals.get(9) + "</a></center></div></td>\n");
+                html.append("	<center><a target='_blank' href=\"" + vals.get(8) + "\">" + vals.get(9) + "</a></center></font></td>\n");
             }
 
             html.append("</tr>");
