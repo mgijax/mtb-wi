@@ -59,6 +59,6 @@ Click <a href="${applicationScope.urlBase}/html/Lymphoma.xlsx">here</a> to downl
         </td>
     </tr>
 </table>
-
+</td></tr></table>
 </body>
 </html> 

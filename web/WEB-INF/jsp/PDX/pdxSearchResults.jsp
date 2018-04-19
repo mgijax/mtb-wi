@@ -285,7 +285,7 @@
     
 </script>
 
-
+</head>
 <c:import url="../../../body.jsp">
     <c:param name="pageTitle" value="Patient Derived Xenograft Search Results"/>
 </c:import>
@@ -512,6 +512,7 @@
            
                  <c:choose>
                     <c:when test="${not empty mice}">
+                    	<tr>
                         <td>
                         <div id="dataDiv"></div>
                         </td>
@@ -532,7 +533,7 @@
                             Check boxes can be used to select models to request details on availability.<br>
                             Models without check boxes (<b>NA</b>) are no longer available (no inventory remaining).
                         </td>
-
+						</tr>
                     </c:when>
                     <c:otherwise>
                         <!-- No results found. //-->

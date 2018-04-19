@@ -540,7 +540,7 @@
 
         </script>
 
-
+</head>
 
         <c:import url="../../../body.jsp">
             <c:param name="pageTitle" value="PDX Model Details"/>

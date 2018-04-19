@@ -107,6 +107,7 @@ Method: <%= request.getMethod() %>
         </td>
     </tr>
 </table>
+</td></tr></table>
 
 </body>
 </html> 

@@ -64,7 +64,7 @@ summary, in turn, is linked to more detailed information about each of
 the reported tumors.
 <p>Additional information associated with a colored cell will be displayed
 in a popup window of your web browser when you hold your mouse over the
-cell. <i>(Requires JavaScript support.)</i>
+cell. <i>(Requires JavaScript support.)</i></p>
 <br>
 <hr>
 
@@ -885,5 +885,6 @@ NZO, and RIII.</li>
         </td>
     </tr>
 </table>
+</td></tr></table>
 </body>
 </html> 

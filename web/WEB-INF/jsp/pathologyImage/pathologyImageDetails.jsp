@@ -575,6 +575,7 @@ if (flashinstalled == 2) {
         </td>
     </tr>
 </table>
+</td></tr></table>
 </body>
 </html> 
 
