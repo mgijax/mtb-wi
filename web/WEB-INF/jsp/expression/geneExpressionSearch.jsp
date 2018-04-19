@@ -123,7 +123,8 @@
                   
                 </table>
                 
-                
+                </td>
+                </tr>
                 <tr class="buttons">
                   <td colspan="2">
                     <table border=0 cellspacing=5 width="100%">
@@ -136,7 +137,7 @@
                     </table>
                   </td>
                 </tr>
-                
+                </table>
               </html:form>
             </td>
           </tr>

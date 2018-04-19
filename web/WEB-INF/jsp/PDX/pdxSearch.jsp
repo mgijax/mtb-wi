@@ -165,7 +165,7 @@
         });
     
     </script>
-
+</head>
 
     <c:import url="../../../body.jsp">
         <c:param name="pageTitle" value="Patient Derived Xenograft Search Form"/>
@@ -222,9 +222,9 @@
                                             <tr><td border="5px">
                                                     <p class="miTitle">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
                                                 <ul>
-                                                    <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a><br>
-                                                    <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a><br>
-                                                    <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a><br>
+                                                    <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a></li>
+                                                    <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a></li>
+                                                    <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a></li>
                                                 </ul>
                                                 <br>
                                             </td></tr>
@@ -233,7 +233,7 @@
 
                                     <td>
                                         <img src="${applicationScope.urlImageDir}/NSG_lg.jpg" height="225" width="450" border=0 alt="NSG Mouse">
-                                    <td>
+                                    </td>
                                 </tr>
 
                             </table>
@@ -320,7 +320,7 @@
                         </html:select>
                     </c:when>
                 </c:choose>
-                <tr>
+
                     </td>
                 </tr>
         </table>
@@ -369,11 +369,11 @@
              <html:select property="recistResponses" size="4" >
                 <html:options collection="recistResponses" property="value" labelProperty="label"/>
             </html:select>
-    </td>
-</tr>
+    			</td>
+			</tr>
 
-</table>
-</td>
+		</table>
+	</td>
 </tr>
 
 
@@ -511,14 +511,15 @@
         </table>
     </td>
 </tr>
-</html:form>
+
 </table>
+</html:form>
 <!--======================== End Main Section ==============================-->
 
-</td>
-</tr>
-</table>
-</td>
+				</td>
+			</tr>
+		</table>
+	</td>
 </tr>
 </table>
 <!-- If the page reloads to update variants don't go back to the top of the page -->

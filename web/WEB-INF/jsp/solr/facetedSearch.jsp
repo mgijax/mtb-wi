@@ -647,7 +647,7 @@
                 var html = pagination;
                 html += "<br><table style='border-collapse: collapse;' border='1' cellpadding='5'>";
                 html += "<tr><th colspan=4>Tumor Model</th><th colspan=3>Model Details</th></tr>";
-                html += "<th onclick='colSort(0)'>Tumor Name <img src='"+getSortImage(0)+"'></th>";
+                html += "<tr><th onclick='colSort(0)'>Tumor Name <img src='"+getSortImage(0)+"'></th>";
                 html += "<th width='120' onclick='colSort(1)'>Organ Affected <img src='"+getSortImage(1)+"'></th>";
                 html += "<th >Treatment Type<br><span class='type'>Agents</span></th>";
                 html += "<th onclick='colSort(2)'>Strain Name <img src='"+getSortImage(2)+"'><br><span class='type'>Strain Types</span></th>";
@@ -743,6 +743,7 @@
      
                     html += "<br>&nbsp;<a href='/mtbwi/tumorSummary.do?tumorFrequencyKeys="+tfKeys+"' target='_blank'>";
                     html += "Model Summary</a><br>";
+                    html += "</td></tr>";
     
                 }
                 html += "</table><br>"+pagination;

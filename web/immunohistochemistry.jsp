@@ -59,6 +59,6 @@ Click <a href="${applicationScope.urlBase}/html/antibodies.xls">here</a> to down
         </td>
     </tr>
 </table>
-
+</td></tr></table>
 </body>
 </html> 

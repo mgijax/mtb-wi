@@ -9,7 +9,7 @@
       <c:param name="pageTitle" value="Human Gene Search"/>
     </c:import>
   </head>
-  <body>
+
     <c:import url="../../../body.jsp">
       <c:param name="pageTitle" value="Human Gene Search Form"/>
     </c:import>

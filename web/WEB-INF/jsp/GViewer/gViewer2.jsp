@@ -873,7 +873,7 @@
                     height:400,
                     closeAction:'hide',
                     plain: true,
-                    html:"<b>Loading QTLs</b><br>"+
+                    html:"<p><b>Loading QTLs</b><br>"+
                         "&nbsp;	'File->Load QTL' will list cancer QTLs by organ/tissue type. Crtl+Click to select multiple organs. <br>"+
                         "&nbsp;	Click 'View' to display selected QTL types in viewer. <br>"+
                         "&nbsp;	QTL data can be displayed as html or tab delimited.<br>"+
@@ -1000,4 +1000,5 @@
     <input type="hidden" name="export" value="true">
     <input type="hidden" id="exportXML" name="exportXML" value="">
 </form>
+</body>
 </html>

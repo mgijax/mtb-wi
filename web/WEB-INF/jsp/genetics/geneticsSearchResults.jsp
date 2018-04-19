@@ -367,7 +367,7 @@
 </c:when> 
 <c:otherwise>
   <!--   No tumor results found.  -->
-  <p>
+  <p></p>
 </c:otherwise>
 </c:choose>
 

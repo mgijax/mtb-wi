@@ -184,11 +184,12 @@
         </td>
     </tr>
 </table>
+</html:form>
 <!--======================== End Main Section ==============================-->
         </td>
     </tr>
 </table>
-</html:form>
+</td></tr></table>
 </body>
 </html> 
 

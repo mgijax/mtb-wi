@@ -19,8 +19,7 @@
            <a href="<c:url value='/index.do'/>">MTB Home</a>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/userHelp.jsp'/>">Help</a>
         </td>
     </tr>
-     
-    <tr>
+
     <tr>
         <td>
             <table border="0" cellpadding=0 cellspacing=1 class="results" width="100%">
