@@ -33,6 +33,7 @@
             if(document.getElementById("variantSelect") != null){
                 document.getElementById("variantSelect").style.visibility="hidden";
             }
+            document.forms[1].modelID.value="";
             document.forms[1].gene.value="";
             document.forms[1].genes2.value="";
             document.forms[1].genesCNV.value="";

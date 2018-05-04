@@ -31,6 +31,8 @@ public class ElimsUtil {
             = Logger.getLogger(ElimsUtil.class.getName());
     private static String userName;
     private static String password;
+    
+    private static final String BCM = "BCM"; // to identify Bayolor MRN IDs for search by ID
 
     public ElimsUtil() {
     }
@@ -500,7 +502,6 @@ public class ElimsUtil {
 
                     // should also test for filterOnID()
                     if ((results[i].getModel_Status().indexOf("Available") != -1)
-                            || (results[i].getModel_Status().indexOf("Inventory") != -1)
                             || (results[i].getModel_Status().indexOf("Blood") != -1)
                             || (results[i].getModel_Status().indexOf("Data") != -1)) {
 
@@ -575,6 +576,13 @@ public class ElimsUtil {
                             idMap.put( mouse.getModelID()+" "+mouse.getPrimarySite() + " " + mouse.getInitialDiagnosis(),mouse.getModelID());
                             // we want to be able to search on previous IDs as well
                             String pid = mouse.getPreviousID();
+                            
+                            String mrn = results[i].getMedical_Record_Number();
+                            if(mrn != null && mrn.startsWith(BCM)){
+                                pid = mrn;
+                                mouse.setPreviousID(pid);
+                            }
+                            
                             if(pid != null && pid.trim().length()>0){
                                 // oh the humanity, the ExtJS widget won't work if IDs are duplicated so we need to pad these id with a space right here ---V
                                 idMap.put( pid+ " ("+mouse.getModelID()+") "+mouse.getPrimarySite() + " " + mouse.getInitialDiagnosis(),mouse.getModelID()+" ");

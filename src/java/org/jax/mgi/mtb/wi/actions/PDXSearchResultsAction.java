@@ -5,6 +5,7 @@
 package org.jax.mgi.mtb.wi.actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -24,7 +25,7 @@ import org.jax.mgi.mtb.wi.utils.WIUtils;
  * @author sbn
  */
 public class PDXSearchResultsAction extends Action {
-
+    
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
             HttpServletRequest request,
@@ -45,6 +46,7 @@ public class PDXSearchResultsAction extends Action {
         ArrayList<String> types = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getTumorTypes());
         ArrayList<String> markers = new ArrayList<String>();
 
+        
         String gene = pdxForm.getGene();
         String genes2 = pdxForm.getGenes2();
         ArrayList<String> variants = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getVariants());
@@ -249,8 +251,10 @@ public class PDXSearchResultsAction extends Action {
             if (mouse.getModelStatus() == null) {
                 mouse.setModelStatus("");
             }
-            if (mouse.getModelStatus().indexOf("Inventory") != -1 || mouse.getModelStatus().indexOf("Data") != -1) {
-                unavailable.append(mouse.getModelID()).append(" ");
+            if (mouse.getModelStatus().indexOf("Inventory") != -1 ) {
+               
+                    unavailable.append(mouse.getModelID()).append(" ");
+              
             }
 
         }
