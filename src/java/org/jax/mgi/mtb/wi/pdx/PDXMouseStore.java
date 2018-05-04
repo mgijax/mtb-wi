@@ -97,18 +97,21 @@ public class PDXMouseStore {
 
     private static String baseURL = WIConstants.getInstance().getPDXWebservice();
 
+    /*
     private static String variationURL = baseURL + "/pdx-variation/";
     private static final String fusionURL = baseURL + "/pdx-fusion/";
 
     private static final String fusionModels = fusionURL + "models-for-fusion-gene-?.json"; // replace ? with gene
     private static final String fusionGenes = fusionURL + "all-fusion-genes.json";
     private static final String allFusionModels = fusionURL + "all-fusion-models.json";
-    private static HashMap<String, String> fusionModelsMap = new HashMap<String, String>();
+   
 
     private static final String allGenes = "all-genes.json";
     private static final String variantsForGene = "variants-for-gene-?.json";  // replace ? with gene symbol
     private static final String allVariants = "all-variants.json";
+    */
     
+    private static HashMap<String, String> fusionModelsMap = new HashMap<String, String>();
     
     private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M", "DAXX", "EHMT2", "EPHB6", "HLA-A", "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4", "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
     private static final String RNA_SEQ = "RNA_Seq";
@@ -925,13 +928,13 @@ public class PDXMouseStore {
 
     }
 
-    public String getModelExpression(String modelID) {
+    public String getOldExpression(String modelID) {
         String data = PDXDAO.getInstance().getModelExpression(modelID);
         return data;
 
     }
     
-     public String getNewModelExpression(String modelID) {
+     public String getModelExpression(String modelID) {
 
         DecimalFormat df = new DecimalFormat("#.##");
 
@@ -1036,14 +1039,14 @@ public class PDXMouseStore {
 
     }
 
-    public String getModelCNV(String modelID) {
+    public String getOldModelCNV(String modelID) {
         String data = PDXDAO.getInstance().getModelCNV(modelID);
         return data;
 
     }
     
     
-     public String getNewModelCNV(String modelID) {
+     public String getModelCNV(String modelID) {
 
         DecimalFormat df = new DecimalFormat("##.####");
 
@@ -1258,16 +1261,15 @@ public class PDXMouseStore {
 
     public String getVariationData(String model, String limit, String start, String sort, String dir, String filter) {
 
-        String params = "{\"model\":[\"" + model + "\"],\"skip\": \"" + start + "\", \"limit\": \"" + limit + "\", \"sort_by\": \"" + sort + "\", \"sort_dir\": \"" + dir + "\", \"filter\": \"" + filter + "\"}";
-
+      
     
         StringBuffer result = new StringBuffer("{'total':");
         try {
-            // for new APIs
-     //    params = "?model="+model+"&skip="+start+"&limit="+limit+"&sort_by="+sort+"&sort_dir="+dir+"&filter="+filter;
-     //       JSONObject job = new JSONObject("{\"data\":" + getJSON("http://pdxdata.jax.org/api/variants"+params) + "}");
+           
+            String params = "?model="+model+"&skip="+start+"&limit="+limit+"&sort_by="+sort+"&sort_dir="+dir+"&filter="+filter;
+            JSONObject job = new JSONObject("{\"data\":" + getJSON("http://pdxdata.jax.org/api/variants"+params) + "}");
      
-         JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allVariants, params) + "}");
+         
 
             job = (JSONObject) job.get("data");
 
