@@ -247,9 +247,11 @@ public class ElimsUtil {
     }
 
     // Any changes here need to get relayed to Al Simons as he comsumes this as JSON and these are field keys
-    private static final String STATUS_COLUMNS = "Model ID,Project Type,Model Status,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,Specimen Site,Primary Site,Initial Diagnosis,Clinical Diagnosis,Other Diagnosis Info,"
-            + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,Engraftment Site,Collecting Site,Collection Date,Received Date,Accession Date,Implantation Date,"
-            + "P1 Creation Date,P2 Engraftment Date,Engraftment Success Date,Engraftment Termination Date,Comments";
+    private static final String STATUS_COLUMNS = "Model ID,Project Type,Model Status,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,"
+            + "Specimen Site,Primary Site,Initial Diagnosis,Clinical Diagnosis,Other Diagnosis Info,"
+            + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,"
+            + "Engraftment Site,Collecting Site,Collection Date,Received Date,Accession Date,P0 Engraftment Date,P0 Success Date,"
+            + "P1 Engraftment Date,P1 Success Date,P2 Engraftment Date,P2 Success Date,Engraftment Success Date,Engraftment Termination Date,Comments";
 
     public String getPDXStatusReport() {
         StringBuffer report = new StringBuffer();
@@ -311,9 +313,12 @@ public class ElimsUtil {
                         report.append(cleanDate(result[i].getCollection_Date())).append(",");
                         report.append(cleanDate(result[i].getReceived_Date())).append(",");
                         report.append(cleanDate(result[i].getAccession_Date())).append(",");
-                        report.append(cleanDate(result[i].getImplantation_Date())).append(",");
-                        report.append(cleanDate(result[i].getP1_Creation_Date())).append(",");
+                        report.append(cleanDate(result[i].getP0_Engraftment_Date())).append(",");
+                        report.append(cleanDate(result[i].getP0_Success_Date())).append(",");
+                        report.append(cleanDate(result[i].getP1_Engraftment_Date())).append(",");
+                        report.append(cleanDate(result[i].getP1_Success_Date())).append(",");
                         report.append(cleanDate(result[i].getP2_Engraftment_Date())).append(",");
+                        report.append(cleanDate(result[i].getP2_Success_Date())).append(",");
                         report.append(cleanDate(result[i].getEngraftment_Success_Date())).append(",");
                         report.append(cleanDate(result[i].getEngraftment_Termination_Date())).append(",");
                         report.append(clean(result[i].getComments())).append("\n");
@@ -383,10 +388,13 @@ public class ElimsUtil {
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getCollecting_Site())).append(",\n");  // organization
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getCollection_Date())).append("\",\n");  
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getReceived_Date())).append("\",\n");
-                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getAccession_Date())).append("\",\n");
-                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getImplantation_Date())).append("\",\n");
-                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP1_Creation_Date())).append("\",\n");
+                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getAccession_Date())).append("\",\n");  
+                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP0_Engraftment_Date())).append("\",\n");
+                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP0_Success_Date())).append("\",\n");
+                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP1_Engraftment_Date())).append("\",\n");
+                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP1_Success_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP2_Engraftment_Date())).append("\",\n");
+                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP2_Success_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getEngraftment_Success_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getEngraftment_Termination_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getComments())).append("},\n");
@@ -418,7 +426,7 @@ public class ElimsUtil {
             if (result.length > 0) {
 
                 report.append("Model AKA,Collection Date,Donating Site,MRN,Patient Age,Sex,Race,Specimen Site,Primary Tumor Site,Clinical Diagnosis,Pathologic Diagnosis,");
-                report.append("Stage,Grade,Molecular Markers,Histological Markers,JAX Model ID,Implantation Date, Model Status\n");
+                report.append("Stage,Grade,Molecular Markers,Histological Markers,JAX Model ID,P0 Engraftment Date, Model Status\n");
                 for (int i = 0; i < result.length; i++) {
 
                     String id = result[i].getIdentifier();
@@ -447,7 +455,7 @@ public class ElimsUtil {
                             // this will happen for J##### ids which is ok
                         }
                         report.append(clean(id)).append(",");  // will need to add a TM to some of these
-                        report.append(cleanDate(result[i].getImplantation_Date())).append(",");
+                        report.append(cleanDate(result[i].getP0_Engraftment_Date())).append(",");
                         report.append(clean(result[i].getModel_Status())).append("\n");
                     }
                 }
