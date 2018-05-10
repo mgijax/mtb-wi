@@ -53,7 +53,7 @@ public class PDXSearchAction extends Action {
 
         if (geneStr != null) {
 
-            // this is very slow
+            
             ArrayList<String> variants = pdxMouseStore.getVariants(geneStr);
             if (variants != null && variants.size() > 0) {
 
