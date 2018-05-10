@@ -78,6 +78,12 @@ public class ElimsUtil {
         return report.toString();
     }
 
+    
+    
+     
+
+ 
+
     public String getPDXPatientHistory() {
         StringBuffer report = new StringBuffer();
 
@@ -86,7 +92,7 @@ public class ElimsUtil {
             HashMap<String, ArrayList<String>> statusMap = this.getModelStatusMap();
 
             ArrayList<String> emptyList = new ArrayList();
-            for (int k = 0; k < 6; k++) {
+            for (int k = 0; k < 10; k++) {
                 emptyList.add("");
             }
 
@@ -103,24 +109,33 @@ public class ElimsUtil {
             if (result.length > 0) {
 
                 /*  Add these fields from the statusMap
+                    list.add(result[i].getModel_Status());
                     list.add(result[i].getModel_Aka());
                     list.add(result[i].getGender());
                     list.add(result[i].getPatient_Age());
                     list.add(result[i].getRace());
                     list.add(result[i].getComments());
+                    list.add(result[i].getSpecimen_Site());
+                    list.add(result[i].getPrimary_Site());
+                    list.add(result[i].getClinical_Diagnosis());
+                    list.add(result[i].getCollecting_Site());
+                
                  */
-                report.append("Participant ID,Model,Model AKA,Model Status,Gender,Age,Race,Occupation Information,Prior Cancer Diagnosis,Risk Factors,Family History, Comorbidity Conditions,Exposures,");
-                report.append("Current Smoker,Former Smoker,Extimated Pack Years,Alcohol Use, Treatment Naive, Radiation Therapy, Radiation Therapy Details, Chemotherapy, Chemotherapy Details, Hormone Therapy, Hormone Therapy Details, Other Therapy, Other Therapy Details,");
+                report.append("Participant ID,Model,Model AKA,Model Status,Institution,Clinical Diagnosis,Primary Site,Specimen Site,Gender,Age,Race,Prior Cancer Diagnosis,");
+                report.append("Current Smoker,Former Smoker,Extimated Pack Years, Treatment Naive, Radiation Therapy,");
+                report.append("Radiation Therapy Details, Chemotherapy, Chemotherapy Details, Hormone Therapy, Hormone Therapy Details, Other Therapy, Other Therapy Details,");
                 report.append("Treatment Outcome,Patient History Notes,Comments\n");
                 for (int i = 0; i < result.length; i++) {
 
                     String id = result[i].getModel();
                     try {
-                        int intID = new Integer(id).intValue();
+                        int intID = new Integer(id);
                         id = ("TM" + String.format("%05d", intID));
                     } catch (NumberFormatException e) {
                         // this will happen for J##### ids which is ok
                     }
+                    
+ 
 
                     if (filterOnID(id)) {
                         report.append(clean(result[i].getParticipant_ID())).append(",");
@@ -132,20 +147,20 @@ public class ElimsUtil {
                         }
                         report.append(clean(statusList.get(1))).append(",");
                         report.append(clean(statusList.get(0))).append(",");
+                        report.append(clean(statusList.get(9))).append(",");
+                        report.append(clean(statusList.get(8))).append(",");
+                        report.append(clean(statusList.get(7))).append(",");
+                        report.append(clean(statusList.get(6))).append(",");
                         report.append(clean(statusList.get(2))).append(",");
                         report.append(clean(statusList.get(3))).append(",");
                         report.append(clean(statusList.get(4))).append(",");
+                        
 
-                        report.append(clean(result[i].getOccupation_Information())).append(",");
+                       
                         report.append(clean(result[i].getPrior_Cancer_Diagnoses())).append(",");
-                        report.append(clean(result[i].getRisk_Factors())).append(",");
-                        report.append(clean(result[i].getFamily_History())).append(",");
-                        report.append(clean(result[i].getComorbidity_Conditions())).append(",");
-                        report.append(clean(result[i].getExposures())).append(",");
                         report.append(clean(result[i].getCurrent_Smoker())).append(",");
                         report.append(clean(result[i].getFormer_Smoker())).append(",");
                         report.append(clean(result[i].getEstimated_Pack_Years())).append(",");
-                        report.append(clean(result[i].getAlcohol_Use())).append(",");
                         report.append(clean(result[i].getTreatment_Naive())).append(",");
                         report.append(clean(result[i].getRadiation_Therapy())).append(",");
                         report.append(clean(result[i].getRadiation_Therapy_Details())).append(",");
@@ -187,6 +202,9 @@ public class ElimsUtil {
                     = stub.getPDXPatientClinicalReports_sessionless(soapRequest).getGetPDXPatientClinicalReports_sessionlessResult().getPDXPatientClinicalReport();
 
             if (result.length > 0) {
+                
+                
+                
 
                 report.append("Model,Name,Primary Site,Laterality,Stage,Grade,Path Report Available,Path Report Link,Cisplatin Resistant, Other Resistance, Histology,");
                 report.append("Tumor Markers,Other Markers,Chromosome Analysis,Genetic Mutation Analysis, Tumor Notes\n");
@@ -251,7 +269,7 @@ public class ElimsUtil {
             + "Specimen Site,Primary Site,Initial Diagnosis,Clinical Diagnosis,Other Diagnosis Info,"
             + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,"
             + "Engraftment Site,Collecting Site,Collection Date,Received Date,Accession Date,P0 Engraftment Date,P0 Success Date,"
-            + "P1 Engraftment Date,P1 Success Date,P2 Engraftment Date,P2 Success Date,Engraftment Success Date,Engraftment Termination Date,Comments";
+            + "P1 Engraftment Date,P1 Success Date,P2 Engraftment Date,P2 Success Date,Comments";
 
     public String getPDXStatusReport() {
         StringBuffer report = new StringBuffer();
@@ -319,8 +337,6 @@ public class ElimsUtil {
                         report.append(cleanDate(result[i].getP1_Success_Date())).append(",");
                         report.append(cleanDate(result[i].getP2_Engraftment_Date())).append(",");
                         report.append(cleanDate(result[i].getP2_Success_Date())).append(",");
-                        report.append(cleanDate(result[i].getEngraftment_Success_Date())).append(",");
-                        report.append(cleanDate(result[i].getEngraftment_Termination_Date())).append(",");
                         report.append(clean(result[i].getComments())).append("\n");
                     }
                 }
@@ -395,8 +411,6 @@ public class ElimsUtil {
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP1_Success_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP2_Engraftment_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getP2_Success_Date())).append("\",\n");
-                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getEngraftment_Success_Date())).append("\",\n");
-                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getEngraftment_Termination_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getComments())).append("},\n");
                     }
                 }
@@ -815,16 +829,7 @@ public class ElimsUtil {
         return report.toString();
     }
 
-    /*
-    Return a map of modelid -> 
-                model status,                
-                Model_AKA,
-                Gender,
-                Age,
-                Race,
-                Comments,
-
-     */
+   
     private HashMap<String, ArrayList<String>> getModelStatusMap() {
 
         HashMap<String, ArrayList<String>> map = new HashMap<>();
@@ -849,6 +854,10 @@ public class ElimsUtil {
                     list.add(result[i].getPatient_Age());
                     list.add(result[i].getRace());
                     list.add(result[i].getComments());
+                    list.add(result[i].getSpecimen_Site());
+                    list.add(result[i].getPrimary_Site());
+                    list.add(result[i].getClinical_Diagnosis());
+                    list.add(result[i].getCollecting_Site()); // instituion/hospital
                     map.put(result[i].getIdentifier(), list);
                 }
             }
