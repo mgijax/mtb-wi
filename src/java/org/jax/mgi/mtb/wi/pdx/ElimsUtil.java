@@ -89,11 +89,11 @@ public class ElimsUtil {
 
         try {
 
-            HashMap<String, ArrayList<String>> statusMap = this.getModelStatusMap();
+            HashMap<String, HashMap<String,String>> statusMap = this.getModelStatusMap();
 
-            ArrayList<String> emptyList = new ArrayList();
-            for (int k = 0; k < 10; k++) {
-                emptyList.add("");
+            HashMap<String,String> emptyList = new HashMap();
+            for (String key: statusMap.get(0).keySet()) {
+                emptyList.put(key,"");
             }
 
             MTB_wsStub stub = getStub();
@@ -109,54 +109,46 @@ public class ElimsUtil {
             if (result.length > 0) {
 
                 /*  Add these fields from the statusMap
-                    list.add(result[i].getModel_Status());
-                    list.add(result[i].getModel_Aka());
-                    list.add(result[i].getGender());
-                    list.add(result[i].getPatient_Age());
-                    list.add(result[i].getRace());
-                    list.add(result[i].getComments());
-                    list.add(result[i].getSpecimen_Site());
-                    list.add(result[i].getPrimary_Site());
-                    list.add(result[i].getClinical_Diagnosis());
-                    list.add(result[i].getCollecting_Site());
-                
+                    list.put("status",result[i].getModel_Status());
+                    list.put("modelAKA",result[i].getModel_Aka());
+                    list.put("gender",result[i].getGender());
+                    list.put("age",result[i].getPatient_Age());
+                    list.put("race",result[i].getRace());
+                    list.put("comments",result[i].getComments());
+                    list.put("specimenSite",result[i].getSpecimen_Site());
+                    list.put("primarySite",result[i].getPrimary_Site());
+                    list.put("clinicalDiagnosis",result[i].getClinical_Diagnosis());
+                    list.put("hospital",result[i].getCollecting_Site()); // instituion/hospital
                  */
-                report.append("Participant ID,Model,Model AKA,Model Status,Institution,Clinical Diagnosis,Primary Site,Specimen Site,Gender,Age,Race,Prior Cancer Diagnosis,");
+                report.append("Participant ID,Model,Model AKA,Model Status,Specimen Site, Primary Site,Gender,Age,Race,Clinical Diagnosis,Prior Cancer Diagnosis,");
                 report.append("Current Smoker,Former Smoker,Extimated Pack Years, Treatment Naive, Radiation Therapy,");
                 report.append("Radiation Therapy Details, Chemotherapy, Chemotherapy Details, Hormone Therapy, Hormone Therapy Details, Other Therapy, Other Therapy Details,");
-                report.append("Treatment Outcome,Patient History Notes,Comments\n");
+                report.append("Donating Hospital,Treatment Outcome,Patient History Notes,Comments\n");
                 for (int i = 0; i < result.length; i++) {
 
                     String id = result[i].getModel();
                     try {
                         int intID = new Integer(id);
                         id = ("TM" + String.format("%05d", intID));
-                    } catch (NumberFormatException e) {
-                        // this will happen for J##### ids which is ok
-                    }
+                    } catch (NumberFormatException e) {}
                     
- 
-
                     if (filterOnID(id)) {
                         report.append(clean(result[i].getParticipant_ID())).append(",");
                         report.append(clean(id)).append(",");
-                        ArrayList<String> statusList = statusMap.get(result[i].getModel());
+                        HashMap<String,String> statusList = statusMap.get(result[i].getModel());
 
                         if (statusList == null) {
                             statusList = emptyList;
                         }
-                        report.append(clean(statusList.get(1))).append(",");
-                        report.append(clean(statusList.get(0))).append(",");
-                        report.append(clean(statusList.get(9))).append(",");
-                        report.append(clean(statusList.get(8))).append(",");
-                        report.append(clean(statusList.get(7))).append(",");
-                        report.append(clean(statusList.get(6))).append(",");
-                        report.append(clean(statusList.get(2))).append(",");
-                        report.append(clean(statusList.get(3))).append(",");
-                        report.append(clean(statusList.get(4))).append(",");
+                        report.append(clean(statusList.get("modelAKA"))).append(",");
+                        report.append(clean(statusList.get("status"))).append(",");
+                        report.append(clean(statusList.get("specimenSite"))).append(",");
+                        report.append(clean(statusList.get("primarySite"))).append(",");
+                        report.append(clean(statusList.get("gender"))).append(",");
+                        report.append(clean(statusList.get("age"))).append(",");
+                        report.append(clean(statusList.get("race"))).append(",");
+                        report.append(clean(statusList.get("clinicalDiagnosis"))).append(",");
                         
-
-                       
                         report.append(clean(result[i].getPrior_Cancer_Diagnoses())).append(",");
                         report.append(clean(result[i].getCurrent_Smoker())).append(",");
                         report.append(clean(result[i].getFormer_Smoker())).append(",");
@@ -170,9 +162,10 @@ public class ElimsUtil {
                         report.append(clean(result[i].getHormone_Therapy_Details())).append(",");
                         report.append(clean(result[i].getOther_Therapy())).append(",");
                         report.append(clean(result[i].getOther_Therapy_Details())).append(",");
+                        report.append(clean(statusList.get("hospital"))).append(",");
                         report.append(clean(result[i].getTreatment_Outcome())).append(",");
                         report.append(clean(result[i].getPatient_History_Notes())).append(",");
-                        report.append(clean(statusList.get(5))).append("\n");
+                        report.append(clean(statusList.get("comments"))).append("\n");
 
                     }
 
@@ -830,9 +823,9 @@ public class ElimsUtil {
     }
 
    
-    private HashMap<String, ArrayList<String>> getModelStatusMap() {
+    private HashMap<String, HashMap<String,String>> getModelStatusMap() {
 
-        HashMap<String, ArrayList<String>> map = new HashMap<>();
+        HashMap<String, HashMap<String,String>> map = new HashMap<>();
 
         try {
             MTB_wsStub stub = getStub();
@@ -847,17 +840,17 @@ public class ElimsUtil {
 
             if (result.length > 0) {
                 for (int i = 0; i < result.length; i++) {
-                    ArrayList<String> list = new ArrayList<>();
-                    list.add(result[i].getModel_Status());
-                    list.add(result[i].getModel_Aka());
-                    list.add(result[i].getGender());
-                    list.add(result[i].getPatient_Age());
-                    list.add(result[i].getRace());
-                    list.add(result[i].getComments());
-                    list.add(result[i].getSpecimen_Site());
-                    list.add(result[i].getPrimary_Site());
-                    list.add(result[i].getClinical_Diagnosis());
-                    list.add(result[i].getCollecting_Site()); // instituion/hospital
+                    HashMap<String,String> list = new HashMap();
+                    list.put("status",result[i].getModel_Status());
+                    list.put("modelAKA",result[i].getModel_Aka());
+                    list.put("gender",result[i].getGender());
+                    list.put("age",result[i].getPatient_Age());
+                    list.put("race",result[i].getRace());
+                    list.put("comments",result[i].getComments());
+                    list.put("specimenSite",result[i].getSpecimen_Site());
+                    list.put("primarySite",result[i].getPrimary_Site());
+                    list.put("clinicalDiagnosis",result[i].getClinical_Diagnosis());
+                    list.put("hospital",result[i].getCollecting_Site()); // instituion/hospital
                     map.put(result[i].getIdentifier(), list);
                 }
             }
