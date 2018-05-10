@@ -91,10 +91,7 @@ public class ElimsUtil {
 
             HashMap<String, HashMap<String,String>> statusMap = this.getModelStatusMap();
 
-            HashMap<String,String> emptyList = new HashMap();
-            for (String key: statusMap.get(0).keySet()) {
-                emptyList.put(key,"");
-            }
+            HashMap<String,String> emptyList = statusMap.get("emptyMap");
 
             MTB_wsStub stub = getStub();
 
@@ -827,6 +824,19 @@ public class ElimsUtil {
 
         HashMap<String, HashMap<String,String>> map = new HashMap<>();
 
+        HashMap<String,String> list = new HashMap();
+                    list.put("status","");
+                    list.put("modelAKA","");
+                    list.put("gender","");
+                    list.put("age","");
+                    list.put("race","");
+                    list.put("comments","");
+                    list.put("specimenSite","");
+                    list.put("primarySite","");
+                    list.put("clinicalDiagnosis","");
+                    list.put("hospital","");
+                    map.put("emptyMap", list);
+        
         try {
             MTB_wsStub stub = getStub();
 
@@ -840,7 +850,7 @@ public class ElimsUtil {
 
             if (result.length > 0) {
                 for (int i = 0; i < result.length; i++) {
-                    HashMap<String,String> list = new HashMap();
+                    list = new HashMap();
                     list.put("status",result[i].getModel_Status());
                     list.put("modelAKA",result[i].getModel_Aka());
                     list.put("gender",result[i].getGender());
