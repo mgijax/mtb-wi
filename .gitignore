@@ -9,3 +9,4 @@
 **/.cvsignore
 **/nbproject/private/
 /doc
+build.number
