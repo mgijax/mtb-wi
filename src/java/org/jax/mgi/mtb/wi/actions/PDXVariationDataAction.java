@@ -51,17 +51,14 @@ public class PDXVariationDataAction extends Action {
            dir = dir.toLowerCase();
        }
     
-       String filter = "FALSE";
-       // need to turn on filtering for public deployment.
-       if(WIConstants.getInstance().getPublicDeployment()){
-           filter = "TRUE";
-       }
        
+       
+        
         
         response.setContentType("application/json");
         
        
-        response.getWriter().write(store.getVariationData(modelID, limit, start, sort, dir,filter));
+        response.getWriter().write(store.getVariationData(modelID, limit, start, sort, dir));
         
         response.flushBuffer();
 
