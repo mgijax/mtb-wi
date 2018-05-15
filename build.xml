@@ -4,7 +4,7 @@
                           MTBWI Library build file
 ===============================================================================
 -->
-<project name="mtbwi" default="debug" basedir=".">
+<project name="mtbwi2" default="debug" basedir=".">
 
 <description>
     mtbwi is the Java Web Interface into the MTB system.
@@ -13,8 +13,8 @@
 <!--===================== Property Definitions =============================-->
 <property name="tomcat.root"      value="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/"/>
 <property name="app.version"      value="1"/>
-<property name="app.name"         value="mtbwi"/>
-<property name="app.path"         value="/mtbwi"/>
+<property name="app.name"         value="mtbwi2"/>
+<property name="app.path"         value="/mtbwi2"/>
 <property name="src.java.home"    value="${basedir}/src/java"/>
 <property name="web.xml"          value="build/WEB-INF/web.xml"/>
 <property name="dist.war.name"    value="${app.name}.war"/>
@@ -173,8 +173,8 @@ invocation even though it may be called more than once.
          overwrite="true"/>
    <antcall target="projectPrepare"/>
    <antcall target="webdist"/>
-   <copy file="dist/mtbwi.war" 
-         tofile="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/webapps/mtbwi.war"
+   <copy file="dist/mtbwi2.war" 
+         tofile="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/webapps/mtbwi2.war"
          overwrite="true"/>
    <tstamp>
     <format property="current.time" pattern="MM/dd/yyyy hh:mm:ss aa" />
@@ -183,7 +183,7 @@ invocation even though it may be called more than once.
   <echo message="finished at ${current.time}" />      
    
 </target>
-<target name="projectDistDev" description="Prepare the web application.">
+<target name="projectDistDev" description="Prepare the dev web application.">
    <echo message="Preparing WAR file for DEVELOPMENT..."/>
    <echo message="Copying conf/build.dev.properties to conf/build.properties"/>
    <copy file="conf/build.dev.properties"
@@ -191,6 +191,7 @@ invocation even though it may be called more than once.
          overwrite="true"/>
    <antcall target="projectPrepare"/>
    <antcall target="webdist"/>
+   
 </target>
 
 <target name="projectDistProd" description="Prepare the web application.">

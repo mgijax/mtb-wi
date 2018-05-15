@@ -205,7 +205,7 @@ public class ModelCounts {
         }
 
         String[] tissues = tissue.split(",");
-        StringBuilder link = new StringBuilder("/mtbwi/pdxSearchResults.do?");
+        StringBuilder link = new StringBuilder("/mtbwi2/pdxSearchResults.do?");
 
         for (String t : tissues) {
             link.append("primarySites=").append(t.replaceAll(" ", "+"));
@@ -348,9 +348,9 @@ public class ModelCounts {
 
             String solrTissue = vals.get(4).replaceAll(" ", "+");
             String[] links = {
-                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:true&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
-                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:false&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
-                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\""
+                "\"/mtbwi2/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:true&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
+                "\"/mtbwi2/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:false&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
+                "\"/mtbwi2/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\""
             };
 
             if ("0".equals(vals.get(5))) {
