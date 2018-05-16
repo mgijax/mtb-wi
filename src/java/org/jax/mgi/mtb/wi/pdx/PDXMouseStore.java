@@ -1190,6 +1190,25 @@ public class PDXMouseStore {
 
     }
 
+    // need to add links for ckb varying on pubilc availability and site prod/pub
+    
+    //https://ckb.jax.org/molecularProfile/show/369<ckb_molpro_id>
+    //https://ckb.jax.org/gene/show?geneId=1956<ckb_gene_id>
+    /*
+     "ckb_clinically_relevant": null, 
+      "ckb_gene_id": null, 
+      "ckb_molpro_id": null, 
+      "ckb_molpro_name": null, 
+      "ckb_nclinical_resist": null, 
+      "ckb_nclinical_sens": null, 
+      "ckb_npreclinical_resist": null, 
+      "ckb_npreclinical_sens": null, 
+      "ckb_potential_treat_approach": null, 
+      "ckb_protein_effect": null, 
+      "ckb_public_status": null, 
+    
+    */
+    
     public String getVariationData(String model, String limit, String start, String sort, String dir) {
 
         StringBuffer result = new StringBuffer("{'total':");
