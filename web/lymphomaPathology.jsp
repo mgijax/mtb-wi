@@ -29,8 +29,9 @@ Click <a href="${applicationScope.urlBase}/html/Lymphoma.html">here</a> for Lymp
 
 Click <a href="${applicationScope.urlBase}/html/Lymphoma.xlsx">here</a> to download in Microsoft<sup>&reg;</sup> Excel format.
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 

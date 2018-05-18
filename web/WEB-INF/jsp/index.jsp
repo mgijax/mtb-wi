@@ -141,9 +141,10 @@ The value for this field is selected from a list of controlled vocabulary terms.
 														<hr>
 														<p></p>
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 
 

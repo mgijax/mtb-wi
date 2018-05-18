@@ -200,9 +200,10 @@ Searches are conducted from a list of antibody names which include clone numbers
 </table>
 </html:form>
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 
 

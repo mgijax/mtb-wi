@@ -575,9 +575,10 @@ if (flashinstalled == 2) {
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 
 

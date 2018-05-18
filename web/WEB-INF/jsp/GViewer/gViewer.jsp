@@ -172,8 +172,9 @@
 								
 			<%--				</html:form> --%>
 						</table>
-		</section>
-	</div>
-</body>
 
+</section>
+</div>
+</body>
 </html>
+

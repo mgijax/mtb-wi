@@ -12,13 +12,8 @@
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-<table>
-		<tr>
-				<td>
-						<table>
-								<tr>
-										<td>
+<div class="wrap">
+<section class="main-alt">
 
 <!-- ////  Start Additional Notes Records  //// -->
 
@@ -52,8 +47,9 @@
 
 <!-- ////  End Additional Notes Records  //// -->
 
-</td>
-		</tr>
-</table>
+
+</section>
+</div>
 </body>
 </html>
+

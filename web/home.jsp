@@ -18,5 +18,6 @@
 
 						<a href="/mtbwi/index.do">Enter the MTB Database.</a>
 				</div>
-		</body>
+</body>
 </html>
+

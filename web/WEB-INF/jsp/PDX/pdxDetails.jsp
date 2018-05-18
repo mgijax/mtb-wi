@@ -1290,8 +1290,8 @@ ${graphic.description}
 </table>
 														</html:form>
 
-</section>
-	</div>
-</body>
 
+</section>
+</div>
+</body>
 </html>

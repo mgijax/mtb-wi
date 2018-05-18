@@ -12,13 +12,8 @@
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-<table>
-		<tr>
-				<td>
-						<table>
-								<tr>
-										<td>
+<div class="wrap">
+<section class="main-alt">
 
 <!-- ////  Start Tumor Genetics Section  //// -->
 
@@ -251,11 +246,8 @@ Type</td>
 				</c:otherwise>
 		</c:choose>
 
-		<!-- End Cytogentics -->
-</td>
-
-</tr>
-
-</table>
+</section>
+</div>
 </body>
-</html> 
+</html>
+ 

@@ -172,9 +172,10 @@ IDs</td>
 
 </table>
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 
 

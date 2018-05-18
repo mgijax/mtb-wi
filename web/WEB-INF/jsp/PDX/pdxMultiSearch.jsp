@@ -196,6 +196,7 @@
 
 														</table>
 
+
 </section>
 </div>
 		<!-- If the page reloads to update variants don't go back to the top of the page -->
@@ -205,4 +206,5 @@
 				</script>
 		</c:if>
 </body>
-</html> 
+</html>
+ 

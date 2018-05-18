@@ -31,8 +31,9 @@ Click <a href="${applicationScope.urlBase}/html/antibodies.html">here</a> for Im
 
 Click <a href="${applicationScope.urlBase}/html/antibodies.xls">here</a> to download in Microsoft<sup>&reg;</sup> Excel format.
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 

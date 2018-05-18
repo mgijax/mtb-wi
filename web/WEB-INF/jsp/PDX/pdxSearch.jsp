@@ -524,6 +524,7 @@ No variants for selected gene.</td>
 </table>
 </html:form>
 
+
 </section>
 </div>
 <!-- If the page reloads to update variants don't go back to the top of the page -->
@@ -533,4 +534,5 @@ No variants for selected gene.</td>
 		</script>
 </c:if>
 </body>
-</html> 
+</html>
+ 

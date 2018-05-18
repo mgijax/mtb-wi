@@ -1111,11 +1111,13 @@
 										
 												
 								</table>
-						</section>
-						</div>
+
+</section>
+</div>
 <form action="" id="export-form" target="_blank" method="post" >
 		<input type="hidden" name="export" value="true">
 		<input type="hidden" id="export-x-mL" name="exportXML" value="">
 </form>
 </body>
 </html>
+

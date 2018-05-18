@@ -463,9 +463,11 @@ ${assayImage.institution}
 
 <!-- ////  End Detail Section  //// -->
 
+
 </section>
 </div>
 
 </body>
-</html> 
+</html>
+ 
 

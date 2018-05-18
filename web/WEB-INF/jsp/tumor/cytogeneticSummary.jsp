@@ -116,9 +116,10 @@
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-	</div>
-</body>
 
+</section>
+</div>
+</body>
 </html>
+
 

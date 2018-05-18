@@ -34,7 +34,9 @@
 		<h4>Generating Tumor Frequency Grid</h4>
 		<img src="${applicationScope.urlImageDir}/loading.gif"/>
 
+
 </section>
 </div>
 </body>
-</html> 
+</html>
+ 

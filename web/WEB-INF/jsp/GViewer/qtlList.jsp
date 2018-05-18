@@ -8,15 +8,11 @@
 		<c:import url="../../../meta.jsp">
 			<c:param name="pageTitle" value="List of Selected QTLs"/>
 		</c:import>
-
+</head>
 <body>
 			<c:import url="../../../body.jsp" />
-
-	</head>
-
-	<table>
-		<tr>
-			<td>
+<div class="wrap">
+<section class="main-alt">
 
 <header>
 	<h1>List of Selected Cancer QTLs</h1>
@@ -63,7 +59,10 @@
 						</c:when>
 					</c:choose>
 				</table>
-			</td>
-		</tr>
-	</table>
-</html> 
+
+
+</section>
+</div>
+</body>
+</html>
+ 

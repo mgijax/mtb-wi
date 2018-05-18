@@ -12,13 +12,8 @@
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-<table>
-		<tr>
-				<td>
-						<table>
-								<tr>
-										<td>
+<div class="wrap">
+<section class="main-alt">
 
 <!-- ////  Start Pathology Records  //// -->
 
@@ -148,8 +143,8 @@
 
 <!-- ////  End Pathology Records  //// -->
 
-</td>
-		</tr>
-</table>
+</section>
+</div>
 </body>
-</html> 
+</html>
+ 

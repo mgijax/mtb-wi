@@ -476,9 +476,10 @@ to",width:100,resizeable:true},
 
 </table>
 
-</section>
-	</div>
-</body>
 
+</section>
+</div>
+</body>
 </html>
+
 

@@ -80,9 +80,10 @@ Method: <%= request.getMethod() %>
 
 //-->
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 
 

@@ -138,8 +138,9 @@
 
 <!-- ////  End Search Results List  //// -->
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 

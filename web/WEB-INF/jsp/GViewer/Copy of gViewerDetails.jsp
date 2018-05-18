@@ -519,11 +519,11 @@
 									</td> 
 								</tr>
 							</table>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
+
+
+</section>
+</div>
+</body>
 	
 </html>
+

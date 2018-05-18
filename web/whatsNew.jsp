@@ -23,8 +23,9 @@
 
 <c:import url="/live/www/html/whatsNew.html"/>
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 

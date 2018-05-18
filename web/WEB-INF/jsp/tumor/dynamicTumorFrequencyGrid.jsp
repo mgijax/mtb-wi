@@ -1063,8 +1063,9 @@
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 

@@ -256,9 +256,10 @@
 
 </table>
 
-</section>
-	</div>
-</body>
 
+</section>
+</div>
+</body>
 </html>
+
 

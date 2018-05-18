@@ -73,7 +73,9 @@
 <!-- \n -->
 
 																		<html:form action="pdxLogin">
-																				<table class="results">
+																				
+
+<table class="results">
 																						<tr>
 																								<td>
 																										<table class="quick-search">
@@ -92,17 +94,18 @@
 																				<div align="right">
 																						<input type="submit" VALUE="Login">
 																						<input type="reset"	VALUE="Reset">
-																				</div>
-																				</td>
-																				</tr>
-																				</table>
-																				</td>
-																				</tr>
-																				</table>
-																		</html:form>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+		</html:form>
+
 </section>
 </div>
 </body>
-
-																		</html> 
+</html>
+ 
 

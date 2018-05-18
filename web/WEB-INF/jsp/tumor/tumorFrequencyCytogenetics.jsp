@@ -13,12 +13,8 @@
 <body>
 	<c:import url="../../../body.jsp" />
 
-<table>
-		<tr>
-				<td>
-						<table>
-								<tr>
-										<td>
+<div class="wrap">
+<section class="main-alt">
 												<!- Cytogenetics -->
 								<c:choose>
 										<c:when test="${not empty tumorFreqs}">
@@ -243,4 +239,5 @@ Type</td>
 
 </table>
 </body>
-</html> 
+</html>
+ 

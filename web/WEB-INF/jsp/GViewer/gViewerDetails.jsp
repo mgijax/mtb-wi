@@ -634,7 +634,9 @@ Symbol/Name
 								</tr>
 							</table>
 
-	</section>
-	</div>
+
+</section>
+</div>
 </html>
+
 </body>

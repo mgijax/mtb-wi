@@ -189,8 +189,9 @@ This search is used to find allele records associated with a specific chromosome
 								</table>
 								</html:form>
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 

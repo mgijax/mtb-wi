@@ -192,8 +192,9 @@ Users interested in a specific strain of mouse that is offered through The Jacks
 
 </html:form>
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 

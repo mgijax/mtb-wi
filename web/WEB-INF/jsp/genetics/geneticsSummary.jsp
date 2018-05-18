@@ -141,9 +141,10 @@ Total Items: ${items}
 
 <!-- ////  End Search Results List  //// -->
 
-</section>
-	</div>
-</body>
 
+</section>
+</div>
+</body>
 </html>
+
 

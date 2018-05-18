@@ -236,8 +236,9 @@ To search for tumor records associated with Pathology images, choose the box nex
 </table>
 </html:form>
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 

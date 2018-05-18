@@ -251,31 +251,14 @@
 
 <body>
 			<c:import url="../../../body.jsp" />
-
-		<table>
-				<tr>
-						<td width="200">
-								<c:import url="../../../toolBar.jsp"/>
-						</td>
-						<td class="separator">
-								
-						</td>
-						<td>
-								<table>
-										<tr>
-												<td>
-
+<div class="wrap">
+<nav><c:import url="../../../toolBar.jsp"/></nav>
+<section class="main">
 <header>
 	<h1>Marker Grid</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
-<table class="results">
 
-														</table>		
-												</td>
-										</tr>
-				</tr>
-				<td>
 				 <!--	 Some really great explanatory text goes here. 
 						Use check boxes to limit organs in grid (check desired organs and click 'Generate Grid'). 
 						Sort highest to lowest frequency for an organ by clicking the organ name. -->
@@ -290,9 +273,8 @@
 
 						</form>
 
-				</td>
-		</tr>
-</table>
 
+</section>
+</div>
 </body>
 </html>

@@ -417,9 +417,10 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-	</div>
-</body>
 
+</section>
+</div>
+</body>
 </html>
+
 

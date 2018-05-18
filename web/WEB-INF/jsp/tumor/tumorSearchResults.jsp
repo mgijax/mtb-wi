@@ -422,11 +422,12 @@ Summary</td>
 
 </table>
 
-</section>
-	</div>
-</body>
 
+</section>
+</div>
+</body>
 </html>
+
 
 </c:catch>
 <c:if test="${not empty exception}">

@@ -242,8 +242,9 @@
 </tr>
 </table>
 </html:form>
-		</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 

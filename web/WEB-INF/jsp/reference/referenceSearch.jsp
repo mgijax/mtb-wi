@@ -213,9 +213,10 @@ This controlled vocabulary was developed using the animal pathology community tu
 </table>
 </html:form>
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 
 

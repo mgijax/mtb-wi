@@ -440,7 +440,7 @@
 	<h1>PDX Add Content</h1>
 	<a class="help" href="userHelp.jsp#pdxAddContent"></a>
 </header>
-<table >
+<table>
 
 <!-- ////  Start Search Summary  //// -->
 
@@ -465,14 +465,10 @@
 										</tr>
 								</table>
 								
-<!-- \n -->
 
-						</td>
-				</tr>
-		</table>
-</td>
-</tr>
-</table>
-
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 
 

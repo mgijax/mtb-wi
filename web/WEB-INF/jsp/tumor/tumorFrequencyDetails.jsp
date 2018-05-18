@@ -21,11 +21,6 @@
 	<h1>Tumor Details</h1>
 	<a class="help" href="userHelp.jsp#tumordetails"></a>
 </header>
-<table class="results">
-
-</table>
-
-<!-- \n -->
 
 <!-- ////  Start Detail Section  //// -->
 
@@ -610,8 +605,9 @@ Change</td>
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-	</div>
-</body>
 
-</html> 
+</section>
+</div>
+</body>
+</html>
+ 
