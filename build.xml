@@ -11,7 +11,7 @@
 </description>
 
 <!--===================== Property Definitions =============================-->
-<property name="tomcat.root"      value="/Users/curria/Projects/eclipse-workspace/apache-tomcat-7.0.70"/>
+<property name="tomcat.root"      value="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/"/>
 <property name="app.version"      value="1"/>
 <property name="app.name"         value="mtbwi"/>
 <property name="app.path"         value="/mtbwi"/>
