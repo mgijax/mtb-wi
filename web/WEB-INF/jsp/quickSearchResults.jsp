@@ -58,7 +58,9 @@
 
 <tr>
 										<td>
-												<table class="results">
+												
+
+<table class="results">
 														<tr class="page-title">
 																<td>
 																		<table>
@@ -96,7 +98,9 @@
 																				</table>
 																		</c:when>
 																		<c:otherwise>
-																				<table class="results">
+																				
+
+<table class="results">
 																						${result.searchResultsText}
 																				</table>
 																		</c:otherwise>

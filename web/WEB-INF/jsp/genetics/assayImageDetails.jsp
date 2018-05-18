@@ -22,6 +22,8 @@
 	<a class="help" href="userHelp.jsp#assayImageDetail"></a>
 </header>
 
+
+
 <table class="results">
 
 <!-- ////  Start Detail Section  //// -->
@@ -188,7 +190,9 @@ ${assayImage.institution}
 <c:set var="num" value="1"/>
 
 				<td width="49%" >
-						<table class="results">
+						
+
+<table class="results">
 								<c:choose>
 										<c:when test="${not empty assayImage.tumorFrequencyKey}">
 												<c:set var="num" value="${num == 1 ? 2 : 1}"/>
@@ -344,7 +348,9 @@ ${assayImage.institution}
 <c:set var="num" value="1"/>
 
 				<td width="49%">
-						<table class="results">
+						
+
+<table class="results">
 								<c:choose>
 										<c:when test="${not empty assayImage.strainName}">
 												<c:set var="num" value="${num == 1 ? 2 : 1}"/>

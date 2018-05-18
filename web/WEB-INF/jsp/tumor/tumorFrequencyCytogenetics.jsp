@@ -18,7 +18,9 @@
 												<!- Cytogenetics -->
 								<c:choose>
 										<c:when test="${not empty tumorFreqs}">
-												<table class="results">
+												
+
+<table class="results">
 														<tr>
 																<td colspan="6" class="results-header-left">
 																		<span class="larger">Tumor Cytogenetics</span>
@@ -30,7 +32,9 @@
 												<c:forEach var="tumorFreq" items="${tumorFreqs}" varStatus="statusTF">
 
 														<!------------------------------------------------------------------------------>
-														<table class="results">
+														
+
+<table class="results">
 																<tr>
 																		<td class="results-header">MTB ID</td>
 																		<td class="results-header">Organ Affected</td>
@@ -120,7 +124,9 @@ Detection</td>
 
 														<!------------------------------------------------------------------------>
 
-														<table class="results">
+														
+
+<table class="results">
 
 																<tr>
 

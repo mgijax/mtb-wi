@@ -22,6 +22,8 @@
 	<h1>Pathology Image Search Form</h1>
 	<a class="help" href="userHelp.jsp#pathology"></a>
 </header>
+
+
 <table class="results">
 
 <tr class="buttons">

@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <!doctype html>

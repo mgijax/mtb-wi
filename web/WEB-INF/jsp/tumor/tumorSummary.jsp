@@ -298,11 +298,7 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 												
 														 <c:choose>
 																<c:when test="${not empty additionalInfoText}">
-																	<c:set var="additionalInfoText" value="${additionalInfoText}
-<!-- \n -->
- 
-<!-- \n -->
-"/>
+																	<c:set var="additionalInfoText" value="${additionalInfoText}"/>
 																</c:when>
 														 </c:choose>
 														<c:choose>
@@ -325,11 +321,7 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 												<c:when test="${rec.numNotes>0}">
 														<c:choose>
 																<c:when test="${not empty additionalInfoText}">
-																		<c:set var="additionalInfoText" value="${additionalInfoText}
-<!-- \n -->
- 
-<!-- \n -->
-"/>
+																		<c:set var="additionalInfoText" value="${additionalInfoText}"/>
 																</c:when>
 														</c:choose>
 														<c:choose>
@@ -348,11 +340,7 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 												<c:when test="${not empty rec.note}">
 														<c:choose>
 																<c:when test="${not empty additionalInfoText}">
-																		<c:set var="additionalInfoText" value="${additionalInfoText}
-<!-- \n -->
- 
-<!-- \n -->
-"/>
+																		<c:set var="additionalInfoText" value="${additionalInfoText}"/>
 																</c:when>
 														</c:choose>
 														<c:choose>
@@ -368,11 +356,7 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 												<c:when test="${rec.numSamples > 0}">
 														<c:choose>
 																<c:when test="${not empty additionalInfoText}">
-																		<c:set var="additionalInfoText" value="${additionalInfoText}
-<!-- \n -->
- 
-<!-- \n -->
-"/>
+																		<c:set var="additionalInfoText" value="${additionalInfoText}"/>
 																</c:when>
 														</c:choose>
 														<c:choose>

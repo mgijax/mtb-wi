@@ -23,6 +23,8 @@
 	<h1>Gene Expression Data Set Search Results</h1>
 	<a class="help" href="userHelp.jsp#geneexpression"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Search Summary  //// -->

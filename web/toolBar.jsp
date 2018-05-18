@@ -17,7 +17,9 @@
 		 
 		<tr>
 				<td>
-						<table class="results">
+						
+
+<table class="results">
 								<tr>
 										<td>
 												<html:form action="quickSearchResults" method="GET">

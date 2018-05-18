@@ -24,6 +24,8 @@
 	<h1>Tumor Search Form</h1>
 	<a class="help" href="userHelp.jsp#tumors"></a>
 </header>
+
+
 <table class="results">
 
 <tr class="buttons">

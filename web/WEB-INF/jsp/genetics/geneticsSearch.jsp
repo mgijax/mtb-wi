@@ -23,6 +23,8 @@
 	<h1>Strain and Tumor Genetics Search Form</h1>
 	<a class="help" href="userHelp.jsp#genetics"></a>
 </header>
+
+
 <table class="results">
 
 <tr class="page-info">

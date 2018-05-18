@@ -19,7 +19,9 @@
 
 <c:choose>
 										<c:when test="${not empty tumorFreq.tumorGenetics}">
-												<table class="results">
+												
+
+<table class="results">
 														<tr>
 																<td colspan="5" class="results-header-left">
 																		<span class="larger">Tumor Genetics</span>
@@ -125,7 +127,9 @@ Change</td>
 						<!- Cytogenetics -->
 		<c:choose>
 				<c:when test="${not empty tumorFreq.tumorCytogenetics}">
-						<table class="results">
+						
+
+<table class="results">
 								<tr>
 										<td colspan="6" class="results-header-left">
 												<span class="larger">Tumor Cytogenetics</span>
@@ -134,7 +138,9 @@ Change</td>
 								</tr>
 						</table>
 
-						<table class="results">
+						
+
+<table class="results">
 
 								<tr>
 

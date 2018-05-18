@@ -21,6 +21,8 @@
 	<h1>PDX Image Detail</h1>
 	<a class="help" href="userHelp.jsp#imagedetail"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Detail Section  //// -->

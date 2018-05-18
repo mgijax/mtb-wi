@@ -25,6 +25,8 @@
 	<h1>Strain Search Form</h1>
 	<a class="help" href="userHelp.jsp#strains"></a>
 </header>
+
+
 <table class="results">
 
 <tr class="buttons">

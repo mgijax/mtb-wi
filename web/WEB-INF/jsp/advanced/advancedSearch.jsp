@@ -22,6 +22,8 @@
 	<h1>Advanced Search Form</h1>
 	<a class="help" href="userHelp.jsp#advanced"></a>
 </header>
+
+
 <table class="results">
 
 <tr class="buttons">

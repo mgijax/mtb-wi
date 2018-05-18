@@ -22,6 +22,8 @@
 	<h1>Advanced Search Results</h1>
 	<a class="help" href="userHelp.jsp#tumorresults"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Search Summary  //// -->

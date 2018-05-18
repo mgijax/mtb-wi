@@ -110,7 +110,7 @@ in MTB </td>
 																</c:when>
 																<c:when test="${info.label=='Pathology Images'}">
 																		<c:if test="${info.value!=0}">
-																				<tr><td>${info.label} (<a href="pathologyImageSearchResults.do?referenceKey=${reference.key}&maxItems=No+Limit">${info.value}</a>)</td</tr>
+																				<tr><td>${info.label} (<a href="pathologyImageSearchResults.do?referenceKey=${reference.key}&maxItems=No+Limit">${info.value}</a>)</td></tr>
 																		</c:if>
 																</c:when>
 																<c:otherwise>

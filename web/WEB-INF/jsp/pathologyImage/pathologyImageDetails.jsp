@@ -71,6 +71,8 @@ End If
 	<h1>Pathology Image Detail</h1>
 	<a class="help" href="userHelp.jsp#pathdetail"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Detail Section  //// -->
@@ -238,7 +240,9 @@ if (flashinstalled == 2) {
 		
 <!-- \n -->
 
-			<table class="results">
+			
+
+<table class="results">
 				<tr class="stripe-1">
 					<td colspan="4" class="cat-title">Image Probes</td>
 				</tr>
@@ -296,7 +300,9 @@ if (flashinstalled == 2) {
 <c:set var="num" value="1"/>
 
 				<td width="49%" >
-						<table class="results">
+						
+
+<table class="results">
 								<c:choose>
 										<c:when test="${not empty pathology.tumorFrequencyKey}">
 												<c:set var="num" value="${num == 1 ? 2 : 1}"/>
@@ -452,7 +458,9 @@ if (flashinstalled == 2) {
 <c:set var="num" value="1"/>
 
 				<td width="49%">
-						<table class="results">
+						
+
+<table class="results">
 								<c:choose>
 										<c:when test="${not empty pathology.strainName}">
 												<c:set var="num" value="${num == 1 ? 2 : 1}"/>

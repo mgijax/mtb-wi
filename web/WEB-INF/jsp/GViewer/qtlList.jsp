@@ -18,6 +18,8 @@
 	<h1>List of Selected Cancer QTLs</h1>
 	<a class="help" href="userHelp.jsp#QTLList"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Detail Section  //// -->
@@ -29,7 +31,9 @@
 						<c:when test="${not empty features}">
 							<tr>
 								<td colspan="2">
-									<table class="results">
+									
+
+<table class="results">
 										<tr>
 											<td class="results-header">MGI ID</td>
 											<td class="results-header">QTL</td>

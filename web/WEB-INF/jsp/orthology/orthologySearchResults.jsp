@@ -23,6 +23,8 @@
 	<h1>Orthology Search Results</h1>
 	<a class="help" href="userHelp.jsp#humangeneresults"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Search Summary  //// -->
@@ -70,6 +72,8 @@
 <!-- ////  Start Results  //// -->
 
 <!-- ////  Start Strain Genetics Results List  //// -->
+
+
 
 <table class="results">
 		<tr>

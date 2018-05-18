@@ -23,11 +23,12 @@
 	<h1>Human Gene Search Form</h1>
 	<a class="help" href="userHelp.jsp#humangene"></a>
 </header>
+
+
 <table class="results">
 
-<tr class="page-info">
-											
-										</tr>
+<tr class="page-info"></tr>
+
 										<tr class="buttons">
 											<td colspan="2">
 												<table>

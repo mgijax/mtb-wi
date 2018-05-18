@@ -153,6 +153,8 @@
 	<h1>Dynamic Tumor Frequency Grid</h1>
 	<a class="help" href="userHelp.jsp#dynamicgrid"></a>
 </header>
+
+
 <table class="results">
 
 				</table>

@@ -18,6 +18,8 @@
 	<h1>Citing the Mouse Tumor Biology Database</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
+
+
 <table class="results">
 
 </table>

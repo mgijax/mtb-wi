@@ -25,7 +25,9 @@
 
 		<tr>
 				<td>
-						<table class="results">
+						
+
+<table class="results">
 								<tr>
 										<td>
 								<form name="placeholder" ></form>

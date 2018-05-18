@@ -99,7 +99,7 @@
 
 <!-- ////  Start System Property Information  //// -->
 
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td colspan="2">System Properties</td>
 	 </tr>
@@ -137,7 +137,7 @@
 
 <!-- ////  Start Request Information  //// -->
 
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td colspan="2">Request Information</td>
 	 </tr>
@@ -212,7 +212,7 @@
 
 <!-- ////  Start Response Information  //// -->
 
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td>Response Information</td>
 	 </tr>
@@ -244,7 +244,7 @@
 
 <!-- ////  Start Servlet Init Params Information  //// -->
 
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td colspan="2">Servlet Initialization Parameters</td>
 	 </tr>
@@ -282,7 +282,7 @@
 
 <!-- ////  Start Context Information  //// -->
 
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td colspan="2">Context Attributes</td>
 	 </tr>
@@ -322,7 +322,7 @@
 
 <!-- ////  Start Session Information  //// -->
 
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td colspan="2">Session Information</td>
 	 </tr>
@@ -371,7 +371,7 @@
 
 <!-- ////  Start Application Information  //// -->
 
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td colspan="2">Application Information</td>
 	 </tr>
@@ -406,7 +406,7 @@
 
 <%-- Loop over the JSTL headerValues implicit object,
 		 which is a map --%>
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td colspan="2">
 					 JSTL Header Values
@@ -450,7 +450,7 @@
 
 <!-- ////  Start Header Information  //// -->
 
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td colspan="2">Header Information</td>
 	 </tr>
@@ -488,7 +488,7 @@
 
 <!-- ////  Start Param Names Information  //// -->
 
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td colspan="2">Param Names</td>
 	 </tr>
@@ -528,7 +528,7 @@
 
 <!-- ////  Start Cookie Information  //// -->
 
-<table width="1000" class="results">
+<table class="results">
 	 <tr class="page-title">
 			 <td colspan="2">Cookie Information</td>
 	 </tr>

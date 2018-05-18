@@ -27,7 +27,9 @@
 
 <c:choose>
 		<c:when test="${not empty tumor}">
-				<table class="results">
+				
+
+<table class="results">
 						<tr>
 								<td class="results-header">Chromosomes</td>
 								<td class="results-header">Name</td>

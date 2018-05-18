@@ -19,7 +19,9 @@
 
 <c:choose>
 		<c:when test="${not empty tumorFreq.note}">
-				<table class="results">
+				
+
+<table class="results">
 						<tr>
 								<td colspan="2" class="results-header-left">
 										<span class="larger">Treatment Note</span>

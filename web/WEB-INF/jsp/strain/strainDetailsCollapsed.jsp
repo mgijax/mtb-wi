@@ -22,6 +22,8 @@
 			<a class="help" href="userHelp.jsp#straindetail"></a>
 		</header>
 
+
+
 <table class="results">
 
 <!-- ////  Start Detail Section  //// -->
@@ -105,7 +107,9 @@
 
 <!-- \n -->
 
-								<table class="results">
+								
+
+<table class="results">
 										<tr>
 												<td class="header-label">Tumor Name</td>
 												<td class="header-label">Organ(s) Affected</td>
@@ -151,7 +155,9 @@ Tumor Group Records</td>
 				<tr class="stripe${num}">
 						<td class="cat${num}">Other Database Links</td>
 						<td class="data${num}">
-								<table class="results">
+								
+
+<table class="results">
 										<c:choose>
 										<c:when test="${not empty strain.links}">
 												<tr>

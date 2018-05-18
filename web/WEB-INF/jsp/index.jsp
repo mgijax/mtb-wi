@@ -79,7 +79,9 @@
 																		<div>
 																		<html:form action="tumorSearchResults" method="GET">
 																		<html:hidden property="maxItems" value="No Limit"/>
-																		<table class="results">
+																		
+
+<table class="results">
 																				<tr>
 																						<td>
 																								<table class="quick-search">

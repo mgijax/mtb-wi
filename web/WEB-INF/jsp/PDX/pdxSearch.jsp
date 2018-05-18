@@ -181,6 +181,8 @@ Please wait..."
 	<a class="help" href="userHelp.jsp#pdxsearch"></a>
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
 </header>
+
+
 <table class="results">
 
 <tr class="page-info">

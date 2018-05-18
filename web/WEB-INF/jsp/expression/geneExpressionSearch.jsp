@@ -23,6 +23,8 @@
 </header>
 
 <html:form action="geneExpressionSearchResults" method="GET">
+
+
 <table class="results">
 
 <tr class="buttons">

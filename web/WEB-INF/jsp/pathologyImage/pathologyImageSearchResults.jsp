@@ -20,6 +20,8 @@
 
 <header><h1>Pathology Image Search Results</h1><a class="help" href="userHelp.jsp#pathresults"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Search Summary  //// -->
@@ -192,7 +194,9 @@
 
 <!-- \n -->
 
-						<table class="results">
+						
+
+<table class="results">
 								<tr>
 										<td width="8%" class="results-header">MTB ID</td>
 										<td width="14%" class="results-header">Tumor Name</td>

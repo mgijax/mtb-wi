@@ -21,6 +21,8 @@
 	<h1>Strain Search Results</h1>
 	<a class="help" href="userHelp.jsp#straindetail"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Search Summary  //// -->

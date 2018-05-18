@@ -268,7 +268,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 				<img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">
 <!-- \n -->
 
-				<input type ="checkbox" name="organChk" value="${organ.organKey}" 
+				<input type ="checkbox" name="organChk" value="${organ.organKey}" >
 				</th>
 				
 			</c:forEach>
@@ -410,7 +410,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 									<c:set var="tdOut" value="0"/>
 								</c:when>
 								<c:otherwise>
-									<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='-' ' height='100%'>"/>
+									<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='-' ' height='100%'>" />
 								</c:otherwise>
 							</c:choose>
 							

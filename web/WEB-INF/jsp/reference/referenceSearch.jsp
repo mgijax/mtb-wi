@@ -22,6 +22,8 @@
 	<h1>Reference Search Form</h1>
 	<a class="help" href="userHelp.jsp#references"></a>
 </header>
+
+
 <table class="results">
 
 <tr class="buttons">

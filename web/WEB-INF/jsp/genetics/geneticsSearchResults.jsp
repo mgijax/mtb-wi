@@ -21,6 +21,8 @@
 
 <header><h1>Genetics Search Results</h1><a class="help" href="userHelp.jsp#geneticsresults"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Search Summary  //// -->
@@ -176,7 +178,9 @@
 
 		</c:if>
 		
-		<table class="results">
+		
+
+<table class="results">
 		<tr>
 			<td class="results-header-left" colspan="4"><span class="larger">Genes, Alleles and Transgenes carried by Strains</span></td>
 		</tr>				
@@ -286,6 +290,8 @@ ${pe}</small>
 <!-- \n -->
 
 </c:if>
+
+
 <table class="results">
 <tr>
 	<td class="results-header-left" colspan="3"><span class="larger">Genetic Markers analyzed in the Tumor</span></td>
@@ -348,6 +354,8 @@ Chrom.</td>
 <!-- \n -->
 
 </c:if>
+
+
 <table class="results">
 <tr>
 	<td class="results-header-left" colspan="4"><span class="larger">Cytogenetic observations in the Tumor</span></td>

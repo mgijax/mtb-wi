@@ -350,6 +350,8 @@ human synonym for Cdc23 is APC8.</strong>"
 	<a class="help" href="userHelp.jsp#GViewerDetails"></a>
 </header>
 
+
+
 <table class="results">
 
 <!-- ////  Start Detail Section  //// -->

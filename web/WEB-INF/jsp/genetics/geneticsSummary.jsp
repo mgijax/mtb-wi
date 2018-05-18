@@ -19,6 +19,8 @@
 	<h1>Genetic Markers analyzed in the Tumor Summary</h1>
 	<a class="help" href="userHelp.jsp#geneticchange"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Genetics Summary Header  //// -->
@@ -57,7 +59,9 @@
 
 <c:choose>
 		<c:when test="${not empty genetics.alleleRecs}">
-				<table class="results">
+				
+
+<table class="results">
 						<tr class="results">
 								<td class="results-header">Mutation Location</td>
 								<td class="results-header">Tumor Name</td>

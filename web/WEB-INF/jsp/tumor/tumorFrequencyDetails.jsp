@@ -32,7 +32,9 @@
 <!-- ////  Start Top Left (Tumor)  //// -->
 
 <td width="49%">
-						<table class="results">
+						
+
+<table class="results">
 								<c:set var="lbl" value="1"/>
 								
 								<c:choose>
@@ -161,7 +163,9 @@
 
 <c:set var="lbl" value="1"/>
 				<td width="49%">
-						<table class="results">
+						
+
+<table class="results">
 								<tr class="stripe-1">
 										<td class="cat-1">Strain</td>
 										<td class="data${(lbl%2)+1}">
@@ -239,7 +243,9 @@
 
 <!-- \n -->
 
-		<table class="results">
+		
+
+<table class="results">
 				<tr>
 						<td class="results-header">MTB ID</td>
 						<td class="results-header">Organ Affected</td>
@@ -355,7 +361,9 @@ and Images</a>
 				
 <!-- \n -->
 
-				<table class="results">
+				
+
+<table class="results">
 						<tr>
 								<td colspan="5" class="results-header-left">
 										<span class="larger">Tumor Genetics</span>
@@ -439,7 +447,9 @@ Change</td>
 				
 <!-- \n -->
 
-				<table class="results">
+				
+
+<table class="results">
 						<tr>
 								<td colspan="2" class="results-header-left">
 										<span class="larger">Additional Notes</span>
@@ -483,7 +493,9 @@ Change</td>
 				<a name="pathology">
 <!-- \n -->
 </a>
-				<table class="results">
+				
+
+<table class="results">
 						<tr>
 								<td colspan="4" class="results-header-left">
 										<span class="larger">Pathology</span>

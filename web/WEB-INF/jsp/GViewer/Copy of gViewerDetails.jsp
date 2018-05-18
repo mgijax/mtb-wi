@@ -178,6 +178,8 @@
 	<a class="help" href="userHelp.jsp#GViewerDetails">
 													</a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Detail Section  //// -->
@@ -504,7 +506,9 @@
 													<c:when test="${not empty noResults}">
 														
 														<td colspan="6">
-															<table class="results">
+															
+
+<table class="results">
 																<tr>
 																	<td class="results-header">0 Matching Genes</td>
 																</tr>

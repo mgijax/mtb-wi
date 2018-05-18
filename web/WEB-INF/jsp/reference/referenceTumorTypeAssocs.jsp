@@ -20,6 +20,8 @@
 	<h1>Reference Tumor Type Associations</h1>
 	<a class="help" href="userHelp.jsp#referenceresults"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Search Summary  //// -->

@@ -92,6 +92,8 @@
 	<h1>Cancer&nbsp;QTL&nbsp;Viewer</h1>
 	<a class="help" href="userHelp.jsp#QTL"></a>
 </header>
+
+
 <table class="results">
 
 <!-- ////  Start Detail Section  //// -->
