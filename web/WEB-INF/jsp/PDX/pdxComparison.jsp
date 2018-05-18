@@ -90,7 +90,7 @@
 				
 				 
 		</script>
-
+</head>
 <body>
 			<c:import url="../../../body.jsp" />
 
@@ -226,6 +226,7 @@
 
 				<input type="hidden" name="savedGenesList" id="saved-genes-list" />
 		</td>
+	</tr>
 </table>
 </td>
 </tr>

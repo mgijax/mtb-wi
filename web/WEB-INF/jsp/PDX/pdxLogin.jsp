@@ -9,7 +9,6 @@
 		<c:import url="../../../meta.jsp">
 				<c:param name="pageTitle" value="PDX Login"/>
 		</c:import>
-
 </head>
 
 <body>
@@ -23,77 +22,56 @@
 	<h1>PDX Login</h1>
 	<a class="help" href="userHelp.jsp#pdxdetails"></a>
 </header>
-<table >
 
-								</table>
-						</td>
-				</tr>
-
-				<tr class="summary">
-						<td colspan="11">
-								<table>
-										<tr>
-												<td>
-														<input type="button" value="Open PDX Genomics Dashboard" onClick="window.open('http://pdx-dashboard.jax.org/v4/')">
-												</td>
-										</tr>
-										<tr>
-												<td>
-														<input type="button" value="Open PDX Sample Name Checker" onClick="window.open('http://pdx-dashboard/elims/submission-lookup/')">
-												</td>
-										</tr>
-										
+<table>
+	<tr>
+		<td>
+			<input type="button" value="Open PDX Genomics Dashboard" onClick="window.open('http://pdx-dashboard.jax.org/v4/')">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="button" value="Open PDX Sample Name Checker" onClick="window.open('http://pdx-dashboard/elims/submission-lookup/')">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="button" value="Open PDX Sample Sheet Generator" onClick="window.open('http://pdx-dashboard/elims/generate-sheet/')">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<c:choose>
+				<c:when test="${not empty failure}">
+					<strong>The User ID and Password pair you entered is not valid.<strong>						
+					<!-- \n -->											
+					<!-- \n -->
+				</c:when>
+			</c:choose>
+			Please enter your <strong>User ID</strong> and <strong>Password</strong> below.												
+			<!-- \n -->
+			As of Sept 18, the password has changed. Please contact <a href="mailto:emily.jocoy@jax.org">Emily Jocoy</a> for the new password					
+			<!-- \n -->
+			<html:form action="pdxLogin">
+				<table class="results">
+					<tr>
+						<td>
+							<table class="quick-search">
+								<tr>
+									<td>
+										<table>
 											<tr>
-										 <td>
-														<input type="button" value="Open PDX Sample Sheet Generator" onClick="window.open('http://pdx-dashboard/elims/generate-sheet/')">
-												</td>
-										</tr>
-										<tr>
-
-										
-										<tr>
-												<td>
-										<c:choose>
-												<c:when test="${not empty failure}">
-														<strong>The User ID and Password pair you entered is not valid.<strong>
-																		
-<!-- \n -->
-
-																		
-<!-- \n -->
-
-																		</c:when>
-																		</c:choose>
-																		Please enter your <strong>User ID</strong> and <strong>Password</strong> below.
-																		
-<!-- \n -->
-
-																		 As of Sept 18, the password has changed. Please contact <a href="mailto:emily.jocoy@jax.org">Emily Jocoy</a> for the new password
-																		
-<!-- \n -->
-
-																		<html:form action="pdxLogin">
-																				
-
-<table class="results">
-																						<tr>
-																								<td>
-																										<table class="quick-search">
-																												<tr>
-																														<td>
-																																<table>
-																																		<tr>
-																																				<td>User ID</td>
-																																				<td><html:text property="userID" size="30" maxlength="255"/></td>
-																												</tr>
-																												<tr>
-																														<td>Password</td>
-																														<td><html:password property="password" size="30" maxlength="255"/></td>
-																						</tr>
-																				</table>
-																				<div align="right">
-																						<input type="submit" VALUE="Login">
-																						<input type="reset"	VALUE="Reset">
+												<td>User ID</td>
+												<td><html:text property="userID" size="30" maxlength="255"/></td>
+											</tr>
+											<tr>
+												<td>Password</td>
+												<td><html:password property="password" size="30" maxlength="255"/></td>
+											</tr>
+										</table>
+										<div align="right">
+											<input type="submit" VALUE="Login">
+											<input type="reset"	VALUE="Reset">
 										</div>
 									</td>
 								</tr>
@@ -101,7 +79,10 @@
 						</td>
 					</tr>
 				</table>
-		</html:form>
+			</html:form>
+		</td>
+	</tr>
+</table>
 
 </section>
 </div>

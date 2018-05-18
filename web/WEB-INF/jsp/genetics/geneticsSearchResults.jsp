@@ -415,8 +415,6 @@ Chroms.</td>
 
 <!-- ////  End Results  //// -->
 
-</table>
-
 
 </section>
 </div>
