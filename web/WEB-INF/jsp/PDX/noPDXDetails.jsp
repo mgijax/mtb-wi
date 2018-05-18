@@ -1,64 +1,27 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
-    <head>
-    <c:import url="../../../meta.jsp">
-        <c:param name="pageTitle" value="No matching PDX models"/>
-    </c:import>
+		<head>
+		<c:import url="../../../meta.jsp">
+				<c:param name="pageTitle" value="No matching PDX models"/>
+		</c:import>
 
-    <c:import url="../../../body.jsp">
-        <c:param name="pageTitle" value="No matching PDX models"/>
-    </c:import>
+<body>
+			<c:import url="../../../body.jsp" />
 
-    <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-            <td width="200" valign="top">
-        <c:import url="../../../pdxToolBar.jsp" />
-    </td>
-    <td class="separator">
-        &nbsp;
-    </td>
-    <td valign="top">
-        <table width="95%" align="center" border="0" cellspacing="1" cellpadding="4">
-            <tr>
-                <td>
-                    <!--======================= Start Main Section =============================-->
-
-                    <!--======================= Start Form Header ==============================-->
-
-                    <table border="0" cellpadding="5" cellspacing="1" width="100%" class="results">
-                        <tr class="pageTitle">
-                            <td colspan="2">
-                                <table width="100%" border="0" cellpadding="4" cellspacing="0">
-                                    <tr>
-                                        <td width="20%" valign="middle" align="left">
-                                            <a class="help" href="userHelp.jsp#pdxsearch"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
-                                        </td>
-                                        <td width="60%" class="pageTitle">
-                                            There is no available PDX model with ID <b>${modelID}</b>
-                                        </td>
-                                        <td width="20%" valign="middle" align="right">
-                                            <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdxRequestButton" onclick="window.location='pdxRequest.do'">
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <!--======================= End Form Header ================================-->
-                       
-
-                    </table>
-                </td>
-            </tr>
-
-        </table>
-        <!--======================== End Main Section ==============================-->
-
-    </td>
-</tr>
-</table>
+		<div class="wrap">
+<nav><c:import url="../../../pdxToolBar.jsp" /></nav>
+<section class="main">
+<header>
+	<h1>There is no available PDX model with ID <em>${modelID}</em></h1>
+	<a class="help" href="userHelp.jsp#pdxsearch"></a>	
+</header>
+<input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
+	
+</section>
+</div>									
 
 </body>
 </html> 

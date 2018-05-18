@@ -412,7 +412,7 @@ public class PDXDashboardAction extends Action {
         // consolidate by status to 
        // Available models (Active:Available, Active: Available (blood cancer))
       // Models in progress (P0 in progress, P1 in progress)
-      // Discontinued (and reason except “no inventory remaining”)
+      // Discontinued (and reason except 'no inventory remaining')
       // Other
         String a = "Available";
         String ip = "In Progress";

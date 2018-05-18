@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html" %>
-<!--===================== Start Include Body Tag ===========================-->
-<body class="mainBody">
-    
-    <!-- Google Tag Manager????????????????????????????????????
+
+<!-- ////  Start Include Body Tag  //// -->
+		
+<!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PDS38F"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -12,6 +12,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PDS38F');</script>
 <!-- End Google Tag Manager -->
 
+<div id="over-div" style="position:absolute; visibility:hidden; z-index:1000;"></div>
 
-<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
-<!--===================== End Include Body Tag =============================-->
+<!-- ////  End Include Body Tag  //// -->
+

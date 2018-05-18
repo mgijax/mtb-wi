@@ -1,47 +1,26 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
 <c:import url="meta.jsp">
-    <c:param name="pageTitle" value="Warranty Disclaimer &amp; Copyright Notice"/>
+		<c:param name="pageTitle" value="Warranty Disclaimer &amp; Copyright Notice"/>
 </c:import>
 </head>
-<body>
-<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
-<tr>
-<td width="200" valign="top">
-    <c:import url="toolBar.jsp" />
-</td>
-<td class="separator">
-    &nbsp;
-</td>
-<td valign="top">
-<table width="95%" align="center" border="0" cellspacing="1" cellpadding="4">
-    <tr>
-        <td>
-<!--======================= Start Main Section =============================-->
-<!--======================= Start Form Header ==============================-->
-<table border="0" cellpadding=5 cellspacing=1 width="100%" class="results">
-   <tr class="pageTitle">
-       <td colspan="2" width="100%">
-           <table width="100%" border=0 cellpadding=0 cellspacing=0>
-               <tr>
-                   <td width="20%" valign="middle" align="left">
-                       <a class="help" href="userHelp.jsp"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
-                   </td>
-                   <td width="60%" class="pageTitle">
-                       Warranty Disclaimer &amp; Copyright Notice
-                   </td>
-                   <td width="20%" valign="middle" align="center">&nbsp;</td>
-               </tr>
-           </table>
-       </td>
-   </tr>
+<body class="alt">
+<div class="wrap">
+<nav><c:import url="toolBar.jsp" /></nav>
+<section class="main">
+
+<header>
+	<h1>Warranty Disclaimer &amp; Copyright Notice</h1>
+	<a class="help" href="userHelp.jsp"></a>
+</header>
+<table class="results">
+
 </table>
-<!--======================= End Form Header ================================-->
-<!--======================= Start Warranty and Disclaimer ==================-->
+
+<!-- ////  Start Warranty and Disclaimer  //// -->
 
 <pre>
 Warranty Disclaimer and Copyright Notice
@@ -65,13 +44,11 @@ Copyright &#169; 1998, 2001, 2004, 2007, 2010, 2012 by The Jackson Laboratory
 All Rights Reserved
 </pre>
 
-<!--======================= End Warranty and Disclaimer ====================-->
-<!--======================== End Main Section ==============================-->
+<!-- ////  End Warranty and Disclaimer  //// -->
 
-            </td>
-        </tr>
-    </table>
-    </td></tr></table>
-    </body>
+</section>
+	</div>
+</body>
+
 </html>
 

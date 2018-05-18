@@ -3,174 +3,147 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <%--
 <t:TimerTag title="Index">
 --%>
 
 <html>
 
-    <head>
+		<head>
 
-        <c:import url="../../meta.jsp">
-            <c:param name="pageTitle" value="Mouse Tumor Biology System (MTB)"/>
-        </c:import>
+				<c:import url="../../meta.jsp">
+						<c:param name="pageTitle" value="Mouse Tumor Biology System (MTB)"/>
+				</c:import>
 
-        <script language="javascript">
-            var mc = false;
-            function toggle() {
-                if (mc) {
-                    document.getElementById("mc").style.display = 'block';
-                    document.getElementById("allMc").style.display = 'none';
-                    mc = false;
-                } else {
-                    document.getElementById("mc").style.display = 'none';
-                    document.getElementById("allMc").style.display = 'block';
-                    mc = true;
-                }
-            }
-        </script>
-    </head>
+				<script type="text/javascript">
+						var mc = false;
+						function toggle() {
+								if (mc) {
+										document.getElementById("mc").style.display = 'block';
+										document.getElementById("all-mc").style.display = 'none';
+										mc = false;
+								} else {
+										document.getElementById("mc").style.display = 'none';
+										document.getElementById("all-mc").style.display = 'block';
+										mc = true;
+								}
+						}
+				</script>
+		</head>
 
-    <c:import url="../../body.jsp">
-        <c:param name="pageTitle" value="Mouse Tumor Biology System (MTB)"/>
-    </c:import>
+<body>
+			<c:import url="../../body.jsp" />
 
-    <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-            <td width="200" valign="top">
-                <c:import url="../../toolBar.jsp"/>
-            </td>
-            <td class="separator">
-                &nbsp;
-            </td>
-            <td valign="top">
-                <table width="95%" align="center" border="0" cellspacing="1" cellpadding="4">
-                    <tr>
-                        <td>
+<div class="wrap">
+<nav><c:import url="../../toolBar.jsp"/></nav>
+<section class="main">
+<header>
+	<h1>Welcome to the Mouse Tumor Biology (MTB) Database</h1>
+</header>
 
-                            <!--======================= Start Form Header ==============================-->
-                            <table border="0" cellpadding=5 cellspacing=1 width="100%" class="results">
-                                <tr class="pageTitle">
-                                    <td width="100%" colspan="2">
-                                        <table width="100%" border=0 cellpadding=0 cellspacing=0>
-                                            <tr>
-                                                <td class="indexTitle">
-                                                    Welcome to the Mouse Tumor Biology (MTB) Database
-                                                </td>
-                                            </tr>
+<p> The Mouse Tumor Biology (MTB) Database supports the use of the mouse as a model system of human cancers by providing access to information on and data for:</p>
+														<ul>
+																<li>spontaneous and induced tumors in mice,</li>
+																<li>genetically defined mice (inbred, hybrid, mutant, and genetically engineered strains of mice) in which tumors arise,</li>
+																<li>genetic factors associated with tumor susceptibility in mice,</li>
+																<li>somatic genetic-mutations observed in tumors,</li>
+																<li>Patient Derived Xenograft (PDX) models</li>
+														</ul>
+														<p>Examples of the data accessible from MTB include:</p>
+														<ul>
+																<li>tumor frequency & latency data,</li>
+																<li>tumor genomic data,</li>
+																<li>tumor pathology reports and images,</li>
+																<li>associations of models to the scientific literature,</li>
+																<li>links additional on-line cancer resources</li>
+														</ul>
 
+														<table class="mi-table">
+																<tr><td border="5px">
+																				<p class="mi-title">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
+																				<ul>
+																						<li class="real-list"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a></li>
+																						<li class="real-list"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a></li>
+																						<li class="real-list"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a></li>
+																				</ul>
+																				
+<!-- \n -->
 
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
+																		</td></tr>
+														</table>
 
-                            <!--======================= Start Main Section =============================-->
+														<hr>
+														<p></p>
+																<%--
+																		<div>
+																		<html:form action="tumorSearchResults" method="GET">
+																		<html:hidden property="maxItems" value="No Limit"/>
+																		<table class="results">
+																				<tr>
+																						<td>
+																								<table class="quick-search">
+																										<tr>
+																												<td>
+																														<h4>Quick <a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The specific organ (or tissue) in which tumor cells originate.
+<!-- \n -->
 
-                            <p> The Mouse Tumor Biology (MTB) Database supports the use of the mouse as a model system of human cancers by providing access to information on and data for:</p>
-                            <ul>
-                                <li>spontaneous and induced tumors in mice,</li>
-                                <li>genetically defined mice (inbred, hybrid, mutant, and genetically engineered strains of mice) in which tumors arise,</li>
-                                <li>genetic factors associated with tumor susceptibility in mice,</li>
-                                <li>somatic genetic-mutations observed in tumors,</li>
-                                <li>Patient Derived Xenograft (PDX) models</li>
-                            </ul>
-                            <p>Examples of the data accessible from MTB include:</p>
-                            <ul>
-                                <li>tumor frequency & latency data,</li>
-                                <li>tumor genomic data,</li>
-                                <li>tumor pathology reports and images,</li>
-                                <li>associations of models to the scientific literature,</li>
-                                <li>links additional on-line cancer resources</li>
-                            </ul>
+<!-- \n -->
+The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ / Tissue of Origin');" onmouseout="return nd();">Organ/Tissue</a> Search</em></h4>
+																												</td>
+																												<td align="right">
+																														<a class="help" href="userHelp.jsp#quickorgan"><img src="${applicationScope.urlImageDir}/help_small.png" height=16 width=16 alt="help"></a>
+																												</td>
+																										</tr>
+																										<tr>
+																												<td colspan=2>
+																														<html:select property="organTissueOrigin" size="8" multiple="true">
+																																<html:option value="">ANY</html:option>
+																																<html:options collection="organTissueValues" property="value" labelProperty="label"/>
+																														</html:select>
+																														
+<!-- \n -->
 
-                            <table class="miTable">
-                                <tr><td border="5px">
-                                        <p class="miTitle">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
-                                        <ul>
-                                            <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a></li>
-                                            <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a></li>
-                                            <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a></li>
-                                        </ul>
-                                        <br>
-                                    </td></tr>
-                            </table>
+																														<INPUT TYPE="submit" NAME="find" VALUE="Search">
+																														<INPUT TYPE="reset" VALUE="Reset">
+																												</td>
+																										</tr>
+																								</table>
+																						</td>
+																				</tr>
+																			 
+																		</table>
+																		</html:form>
+																		</div>--%>
+														<p></p>
+														<div id="mc">		
+																<div>
+																		${modelCounts}
+																</div> 
+														</div>
+														<div id="all-mc" style="display: none">
+																<div>
+																		${allModelCounts}
+																</div>
+														</div>
+														<p></p>
+														<hr>
+														<p></p>
 
-                            <hr width="100%">
-                            <p></p>
-                                <%--
-                                    <center>
-                                    <html:form action="tumorSearchResults" method="GET">
-                                    <html:hidden property="maxItems" value="No Limit"/>
-                                    <table border="0" cellpadding=0 cellspacing=1 class="results">
-                                        <tr>
-                                            <td>
-                                                <table border=0 cellspacing=5 cellpadding=2 class="quickSearch">
-                                                    <tr>
-                                                        <td>
-                                                            <h4>Quick <a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The specific organ (or tissue) in which tumor cells originate.<br><br>The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ / Tissue of Origin');" onmouseout="return nd();">Organ/Tissue</a> Search</i></h4>
-                                                        </td>
-                                                        <td valign="top" align="right">
-                                                            <a class="help" href="userHelp.jsp#quickorgan"><img src="${applicationScope.urlImageDir}/help_small.png" height=16 width=16 border=0 alt="help"></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan=2>
-                                                            <html:select property="organTissueOrigin" size="8" multiple="true">
-                                                                <html:option value="">ANY</html:option>
-                                                                <html:options collection="organTissueValues" property="value" labelProperty="label"/>
-                                                            </html:select>
-                                                            <br>
-                                                            <INPUT TYPE="submit" NAME="find" VALUE="Search">
-                                                            <INPUT TYPE="reset" VALUE="Reset">
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                       
-                                    </table>
-                                    </html:form>
-                                    </center>--%>
-                            <p></p>
-                            <div id="mc">    
-                                <center>
-                                    ${modelCounts}
-                                </center> 
-                            </div>
-                            <div id="allMc" style="display: none">
-                                <center>
-                                    ${allModelCounts}
-                                </center>
-                            </div>
-                            <p></p>
-                            <hr width="100%">
-                            <p></p>
+																<span class="toolbar-title">What's new in MTB?</span>
+																		${whatsNewText}
+																
+<!-- \n -->
 
+																(<a href="whatsNew.jsp">View all...</a>)
 
+														<p></p>
+														<hr>
+														<p></p>
 
-
-                                <font class="toolBarTitle">What's new in MTB?</font>
-                                    ${whatsNewText}
-                                <br>
-                                (<a href="whatsNew.jsp">View all...</a>)
-
-                            <p></p>
-                            <hr width="100%">
-                            <p></p>
-                                <!--======================== End Main Section ==============================-->
-                               
-
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-
-
+</section>
+	</div>
 </body>
+
 </html> 
 

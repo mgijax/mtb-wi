@@ -1,175 +1,190 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
 <c:import url="../../../meta.jsp">
-    <c:param name="pageTitle" value="Reference Search Results"/>
+		<c:param name="pageTitle" value="Reference Search Results"/>
 </c:import>
 </head>
 
-<c:import url="../../../body.jsp">
-     <c:param name="pageTitle" value="Reference Search Results"/>
-</c:import>
+<body>
+	<c:import url="../../../body.jsp" />
 
-<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
-    <tr>
-        <td width="200" valign="top">
-            <c:import url="../../../toolBar.jsp" />
-        </td>
-        <td class="separator">
-            &nbsp;
-        </td>
-        <td valign="top">
-            <table width="95%" align="center" border="0" cellspacing="1" cellpadding="4">
-                <tr>
-                    <td>
-<!--======================= Start Main Section =============================-->
-<!--======================= Start Form Header ==============================-->
-<table border="0" cellpadding=5 cellspacing=1 width="100%" class="results">
-   <tr class="pageTitle">
-       <td colspan="3" width="100%">
-           <table width="100%" border=0 cellpadding=0 cellspacing=0>
-               <tr>
-                   <td width="20%" valign="middle" align="left">
-                       <a class="help" href="userHelp.jsp#referenceresults"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
-                   </td>
-                   <td width="60%" class="pageTitle">
-                       Reference Search Results
-                   </td>
-                   <td width="20%" valign="middle" align="center">&nbsp;</td>
-               </tr>
-           </table>
-       </td>
-   </tr>
-<!--======================= End Form Header ================================-->
-<!--======================= Start Search Summary ===========================-->
-    <tr class="summary">
-        <td colspan="3">
-            <font class="label">Search Summary</font><br>
+<div class="wrap">
+<nav><c:import url="../../../toolBar.jsp" /></nav>
+<section class="main">
 
-            <c:if test="${not empty accId}">
-                <font class="label">Accession Id:</font> ${accId}<br>
-            </c:if>
-            
-            <c:if test="${not empty firstAuthor}">
-                <font class="label">First Author:</font> ${firstAuthorComparison} "${firstAuthor}"<br>
-            </c:if>
-            
-            <c:if test="${not empty authors}">
-                <font class="label">Authors:</font> Contains "${authors}"<br>
-            </c:if>
-            
-            <c:if test="${not empty journal}">
-                <font class="label">Journal:</font> ${journalComparison} "${journal}"<br>
-            </c:if>
-            
-            <c:if test="${not empty year}">
-                <font class="label">Year:</font> ${yearComparison} ${year}<br>
-            </c:if>
-            
-            <c:if test="${not empty volume}">
-                <font class="label">Volume:</font> ${volumeComparison} "${volume}"<br>
-            </c:if>
-            
-            <c:if test="${not empty pages}">
-                <font class="label">Pages:</font> ${pagesComparison} "${pages}"<br>
-            </c:if>
-            
-            <c:if test="${not empty title}">
-                <font class="label">Title:</font> ${titleComparison} "${title}"<br>
-            </c:if>
-            
-             <c:if test="${not empty organ}">
-                <font class="label">Organ:</font> ${organ}<br>
-            </c:if>
-            
-            <c:if test="${not empty tumorType}">
-                <font class="label">Tumor Type:</font>${tumorType}<br>
-            </c:if>
-            
-            
-            <%--
-            <c:if test="${not empty abstract}">
-                <b>Abstract:</b> contains ${abstract}<br>
-            </c:if>
-            --%>
-            
-            <font class="label">Sort By:</font> ${sortBy}<br>
-            <font class="label">Display Limit:</font> ${maxItems} 
-        </td>
-    </tr>
-    <tr class="summary">
-        <td colspan="3">
-<!--======================= Start Display Limit ============================-->
-            <c:choose>
-                <c:when test="${numberOfResults != totalResults}">
-                    ${numberOfResults} of ${totalResults} matching items displayed.
-                </c:when>
-                <c:otherwise>
-                    <c:out value="${numberOfResults}" default="0"/> matching items displayed.
-                </c:otherwise>
-            </c:choose>
-<!--======================= End Display Limit ==============================-->
-        </td>
-    </tr>
-<!--======================= End Search Summary =============================-->
-<!--======================= Start Results ==================================-->
+<header>
+	<h1>Reference Search Results</h1>
+	<a class="help" href="userHelp.jsp#referenceresults"></a>
+</header>
+<table class="results">
+
+<!-- ////  Start Search Summary  //// -->
+
+<tr class="summary">
+				<td colspan="3">
+						<span class="label">Search Summary</span>
+<!-- \n -->
+
+						<c:if test="${not empty accId}">
+								<span class="label">Accession Id:</span> ${accId}
+<!-- \n -->
+
+						</c:if>
+						
+						<c:if test="${not empty firstAuthor}">
+								<span class="label">First Author:</span> ${firstAuthorComparison} "${firstAuthor}"
+<!-- \n -->
+
+						</c:if>
+						
+						<c:if test="${not empty authors}">
+								<span class="label">Authors:</span> Contains "${authors}"
+<!-- \n -->
+
+						</c:if>
+						
+						<c:if test="${not empty journal}">
+								<span class="label">Journal:</span> ${journalComparison} "${journal}"
+<!-- \n -->
+
+						</c:if>
+						
+						<c:if test="${not empty year}">
+								<span class="label">Year:</span> ${yearComparison} ${year}
+<!-- \n -->
+
+						</c:if>
+						
+						<c:if test="${not empty volume}">
+								<span class="label">Volume:</span> ${volumeComparison} "${volume}"
+<!-- \n -->
+
+						</c:if>
+						
+						<c:if test="${not empty pages}">
+								<span class="label">Pages:</span> ${pagesComparison} "${pages}"
+<!-- \n -->
+
+						</c:if>
+						
+						<c:if test="${not empty title}">
+								<span class="label">Title:</span> ${titleComparison} "${title}"
+<!-- \n -->
+
+						</c:if>
+						
+						 <c:if test="${not empty organ}">
+								<span class="label">Organ:</span> ${organ}
+<!-- \n -->
+
+						</c:if>
+						
+						<c:if test="${not empty tumorType}">
+								<span class="label">Tumor Type:</span>${tumorType}
+<!-- \n -->
+
+						</c:if>
+						
+						
+						<%--
+						<c:if test="${not empty abstract}">
+								<strong>Abstract:</strong> contains ${abstract}
+<!-- \n -->
+
+						</c:if>
+						--%>
+						
+						<span class="label">Sort By:</span> ${sortBy}
+<!-- \n -->
+
+						<span class="label">Display Limit:</span> ${maxItems} 
+				</td>
+		</tr>
+		<tr class="summary">
+				<td colspan="3">
+
+<!-- ////  Start Display Limit  //// -->
+
 <c:choose>
-    <c:when test="${not empty references}">
-        <tr class="results">
-            <td class="resultsHeader">Accession Id</td>
-            <td class="resultsHeader">Reference</td>
-            <td class="resultsHeader">Additional Info</td>
-        </tr>
+								<c:when test="${numberOfResults != totalResults}">
+										${numberOfResults} of ${totalResults} matching items displayed.
+								</c:when>
+								<c:otherwise>
+										<c:out value="${numberOfResults}" default="0"/> matching items displayed.
+								</c:otherwise>
+						</c:choose>
 
-        <c:forEach var="reference" items="${references}" varStatus="status">
-            <c:choose>
-                <c:when test="${status.index%2==0}">
-                    <tr class="stripe1">
-                </c:when>
-                <c:otherwise>
-                    <tr class="stripe2">
-                </c:otherwise>
-            </c:choose>
+<!-- ////  End Display Limit  //// -->
 
-                <td><a href="referenceDetails.do?key=${reference.key}">${reference.accId}</a></td>
-                <td>${reference.authors}, ${reference.title}, ${reference.citation}</td>
-                <td style="white-space: nowrap">
-                    
-                    <c:if test="${reference.tumorFreqAssocs > 0}">
-                    Curated Tumor Records: <a href="tumorSearchResults.do?referenceKey=${reference.key}&maxItems=No+Limit">${reference.tumorFreqAssocs}</a><br>
-                    </c:if>
-                    
-                    <c:if test="${reference.strainAssocs > 0}">
-                    Curated Strains: <a href="strainSearchResults.do?referenceKey=${reference.key}&maxItems=No+Limit">${reference.strainAssocs}</a><br>
-                    </c:if>
-                    
-                    <c:if test="${reference.tumorFreqAssocs ==0 && reference.tumorTypeAssocs > 0}">
-                    Indexed Tumor Types: <a href="referenceTumorTypeAssocs.do?referenceKey=${reference.key}">${reference.tumorTypeAssocs}</a><br>
-                    </c:if>
-                    
-                    <c:if test="${reference.isReviewArticle}">
-                    <b>Review Article</b>
-                    </c:if>
-                </td>   
-            </tr>
-        </c:forEach>
-    </c:when>
-    <c:otherwise>
-    <!-- No results found. //-->
-    </c:otherwise>
+</td>
+		</tr>
+
+<!-- ////  End Search Summary  //// -->
+
+<!-- ////  Start Results  //// -->
+
+<c:choose>
+		<c:when test="${not empty references}">
+				<tr class="results">
+						<td class="results-header">Accession Id</td>
+						<td class="results-header">Reference</td>
+						<td class="results-header">Additional Info</td>
+				</tr>
+
+				<c:forEach var="reference" items="${references}" varStatus="status">
+						<c:choose>
+								<c:when test="${status.index%2==0}">
+										<tr class="stripe-1">
+								</c:when>
+								<c:otherwise>
+										<tr class="stripe-2">
+								</c:otherwise>
+						</c:choose>
+
+								<td><a href="referenceDetails.do?key=${reference.key}">${reference.accId}</a></td>
+								<td>${reference.authors}, ${reference.title}, ${reference.citation}</td>
+								<td style="white-space: nowrap">
+										
+										<c:if test="${reference.tumorFreqAssocs > 0}">
+										Curated Tumor Records: <a href="tumorSearchResults.do?referenceKey=${reference.key}&maxItems=No+Limit">${reference.tumorFreqAssocs}</a>
+<!-- \n -->
+
+										</c:if>
+										
+										<c:if test="${reference.strainAssocs > 0}">
+										Curated Strains: <a href="strainSearchResults.do?referenceKey=${reference.key}&maxItems=No+Limit">${reference.strainAssocs}</a>
+<!-- \n -->
+
+										</c:if>
+										
+										<c:if test="${reference.tumorFreqAssocs ==0 && reference.tumorTypeAssocs > 0}">
+										Indexed Tumor Types: <a href="referenceTumorTypeAssocs.do?referenceKey=${reference.key}">${reference.tumorTypeAssocs}</a>
+<!-- \n -->
+
+										</c:if>
+										
+										<c:if test="${reference.isReviewArticle}">
+										<strong>Review Article</strong>
+										</c:if>
+								</td>	 
+						</tr>
+				</c:forEach>
+		</c:when>
+		<c:otherwise>
+		<!-- No results found. //-->
+		</c:otherwise>
 </c:choose>
-<!--======================= End Results ====================================-->
+
+<!-- ////  End Results  //// -->
+
 </table>
-<!--======================== End Main Section ==============================-->
-        </td>
-    </tr>
-</table>
+
+</section>
+</div>
 </body>
 </html> 
-
-
 

@@ -10,3 +10,5 @@
 **/nbproject/private/
 /doc
 .DS_Store
+/.idea
+/src/mtb-wi.iml
