@@ -3,8 +3,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="Marker Grid"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Marker Grid"/>
 
 				<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all_noGlobals.css" /> 
 
@@ -244,12 +244,11 @@
 						})
 
 				</script>
-
-		<c:import url="../../../meta.jsp"/>
+	<c:import url="../../../meta.jsp"/>
 		</head>
 
 <body>
-			<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 <div class="wrap">
 <nav><c:import url="../../../toolBar.jsp"/></nav>
 <section class="main">
@@ -272,7 +271,6 @@
 								${table}
 
 						</form>
-
 
 </section>
 </div>

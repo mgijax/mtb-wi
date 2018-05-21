@@ -4,8 +4,8 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Reference Search Form"/>
-<c:import url="../../../meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Reference Search Form"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -17,12 +17,10 @@
 
 <html:form action="referenceSearchResults" method="GET">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#references"></a>
 </header>
-
 
 <table class="results">
 
@@ -214,7 +212,6 @@ This controlled vocabulary was developed using the animal pathology community tu
 		</tr>
 </table>
 </html:form>
-
 
 </section>
 </div>

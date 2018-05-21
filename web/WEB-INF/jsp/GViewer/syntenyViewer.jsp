@@ -4,10 +4,9 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <!doctype html>
 <html>
-
-		<head>
-		<c:set var="pageTitle" scope="request" value="Synteny Viewer"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Synteny Viewer"/>
+	<c:import url="../../../meta.jsp"/>
 
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>

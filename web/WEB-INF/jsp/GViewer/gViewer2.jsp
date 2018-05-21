@@ -4,8 +4,8 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <!doctype html>
 <html>
-	<head>
-		<c:set var="pageTitle" scope="request" value="QTL Viewer"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="QTL Viewer"/>
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/GViewer/javascript/fileUpload.css"/>
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 		<style type="text/css">
@@ -28,9 +28,7 @@
 			}
 			
 		</style>
-
-
-		<c:import url="../../../meta.jsp"/>
+	<c:import url="../../../meta.jsp"/>
 
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>

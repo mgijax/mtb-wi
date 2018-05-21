@@ -2,13 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html>
-
 <head>
-
-<c:set var="pageTitle" scope="request" value="Mouse Tumor Biology Database User Help Reference"/>
-<c:import url="meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Mouse Tumor Biology Database User Help Reference"/>
+	<c:import url="meta.jsp"/>
 
 </head>
+
 <body class="alt">
 
 <div class="wrap">
@@ -21,8 +20,7 @@
 </header>
 
 <!-- ////  Start Help  //// -->
-
-<c:import url="/live/www/html/userHelp.html"/>
+	<c:import url="/live/www/html/userHelp.html"/>
 
 <!-- ////  End Help  //// -->
 

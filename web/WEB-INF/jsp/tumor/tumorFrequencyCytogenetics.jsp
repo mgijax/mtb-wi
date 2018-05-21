@@ -4,9 +4,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-	<head>
-		<c:set var="pageTitle" scope="request" value="Tumor Cytogenetics"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Tumor Cytogenetics"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>

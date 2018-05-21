@@ -5,8 +5,8 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Genetic Change Summary"/>
-<c:import url="../../../meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Genetic Change Summary"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -19,7 +19,6 @@
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#geneticchange"></a>
 </header>
-
 
 <table class="results">
 
@@ -68,22 +67,21 @@
 								<td class="results-header">Treatment Type</td>
 								<td class="results-header">Number of Associated Tumor Frequencies</td>
 						</tr>
-
-						<c:set var="names" value="${genetics.names}"/>
-						<c:set var="mutationSymbols" value="${genetics.mutationSymbols}"/>
-						<c:set var="counter" value="0"/>
-						<c:set var="items" value="0"/>
+	<c:set var="names" value="${genetics.names}"/>
+	<c:set var="mutationSymbols" value="${genetics.mutationSymbols}"/>
+	<c:set var="counter" value="0"/>
+	<c:set var="items" value="0"/>
 
 						<c:forEach var="rec" items="${genetics.alleleRecs}" varStatus="status">
-								<c:set var="key" value="${rec.key}"/>
-								<c:set var="counter" value="${counter+1}"/>
+	<c:set var="key" value="${rec.key}"/>
+	<c:set var="counter" value="${counter+1}"/>
 
 								<c:choose>
 										<c:when test="${status.index%2==0}">
-												<c:set var="classVal" value="stripe1"/>
+	<c:set var="classVal" value="stripe1"/>
 										</c:when>
 										<c:otherwise>
-												<c:set var="classVal" value="stripe2"/>
+	<c:set var="classVal" value="stripe2"/>
 										</c:otherwise>
 								</c:choose>
 
@@ -116,7 +114,7 @@
 										<c:if test="${status.index!=0}">
 												<tr class="${classVal}">
 										</c:if>
-										<c:set var="items" value="${items + 1}"/>
+	<c:set var="items" value="${items + 1}"/>
 
 										<td>${subRec.tumorName}</td>
 										<td>${subRec.agentType}</td>
@@ -145,10 +143,8 @@ Total Items: ${items}
 
 <!-- ////  End Search Results List  //// -->
 
-
 </section>
 </div>
 </body>
 </html>
-
 

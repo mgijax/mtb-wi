@@ -2,10 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html>
-
 <head>
-<c:set var="pageTitle" scope="request" value="Server Information"/>
-<c:import url="meta.jsp" />
+	<c:set var="pageTitle" scope="request" value="Server Information"/>
+	<c:import url="meta.jsp" />
 </head>
 
 <body class="alt">
@@ -13,7 +12,6 @@
 <div class="wrap">
 <nav><c:import url="toolBar.jsp" /></nav>
 <section class="main">
-
 
 <header>
 	<h1>${pageTitle}</h1>
@@ -380,7 +378,7 @@
 				<td colspan="2">
 						<%-- Store the servlet context in a page-scoped variable
 									named app for better readability --%>
-						 <c:set var='app' value='${pageContext.servletContext}'/>
+	<c:set var='app' value='${pageContext.servletContext}'/>
 
 						 <%-- Use the application object to show the major and minor 
 									versions of the servlet API that the container supports --%>
@@ -564,7 +562,6 @@
 </table>
 
 <!-- ////  End Cookie Information  //// -->
-
 
 </section>
 </div>

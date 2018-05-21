@@ -5,9 +5,9 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <!doctype html>
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="PDX Image Detail"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="PDX Image Detail"/>
+	<c:import url="../../../meta.jsp"/>
 
 </head>
 
@@ -16,12 +16,10 @@
 <div class="wrap">
 <section class="main-alt">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#imagedetail"></a>
 </header>
-
 
 <table class="results">
 

@@ -3,11 +3,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-
-		<head>
-<c:set var="pageTitle" scope="request" value="PDX Information Request Form"/>
-
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="PDX Information Request Form"/>
+	<c:import url="../../../meta.jsp"/>
 
 		<script type="text/javascript">
 		
@@ -38,12 +36,10 @@
 <nav><c:import url="../../../pdxToolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxRequest"></a>
 </header>
-
 
 <table class="results">
 

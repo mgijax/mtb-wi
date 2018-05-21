@@ -5,9 +5,9 @@
 
 <!doctype html>
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Gene Expression"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Gene Expression"/>
+	<c:import url="../../../meta.jsp"/>
 
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
@@ -62,19 +62,17 @@
 		</script>
 
 <body>
-			<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 		<div class="wrap">
 <nav><c:import url="../../../pdxToolBar.jsp" /></nav>
 <section class="main">
-
 
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxdetails"></a>
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
 </header>
-
 
 <table class="results">
 
@@ -201,7 +199,6 @@
 						</c:choose>
 						</tr>
 				</table>
-
 
 </section>
 </div>

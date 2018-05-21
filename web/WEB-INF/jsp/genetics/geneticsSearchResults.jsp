@@ -5,7 +5,7 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Genetics Search Results"/>
+	<c:set var="pageTitle" scope="request" value="Genetics Search Results"/>
 	<c:import url="../../../meta.jsp"/>
 </head>
 
@@ -18,11 +18,9 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1><a class="help" href="userHelp.jsp#geneticsresults"></a>
 </header>
-
 
 <table class="results">
 
@@ -292,7 +290,6 @@ ${pe}</small>
 
 </c:if>
 
-
 <table class="results">
 <tr>
 	<td class="results-header-left" colspan="3"><span class="larger">Genetic Markers analyzed in the Tumor</span></td>
@@ -356,7 +353,6 @@ Chrom.</td>
 
 </c:if>
 
-
 <table class="results">
 <tr>
 	<td class="results-header-left" colspan="4"><span class="larger">Cytogenetic observations in the Tumor</span></td>
@@ -415,7 +411,6 @@ Chroms.</td>
 </c:choose>
 
 <!-- ////  End Results  //// -->
-
 
 </section>
 </div>

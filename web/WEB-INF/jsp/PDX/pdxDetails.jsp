@@ -4,8 +4,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="PDX Model Details"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="PDX Model Details"/>
 
 				<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 
@@ -29,8 +29,7 @@
 						}
 
 				</style>
-
-				<c:import url="../../../meta.jsp"/>
+	<c:import url="../../../meta.jsp"/>
 
 				<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 				<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
@@ -533,7 +532,7 @@ Click to expand/collapse',
 </head>
 
 <body>
-					<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 		<div class="wrap">
 <nav><c:import url="../../../pdxToolBar.jsp" /></nav>
@@ -547,8 +546,6 @@ Click to expand/collapse',
 
 														<html:form action="pdxAddContent" method="GET">
 																<input type="hidden" name="modelID" value="${mouse.modelID}"/>
-
-
 
 <table class="results">
 																		
@@ -666,14 +663,12 @@ Click to expand/collapse',
 																						</table>
 																				</td>
 																		</tr>
-
-																		<c:set var="a" value="1"/>
-																		<c:set var="b" value="2"/>
+	<c:set var="a" value="1"/>
+	<c:set var="b" value="2"/>
 
 																		<c:if test="${not empty referenceLinks or not empty sessionScope.pdxEditor}">
-
-																				<c:set var="a" value="2"/>
-																				<c:set var="b" value="1"/>
+	<c:set var="a" value="2"/>
+	<c:set var="b" value="1"/>
 
 																				<tr class="stripe${a}">
 																						<td class="cat${a}">
@@ -1291,7 +1286,6 @@ ${graphic.description}
 
 </table>
 														</html:form>
-
 
 </section>
 </div>

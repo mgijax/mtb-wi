@@ -3,9 +3,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Comparison Form"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Comparison Form"/>
+	<c:import url="../../../meta.jsp"/>
 
 		<script type="text/javascript">
 				 
@@ -90,8 +90,9 @@
 				 
 		</script>
 </head>
+
 <body>
-			<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 		<div class="wrap">
 <nav><c:import url="../../../pdxToolBar.jsp" /></nav>
@@ -106,7 +107,6 @@
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." 
 																							 class="pdx-request-button" onclick="window.location='pdxRequest.do'">
 </header>
-
 
 <table class="results">
 

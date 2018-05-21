@@ -10,25 +10,23 @@
 <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js&2.7.0/build/element/element-min.js&2.7.0/build/paginator/paginator-min.js&2.7.0/build/datasource/datasource-min.js&2.7.0/build/dragdrop/dragdrop-min.js&2.7.0/build/datatable/datatable-min.js&2.7.0/build/resize/resize-min.js"></script>
 
 <html>
-	<head>
-<c:set var="pageTitle" scope="request" value="Tumor Search Results"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Tumor Search Results"/>
+	<c:import url="../../../meta.jsp"/>
 	</head>
-	
+
 <body>
-		<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 	
 	<div class="wrap">
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#tumorresults"></a>
 </header>
-
 
 <table class="results">
 
@@ -478,10 +476,8 @@ to",width:100,resizeable:true},
 
 </table>
 
-
 </section>
 </div>
 </body>
 </html>
-
 

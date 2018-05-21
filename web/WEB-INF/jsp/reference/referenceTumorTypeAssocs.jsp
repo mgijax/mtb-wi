@@ -4,8 +4,8 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Reference Tumor Type Associations"/>
-<c:import url="../../../meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Reference Tumor Type Associations"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -15,12 +15,10 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#referenceresults"></a>
 </header>
-
 
 <table class="results">
 
@@ -69,7 +67,6 @@
 <!-- ////  End Display Limit  //// -->
 
 </table>
-
 
 </section>
 </div>

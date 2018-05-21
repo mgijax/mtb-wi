@@ -6,8 +6,8 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Tumor Summary"/>
-<c:import url="../../../meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Tumor Summary"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -15,7 +15,6 @@
 <div class="wrap">
 <nav><c:import url="../../../toolBar.jsp"/></nav>
 <section class="main">
-
 
 <header>
 	<h1>${pageTitle}</h1>
@@ -47,12 +46,11 @@
 												<c:out value="${tumor.treatmentType}" escapeXml="false"/>
 										</td>
 								</tr>
-
-								<c:set var="lbl" value="1"/>
+	<c:set var="lbl" value="1"/>
 
 								<c:choose>
 								<c:when test="${not empty tumor.tumorSynonyms}">
-										<c:set var="lbl" value="${lbl+1}"/>
+	<c:set var="lbl" value="${lbl+1}"/>
 										<tr class="stripe${(lbl%2)+1}">
 												<c:choose>
 												<c:when test="${fn:length(tumor.tumorSynonyms)>1}">
@@ -190,10 +188,9 @@ Detection</td>
 Information</td>
 								<td class="results-header">Reference</td>
 						</tr>
-
-						<c:set var="lbl" value="1"/>
-						<c:set var="previousParent" value="-100"/>
-						<c:set var="rowClass" value="stripe1"/>
+	<c:set var="lbl" value="1"/>
+	<c:set var="previousParent" value="-100"/>
+	<c:set var="rowClass" value="stripe1"/>
 
 						<c:forEach var="rec" items="${tumor.frequencyRecs}" varStatus="status">
 						
@@ -203,15 +200,13 @@ Information</td>
 								
 							</tr>
 						</c:if>
-						
-						
-								<c:set var="currentParent" value="${rec.sortOrder}"/>
+	<c:set var="currentParent" value="${rec.sortOrder}"/>
 
 								<c:choose>
 										<c:when test="${currentParent!=previousParent}">
-												<c:set var="lbl" value="${lbl+1}"/>
-												<c:set var="previousParent" value="${rec.sortOrder}"/>
-												<c:set var="rowClass" value="stripe${(lbl%2)+1}"/>
+	<c:set var="lbl" value="${lbl+1}"/>
+	<c:set var="previousParent" value="${rec.sortOrder}"/>
+	<c:set var="rowClass" value="stripe${(lbl%2)+1}"/>
 										</c:when>
 										<c:otherwise>
 										</c:otherwise>
@@ -276,18 +271,18 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 										<td><c:out value="${rec.ageDetection}" escapeXml="false" default="&nbsp;"/></td>
 										<!-- Additional Information -->
 										<td>
-												<c:set var="additionalInfoText" value=""/>
+	<c:set var="additionalInfoText" value=""/>
 												<span size="-2">
 												<%-- Check to see if we have pathology information about the tumor --%>
 												<c:choose>
 												<c:when test="${rec.numImages>0&&rec.numPathEntries>0}">
-														<c:set var="additionalInfoText" value="<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=pathology', '${rec.tumorFrequencyKey}');return false;\">Pathology Reports</a> <img src=\"${applicationScope.urlImageDir}/pic.gif\" alt=\"X\" border=\"0\">"/>
+	<c:set var="additionalInfoText" value="<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=pathology', '${rec.tumorFrequencyKey}');return false;\">Pathology Reports</a> <img src=\"${applicationScope.urlImageDir}/pic.gif\" alt=\"X\" border=\"0\">"/>
 												</c:when>
 												<c:when test="${rec.numImages>0&&rec.numPathEntries<=0}">
-														<c:set var="additionalInfoText" value="<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=pathology', '${rec.tumorFrequencyKey}');return false;\">Pathology Reports</a> <img src=\"${applicationScope.urlImageDir}/pic.gif\" alt=\"X\" border=\"0\">"/>
+	<c:set var="additionalInfoText" value="<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=pathology', '${rec.tumorFrequencyKey}');return false;\">Pathology Reports</a> <img src=\"${applicationScope.urlImageDir}/pic.gif\" alt=\"X\" border=\"0\">"/>
 												</c:when>
 												<c:when test="${rec.numImages<=0&&rec.numPathEntries>0}">
-														<c:set var="additionalInfoText" value="<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=pathology', '${rec.tumorFrequencyKey}');return false;\">Pathology Reports</a> "/>
+	<c:set var="additionalInfoText" value="<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=pathology', '${rec.tumorFrequencyKey}');return false;\">Pathology Reports</a> "/>
 												</c:when>
 											 
 												</c:choose>
@@ -298,15 +293,15 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 												
 														 <c:choose>
 																<c:when test="${not empty additionalInfoText}">
-																	<c:set var="additionalInfoText" value="${additionalInfoText}"/>
+	<c:set var="additionalInfoText" value="${additionalInfoText}"/>
 																</c:when>
 														 </c:choose>
 														<c:choose>
 																<c:when test="${rec.numAssayImages > 0}">
-																		<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=genetics', '${rec.tumorFrequencyKey}');return false;\">Genetics</a><img src=\"${applicationScope.urlImageDir}/pic.gif\" alt=\"X\" border=\"0\">"/>
+	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=genetics', '${rec.tumorFrequencyKey}');return false;\">Genetics</a><img src=\"${applicationScope.urlImageDir}/pic.gif\" alt=\"X\" border=\"0\">"/>
 																</c:when>
 																<c:otherwise>
-																		<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=genetics', '${rec.tumorFrequencyKey}');return false;\">Genetics</a>"/>
+	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=genetics', '${rec.tumorFrequencyKey}');return false;\">Genetics</a>"/>
 																</c:otherwise>
 														</c:choose>
 												</c:when>
@@ -316,17 +311,17 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 												</c:choose>
 
 												<%-- Check to see if we have additional notes about the tumor --%>
-												<c:set var="notesLinkName" value=""/>
+	<c:set var="notesLinkName" value=""/>
 												<c:choose>
 												<c:when test="${rec.numNotes>0}">
 														<c:choose>
 																<c:when test="${not empty additionalInfoText}">
-																		<c:set var="additionalInfoText" value="${additionalInfoText}"/>
+	<c:set var="additionalInfoText" value="${additionalInfoText}"/>
 																</c:when>
 														</c:choose>
 														<c:choose>
 															<c:when test="${true}">
-																	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=notes', '${rec.tumorFrequencyKey}');return false;\">Additional Notes</a>" />
+	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=notes', '${rec.tumorFrequencyKey}');return false;\">Additional Notes</a>" />
 															</c:when>
 														</c:choose>
 															
@@ -340,12 +335,12 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 												<c:when test="${not empty rec.note}">
 														<c:choose>
 																<c:when test="${not empty additionalInfoText}">
-																		<c:set var="additionalInfoText" value="${additionalInfoText}"/>
+	<c:set var="additionalInfoText" value="${additionalInfoText}"/>
 																</c:when>
 														</c:choose>
 														<c:choose>
 															<c:when test="${true}">
-																	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=tnotes', '${rec.tumorFrequencyKey}');return false;\">Treatment Note</a>" />
+	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=tnotes', '${rec.tumorFrequencyKey}');return false;\">Treatment Note</a>" />
 															</c:when>
 														</c:choose>
 															
@@ -356,12 +351,12 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 												<c:when test="${rec.numSamples > 0}">
 														<c:choose>
 																<c:when test="${not empty additionalInfoText}">
-																		<c:set var="additionalInfoText" value="${additionalInfoText}"/>
+	<c:set var="additionalInfoText" value="${additionalInfoText}"/>
 																</c:when>
 														</c:choose>
 														<c:choose>
 															<c:when test="${true}">
-																	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('geneExpressionSearchResults.do?tfKey=${rec.tumorFrequencyKey}&amp;page=arrays', '${rec.tumorFrequencyKey}');return false;\">Expression Data</a>" />
+	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('geneExpressionSearchResults.do?tfKey=${rec.tumorFrequencyKey}&amp;page=arrays', '${rec.tumorFrequencyKey}');return false;\">Expression Data</a>" />
 															</c:when>
 														</c:choose>
 															
@@ -401,10 +396,8 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 
 <!-- ////  End Detail Section  //// -->
 
-
 </section>
 </div>
 </body>
 </html>
-
 

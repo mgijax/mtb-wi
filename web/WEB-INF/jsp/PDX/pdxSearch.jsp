@@ -3,12 +3,11 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Search Form"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Search Form"/>
 
 				<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
-
-		<c:import url="../../../meta.jsp"/>
+	<c:import url="../../../meta.jsp"/>
 
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
@@ -167,7 +166,7 @@ Please wait..."
 </head>
 
 <body>
-			<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 		<div class="wrap">
 <nav><c:import url="../../../pdxToolBar.jsp" /></nav>
@@ -181,7 +180,6 @@ Please wait..."
 	<a class="help" href="userHelp.jsp#pdxsearch"></a>
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
 </header>
-
 
 <table class="results">
 
@@ -525,7 +523,6 @@ No variants for selected gene.</td>
 
 </table>
 </html:form>
-
 
 </section>
 </div>

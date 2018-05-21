@@ -6,8 +6,8 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Tumor Search Form"/>
-<c:import url="../../../meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Tumor Search Form"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -19,12 +19,10 @@
 
 <html:form action="tumorSearchResults" method="GET">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#tumors"></a>
 </header>
-
 
 <table class="results">
 
@@ -225,7 +223,6 @@ To search for tumor records associated with Pathology images, choose the box nex
 		</tr>
 </table>
 </html:form>
-
 
 </section>
 </div>

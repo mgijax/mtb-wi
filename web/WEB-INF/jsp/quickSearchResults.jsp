@@ -6,9 +6,8 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Quick Search Results"/>
-
-<c:import url="../../meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Quick Search Results"/>
+	<c:import url="../../meta.jsp"/>
 
 </head>
 
@@ -18,7 +17,6 @@
 <div class="wrap">
 <nav><c:import url="../../toolBar.jsp" /></nav>
 <section class="main">
-
 
 <header>
 	<h1>${pageTitle}</h1>
@@ -141,7 +139,6 @@
 </table>
 
 <!-- ////  End Search Results List  //// -->
-
 
 </section>
 </div>

@@ -3,13 +3,13 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-	<head>
-<c:set var="pageTitle" scope="request" value="Human Gene Search Form"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Human Gene Search Form"/>
+	<c:import url="../../../meta.jsp"/>
 	</head>
 
 <body>
-			<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 		
 		<div class="wrap">
@@ -18,12 +18,10 @@
 
 <html:form action="orthologySearch" method="GET" >
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#humangene"></a>
 </header>
-
 
 <table class="results">
 
@@ -105,8 +103,8 @@
 </html:form>
 							</td>
 						</tr>
-						<c:set var="url" value="/orthologySearch.do?sortBy=HumanGS&compare=Equals&reference=" />
-						<c:set var="asList" value="&asList=true" />
+	<c:set var="url" value="/orthologySearch.do?sortBy=HumanGS&compare=Equals&reference=" />
+	<c:set var="asList" value="&asList=true" />
 						<tr>
 							
 							<td>		

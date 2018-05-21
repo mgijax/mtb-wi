@@ -32,7 +32,7 @@
 						</tr>
 
 						<c:if test="${not empty tumorFreq.note}">
-								<c:set var="noteRow" value="1"/>
+	<c:set var="noteRow" value="1"/>
 								<tr class="stripe-1">
 										<td>${tumorFreq.note}</td>
 										<td><a href="nojavascript.jsp" onclick="focusBackToOpener('referenceDetails.do?accId=${tumorFreq.reference}');return false;">${tumorFreq.reference}</a></td>
@@ -47,7 +47,6 @@
 		</c:choose>
 
 <!-- ////  End Additional Notes Records  //// -->
-
 
 </section>
 </div>

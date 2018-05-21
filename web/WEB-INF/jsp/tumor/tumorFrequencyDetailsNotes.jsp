@@ -35,12 +35,11 @@
 								<td class="results-header">Note</td>
 								<td class="results-header">Reference</td>
 						</tr>
-
-						<c:set var="noteRow" value="2"/>
+	<c:set var="noteRow" value="2"/>
 
 					 
 						<c:forEach var="rec" items="${tumorFreq.additionalNotes}" varStatus="status">
-								<c:set var="noteRow" value="${noteRow == 1 ? 2 : 1}"/>
+	<c:set var="noteRow" value="${noteRow == 1 ? 2 : 1}"/>
 								<tr class="stripe${noteRow}">
 										<td><c:out value="${rec.label}" escapeXml="false"/></td>
 										<td><a href="nojavascript.jsp" onclick="focusBackToOpener('referenceDetails.do?key=${rec.data}');return false;">${rec.value}</a></td>

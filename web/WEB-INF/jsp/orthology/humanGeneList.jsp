@@ -5,7 +5,7 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Human Gene List"/>
+	<c:set var="pageTitle" scope="request" value="Human Gene List"/>
 	<c:import url="../../../meta.jsp"/>
 </head>
 
@@ -25,8 +25,6 @@
 <!-- ////  Start Results  //// -->
 
 <!-- ////  Start Strain Genetics Results List  //// -->
-
-
 
 <table class="results">
 		<tr>
@@ -60,7 +58,6 @@
 	<a href="<c:url value='/orthologySearch.do?sortBy=HumanGS&compare=Equals&reference=${reference}'/>"><input type="button" value="Search MTB"></a>
 </td></tr>
 </table>
-
 
 </section>
 </div>

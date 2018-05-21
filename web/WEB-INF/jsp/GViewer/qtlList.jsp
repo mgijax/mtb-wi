@@ -4,21 +4,20 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <!doctype html>
-	<head>
-<c:set var="pageTitle" scope="request" value="List of Selected Cancer QTLs"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="List of Selected Cancer QTLs"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
+
 <body>
-			<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 <div class="wrap">
 <section class="main-alt">
-
 
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#QTLList"></a>
 </header>
-
 
 <table class="results">
 
@@ -45,7 +44,7 @@
 										</tr>
 
 											<c:forEach var="feature" items="${features}">
-												<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
 													<td>${feature.mgiId}</td>
 													<td><a href="gViewer.do?id=${feature.mgiId}&name=${feature.chromosome}:${feature.start}..${feature.end}&label=${feature.label}&primeRef=${feature.primeRef}&qtlName=${feature.name}" >${feature.label}</a></td>
@@ -63,7 +62,6 @@
 						</c:when>
 					</c:choose>
 				</table>
-
 
 </section>
 </div>

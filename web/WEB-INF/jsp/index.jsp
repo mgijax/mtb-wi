@@ -9,11 +9,9 @@
 --%>
 
 <html>
-
-		<head>
-<c:set var="pageTitle" scope="request" value="Mouse Models of Human Cancer"/>
-
-				<c:import url="../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Mouse Models of Human Cancer"/>
+	<c:import url="../../meta.jsp"/>
 
 				<script type="text/javascript">
 						var mc = false;
@@ -32,7 +30,7 @@
 		</head>
 
 <body>
-			<c:import url="../../body.jsp" />
+	<c:import url="../../body.jsp" />
 
 <div class="wrap">
 <nav><c:import url="../../toolBar.jsp"/></nav>
@@ -142,7 +140,6 @@ The value for this field is selected from a list of controlled vocabulary terms.
 														<p></p>
 														<hr>
 														<p></p>
-
 
 </section>
 </div>

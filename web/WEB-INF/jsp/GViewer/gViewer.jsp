@@ -5,14 +5,14 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <!doctype html>
 <html>
-	<head>
-<c:set var="pageTitle" scope="request" value="Cancer QTL Viewer"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Cancer QTL Viewer"/>
+	<c:import url="../../../meta.jsp"/>
 		
 	</head>
-	
+
 <body>
-		<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 	
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/JavaScriptFlashGateway.js"></script>
@@ -53,7 +53,8 @@
 	
 			generator.document.write('<html><head><title>Annotation Data</title>');
 			generator.document.write('<link rel="stylesheet" href="style.css">');
-			generator.document.write('</head><body class="alt">');
+			generator.document.write('</head>
+<body class="alt">');
 			generator.document.write('<h3>GViewer Annotation Data</h3>');
 			generator.document.write(data);
 			generator.document.write('<p><a href="javascript:self.close()">Close</a> this window.</p>');
@@ -87,12 +88,10 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#QTL"></a>
 </header>
-
 
 <table class="results">
 

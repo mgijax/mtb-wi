@@ -3,9 +3,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Dashboard"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Dashboard"/>
+	<c:import url="../../../meta.jsp"/>
 
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
@@ -88,7 +88,9 @@
 		</script>
 
 </head>
+
 <body class="alt">
+
 <body>
 	<c:import url="../../../body.jsp" />
 
@@ -96,12 +98,10 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxDashboard"></a>
 </header>
-
 
 <table class="results">
 
@@ -314,7 +314,6 @@
 </tr>	-->
 
 </table>
-
 
 </section>
 </div>

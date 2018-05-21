@@ -7,10 +7,9 @@
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <!doctype html>
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="Edit PDX Content"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Edit PDX Content"/>
 				<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-				<title>Edit PDX Content</title>
 
 				<style type="text/css">
 						.upload-icon {
@@ -24,8 +23,7 @@
 								float: left;
 						}
 				</style>
-
-		<c:import url="../../../meta.jsp"/>
+	<c:import url="../../../meta.jsp"/>
 
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
@@ -469,7 +467,6 @@
 <div class="wrap">
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
-
 
 <header>
 	<h1>${pageTitle}</h1>

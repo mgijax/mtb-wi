@@ -4,8 +4,8 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Pathology Image Search Form"/>
-<c:import url="../../../meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Pathology Image Search Form"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -17,12 +17,10 @@
 
 <html:form action="pathologyImageSearchResults" method="GET">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pathology"></a>
 </header>
-
 
 <table class="results">
 
@@ -201,7 +199,6 @@ Searches are conducted from a list of antibody names which include clone numbers
 		</tr>
 </table>
 </html:form>
-
 
 </section>
 </div>

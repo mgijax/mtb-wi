@@ -5,9 +5,9 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <!doctype html>
 <html>
-	<head>
-<c:set var="pageTitle" scope="request" value="Cancer QTL Selection Details"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Cancer QTL Selection Details"/>
+	<c:import url="../../../meta.jsp"/>
 		<style type="text/css">
 			.no-icon {
 				display : none;
@@ -21,9 +21,9 @@
 		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/PagingStore.js"></script>
 		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FeatureGrid.js"></script>
 	</head>
-	
+
 <body>
-		<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 	
 	<script type="text/javascript">
@@ -339,18 +339,16 @@ human synonym for Cdc23 is APC8.</strong>"
 		
 		
 	</script>
-	<body class="alt">
+
+<body class="alt">
 <div class="wrap">
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
-
 
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#GViewerDetails"></a>
 </header>
-
-
 
 <table class="results">
 
@@ -635,7 +633,6 @@ Symbol/Name
 									</td> 
 								</tr>
 							</table>
-
 
 </section>
 </div>

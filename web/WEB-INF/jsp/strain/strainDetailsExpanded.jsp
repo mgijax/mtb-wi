@@ -20,8 +20,6 @@
 			<a class="help" href="userHelp.jsp#straindetail"></a>
 		</header>
 
-
-
 <table class="results">
 
 <!-- ////  Start Detail Section  //// -->
@@ -79,18 +77,17 @@
 		</tr>
 
 <!-- ////  End Strain Header  //// -->
-
-<c:set var="num" value="1"/>
+	<c:set var="num" value="1"/>
 
 <!-- ////  Start Strain Tumors  //// -->
 
 <c:choose>
 		<c:when test="${not empty strain.tumors}">
-				<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 				<tr class="stripe${num}">
 						<td class="cat${num}">Tumors</td>
 						<td class="data${num}">
-								<c:set var="statsBean" value="${strain.tumorStats}"/>
+	<c:set var="statsBean" value="${strain.tumorStats}"/>
 								${statsBean.label} unique tumor sub-types displayed. <!-- representing ${statsBean.value} tumor detail records. -->
 								
 <!-- \n -->
@@ -205,7 +202,7 @@ Tumor Sub-type Records</td>
 
 <c:choose>
 		<c:when test="${not empty strain.links || not empty strain.linksGeneral}">
-				<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 				<tr class="stripe${num}">
 						<td class="cat${num}">Other Database Links</td>
 						<td class="data${num}">
@@ -277,7 +274,6 @@ Tumor Sub-type Records</td>
 </table>
 
 <!-- ////  End Detail Section  //// -->
-
 
 </section>
 </div>

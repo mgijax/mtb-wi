@@ -51,18 +51,16 @@
 								<td class="results-header">Notes</td>
 								<td class="results-header">Images</td>
 						</tr>
-						
-						<c:set var="lbl" value="1"/>
-						<c:set var="rowClass" value="stripe1"/>
+	<c:set var="lbl" value="1"/>
+	<c:set var="rowClass" value="stripe1"/>
 						
 						<c:forEach var="rec" items="${tumorFreq.pathologyRecs}" varStatus="status">
-
-								<c:set var="lbl" value="${lbl+1}"/>
-								<c:set var="rowClass" value="stripe${(lbl%2)+1}"/>
-								<c:set var="rowSpan" value="${fn:length(rec.images)}"/>
+	<c:set var="lbl" value="${lbl+1}"/>
+	<c:set var="rowClass" value="stripe${(lbl%2)+1}"/>
+	<c:set var="rowSpan" value="${fn:length(rec.images)}"/>
 								
 								<c:if test="${rowSpan<1}">
-										<c:set var="rowSpan" value="1"/>
+	<c:set var="rowSpan" value="1"/>
 								</c:if>
 								
 								<tr class="${rowClass}">

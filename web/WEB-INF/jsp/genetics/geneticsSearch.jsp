@@ -3,13 +3,13 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="Strain and Tumor Genetics Search Form"/>
-				<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Strain and Tumor Genetics Search Form"/>
+	<c:import url="../../../meta.jsp"/>
 		</head>
-		
+
 <body>
-			<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 		
 		<div class="wrap">
@@ -18,12 +18,10 @@
 
 <html:form action="geneticsSearchResults" method="GET">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#genetics"></a>
 </header>
-
 
 <table class="results">
 
@@ -190,7 +188,6 @@ This search is used to find allele records associated with a specific chromosome
 										</tr>
 								</table>
 								</html:form>
-
 
 </section>
 </div>

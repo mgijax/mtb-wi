@@ -3,19 +3,18 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-	<head>
-<c:set var="pageTitle" scope="request" value="Gene Expression Data Set Search Form"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Gene Expression Data Set Search Form"/>
+	<c:import url="../../../meta.jsp"/>
 	</head>
-	
+
 <body>
-		<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 	
 	<div class="wrap">
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
-
 
 <header>
 	<h1>${pageTitle}</h1>
@@ -23,7 +22,6 @@
 </header>
 
 <html:form action="geneExpressionSearchResults" method="GET">
-
 
 <table class="results">
 

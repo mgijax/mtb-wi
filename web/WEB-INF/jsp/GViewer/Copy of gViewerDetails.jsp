@@ -5,8 +5,8 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <!doctype html>
 <html>
-	<head>
-<c:set var="pageTitle" scope="request" value="Cancer QTL Selection Details"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Cancer QTL Selection Details"/>
 		
 		<style type="text/css">
 		
@@ -15,11 +15,7 @@
 	background-image:'' !important;
 	}
 	</style>
-		
-		
-		
-		
-		<c:import url="../../../meta.jsp"/>
+	<c:import url="../../../meta.jsp"/>
 		
 		
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
@@ -27,9 +23,9 @@
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 		
 	</head>
-	
+
 <body>
-		<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 	
 	<script type="text/javascript">
@@ -172,13 +168,11 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#GViewerDetails">
 													</a>
 </header>
-
 
 <table class="results">
 
@@ -489,7 +483,7 @@
 																	<td class="results-header">MGI ID</td>
 																</tr>
 																<c:forEach var="feature" items="${features}" varStatus="count">
-																	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 																	<tr class="stripe${num}">
 																		<td>${feature.label}</td>
 																		<td>${feature.name}</td>
@@ -523,7 +517,6 @@
 									</td> 
 								</tr>
 							</table>
-
 
 </section>
 </div>

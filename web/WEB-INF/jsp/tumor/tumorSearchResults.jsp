@@ -7,8 +7,8 @@
 <c:catch var="exception">
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Tumor Search Results"/>
-<c:import url="../../../meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Tumor Search Results"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -18,12 +18,10 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#tumorresults"></a>
 </header>
-
 
 <table class="results">
 
@@ -303,7 +301,7 @@
 
 <c:choose>
 <c:when test="${not empty tumors}">
-		<c:set var="lbl" value="1"/>
+	<c:set var="lbl" value="1"/>
 				<tr class="results">
 						<td class="results-header" rowspan="2">Tumor Name</td>
 						<td class="results-header" rowspan="2">Organ Affected</td>
@@ -424,12 +422,10 @@ Summary</td>
 
 </table>
 
-
 </section>
 </div>
 </body>
 </html>
-
 
 </c:catch>
 <c:if test="${not empty exception}">

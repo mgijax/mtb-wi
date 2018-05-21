@@ -5,25 +5,23 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <!doctype html>
 	<html>
-		<head>
-<c:set var="pageTitle" scope="request" value="Gene Expression Data Set Search Results"/>
-			<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Gene Expression Data Set Search Results"/>
+	<c:import url="../../../meta.jsp"/>
 		</head>
-		
+
 <body>
-			<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 		
 		<div class="wrap">
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#geneexpression"></a>
 </header>
-
 
 <table class="results">
 
@@ -196,7 +194,7 @@
 
 <c:choose>
 							<c:when test="${not empty results}"> 
-							<c:set var="lbl" value="1"/>
+	<c:set var="lbl" value="1"/>
 							
 							
 							<c:forEach var="series" items="${results}" >
@@ -305,7 +303,6 @@ Control sample
 <!-- ////  End Results  //// -->
 
 </table>
-
 
 </section>
 </div>

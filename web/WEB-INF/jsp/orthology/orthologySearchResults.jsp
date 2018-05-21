@@ -5,7 +5,7 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Orthology Search Results"/>
+	<c:set var="pageTitle" scope="request" value="Orthology Search Results"/>
 	<c:import url="../../../meta.jsp"/>
 </head>
 
@@ -18,12 +18,10 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#humangeneresults"></a>
 </header>
-
 
 <table class="results">
 
@@ -72,8 +70,6 @@
 <!-- ////  Start Results  //// -->
 
 <!-- ////  Start Strain Genetics Results List  //// -->
-
-
 
 <table class="results">
 		<tr>
@@ -127,7 +123,6 @@
 </table>
 
 <!-- ////  End Results  //// -->
-
 
 </section>
 </div>

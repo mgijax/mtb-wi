@@ -6,11 +6,11 @@
 <!doctype html>
 
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Search Results"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Search Results"/>
 	 
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
-		 <c:import url="../../../meta.jsp"/>
+	<c:import url="../../../meta.jsp"/>
 
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
@@ -284,6 +284,7 @@
 </script>
 
 </head>
+
 <body>
 	<c:import url="../../../body.jsp" />
 
@@ -576,10 +577,8 @@
 
 </table>
 
-
 </section>
 </div>
 </body>
 </html>
-
 

@@ -2,11 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html>
-
 <head>
-<c:set var="pageTitle" scope="request" value="Invalid URL"/>
-
-<c:import url="meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Invalid URL"/>
+	<c:import url="meta.jsp"/>
 
 </head>
 
@@ -17,12 +15,10 @@
 <nav><c:import url="toolBar.jsp" /></nav>
 <section class="main">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
-
 
 <table class="results">
 
@@ -81,7 +77,6 @@ Method: <%= request.getMethod() %>
 </pre>
 
 //-->
-
 
 </section>
 </div>

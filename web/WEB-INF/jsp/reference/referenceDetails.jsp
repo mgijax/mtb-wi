@@ -4,8 +4,8 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Reference Detail"/>
-<c:import url="../../../meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Reference Detail"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -14,7 +14,6 @@
 <div class="wrap">
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
-
 
 <header>
 	<h1>${pageTitle}</h1>
@@ -81,13 +80,12 @@
 <!-- ////  End Reference Detail  //// -->
 
 <!-- ////  Start Reference Additional Info  //// -->
-
-<c:set var="lbl" value="2"/>
+	<c:set var="lbl" value="2"/>
 		
 		<c:choose>
 		<c:when test="${not empty reference.additionalInfo}">
 				<c:if test="${reference.hasAdditionalInfo}">
-						<c:set var="lbl" value="${lbl+1}"/>
+	<c:set var="lbl" value="${lbl+1}"/>
 						<tr class="stripe${(lbl%2)+1}">
 								<td class="cat${(lbl%2)+1}">Additional
 <!-- \n -->
@@ -134,7 +132,7 @@ in MTB </td>
 
 <c:choose>
 		<c:when test="${not empty reference.otherAccessionIds}">
-				<c:set var="lbl" value="${lbl+1}"/>
+	<c:set var="lbl" value="${lbl+1}"/>
 				<tr class="stripe${(lbl%2)+1}">
 						<td class="cat${(lbl%2)+1}">Other
 <!-- \n -->
@@ -171,7 +169,6 @@ IDs</td>
 <!-- ////  End Detail Section  //// -->
 
 </table>
-
 
 </section>
 </div>

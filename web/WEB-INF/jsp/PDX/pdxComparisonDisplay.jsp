@@ -4,12 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!doctype html>
 <html>
-		<head>
-<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Comparison"/>
-		<c:import url="../../../meta.jsp"/>
+<head>
+	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Comparison"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
+
 <body>
-			<c:import url="../../../body.jsp" />
+	<c:import url="../../../body.jsp" />
 
 		
 		<script type="text/javascript">
@@ -217,7 +218,6 @@
 
 								</table>
 						</html:form>
-
 
 </section>
 </div>

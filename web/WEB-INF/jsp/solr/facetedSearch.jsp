@@ -2,8 +2,7 @@
 <%@ page language="java" pageEncoding="UTF-8" session="false"%>
 
 <html>
-
-		<head>
+<head>
 				<title>MTB Faceted Search</title>
 
 				<style type="text/css">
@@ -1109,7 +1108,7 @@ To</th>";
 				</script>
 		</head>
 
-		<body onload="onLoad()">
+<body onload="onLoad()">
 				<table>
 
 						<tr>

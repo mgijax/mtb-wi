@@ -6,8 +6,8 @@
 <!doctype html>
 <html>
 <head>
-<c:set var="pageTitle" scope="request" value="Cytogenetic Summary"/>
-<c:import url="../../../meta.jsp"/>
+	<c:set var="pageTitle" scope="request" value="Cytogenetic Summary"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -16,7 +16,6 @@
 <nav><c:import url="../../../toolBar.jsp"/></nav>
 	
 <section class="main">
-
 
 <header>
 	<h1>${pageTitle}</h1>
@@ -118,10 +117,8 @@
 
 <!-- ////  End Detail Section  //// -->
 
-
 </section>
 </div>
 </body>
 </html>
-
 

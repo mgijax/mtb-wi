@@ -3,7 +3,6 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-
 <head>
 	<c:set var="pageTitle" scope="request" value="Strain Search Form"/>
 	<c:import url="../../../meta.jsp"/>
@@ -19,12 +18,10 @@
 
 <html:form action="strainSearchResults" method="GET">
 
-
 <header>
 	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#strains"></a>
 </header>
-
 
 <table class="results">
 
@@ -192,7 +189,6 @@ Users interested in a specific strain of mouse that is offered through The Jacks
 </table>
 
 </html:form>
-
 
 </section>
 </div>
