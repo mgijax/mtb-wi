@@ -6,7 +6,7 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Strain and Tumor Genetics Search Form"/>
 	<c:import url="../../../meta.jsp"/>
-		</head>
+</head>
 
 <body>
 	<c:import url="../../../body.jsp" />

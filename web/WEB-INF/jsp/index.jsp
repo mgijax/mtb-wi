@@ -12,8 +12,7 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Mouse Models of Human Cancer"/>
 	<c:import url="../../meta.jsp"/>
-
-				<script type="text/javascript">
+	<script type="text/javascript">
 						var mc = false;
 						function toggle() {
 								if (mc) {
@@ -26,8 +25,8 @@
 										mc = true;
 								}
 						}
-				</script>
-		</head>
+	</script>
+</head>
 
 <body>
 	<c:import url="../../body.jsp" />

@@ -8,15 +8,11 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Cancer QTL Viewer"/>
 	<c:import url="../../../meta.jsp"/>
-		
-	</head>
+</head>
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-	
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/JavaScriptFlashGateway.js"></script>
-	
 	<script type="text/javascript">
 
 				 
@@ -77,8 +73,6 @@
 			document.forms[1].qtlList.value="";
 			document.forms[1].target="_self";
 		}
-
-				
 	</script>
 	
 	

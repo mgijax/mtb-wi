@@ -6,8 +6,7 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Comparison Form"/>
 	<c:import url="../../../meta.jsp"/>
-
-		<script type="text/javascript">
+	<script type="text/javascript">
 				 
 				function resetForm(){
 						document.forms[1].reset();
@@ -85,10 +84,7 @@
 						}
 						document.getElementById("savedGenesList").value=geneList;
 				}
-
-				
-				 
-		</script>
+	</script>
 </head>
 
 <body>

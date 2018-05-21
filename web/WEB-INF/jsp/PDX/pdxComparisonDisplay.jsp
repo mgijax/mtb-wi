@@ -11,9 +11,7 @@
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-		
-		<script type="text/javascript">
+	<script type="text/javascript">
 				
 				function showAllMutations(){
 						var genes = document.getElementsByName("mtGene");
@@ -44,8 +42,7 @@
 										}
 						}
 				}
-
-</script>
+	</script>
 		
 
 		<div class="wrap">

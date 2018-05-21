@@ -7,7 +7,7 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Tumor Genetics"/>
 	<c:import url="../../../meta.jsp"/>
-	</head>
+</head>
 
 <body>
 	<c:import url="../../../body.jsp" />

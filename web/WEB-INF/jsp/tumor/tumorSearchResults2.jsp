@@ -5,15 +5,15 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <!doctype html>
 <!-- Combo-handled YUI CSS files: -->
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.7.0/build/reset-fonts-grids/reset-fonts-grids.css&2.7.0/build/base/base-min.css&2.7.0/build/assets/skins/sam/skin.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.7.0/build/reset-fonts-grids/reset-fonts-grids.css&2.7.0/build/base/base-min.css&2.7.0/build/assets/skins/sam/skin.css">
 <!-- Combo-handled YUI JS files: -->
-<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js&2.7.0/build/element/element-min.js&2.7.0/build/paginator/paginator-min.js&2.7.0/build/datasource/datasource-min.js&2.7.0/build/dragdrop/dragdrop-min.js&2.7.0/build/datatable/datatable-min.js&2.7.0/build/resize/resize-min.js"></script>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js&2.7.0/build/element/element-min.js&2.7.0/build/paginator/paginator-min.js&2.7.0/build/datasource/datasource-min.js&2.7.0/build/dragdrop/dragdrop-min.js&2.7.0/build/datatable/datatable-min.js&2.7.0/build/resize/resize-min.js"></script>
 
 <html>
 <head>
 	<c:set var="pageTitle" scope="request" value="Tumor Search Results"/>
 	<c:import url="../../../meta.jsp"/>
-	</head>
+</head>
 
 <body>
 	<c:import url="../../../body.jsp" />
@@ -308,7 +308,7 @@
 
 <c:choose>
 									<c:when test="${not empty tumors}">
-										<script type="text/javascript" >
+	<script type="text/javascript" >
 											YAHOO.util.Event.addListener(window, "load", function() { 
 												buildTable = new function() { 
 													var resultsDataSource = new YAHOO.util.LocalDataSource( [
@@ -464,7 +464,7 @@ to",width:100,resizeable:true},
 														}
 													}();
 												});
-										</script>
+	</script>
 										<tr class="summary"><td><div class="yui-skin-sam" id="results-table">There should be stuff here</div></td></tr>
 									</c:when>
 									<c:otherwise>

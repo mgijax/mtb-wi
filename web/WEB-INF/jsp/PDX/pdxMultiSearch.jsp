@@ -5,26 +5,21 @@
 <html>
 <head>
 	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Search Form"/>
-
-				<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
 	<c:import url="../../../meta.jsp"/>
-
-				<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
-				<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-
-				<script type="text/javascript">
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+	<script type="text/javascript">
 
 						function clearForm() {
 								document.forms[1].cases.value = "";
 								document.forms[1].submit();
 						}
-
-				</script>
+	</script>
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-		</head>
+</head>
 
 		<div class="wrap">
 <nav><c:import url="../../../pdxToolBar.jsp" /></nav>
@@ -200,9 +195,9 @@
 </div>
 		<!-- If the page reloads to update variants don't go back to the top of the page -->
 		<c:if test="${not empty update}">
-				<script>
+	<script>
 						document.location = "#variantsLocation"
-				</script>
+	</script>
 		</c:if>
 </body>
 </html>

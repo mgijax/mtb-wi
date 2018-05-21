@@ -8,14 +8,11 @@
 <html>
 <head>
 	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Search Results"/>
-	 
-		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<c:import url="../../../meta.jsp"/>
-
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-
-<script type="text/javascript">
+	<script type="text/javascript">
 		
 		Ext.ns('org.jax.mgi.mtb');
 		
@@ -280,9 +277,7 @@
 				
 	 
 		});
-		
-</script>
-
+	</script>
 </head>
 
 <body>

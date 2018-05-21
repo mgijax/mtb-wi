@@ -3,8 +3,8 @@
 <html>
 <head>
 				<title>Mouse Tumor Database Project</title>
-				<meta content="0; URL=/mtbwi/index.do" http-equiv="refresh">
-		</head>
+	<meta content="0; URL=/mtbwi/index.do" http-equiv="refresh">
+</head>
 
 <body bgcolor="#ffffff">
 				<div>

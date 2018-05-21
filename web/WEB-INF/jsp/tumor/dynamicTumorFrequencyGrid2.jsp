@@ -14,8 +14,7 @@
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-<script language="javascript" >
+	<script language="javascript" >
 	
 	 function checkChecks(){
 		var checked = false;
@@ -176,8 +175,7 @@
 		}
 	}
  }
-		
-</script>
+	</script>
 
 <div class="wrap">
 <nav><c:import url="../../../toolBar.jsp"/></nav>

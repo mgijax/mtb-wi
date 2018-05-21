@@ -18,7 +18,7 @@
 		<header>
 			<h1>Strain Tumor Overview<pan class="normal">Expanded View</span></h1>
 			<a class="help" href="userHelp.jsp#straindetail"></a>
-		</header>
+</header>
 
 <table class="results">
 

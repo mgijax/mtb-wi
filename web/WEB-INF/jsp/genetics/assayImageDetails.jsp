@@ -8,7 +8,6 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Assay Image Detail"/>
 	<c:import url="../../../meta.jsp"/>
-
 </head>
 
 <body>

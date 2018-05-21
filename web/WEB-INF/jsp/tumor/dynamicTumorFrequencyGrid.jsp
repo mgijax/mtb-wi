@@ -10,14 +10,10 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Dynamic Tumor Frequency Grid"/>
 	<c:import url="../../../meta.jsp"/>
-		
-		
-	</head>
+</head>
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-	
 	<script language="JavaScript"	>
 		
 		function checkChecks(){
@@ -141,7 +137,6 @@
 				}
 			}
 		}
-		
 	</script>
 
 <div class="wrap">

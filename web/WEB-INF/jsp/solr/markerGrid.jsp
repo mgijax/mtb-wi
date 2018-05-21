@@ -5,17 +5,14 @@
 <html>
 <head>
 	<c:set var="pageTitle" scope="request" value="Marker Grid"/>
-
-				<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all_noGlobals.css" /> 
-
-				<link href="${applicationScope.urlStyleSheet}" rel="stylesheet" type="text/css"/>
-				<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
-				<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-				<script type="text/javascript" src="${applicationScope.urlBase}/js/mtb.js?version=2"></script>
-				<script type="text/javascript" src="${applicationScope.urlBase}/js/overlib.js"></script>
-				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-			
-				<style type="text/css">
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all_noGlobals.css" /> 
+	<link href="${applicationScope.urlStyleSheet}" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/js/mtb.js?version=2"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/js/overlib.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style type="text/css">
 
 						div.cbox{
 								font-size:90%;
@@ -126,10 +123,8 @@
 						a.noline:link{ 
 								text-decoration: none;
 						} 
-
-				</style>
-
-				<script	language="javascript">
+	</style>
+	<script	language="javascript">
 
 						function organSort(o) {
 								document.getElementById("sort-organ").value = o;
@@ -242,10 +237,9 @@
 										value: '${marker}'
 								});
 						})
-
-				</script>
+	</script>
 	<c:import url="../../../meta.jsp"/>
-		</head>
+</head>
 
 <body>
 	<c:import url="../../../body.jsp" />

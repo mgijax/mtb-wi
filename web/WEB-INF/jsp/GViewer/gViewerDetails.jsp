@@ -8,24 +8,22 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Cancer QTL Selection Details"/>
 	<c:import url="../../../meta.jsp"/>
-		<style type="text/css">
+	<style type="text/css">
 			.no-icon {
 				display : none;
 				background-image:'' !important;
 			}
-		</style>
-		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Karyotype-canvas.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/PagingStore.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FeatureGrid.js"></script>
-	</head>
+	</style>
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Karyotype-canvas.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/PagingStore.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FeatureGrid.js"></script>
+</head>
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-	
 	<script type="text/javascript">
 		
 		var loadViewerWinAttempts =0;
@@ -335,12 +333,8 @@ human synonym for Cdc23 is APC8.</strong>"
 						}
 						aboutGSMWindow.show(); 
 				};
-		
-		
-		
 	</script>
 
-<body class="alt">
 <div class="wrap">
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">

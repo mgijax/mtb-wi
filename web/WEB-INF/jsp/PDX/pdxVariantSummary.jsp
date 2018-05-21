@@ -9,12 +9,10 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Variant Summary"/>
 	<c:import url="../../../meta.jsp"/>
-		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
-
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base-debug.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-
-		<script type="text/javascript">
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base-debug.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+	<script type="text/javascript">
 		
 				Ext.ns('org.jax.mgi.mtb');
 		
@@ -212,8 +210,7 @@
 				
 	 
 				});
-		
-		</script>
+	</script>
 </head>
 
 <body class="alt">

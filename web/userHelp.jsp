@@ -5,7 +5,6 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Mouse Tumor Biology Database User Help Reference"/>
 	<c:import url="meta.jsp"/>
-
 </head>
 
 <body class="alt">

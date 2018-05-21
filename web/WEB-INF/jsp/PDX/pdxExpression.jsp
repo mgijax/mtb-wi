@@ -8,9 +8,8 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Gene Expression"/>
 	<c:import url="../../../meta.jsp"/>
-
-		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-		<script type="text/javascript">
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
 				
 				
 				google.load("visualization", "1", {packages:["corechart"]});
@@ -57,9 +56,7 @@
 								rankBarChart.draw(rankView, options);
 						}
 				}
-	
-				 
-		</script>
+	</script>
 
 <body>
 	<c:import url="../../../body.jsp" />

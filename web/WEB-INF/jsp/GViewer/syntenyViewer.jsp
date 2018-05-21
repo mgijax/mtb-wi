@@ -7,18 +7,15 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Synteny Viewer"/>
 	<c:import url="../../../meta.jsp"/>
-
-		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/PagingStore.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Karyotype-canvas.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FeatureGrid.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FeatureGrid.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Legend.js"></script>
-	
-
-		<script type="text/javascript">
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/PagingStore.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Karyotype-canvas.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FeatureGrid.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FeatureGrid.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Legend.js"></script>
+	<script type="text/javascript">
 				// number of pixels for largest chromosome
 				var maxSize = 100;
 
@@ -256,8 +253,7 @@
 						featureGrid.doLayout();
 			
 				});	//end onReady()
-		</script>
-
+	</script>
 </head>
 
 <body>

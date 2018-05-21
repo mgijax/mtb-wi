@@ -6,9 +6,9 @@
 <html>
 <head>
 	<c:set var="pageTitle" scope="request" value="QTL Viewer"/>
-		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/GViewer/javascript/fileUpload.css"/>
-		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
-		<style type="text/css">
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/GViewer/javascript/fileUpload.css"/>
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<style type="text/css">
 				.upload-icon {
 						background: url('${applicationScope.urlBase}/extjs/resources/images/image_add.png') no-repeat 0 0 !important;
 				}
@@ -26,26 +26,21 @@
 				display : none;
 				background-image:'' !important;
 			}
-			
-		</style>
+	</style>
 	<c:import url="../../../meta.jsp"/>
-
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/PagingStore.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Karyotype-canvas.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FeatureGrid.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FileUploadField.js"></script>
-
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Legend.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/ZoomPanel.js"></script>
-
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/PagingStore.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Karyotype-canvas.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FeatureGrid.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FileUploadField.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Legend.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/ZoomPanel.js"></script>
 </head>
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-<script type="text/javascript">
+	<script type="text/javascript">
 		// number of pixels for largest chromosome
 		var maxSize = 100;
 
@@ -1079,7 +1074,7 @@
 				// allows the form to be run outside of mtbwi app
 				document.forms['exportForm'].action = localURL+'viewer.do?method=export';
 		});	//end onReady()
-</script>
+	</script>
 
 <div class="wrap">
 <nav><c:import url="../../../toolBar.jsp" /></nav>

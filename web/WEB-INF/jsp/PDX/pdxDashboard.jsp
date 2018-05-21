@@ -6,9 +6,8 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Dashboard"/>
 	<c:import url="../../../meta.jsp"/>
-
-		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-		<script type="text/javascript">
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
 				
 				var disableResult = "${disableResults}";
 				if(disableResult.length > 0){
@@ -80,16 +79,8 @@
 				
 				
 				}
-				
-									
-			 
-							 
-			 
-		</script>
-
+	</script>
 </head>
-
-<body class="alt">
 
 <body>
 	<c:import url="../../../body.jsp" />
@@ -318,9 +309,9 @@
 </section>
 </div>
 <c:if test="${not empty bySite}">
-		<script>
+	<script>
 				document.location="#sites"
-		</script>
+	</script>
 </c:if>
 </body>
 </html>

@@ -8,7 +8,6 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Quick Search Results"/>
 	<c:import url="../../meta.jsp"/>
-
 </head>
 
 <body>

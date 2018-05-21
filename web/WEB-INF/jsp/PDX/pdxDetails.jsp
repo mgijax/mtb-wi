@@ -6,10 +6,8 @@
 <html>
 <head>
 	<c:set var="pageTitle" scope="request" value="PDX Model Details"/>
-
-				<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
-
-				<style type="text/css">
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<style type="text/css">
 						/* this color is totaly arbitrary -- sota salmony */
 						.x-grid3-row.false-positive .x-grid3-cell{ 
 								background-color:	#ffe2e2 !important; 
@@ -27,16 +25,12 @@
 						p{
 								margin-bottom: 2px;
 						}
-
-				</style>
+	</style>
 	<c:import url="../../../meta.jsp"/>
-
-				<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
-				<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-
-				<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
-				<script type="text/javascript">
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
 
 						google.load("visualization", "1", {packages: ["corechart"]});
 
@@ -526,9 +520,7 @@ Click to expand/collapse',
 								}
 								
 						});
-
-				</script>
-
+	</script>
 </head>
 
 <body>

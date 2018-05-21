@@ -6,8 +6,7 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="PDX Information Request Form"/>
 	<c:import url="../../../meta.jsp"/>
-
-		<script type="text/javascript">
+	<script type="text/javascript">
 		
 				function validate(){
 						
@@ -24,9 +23,7 @@
 								document.getElementById("msgtxt").style.display="inline";
 						}
 				}
-		
-		</script>
-
+	</script>
 </head>
 
 <body>

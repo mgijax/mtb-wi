@@ -5,7 +5,6 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Invalid URL"/>
 	<c:import url="meta.jsp"/>
-
 </head>
 
 <body>

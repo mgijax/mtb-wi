@@ -7,8 +7,7 @@
 <html>
 <head>
 	<c:set var="pageTitle" scope="request" value="Cancer QTL Selection Details"/>
-		
-		<style type="text/css">
+	<style type="text/css">
 		
 		.no-icon {
 	display : none;
@@ -16,18 +15,13 @@
 	}
 	</style>
 	<c:import url="../../../meta.jsp"/>
-		
-		
-		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-		
-	</head>
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+</head>
 
 <body>
 	<c:import url="../../../body.jsp" />
-
-	
 	<script type="text/javascript">
 		
 		var treePanel;
@@ -157,8 +151,6 @@
 			window.opener.alert("Loading MGD results.");
 			
 		}
-
-	
 	</script>
 	
 	

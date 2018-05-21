@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-
-<style type="text/css">
+	<style type="text/css">
 
 .survey{
  border: 1px solid blue;
  padding: 4px;}
-
-</style>
+	</style>
 
 <!-- ////  Start Include Navigation Menu  //// -->
 

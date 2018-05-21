@@ -6,7 +6,6 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Strain Search Form"/>
 	<c:import url="../../../meta.jsp"/>
-
 </head>
 
 <body>

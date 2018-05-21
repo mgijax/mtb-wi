@@ -13,19 +13,19 @@
 </c:choose>
  
 <!-- META Tags -->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="description" content="MTB has been designed to aid researchers in such areas as choosing experimental models, reviewing patterns of mutations in specific cancers, and identifying genes that are commonly mutated across a spectrum of cancers.">
-<meta name="keywords" CONTENT="mtb, mouse, tumor, biology, jax, lab, laboratory, jackson, mgi, genome, informatics">
-<meta name="revised" content="2016/10/30">
-<meta name="robots" content="all">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="description" content="MTB has been designed to aid researchers in such areas as choosing experimental models, reviewing patterns of mutations in specific cancers, and identifying genes that are commonly mutated across a spectrum of cancers.">
+	<meta name="keywords" CONTENT="mtb, mouse, tumor, biology, jax, lab, laboratory, jackson, mgi, genome, informatics">
+	<meta name="revised" content="2016/10/30">
+	<meta name="robots" content="all">
 
 <!-- CSS -->
-<link href="${applicationScope.urlStyleSheet}" rel="stylesheet" type="text/css"/>
+	<link href="${applicationScope.urlStyleSheet}" rel="stylesheet" type="text/css"/>
 
 <!-- JavaScript -->
-<script type="text/javascript" src="${applicationScope.urlJavaScript}"></script>
-<script type="text/javascript" src="${applicationScope.urlBase}/js/overlib.js"></script>
-<script type="text/javascript">
+	<script type="text/javascript" src="${applicationScope.urlJavaScript}"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/js/overlib.js"></script>
+	<script type="text/javascript">
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m
@@ -34,12 +34,11 @@
 
 	ga('create', '${applicationScope.googleID}', 'auto');
 	ga('send', 'pageview');
-
-</script>
+	</script>
 
 <!-- FavIcon -->
-<link rel="icon" href="${applicationScope.urlImageDir}/favicon.ico" type="image/ico">
-<link rel="SHORTCUT ICON" href="${applicationScope.urlImageDir}/favicon.ico">
+	<link rel="icon" href="${applicationScope.urlImageDir}/favicon.ico" type="image/ico">
+	<link rel="SHORTCUT ICON" href="${applicationScope.urlImageDir}/favicon.ico">
 
 <!-- ////  End Include Meta Information  //// -->
 

@@ -8,7 +8,7 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Pathology Image Detail"/>
 	<c:import url="../../../meta.jsp"/>
-<script type="text/javascript">
+	<script type="text/javascript">
 <!--
 var flashinstalled = 0;
 var flashversion = 0;
@@ -39,9 +39,8 @@ if (navigator.plugins && navigator.plugins.length) {
 	MSDetect = "true";
 }
 // -->
-</script>
-
-<script language="VBScript">
+	</script>
+	<script language="VBScript">
 on error resume next
 
 If MSDetect = "true" Then
@@ -58,7 +57,7 @@ End If
 If flashinstalled = 0 Then
 		flashinstalled = 1
 End If
-</script>
+	</script>
 </head>
 
 <body>
@@ -83,7 +82,7 @@ End If
 						<c:choose>
 								<c:when test="${not empty pathology.zoomifyDir}">
 								<!-- ZOOMIFY CHECK -->
-<script language="javascript" type="text/javascript">
+	<script language="javascript" type="text/javascript">
 <!--
 if (flashinstalled == 2) {
 		document.write("<DIV ALIGN=\"center\">");
@@ -98,7 +97,7 @@ if (flashinstalled == 2) {
 		document.write("<img src=\"${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${pathology.imageName}\">");
 }
 // -->
-</script>
+	</script>
 								</c:when>
 								<c:otherwise>
 										<!-- IMAGE HAS NOT BEEN ZOOMIFIED -->

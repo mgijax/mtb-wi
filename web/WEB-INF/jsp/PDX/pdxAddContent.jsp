@@ -9,10 +9,9 @@
 <html>
 <head>
 	<c:set var="pageTitle" scope="request" value="Add PDX Content"/>
-				<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-
-				<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/GViewer/javascript/fileUpload.css"/>
-				<style type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/GViewer/javascript/fileUpload.css"/>
+	<style type="text/css">
 						.upload-icon {
 								background: url('${applicationScope.urlBase}/extjs/resources/images/image_add.png') no-repeat 0 0 !important;
 						}
@@ -23,18 +22,14 @@
 								margin: 5px;
 								float: left;
 						}
-				</style>
+	</style>
 	<c:import url="../../../meta.jsp"/>
-
-		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
-		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-
-		<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FileUploadField.js"></script>
-
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FileUploadField.js"></script>
 </head>
-
-<script type="text/javascript">
+	<script type="text/javascript">
 				
 		Ext.onReady(function(){
 				
@@ -412,18 +407,7 @@
 // end onReady
 
 		});
-		
-		
-		
-		
-		
-			 
-	 
-				
-				
-				
-				
-</script>		
+	</script>		
 
 <body>
 	<c:import url="../../../body.jsp" />

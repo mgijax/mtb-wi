@@ -8,7 +8,6 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="PDX Data is Not Currently Available"/>
 	<c:import url="../../../meta.jsp"/>
-
 </head>
 
 <body>

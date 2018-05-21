@@ -12,11 +12,10 @@
 
 <!-- The following two lines are required, they instruct the browser to not cache the wait page. -->
 <!-- This way we can better guarantee that when the user hits the 'Back' button, they don't get the wait page instead of the form. -->
-<META http-equiv="CACHE-CONTROL" content="NO-CACHE">	<!-- For HTTP 1.1 -->
-<META http-equiv="PRAGMA" content="NO-CACHE">				 <!-- For HTTP 1.0 -->
-<META http-equiv="refresh" content="0; URL=<bean:write name="action_path_key" property="actionPath"/>">
+	<meta http-equiv="CACHE-CONTROL" content="NO-CACHE">	<!-- For HTTP 1.1 -->
+	<meta http-equiv="PRAGMA" content="NO-CACHE">				 <!-- For HTTP 1.0 -->
+	<meta http-equiv="refresh" content="0; URL=<bean:write name="action_path_key" property="actionPath"/>">
 	<c:import url="meta.jsp"/>
-
 </head>
 
 <body>

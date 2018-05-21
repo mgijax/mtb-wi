@@ -6,7 +6,7 @@
 <head>
 	<c:set var="pageTitle" scope="request" value="Gene Expression Data Set Search Form"/>
 	<c:import url="../../../meta.jsp"/>
-	</head>
+</head>
 
 <body>
 	<c:import url="../../../body.jsp" />
