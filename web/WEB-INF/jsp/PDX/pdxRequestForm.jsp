@@ -5,10 +5,9 @@
 <html>
 
 		<head>
+<c:set var="pageTitle" scope="request" value="PDX Information Request Form"/>
 
-		<c:import	url="../../../meta.jsp">
-				<c:param name="pageTitle" value="PDX Request Form"/>
-		</c:import>
+		<c:import url="../../../meta.jsp"/>
 
 		<script type="text/javascript">
 		
@@ -39,8 +38,9 @@
 <nav><c:import url="../../../pdxToolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>PDX Information Request Form</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxRequest"></a>
 </header>
 

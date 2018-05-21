@@ -5,10 +5,8 @@
 <html>
 
 <head>
-
-<c:import	url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Strain Search Form"/>
-</c:import>
+	<c:set var="pageTitle" scope="request" value="Strain Search Form"/>
+	<c:import url="../../../meta.jsp"/>
 
 </head>
 
@@ -21,8 +19,9 @@
 
 <html:form action="strainSearchResults" method="GET">
 
+
 <header>
-	<h1>Strain Search Form</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#strains"></a>
 </header>
 

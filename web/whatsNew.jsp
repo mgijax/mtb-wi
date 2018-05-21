@@ -4,8 +4,8 @@
 
 <html>
 <head>
+<c:set var="pageTitle" scope="request" value="What's New?"/>
 <c:import url="meta.jsp" />
-<title>What's New at MTB?</title>
 </head>
 <body class="alt">
 
@@ -13,8 +13,9 @@
 <nav><c:import url="toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>What's New in MTB?</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
 

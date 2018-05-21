@@ -6,9 +6,8 @@
 <!doctype html>
 <html>
 <head>
-<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Cytogenetic Summary"/>
-</c:import>
+<c:set var="pageTitle" scope="request" value="Cytogenetic Summary"/>
+<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -18,8 +17,9 @@
 	
 <section class="main">
 
+
 <header>
-	<h1>Cytogenetic Summary</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#cytogeneticsummary"></a>
 </header>
 

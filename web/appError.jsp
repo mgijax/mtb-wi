@@ -4,10 +4,9 @@
 <html>
 
 <head>
+<c:set var="pageTitle" scope="request" value="Application Error"/>
 
-<c:import url="meta.jsp">
-		<c:param name="pageTitle" value="MTB Application Error"/>
-</c:import>
+<c:import url="meta.jsp"/>
 
 </head>
 
@@ -18,8 +17,9 @@
 <nav><c:import url="toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Application Error</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
 

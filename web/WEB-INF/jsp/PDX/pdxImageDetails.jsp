@@ -6,9 +6,8 @@
 <!doctype html>
 <html>
 		<head>
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="PDX Image Detail"/>
-		</c:import>
+<c:set var="pageTitle" scope="request" value="PDX Image Detail"/>
+		<c:import url="../../../meta.jsp"/>
 
 </head>
 
@@ -17,8 +16,9 @@
 <div class="wrap">
 <section class="main-alt">
 
+
 <header>
-	<h1>PDX Image Detail</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#imagedetail"></a>
 </header>
 

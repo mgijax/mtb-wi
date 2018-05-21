@@ -4,9 +4,8 @@
 <!doctype html>
 <html>
 		<head>
-				<c:import url="../../../meta.jsp">
-						<c:param name="pageTitle" value="Strain and Tumor Genetics Search Form"/>
-				</c:import>
+<c:set var="pageTitle" scope="request" value="Strain and Tumor Genetics Search Form"/>
+				<c:import url="../../../meta.jsp"/>
 		</head>
 		
 <body>
@@ -19,8 +18,9 @@
 
 <html:form action="geneticsSearchResults" method="GET">
 
+
 <header>
-	<h1>Strain and Tumor Genetics Search Form</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#genetics"></a>
 </header>
 

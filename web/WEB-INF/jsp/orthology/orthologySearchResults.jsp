@@ -5,9 +5,8 @@
 <!doctype html>
 <html>
 <head>
-	<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Orthology Search Results"/>
-	</c:import>
+<c:set var="pageTitle" scope="request" value="Orthology Search Results"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -19,8 +18,9 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Orthology Search Results</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#humangeneresults"></a>
 </header>
 

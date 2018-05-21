@@ -4,11 +4,11 @@
 <!-- ////  Start Include Meta Information  //// -->
 
 <c:choose>
-<c:when test="${empty param.pageTitle}">
+<c:when test="${empty requestScope.pageTitle}">
 		<title>Mouse Tumor Biology Database Project</title>
 </c:when>
 <c:otherwise>
-		<title><c:out value="${param.pageTitle}" escapeXml="false"/></title>
+		<title><c:out value="${requestScope.pageTitle}" escapeXml="false"/></title>
 </c:otherwise>	 
 </c:choose>
  

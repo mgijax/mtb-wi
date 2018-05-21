@@ -5,9 +5,8 @@
 <!doctype html>
 <html>
 <head>
-<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Tumor Pathology Report/Images"/>
-</c:import>
+	<c:set var="pageTitle" scope="request" value="Tumor Pathology Report/Images"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -19,9 +18,7 @@
 
 <c:choose>
 		<c:when test="${not empty tumorFreq.pathologyRecs}">
-				<a name="pathology">
-<!-- \n -->
-</a>
+				<a name="pathology"></a>
 				
 
 <table class="results">

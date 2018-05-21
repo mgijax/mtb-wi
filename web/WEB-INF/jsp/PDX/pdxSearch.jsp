@@ -4,12 +4,11 @@
 <!doctype html>
 <html>
 		<head>
+<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Search Form"/>
 
 				<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
 
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="Patient Derived Xenograft Search Form"/>
-		</c:import>
+		<c:import url="../../../meta.jsp"/>
 
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
@@ -176,8 +175,9 @@ Please wait..."
 
 <html:form action="pdxSearchResults" method="GET">
 
-								<header>
-	<h1>Patient Derived Xenograft Search Form</h1>
+								
+<header>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxsearch"></a>
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
 </header>

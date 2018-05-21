@@ -3,17 +3,17 @@
 <!doctype html>
 <html>
 <head>
-<c:import url="meta.jsp">
-		<c:param name="pageTitle" value="Warranty Disclaimer &amp; Copyright Notice"/>
-</c:import>
+<c:set var="pageTitle" scope="request" value="Warranty Disclaimer &amp; Copyright Notice"/>
+<c:import url="meta.jsp"/>
 </head>
 <body class="alt">
 <div class="wrap">
 <nav><c:import url="toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Warranty Disclaimer &amp; Copyright Notice</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
 

@@ -4,18 +4,19 @@
 <html>
 
 <head>
+<c:set var="pageTitle" scope="request" value="Server Information"/>
 <c:import url="meta.jsp" />
-
-<title>Server Information</title>
 </head>
+
 <body class="alt">
 
 <div class="wrap">
 <nav><c:import url="toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Server Information</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
 

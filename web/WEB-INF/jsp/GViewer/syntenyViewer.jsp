@@ -6,9 +6,8 @@
 <html>
 
 		<head>
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="Synteny Viewer"/>
-		</c:import>
+		<c:set var="pageTitle" scope="request" value="Synteny Viewer"/>
+		<c:import url="../../../meta.jsp"/>
 
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>

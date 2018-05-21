@@ -4,9 +4,8 @@
 <!doctype html>
 <html>
 <head>
-<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Pathology Image Search Form"/>
-</c:import>
+<c:set var="pageTitle" scope="request" value="Pathology Image Search Form"/>
+<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -18,8 +17,9 @@
 
 <html:form action="pathologyImageSearchResults" method="GET">
 
+
 <header>
-	<h1>Pathology Image Search Form</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pathology"></a>
 </header>
 

@@ -4,9 +4,8 @@
 <!doctype html>
 <html>
 	<head>
-		<c:import url="../../../meta.jsp">
-			<c:param name="pageTitle" value="Human Gene Search"/>
-		</c:import>
+<c:set var="pageTitle" scope="request" value="Human Gene Search Form"/>
+		<c:import url="../../../meta.jsp"/>
 	</head>
 
 <body>
@@ -19,8 +18,9 @@
 
 <html:form action="orthologySearch" method="GET" >
 
+
 <header>
-	<h1>Human Gene Search Form</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#humangene"></a>
 </header>
 

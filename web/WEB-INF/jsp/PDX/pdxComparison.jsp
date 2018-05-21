@@ -4,9 +4,8 @@
 <!doctype html>
 <html>
 		<head>
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="Patient Derived Xenograft Comparison"/>
-		</c:import>
+<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Comparison Form"/>
+		<c:import url="../../../meta.jsp"/>
 
 		<script type="text/javascript">
 				 
@@ -100,8 +99,9 @@
 
 <html:form action="pdxComparison" method="GET">
 
-								<header>
-	<h1>Patient Derived Xenograft Comparison Form</h1>
+								
+<header>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxcomparison"></a>
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." 
 																							 class="pdx-request-button" onclick="window.location='pdxRequest.do'">

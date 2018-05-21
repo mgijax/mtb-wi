@@ -4,11 +4,10 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <!doctype html>
 <html>
-		<head>
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="Tumor Genetics"/>
-		</c:import>
-</head>
+	<head>
+		<c:set var="pageTitle" scope="request" value="Tumor Genetics"/>
+		<c:import url="../../../meta.jsp"/>
+	</head>
 
 <body>
 	<c:import url="../../../body.jsp" />

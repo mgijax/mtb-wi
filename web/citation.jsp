@@ -4,9 +4,8 @@
 <html>
 
 <head>
-<c:import url="meta.jsp">
-		<c:param name="pageTitle" value="Citing the Mouse Tumor Biology Database"/>
-</c:import>
+<c:set var="pageTitle" scope="request" value="Citing the Mouse Tumor Biology Database"/>
+<c:import url="meta.jsp"/>
 </head>
 <body class="alt">
 
@@ -14,8 +13,9 @@
 <nav><c:import url="toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Citing the Mouse Tumor Biology Database</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
 

@@ -5,9 +5,8 @@
 <!doctype html>
 <html>
 <head>
-<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Tumor Treatment Note"/>
-</c:import>
+	<c:set var="pageTitle" scope="request" value="Tumor Treatment Note"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>

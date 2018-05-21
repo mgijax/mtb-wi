@@ -6,9 +6,8 @@
 <!doctype html>
 <html>
 <head>
-<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Pathology Image Detail"/>
-</c:import>
+<c:set var="pageTitle" scope="request" value="Pathology Image Detail"/>
+<c:import url="../../../meta.jsp"/>
 <script type="text/javascript">
 <!--
 var flashinstalled = 0;
@@ -67,8 +66,9 @@ End If
 	<div class="wrap">
 <section class="main-alt">
 
+
 <header>
-	<h1>Pathology Image Detail</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pathdetail"></a>
 </header>
 

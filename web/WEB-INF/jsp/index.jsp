@@ -11,10 +11,9 @@
 <html>
 
 		<head>
+<c:set var="pageTitle" scope="request" value="Mouse Models of Human Cancer"/>
 
-				<c:import url="../../meta.jsp">
-						<c:param name="pageTitle" value="Mouse Tumor Biology System (MTB)"/>
-				</c:import>
+				<c:import url="../../meta.jsp"/>
 
 				<script type="text/javascript">
 						var mc = false;
@@ -38,8 +37,9 @@
 <div class="wrap">
 <nav><c:import url="../../toolBar.jsp"/></nav>
 <section class="main">
+
 <header>
-	<h1>Welcome to the Mouse Tumor Biology (MTB) Database</h1>
+	<h1>${pageTitle}</h1>
 </header>
 
 <p> The Mouse Tumor Biology (MTB) Database supports the use of the mouse as a model system of human cancers by providing access to information on and data for:</p>

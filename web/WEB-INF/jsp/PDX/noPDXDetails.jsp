@@ -4,9 +4,8 @@
 <!doctype html>
 <html>
 		<head>
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="No matching PDX models"/>
-		</c:import>
+		<c:set var="pageTitle" scope="request" value="No matching PDX models"/>
+		<c:import url="../../../meta.jsp"/>
 
 <body>
 			<c:import url="../../../body.jsp" />

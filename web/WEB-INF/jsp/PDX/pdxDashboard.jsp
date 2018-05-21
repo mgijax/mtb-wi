@@ -4,9 +4,8 @@
 <!doctype html>
 <html>
 		<head>
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="Patient Derived Xenograft Dashboard"/>
-		</c:import>
+<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Dashboard"/>
+		<c:import url="../../../meta.jsp"/>
 
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
@@ -97,8 +96,9 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Patient Derived Xenograft Dashboard</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxDashboard"></a>
 </header>
 

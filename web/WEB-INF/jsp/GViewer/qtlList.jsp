@@ -5,17 +5,17 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <!doctype html>
 	<head>
-		<c:import url="../../../meta.jsp">
-			<c:param name="pageTitle" value="List of Selected QTLs"/>
-		</c:import>
+<c:set var="pageTitle" scope="request" value="List of Selected Cancer QTLs"/>
+		<c:import url="../../../meta.jsp"/>
 </head>
 <body>
 			<c:import url="../../../body.jsp" />
 <div class="wrap">
 <section class="main-alt">
 
+
 <header>
-	<h1>List of Selected Cancer QTLs</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#QTLList"></a>
 </header>
 

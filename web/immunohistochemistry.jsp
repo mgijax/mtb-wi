@@ -4,10 +4,9 @@
 <html>
 
 <head>
+<c:set var="pageTitle" scope="request" value="Immunohistochemistry Summary"/>
 
 <c:import url="meta.jsp" />
-
-<title>Immunohistochemistry Summary</title>
 
 </head>
 <body class="alt">
@@ -16,8 +15,9 @@
 <nav><c:import url="toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Immunohistochemistry Summary</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
 

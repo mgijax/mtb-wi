@@ -5,6 +5,7 @@
 <!doctype html>
 <html>
 		<head>
+<c:set var="pageTitle" scope="request" value="PDX Model Details"/>
 
 				<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 
@@ -29,9 +30,7 @@
 
 				</style>
 
-				<c:import url="../../../meta.jsp">
-						<c:param name="pageTitle" value="PDX Model Details"/>
-				</c:import>
+				<c:import url="../../../meta.jsp"/>
 
 				<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 				<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
@@ -539,8 +538,9 @@ Click to expand/collapse',
 		<div class="wrap">
 <nav><c:import url="../../../pdxToolBar.jsp" /></nav>
 <section class="main">
+
 <header>
-	<h1>PDX Model Details</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxdetails"></a>
 	<input type="button" value="Request more &#x00A; information on this &#x00A; PDX model." class="pdx-request-button" onclick="window.location='pdxRequest.do?mice=${mouse.modelID}'">
 </header>

@@ -4,6 +4,7 @@
 <html>
 
 <head>
+<c:set var="pageTitle" scope="request" value="Web-Based Resources for Basic Cancer Research"/>
 <c:import url="meta.jsp" />
 </head>
 <body class="alt">
@@ -11,8 +12,9 @@
 <nav><c:import url="toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Web-Based Resources for Basic Cancer Research</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
 

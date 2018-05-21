@@ -4,20 +4,19 @@
 <html>
 
 <head>
-
+<c:set var="pageTitle" scope="request" value="Lymphoma Pathology"/>
 <c:import url="meta.jsp" />
-
-<title>Lymphoma Pathology</title>
-
 </head>
+
 <body class="alt">
 
 <div class="wrap">
 <nav><c:import url="toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Lymphoma Pathology</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
 

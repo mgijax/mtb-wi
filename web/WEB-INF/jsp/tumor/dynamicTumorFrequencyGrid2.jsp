@@ -8,9 +8,8 @@
 <!doctype html>
 <html>
 <head>
-	<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Tumor Frequency Grid"/>
-	</c:import>
+<c:set var="pageTitle" scope="request" value="Dynamic Tumor Frequency Grid"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -184,8 +183,9 @@
 <nav><c:import url="../../../toolBar.jsp"/></nav>
 <section class="main">
 
+
 <header>
-	<h1>Dynamic Tumor Frequency Grid</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#dynamicgrid"></a>
 </header>
 

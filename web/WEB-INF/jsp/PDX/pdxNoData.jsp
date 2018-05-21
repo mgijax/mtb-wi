@@ -6,9 +6,8 @@
 <!doctype html>
 <html>
 		<head>
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="No PDX Data"/>
-		</c:import>
+<c:set var="pageTitle" scope="request" value="PDX Data is Not Currently Available"/>
+		<c:import url="../../../meta.jsp"/>
 
 </head>
 
@@ -19,8 +18,9 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>The PDX data is not currently available.</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxdetails"></a>
 </header>
 <table >

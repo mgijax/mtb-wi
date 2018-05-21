@@ -4,6 +4,7 @@
 <!doctype html>
 <html>
 		<head>
+<c:set var="pageTitle" scope="request" value="Marker Grid"/>
 
 				<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all_noGlobals.css" /> 
 
@@ -244,9 +245,7 @@
 
 				</script>
 
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="Marker Grid"/>
-		</c:import>
+		<c:import url="../../../meta.jsp"/>
 		</head>
 
 <body>
@@ -254,8 +253,9 @@
 <div class="wrap">
 <nav><c:import url="../../../toolBar.jsp"/></nav>
 <section class="main">
+
 <header>
-	<h1>Marker Grid</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp"></a>
 </header>
 

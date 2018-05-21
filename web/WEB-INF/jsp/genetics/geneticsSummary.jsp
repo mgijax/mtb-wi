@@ -5,9 +5,8 @@
 <!doctype html>
 <html>
 <head>
-<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Genetic Change Summary"/>
-</c:import>
+<c:set var="pageTitle" scope="request" value="Genetic Change Summary"/>
+<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -15,8 +14,9 @@
 <div class="wrap">
 <nav><c:import url="../../../toolBar.jsp"/></nav>
 <section class="main">
+
 <header>
-	<h1>Genetic Markers analyzed in the Tumor Summary</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#geneticchange"></a>
 </header>
 

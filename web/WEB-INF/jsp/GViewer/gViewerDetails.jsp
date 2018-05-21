@@ -6,9 +6,8 @@
 <!doctype html>
 <html>
 	<head>
-		<c:import url="../../../meta.jsp">
-			<c:param name="pageTitle" value="GViewer Details"/>
-		</c:import>
+<c:set var="pageTitle" scope="request" value="Cancer QTL Selection Details"/>
+		<c:import url="../../../meta.jsp"/>
 		<style type="text/css">
 			.no-icon {
 				display : none;
@@ -345,8 +344,9 @@ human synonym for Cdc23 is APC8.</strong>"
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Cancer &nbsp; QTL &nbsp; Selection &nbsp; Details</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#GViewerDetails"></a>
 </header>
 

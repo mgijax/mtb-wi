@@ -5,9 +5,8 @@
 <!doctype html>
 <html>
 <head>
-	<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Genetics Search Results"/>
-	</c:import>
+<c:set var="pageTitle" scope="request" value="Genetics Search Results"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -19,7 +18,9 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
-<header><h1>Genetics Search Results</h1><a class="help" href="userHelp.jsp#geneticsresults"></a>
+
+<header>
+	<h1>${pageTitle}</h1><a class="help" href="userHelp.jsp#geneticsresults"></a>
 </header>
 
 

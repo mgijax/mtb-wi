@@ -6,9 +6,8 @@
 
 <html>
 <head>
-<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Strain Tumor Overview (Expanded View)"/>
-</c:import>
+	<c:set var="pageTitle" scope="request" value="Strain Tumor Overview (Expanded View)"/>
+	<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>

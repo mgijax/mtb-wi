@@ -7,9 +7,8 @@
 
 <html>
 		<head>
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="Patient Derived Xenograft Variant Summary"/>
-		</c:import>
+<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Variant Summary"/>
+		<c:import url="../../../meta.jsp"/>
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base-debug.js"></script>
@@ -225,8 +224,9 @@
 <nav><c:import url="../../../pdxToolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>Patient Derived Xenograft Variant Summary</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxresults"></a>
 </header>
 <table>

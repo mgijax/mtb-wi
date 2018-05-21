@@ -4,9 +4,8 @@
 <!doctype html>
 <html>
 <head>
-<c:import url="../../../meta.jsp">
-		<c:param name="pageTitle" value="Reference Search Form"/>
-</c:import>
+<c:set var="pageTitle" scope="request" value="Reference Search Form"/>
+<c:import url="../../../meta.jsp"/>
 </head>
 
 <body>
@@ -18,8 +17,9 @@
 
 <html:form action="referenceSearchResults" method="GET">
 
+
 <header>
-	<h1>Reference Search Form</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#references"></a>
 </header>
 

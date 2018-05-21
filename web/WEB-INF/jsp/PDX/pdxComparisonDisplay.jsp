@@ -5,9 +5,8 @@
 <!doctype html>
 <html>
 		<head>
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="Patient Derived Xenograft Comparison"/>
-		</c:import>
+<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Comparison"/>
+		<c:import url="../../../meta.jsp"/>
 </head>
 <body>
 			<c:import url="../../../body.jsp" />
@@ -54,8 +53,9 @@
 
 <html:form action="pdxComparison" method="GET">
 
-								<header>
-	<h1>Patient Derived Xenograft Comparison</h1>
+								
+<header>
+	<h1>${pageTitle}</h1>
 	<a href="nojavascript.jsp" onClick="popSizedPathWin('${applicationScope.urlBase}/html/userHelp.html#pdxcomparison', 'comparisonhelp',350,1000);return false;"></a>
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
 </header>

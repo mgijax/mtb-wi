@@ -8,6 +8,7 @@
 <!doctype html>
 <html>
 		<head>
+<c:set var="pageTitle" scope="request" value="Add PDX Content"/>
 				<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 				<title>Add PDX Content</title>
 
@@ -25,9 +26,7 @@
 						}
 				</style>
 
-		<c:import url="../../../meta.jsp">
-				<c:param name="pageTitle" value="Add PDX Content"/>
-		</c:import>
+		<c:import url="../../../meta.jsp"/>
 
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
@@ -435,8 +434,9 @@
 <nav><c:import url="../../../toolBar.jsp" /></nav>
 <section class="main">
 
+
 <header>
-	<h1>PDX Add Content</h1>
+	<h1>${pageTitle}</h1>
 	<a class="help" href="userHelp.jsp#pdxAddContent"></a>
 </header>
 <table>
