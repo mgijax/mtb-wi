@@ -96,6 +96,12 @@ public class PDXMouseStore {
     private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M", "DAXX", "EHMT2", "EPHB6", "HLA-A", "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4", "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
     private static final String RNA_SEQ = "RNA_Seq";
     private static final HashMap<String, String> AFFECTED_GENES = new HashMap<>();
+    
+    private static final String CKB_MOLPRO_PUBLIC = "https://ckb.jax.org/molecularProfile/show/";
+    private static final String CKB_GENE_PUBLIC = "https://ckb.jax.org/gene/show?geneId=";
+    
+    private static final String CKB_MOLPRO_INTERNAL = "https://cga.jax.org/ckb-utilities/molecularProfile/show/";
+    private static final String CKB_GENE_INTERNAL = "https://cga.jax.org/ckb-utilities/gene/show?geneId=";
 
     public PDXMouseStore() {
 
@@ -1214,7 +1220,7 @@ public class PDXMouseStore {
         StringBuffer result = new StringBuffer("{'total':");
         try {
 
-            String params = "?model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
+            String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
             JSONObject job = new JSONObject(getJSON(VARIANTS + params));
 
             String total = ((Integer) job.get("total_rows")).toString();
@@ -1259,7 +1265,7 @@ public class PDXMouseStore {
 
             do {
 
-                String params = "?model=" + model + "&skip=" + start + "&limit=" + limit;
+                String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit;
                 JSONObject job = new JSONObject(getJSON(VARIANTS + params));
 
                 int total = (Integer) job.get("total_rows");
@@ -1287,6 +1293,42 @@ public class PDXMouseStore {
 
     private String getVariantFields(JSONArray array) throws JSONException {
         StringBuilder result = new StringBuilder();
+        /*
+                allele_frequency	"0.0"
+                alt_allele	"G"
+                amino_acid_change	"R213fs"
+                caller	"Pindel"
+                chromosome	"17"
+                ckb_clinically_relevant	"yes"
+                ckb_gene_id	7157
+                ckb_molpro_id	26001
+                ckb_molpro_name	"TP53 R213fs"
+                ckb_potential_treat_approach	"p53 Gene Therapy"
+                ckb_protein_effect	"loss of function - predicted"
+                ckb_public_status	"public"
+                codon_change	"c.636delT"
+                consequence	"frameshift_variant"
+                count_human_reads	731136
+                entrez_gene_id	7157
+                filter	"lowAF"
+                gene_symbol	"TP53"
+                impact	"HIGH"
+                model_id	13
+                model_name	"TM00013"
+                mtb_flag	1
+                passage_num	"P0"
+                pct_human_reads	98.907
+                platform	"Truseq_JAX"
+                read_depth	"3341"
+                ref_allele	"GA"
+                refresh_date	"2018-05-02"
+                row_id	7701
+                rs_variants	"COSM4425031"
+                sample_id	239
+                sample_name	"BL0058F037P0"
+                seq_position	7674894
+                transcript_id	"ENST00000269305.8"
+        */
 
         for (int i = 0; i < array.length(); i++) {
 
@@ -1306,14 +1348,39 @@ public class PDXMouseStore {
             result.append("'").append(getField(array.getJSONObject(i), "transcript_id")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "filtered_rationale")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "passage_num")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "gene_id")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "ckb_evidence_types")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "cancer_types_actionable")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "drug_class")).append("',");
+            
+            String ckbGeneID =getField(array.getJSONObject(i),"ckb_gene_id");
+            String ckbMolProID = getField(array.getJSONObject(i),"ckb_molpro_id");
+            String ckbMolProName = getField(array.getJSONObject(i),"ckb_molpro_name");
+            
+            if(WIConstants.getInstance().getPublicDeployment()){
+                if("public".equals(getField(array.getJSONObject(i),"ckb_public_status"))){
+                   
+                    result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
+                    result.append("'").append(ckbMolProName).append("',");
+                    result.append("'").append(CKB_GENE_PUBLIC).append(ckbGeneID).append("',");
+                    result.append("'").append(getField(array.getJSONObject(i), "ckb_potential_treat_approach")).append("',");
+                    result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
+                }
+                result.append("'',");
+                result.append("'',");
+                result.append("'',");
+                result.append("'',");
+                result.append("'',");
+            }else{
+                //link to internal site
+                    result.append("'").append(CKB_MOLPRO_INTERNAL).append(ckbMolProID).append("',");
+                    result.append("'").append(ckbMolProName).append("',");
+                    result.append("'").append(CKB_GENE_INTERNAL).append(ckbGeneID).append("',");
+                    result.append("'").append(getField(array.getJSONObject(i), "ckb_potential_treat_approach")).append("',");
+                    result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
+                    
+            }
+           
+           
+
             result.append("'").append(getField(array.getJSONObject(i), "count_human_reads")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "pct_human_reads")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "variant_num_trials")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "variant_nct_ids")).append("'],");
+            result.append("'").append(getField(array.getJSONObject(i), "pct_human_reads")).append("'],");
 
         }
         return result.toString();

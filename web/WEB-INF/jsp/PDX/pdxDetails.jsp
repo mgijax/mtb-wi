@@ -170,14 +170,15 @@
                     {name: 'transcript_id'},
                     {name: 'filtered_rationale'},
                     {name: 'passage_num'},
+                    {name: 'ckb_molpro_link'},
+                    {name: 'ckb_molpro_name'},
+                    {name: 'ckb_gene_link'},
+                    {name: 'ckb_potential_treat_approach'},
+                    {name: 'ckb_protein_effect'},
                     {name: 'gene_id'},
-                    {name: 'ckb_evidence_types'},
-                    {name: 'cancer_types_actionable'},
-                    {name: 'drug_class'},
                     {name: 'count_human_reads'},
-                    {name: 'pct_human_reads'},
-                    {name: 'variant_num_trials'},
-                    {name: 'variant_nct_ids'}
+                    {name: 'pct_human_reads'}
+                    
 
                 ];
 
@@ -214,6 +215,32 @@
                             width: 60,
                             sortable: true,
                             dataIndex: 'gene_symbol'
+                        },
+                        {
+                            header: 'CKB Gene',
+                            width: 70,
+                            sortable: true,
+                            dataIndex: 'ckb_gene_link',
+                            renderer: ckbGeneRenderer
+                        },
+                       {
+                            header: 'CKB Mol Profile',
+                            width: 120,
+                            sortable: true,
+                            dataIndex: 'ckb_molpro_link',
+                            renderer: ckbMolProRenderer
+                        },
+                        {
+                            header: 'CKB potential treatment approach',
+                            width: 70,
+                            sortable: true,
+                            dataIndex: 'ckb_potential_treat_approach'
+                        },               
+                        {
+                            header: 'CKB protein effect',
+                            width: 70,
+                            sortable: true,
+                            dataIndex: 'ckb_protein_effect'
                         },
                         {
                             header: 'Platform',
@@ -302,24 +329,6 @@
                             sortable: true,
                             dataIndex: 'gene_id'
                         },
-               //         {
-               //             header: 'CKB Evidence Type',
-               //             width: 70,
-               //             sortable: true,
-               //             dataIndex: 'ckb_evidence_types'
-               //         },
-               //        {
-               //             header: 'Actionable Cancer Types',
-               //             width: 120,
-               //             sortable: true,
-               //             dataIndex: 'cancer_types_actionable'
-               //         },
-               //         {
-               //             header: 'Drug Class',
-               //             width: 70,
-               //             sortable: true,
-               //             dataIndex: 'drug_class'
-               //         },
                         {
                             header: 'Count Human Reads',
                             width: 70,
@@ -331,28 +340,13 @@
                             width: 70,
                             sortable: true,
                             dataIndex: 'pct_human_reads'
-                        }//,
-                //        {
-                //            header: 'Variant Num Trials',
-                //            width: 100,
-                //            sortable: true,
-                //            dataIndex: 'variant_num_trials'
-                //        },
-                //        {
-                //            header: 'Variant NCT IDs',
-                //            width: 100,
-                //            sortable: true,
-                //            dataIndex: 'variant_nct_ids'
-                //        }
+                        }
 
                     ],
                     stripeRows: true,
                     height: 700,
                     width: 1000,
                     id: 'pdxGrid'
-
-
-                            // paging bar on the bottom  this was removed due to perfromace issues with the filterd (public) query
                     , bbar: new Ext.PagingToolbar({
                         pageSize: 30,
                         store: store,
@@ -363,6 +357,23 @@
 
 
                 });
+                
+                 function ckbGeneRenderer(value, p, record){
+                    if(record.get("ckb_gene_link").length>0){
+                        return String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_gene_link"),record.get("gene_symbol"));
+                    }else{
+                        return "";
+                    }
+                   
+                }
+                
+                 function ckbMolProRenderer(value, p, record){
+                     if(record.get("ckb_molpro_name").length>0){
+                        return String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
+                    }else{
+                        return "";
+                    }
+                }
 
                 Ext.EventManager.onWindowResize(function (w, h) {
                     panel.doLayout();
@@ -373,6 +384,11 @@
                 colNames.push('model_id');
                 colNames.push('sample_name');
                 colNames.push('gene_symbol');
+                colNames.push('gene_id');
+                colNames.push('ckb_gene_link');
+                colNames.push('ckb_molpro_link');
+                colNames.push('ckb_potential_treat_approach');
+                colNames.push('ckb_protein_effect');
                 colNames.push('platform');
                 colNames.push('chromosome');
                 colNames.push('seq_position');
@@ -386,15 +402,9 @@
                 colNames.push('transcript_id');
                 colNames.push('filtered_rationale');
                 colNames.push('passage_num');
-                colNames.push('gene_id');
-      //          colNames.push('ckb_evidence_types');
-      //          colNames.push('cancer_types_actionable');
-      //          colNames.push('drug_class');
                 colNames.push('count_human_reads');
                 colNames.push('pct_human_reads');
-      //          colNames.push('variant_nct_ids');
-      //          colNames.push('variant_num_trials')
-
+     
 
 
                 // focus on sort column otherwise focus always jumps to first column
@@ -418,7 +428,7 @@
                     collapsible: true,
                     collapsed: true,
                     collapseFirst: true,
-                    title: '<b>User Alert</b> (3/14/2018): We are in the process of updating annotations associated with mutations observed in PDX model tumors. These data are not currently available but will be restored soon. Visit the <a href="https://ckb.jax.org" target="_blank">JAX Clinical Knowledgebase </a>for information on clinical relevance of specific mutations.<br><br>Click to expand/collapse',
+                    title: 'Click to expand/collapse',
                     layout: {
                         type: 'fit',
                         align: 'stretch',
