@@ -9,6 +9,7 @@
 
 <!-- ////  Top Left (Tumor)  //// -->
 
+
 <table id="tumor-info">
 	<tr>
 		<td><h4>Tumor Name</h4></td>
