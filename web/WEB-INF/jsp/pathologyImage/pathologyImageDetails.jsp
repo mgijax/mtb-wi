@@ -65,7 +65,7 @@ End If
 
 <!-- ////  Start Pathology Image  //// -->
 
-<tr class="stripe-1">
+<tr>
 	<td colspan="2">
 		<div>
 			<c:choose>
@@ -105,8 +105,8 @@ if (flashinstalled == 2) {
 <c:choose>
 	<c:when test="${not empty pathology.caption}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Caption</td>
+		<tr>
+			<td><h4>Caption</h4></td>
 				<td>${pathology.caption}</td>
 					</tr>
 				</c:when>
@@ -118,8 +118,8 @@ if (flashinstalled == 2) {
 <c:choose>
 	<c:when test="${not empty pathology.pathologyDescription}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Description</td>
+		<tr>
+			<td><h4>Description</h4></td>
 				<td>${pathology.pathologyDescription}</td>
 					</tr>
 				</c:when>
@@ -131,8 +131,8 @@ if (flashinstalled == 2) {
 <c:choose>
 	<c:when test="${not empty pathology.ageAtNecropsy}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Age at Necropsy</td>
+		<tr>
+			<td><h4>Age at Necropsy</h4></td>
 				<td>${pathology.ageAtNecropsy}</td>
 					</tr>
 				</c:when>
@@ -144,8 +144,8 @@ if (flashinstalled == 2) {
 <c:choose>
 	<c:when test="${not empty pathology.pathologyNote}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Notes</td>
+		<tr>
+			<td><h4>Notes</h4></td>
 				<td>${pathology.pathologyNote}</td>
 					</tr>
 				</c:when>
@@ -157,8 +157,8 @@ if (flashinstalled == 2) {
 <c:choose>
 	<c:when test="${not empty pathology.sourceOfImage}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Contributor</td>
+		<tr>
+			<td><h4>Contributor</h4></td>
 				<td>
 					${pathology.sourceOfImage}&nbsp;
 						 (<a href="nojavascript.jsp" onClick="focusBackToOpener('referenceDetails.do?key=${pathology.imgRefKey}');return false;">${pathology.imgRefAccId}</a>)
@@ -174,8 +174,8 @@ if (flashinstalled == 2) {
 <c:choose>
 	<c:when test="${not empty pathology.pathologist}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Pathologist</td>
+		<tr>
+			<td><h4>Pathologist</h4></td>
 				<td>
 					${pathology.pathologist}&nbsp;
 						 (<a href="nojavascript.jsp" onClick="focusBackToOpener('referenceDetails.do?key=${pathology.pathologistRefKey}');return false;">${pathology.pathologistAccId}</a>)
@@ -191,8 +191,8 @@ if (flashinstalled == 2) {
 <c:choose>
 	<c:when test="${not empty pathology.copyright}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Copyright</td>
+		<tr>
+			<td><h4>Copyright</h4></td>
 				<td>
 					${pathology.copyright}
 						</td>
@@ -206,8 +206,8 @@ if (flashinstalled == 2) {
 <c:choose>
 	<c:when test="${not empty pathology.method}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Method</td>
+		<tr>
+			<td><h4>Method</h4></td>
 				<td>${pathology.method}</td>
 					</tr>
 				</c:when>
@@ -225,34 +225,34 @@ if (flashinstalled == 2) {
 <!-- \n -->
 
 <table class="results">
-	<tr class="stripe-1">
+	<tr>
 		<td colspan="4" class="cat-title">Image Probes</td>
 			</tr>
 
 <c:forEach var="probe" items="${pathology.probes}" varStatus="status">
-	<tr class="stripe-2">
-		<td class="cat-2">Type</td><td>${probe.type}</td>
+	<tr>
+		<td><h4>Type</h4></td><td>${probe.type}</td>
 			<c:choose>
 				<c:when test="${not empty probe.url}">
 					<td class="cat-2" >Name</td><td><a href="${probe.url}">${probe.name}</a></td>
 						</c:when>
 						<c:otherwise>
-							<td class="cat-2">Name</td><td>${probe.name}</td>
+							<td><h4>Name</h4></td><td>${probe.name}</td>
 						</c:otherwise>
 					</c:choose>
-						<tr class="stripe-1">
-							<td class="cat-1">Target</td><td>${probe.target}</td> 
+						<tr>
+							<td><h4>Target</h4></td><td>${probe.target}</td> 
 
 <c:choose>
 	<c:when test="${not empty probe.supplierUrl}">
-		<td class="cat-1">Supplier</td><td><a href="${probe.supplierUrl}">${probe.supplierName}</a></td>
+		<td><h4>Supplier</h4></td><td><a href="${probe.supplierUrl}">${probe.supplierName}</a></td>
 			</c:when>
 				<c:otherwise>
-					<td class="cat-1">Supplier</td><td>${probe.supplierName}</td>
+					<td><h4>Supplier</h4></td><td>${probe.supplierName}</td>
 						</c:otherwise>
 					</c:choose>
 						<tr class="stripe-2"">	
-					<td class="cat-2">Notes</td><td colspan="3">${probe.notes}</td>
+					<td><h4>Notes</h4></td><td colspan="3">${probe.notes}</td>
 
 </tr>
 
@@ -282,8 +282,8 @@ if (flashinstalled == 2) {
 	<c:choose>
 		<c:when test="${not empty pathology.tumorFrequencyKey}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">MTB ID</td>
+		<tr>
+			<td><h4>MTB ID</h4></td>
 				<td class="enhance">
 					<a href="tumorSummary.do?tumorFrequencyKeys=${pathology.tumorFrequencyKey}">MTB:${pathology.tumorFrequencyKey}</a>
 						</td>
@@ -297,8 +297,8 @@ if (flashinstalled == 2) {
 <c:choose>
 	<c:when test="${not empty pathology.tumorClassName}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Tumor Name</td>
+		<tr>
+			<td><h4>Tumor Name</h4></td>
 				<td>
 					<span class="enhance">
 						${pathology.organOrigin} 
@@ -317,8 +317,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.treatmentType}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Treatment Type</td>
+		<tr>
+			<td><h4>Treatment Type</h4></td>
 				<td>${pathology.treatmentType}</td>
 					</tr>
 						</c:when>
@@ -330,8 +330,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.agents}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Agents</td>
+		<tr>
+			<td><h4>Agents</h4></td>
 				<td>
 					<c:forEach var="agent" items="${pathology.agents}" varStatus="status">
 						<c:out value="${agent.name}" escapeXml="false"/>
@@ -350,8 +350,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.tumorSynonyms}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Tumor Synonyms</td>
+		<tr>
+			<td><h4>Tumor Synonyms</h4></td>
 				<td>
 					<c:forEach var="tumorSynonym" items="${pathology.tumorSynonyms}" varStatus="status">
 						<c:out value="${tumorSynonym.name}" escapeXml="false"/>
@@ -370,8 +370,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.organAffected}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Organ Affected</td>
+		<tr>
+			<td><h4>Organ Affected</h4></td>
 				<td>${pathology.organAffected}</td>
 					</tr>
 						</c:when>
@@ -383,8 +383,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.frequency}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Frequency</td>
+		<tr>
+			<td><h4>Frequency</h4></td>
 				<td>${pathology.frequencyString}</td>
 					</tr>
 						</c:when>
@@ -396,8 +396,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.frequencyNote}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Frequency Note</td>
+		<tr>
+			<td><h4>Frequency Note</h4></td>
 				<td>${pathology.frequencyNote}</td>
 					</tr>
 						</c:when>
@@ -409,8 +409,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${(not empty pathology.referenceKey) && (not empty pathology.accessionId)}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Reference</td>
+		<tr>
+			<td><h4>Reference</h4></td>
 				<td>
 					<a href="nojavascript.jsp" onClick="focusBackToOpener('referenceDetails.do?key=${pathology.referenceKey}');return false;">${pathology.accessionId}</a>
 						</td>
@@ -438,8 +438,8 @@ ${pathology.tumorClassName}
 	<c:choose>
 		<c:when test="${not empty pathology.strainName}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Strain</td>
+		<tr>
+			<td><h4>Strain</h4></td>
 				<td>
 					<table>
 						<tr>
@@ -477,8 +477,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.strainSynonyms}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Strain Synonyms</td>
+		<tr>
+			<td><h4>Strain Synonyms</h4></td>
 				<td>
 					<c:forEach var="synonym" items="${pathology.strainSynonyms}" varStatus="status">
 						<span class="syn-div-2"><c:out value="${synonym.name}" escapeXml="false"/></span>
@@ -497,8 +497,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.sex}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Strain Sex</td>
+		<tr>
+			<td><h4>Strain Sex</h4></td>
 				<td>${pathology.sex}</td>
 					</tr>
 						</c:when>
@@ -510,8 +510,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.reproductiveStatus}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Reproductive Status</td>
+		<tr>
+			<td><h4>Reproductive Status</h4></td>
 				<td>${pathology.reproductiveStatus}</td>
 					</tr>
 						</c:when>
@@ -523,8 +523,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.ageOfOnset}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Age of Onset</td>
+		<tr>
+			<td><h4>Age of Onset</h4></td>
 				<td>${pathology.ageOfOnset}</td>
 					</tr>
 						</c:when>
@@ -536,8 +536,8 @@ ${pathology.tumorClassName}
 <c:choose>
 	<c:when test="${not empty pathology.ageOfDetection}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Age of Detection</td>
+		<tr>
+			<td><h4>Age of Detection</h4></td>
 				<td>${pathology.ageOfDetection}</td>
 					</tr>
 						</c:when>

@@ -76,7 +76,7 @@ function showTabbedList(){
 <!-- ////  Start Detail Section  //// -->
 
 <%--			 <html:form action="gViewer" method="GET"> --%>
-								<tr class="stripe-1">
+								<tr>
 									<td colspan="2">
 
 <table width="560">

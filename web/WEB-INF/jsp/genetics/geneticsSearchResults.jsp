@@ -175,10 +175,10 @@ Chrom.</td>
 <c:forEach var="rec" items="${strainGenetics}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 			</c:when>
 			<c:otherwise>
-				<tr class="stripe-2">
+				<tr>
 			</c:otherwise>
 		</c:choose>
 
@@ -284,10 +284,10 @@ Chrom.</td>
 <c:forEach var="rec" items="${tumorGenetics}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 		</c:when>
 		<c:otherwise>
-			<tr class="stripe-2">
+			<tr>
 		</c:otherwise>
 	</c:choose>
 
@@ -346,10 +346,10 @@ Chroms.</td>
 <c:forEach var="rec" items="${cytoGenetics}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 		</c:when>
 		<c:otherwise>
-			<tr class="stripe-2">
+			<tr>
 		</c:otherwise>
 	</c:choose>
 

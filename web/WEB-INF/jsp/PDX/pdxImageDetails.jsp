@@ -16,7 +16,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="cat-1">Description</td>
+			<td><h4>Description</h4></td>
 			<td>${description}</td>
 		</tr>
 	</table>

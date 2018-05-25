@@ -20,10 +20,10 @@
 <c:forEach var="jvmItem" items="${jvm}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 
@@ -58,10 +58,10 @@
 <c:forEach var="osInfoItem" items="${os}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 
@@ -96,10 +96,10 @@
 <c:forEach var="itemVar" items="${sysProps}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 
@@ -124,7 +124,7 @@
 	 <tr class="page-title">
 		 <td colspan="2">Request Information</td>
 	 </tr>
-		<tr class="stripe-1">
+		<tr>
 			<td colspan="2">
 				<%-- Use the request object to show the server port and protocol --%>				
 				The current request was made on <strong>port 
@@ -148,10 +148,10 @@
 <c:forEach var="reqAtt" items="${requestAttributes}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 
@@ -169,10 +169,10 @@
 		<c:forEach var="reqAttDetail" items="${detailRequestInfo}" varStatus="status">
 			<c:choose>
 				<c:when test="${status.index%2==0}">
-					<tr class="stripe-1">
+					<tr>
 						</c:when>
 							<c:otherwise>
-								<tr class="stripe-2">
+								<tr>
 								</c:otherwise>
 						</c:choose>
 
@@ -198,7 +198,7 @@
 	 <tr class="page-title">
 		 <td>Response Information</td>
 	 </tr>
-		<tr class="stripe-1">
+		<tr>
 			<td>
 				 The response <strong>locale</strong> is 
 					 <strong><c:out value='${pageContext.response.locale}'/>.</strong>
@@ -240,10 +240,10 @@
 <c:forEach var="servletParamItem" items="${servletInitParams}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 
@@ -278,10 +278,10 @@
 <c:forEach var="contextAtt" items="${contextAttributes}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 
@@ -291,7 +291,7 @@
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<tr class="stripe-1">
+			<tr>
 				<td colspan="2">No context information</td>
 				</tr>
 		</c:otherwise>
@@ -308,7 +308,7 @@
 	 <tr class="page-title">
 		 <td colspan="2">Session Information</td>
 	 </tr>
-		<tr class="stripe-1">
+		<tr>
 			<td colspan="2">
 				Session ID: 
 					<strong><c:out value='${pageContext.session.id}'/></strong>
@@ -329,10 +329,10 @@ Max Session Inactive Interval:<strong>
 <c:forEach var="sessInfoItem" items="${sessionInfo}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 
@@ -357,7 +357,7 @@ Max Session Inactive Interval:<strong>
 	 <tr class="page-title">
 		 <td colspan="2">Application Information</td>
 	 </tr>
-		<tr class="stripe-1">
+		<tr>
 			<td colspan="2">
 				<%-- Store the servlet context in a page-scoped variable
 					named app for better readability --%>
@@ -370,11 +370,11 @@ Max Session Inactive Interval:<strong>
 						 of the servlet API.
 				</td>
 		</tr>
-		<tr class="stripe-2">
+		<tr>
 			<td width="250">Servlet Specification</td>
 				<td>${servletSpec}</td>
 		</tr>
-		<tr class="stripe-1">
+		<tr>
 			<td width="250">JSP Specification</td>
 				<td>${jspSpec}</td>
 		</tr>
@@ -401,10 +401,10 @@ Max Session Inactive Interval:<strong>
 <c:forEach items='${headerValues}' var='hv' varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 				<c:otherwise>
-					<tr class="stripe-2">
+					<tr>
 				</c:otherwise>
 		</c:choose>
 			<%-- Display the key of the current item; that item
@@ -446,10 +446,10 @@ Max Session Inactive Interval:<strong>
 <c:forEach var="headerItem" items="${headers}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 
@@ -484,10 +484,10 @@ Max Session Inactive Interval:<strong>
 <c:forEach var="paramNamesItem" items="${paramNames}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 
@@ -497,7 +497,7 @@ Max Session Inactive Interval:<strong>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<tr class="stripe-1">
+			<tr>
 				<td colspan="2">No param name information</td>
 				</tr>
 		</c:otherwise>
@@ -524,10 +524,10 @@ Max Session Inactive Interval:<strong>
 <c:forEach var="cookiesItem" items="${cookies}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 
@@ -537,7 +537,7 @@ Max Session Inactive Interval:<strong>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<tr class="stripe-1">
+			<tr>
 				<td colspan="2">No cookie information</td>
 				</tr>
 		</c:otherwise>

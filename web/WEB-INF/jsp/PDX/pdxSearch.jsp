@@ -215,7 +215,7 @@ var combo3 = new Ext.form.ComboBox({
 		</td>
 			</tr>
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Search by PDX model identifier
 			</td>
@@ -240,7 +240,7 @@ var combo3 = new Ext.form.ComboBox({
 	</td>
 		</tr>
 
-<tr class="stripe-2">
+<tr>
 
 <td class="cat-2">
 	Search by primary cancer site
@@ -292,7 +292,7 @@ var combo3 = new Ext.form.ComboBox({
 		</table>
 		</td>
 </tr>
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Search by diagnosis
 		</td>
@@ -315,7 +315,7 @@ var combo3 = new Ext.form.ComboBox({
 </td>
 </tr>
 
-<tr class="stripe-2">
+<tr>
 	<td class="cat-2">
 		Search by dosing study results
 		</td>
@@ -346,7 +346,7 @@ var combo3 = new Ext.form.ComboBox({
 	</td>
 </tr>
 
-<tr class="stripe-2">
+<tr>
 	<td class="cat-2">
 		Search by fusion gene
 		</td>
@@ -369,7 +369,7 @@ var combo3 = new Ext.form.ComboBox({
 </td>
 </tr>
 
-<tr class="stripe-1">
+<tr>
 
 <td class="cat-1">
 	Search by gene variants (in engrafted tumors)
@@ -422,7 +422,7 @@ No variants for selected gene.</td>
 </td>
 </tr>
 
-<tr class="stripe-2">
+<tr>
 	<td class="cat-2">
 		Display a chart of gene expression across PDX models for a gene
 		</td>
@@ -436,7 +436,7 @@ No variants for selected gene.</td>
 	</td>
 </tr>
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Search by gene amplification and deletion
 		</td>
@@ -453,7 +453,7 @@ No variants for selected gene.</td>
 </tr>
 
 <!--
-<tr class="stripe-2">
+<tr>
 	<td class="cat-2">
 		Search by chromosome amplification and deletion	
 <!-- \n -->

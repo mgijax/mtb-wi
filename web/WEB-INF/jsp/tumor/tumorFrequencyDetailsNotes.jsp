@@ -32,7 +32,7 @@
 
 <c:forEach var="rec" items="${tumorFreq.additionalNotes}" varStatus="status">
 	<c:set var="noteRow" value="${noteRow == 1 ? 2 : 1}"/>
-		<tr class="stripe${noteRow}">
+		<tr>
 			<td><c:out value="${rec.label}" escapeXml="false"/></td>
 				<td><a href="nojavascript.jsp" onclick="focusBackToOpener('referenceDetails.do?key=${rec.data}');return false;">${rec.value}</a></td>
 					</tr>

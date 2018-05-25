@@ -9,7 +9,7 @@
 
 <!-- ////  Start Reference Detail //// -->
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Reference
 			</td>
@@ -72,7 +72,7 @@
 	<c:when test="${not empty reference.additionalInfo}">
 		<c:if test="${reference.hasAdditionalInfo}">
 	<c:set var="lbl" value="${lbl+1}"/>
-		<tr class="stripe${(lbl%2)+1}">
+		<tr>
 			<td class="cat${(lbl%2)+1}">Additional
 <!-- \n -->
 Information
@@ -119,7 +119,7 @@ in MTB </td>
 <c:choose>
 	<c:when test="${not empty reference.otherAccessionIds}">
 	<c:set var="lbl" value="${lbl+1}"/>
-		<tr class="stripe${(lbl%2)+1}">
+		<tr>
 			<td class="cat${(lbl%2)+1}">Other
 <!-- \n -->
 Accession

@@ -109,7 +109,7 @@ function doStorage() {
 										</td>
 										</tr>
 
-<tr class="stripe-2">
+<tr>
 	<td class="cat-2">
 		Limit models by primary cancer site
 			</td>
@@ -134,7 +134,7 @@ function doStorage() {
 	</table>
 		</td>
 			</tr>
-				<tr class="stripe-1">
+				<tr>
 					<td class="cat-1">
 						Limit models by diagnosis
 							</td>
@@ -159,7 +159,7 @@ function doStorage() {
 		</td>
 </tr>
 
-<tr class="stripe-2">
+<tr>
 
 <td class="cat-2">
 	Select genes for comparison

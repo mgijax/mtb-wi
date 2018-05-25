@@ -71,7 +71,7 @@
 												<c:choose>
 													<c:when test="${fn:containsIgnoreCase(result.searchName, 'genetics')}">
 														<table>
-															<tr class="stripe-1">
+															<tr>
 																<td class="data-1">
 																	${result.searchResultsText}
 																		</td>

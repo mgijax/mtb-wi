@@ -533,8 +533,8 @@ panel4.render();
 <table class="results">
 
 <c:if test="${fn:contains(mouse.institution,'Dana-Farber')}">
-	<tr class="stripe-2">
-		<td class="cat-2">Notices</td>
+	<tr>
+		<td><h4>Notices</h4></td>
 			<td class="data-2" >
 				The use of this material by a company is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCICompany.pdf">notice</a>.
 
@@ -546,7 +546,7 @@ The use of this material by an academic institution is subject to the terms of t
 
 </c:if>		 
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Model Details
 			</td>
@@ -600,7 +600,7 @@ The use of this material by an academic institution is subject to the terms of t
 </table>	 
 																				</td>
 																		</tr>
-																		<tr class="stripe-2">
+																		<tr>
 																			<td class="cat-2">
 																				Patient
 																				</td>
@@ -624,7 +624,7 @@ The use of this material by an academic institution is subject to the terms of t
 							</td>
 								</tr>
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Engraftment Host
 			</td>
@@ -648,7 +648,7 @@ The use of this material by an academic institution is subject to the terms of t
 	<c:set var="a" value="2"/>
 	<c:set var="b" value="1"/>
 
-<tr class="stripe${a}">
+<tr>
 	<td class="cat${a}">
 		Publications citing this model
 			</td>
@@ -663,7 +663,7 @@ The use of this material by an academic institution is subject to the terms of t
 
 </c:if>
 
-<tr class="stripe${b}">
+<tr>
 	<td class="cat${b}">
 		Variant Summary
 			</td>
@@ -692,7 +692,7 @@ The use of this material by an academic institution is subject to the terms of t
 								</td>
 									</tr>
 
-<tr class="stripe${a}">
+<tr>
 	<td class="cat${a}">
 		Gene Expression
 			</td>
@@ -730,7 +730,7 @@ The use of this material by an academic institution is subject to the terms of t
 </td>
 	</tr>
 
-<tr class="stripe${b}">
+<tr>
 	<td class="cat${b}">
 		Gene CNV
 			</td>
@@ -752,7 +752,7 @@ The use of this material by an academic institution is subject to the terms of t
 
 </td>
 	</tr>
-		<tr class="stripe${a}">
+		<tr>
 			<td class="cat${a}">
 				Model Characterization
 					</td>
@@ -1234,7 +1234,7 @@ ${graphic.description}
 																		<c:choose>
 																			<c:when test="${mouse.socGraph > 0}">
 																				<c:forEach var="socGraph" begin="1" end="${mouse.socGraph}" >
-																					<tr class="stripe${b}">
+																					<tr>
 																						<td class="cat${b}">
 																							Dosing Studies:
 																								</td>

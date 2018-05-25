@@ -41,7 +41,7 @@
 				</td>
 		</tr>
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Reference
 			</td>
@@ -138,7 +138,7 @@ contains <html:text property="authors" size="40" maxlength="255"/>
 				</td>
 		</tr>
 		<!--
-		<tr class="stripe-2">
+		<tr>
 			<td class="cat-2">
 				Tumor Type
 				</td>

@@ -59,7 +59,7 @@
 
 <!-- ////  End Error Section  //// -->
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Tumors
 			</td>
@@ -120,7 +120,7 @@ The value for this field is selected from a list of controlled vocabulary terms.
 						</table>
 				</td>
 		</tr>
-		<tr class="stripe-2">
+		<tr>
 			<td class="cat-2">
 				Image
 				</td>

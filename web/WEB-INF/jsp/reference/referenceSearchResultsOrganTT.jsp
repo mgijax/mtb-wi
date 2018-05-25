@@ -122,10 +122,10 @@
 <c:forEach var="reference" items="${references}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 						</c:choose>
 

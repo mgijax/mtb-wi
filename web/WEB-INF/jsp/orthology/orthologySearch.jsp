@@ -34,7 +34,7 @@
 	</td>
 		</tr>
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Human Genes:
 			</td>

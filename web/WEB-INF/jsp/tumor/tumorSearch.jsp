@@ -59,7 +59,7 @@
 
 <!-- ////  End Error Section  //// -->
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Associated Tumors
 			</td>

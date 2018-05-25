@@ -150,14 +150,14 @@ window.opener.alert("Loading MGD results.");
 
 <!-- ////  Start Detail Section  //// -->
 
-<tr class="stripe-1">
+<tr>
 	<td colspan="2">
 
 <table width="560">
 
 <c:choose>
 	<c:when test="${not empty QTLForm.label}">
-		<tr class="stripe-2">
+		<tr>
 			<td class="cat-2">
 				QTL
 					</td> 
@@ -165,7 +165,7 @@ window.opener.alert("Loading MGD results.");
 							<a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=markerDetail&id=${QTLForm.mgiId}">${QTLForm.label}</a> &nbsp; (links to MGI detail)
 								</td>
 									</tr>
-										<tr class="stripe-1">
+										<tr>
 											<td class="cat-1">
 												Name
 													</td>
@@ -177,17 +177,17 @@ window.opener.alert("Loading MGD results.");
 
 </c:choose>
 
-<tr class="stripe-2">
-	<td class="cat-2">Location</td><td><a href="nojavascript.jsp" onClick="popPathWin('http://genome.ucsc.edu/cgi-bin/hgTracks?org=Mouse&position=Chr${QTLForm.chrom}:${QTLForm.qtlStart}-${QTLForm.qtlEnd}');return false;" >${QTLForm.chrom}:${QTLForm.qtlStart}..${QTLForm.qtlEnd}</a> &nbsp; (links to UCSC genome browser) 
+<tr>
+	<td><h4>Location</h4></td><td><a href="nojavascript.jsp" onClick="popPathWin('http://genome.ucsc.edu/cgi-bin/hgTracks?org=Mouse&position=Chr${QTLForm.chrom}:${QTLForm.qtlStart}-${QTLForm.qtlEnd}');return false;" >${QTLForm.chrom}:${QTLForm.qtlStart}..${QTLForm.qtlEnd}</a> &nbsp; (links to UCSC genome browser) 
 <!-- \n -->
  <em>Build 37</em> </td>
 	</tr>
 
-<tr class="stripe-1">
-	<td class="cat-1">Primary Reference</td><td><a href="http://www.informatics.jax.org/searches/reference.cgi?${QTLForm.primeRefId}">${QTLForm.primeRef}</a></td>
+<tr>
+	<td><h4>Primary Reference</h4></td><td><a href="http://www.informatics.jax.org/searches/reference.cgi?${QTLForm.primeRefId}">${QTLForm.primeRef}</a></td>
 		</tr>
-			<tr class="stripe-2">
-				<td class="cat-2">Strain tumor overview</td>
+			<tr>
+				<td><h4>Strain tumor overview</h4></td>
 					<td>
 						<c:choose>
 							<c:when test="${not empty strains}">
@@ -212,7 +212,7 @@ window.opener.alert("Loading MGD results.");
 </table>
 	</td>
 		</tr>
-			<tr class="stripe-1">
+			<tr>
 				<td colspan="2">
 					<table width="560">
 						<html:form action="gViewerDetails" method="GET" >
@@ -227,21 +227,21 @@ Refine search with the following critera.
 
 </td>
 	</tr>
-		<tr class="stripe-2">
-			<td class="cat-2">Chromosome</td>
+		<tr>
+			<td><h4>Chromosome</h4></td>
 				<td>${QTLForm.chrom}</td>
-					<td class="cat-2">Start (bp)</td>
+					<td><h4>Start (bp)</h4></td>
 						<td><input type="text" name="searchStart" value="${QTLForm.searchStart}"></td>
-							<td class="cat-2">End (bp)</td>
+							<td><h4>End (bp)</h4></td>
 								<td><input type="text" name="searchEnd" value="${QTLForm.searchEnd}"></td>
 									</tr>
-										<tr class="stripe-1">
+										<tr>
 											<td class ="cat-1">
 												Feature Type
 													</td>
 													<td colspan ="5" id="feature-type-selection"></td>
 												</tr>
-												<tr class="stripe-1">
+												<tr>
 													<td class="cat-1">
 														Mouse phenotypes & mouse models of human disease
 													</td>
@@ -292,7 +292,7 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 	</td>
 		</tr>
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Display Results as
 			</td>
@@ -366,8 +366,8 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 
 <td>
 	<table>
-		<tr class="stripe-2">
-			<td class="cat-2"><span class='label'>Gene Attributes:</span></td>
+		<tr>
+			<td><h4><span class='label'>Gene Attributes:</span></h4></td>
 
 <td	colspan='4'>
 																									<table>
@@ -383,8 +383,8 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 																									</table>
 																								</td>
 																							</tr>
-																							<tr class="stripe-1">
-																							<td class="cat-1">Additional Information</td>
+																							<tr>
+																							<td><h4>Additional Information</h4></td>
 																							<td colsan='4'>
 																								<table>
 																									<tr>
@@ -406,8 +406,8 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 						</table>
 							</td>
 
-<tr class="stripe-2">
-	<td class="cat-2">Format</td>
+<tr>
+	<td><h4>Format</h4></td>
 		<td	colspan='4'>
 																									<table>
 																										<tr>
@@ -447,7 +447,7 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 										</tr>
 											<c:forEach var="feature" items="${features}" varStatus="count">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
+		<tr>
 			<td>${feature.label}</td>
 				<td>${feature.name}</td>
 					<td>${feature.chromosome}:${feature.start}..${feature.end}</td>

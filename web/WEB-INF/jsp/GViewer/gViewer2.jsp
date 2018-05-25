@@ -417,16 +417,16 @@ var mgdWin =	new Ext.Window({
 
 '</td>'+
 	'</tr>'+
-		'<tr class="stripe-2">'+
-			'<td class="cat-2">Chromosome</td>'+
+		'<tr>'+
+			'<td><h4>Chromosome</h4></td>'+
 				'<td><input type="text" name="chrom" value="" size="5"></td>'+
-					'<td class="cat-2">Start (bp)</td>'+
+					'<td><h4>Start (bp)</h4></td>'+
 						'<td><input type="text" name="start" value=""></td>'+
-							'<td class="cat-2">End (bp)</td>'+
+							'<td><h4>End (bp)</h4></td>'+
 								'<td><input type="text" name="end" value=""></td>'+
 								'</tr>'+
-								'<tr class="stripe-1"><td class="cat-1">Feature Type</td><td colspan="5" id="feature-type-selection"></td></tr>'+
-								'<tr class="stripe-2">'+
+								'<tr><td><h4>Feature Type</h4></td><td colspan="5" id="feature-type-selection"></td></tr>'+
+								'<tr>'+
 								'<td class="cat-2">'+
 								'Mouse phenotypes & mouse models of human disease'+
 								'</td>'+

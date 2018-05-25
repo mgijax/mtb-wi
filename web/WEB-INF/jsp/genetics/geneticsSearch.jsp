@@ -61,7 +61,7 @@
 
 <!-- ////  End Error Section  //// -->
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Strain and Tumor Genetics:
 			</td>

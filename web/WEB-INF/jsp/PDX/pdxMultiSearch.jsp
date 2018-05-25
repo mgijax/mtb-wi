@@ -141,7 +141,7 @@ KRAS,Deleted
 		</td>
 			</tr>
 
-<tr class="stripe-1">
+<tr>
 
 <td class="cat-1">
 	Enter Case information here:

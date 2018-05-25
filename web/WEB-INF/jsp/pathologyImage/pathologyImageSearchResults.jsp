@@ -200,7 +200,7 @@ Necropsy</td>
 	<td width="13%" class="results-header">Description</td>
 		<td width="7%" class="results-header">Reference</td>
 			</tr>
-				<tr class="stripe-1">
+				<tr>
 
 <td><a href="tumorSummary.do?tumorFrequencyKeys=${pathRec.tumorFrequencyKey}">MTB:${pathRec.tumorFrequencyKey}</a></td>
 	<td>${pathRec.organOriginName} &nbsp; ${pathRec.tumorClassName}</td>
@@ -242,10 +242,10 @@ ${pathRec.reproductiveStatus}
 								<c:forEach var="image" items="${pathRec.images}" varStatus="status">
 									<c:choose>
 										<c:when test="${status.index%2==1}">
-											<tr class="stripe-1">
+											<tr>
 												</c:when>
 												<c:otherwise>
-													<tr class="stripe-2">
+													<tr>
 												</c:otherwise>
 										</c:choose>
 											<td colspan=9>

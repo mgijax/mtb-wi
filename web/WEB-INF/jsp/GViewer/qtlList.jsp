@@ -11,7 +11,7 @@
 
 <!-- ////  Start Detail Section  //// -->
 
-<tr class="stripe-1">
+<tr>
 	<td colspan="2">
 
 <c:choose>
@@ -32,7 +32,7 @@
 
 <c:forEach var="feature" items="${features}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
+		<tr>
 			<td>${feature.mgiId}</td>
 				<td><a href="gViewer.do?id=${feature.mgiId}&name=${feature.chromosome}:${feature.start}..${feature.end}&label=${feature.label}&primeRef=${feature.primeRef}&qtlName=${feature.name}" >${feature.label}</a></td>
 					<td>${feature.name}</td>

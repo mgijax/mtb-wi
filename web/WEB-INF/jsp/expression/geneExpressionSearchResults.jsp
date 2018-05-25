@@ -181,7 +181,7 @@
 
 </tr>
 
-<tr class="stripe-1">
+<tr>
 	<td colspan="1"><a href="${series.siteURL}${series.series.id}"><c:out value="${series.series.id} " escapeXml="false"/></a>
 <!-- \n -->
 
@@ -225,10 +225,10 @@ match the search criteria
 
 <c:choose>
 	<c:when test="${status.index%2==0}">
-		<tr class="stripe-2">
+		<tr>
 			</c:when>
 				<c:otherwise>
-					<tr class="stripe-1">
+					<tr>
 						</c:otherwise>
 							</c:choose>
 

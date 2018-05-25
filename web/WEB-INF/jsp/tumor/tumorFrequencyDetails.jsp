@@ -24,8 +24,8 @@
 <c:choose>
 	<c:when test="${tumorFreq.parentFrequencyKey>0}">
 	<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
-		<tr class="stripe${lbl}">
-			<td class="cat${lbl}">Metastatic Tumor</td>
+		<tr>
+			<td><h4>Metastatic Tumor</h4></td>
 				<td class="data${lbl}">
 					<span class="enhance">
 						<c:out value="${tumorFreq.organAffected}"/>
@@ -38,8 +38,8 @@
 										</c:otherwise>
 								</c:choose>
 	<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
-		<tr class="stripe${lbl}">
-			<td class="cat${lbl}">Tumor Name</td>
+		<tr>
+			<td><h4>Tumor Name</h4></td>
 				<td class="data${lbl}">
 					<c:if test="${tumorFreq.parentFrequencyKey<=0}">
 						<span class="enhance">
@@ -55,8 +55,8 @@
 				</td>
 					</tr>
 	<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
-		<tr class="stripe${lbl}">
-			<td class="cat${lbl}">Treatment Type</td>
+		<tr>
+			<td><h4>Treatment Type</h4></td>
 				<td class="data${lbl}">
 					<c:out value="${tumorFreq.treatmentType}" escapeXml="false"/>
 						</td>
@@ -65,13 +65,13 @@
 <c:choose>
 	<c:when test="${not empty tumorFreq.tumorSynonyms}">
 	<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
-		<tr class="stripe${lbl}">
+		<tr>
 			<c:choose>
 				<c:when test="${fn:length(tumor.agents)>1}">
-					<td class="cat${lbl}">Tumor Synonyms</td>
+					<td><h4>Tumor Synonyms</h4></td>
 						</c:when>
 							<c:otherwise>
-								<td class="cat${lbl}">Tumor Synonym</td>
+								<td><h4>Tumor Synonym</h4></td>
 									</c:otherwise>
 										</c:choose>
 
@@ -96,8 +96,8 @@
 			<c:when test="${not empty tumorFreq.associatedFrequencyInfo}">
 	<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 	<c:set var="pmets" value="-1"/>
-		<tr class="stripe${lbl}">
-			<td class="cat${lbl}">Metastases</td>
+		<tr>
+			<td><h4>Metastases</h4></td>
 				<td class="data${lbl}">
 					<table>
 						<c:forEach var="mets" items="${tumorFreq.associatedFrequencyInfo}" varStatus="status">
@@ -146,8 +146,8 @@
 		<td width="49%">
 
 <table class="results">
-	<tr class="stripe-1">
-		<td class="cat-1">Strain</td>
+	<tr>
+		<td><h4>Strain</h4></td>
 			<td class="data${(lbl%2)+1}">
 				<table align="left">
 					<tr>
@@ -187,13 +187,13 @@
 		<c:choose>
 			<c:when test="${not empty tumorFreq.strainSynonyms}">
 	<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
-		<tr class="stripe${lbl}">
+		<tr>
 			<c:choose>
 				<c:when test="${fn:length(tumorFreq.strainSynonyms)>1}">
-					<td class="cat${lbl}">Strain Synonyms</td>
+					<td><h4>Strain Synonyms</h4></td>
 						</c:when>
 							<c:otherwise>
-								<td class="cat${lbl}">Strain Synonym</td>
+								<td><h4>Strain Synonym</h4></td>
 									</c:otherwise>
 										</c:choose>
 											<td class="data${lbl}">
@@ -240,7 +240,7 @@ Onset</td>
 Detection</td>
 	<td class="results-header">Reference</td>
 		</tr>
-			<tr class="stripe-1">
+			<tr>
 				<td>MTB:${tumorFreq.tumorFrequencyKey}</td>
 					<td>
 						<c:choose>
@@ -365,10 +365,10 @@ Change</td>
 <c:forEach var="genetics" items="${tumorFreq.tumorGenetics}" varStatus="status">
 	<c:choose>
 		<c:when test="${status.index%2==0}">
-			<tr class="stripe-1">
+			<tr>
 				</c:when>
 					<c:otherwise>
-						<tr class="stripe-2">
+						<tr>
 							</c:otherwise>
 								</c:choose>
 									<td>
@@ -436,7 +436,7 @@ Change</td>
 
 <c:if test="${not empty tumorFreq.note}">
 	<c:set var="noteRow" value="1"/>
-		<tr class="stripe-1">
+		<tr>
 			<td><c:out value="${tumorFreq.note}"/></td>
 				<td><a href="referenceDetails.do?accId=${tumorFreq.reference}">${tumorFreq.reference}</a></td>
 					</tr>
@@ -444,7 +444,7 @@ Change</td>
 
 <c:forEach var="rec" items="${tumorFreq.additionalNotes}" varStatus="status">
 	<c:set var="noteRow" value="${noteRow == 1 ? 2 : 1}"/>
-		<tr class="stripe${noteRow}">
+		<tr>
 			<td><c:out value="${rec.label}" escapeXml="false"/></td>
 				<td><a href="referenceDetails.do?key=${rec.data}">${rec.value}</a></td>
 					</tr>

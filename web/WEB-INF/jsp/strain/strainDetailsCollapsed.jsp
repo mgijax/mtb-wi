@@ -9,7 +9,7 @@
 
 <table class="results">
 
-<tr class="stripe-1">
+<tr>
 	<td class="cat-1">
 		Strain
 			</td>
@@ -69,8 +69,8 @@
 <c:choose>
 	<c:when test="${not empty strain.tumors}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Tumors</td>
+		<tr>
+			<td><h4>Tumors</h4></td>
 				<td class="data${num}">
 	<c:set var="statsBean" value="${strain.tumorStats}"/>
 		${statsBean.label} unique tumor types displayed.
@@ -97,10 +97,10 @@ Tumor Group Records</td>
 		<c:forEach var="tumor" items="${strain.tumors}" varStatus="status">
 			<c:choose>
 				<c:when test="${status.index%2==0}">
-					<tr class="stripe-1">
+					<tr>
 						</c:when>
 							<c:otherwise>
-								<tr class="stripe-2">
+								<tr>
 									</c:otherwise>
 										</c:choose>
 											<td><c:out value="${tumor.tumorName}" escapeXml="false"/></td>
@@ -128,8 +128,8 @@ Tumor Group Records</td>
 <c:choose>
 	<c:when test="${not empty strain.links || not empty strain.linksGeneral}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-		<tr class="stripe${num}">
-			<td class="cat${num}">Other Database Links</td>
+		<tr>
+			<td><h4>Other Database Links</h4></td>
 				<td class="data${num}">
 
 <table class="results">
@@ -141,10 +141,10 @@ Tumor Group Records</td>
 						<c:forEach var="link" items="${strain.links}" varStatus="status">
 							<c:choose>
 								<c:when test="${status.index%2==0}">
-									<tr class="stripe-1">
+									<tr>
 										</c:when>
 											<c:otherwise>
-												<tr class="stripe-2">
+												<tr>
 													</c:otherwise>
 														</c:choose>
 														<%--
@@ -168,10 +168,10 @@ Tumor Group Records</td>
 					<c:forEach var="linkGeneral" items="${strain.linksGeneral}" varStatus="status">
 						<c:choose>
 							<c:when test="${status.index%2==0}">
-								<tr class="stripe-1">
+								<tr>
 									</c:when>
 										<c:otherwise>
-											<tr class="stripe-2">
+											<tr>
 												</c:otherwise>
 													</c:choose>
 														<td><a href="${linkGeneral.siteUrl}" target="${linkGeneral.siteName}"><c:out value="${linkGeneral.siteName}" escapeXml="false"/></a></td>
