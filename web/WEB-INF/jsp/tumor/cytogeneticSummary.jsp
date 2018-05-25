@@ -3,30 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Cytogenetic Summary"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp"/></nav>
-	
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#cytogeneticsummary"></a>
-</header>
+<jax:mmhcpage title="Cytogenetic Summary" help="cytogeneticsummary">
 
 <!-- ////  Start Frequency Records  //// -->
 
 <c:choose>
 		<c:when test="${not empty tumor}">
-				
 
 <table class="results">
 						<tr>
@@ -40,8 +23,8 @@
 								<td class="results-header">Images</td>
 								<td class="results-header">Tumor Summary</td>
 						</tr>
-						
-							<c:forEach var="genetics" items="${tumor}" varStatus="status">
+
+<c:forEach var="genetics" items="${tumor}" varStatus="status">
 												<c:choose>
 														<c:when test="${status.index%2==0}">
 																<tr class="stripe-1">
@@ -53,61 +36,58 @@
 													 <td>
 																<c:out value="${genetics.displayChromosomes}" escapeXml="false"/>
 														</td>
-														
-														<td>
-																
-															 <c:out value="${genetics.name}" escapeXml="false"/>
-																	
-														</td>
-														
-														 <td>
+
+<td>
+
+<c:out value="${genetics.name}" escapeXml="false"/>
+
+</td>
+
+<td>
 																<c:out value="${genetics.notes}" escapeXml="false"/>
 														</td>
-														
-														<td>
+
+<td>
 																<c:out value="${genetics.alleleTypeName}" escapeXml="false"/>
 														</td>
-														
-														 <td>
+
+<td>
 																<c:out value="${genetics.assayType}" escapeXml="false"/>
 														</td>
-						
-														 <td>
+
+<td>
 																<c:out value="${genetics.tumorName}" escapeXml="false"/>
 														</td>
 
-														<td>
+<td>
 																<c:out value="${genetics.treatmentType}" escapeXml="false"/>
 														</td>
-														
-														<td>
+
+<td>
 														<c:choose>
 															<c:when test="${not empty genetics.assayImages}">
 																	<c:forEach var="image" items="${genetics.assayImages}">
 																	<a href="nojavascript.jsp" onClick="popPathWin('assayImageDetails.do?key=${image.assayImagesKey}&amp;page=pathology', '${image.assayImagesKey}');return false;">
 																		 <img width="150" src="${applicationScope.assayImageURL}/${applicationScope.assayImagePath}/${image.lowResName}" alt="X">
 																	</a>
-																	 
-																		
-<!-- \n -->
 
 <!-- \n -->
 
-																	</c:forEach>
+<!-- \n -->
+
+</c:forEach>
 																</c:when>
 														</c:choose>
 													</td>
-														
-														<td>
+
+<td>
 																<a href="tumorSummary.do?tumorFrequencyKeys=${genetics.tumorFrequencyKey}">Tumor Summary</a> 
 														</td>
-														
-													 
-												</tr>
+
+</tr>
 						</c:forEach>
 
-					 
-		</c:when>
+</c:when>
 		<c:otherwise>
 				<!-- There are no tumor frequency records associated with this tumor. -->
 		</c:otherwise>
@@ -117,8 +97,5 @@
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-</div>
-</body>
-</html>
+</jax:mmhcpage>
 

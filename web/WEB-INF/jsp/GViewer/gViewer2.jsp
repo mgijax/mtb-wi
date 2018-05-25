@@ -2,10 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="QTL Viewer"/>
+
+<jax:mmhcpage title="QTL Viewer">
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/GViewer/javascript/fileUpload.css"/>
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<style type="text/css">
@@ -20,15 +18,15 @@
 						float: left;
 				}
 
-			.x-form-check-wrap {overflow: hidden;}
-	 
-			.no-icon {
+.x-form-check-wrap {overflow: hidden;}
+
+.no-icon {
 				display : none;
 				background-image:'' !important;
 			}
 	</style>
-	<c:import url="../../../meta.jsp"/>
-	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+
+<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/PagingStore.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Karyotype-canvas.js"></script>
@@ -36,28 +34,25 @@
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FileUploadField.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Legend.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/ZoomPanel.js"></script>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-	<script type="text/javascript">
+<script type="text/javascript">
 		// number of pixels for largest chromosome
 		var maxSize = 100;
 
-		var bandingURL = 'viewer.do?method=getBands';
+var bandingURL = 'viewer.do?method=getBands';
 		// used to link chromosome bands to ucsc details
 		// use empty string for no link
 		var UCSCBandLink='http://genome.ucsc.edu/cgi-bin/hgTracks?org=Mouse&position=';
-			
-		// it appears that this is useless	
-		var localURL = '';
-			
-		var karyoPanel = null;
-		var qtlStore = null;
-		
-		Ext.onReady(function() {
 
-				Ext.override(Ext.form.Action.Submit,{
+// it appears that this is useless	
+		var localURL = '';
+
+var karyoPanel = null;
+		var qtlStore = null;
+
+Ext.onReady(function() {
+
+Ext.override(Ext.form.Action.Submit,{
 						features:[],
 						handleResponse : function(response){
 								if(this.form.errorReader){
@@ -94,8 +89,8 @@
 														this.features.push(feature);
 												}
 										}
-							
-										if(errors.length < 1){
+
+if(errors.length < 1){
 												errors = null;
 										}
 										return {
@@ -105,8 +100,8 @@
 								}
 								return Ext.decode(response.responseText);
 						}});
-				
-				FeatureRecord = Ext.data.Record.create([
+
+FeatureRecord = Ext.data.Record.create([
 						{name:'chromosome'},
 						{name:'start'},
 						{name:'end'},
@@ -125,7 +120,7 @@
 						{name:'col9'}
 				]);
 
-				var fp = new Ext.FormPanel({
+var fp = new Ext.FormPanel({
 						id:'fp',
 						fileUpload: true,
 						width: 500,
@@ -197,8 +192,8 @@
 	//									fieldLabel:'Track Index',
 	//									name:'trackIndex',
 	//									minValue:1
-										
-	 //						 }
+
+//						 }
 						],
 						buttons: [{
 										text: 'Upload',
@@ -228,27 +223,27 @@
 										}
 								}]
 				});
-				
-				function loadUploadedFeatures(records){
+
+function loadUploadedFeatures(records){
 						qtlStore.suspendEvents();
 						var start = 0;
 						if(qtlStore){
 								start = qtlStore.getCount();
 						}
-				 
-						qtlStore.add(records);
+
+qtlStore.add(records);
 						qtlStore.resumeEvents();
 						qtlStore.fireEvent('add',qtlStore,records,start);
 						featureGrid.addAllFeatures();
 				};
-				
-				function loadFromMGI(){
-					
-						var ch,start,end;
-						
-						 mgdWin.show();
-						 
-						if(featureGrid.getSelectionModel().hasSelection()){
+
+function loadFromMGI(){
+
+var ch,start,end;
+
+mgdWin.show();
+
+if(featureGrid.getSelectionModel().hasSelection()){
 								ch = featureGrid.getSelectionModel().getSelected().get("chromosome");
 								start = featureGrid.getSelectionModel().getSelected().get("start");
 								end = featureGrid.getSelectionModel().getSelected().get("end");;
@@ -258,91 +253,81 @@
 								start = zoomPanel.start;
 								end = zoomPanel.end;
 						}
-						
-						if(end > 0){	 
+
+if(end > 0){	 
 								document.mgiForm.chrom.value = ch;
 								document.mgiForm.start.value =	start;
 								document.mgiForm.end.value =	end;
 						}
 				};
-				
-			 
-				function mgdQueryHandler(){
-					 
-						var ch = document.mgiForm.chrom.value;
+
+function mgdQueryHandler(){
+
+var ch = document.mgiForm.chrom.value;
 						var start = document.mgiForm.start.value;
 						var end = document.mgiForm.end.value;
 						var pheno = document.mgiForm.phenotype.value;
-		
-						var ontologyKeys="";
-						
-						if(document.mgiForm.ontology_key1.checked){
+
+var ontologyKeys="";
+
+if(document.mgiForm.ontology_key1.checked){
 								ontologyKeys="&ontology_key="+document.mgiForm.ontology_key1.value;
 						}
-						
-						if(document.mgiForm.ontology_key2.checked){
+
+if(document.mgiForm.ontology_key2.checked){
 								ontologyKeys= ontologyKeys+"&ontology_key="+document.mgiForm.ontology_key2.value;
 						}
-					
-						if(document.mgiForm.ontology_key3.checked){
+
+if(document.mgiForm.ontology_key3.checked){
 								ontologyKeys= ontologyKeys+"&ontology_key="+document.mgiForm.ontology_key3.value;
 						}
-						
-						var goOp = document.mgiForm.goOp.value;
+
+var goOp = document.mgiForm.goOp.value;
 						var goTerm = document.mgiForm.goTerm.value;
-						
-						var mcvs = document.mgiForm.featureTypes.value;
-						
-						qtlStore.proxy.setUrl(localURL+'viewer.do?method=getMGIFeatures&chromosome='+ch+'&start='+start+'&end='+end
+
+var mcvs = document.mgiForm.featureTypes.value;
+
+qtlStore.proxy.setUrl(localURL+'viewer.do?method=getMGIFeatures&chromosome='+ch+'&start='+start+'&end='+end
 								+'&phenotype='+pheno+'&mcv='+mcvs+'&go_op='+goOp+'&go_term='+goTerm+ontologyKeys+'&linkTo=details');
-						
-					 
-						 mgdWin.hide();
-			
-						mask =	new Ext.LoadMask('mainDiv', {msg:"Loading data...", removeMask:true, store:qtlStore});
-					
-					
-					
-						qtlStore.load({add:true, callback:mgiQueryCallback});
-					
-						document.mgiForm.reset();
+
+mgdWin.hide();
+
+mask =	new Ext.LoadMask('mainDiv', {msg:"Loading data...", removeMask:true, store:qtlStore});
+
+qtlStore.load({add:true, callback:mgiQueryCallback});
+
+document.mgiForm.reset();
 				};
-				
-				
-			
-				function mgiQueryCallback(r, options, success){
-					
-						if(r.length == 0){
+
+function mgiQueryCallback(r, options, success){
+
+if(r.length == 0){
 								Ext.Msg.alert('MGI Query', 'Query returned no results.');
 						}
-						
-					
-						
-					
-				};	
-				
-				
-				function showRegionWin(){
+
+};	
+
+function showRegionWin(){
 						regionWin.show();
 				}
-				
-				function createRegion(){
-					
-						regionWin.hide();
-					
-						var ch =	createRegionForm.getForm().findField('chromosome').getValue();
+
+function createRegion(){
+
+regionWin.hide();
+
+var ch =	createRegionForm.getForm().findField('chromosome').getValue();
 						var start = createRegionForm.getForm().findField('start').getValue();
 						var end = createRegionForm.getForm().findField('end').getValue();
-					
-						var name = createRegionForm.getForm().findField('name').getValue();
+
+var name = createRegionForm.getForm().findField('name').getValue();
 						var description = createRegionForm.getForm().findField('description').getValue();
-						
-						var group = createRegionForm.getForm().findField('group').getValue();
+
+var group = createRegionForm.getForm().findField('group').getValue();
 						if(group == null || group.length == 0){
 								group = 'user created';
 						}
-					
-						if(end > 0){
+
+if(end > 0){
 								var rec = new FeatureRecord({
 										chromosome:ch,
 										start:start,
@@ -356,13 +341,13 @@
 										group:group,
 										track:'R1'
 								});
-						
-								qtlStore.add(rec);
+
+qtlStore.add(rec);
 								featureGrid.store.add(rec.copy());
 						}
 				}
-			 
-				var createRegionForm = new Ext.FormPanel({
+
+var createRegionForm = new Ext.FormPanel({
 						frame: true,
 						bodyStyle: 'padding: 5px 5px 0px 5px;',
 						defaults: {
@@ -411,11 +396,11 @@
 						buttons: [{
 										text: 'Create region',
 										handler:createRegion
-			 
-								}]
+
+}]
 				});
-				
-				var mgdWin =	new Ext.Window({
+
+var mgdWin =	new Ext.Window({
 						layout:'fit',
 						target: Ext.getBody(),
 						closeAction:'hide', 
@@ -426,8 +411,8 @@
 								'<tr>'+
 								'<td colspan="6">'+
 								'<strong>Search for features within the selected coordinates.</strong>'+
-														
-								'</td>'+
+
+'</td>'+
 								'</tr>'+
 								'<tr class="stripe-2">'+
 								'<td class="cat-2">Chromosome</td>'+
@@ -482,12 +467,11 @@
 <!-- \n -->
 '+
 								'<input type="checkbox" name="ontology_key3" value="Cellular+Component"/>Cellular Component'+
-													 
-								' </td>'+
+
+' </td>'+
 								'</tr>'+	
-												
-										 
-								'</table> <input type="hidden" name="featureTypes"/></form>',
+
+'</table> <input type="hidden" name="featureTypes"/></form>',
 						buttons: [
 											 {
 												text: 'Load from MGI',
@@ -498,11 +482,10 @@
 												handler:function(){document.mgiForm.reset();}
 												}
 									 ]
-						
-				});
-				
-				
-				treePanel = new Ext.tree.TreePanel({
+
+});
+
+treePanel = new Ext.tree.TreePanel({
 								height: 100,
 								width: 450,
 								useArrows:true,
@@ -521,10 +504,10 @@
 									iconCls:'no-icon'
 								},
 
-								// auto create TreeLoader
+// auto create TreeLoader
 								dataUrl:'gViewerDetails.do?featureTypes=json',
 
-								listeners: {
+listeners: {
 									'checkchange': function(node, checked){
 											function check(cNode){
 													cNode.expand();
@@ -533,12 +516,12 @@
 														for(j; j < gChildren.length; j++){
 															gChildren[j].getUI().toggleCheck(checked);
 															check(gChildren[j]);
-															
-														}
+
+}
 											}
 									 check(node);
-											
-										var mcvs ='',selNodes = treePanel.getChecked();;
+
+var mcvs ='',selNodes = treePanel.getChecked();;
 										Ext.each(selNodes, function(node){
 											if(mcvs.length > 0){
 												mcvs += ',';
@@ -549,14 +532,14 @@
 									}
 								}
 							});
-							
-			 function showTree(){
+
+function showTree(){
 				treePanel.render(document.getElementById('featureTypeSelection'))
 			 }
-			 
-			 mgdWin.on('afterrender',showTree);
-				
-				var regionWin =	new Ext.Window({
+
+mgdWin.on('afterrender',showTree);
+
+var regionWin =	new Ext.Window({
 						layout:'fit',
 						target: Ext.getBody(),
 						closeAction:'hide', 
@@ -564,8 +547,8 @@
 						title: 'Create region',
 						items:[createRegionForm]
 				});
-		
-				var fileWin = new Ext.Window({
+
+var fileWin = new Ext.Window({
 						title:'Load features from file.',
 						layout:'fit',
 						width:550,
@@ -573,13 +556,13 @@
 						closeAction:'hide', 
 						items:[fp]
 				});
-		
-				function showFPWindow(){
+
+function showFPWindow(){
 						fileWin.show();
 						fp.getForm().reset();
 				};
-				
-				karyoPanel = new org.jax.mgi.kmap.KaryoPanel({bandingFile:bandingURL,
+
+karyoPanel = new org.jax.mgi.kmap.KaryoPanel({bandingFile:bandingURL,
 						title:'<div>MTB QTL Viewer</div>',
 						id:'kPanel',
 						maxKaryoSize:maxSize,
@@ -594,8 +577,8 @@
 						bandMaskDiv:'mainDiv',
 						width:1000
 				});
-				
-				qtlStore = new Ext.ux.data.PagingXmlStore({
+
+qtlStore = new Ext.ux.data.PagingXmlStore({
 						autoDestroy: true,
 						storeId: 'qtlStore',
 						url:'toConfigureProxy',
@@ -621,45 +604,45 @@
 								'strand',
 								'phase',
 								'col9'
-									 
-						]	
+
+]	
 				});	
-			
-				var oGridHandler = function (b,e){
+
+var oGridHandler = function (b,e){
 						var i;
 						var link = localURL+'viewer.do?method=getQTLs&';
 						var selections = Ext.getCmp('oGrid').getSelectionModel().getSelections();
-						
-						for(i = 0 ; i < selections.length; i++){
+
+for(i = 0 ; i < selections.length; i++){
 								link = link+'selectedQTLTypes='+ selections[i].get("name").replace(/ /g,'+')+'&';
 						}	 
 						Ext.getCmp('oGridMenu').hide();
 						Ext.getCmp('oGridMenu').findParentByType('menu').hide();
 						if(selections.length == 0 ){
-								
-								Ext.Msg.alert('Display QTL', 'No QTL groups were selected.');
+
+Ext.Msg.alert('Display QTL', 'No QTL groups were selected.');
 								return;
 						}
 						if(b.getText() == 'View'){
-						
-								qtlStore.proxy.setUrl(link);
-				
-								var mask =	new Ext.LoadMask('mainDiv', {msg:"Loading data...", removeMask:true, store:qtlStore});
-						
-								qtlStore.load({add:true});
 
-						}else{
+qtlStore.proxy.setUrl(link);
+
+var mask =	new Ext.LoadMask('mainDiv', {msg:"Loading data...", removeMask:true, store:qtlStore});
+
+qtlStore.load({add:true});
+
+}else{
 								if(b.getText() == 'as HTML'){
 										link = link + 'qtlList=HTML';
 
-								}else if(b.getText() == 'as Text'){
+}else if(b.getText() == 'as Text'){
 										link = link + 'qtlList=tabbed';
 								}
 								window.open(link,'qtlList');
 						} 
 				};
-			
-				var oStore = new Ext.data.XmlStore({
+
+var oStore = new Ext.data.XmlStore({
 						autoDestroy: true,
 						storeId: 'oStore',
 						record: 'organ', 
@@ -670,12 +653,12 @@
 								'color'
 						]
 				});
-				
-				var oGridCM =	new Ext.grid.ColumnModel({columns:[
+
+var oGridCM =	new Ext.grid.ColumnModel({columns:[
 								{id:'name', sortable: true, dataIndex: 'name'}
 						]});
-				
-				var oGrid = new Ext.grid.GridPanel({
+
+var oGrid = new Ext.grid.GridPanel({
 						id:'oGrid',
 						selModel:new Ext.grid.RowSelectionModel(),
 						store:oStore,
@@ -699,71 +682,67 @@
 								}
 						]
 				});
-		 
-				var oGridMenu = new Ext.menu.Menu({
+
+var oGridMenu = new Ext.menu.Menu({
 						id: 'oGridMenu',
 						style: {
 								overflow: 'visible'		 
 						},
 						items: [oGrid]
 				});
-				
-				karyoPanel.setFeatureStore(qtlStore);
-				
-				
-			 karyoPanel.getTopToolbar().items.items[2].menu.add(
+
+karyoPanel.setFeatureStore(qtlStore);
+
+karyoPanel.getTopToolbar().items.items[2].menu.add(
 										[{text:'Create Region', handler:showRegionWin},
 										{text:'Clear All',handler:karyoPanel.clear, scope:karyoPanel}
 								]);
-				
-			
-				karyoPanel.getTopToolbar().add('-');
-				
-				karyoPanel.getTopToolbar().add(
+
+karyoPanel.getTopToolbar().add('-');
+
+karyoPanel.getTopToolbar().add(
 				{text:'Help',
 						menu:{items:[{text:'Viewer Help', handler:helpHandler},
 										{text:'Using GFF files',handler:gffHowToHandler}
 								]}});
-				
-			
-				//			karyoPanel.getTopToolbar().add('-');
-				
-				//			 karyoPanel.getTopToolbar().addButton({
+
+//			karyoPanel.getTopToolbar().add('-');
+
+//			 karyoPanel.getTopToolbar().addButton({
 				//					 text:'Create region',
 				//					 handler:showRegionWin
 				//			 });
-				
-				karyoPanel.getTopToolbar().add('-');
-			
-				karyoPanel.getTopToolbar().items.items[0].menu.add({
+
+karyoPanel.getTopToolbar().add('-');
+
+karyoPanel.getTopToolbar().items.items[0].menu.add({
 						text:'Load QTL',
 						menu:oGridMenu
 				});
-				
-				karyoPanel.getTopToolbar().items.items[0].menu.add({
+
+karyoPanel.getTopToolbar().items.items[0].menu.add({
 						text:'Load annotations from MGI',
 						handler:loadFromMGI
 				});
-				
-				karyoPanel.getTopToolbar().items.items[0].menu.add({
+
+karyoPanel.getTopToolbar().items.items[0].menu.add({
 						text:'Upload annotation file (GFF)',
 						handler:showFPWindow
 				});
-				
-				karyoPanel.getTopToolbar().items.items[0].menu.add(
+
+karyoPanel.getTopToolbar().items.items[0].menu.add(
 				{text:'Export annotation file (GFF)',
 						handler:karyoPanel.exportFeatures,
 						scope:karyoPanel
 				});
-				
-				
-				var zoomPanel = new org.jax.mgi.kmap.ZoomPanel({
+
+var zoomPanel = new org.jax.mgi.kmap.ZoomPanel({
 						id:'zoomPanel',
 						rowspan:2,
 						minWidth:200,
 						kPanel:karyoPanel});
-											 
-				var featureGrid = new org.jax.mgi.kmap.FeatureGrid({
+
+var featureGrid = new org.jax.mgi.kmap.FeatureGrid({
 						id:'featureGrid',
 						rowspan:1,
 						colspan:1,
@@ -779,20 +758,19 @@
 								prependButtons: true
 						})
 				});
-			
-			
-				// table for the center
+
+// table for the center
 				var centerTable = new Ext.Container({
 						region: 'center',
 						layout:'table',
 						layoutConfig:{columns:2},
 						items:[karyoPanel,zoomPanel,featureGrid]
-				 
-				});
 
-				// Legend Panel to the west
-			 
-				var legendPanel = new org.jax.mgi.kmap.LegendPanel({
+});
+
+// Legend Panel to the west
+
+var legendPanel = new org.jax.mgi.kmap.LegendPanel({
 						autoScroll:true,
 						title:'Legend',
 						id:'legendPanel',
@@ -805,7 +783,7 @@
 						karyoPanel:karyoPanel
 				});
 
-				var mainContainer = new Ext.Container({
+var mainContainer = new Ext.Container({
 						id:'mainTain',
 						height:780,	// the kPanel height is based on the size of the chromosomes so this value is really how the legend panel is sized
 						//	width:1200,
@@ -815,54 +793,53 @@
 						style:{background:'white'}
 				});
 
-				mainContainer.doLayout();
-			
-				zoomPanel.doLayout();
+mainContainer.doLayout();
+
+zoomPanel.doLayout();
 				zoomPanel.hide();
-				
-				karyoPanel.loadBands();
-																												
-				featureGrid.doLayout();
-			
-				zoomPanel.on('featureClick',featureGrid.selectFeature,featureGrid);
+
+karyoPanel.loadBands();
+
+featureGrid.doLayout();
+
+zoomPanel.on('featureClick',featureGrid.selectFeature,featureGrid);
 				zoomPanel.on('featureRightClick',karyoPanel.featureRightClick,karyoPanel);
 				zoomPanel.on('featureMouseOver',karyoPanel.featureMouseOver,karyoPanel);
 				zoomPanel.on('featureMouseOut',karyoPanel.featureMouseOut,karyoPanel);
-				
-				function setjBrowseURL(e,mbp,feature,kpanel){
+
+function setjBrowseURL(e,mbp,feature,kpanel){
 					if(feature){
 							 start = parseInt(feature.start);
 							 end = parseInt(feature.end) ;
 
-							 // not sure how worth wile this is
+// not sure how worth wile this is
 							 pad = Math.floor((end - start)/4);
 							 start = start - pad;
 							 if(start<0) start =0;
 							 end = end + pad;
-							 
 
-							 src = "http://jbrowse.informatics.jax.org/?data=data%2Fmouse&loc=chr"+feature.chromosome+"%3A"+start+".."+end+"&tracks=MGI_Genome_Features";
+src = "http://jbrowse.informatics.jax.org/?data=data%2Fmouse&loc=chr"+feature.chromosome+"%3A"+start+".."+end+"&tracks=MGI_Genome_Features";
 							 document.getElementById('jBrowseFrame').src = src
 							 document.getElementById('jBrowseFrame').width = (mainContainer.getWidth())+"px";
-							 
-							qtlStore.proxy.setUrl(localURL+'viewer.do?method=getMGIFeatures&chromosome='+feature.chromosome+'&start='+feature.start+'&end='+feature.end
+
+qtlStore.proxy.setUrl(localURL+'viewer.do?method=getMGIFeatures&chromosome='+feature.chromosome+'&start='+feature.start+'&end='+feature.end
 								+'&phenotype=&mcv=&go_op=&go_term=&linkTo=details');
-						
-								mask =	new Ext.LoadMask('mainDiv', {msg:"Loading data...", removeMask:true, store:qtlStore});
-					
-								qtlStore.load({add:true, callback:mgiQueryCallback});
-								
-						}
+
+mask =	new Ext.LoadMask('mainDiv', {msg:"Loading data...", removeMask:true, store:qtlStore});
+
+qtlStore.load({add:true, callback:mgiQueryCallback});
+
+}
 				}
-		
-				// for jill recla
+
+// for jill recla
 				//karyoPanel.on('featureClick',setjBrowseURL,karyoPanel);
-				
-				zoomPanel.on('featureClick',setjBrowseURL,featureGrid);
-				
-				var helpWindow = null;
-				
-				function helpHandler(){
+
+zoomPanel.on('featureClick',setjBrowseURL,featureGrid);
+
+var helpWindow = null;
+
+function helpHandler(){
 						if(!helpWindow){
 								helpWindow = new Ext.Window({
 										title:'MTB QTL Viewer Help',
@@ -945,11 +922,10 @@
 						}
 						helpWindow.show(); 
 				};
-				
-				
-				var howToWindow = null;
-				
-				function gffHowToHandler(){
+
+var howToWindow = null;
+
+function gffHowToHandler(){
 						if(!howToWindow){
 								howToWindow = new Ext.Window({
 										title:'Using GFF files with the MTB QTL Viewer',
@@ -1070,20 +1046,17 @@
 						}
 						howToWindow.show(); 
 				};
-				
-				// allows the form to be run outside of mtbwi app
+
+// allows the form to be run outside of mtbwi app
 				document.forms['exportForm'].action = localURL+'viewer.do?method=export';
 		});	//end onReady()
 	</script>
 
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-								<table>
+<table>
 										<tr>
 												<td id="main-div" colspan="2" style="width:100%">
-														
-														<noscript>
+
+<noscript>
 <!-- \n -->
 
 <!-- \n -->
@@ -1093,23 +1066,19 @@
 <!-- \n -->
 <h2>The QTL Viewer requires Javascript which is disabled or unavailable on your browser.</h2></noscript>
 												</td>
-												
-										</tr>
+
+</tr>
 										<tr>
 												<td>
 														<iframe id="j-browse-frame" height="500px" width="1349px" style="border: 1px solid #dfdfdf; padding: 5px" src=""></iframe>
 												</td>
 										</tr>
-										
-												
-								</table>
 
-</section>
-</div>
+</table>
+
 <form action="" id="export-form" target="_blank" method="post" >
 		<input type="hidden" name="export" value="true">
 		<input type="hidden" id="export-x-mL" name="exportXML" value="">
 </form>
-</body>
-</html>
+</jax:mmhcpage>
 

@@ -2,23 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Genetic Change Summary"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp"/></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#geneticchange"></a>
-</header>
+<jax:mmhcpage title="Genetic Change Summary" help="geneticchange">
 
 <table class="results">
 
@@ -58,7 +43,6 @@
 
 <c:choose>
 		<c:when test="${not empty genetics.alleleRecs}">
-				
 
 <table class="results">
 						<tr class="results">
@@ -72,11 +56,11 @@
 	<c:set var="counter" value="0"/>
 	<c:set var="items" value="0"/>
 
-						<c:forEach var="rec" items="${genetics.alleleRecs}" varStatus="status">
+<c:forEach var="rec" items="${genetics.alleleRecs}" varStatus="status">
 	<c:set var="key" value="${rec.key}"/>
 	<c:set var="counter" value="${counter+1}"/>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${status.index%2==0}">
 	<c:set var="classVal" value="stripe1"/>
 										</c:when>
@@ -85,14 +69,14 @@
 										</c:otherwise>
 								</c:choose>
 
-								<tr class="${classVal}">
+<tr class="${classVal}">
 
-								<c:choose>
+<c:choose>
 										<c:when test="${fn:length(rec.value.recsCollection)>1}">
 												<td rowspan="${fn:length(rec.value.recsCollection)}">
 														${mutationSymbols[key]}
 														<c:if test="${not empty names[key]}">
-																
+
 <!-- \n -->
 <span size="-2"><em>${names[key]}</em></span>
 														</c:if>
@@ -102,7 +86,7 @@
 												<td>
 														${mutationSymbols[key]}
 														<c:if test="${not empty names[key]}">
-																
+
 <!-- \n -->
 <span size="-2"><em>${names[key]}</em></span>
 														</c:if>
@@ -110,13 +94,13 @@
 										</c:otherwise>
 								</c:choose>
 
-								<c:forEach var="subRec" items="${rec.value.recsCollection}" varStatus="status">
+<c:forEach var="subRec" items="${rec.value.recsCollection}" varStatus="status">
 										<c:if test="${status.index!=0}">
 												<tr class="${classVal}">
 										</c:if>
 	<c:set var="items" value="${items + 1}"/>
 
-										<td>${subRec.tumorName}</td>
+<td>${subRec.tumorName}</td>
 										<td>${subRec.agentType}</td>
 										<td>(<a href="tumorSearchResults.do?allelePairKey=${subRec.allelePairKey}&amp;organTissueOrigin=${subRec.organKey}&amp;tumorClassification=${subRec.tumorClassificationKey}&amp;agentType=${subRec.agentTypeKey}&amp;maxItems=No+Limit">${subRec.count}</a>)</td>
 										</tr>
@@ -135,7 +119,7 @@ Total Items: ${items}
 </pre>
 --%>
 
-		</c:when>
+</c:when>
 		<c:otherwise>
 				No summary information found.
 		</c:otherwise>
@@ -143,8 +127,5 @@ Total Items: ${items}
 
 <!-- ////  End Search Results List  //// -->
 
-</section>
-</div>
-</body>
-</html>
+</jax:mmhcpage>
 

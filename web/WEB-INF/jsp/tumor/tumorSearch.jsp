@@ -3,26 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Tumor Search Form"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
+<jax:mmhcpage title="Tumor Search Form" help="tumors">
+	<html:form action="tumorSearchResults" method="GET">
 
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<html:form action="tumorSearchResults" method="GET">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#tumors"></a>
-</header>
 
 <table class="results">
 
@@ -87,10 +71,10 @@
 
 <!-- \n -->
 The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ / Tissue of Origin');" onmouseout="return nd();">Organ/Tissue of Origin</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="organTissueOrigin" size="8" multiple="true">
+<html:select property="organTissueOrigin" size="8" multiple="true">
 														<html:option value="">ANY</html:option>
 														<html:options collection="organTissueValues" property="value" labelProperty="label"/>
 												</html:select>
@@ -103,10 +87,10 @@ The value for this field is selected from a list of controlled vocabulary terms.
 
 <!-- \n -->
 This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.', CAPTION, 'Tumor Classification');" onmouseout="return nd();">Tumor Classification</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="tumorClassification" size="8" multiple="true">
+<html:select property="tumorClassification" size="8" multiple="true">
 														<html:option value="">ANY</html:option>
 														<html:options collection="tumorClassificationValues" property="value" labelProperty="label"/>
 												</html:select>
@@ -123,10 +107,10 @@ The default operator is CONTAINS.
 
 <!-- \n -->
 Search for a text string in the tumor name box is conducted against tumor name and synonym records.', CAPTION, 'Tumor Name');" onmouseout="return nd();">Tumor Name</a>:</strong>
-												
+
 <!-- \n -->
 
-												contains <html:text property="tumorName" size="30" maxlength="255"/>
+contains <html:text property="tumorName" size="30" maxlength="255"/>
 										</td>
 								</tr>
 								<tr>
@@ -140,10 +124,10 @@ Treatment type offers a means to search for tumors induced by agents falling und
 
 <!-- \n -->
 The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Treatment Type');" onmouseout="return nd();">Treatment Type</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="agentType">
+<html:select property="agentType">
 														<html:option value="">ANY</html:option>
 														<html:options collection="agentTypes" property="value" labelProperty="label"/>
 												</html:select>
@@ -156,28 +140,28 @@ The value for this field is selected from a list of controlled vocabulary terms.
 
 <!-- \n -->
 Examples of possible agents:<ul><li>1-methyl-1-nitrosourea (MNU)</li><li>12-O-tetradecanoylphorbol-13-acetate (TPA)</li><li>angiostatin</li><li>benzo[a]pyrene (BP) (BaP) (B[a]P)</li><li>estrogen</li><li>testosterone</li><li>gamma-radiation</li><li>MMTV (mouse mammary tumor virus)</li></ul>', CAPTION, 'Treatment Agent');" onmouseout="return nd();">Treatment Agent</a>:</strong>
-												
+
 <!-- \n -->
 
-												contains <html:text property="agent" size="30" maxlength="255"/>
+contains <html:text property="agent" size="30" maxlength="255"/>
 										</td>
 								</tr>
 
-								<tr>
+<tr>
 										<td>
 												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Used to search for tumors that have been reported to metastasize to a particular organ.
 <!-- \n -->
 
 <!-- \n -->
 First choose the <em>Restrict search to metastasis tumors only</em> then select an organ from the <em>Metastasizes to the</em> menu.', CAPTION, 'Metastasis');" onmouseout="return nd();">Metastasis</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:checkbox property="metastasisLimit"/> Restrict search to metastatic tumors only. 
-												
+<html:checkbox property="metastasisLimit"/> Restrict search to metastatic tumors only. 
+
 <!-- \n -->
 
-												<table>
+<table>
 														<tr>
 																<td align="right" width="200">
 																		Metastasizes to the:
@@ -199,17 +183,17 @@ First choose the <em>Restrict search to metastasis tumors only</em> then select 
 
 <!-- \n -->
 To search for tumor records associated with Pathology images, choose the box next to <em>Restrict search to entries with associated pathology images</em>.', CAPTION, 'Pathology Images');" onmouseout="return nd();">Pathology Images</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:checkbox property="mustHaveImages"/> Restrict search to entries with associated pathology images.
+<html:checkbox property="mustHaveImages"/> Restrict search to entries with associated pathology images.
 										</td>
 								</tr>
 						</table>
 				</td>
 		</tr>
 
-		<tr class="buttons">
+<tr class="buttons">
 				<td colspan="2">
 						<table>
 								<tr>
@@ -224,8 +208,5 @@ To search for tumor records associated with Pathology images, choose the box nex
 </table>
 </html:form>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

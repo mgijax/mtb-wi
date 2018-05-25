@@ -1,24 +1,8 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Reference Search Results"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#referenceresults"></a>
-</header>
+<jax:mmhcpage title="Reference Search Results" help="referenceresults">
 
 <table class="results">
 
@@ -29,67 +13,66 @@
 						<span class="label">Search Summary</span>
 <!-- \n -->
 
-						<c:if test="${not empty accId}">
+<c:if test="${not empty accId}">
 								<span class="label">Accession Id:</span> ${accId}
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty firstAuthor}">
+</c:if>
+
+<c:if test="${not empty firstAuthor}">
 								<span class="label">First Author:</span> ${firstAuthorComparison} "${firstAuthor}"
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty authors}">
+</c:if>
+
+<c:if test="${not empty authors}">
 								<span class="label">Authors:</span> Contains "${authors}"
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty journal}">
+</c:if>
+
+<c:if test="${not empty journal}">
 								<span class="label">Journal:</span> ${journalComparison} "${journal}"
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty year}">
+</c:if>
+
+<c:if test="${not empty year}">
 								<span class="label">Year:</span> ${yearComparison} ${year}
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty volume}">
+</c:if>
+
+<c:if test="${not empty volume}">
 								<span class="label">Volume:</span> ${volumeComparison} "${volume}"
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty pages}">
+</c:if>
+
+<c:if test="${not empty pages}">
 								<span class="label">Pages:</span> ${pagesComparison} "${pages}"
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty title}">
+</c:if>
+
+<c:if test="${not empty title}">
 								<span class="label">Title:</span> ${titleComparison} "${title}"
 <!-- \n -->
 
-						</c:if>
-						
-						
-						<%--
+</c:if>
+
+<%--
 						<c:if test="${not empty abstract}">
 								<strong>Abstract:</strong> contains ${abstract}
 <!-- \n -->
 
-						</c:if>
+</c:if>
 						--%>
-						
-						<span class="label">Sort By:</span> ${sortBy}
+
+<span class="label">Sort By:</span> ${sortBy}
 <!-- \n -->
 
-						<span class="label">Display Limit:</span> ${maxItems} 
+<span class="label">Display Limit:</span> ${maxItems} 
 				</td>
 		</tr>
 		<tr class="summary">
@@ -122,7 +105,7 @@
 						<td class="results-header">Reference</td>
 				</tr>
 
-				<c:forEach var="reference" items="${references}" varStatus="status">
+<c:forEach var="reference" items="${references}" varStatus="status">
 						<c:choose>
 								<c:when test="${status.index%2==0}">
 										<tr class="stripe-1">
@@ -132,7 +115,7 @@
 								</c:otherwise>
 						</c:choose>
 
-								<td><a href="referenceDetails.do?key=${reference.key}">${reference.accId}</a></td>
+<td><a href="referenceDetails.do?key=${reference.key}">${reference.accId}</a></td>
 								<td>${reference.authors}, ${reference.title}, ${reference.citation}</td>
 						</tr>
 				</c:forEach>
@@ -146,9 +129,5 @@
 
 </table>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
 

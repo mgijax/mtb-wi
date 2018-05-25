@@ -1,26 +1,10 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Reference Search Form"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
+<jax:mmhcpage title="Reference Search Form" help="references">
+	<html:form action="referenceSearchResults" method="GET">
 
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<html:form action="referenceSearchResults" method="GET">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#references"></a>
-</header>
 
 <table class="results">
 
@@ -56,21 +40,20 @@
 				</td>
 		</tr>
 
-		
-		<tr class="stripe-1">
+<tr class="stripe-1">
 				<td class="cat-1">
 						Reference
 				</td>
 				<td class="data-1">
 						<table>
-							 
-								<tr>
+
+<tr>
 										<td>
 												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search against first author names.', CAPTION, 'First Author');" onmouseout="return nd();">First Author</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="firstAuthorComparison">
+<html:select property="firstAuthorComparison">
 														<html:option value="Contains"> Contains </html:option>
 														<html:option value="Begins"> Begins </html:option>
 														<html:option value="Equals"> Equals </html:option>
@@ -81,19 +64,19 @@
 								<tr>
 										<td>
 												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search against all author names.', CAPTION, 'Authors');" onmouseout="return nd();">Authors</a>:</strong>
-												
+
 <!-- \n -->
 
-												contains <html:text property="authors" size="40" maxlength="255"/>
+contains <html:text property="authors" size="40" maxlength="255"/>
 										</td>
 								</tr>
 								<tr>
 										<td>
 												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Text string search against the abbreviated name of the journal in which the published reference appears.', CAPTION, 'Journal');" onmouseout="return nd();">Journal</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="journalComparison">
+<html:select property="journalComparison">
 														<html:option value="Contains"> Contains </html:option>
 														<html:option value="Begins"> Begins </html:option>
 														<html:option value="Equals"> Equals </html:option>
@@ -107,10 +90,10 @@
 														<tr>
 																<td>
 																		<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search for publication year.', CAPTION, 'Year');" onmouseout="return nd();">Year</a>:</strong>
-																		
+
 <!-- \n -->
 
-																		<html:select property="yearComparison">
+<html:select property="yearComparison">
 																				<html:option value="="> Equals </html:option>
 																				<html:option value=">"> Greater Than </html:option>
 																				<html:option value="<"> Less Than </html:option>
@@ -120,20 +103,18 @@
 																<td width="30"></td>
 																<td>
 																		<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search for the volume of a journal in which an article was published.', CAPTION, 'Volume');" onmouseout="return nd();">Volume</a>:</strong>
-																		
+
 <!-- \n -->
 
-																	 
-																		<html:text property="volume" size="10" maxlength="20"/>
+<html:text property="volume" size="10" maxlength="20"/>
 																</td>
 																<td width="30"></td>
 																<td>
 																		<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search for the <em>BEGINNING</em> page number of a journal article.', CAPTION, 'Page');" onmouseout="return nd();">Page</a>:</strong>
-																		
+
 <!-- \n -->
 
-																		
-																		<html:text property="pages"	size="10" maxlength="20"/>
+<html:text property="pages"	size="10" maxlength="20"/>
 																</td>
 														</tr>
 												</table>
@@ -142,10 +123,10 @@
 								<tr>
 										<td>
 												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search for an article title.', CAPTION, 'Title');" onmouseout="return nd();">Title</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="titleComparison">
+<html:select property="titleComparison">
 														<html:option value="Contains"> Contains </html:option>
 														<html:option value="Begins"> Begins </html:option>
 												</html:select>  
@@ -169,10 +150,10 @@
 
 <!-- \n -->
 The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ/Tissue of Origin');" onmouseout="return nd();">Organ/Tissue of Origin</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="organTissue" size="5" >
+<html:select property="organTissue" size="5" >
 														<html:option value="">ANY</html:option>
 														<html:options collection="organTissueValues" property="value" labelProperty="label"/>
 												</html:select>
@@ -185,10 +166,10 @@ The value for this field is selected from a list of controlled vocabulary terms.
 
 <!-- \n -->
 This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.', CAPTION, 'Tumor Classification');" onmouseout="return nd();">Tumor Classification</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="tumorClassification" size="5" >
+<html:select property="tumorClassification" size="5" >
 														<html:option value="">ANY</html:option>
 														<html:options collection="tumorClassificationValues" property="value" labelProperty="label"/>
 												</html:select>
@@ -213,9 +194,5 @@ This controlled vocabulary was developed using the animal pathology community tu
 </table>
 </html:form>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
 

@@ -1,22 +1,20 @@
-<!doctype html>
+
 <%@ page language="java" pageEncoding="UTF-8" session="false"%>
 
-<html>
-<head>
-				<title>MTB Faceted Search</title>
+<title>MTB Faceted Search</title>
 	<style type="text/css">
-								
-						.facet{
+
+.facet{
 								margin-left: 5px;
 								white-space: nowrap;
 								color: blue;
 								text-decoration: underline;
 								cursor: pointer;}
 
-						.facetBox{
+.facetBox{
 								width: 300px;}
 
-						.facetList{
+.facetList{
 								height: 150px; 
 								width: 300px; 
 								overflow:auto; 
@@ -24,34 +22,34 @@
 								margin: 0px;
 								padding: 0px;}
 
-						.facetLabel{
+.facetLabel{
 								font-weight: bold;
 								float:left;}
 
-						.moreFacets{
+.moreFacets{
 								float: right;
 								color: blue;
 								text-decoration: underline;
 								cursor: pointer;}
-						
-						.fakeLink{
+
+.fakeLink{
 								color: blue;
 								text-decoration: underline;
 								cursor: pointer;}
-						
-						.removeFilter{
+
+.removeFilter{
 								color: red;
 								text-decoration: underline;
 								cursor: pointer;}
 
-						.clear{
+.clear{
 								clear:both;}
 
-						.type{
+.type{
 								font-size: 0.8em;
 								font-style: italic;}
 
-						th{
+th{
 								font-size: 12px;
 								font-family: Arial,Helvetica;
 								vertical-align: middle;
@@ -60,97 +58,97 @@
 								font-weight: bold;
 								text-align: center; }
 
-						table{
+table{
 								border:0;
 								padding:0;
 								border-collapse:collapse}
 
-						td{
+td{
 								border:0;
 								padding:1px;
 								font-family: Verdana,Arial,Helvetica;
 								font-size: 12px; }
 
-						td.cell{
+td.cell{
 								border:1px solid black;
 								padding:1px;
 								font-family: Verdana,Arial,Helvetica;
 								font-size: 12px;
 								text-align: center;}
 
-						td.cellNW{
+td.cellNW{
 								border:1px solid black;
 								padding:1px;
 								font-family: Verdana,Arial,Helvetica;
 								font-size: 12px; 
 								white-space: nowrap; }
 
-						td.freq{
+td.freq{
 								text-align:center;
 								border:1px solid black;
 								padding:0;
 								font-family: Verdana,Arial,Helvetica;
 								font-size: 12px; }
 
-						td.high{
+td.high{
 								padding: 0px;
 								color: white;
 								background-image: url(${applicationScope.urlImageDir}/high.png);}
 
-						td.veryhigh{
+td.veryhigh{
 								padding: 0px;
 								color: white;
 								background-image: url(${applicationScope.urlImageDir}/veryhigh.png);}
 
-						td.moderate{
+td.moderate{
 								padding: 0px;
 								background-image: url(${applicationScope.urlImageDir}/moderate.png);}
 
-						td.low{
+td.low{
 								padding: 0px;
 								background-image: url(${applicationScope.urlImageDir}/low.png);}
 
-						td.verylow{
+td.verylow{
 								padding: 0px;
 								background-image: url(${applicationScope.urlImageDir}/verylow.png);}
 
-						td.observed{
+td.observed{
 								padding: 0px;
 								background-image: url(${applicationScope.urlImageDir}/observed.png);}
 
-						.high{
+.high{
 								width: 100%;
 								padding: 0px;
 								color: white;
 								background-image: url(${applicationScope.urlImageDir}/high.png);}
 
-						.veryhigh{
+.veryhigh{
 								width: 100%;
 								padding: 0px;
 								color: white;
 								background-image: url(${applicationScope.urlImageDir}/veryhigh.png);}
 
-						.moderate{
+.moderate{
 								width: 100%;
 								padding: 0px;
 								background-image: url(${applicationScope.urlImageDir}/moderate.png);}
 
-						.low{
+.low{
 								width: 100%;
 								padding: 0px;
 								background-image: url(${applicationScope.urlImageDir}/low.png);}
 
-						.verylow{
+.verylow{
 								width: 100%;
 								padding: 0px;
 								background-image: url(${applicationScope.urlImageDir}/verylow.png);}
 
-						.observed{
+.observed{
 								width: 100%;
 								padding: 0px;
 								background-image: url(${applicationScope.urlImageDir}/observed.png);}
 
-						img{
+img{
 								vertical-align: middle; }
 	</style>
 	<script type="text/javascript">
@@ -160,14 +158,14 @@
 						)
 						})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-						ga('create', '${applicationScope.googleID}', 'auto');
+ga('create', '${applicationScope.googleID}', 'auto');
 						ga('send', 'pageview');
 	</script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/js/overlib.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlJavaScript}"></script>
 	<script type="text/javascript">
 
-						var	rsp;
+var	rsp;
 						var	f_field=['organParent','agentType','tcParent','strainType','metsTo','strainMarker','humanTissue'];
 						var	f_field_display=['Organ of Origin','Agent Type','Tumor Classification','Strain Type','Mets. To','Germline Mutant Alleles','Human Tissue Model'];
 						var	sortCols = ['organOrigin','organAffected','strain','freqNum'];
@@ -194,8 +192,8 @@
 						var	mutants="";
 						// runs in mtb
 						var	mtbURL = "";
-						
-						//this is awesome
+
+//this is awesome
 						var legend = '&lt;table border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;img src=&quot;${applicationScope.urlImageDir}/veryhigh.png&quot; alt=&quot;VH&quot;&gt;&lt;/td&gt;&lt;td&gt;Very High (&gt;80%)&lt;/td&gt;&lt;/tr&gt;'+
 								'&lt;tr&gt;&lt;td&gt;&lt;img src=&quot;${applicationScope.urlImageDir}/high.png&quot; alt=&quot;HI&quot;&gt;&lt;/td&gt;&lt;td&gt;High (&gt;50%)&lt;/td&gt;&lt;/tr&gt;'+
 								'&lt;tr&gt;&lt;td&gt;&lt;img src=&quot;${applicationScope.urlImageDir}/moderate.png&quot; alt=&quot;MO&quot;&gt;&lt;/td&gt;&lt;td&gt;Moderate (&gt;20%)&lt;/td&gt;&lt;/tr&gt;'+
@@ -204,24 +202,24 @@
 								'&lt;tr&gt;&lt;td&gt;&lt;img src=&quot;${applicationScope.urlImageDir}/observed.png&quot; alt=&quot;OB&quot;&gt;&lt;/td&gt;&lt;td&gt;Observed (&gt;0%)&lt;/td&gt;&lt;/tr&gt;'+
 								'&lt;tr&gt;&lt;td bgcolor=&quot;#ffffff&quot; width=&quot;20&quot;&gt;&nbsp;&lt;/td&gt;&lt;td &quot;&gt;Zero&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;';
 
-						// derived from http://www.degraeve.com/reference/simple-ajax-example.php
+// derived from http://www.degraeve.com/reference/simple-ajax-example.php
 
-						function onLoad(){	
-						 
-								if(window.location.search){
+function onLoad(){	
 
-										updatePage(document.location.search.substring(1));
+if(window.location.search){
 
-										// this should only get called when the page loads w/ a query string
+updatePage(document.location.search.substring(1));
+
+// this should only get called when the page loads w/ a query string
 										// or on popstate
 										queryToUI(document.location.search.substring(1))
 							}else{
 									updatePage();
 							}
-						 
-						}
 
-						window.onpopstate = function(event) {	
+}
+
+window.onpopstate = function(event) {	
 								try{
 								if(event.state.faceted){
 								 window.location.reload(); 
@@ -231,29 +229,28 @@
 								}catch(err){
 										window.history.back();
 								}
-							 
-						};
-						
-						// after a change to a checkbox start from the first result
+
+};
+
+// after a change to a checkbox start from the first result
 						function updatePageFromZero(){
 								start = 0;
 								updatePage();
 						}
-						
-						function updatePage(qStr){
+
+function updatePage(qStr){
 								doXMLReq(qStr)
 									// really don't want this to happen after moreFacets()
 								window.scrollTo(0,0);
 						}
-						
-						 function updatePageNoScroll(qStr){
+
+function updatePageNoScroll(qStr){
 								doXMLReq(qStr)
 						}
 
-						function doXMLReq(qStr) {
-		
-							 
-								var xmlHttpReq = false;
+function doXMLReq(qStr) {
+
+var xmlHttpReq = false;
 								var self = this;
 								if (window.XMLHttpRequest) { // Mozilla/Safari
 										self.xmlHttpReq = new XMLHttpRequest(); 
@@ -268,24 +265,24 @@
 												parseResponse(self.xmlHttpReq.responseText);
 										}
 								}
-		
-								// from UI action
+
+// from UI action
 								if(typeof qStr == "undefined" || qStr == null ){
-									
-										qStr = getQueryString();
+
+qStr = getQueryString();
 										try{
 												window.history.pushState({faceted:1},"","?"+qStr);
 										}catch(error){
 												// no html 5
 										}
-								
-								}
-	 
-								self.xmlHttpReq.send(getStandardArgs().join('&')+'&'+qStr);
-		
-						}
 
-						// make an attempt to break this up so all the static stuff doesn't goin the url
+}
+
+self.xmlHttpReq.send(getStandardArgs().join('&')+'&'+qStr);
+
+}
+
+// make an attempt to break this up so all the static stuff doesn't goin the url
 						function getStandardArgs() {
 								var params = [
 										'wt=json'
@@ -307,30 +304,29 @@
 										, 'sort='+sort+'%20'+ascdesc[ad]
 										, 'q=*:*'
 										, 'rows='+resLimit
-										
-										
-										// can do this fq=freqNum:[60 TO 100]
+
+// can do this fq=freqNum:[60 TO 100]
 										// and this fq=minFC:[1 TO 1]
 										// and this fq=freqF:[* TO *]&fq=freqM:[* TO *]
 								];
 
-								return params;
+return params;
 						}
 
-						function getQueryString() {
-								
-								try{
+function getQueryString() {
+
+try{
 										start = parseInt(start);
 										if(isNaN(start)	|| start < 0){
 												start = 0;
 										}
-								
-								}catch(err){
+
+}catch(err){
 										start = 0;
 								}
 								var query="start="+start;
-								
-								for(var i=0;i<filters.length;i++){
+
+for(var i=0;i<filters.length;i++){
 										query +="&fq="+myEscape(filters[i]);
 								}
 								if(cytoImages){
@@ -352,53 +348,53 @@
 										query += "&fq=minFC:[1 TO 1]";
 								}
 								query += mutants;
-								
-								return query;
-	
-						}
 
-						function queryToUI(queryStr){
-		
-								// for symmetry
+return query;
+
+}
+
+function queryToUI(queryStr){
+
+// for symmetry
 								queryStr = '&'+queryStr;
-		
-								if(queryStr.indexOf("geneExpression") != -1){
+
+if(queryStr.indexOf("geneExpression") != -1){
 										geneExpression = document.getElementById("gene-expression").checked = true;
 								}else{
 										geneExpression = document.getElementById("gene-expression").checked = false;
 								}
-		
-								if(queryStr.indexOf("pathologyImages") != -1){
+
+if(queryStr.indexOf("pathologyImages") != -1){
 										document.getElementById("pathology-images").checked = true;
 								}else{
 										document.getElementById("pathology-images").checked = false;
 								}
-	
-								if(queryStr.indexOf("cytoImages") != -1){
+
+if(queryStr.indexOf("cytoImages") != -1){
 										cytoImages = document.getElementById("cyto-images").checked = true;
 								}else{
 										cytoImages = document.getElementById("cyto-images").checked = false;	
 								}
-	
-								if(queryStr.indexOf("-agent") != -1){
+
+if(queryStr.indexOf("-agent") != -1){
 										untreated = document.getElementById("untreated").checked = true;
 								}else{
 										untreated = document.getElementById("untreated").checked = false;	
 								}
-	
-								if(queryStr.indexOf("metastatic") != -1){
+
+if(queryStr.indexOf("metastatic") != -1){
 										metastatic = document.getElementById("metastatic").checked = true;
 								}else{
 										metastatic = document.getElementById("metastatic").checked = false;
 								}
-								
-								if(queryStr.indexOf("minFC") != -1){
+
+if(queryStr.indexOf("minFC") != -1){
 										minFC = document.getElementById("minFC").checked = true;
 								}else{
 										minFC = document.getElementById("minFC").checked = false;
 								}
-								
-								if(queryStr.indexOf("mutant") != -1){
+
+if(queryStr.indexOf("mutant") != -1){
 										if(queryStr.indexOf("mutant:true") != -1){
 												mutantCheck("m",false);
 												mutants = "&fq=mutant:true";
@@ -410,9 +406,8 @@
 										mutantCheck("a",false);
 										mutants = "";
 								}
-	
-								
-								try{
+
+try{
 										startStr = queryStr.substring(queryStr.indexOf("start=")+6);
 										// something a little more clever is needed here
 										var end = startStr.search(/\D/)
@@ -420,30 +415,30 @@
 												end = startStr.length;
 										}
 
-										startStr = startStr.substring(0, end)
+startStr = startStr.substring(0, end)
 
-										start = parseInt(startStr);
+start = parseInt(startStr);
 										if(isNaN(start)){
 												start = 0;
 										}
 								}catch(err){
 										start = 0;
 								}
-								
-								// sort for links from human model grid
+
+// sort for links from human model grid
 								if(queryStr.substring("sort=hm") != -1){
 										// sort on frequency desc
 										ad = 1;
 										sort = sortCols[3];
 								}
-								
-								//now deal with the filterlist
+
+//now deal with the filterlist
 								// need special code for organOrigin <--> TumorClassification / organParent <--> tcParent
-	
-								var f_field_temp = f_field.concat(["organOrigin","tumorClassification"]);
+
+var f_field_temp = f_field.concat(["organOrigin","tumorClassification"]);
 								var f_field_display_temp = f_field_display.concat(["Organ of Origin", "Tumor Classification"]);
-	
-								filters = [];
+
+filters = [];
 								displayFilters = [];
 								queryStr = queryStr.substring(queryStr.indexOf("&fq="));
 								queryStr = queryStr.replace(new RegExp('%3A','g'),'=');
@@ -452,10 +447,10 @@
 								queryStr = queryStr.replace(new RegExp('%28','g'),'(');
 								queryStr = queryStr.replace(new RegExp('%29','g'),')');
 								fqs = queryStr.split("&fq=");
-		 
-								for(i=0; i< fqs.length; i++){
 
-										fq = fqs[i];
+for(i=0; i< fqs.length; i++){
+
+fq = fqs[i];
 										fq= fq.split("=");
 										for(j=0; j<f_field_temp.length; j++){
 												if(f_field_temp[j] == fq[0]){
@@ -472,17 +467,17 @@
 								}	 
 						}
 
-						function myEscape(filter){
+function myEscape(filter){
 								var parts = filter.split("=");
 								var vals =parts[1].split(" ");
 
-								if(vals.length > 1){
+if(vals.length > 1){
 										parts[1] = '"'+vals.join("+")+'"';
 								}
 								return escape(parts[0]+":"+parts[1]);
 						}
 
-						function facetSearch(f,i){
+function facetSearch(f,i){
 								var type = f_field[f];
 								var fDisplay = f_field_display[f];
 								var val = rsp.facet_counts.facet_fields[type][--i];
@@ -490,19 +485,19 @@
 										filters.push(type+"="+val);
 										displayFilters.push(fDisplay+'='+val);
 
-										start = 0;
+start = 0;
 										if(f==0){
 												f_field[0]="organOrigin";
 										}
 										if(f==2){
 												f_field[2]="tumorClassification";
 
-										}
+}
 										updatePage();
 								}
 						}
 
-						function showFilters(){
+function showFilters(){
 								document.getElementById("filters").innerHTML="";
 								for(var i=0; i< displayFilters.length; i++){
 										document.getElementById("filters").innerHTML += 
@@ -512,12 +507,12 @@
 								}
 						}
 
-						function facetSort(){
+function facetSort(){
 								fs =(fs+1)%2;
 								updatePage();
 						}
 
-						function showFacetCount(){
+function showFacetCount(){
 								var showWhat = "show all facets";
 								if(facetLimit == -1){
 										document.getElementById("facet-count").innerHTML =
@@ -530,12 +525,12 @@
 												 "Displaying top <strong>25</strong> facets. <span class='fake-link' onClick='moreFacets();'>Show All</span>.
 <!-- \n -->
 ";
-	
-								}
+
+}
 								document.getElementById("facet-count").innerHTML += 
 										"<span	onclick='facetSort();'>Facets sorted by <strong>"+facetSortDisp[(fs+1)%2]+"</strong>. (Sort by <span class='fake-link'><strong>"+facetSortDisp[fs]+"</strong></span>)</span>.";
-	
-								try{
+
+try{
 										var moreF = document.getElementsByClassName("more-facets");
 										for(var i = 0; i < moreF.length; i++){
 												moreF[i].innerHTML = showWhat;
@@ -549,7 +544,7 @@
 								}
 						}
 
-						function removeFilter(i){
+function removeFilter(i){
 								if(filters[i].indexOf("tcParent") != -1){
 										f_field[2] = "tcParent";
 								}
@@ -559,12 +554,11 @@
 								filters.splice(i,1);
 								displayFilters.splice(i,1);
 								start = 0;
-	
-	
-								updatePage();
+
+updatePage();
 						}
 
-						// this function does all the work of parsing the solr response and updating the page.
+// this function does all the work of parsing the solr response and updating the page.
 						function parseResponse(str){
 								showFilters();
 								showFacetCount();
@@ -598,10 +592,10 @@ numFound=" + rsp.response.numFound;
 								}else{
 										showResults();
 								}
-							
-						}
 
-						function colSort(col){
+}
+
+function colSort(col){
 								nd();	 // hides frequency legend (see overlib.js)
 								if(sort == sortCols[col]){
 										ad = (ad+1)%2;
@@ -610,7 +604,7 @@ numFound=" + rsp.response.numFound;
 								updatePage();
 						}
 
-						function getSortImage(col){
+function getSortImage(col){
 								if(sort == sortCols[col]){
 										if(ad == 1){
 												return "${applicationScope.urlImageDir}/sortableDown.gif";
@@ -621,8 +615,8 @@ numFound=" + rsp.response.numFound;
 										return "${applicationScope.urlImageDir}/sortable.gif";
 								}
 						}
-						
-							function showResults(){
+
+function showResults(){
 								var resCount = rsp.response.numFound;
 								var pagination = "<div style='text-align: center;'>";
 								if(resCount <= resLimit){
@@ -642,8 +636,8 @@ numFound=" + rsp.response.numFound;
 												pagination += "<span class='fake-link' onClick='moreResults("+resCount+")'>--></span></br>";
 										}
 								}
-	 
-								pagination += "</div>";
+
+pagination += "</div>";
 								var html = pagination;
 								html += "
 <!-- \n -->
@@ -662,21 +656,20 @@ numFound=" + rsp.response.numFound;
 <!-- \n -->
 To</th>";
 								html += "<th>Additional Info.</th></tr>";
- 
-								for(var i=0; i < rsp.response.docs.length; i++){
+
+for(var i=0; i < rsp.response.docs.length; i++){
 										var doc = rsp.response.docs[i];
-		 
-										var tfKeys="";
-	
-										for(var j=0; j < doc.tumorFrequencyKey.length; j++){
+
+var tfKeys="";
+
+for(var j=0; j < doc.tumorFrequencyKey.length; j++){
 												if(j>0){
 														tfKeys += ",";
 												}
 												tfKeys += doc.tumorFrequencyKey[j];
 										}
-		 
-		 
-										html += "<tr>";
+
+html += "<tr>";
 										html += "<td class='cell'>"+doc.organOrigin+" "+doc.tumorClassification+"</td>";
 										html += "<td class='cell'>"+doc.organAffected+"</td>";
 										if(doc.hasOwnProperty("agentType")){
@@ -706,7 +699,7 @@ To</th>";
 ";
 										}
 
-										html += "</td>";
+html += "</td>";
 										html += freqsToString(doc);
 										if(doc.hasOwnProperty("metsTo")){
 												html += "<td class='cell'>";
@@ -720,8 +713,8 @@ To</th>";
 												html += "<td class='cell'></td>";
 										}
 										html += "<td class='cell-n-w'>"
-		 
-										if(doc.hasOwnProperty("reference")){
+
+if(doc.hasOwnProperty("reference")){
 												if(doc.reference.length == 1){
 														html += doc.reference.length+' Reference
 <!-- \n -->
@@ -738,10 +731,10 @@ To</th>";
 ";
 												}
 										}
-		 
-										if(doc.hasOwnProperty("pathologyImages")){
-				
-												html +="&nbsp;<a href='/mtbwi/pathologyImageSearchResults.do?tfKeys="+tfKeys+"' target='_blank'>";
+
+if(doc.hasOwnProperty("pathologyImages")){
+
+html +="&nbsp;<a href='/mtbwi/pathologyImageSearchResults.do?tfKeys="+tfKeys+"' target='_blank'>";
 												if(doc.pathologyImages == 1){
 														html += doc.pathologyImages+" Pathology Image</a>
 <!-- \n -->
@@ -752,8 +745,8 @@ To</th>";
 ";
 												}
 										}
-		 
-										if(doc.hasOwnProperty("cytoImages")){
+
+if(doc.hasOwnProperty("cytoImages")){
 												html +="&nbsp;<a href='/mtbwi/tumorFrequencyDetails.do?page=cytogenetics&key="+doc.cytoImages+"' target='_blank'>";
 												if(doc.cytoCount== 1){
 														html += "1 Cytogenetic Image</a>
@@ -766,38 +759,37 @@ To</th>";
 												}
 										}
 										if(doc.geneExpression){
-				 
-												html +="&nbsp;<a href='/mtbwi/geneExpressionSearchResults.do?tfKeys="+tfKeys+"' target='_blank'>";
+
+html +="&nbsp;<a href='/mtbwi/geneExpressionSearchResults.do?tfKeys="+tfKeys+"' target='_blank'>";
 												html += "Gene Expression Data</a>
 <!-- \n -->
 ";
-				 
-										}
-		 
-		 
-										html += "
+
+}
+
+html += "
 <!-- \n -->
 <a href='/mtbwi/tumorSummary.do?tumorFrequencyKeys="+tfKeys+"' target='_blank'>";
 										html += "Model Summary</a>
 <!-- \n -->
 ";
 										html += "</td></tr>";
-		
-								}
+
+}
 								html += "</table>
 <!-- \n -->
 "+pagination;
 								document.getElementById("results").innerHTML=html;
 
-						}
+}
 
-						function showCSVResults(){
+function showCSVResults(){
 								var html ="Tumor Type, Organ Affected , Agent<:Treatment>, Strain:Type, Frequencies, Mets. To, References, Pathology Images, Cyto Images, Gene Expression , Summary";
 								html +="
 <!-- \n -->
 ";
- 
-								for(var i=0; i < rsp.response.docs.length; i++){
+
+for(var i=0; i < rsp.response.docs.length; i++){
 										var doc = rsp.response.docs[i];
 										var tfKeys="";
 										for(var j=0; j < doc.tumorFrequencyKey.length; j++){
@@ -806,8 +798,8 @@ To</th>";
 												}
 												tfKeys += doc.tumorFrequencyKey[j];
 										}
-										
-										html += "'"+doc.organOrigin+" "+doc.tumorClassification+"',";
+
+html += "'"+doc.organOrigin+" "+doc.tumorClassification+"',";
 										html += "'"+doc.organAffected+"',";
 										if(doc.hasOwnProperty("agentType")){
 												html += "'";
@@ -836,8 +828,8 @@ To</th>";
 										}
 										html += "',";
 										html += freqsToCSVString(doc);
-										
-										if(doc.hasOwnProperty("metsTo")){
+
+if(doc.hasOwnProperty("metsTo")){
 												html += "'";
 												for(var j=0; j < doc.metsTo.length; j++){
 														if(j>0){
@@ -850,8 +842,8 @@ To</th>";
 												html += "''";
 										}
 										html += ",'"
-		 
-										if(doc.hasOwnProperty("reference")){	 
+
+if(doc.hasOwnProperty("reference")){	 
 												for(var j=0; j < doc.reference.length; j++){
 														if(j>0){
 																		html += ", ";
@@ -870,8 +862,8 @@ To</th>";
 										}else{
 												html +="'',"
 										}
-												
-										if(doc.geneExpression){
+
+if(doc.geneExpression){
 												html +="'http://tumor.informatics.jax.org/mtbwi/geneExpressionSearchResults.do?tfKeys="+tfKeys+"',";
 										}else{
 												html +="'',"
@@ -882,12 +874,12 @@ To</th>";
 ";
 										html = html.replace(new RegExp("'",'g'),'"');
 								}
-								
-								document.getElementById("results").innerHTML=html;
 
-						}
+document.getElementById("results").innerHTML=html;
 
-						function getFeqStyle(freqStr){
+}
+
+function getFeqStyle(freqStr){
 								var strRet = "";
 								freqStr = freqStr.replace("=","");
 								var parts = freqStr.split(/-|~|>|</);
@@ -902,7 +894,7 @@ To</th>";
 								}
 								var freq = parseFloat(freqStr);
 
-								if(freqStr == "very high"){
+if(freqStr == "very high"){
 										strRet = "veryhigh";
 								}else if(freqStr == "high"){
 										strRet = "high";
@@ -932,66 +924,66 @@ To</th>";
 								return strRet
 						}
 
-						function freqsToString(doc){
+function freqsToString(doc){
 								var str ="<td class='freq'><table>";
 								if(doc.hasOwnProperty("freqF")){
 										str += "<tr><td><div class='"+getFeqStyle(doc.freqF)+"'>";
 										str += doc.freqF
 										str += "&nbsp;(Female)</div></td></tr>";
 								}
-	
-								if(doc.hasOwnProperty("freqM")){
+
+if(doc.hasOwnProperty("freqM")){
 										str += "<tr><td><div class='"+getFeqStyle(doc.freqM)+"'>";
 										str += doc.freqM;
 										str += "&nbsp;(Male)</div></td></tr>";
 								}
-	
-								if(doc.hasOwnProperty("freqX")){
+
+if(doc.hasOwnProperty("freqX")){
 										str += "<tr><td><div class='"+getFeqStyle(doc.freqX)+"'>";
 										str += doc.freqX;
 										str += "&nbsp;(Mixed)</div></td></tr>";
 								}
-	
-								if(doc.hasOwnProperty("freqU")){
+
+if(doc.hasOwnProperty("freqU")){
 										str += "<tr><td><div class='"+getFeqStyle(doc.freqU)+"'>";
 										str += doc.freqU;
 										str += "&nbsp;(Unknown)</div></td></tr>";
 								}
 								str += "</table></td>";
- 
-								return str;
+
+return str;
 						}
 
-						function freqsToCSVString(doc){
+function freqsToCSVString(doc){
 								str = "'";
 								if(doc.hasOwnProperty("freqF")){
 										str += doc.freqF
 										str += " (Female)";
 								}
-	
-								if(doc.hasOwnProperty("freqM")){
-										
-										str += doc.freqM;
+
+if(doc.hasOwnProperty("freqM")){
+
+str += doc.freqM;
 										str += "(Male)";
 								}
-	
-								if(doc.hasOwnProperty("freqX")){
-										
-										str += doc.freqX;
+
+if(doc.hasOwnProperty("freqX")){
+
+str += doc.freqX;
 										str += "(Mixed)";
 								}
-	
-								if(doc.hasOwnProperty("freqU")){
 
-										str += doc.freqU;
+if(doc.hasOwnProperty("freqU")){
+
+str += doc.freqU;
 										str += " (Unknown)";
 								}
 								str += "',";
- 
-								return str;
+
+return str;
 						}
 
-						function moreFacets(){
+function moreFacets(){
 								if(facetLimit != 25){
 										facetLimit = 25;
 								}else{
@@ -1012,7 +1004,7 @@ To</th>";
 								updatePageNoScroll();
 						}
 
-						function moreResults(max){
+function moreResults(max){
 								start += resLimit;
 								if(start >= max - resLimit){
 										//	start = max - resLimit;
@@ -1020,7 +1012,7 @@ To</th>";
 								updatePage();
 						}
 
-						function lessResults(){
+function lessResults(){
 								start -= resLimit;
 								if(start<0){
 										start = 0;
@@ -1028,7 +1020,7 @@ To</th>";
 								updatePage();
 						}
 
-						function pathologyImagesCB(){
+function pathologyImagesCB(){
 								pathologyImages = document.getElementById("pathology-images").checked;
 								updatePageFromZero();
 						}
@@ -1061,14 +1053,14 @@ To</th>";
 								}
 								updatePageFromZero();
 						}
-						
-						function mutantCheck(name,search){
- 
-								all = document.getElementById("all-strains");
+
+function mutantCheck(name,search){
+
+all = document.getElementById("all-strains");
 								mutant = document.getElementById("mutant-strains");
 								nMutant =document.getElementById("nonMutantStrains");
 
-								if(name=="a"){
+if(name=="a"){
 												all.checked = true;
 												mutant.checked = false;
 												nMutant.checked = false;
@@ -1084,148 +1076,143 @@ To</th>";
 												nMutant.checked = true;
 								}
 								if(search){
-										
-										mutants = "";
 
-										if(mutant.checked){
+mutants = "";
+
+if(mutant.checked){
 														mutants = "&fq=mutant:true"
 														}
 										if(nMutant.checked){
 														mutants = "&fq=mutant:false"
 										}
 
-										updatePageFromZero();
+updatePageFromZero();
 								}
-								
-						 }
-	</script>
-</head>
 
-<body onload="onLoad()">
+}
+	</script>
+
+
 				<table>
 
-						<tr>
+<tr>
 								<td>
-										
-										<table>
+
+<table>
 												<tr>
 														<td>
 																<a href="index.do"><img src="${applicationScope.urlImageDir}/mtb_logo_side.png" alt="Mouse Tumor Biology Database (MTB)"></a>
-																
+
 <!-- \n -->
 
-																<a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">Feedback welcome</a>.
+<a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">Feedback welcome</a>.
 														</td>
 												</tr>
 										</table>
-										
+
 <!-- \n -->
 
-										<strong>Require in results:</strong>
+<strong>Require in results:</strong>
 <!-- \n -->
 
-										<input type="checkbox" id="pathology-images" onClick="pathologyImagesCB()">Pathology Images
+<input type="checkbox" id="pathology-images" onClick="pathologyImagesCB()">Pathology Images
 <!-- \n -->
 
-										<input type="checkbox" id="cyto-images" onClick="cytoImagesCB()">Cytogenetic Images
+<input type="checkbox" id="cyto-images" onClick="cytoImagesCB()">Cytogenetic Images
 <!-- \n -->
 
-										<input type="checkbox" id="untreated" onClick="untreatedCB()">Spontaneous
+<input type="checkbox" id="untreated" onClick="untreatedCB()">Spontaneous
 <!-- \n -->
 
-										<input type="checkbox" id="metastatic" onClick="metastaticCB()">Metastatic
+<input type="checkbox" id="metastatic" onClick="metastaticCB()">Metastatic
 <!-- \n -->
 
-										<input type="checkbox" id="gene-expression" onClick="geneExpressionCB()">Gene Expression Data
+<input type="checkbox" id="gene-expression" onClick="geneExpressionCB()">Gene Expression Data
 <!-- \n -->
 
-										<input type="checkbox" id="min-f-c" onClick="minFCCB()">Freq. >= 80% C. size >= 20
+<input type="checkbox" id="min-f-c" onClick="minFCCB()">Freq. >= 80% C. size >= 20
 <!-- \n -->
 
-										<input type="checkbox" id="all-strains" onclick="mutantCheck('a',true)" checked >All Strains
+<input type="checkbox" id="all-strains" onclick="mutantCheck('a',true)" checked >All Strains
 <!-- \n -->
 
-										<input type="checkbox" id="mutant-strains" onclick="mutantCheck('m',true)">Mutant Strains</br>
+<input type="checkbox" id="mutant-strains" onclick="mutantCheck('m',true)">Mutant Strains</br>
 										<input type="checkbox" id="non-mutant-strains" onclick="mutantCheck('n',true)">Non-Mutant Strains</br>
 										<input type="checkbox" id="as-c-sV" onClick="asCSVCB()">Results as CSV
 <!-- \n -->
 
-										
 <!-- \n -->
 
-										<strong>Active Filters:</strong>
+<strong>Active Filters:</strong>
 										<div id="filters"></div>
 <!-- \n -->
-	
 
-										<div id="facet-count"></div>
+<div id="facet-count"></div>
 										<div class="facet-box">
 												<span class="facet-label">Organ of Origin</span>
 												<div class="clear"></div>
 										</div>
 										<div class="facet-list" id="organ-parent"></div>
 										<div onclick='moreFacets()' class="more-facets" ></div>
-										
+
 <!-- \n -->
 
-										<div class="facet-box">
+<div class="facet-box">
 												<span class="facet-label">Tumor Classification</span>
 												<div class="clear"></div>
 										</div>
 										<div class="facet-list" id="tc-parent"></div>
 										<div onclick='moreFacets()' class="more-facets" ></div>
-										
+
 <!-- \n -->
 
-										<div class="facet-box">
+<div class="facet-box">
 												<span class="facet-label">Agent Type</span>
 												<div class="clear"></div>
 										</div>
 										<div class="facet-list" id="agent-type"></div>
 										<div onclick='moreFacets()' class="more-facets" ></div>
-										
+
 <!-- \n -->
 
-										<div class="facet-box">
+<div class="facet-box">
 												<span class="facet-label">Strain Type</span>
 												<div class="clear"></div>
 										</div>
 										<div class="facet-list" id="strain-type"></div>
 										<div onclick='moreFacets()' class="more-facets" ></div>
-										
+
 <!-- \n -->
 
-										<div class="facet-box">
+<div class="facet-box">
 												<span class="facet-label">Metastasizes To</span>
 												<div class="clear"></div>
 										</div>
 										<div class="facet-list" id="mets-to"></div>
 										<div onclick='moreFacets()' class="more-facets" ></div>
-										
+
 <!-- \n -->
 
-										<div class="facet-box">
+<div class="facet-box">
 												<span class="facet-label">Germline Mutant Alleles</span>
 												<div class="clear"></div>
 										</div>
 										<div class="facet-list" id="strain-marker"></div>
 										<div onclick='moreFacets()' class="more-facets" ></div>
-										
+
 <!-- \n -->
 
-										<div class="facet-box">
+<div class="facet-box">
 												<span class="facet-label">Human Tissue Model</span>
 												<div class="clear"></div>
 										</div>
 										<div class="facet-list" id="human-tissue"></div>
 										<div onclick='moreFacets()' class="more-facets" ></div>
-										
+
 <!-- \n -->
 
-								</td>
+</td>
 								<td><div id="results"></div></td>
 						</tr>
 				</table>
-				<div id ="raw"></div>
-</body>
-</html>
+				<div id ="raw"></jax:mmhcpage>

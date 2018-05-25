@@ -3,22 +3,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
 
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Variant Summary"/>
-	<c:import url="../../../meta.jsp"/>
-	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+<jax:mmhcpage title="Patient Derived Xenograft Variant Summary" help="pdxresults">
+
+<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base-debug.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 	<script type="text/javascript">
-		
-				Ext.ns('org.jax.mgi.mtb');
-		
-				Ext.onReady(function(){
-			
-						var store = new Ext.data.ArrayStore({
+
+Ext.ns('org.jax.mgi.mtb');
+
+Ext.onReady(function(){
+
+var store = new Ext.data.ArrayStore({
 								fields: [
 										{name: 'modelID'},
 										{name: 'sample'},
@@ -42,26 +39,24 @@
 								],
 								data: ${variants}
 						});
-		
-						org.jax.mgi.mtb.PDXGrid =	Ext.extend(Ext.grid.EditorGridPanel,({
-						
-								initComponent: function(){
+
+org.jax.mgi.mtb.PDXGrid =	Ext.extend(Ext.grid.EditorGridPanel,({
+
+initComponent: function(){
 										org.jax.mgi.mtb.PDXGrid.superclass.initComponent.apply(this,arguments);
 										this.on("rowclick",this.rowClickHandler);
 								},
-						
-								rowClickHandler: function(grid, index, event){
+
+rowClickHandler: function(grid, index, event){
 										var record = grid.getStore().getAt(index);
 								}
 						}));
-						
-						
-						function idRenderer(value, p, record){
+
+function idRenderer(value, p, record){
 								return String.format('<a href="pdxDetails.do?modelID={0}" target="_blank">{0}</a>',record.get("modelID"));
 						}
-						
-						
-						var grid = new org.jax.mgi.mtb.PDXGrid({		
+
+var grid = new org.jax.mgi.mtb.PDXGrid({		
 								store: store,
 								columns: [
 										{
@@ -89,8 +84,8 @@
 												width		: 70, 
 												sortable : true, 
 												dataIndex: 'analysis_id'
-										
-										},
+
+},
 										{
 												header	 : 'Chromosome', 
 												width		: 70, 
@@ -108,15 +103,15 @@
 												width		: 70, 
 												sortable : true, 
 												dataIndex: 'ref_allele'
-										
-										},
+
+},
 										{
 												header	 : 'Alt Allele',
 												width		: 70,
 												sortable : true,
 												dataIndex: 'alt_alele'
-										
-										},
+
+},
 										{
 												header	 : 'Consequence',
 												width		: 170,
@@ -182,17 +177,17 @@
 												sortable : true, 
 												dataIndex: 'variant_frequency'
 										}
-				
-								],
+
+],
 								stripeRows: true,
 								height:700,
 								width: 1000,
 								title: 'PDX Variant Summary',
-								
-								id:'pdxGrid'
+
+id:'pdxGrid'
 						});
-						
-						panel = new Ext.Panel({
+
+panel = new Ext.Panel({
 								applyTo:'dataDiv',
 								collapsible: true,
 								collaped: true,
@@ -203,32 +198,21 @@
 												pack:'start'
 								}
 						});
-						
-						panel.render();
+
+panel.render();
 						panel.add(grid);
 						panel.doLayout();
-				
-	 
-				});
+
+});
 	</script>
-</head>
 
-<body class="alt">
 
-<body>
-	<c:import url="../../../body.jsp" />
 
-<div class="wrap">
-<nav><c:import url="../../../pdxToolBar.jsp" /></nav>
-<section class="main">
+<c:import url="../../../pdxToolBar.jsp" />
 
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#pdxresults"></a>
-</header>
 <table>
 
-				<tr class="summary">
+<tr class="summary">
 						<td colspan="11">
 						</td>
 				</tr>
@@ -253,8 +237,5 @@
 
 </table>
 
-</section>
-</div>
-</body>
-</html>
+</jax:mmhcpage>
 

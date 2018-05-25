@@ -3,23 +3,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
 
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Search Results"/>
+<jax:mmhcpage title="Patient Derived Xenograft Search Results" help="pdxresults">
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
-	<c:import url="../../../meta.jsp"/>
-	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+
+<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 	<script type="text/javascript">
-		
-		Ext.ns('org.jax.mgi.mtb');
-		
-		Ext.onReady(function(){
-			
-			
-				Ext.ux.GridRowChecker = Ext.extend(Object, {
+
+Ext.ns('org.jax.mgi.mtb');
+
+Ext.onReady(function(){
+
+Ext.ux.GridRowChecker = Ext.extend(Object, {
 						header: "",
 						width: 30,
 						sortable: true,
@@ -29,24 +25,24 @@
 						id: 'selection-checkbox',
 						rowspan: undefined,
 
-						init: function(grid) {
+init: function(grid) {
 								this.grid = grid;
 								this.gridSelModel = this.grid.getSelectionModel();
 								this.gridSelModel.originalMouseDown = this.gridSelModel.handleMouseDown;
 								this.gridSelModel.handleMouseDown = this.onGridMouseDown;
 								grid.getColumnModel().config.unshift(this);
 								grid.getChecked = this.getChecked.createDelegate(this);
-							 
-						},
 
-						renderer: function(value, cell, record) {
+},
+
+renderer: function(value, cell, record) {
 								if((record.get("modelID").trim().length>0)&&("${unavailableModels}".indexOf(record.get("modelID"))!= -1)){
 										return '<strong>NA</strong>';
 								}
 								return '<input class="x-row-checkbox" type="checkbox">';
 						},
 
-						getChecked: function() {
+getChecked: function() {
 								var result = [];
 								var cb = this.grid.getEl().query("div.x-grid3-col-selection-checkbox > *");
 								var idx = 0;
@@ -60,26 +56,25 @@
 								return result;
 						},
 
-						onGridMouseDown: function(g, rowIndex,	columnIndex, e) {
+onGridMouseDown: function(g, rowIndex,	columnIndex, e) {
 								if (e.getTarget('div.x-grid3-col-selection-checkbox')) {
 										e.stopEvent();
 										updateBucket.defer(200);
 										return false;
 								}
 								this.originalMouseDown.apply(this, arguments);
-							 
-						}
+
+}
 				});
-			
-			
-				function updateBucket(){
+
+function updateBucket(){
 						var checked = grid.getChecked();
 						var bucket = document.getElementById("bucket");
 						var bucketDiv = document.getElementById("bucket-div");
 						if(checked.length ==0){
 								bucketDiv.style.display='none';
-						
-						}else{
+
+}else{
 								bucketDiv.style.display='inline';
 						}
 						var mice ="";
@@ -89,13 +84,13 @@
 										sep=", ";
 								}
 								mice = mice+sep+checked[i].get("modelID");
-						
-						}
+
+}
 						bucket.size=mice.length+10;
 						bucket.value=mice;
 				}
-				
-				var store = new Ext.data.ArrayStore({
+
+var store = new Ext.data.ArrayStore({
 						fields: [
 								{name: 'modelID'},
 								{name: 'status'},
@@ -116,33 +111,31 @@
 								{name: 'variant'},
 								{name: 'consequence'},
 								{name: 'fusionGenes'}
-								
-						],
+
+],
 						data: ${mice},
 						sortInfo: {
 								field: 'modelID',
 								direction: 'ASC'
 						}
 				});
-		
-				org.jax.mgi.mtb.PDXGrid =	Ext.extend(Ext.grid.EditorGridPanel,({
-						
-						initComponent: function(){
-								
-								org.jax.mgi.mtb.PDXGrid.superclass.initComponent.apply(this,arguments);
-						 
-								this.setTitle(this.getStore().getTotalCount()+" matching PDX Model(s)");
-								 
-						}
+
+org.jax.mgi.mtb.PDXGrid =	Ext.extend(Ext.grid.EditorGridPanel,({
+
+initComponent: function(){
+
+org.jax.mgi.mtb.PDXGrid.superclass.initComponent.apply(this,arguments);
+
+this.setTitle(this.getStore().getTotalCount()+" matching PDX Model(s)");
+
+}
 				}));
-						
-						
-				function idRenderer(value, p, record){
+
+function idRenderer(value, p, record){
 						return String.format('<a href="pdxDetails.do?modelID={0}" target="_blank">{0}</a>',record.get("modelID"));
 				}
-				
-		 
-				var grid = new org.jax.mgi.mtb.PDXGrid({		
+
+var grid = new org.jax.mgi.mtb.PDXGrid({		
 						store: store,
 						columns: [
 								{
@@ -170,8 +163,8 @@
 										width		: 100, 
 										sortable : true, 
 										dataIndex: 'primarySite'
-										
-								},
+
+},
 								{
 										header	 : 'Diagnosis (Initial : Final)', 
 										width		: 110, 
@@ -189,40 +182,40 @@
 										width		: 120, 
 										sortable : true, 
 										dataIndex: 'tumorType'
-										
-								},
+
+},
 								{
 										header	 : 'Fusion genes',
 										width		: 330,
 										sortable : false,
 										dataIndex: 'fusionGenes',
 										hidden	 : ${hideFusionGenes}
-										
-								},
+
+},
 								{
 										header	 : 'Gene',
 										width		: 70,
 										sortable : true,
 										dataIndex: 'gene',
 										hidden	 : ${hideGene}
-										
-								},
+
+},
 								{
 										header	 : 'Variant(s)',
 										width		: 90,
 										sortable : true,
 										dataIndex: 'variant',
 										hidden	 : ${hideGene}
-										
-								},
+
+},
 								{
 										header	 : 'Consequence(s)',
 										width		: 100,
 										sortable : true,
 										dataIndex: 'consequence',
 										hidden	 : true //${hideGene}
-										
-								},
+
+},
 								{
 										header	 : 'Sex', 
 										width		: 70, 
@@ -248,50 +241,36 @@
 										sortable : true, 
 										dataIndex: 'assocData'
 								}
-								
-						],
+
+],
 						stripeRows: true,
 						height:350,
 						autoExpandColumn:3,
 						title: 'PDX Mice',
-						
-						plugins: [new Ext.ux.GridRowChecker()],
+
+plugins: [new Ext.ux.GridRowChecker()],
 						id:'pdxGrid'
 				});
-				
-				panel = new Ext.Panel({
+
+panel = new Ext.Panel({
 						applyTo:'dataDiv',
 						items:[grid],
 						layout:{type:'fit'}
 				});
-				
-				 
-						Ext.EventManager.onWindowResize(function(w, h){
+
+Ext.EventManager.onWindowResize(function(w, h){
 										panel.doLayout();
 								});
-				
-				
-				 panel.render();
+
+panel.render();
 				 panel.doLayout();
 
-				
-	 
-		});
+});
 	</script>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
+<c:import url="../../../pdxToolBar.jsp" />
 
-<div class="wrap">
-<nav><c:import url="../../../pdxToolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#pdxresults"></a>
 	<input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
-</header>
 
 <table class="results" >
 
@@ -302,12 +281,12 @@
 														<span class="label">Search Summary</span>
 <!-- \n -->
 
-										<c:choose>
+<c:choose>
 												<c:when test="${not empty modelID}">
 														<span class="label">Model ID:</span>${modelID}
 <!-- \n -->
 
-												</c:when>
+</c:when>
 										</c:choose>
 										<c:choose>
 												<c:when test="${not empty primarySites}">
@@ -320,7 +299,7 @@
 																</c:otherwise>
 														</c:choose>
 
-														<c:forEach var="site" items="${primarySites}" varStatus="status">
+<c:forEach var="site" items="${primarySites}" varStatus="status">
 																<c:choose>
 																		<c:when test="${status.last != true}">
 																				${site},
@@ -330,18 +309,18 @@
 																		</c:otherwise>
 																</c:choose>
 														</c:forEach>
-														
+
 <!-- \n -->
 
-												</c:when>
+</c:when>
 												<c:otherwise>
 														<span class="label">Primary Sites:</span> Any
 <!-- \n -->
 
-												</c:otherwise>
+</c:otherwise>
 										</c:choose>
 
-										<c:choose>
+<c:choose>
 												<c:when test="${not empty diagnoses}">
 														<c:choose>
 																<c:when test="${fn:length(diagnoses)>1}">
@@ -352,7 +331,7 @@
 																</c:otherwise>
 														</c:choose>
 
-														<c:forEach var="diagnosis" items="${diagnoses}" varStatus="status">
+<c:forEach var="diagnosis" items="${diagnoses}" varStatus="status">
 																<c:choose>
 																		<c:when test="${status.last != true}">
 																				${diagnosis},
@@ -362,19 +341,18 @@
 																		</c:otherwise>
 																</c:choose>
 														</c:forEach>
-														
+
 <!-- \n -->
 
-												</c:when>
+</c:when>
 												<c:otherwise>
 														<span class="label">Diagnosis:</span> Any
 <!-- \n -->
 
-												</c:otherwise>
+</c:otherwise>
 										</c:choose>
-																		
-																		
-									<c:choose>
+
+<c:choose>
 												<c:when test="${not empty tags}">
 														<c:choose>
 																<c:when test="${fn:length(tags)>1}">
@@ -385,7 +363,7 @@
 																</c:otherwise>
 														</c:choose>
 
-														<c:forEach var="tag" items="${tags}" varStatus="status">
+<c:forEach var="tag" items="${tags}" varStatus="status">
 																<c:choose>
 																		<c:when test="${status.last != true}">
 																				${tag},
@@ -395,20 +373,18 @@
 																		</c:otherwise>
 																</c:choose>
 														</c:forEach>
-														
+
 <!-- \n -->
 
-												</c:when>
+</c:when>
 												<c:otherwise>
 														<span class="label">Tags:</span> Any
 <!-- \n -->
 
-												</c:otherwise>
+</c:otherwise>
 										</c:choose>
-																											 
-				
-																		
-								 <c:choose>
+
+<c:choose>
 												<c:when test="${not empty genes}">
 														<c:choose>
 																<c:when test="${fn:length(genes)>1}">
@@ -419,7 +395,7 @@
 																</c:otherwise>
 														</c:choose>
 
-														<c:forEach var="gene" items="${genes}" varStatus="status">
+<c:forEach var="gene" items="${genes}" varStatus="status">
 																<c:choose>
 																		<c:when test="${status.last != true}">
 																				${gene},
@@ -429,18 +405,18 @@
 																		</c:otherwise>
 																</c:choose>
 														</c:forEach>
-														
+
 <!-- \n -->
 
-												</c:when>
+</c:when>
 												<c:otherwise>
 														<span class="label">Genes:</span> Any
 <!-- \n -->
 
-												</c:otherwise>
+</c:otherwise>
 										</c:choose>
-																		
-							 <c:choose>
+
+<c:choose>
 												<c:when test="${not empty variants}">
 														<c:choose>
 																<c:when test="${fn:length(variants)>1}">
@@ -451,7 +427,7 @@
 																</c:otherwise>
 														</c:choose>
 
-														<c:forEach var="variant" items="${variants}" varStatus="status">
+<c:forEach var="variant" items="${variants}" varStatus="status">
 																<c:choose>
 																		<c:when test="${status.last != true}">
 																				${variant},
@@ -461,64 +437,60 @@
 																		</c:otherwise>
 																</c:choose>
 														</c:forEach>
-														
+
 <!-- \n -->
 
-												</c:when>
+</c:when>
 												<c:otherwise>
 														<span class="label">Variants:</span> Any
 <!-- \n -->
 
-												</c:otherwise>
+</c:otherwise>
 										</c:choose>
-														
-										
-										 <c:if test="${not empty fusionGenes}">
+
+<c:if test="${not empty fusionGenes}">
 												<span class="label">Fusion Gene:</span> ${fusionGenes}
 <!-- \n -->
 
-										</c:if>	
-																	 
-																		
-										<c:if test="${not empty tumorGrowth}">
+</c:if>	
+
+<c:if test="${not empty tumorGrowth}">
 												<span class="label">Tumor Growth Data:</span> Required
 <!-- \n -->
 
-										</c:if>		
-																		
-										 <c:if test="${not empty dosingStudy}">
+</c:if>		
+
+<c:if test="${not empty dosingStudy}">
 												<span class="label">Dosing Studies:</span> Required
 <!-- \n -->
 
-										</c:if>	
-												
-										<c:if test="${not empty treatmentNaive}">
+</c:if>	
+
+<c:if test="${not empty treatmentNaive}">
 												<span class="label">Treatment Naive Patient:</span> Required
 <!-- \n -->
 
-										</c:if> 
-												
-										<c:if test="${not empty recistDrug}">
+</c:if> 
+
+<c:if test="${not empty recistDrug}">
 												<span class="label">RECIST Drug:</span> ${recistDrug}
 <!-- \n -->
 
-										</c:if>	
-												
-										<c:if test="${not empty recistResponse}">
+</c:if>	
+
+<c:if test="${not empty recistResponse}">
 												<span class="label">RECIST Response:</span> ${recistResponse}
 <!-- \n -->
 
-										</c:if> 
-												
-									 
-									 
-						</td>
+</c:if> 
+
+</td>
 				</tr>
 				<tr class="buttons">
 						<td>
 								<table>
-					 
-								 <c:choose>
+
+<c:choose>
 										<c:when test="${not empty mice}">
 											<tr>
 												<td>
@@ -541,7 +513,7 @@
 														Check boxes can be used to select models to request details on availability.
 <!-- \n -->
 
-														Models without check boxes (<strong>NA</strong>) are no longer available (no inventory remaining).
+Models without check boxes (<strong>NA</strong>) are no longer available (no inventory remaining).
 												</td>
 						</tr>
 										</c:when>
@@ -549,9 +521,8 @@
 												<!-- No results found. //-->
 										</c:otherwise>
 								 </c:choose>
-			
-						
-										<tr>
+
+<tr>
 												<td>
 														<form method="GET" action ="pdxSearch.do"><input type="submit" value="Search Again"></form>
 												</td>
@@ -572,8 +543,5 @@
 
 </table>
 
-</section>
-</div>
-</body>
-</html>
+</jax:mmhcpage>
 

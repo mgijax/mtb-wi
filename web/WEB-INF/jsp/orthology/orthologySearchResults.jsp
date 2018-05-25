@@ -2,26 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Orthology Search Results"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
+<jax:mmhcpage title="Orthology Search Results" help="humangeneresults">
 
 <a name="top"></a>
 
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#humangeneresults"></a>
-</header>
 
 <table class="results">
 
@@ -32,8 +17,7 @@
 								<span class="label">Search Summary</span>
 <!-- \n -->
 
-								
-							</td> 
+</td> 
 						</tr>
 						<tr class="summary">
 							<td>
@@ -54,8 +38,8 @@
 								 ${sortBy}
 								</td>
 							</tr>
-					 
-					</table>
+
+</table>
 
 <!-- ////  End Display Limit  //// -->
 
@@ -82,10 +66,10 @@
 			<td class="results-header">Alleles/Transgenes in Strains</td>
 			<td class="results-header">Classes of Tumor Specific Alterations</td>
 		</tr>
-		
-		<c:forEach var="rec" items="${orthos}" varStatus="status">
-		
-		<c:choose>
+
+<c:forEach var="rec" items="${orthos}" varStatus="status">
+
+<c:choose>
 			<c:when test="${status.index%2==0}">
 				<tr class="stripe-1">
 			</c:when>
@@ -93,9 +77,8 @@
 				<tr class="stripe-2">
 			</c:otherwise>
 		</c:choose>
-		
-		
-		<td><c:out value="${rec.humanGS}" default="&nbsp;" escapeXml="false"/></td>
+
+<td><c:out value="${rec.humanGS}" default="&nbsp;" escapeXml="false"/></td>
 		<td><a href="http://www.informatics.jax.org/marker/key/${rec.mgiGSKey}">${rec.mouseGS}</a></td>
 		<td>${rec.symbol}</td>
 		<c:choose>
@@ -119,13 +102,10 @@
 	<html:form action="orthologySearch" method="GET">
 	<tr class="buttons"><td colspan="6"><input type="submit" value="Search Again"/></td></tr>
 </html:form>
-	
+
 </table>
 
 <!-- ////  End Results  //// -->
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

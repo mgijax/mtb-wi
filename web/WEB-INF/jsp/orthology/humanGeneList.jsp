@@ -2,25 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Human Gene List"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
+<jax:mmhcpage title="Human Gene List">
 
 <a name="top"></a>
-
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-</header>
 
 <!-- ////  Start Results  //// -->
 
@@ -35,10 +20,10 @@
 			<td class="results-header">Human Gene Symbol</td>
 			<td class="results-header">Gene Name</td>
 		</tr>
-		
-		<c:forEach var="rec" items="${symbols}" varStatus="status">
-		
-		<c:choose>
+
+<c:forEach var="rec" items="${symbols}" varStatus="status">
+
+<c:choose>
 			<c:when test="${status.index%2==0}">
 				<tr class="stripe-1">
 			</c:when>
@@ -46,9 +31,8 @@
 				<tr class="stripe-2">
 			</c:otherwise>
 		</c:choose>
-		
-		
-		<td><c:out value="GeneID:${rec.value}" default="&nbsp;" escapeXml="false"/>
+
+<td><c:out value="GeneID:${rec.value}" default="&nbsp;" escapeXml="false"/>
 		</td>
 		<td>${rec.label}</td>
 		<td>${rec.data}</td>
@@ -59,8 +43,5 @@
 </td></tr>
 </table>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

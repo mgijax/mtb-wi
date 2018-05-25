@@ -3,12 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Pathology Image Detail"/>
-	<c:import url="../../../meta.jsp"/>
-	<script type="text/javascript">
+
+<jax:mmhcpage title="Pathology Image Detail" help="pathdetail">
+
+<script type="text/javascript">
 <!--
 var flashinstalled = 0;
 var flashversion = 0;
@@ -25,7 +23,7 @@ if (navigator.plugins && navigator.plugins.length) {
 				flashinstalled = 1;
 		}
 
-		if (navigator.plugins["Shockwave Flash 2.0"]) {
+if (navigator.plugins["Shockwave Flash 2.0"]) {
 				flashinstalled = 2;
 				flashversion = 2;
 		}
@@ -47,7 +45,7 @@ If MSDetect = "true" Then
 		For i = 2 to 6
 				If Not(IsObject(CreateObject("ShockwaveFlash.ShockwaveFlash." & i))) Then
 
-				Else
+Else
 						flashinstalled = 2
 						flashversion = i
 				End If
@@ -58,17 +56,6 @@ If flashinstalled = 0 Then
 		flashinstalled = 1
 End If
 	</script>
-</head>
-
-<body>
-	<c:import url="../../../body.jsp" />
-	<div class="wrap">
-<section class="main-alt">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#pathdetail"></a>
-</header>
 
 <table class="results">
 
@@ -112,8 +99,8 @@ if (flashinstalled == 2) {
 
 <!-- ////  Start Pathology  //// -->
 	<c:set var="num" value="1"/>
-		
-		<c:choose>
+
+<c:choose>
 				<c:when test="${not empty pathology.caption}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 						<tr class="stripe${num}">
@@ -126,7 +113,7 @@ if (flashinstalled == 2) {
 				</c:otherwise>
 		</c:choose>
 
-		<c:choose>
+<c:choose>
 				<c:when test="${not empty pathology.pathologyDescription}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 						<tr class="stripe${num}">
@@ -139,7 +126,7 @@ if (flashinstalled == 2) {
 				</c:otherwise>
 		</c:choose>
 
-		<c:choose>
+<c:choose>
 				<c:when test="${not empty pathology.ageAtNecropsy}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 						<tr class="stripe${num}">
@@ -151,8 +138,8 @@ if (flashinstalled == 2) {
 						<!-- Age at necropsy is null. //-->
 				</c:otherwise>
 		</c:choose>
-		
-		<c:choose>
+
+<c:choose>
 				<c:when test="${not empty pathology.pathologyNote}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 						<tr class="stripe${num}">
@@ -165,7 +152,7 @@ if (flashinstalled == 2) {
 				</c:otherwise>
 		</c:choose>
 
-		<c:choose>
+<c:choose>
 				<c:when test="${not empty pathology.sourceOfImage}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 						<tr class="stripe${num}">
@@ -173,16 +160,16 @@ if (flashinstalled == 2) {
 								<td>
 										${pathology.sourceOfImage}&nbsp;
 										 (<a href="nojavascript.jsp" onClick="focusBackToOpener('referenceDetails.do?key=${pathology.imgRefKey}');return false;">${pathology.imgRefAccId}</a>)
-									 
-								</td>
+
+</td>
 						</tr>
 				</c:when>
 				<c:otherwise>
 						<!-- Source of image is null. //-->
 				</c:otherwise>
 		</c:choose>
-		
-		 <c:choose>
+
+<c:choose>
 				<c:when test="${not empty pathology.pathologist}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 						<tr class="stripe${num}">
@@ -190,16 +177,16 @@ if (flashinstalled == 2) {
 								<td>
 										${pathology.pathologist}&nbsp;
 										 (<a href="nojavascript.jsp" onClick="focusBackToOpener('referenceDetails.do?key=${pathology.pathologistRefKey}');return false;">${pathology.pathologistAccId}</a>)
-									 
-								</td>
+
+</td>
 						</tr>
 				</c:when>
 				<c:otherwise>
 						<!-- Source of image is null. //-->
 				</c:otherwise>
 		</c:choose>
-		
-		<c:choose>
+
+<c:choose>
 				<c:when test="${not empty pathology.copyright}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 						<tr class="stripe${num}">
@@ -214,7 +201,7 @@ if (flashinstalled == 2) {
 				</c:otherwise>
 		</c:choose>
 
-		<c:choose>
+<c:choose>
 				<c:when test="${not empty pathology.method}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 						<tr class="stripe${num}">
@@ -232,18 +219,15 @@ if (flashinstalled == 2) {
 </table>
 <c:choose>
 	<c:when test="${not empty pathology.probes}">
-		
-		
-<!-- \n -->
 
-			
+<!-- \n -->
 
 <table class="results">
 				<tr class="stripe-1">
 					<td colspan="4" class="cat-title">Image Probes</td>
 				</tr>
-				
-				<c:forEach var="probe" items="${pathology.probes}" varStatus="status">
+
+<c:forEach var="probe" items="${pathology.probes}" varStatus="status">
 				<tr class="stripe-2">
 					<td class="cat-2">Type</td><td>${probe.type}</td>
 																				<c:choose>
@@ -256,8 +240,8 @@ if (flashinstalled == 2) {
 					</c:choose>
 																			<tr class="stripe-1">
 																				<td class="cat-1">Target</td><td>${probe.target}</td> 
-																			
-																				<c:choose>
+
+<c:choose>
 						<c:when test="${not empty probe.supplierUrl}">
 							<td class="cat-1">Supplier</td><td><a href="${probe.supplierUrl}">${probe.supplierName}</a></td>
 						</c:when>
@@ -267,20 +251,16 @@ if (flashinstalled == 2) {
 					</c:choose>
 																			<tr class="stripe-2"">	
 					<td class="cat-2">Notes</td><td colspan="3">${probe.notes}</td>
-					
 
-																			</tr>
-				
-				
-				
-				<c:if test="${status.last != true}">
+</tr>
+
+<c:if test="${status.last != true}">
 																	<tr class="tablebreak"><td colspan="4"></tr>
 																</c:if>
 
-				
-				</c:forEach>
+</c:forEach>
 
-			</table>
+</table>
 	</c:when>
 </c:choose>
 
@@ -294,8 +274,7 @@ if (flashinstalled == 2) {
 <!-- ////  Start Bottom Left  //// -->
 	<c:set var="num" value="1"/>
 
-				<td width="49%" >
-						
+<td width="49%" >
 
 <table class="results">
 								<c:choose>
@@ -313,7 +292,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.tumorClassName}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -323,7 +302,7 @@ if (flashinstalled == 2) {
 																		${pathology.organOrigin} 
 <!-- \n -->
 
-																		${pathology.tumorClassName}
+${pathology.tumorClassName}
 																</span>
 														</td>
 												</tr>
@@ -333,7 +312,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.treatmentType}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -346,7 +325,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.agents}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -366,7 +345,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.tumorSynonyms}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -385,8 +364,8 @@ if (flashinstalled == 2) {
 												<!-- Tumor synonyms is null. //-->
 										</c:otherwise>
 								</c:choose>
-								
-								<c:choose>
+
+<c:choose>
 										<c:when test="${not empty pathology.organAffected}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -399,7 +378,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.frequency}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -412,7 +391,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.frequencyNote}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -425,7 +404,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${(not empty pathology.referenceKey) && (not empty pathology.accessionId)}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -440,7 +419,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-						</table>
+</table>
 				</td>
 
 <!-- ////  End Bottom Left  //// -->
@@ -451,8 +430,7 @@ if (flashinstalled == 2) {
 <!-- ////  Start Bottom Right  //// -->
 	<c:set var="num" value="1"/>
 
-				<td width="49%">
-						
+<td width="49%">
 
 <table class="results">
 								<c:choose>
@@ -466,7 +444,7 @@ if (flashinstalled == 2) {
 																				<td class="enhance" colspan="2"><a href="nojavascript.jsp" onclick="focusBackToOpener('strainDetails.do?key=${pathology.strainKey}');return false;"><c:out value="${pathology.strainName}" escapeXml="false"/></a></td>
 																		</tr>
 
-																<c:if test="${not empty pathology.strainTypes}">
+<c:if test="${not empty pathology.strainTypes}">
 																		<tr>
 																				<td class="label">Strain Types: </td>
 																				<td>
@@ -494,7 +472,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.strainSynonyms}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -514,7 +492,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.sex}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -527,7 +505,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.reproductiveStatus}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -540,7 +518,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.ageOfOnset}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -553,7 +531,7 @@ if (flashinstalled == 2) {
 										</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${not empty pathology.ageOfDetection}">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
 												<tr class="stripe${num}">
@@ -577,9 +555,5 @@ if (flashinstalled == 2) {
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
 

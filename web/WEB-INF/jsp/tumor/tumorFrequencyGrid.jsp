@@ -5,23 +5,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %> 
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Tumor Frequency Grid"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp"/></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp"></a>
-</header>
+<jax:mmhcpage title="Tumor Frequency Grid" help="#">
 
 <!-- ////  Start Detail Section  //// -->
 
@@ -237,10 +222,10 @@ cell. <em>(Requires JavaScript support.)</em></p>
 														We have a heredity value. <strong>${heredityGrid.strainHeredityName}</strong>
 <!-- \n -->
 
-														Getting family...
+Getting family...
 <!-- \n -->
 
-														--%>
+--%>
 														<c:forEach var="fam" items="${heredityAll.families}" varStatus="status3">
 	<c:set var="familyGrid" value =""/>
 	<c:set var="familyAll" value =""/>
@@ -255,7 +240,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																						<%--MATCH: familyItem.value.strainFamilyKey == fam.strainFamilyKey
 <!-- \n -->
 
-																						MATCH: ${familyItem.value.strainFamilyKey} == ${fam.strainFamilyKey}
+MATCH: ${familyItem.value.strainFamilyKey} == ${fam.strainFamilyKey}
 <!-- \n -->
 --%>
 	<c:set var="familyGrid" value="${familyItem.value}"/>
@@ -320,14 +305,14 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																				------------ POTENTIALLY EXPANDED GRID ------------------
 <!-- \n -->
 
-																																				<h3>TESTING</h3>
+<h3>TESTING</h3>
 																																				ORGAN KEY = ${organKey}
 <!-- \n -->
 
-																																				ORGAN PARENT KEY = ${organParent.organKey}
+ORGAN PARENT KEY = ${organParent.organKey}
 <!-- \n -->
 
-																																				--%>
+--%>
 																																				<c:choose>
 																																						<c:when test="${organKey == organParent.organKey}">
 																																								<%-- ------------ LOOP THROUGH SUB ORGANS ------------------
@@ -345,10 +330,10 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																																MATCH: ${subOrgan.organKey} == ${subOrganItem.value.organKey}
 <!-- \n -->
 
-																																																ORGAN: ${subOrgan.organName}
+ORGAN: ${subOrgan.organName}
 <!-- \n -->
 
-																																																--%>
+--%>
 	<c:set var="organ" value="${subOrganItem.value}"/>
 																																														</c:if>
 																																												</c:forEach>
@@ -386,7 +371,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																												<%--MATCH: ${organParent.organKey} == ${organItem.value.organKey}
 <!-- \n -->
 
-																																												ORGAN: ${organParent.organName}
+ORGAN: ${organParent.organName}
 <!-- \n -->
 --%>
 	<c:set var="organ" value="${organItem.value}"/>
@@ -421,7 +406,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																								<%--MATCH: ${organParent.organKey} == ${organItem.value.organKey}
 <!-- \n -->
 
-																																								ORGAN: ${organParent.organName}
+ORGAN: ${organParent.organName}
 <!-- \n -->
 --%>
 	<c:set var="organ" value="${organItem.value}"/>
@@ -455,10 +440,10 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																												${fam.strainFamilyKey} == ${strainFamilyKey}
 <!-- \n -->
 
-																												DISPLAY SUB STRAINS!
+DISPLAY SUB STRAINS!
 <!-- \n -->
 
-																												--%>
+--%>
 	<c:set var="theStrain" value=""/>
 																												<c:forEach var="strainCat" items="${familyAll.strains}" varStatus="status2000">
 	<c:set var="theStrain" value=""/>
@@ -480,14 +465,14 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																								------------ POTENTIALLY EXPANDED GRID ------------------
 <!-- \n -->
 
-																																								<h3>TESTING</h3>
+<h3>TESTING</h3>
 																																								ORGAN KEY = ${organKey}
 <!-- \n -->
 
-																																								ORGAN PARENT KEY = ${organParent.organKey}
+ORGAN PARENT KEY = ${organParent.organKey}
 <!-- \n -->
 
-																																								--%>
+--%>
 																																								<c:choose>
 																																										<c:when test="${organKey == organParent.organKey}">
 																																												<%-- ------------ LOOP THROUGH SUB ORGANS ------------------
@@ -509,13 +494,13 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																																				SUB
 <!-- \n -->
 
-																																																				MATCH: ${subOrgan.organKey} == ${subOrganItem.value.organKey}
+MATCH: ${subOrgan.organKey} == ${subOrganItem.value.organKey}
 <!-- \n -->
 
-																																																				ORGAN: ${subOrgan.organName}
+ORGAN: ${subOrgan.organName}
 <!-- \n -->
 
-																																																				--%>
+--%>
 	<c:set var="organ" value="${subOrganItem.value}"/>
 																																																		</c:if>
 																																																</c:forEach>
@@ -551,13 +536,13 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																																PARENT
 <!-- \n -->
 
-																																																MATCH: ${organParent.organKey} == ${organItem.value.organKey}
+MATCH: ${organParent.organKey} == ${organItem.value.organKey}
 <!-- \n -->
 
-																																																ORGAN: ${organParent.organName}
+ORGAN: ${organParent.organName}
 <!-- \n -->
 
-																																																--%>
+--%>
 	<c:set var="organ" value="${organItem.value}"/>
 																																														</c:if>
 																																												</c:forEach>
@@ -591,13 +576,13 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																												COLLAPSED
 <!-- \n -->
 
-																																												MATCH: ${organParent.organKey} == ${organItem.value.organKey}
+MATCH: ${organParent.organKey} == ${organItem.value.organKey}
 <!-- \n -->
 
-																																												ORGAN: ${organParent.organName}
+ORGAN: ${organParent.organName}
 <!-- \n -->
 
-																																												--%>
+--%>
 	<c:set var="organ" value="${organItem.value}"/>
 																																										</c:if>
 																																								</c:forEach>
@@ -647,10 +632,10 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																												${fam.strainFamilyKey} != ${strainFamilyKey}
 <!-- \n -->
 
-																												DISPLAY FAMILY AS NORMAL!
+DISPLAY FAMILY AS NORMAL!
 <!-- \n -->
 
-																												--%>
+--%>
 																												<c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
 																														<c:forEach var="organParent" items="${anatomicalSystem.organs}" varStatus="status">
 	<c:set var="organ" value=""/>
@@ -662,10 +647,10 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																				ORGAN KEY = ${organKey}
 <!-- \n -->
 
-																																				ORGAN PARENT KEY = ${organParent.organKey}
+ORGAN PARENT KEY = ${organParent.organKey}
 <!-- \n -->
 
-																																				--%>
+--%>
 																																				<c:choose>
 																																						<c:when test="${organKey == organParent.organKey}">
 																																								<%-- ------------ LOOP THROUGH SUB ORGANS ------------------
@@ -683,10 +668,10 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																																MATCH: ${subOrgan.organKey} == ${subOrganItem.value.organKey}
 <!-- \n -->
 
-																																																ORGAN: ${subOrgan.organName}
+ORGAN: ${subOrgan.organName}
 <!-- \n -->
 
-																																																--%>
+--%>
 	<c:set var="organ" value="${subOrganItem.value}"/>
 																																														</c:if>
 																																												</c:forEach>
@@ -720,7 +705,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																												<%--MATCH: ${organParent.organKey} == ${organItem.value.organKey}
 <!-- \n -->
 
-																																												ORGAN: ${organParent.organName}
+ORGAN: ${organParent.organName}
 <!-- \n -->
 --%>
 	<c:set var="organ" value="${organItem.value}"/>
@@ -754,7 +739,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																								<%--MATCH: ${organParent.organKey} == ${organItem.value.organKey}
 <!-- \n -->
 
-																																								ORGAN: ${organParent.organName}
+ORGAN: ${organParent.organName}
 <!-- \n -->
 --%>
 	<c:set var="organ" value="${organItem.value}"/>
@@ -790,7 +775,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																						<c:otherwise>
 <%----------------------------------- START Strains are not expanded -----------------------------------%>
 
-																								<%--Getting organ...
+<%--Getting organ...
 <!-- \n -->
 --%>
 																								<c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
@@ -802,14 +787,14 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																------------ POTENTIALLY EXPANDED GRID ------------------
 <!-- \n -->
 
-																																<h3>TESTING</h3>
+<h3>TESTING</h3>
 																																ORGAN KEY = ${organKey}
 <!-- \n -->
 
-																																ORGAN PARENT KEY = ${organParent.organKey}
+ORGAN PARENT KEY = ${organParent.organKey}
 <!-- \n -->
 
-																																--%>
+--%>
 																																<c:choose>
 																																		<c:when test="${organKey == organParent.organKey}">
 																																				<%-- ------------ LOOP THROUGH SUB ORGANS ------------------
@@ -827,10 +812,10 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																												MATCH: ${subOrgan.organKey} == ${subOrganItem.value.organKey}
 <!-- \n -->
 
-																																												ORGAN: ${subOrgan.organName}
+ORGAN: ${subOrgan.organName}
 <!-- \n -->
 
-																																												--%>
+--%>
 	<c:set var="organ" value="${subOrganItem.value}"/>
 																																										</c:if>
 																																								</c:forEach>
@@ -864,7 +849,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																								<%--MATCH: ${organParent.organKey} == ${organItem.value.organKey}
 <!-- \n -->
 
-																																								ORGAN: ${organParent.organName}
+ORGAN: ${organParent.organName}
 <!-- \n -->
 --%>
 	<c:set var="organ" value="${organItem.value}"/>
@@ -899,7 +884,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 																																				<%--MATCH: ${organParent.organKey} == ${organItem.value.organKey}
 <!-- \n -->
 
-																																				ORGAN: ${organParent.organName}
+ORGAN: ${organParent.organName}
 <!-- \n -->
 --%>
 	<c:set var="organ" value="${organItem.value}"/>
@@ -984,8 +969,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 			An error occurred <c:out value="${exception.message}"/>
 <!-- \n -->
 
-			
-				Stacktrace: 
+Stacktrace: 
 <!-- \n -->
 
 <%		
@@ -1050,8 +1034,5 @@ NZO, and RIII.</li>
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

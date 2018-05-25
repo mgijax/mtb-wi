@@ -2,25 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
 
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Strain Search Results"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
-
-<body>
-	<c:import url="../../../body.jsp" />
-
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#straindetail"></a>
-</header>
+<jax:mmhcpage title="Strain Search Results" help="straindetail">
 
 <table class="results">
 
@@ -31,13 +14,13 @@
 						<span class="label">Search Summary</span>
 <!-- \n -->
 
-						<c:if test="${not empty strainName}">
+<c:if test="${not empty strainName}">
 								<span class="label">Strain Name:</span> ${strainComparison} "${strainName}"
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty strainTypes}">
+</c:if>
+
+<c:if test="${not empty strainTypes}">
 								<c:choose>
 										<c:when test="${strainTypesSize>'1'}">
 												<span class="label">Strain Types:</span>
@@ -46,8 +29,8 @@
 												<span class="label">Strain Type:</span>
 										</c:otherwise>
 								</c:choose>
-								
-								<c:forEach var="strainType" items="${strainTypes}" varStatus="status">
+
+<c:forEach var="strainType" items="${strainTypes}" varStatus="status">
 										<c:choose>
 												<c:when test="${status.last != true}">
 														${strainType},
@@ -57,47 +40,47 @@
 												</c:otherwise>
 										</c:choose>
 								</c:forEach>
-								
+
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty geneticName}">
+</c:if>
+
+<c:if test="${not empty geneticName}">
 								<span class="label">Gene or Allele</span> <em>(Symbol/Name/Synonym)</em>: Contains "${geneticName}"
 <!-- \n -->
 
-						</c:if>
-						
-						<%--
+</c:if>
+
+<%--
 						<c:if test="${not empty strainNotes}">
 								<strong>Strain Notes:</strong> contains ${strainNotes}
 <!-- \n -->
 
-						</c:if>
+</c:if>
 						--%>
-						
-						<c:if test="${not empty sites}">
+
+<c:if test="${not empty sites}">
 								<span class="label">Other Database Links:</span> ${sites}
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty jaxMiceStockNumber}">
+</c:if>
+
+<c:if test="${not empty jaxMiceStockNumber}">
 								<span class="label">JAX<sup>&reg;</sup>Mice Stock No.:</span> ${jaxMiceStockNumber}
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty accId}">
+</c:if>
+
+<c:if test="${not empty accId}">
 								<span class="label">Accession ID:</span> ${accId}
 <!-- \n -->
 
-						</c:if>
-						
-						<span class="label">Sort By:</span> ${sortBy}
+</c:if>
+
+<span class="label">Sort By:</span> ${sortBy}
 <!-- \n -->
 
-						<span class="label">Display Limit:</span> ${maxItems}
+<span class="label">Display Limit:</span> ${maxItems}
 				</td>
 		</tr>
 		<tr class="summary">
@@ -131,7 +114,7 @@
 						<td class="results-header">Strain Notes</td>
 				</tr>
 
-				<c:forEach var="strain" items="${strains}" varStatus="status">
+<c:forEach var="strain" items="${strains}" varStatus="status">
 						<c:choose>
 								<c:when test="${status.index%2==0}">
 										<tr class="stripe-1">
@@ -148,7 +131,7 @@
 														&amp;
 <!-- \n -->
 
-												</c:if>
+</c:if>
 										</c:forEach>
 								</td>
 								<td><c:out value="${strain.description}" default="&nbsp;" escapeXml="false"/></td>
@@ -164,8 +147,5 @@
 
 </table>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

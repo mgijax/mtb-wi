@@ -2,21 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Comparison"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-	<script type="text/javascript">
-				
-				function showAllMutations(){
+<jax:mmhcpage title="Patient Derived Xenograft Comparison">
+
+<script type="text/javascript">
+
+function showAllMutations(){
 						var genes = document.getElementsByName("mtGene");
-					
-						for(var i=0; i<genes.length; i++){
+
+for(var i=0; i<genes.length; i++){
 								if(genes[i].style.cursor == "pointer"){
 										showMutations(genes[i].textContent);
 								}
@@ -26,46 +20,39 @@
 						}else{
 								document.getElementById("show-all").textContent="+";
 						}
-				
-				}
-				
-				function showMutations(gene){
+
+}
+
+function showMutations(gene){
 						var tds = document.getElementsByName(gene);
 						for(var i=0; i< tds.length; i++){
 										if(tds[i].textContent.length > 1){
 														tds[i].textContent=" ";
 														tds[i].style ="background-color:#000000";
-														
-										}else{
+
+}else{
 														tds[i].removeAttribute("style");
 														tds[i].textContent = tds[i].getAttribute("mutation");
 										}
 						}
 				}
 	</script>
-		
 
-		<div class="wrap">
-<nav><c:import url="../../../pdxToolBar.jsp" /></nav>
-<section class="main">
+<c:import url="../../../pdxToolBar.jsp" />
 
 <html:form action="pdxComparison" method="GET">
 
-								
-<header>
-	<h1>${pageTitle}</h1>
-	<a href="nojavascript.jsp" onClick="popSizedPathWin('${applicationScope.urlBase}/html/userHelp.html#pdxcomparison', 'comparisonhelp',350,1000);return false;"></a>
+<a href="nojavascript.jsp" onClick="popSizedPathWin('${applicationScope.urlBase}/html/userHelp.html#pdxcomparison', 'comparisonhelp',350,1000);return false;"></a>
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
-</header>
+
 <table>
 
-										
-											<tr class="summary">
+<tr class="summary">
 												<td >
 														<span class="label">Search Summary</span>
 <!-- \n -->
 
-																				<c:choose>
+<c:choose>
 												<c:when test="${not empty primarySites}">
 														<c:choose>
 																<c:when test="${fn:length(primarySites)>1}">
@@ -76,7 +63,7 @@
 																</c:otherwise>
 														</c:choose>
 
-														<c:forEach var="site" items="${primarySites}" varStatus="status">
+<c:forEach var="site" items="${primarySites}" varStatus="status">
 																<c:choose>
 																		<c:when test="${status.last != true}">
 																				${site},
@@ -86,18 +73,18 @@
 																		</c:otherwise>
 																</c:choose>
 														</c:forEach>
-														
+
 <!-- \n -->
 
-												</c:when>
+</c:when>
 												<c:otherwise>
 														<span class="label">Primary Sites:</span> Any
 <!-- \n -->
 
-												</c:otherwise>
+</c:otherwise>
 										</c:choose>
 
-										<c:choose>
+<c:choose>
 												<c:when test="${not empty diagnoses}">
 														<c:choose>
 																<c:when test="${fn:length(diagnoses)>1}">
@@ -108,7 +95,7 @@
 																</c:otherwise>
 														</c:choose>
 
-														<c:forEach var="diagnosis" items="${diagnoses}" varStatus="status">
+<c:forEach var="diagnosis" items="${diagnoses}" varStatus="status">
 																<c:choose>
 																		<c:when test="${status.last != true}">
 																				${diagnosis},
@@ -118,15 +105,15 @@
 																		</c:otherwise>
 																</c:choose>
 														</c:forEach>
-														
+
 <!-- \n -->
 
-												</c:when>
+</c:when>
 												<c:otherwise>
 														<span class="label">Diagnosis:</span> Any
 <!-- \n -->
 
-												</c:otherwise>
+</c:otherwise>
 										</c:choose>
 								</td> 
 								<td>
@@ -170,8 +157,8 @@
 								<td style="text-align:center;background-color:#FFFFFF">No Value</td>
 								</tr>
 						</table>
-						
-				</td>
+
+</td>
 		</tr>
 		<tr><td>
 						<table>
@@ -213,11 +200,8 @@
 												</td>
 										</tr>		-->
 
-								</table>
+</table>
 						</html:form>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

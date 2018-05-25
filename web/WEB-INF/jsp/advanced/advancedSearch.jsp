@@ -1,26 +1,10 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Advanced Search Form"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
+<jax:mmhcpage title="Advanced Search Form" help="advanced">
+	<html:form action="advancedSearchResults" method="GET">
 
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<html:form action="advancedSearchResults" method="GET">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#advanced"></a>
-</header>
 
 <table class="results">
 
@@ -84,10 +68,10 @@
 								<tr>
 										<td>
 												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.', CAPTION, 'Strain Name');" onmouseout="return nd();">Strain Name:</a></strong>
-												
+
 <!-- \n -->
 
-												<html:select property="strainNameComparison">
+<html:select property="strainNameComparison">
 														<html:option value="Contains"> Contains </html:option>
 														<html:option value="Begins"> Begins </html:option>
 														<html:option value="Equals"> Equals </html:option>
@@ -102,10 +86,10 @@
 
 <!-- \n -->
 The values for these fields are selected from lists of controlled vocabulary terms.', CAPTION, 'Strain Type');" onmouseout="return nd();">Strain Type:</a></strong>
-												
+
 <!-- \n -->
 
-												<html:select property="strainTypes" size="8" multiple="true">
+<html:select property="strainTypes" size="8" multiple="true">
 														<html:option value="">ANY</html:option>
 														<html:options collection="strainTypeValues" property="value" labelProperty="label"/>
 												</html:select>
@@ -122,10 +106,10 @@ This field searches Gene symbols, Gene names, and synonyms. The default operator
 
 <!-- \n -->
 If you have difficulty locating records of interest, you may want to consult the Mouse Genome Database to ensure that the search string is appropriate for the gene/locus of interest.', CAPTION, 'Gene or Allele');" onmouseout="return nd();">Gene or Allele:</a></strong>
-												
+
 <!-- \n -->
 
-												<html:text property="geneticName" size="30" maxlength="255"/> <em>(Symbol/Name/Synonym)</em>
+<html:text property="geneticName" size="30" maxlength="255"/> <em>(Symbol/Name/Synonym)</em>
 										</td>
 								</tr>
 						</table>
@@ -144,10 +128,10 @@ If you have difficulty locating records of interest, you may want to consult the
 
 <!-- \n -->
 The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ / Tissue of Origin');" onmouseout="return nd();">Organ/Tissue of Origin</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="organTissueOrigin" size="8" multiple="true">
+<html:select property="organTissueOrigin" size="8" multiple="true">
 														<html:option value="">ANY</html:option>
 														<html:options collection="organTissueValues" property="value" labelProperty="label"/>
 												</html:select>
@@ -160,10 +144,10 @@ The value for this field is selected from a list of controlled vocabulary terms.
 
 <!-- \n -->
 This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.', CAPTION, 'Tumor Classification');" onmouseout="return nd();">Tumor Classification</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="tumorClassification" size="8" multiple="true">
+<html:select property="tumorClassification" size="8" multiple="true">
 														<html:option value="">ANY</html:option>
 														<html:options collection="tumorClassificationValues" property="value" labelProperty="label"/>
 												</html:select>
@@ -180,10 +164,10 @@ Treatment type offers a means to search for tumors induced by agents falling und
 
 <!-- \n -->
 The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Treatment Type');" onmouseout="return nd();">Treatment Type</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="agentType">
+<html:select property="agentType">
 														<html:option value="">ANY</html:option>
 														<html:options collection="agentTypes" property="value" labelProperty="label"/>
 												</html:select>
@@ -196,14 +180,14 @@ The value for this field is selected from a list of controlled vocabulary terms.
 
 <!-- \n -->
 First choose the <em>Restrict search to metastasis tumors only</em> then select an organ from the <em>Metastasizes to the</em> menu.', CAPTION, 'Metastasis');" onmouseout="return nd();">Metastasis</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:checkbox property="metastasisLimit"/> Restrict search to metastatic tumors only. 
-												
+<html:checkbox property="metastasisLimit"/> Restrict search to metastatic tumors only. 
+
 <!-- \n -->
 
-										</td>
+</td>
 								</tr>
 								<tr>
 										<td>
@@ -212,10 +196,10 @@ First choose the <em>Restrict search to metastasis tumors only</em> then select 
 
 <!-- \n -->
 To search for tumor records associated with Pathology images, choose the box next to <em>Restrict search to entries with associated pathology images</em>.', CAPTION, 'Pathology Images');" onmouseout="return nd();">Pathology Images</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:checkbox property="mustHaveImages"/> Restrict search to entries with associated pathology images.
+<html:checkbox property="mustHaveImages"/> Restrict search to entries with associated pathology images.
 										</td>
 								</tr>
 						</table>
@@ -236,8 +220,5 @@ To search for tumor records associated with Pathology images, choose the box nex
 </table>
 </html:form>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

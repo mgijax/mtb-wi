@@ -1,33 +1,16 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Strain and Tumor Genetics Search Form"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
+<jax:mmhcpage title="Strain and Tumor Genetics Search Form" help="genetics">
+	<html:form action="geneticsSearchResults" method="GET">
 
-		
-		<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<html:form action="geneticsSearchResults" method="GET">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#genetics"></a>
-</header>
 
 <table class="results">
 
 <tr class="page-info">
-											 
-										</tr>
+
+</tr>
 										<tr class="buttons">
 												<td colspan="2">
 														<table>
@@ -83,15 +66,15 @@
 												</td>
 												<td class="data-1">
 														<table>
-																
-																<tr>
+
+<tr>
 																		<td>
 																				<table>
 																						<tr>
 																								<td></td>
 																								<td></td>
-																							 
-																						</tr>
+
+</tr>
 																						<tr>
 																								<td align="right"><strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('This field offers a text based search against Marker Symbol, Name and Synonym records.
 <!-- \n -->
@@ -131,27 +114,26 @@ If a gene of interest is not found on the list please check the Mouse Genome Dat
 
 <!-- \n -->
 The values for type of genetic change are selected from a controlled vocabulary list.', CAPTION, 'Mutations / Aberrations');" onmouseout="return nd();">Mutations / Aberrations</a>:</strong>
-																										
+
 <!-- \n -->
 
-																										<html:select property="alleleGroupType" size="8" multiple="true">
+<html:select property="alleleGroupType" size="8" multiple="true">
 																												<html:option value="">ANY</html:option>
 																												<html:options collection="alleleGroupTypeValues" property="value" labelProperty="label"/>
 																										</html:select>
-																										
-																								</td>
-																								
-																								
-																								<td>
+
+</td>
+
+<td>
 																										<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Chromosome number an allele is found on.
 <!-- \n -->
 
 <!-- \n -->
 This search is used to find allele records associated with a specific chromosome number using a pick list.', CAPTION, 'Chromosome');" onmouseout="return nd();">Chromosome</a>:</strong>
-																										
+
 <!-- \n -->
 
-																										<html:select property="chromosome" size="8" multiple="true">
+<html:select property="chromosome" size="8" multiple="true">
 																												<html:option value="">ANY</html:option>
 																												<html:options collection="chromosomeValues" property="value" labelProperty="label"/>
 																										</html:select>
@@ -160,10 +142,10 @@ This search is used to find allele records associated with a specific chromosome
 																						<tr>
 																								<td colspan="2">
 																									<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Some cytogenetic records include assay images selecting this check box will return only cytognetic records with assay images.', CAPTION, 'Assay Images');" onmouseout="return nd();">Assay Images</a>:</strong>
-																									
+
 <!-- \n -->
 
-																										<html:checkbox property="assayImages">Restrict search to entries with associated assay images. </html:checkbox>
+<html:checkbox property="assayImages">Restrict search to entries with associated assay images. </html:checkbox>
 																								</td>
 																						</tr>
 																				</table>
@@ -173,8 +155,7 @@ This search is used to find allele records associated with a specific chromosome
 												</td>
 										</tr>
 
-						 
-										<tr class="buttons">
+<tr class="buttons">
 												<td colspan="2">
 														<table>
 																<tr>
@@ -189,8 +170,5 @@ This search is used to find allele records associated with a specific chromosome
 								</table>
 								</html:form>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

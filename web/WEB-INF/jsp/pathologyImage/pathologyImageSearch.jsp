@@ -1,26 +1,10 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Pathology Image Search Form"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
+<jax:mmhcpage title="Pathology Image Search Form" help="pathology">
+	<html:form action="pathologyImageSearchResults" method="GET">
 
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<html:form action="pathologyImageSearchResults" method="GET">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#pathology"></a>
-</header>
 
 <table class="results">
 
@@ -87,10 +71,10 @@
 
 <!-- \n -->
 The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ/Tissue of Origin');" onmouseout="return nd();">Organ/Tissue of Origin</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="organTissueOrigin" size="8" multiple="true">
+<html:select property="organTissueOrigin" size="8" multiple="true">
 														<html:option value="">ANY</html:option>
 														<html:options collection="organsOfOrigin" property="value" labelProperty="label"/>
 												</html:select>
@@ -103,10 +87,10 @@ The value for this field is selected from a list of controlled vocabulary terms.
 
 <!-- \n -->
 This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.', CAPTION, 'Tumor Classification');" onmouseout="return nd();">Tumor Classification</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="tumorClassification" size="8" multiple="true">
+<html:select property="tumorClassification" size="8" multiple="true">
 														<html:option value="">ANY</html:option>
 														<html:options collection="tumorClassifications" property="value" labelProperty="label"/>
 												</html:select>
@@ -123,10 +107,10 @@ The organ/tissue affected by a tumor can be different than the organ/tissue of t
 
 <!-- \n -->
 The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ/Tissue Affected');" onmouseout="return nd();">Organ/Tissue Affected</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="organTissueAffected" size="8" multiple="false">
+<html:select property="organTissueAffected" size="8" multiple="false">
 														<html:option value="">ANY</html:option>
 														<html:options collection="organsAffected" property="value" labelProperty="label"/>
 												</html:select>
@@ -145,10 +129,10 @@ The value for this field is selected from a list of controlled vocabulary terms.
 								<tr>
 										<td>
 												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('This field offers a text based search against the diagnosis and description fields associated with a Pathological record.', CAPTION, 'Diagnosis or Description');" onmouseout="return nd();">Diagnosis or Description</a>:</strong>
-												
+
 <!-- \n -->
 
-												contains &nbsp;
+contains &nbsp;
 												<html:text property="diagnosisDescription" size="40" maxlength="50"/>
 										</td>
 								</tr>
@@ -156,10 +140,10 @@ The value for this field is selected from a list of controlled vocabulary terms.
 								<tr>
 										<td>
 												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('This field searches for specific histological procedures from a select list of procedures.', CAPTION, 'Stain / Method');" onmouseout="return nd();">Stain / Method</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="method">
+<html:select property="method">
 														<html:option value="">ANY</html:option>
 														<html:options collection="methods" property="value" labelProperty="label"/>
 												</html:select>
@@ -172,17 +156,17 @@ The value for this field is selected from a list of controlled vocabulary terms.
 
 <!-- \n -->
 Searches are conducted from a list of antibody names which include clone numbers, when available.', CAPTION, 'Antibody');" onmouseout="return nd();">Antibody</a>:</strong>
-												
+
 <!-- \n -->
 
-												<html:select property="antibody" size="8" multiple="true">
+<html:select property="antibody" size="8" multiple="true">
 														<html:option value="">ANY</html:option>
 														<html:options collection="antibodies" property="value" labelProperty="label"/>
 												</html:select>
 										</td>
 								</tr>
-								
-						</table>
+
+</table>
 				</td>
 		</tr>
 		<tr class="buttons">
@@ -200,9 +184,5 @@ Searches are conducted from a list of antibody names which include clone numbers
 </table>
 </html:form>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
 

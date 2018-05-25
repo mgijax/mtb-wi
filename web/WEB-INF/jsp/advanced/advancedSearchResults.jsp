@@ -3,24 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Advanced Search Results"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#tumorresults"></a>
-</header>
+<jax:mmhcpage title="Advanced Search Results" help="tumorresults">
 
 <table class="results">
 
@@ -31,14 +15,13 @@
 						<span class="label">Search Summary</span>
 <!-- \n -->
 
-						
-						<c:if test="${not empty strainName}">
+<c:if test="${not empty strainName}">
 								<span class="label">Strain Name:</span> ${strainNameComparison} "${strainName}"
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty strainTypes}">
+</c:if>
+
+<c:if test="${not empty strainTypes}">
 								<c:choose>
 										<c:when test="${strainTypesSize>'1'}">
 												<span class="label">Strain Types:</span>
@@ -47,8 +30,8 @@
 												<span class="label">Strain Type:</span>
 										</c:otherwise>
 								</c:choose>
-								
-								<c:forEach var="strainType" items="${strainTypes}" varStatus="status">
+
+<c:forEach var="strainType" items="${strainTypes}" varStatus="status">
 										<c:choose>
 												<c:when test="${status.last != true}">
 														${strainType},
@@ -58,19 +41,18 @@
 												</c:otherwise>
 										</c:choose>
 								</c:forEach>
-								
+
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty geneticName}">
+</c:if>
+
+<c:if test="${not empty geneticName}">
 								<span class="label">Genetic Name</span> ${geneticName}
 <!-- \n -->
 
-						</c:if>
-						
+</c:if>
 
-						<c:if test="${not empty organTissueOrigins}">
+<c:if test="${not empty organTissueOrigins}">
 								<c:choose>
 										<c:when test="${fn:length(organTissueOrigins)>1}">
 												<span class="label">Organs/Tissues of Origin:</span> 
@@ -79,8 +61,8 @@
 												<span class="label">Organ/Tissue of Origin:</span> 
 										</c:otherwise>
 								</c:choose>
-								
-								<c:forEach var="organ" items="${organTissueOrigins}" varStatus="status">
+
+<c:forEach var="organ" items="${organTissueOrigins}" varStatus="status">
 										<c:choose>
 												<c:when test="${status.last != true}">
 														${organ},
@@ -90,18 +72,18 @@
 												</c:otherwise>
 										</c:choose>
 								</c:forEach>
-								
+
 <!-- \n -->
 
-						</c:if>
+</c:if>
 
-						<c:if test="${not empty organOfOriginName}">
+<c:if test="${not empty organOfOriginName}">
 								<span class="label">Organ/Tissue of Origin:</span> Contains "${organOfOriginName}"
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty tumorClassifications}">
+</c:if>
+
+<c:if test="${not empty tumorClassifications}">
 								<c:choose>
 										<c:when test="${fn:length(tumorClassifications)>1}">
 												<span class="label">Tumor Classifications:</span>
@@ -110,8 +92,8 @@
 												<span class="label">Tumor Classification:</span> 
 										</c:otherwise>
 								</c:choose>
-								
-								<c:forEach var="classification" items="${tumorClassifications}" varStatus="status">
+
+<c:forEach var="classification" items="${tumorClassifications}" varStatus="status">
 										<c:choose>
 												<c:when test="${status.last != true}">
 														${classification},
@@ -121,36 +103,36 @@
 												</c:otherwise>
 										</c:choose>
 								</c:forEach>
-								
+
 <!-- \n -->
 
-						</c:if>
+</c:if>
 
-						<c:if test="${not empty tumorName}">
+<c:if test="${not empty tumorName}">
 								<span class="label">Tumor Name:</span> Contains "${tumorName}"
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty agentType}">
+</c:if>
+
+<c:if test="${not empty agentType}">
 								<span class="label">Treatment Type:</span> ${agentType}
 <!-- \n -->
 
-						</c:if>
+</c:if>
 
-						<c:if test="${not empty agent}">
+<c:if test="${not empty agent}">
 								<span class="label">Treatment:</span>	Contains "${agent}"
 <!-- \n -->
 
-						</c:if>
+</c:if>
 
-						<c:if test="${not empty metastasisLimit}">
+<c:if test="${not empty metastasisLimit}">
 								<span class="label">Restrict search to metastatic tumors only.</span>
 <!-- \n -->
 
-						</c:if>
+</c:if>
 
-						<c:if test="${not empty organsAffected}">
+<c:if test="${not empty organsAffected}">
 								<c:choose>
 										<c:when test="${fn:length(organsAffected)>1}">
 												<span class="label">Organs/Tissues Affected:</span>
@@ -159,8 +141,8 @@
 												<span class="label">Organ/Tissue Affected:</span>
 										</c:otherwise>
 								</c:choose>
-								
-								<c:forEach var="organ" items="${organsAffected}" varStatus="status">
+
+<c:forEach var="organ" items="${organsAffected}" varStatus="status">
 										<c:choose>
 												<c:when test="${status.last != true}">
 														${organ},
@@ -170,39 +152,39 @@
 												</c:otherwise>
 										</c:choose>
 								</c:forEach>
-								
+
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty mustHaveImages}">
+</c:if>
+
+<c:if test="${not empty mustHaveImages}">
 								<span class="label">Restrict search to entries with associated pathology images.</span>
 <!-- \n -->
 
-						</c:if>
+</c:if>
 
-						<c:if test="${not empty geneticChange}">
+<c:if test="${not empty geneticChange}">
 								<span class="label">Genetic Change:</span> ${geneticChange}
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty cytogeneticChange}">
+</c:if>
+
+<c:if test="${not empty cytogeneticChange}">
 								<span class="label">Cytogenetic Change:</span> ${cytogeneticChange}
 <!-- \n -->
 
-						</c:if>
-						
-						<c:if test="${not empty accId}">
+</c:if>
+
+<c:if test="${not empty accId}">
 								<span class="label">Accession Id:</span> ${accId}
 <!-- \n -->
 
-						</c:if>
-						
-						<span class="label">Sort By:</span> ${sortBy}
+</c:if>
+
+<span class="label">Sort By:</span> ${sortBy}
 <!-- \n -->
 
-						<span class="label">Display Limit:</span> ${maxItems}
+<span class="label">Display Limit:</span> ${maxItems}
 				</td>
 		</tr>
 		<tr class="summary">
@@ -311,34 +293,34 @@ Summary</td>
 						<td width="200">
 								<c:out value="${tumor.treatmentType}" escapeXml="false"/>
 								<c:if test="${not empty tumor.agentsCollection}">
-										
+
 <!-- \n -->
 
-										<span size="-2"><em>
+<span size="-2"><em>
 										<c:forEach var="agent" items="${tumor.agentsCollection}" varStatus="status">
 												<c:out value="${agent}" escapeXml="false"/>
 												<c:if test="${status.last != true}">
-														
+
 <!-- \n -->
 
-												</c:if>
+</c:if>
 										</c:forEach>
 										</em></span> 
 								</c:if>
 						</td>
 						<td><a href="strainDetails.do?key=${tumor.strainKey}"><c:out value="${tumor.strainName}" escapeXml="false"/></a>
 								<c:if test="${not empty tumor.strainTypesCollection}">
-										
+
 <!-- \n -->
 
-										<span size="-2"><em>
+<span size="-2"><em>
 										<c:forEach var="strainType" items="${tumor.strainTypesCollection}" varStatus="status">
 												${strainType}
 												<c:if test="${status.last != true}">
-														
+
 <!-- \n -->
 
-												</c:if>
+</c:if>
 										</c:forEach>
 										</em></span>
 								</c:if>
@@ -354,16 +336,16 @@ Summary</td>
 										<c:forEach var="organ" items="${tumor.metastasizesToDisplay}" varStatus="status">
 												${organ}
 												<c:if test="${status.last != true}">
-														
+
 <!-- \n -->
 
-												</c:if>
+</c:if>
 										</c:forEach>
 										</span>
 							 </c:when>
 								<c:otherwise>
-										
-								</c:otherwise>
+
+</c:otherwise>
 								</c:choose>
 						</td>
 						<td>
@@ -372,8 +354,8 @@ Summary</td>
 									<div><img src="${applicationScope.urlImageDir}/pic.gif" alt="X"></div>
 							 </c:when>
 							 <c:otherwise>
-									 
-							 </c:otherwise>
+
+</c:otherwise>
 							 </c:choose>
 						</td>
 						<td>
@@ -391,8 +373,5 @@ Summary</td>
 
 </table>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

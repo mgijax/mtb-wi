@@ -1,22 +1,20 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="PDX Information Request Form"/>
-	<c:import url="../../../meta.jsp"/>
-	<script type="text/javascript">
-		
-				function validate(){
-						
-						var email = document.requestForm.email.value;
+
+<jax:mmhcpage title="PDX Information Request Form" help="pdxRequest">
+
+<script type="text/javascript">
+
+function validate(){
+
+var email = document.requestForm.email.value;
 						var name = document.requestForm.name.value;
 						var title = document.requestForm.title.value;
 						var org = document.requestForm.org.value;
 						var comments = document.requestForm.comments.value;
-						
-						if((email.length > 0 ) && (name.length >0) &&(title.length>0) &&(org.length>0) &&(comments.length > 0)
+
+if((email.length > 0 ) && (name.length >0) &&(title.length>0) &&(org.length>0) &&(comments.length > 0)
 						&& (email.indexOf("@")>=1) &&(email == document.requestForm.vemail.value)){
 								document.requestForm.submit();
 						}else{
@@ -24,19 +22,8 @@
 						}
 				}
 	</script>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-
-<div class="wrap">
-<nav><c:import url="../../../pdxToolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#pdxRequest"></a>
-</header>
+<c:import url="../../../pdxToolBar.jsp" />
 
 <table class="results">
 
@@ -45,7 +32,7 @@
 														<form action="pdxRequest.do" method="GET" name="requestForm">
 																<table>
 
-																		<tr>
+<tr>
 																				<td colspan="2" style="display:hidden"><div id="msgtxt" style="display:none">
 																								<strong>Please verify that both emails match and all fields are completed</strong>
 																						</div>
@@ -61,9 +48,8 @@
 																										You are requesting general information on the PDX program.
 																								</c:otherwise>
 																						 </c:choose>
-																						
-																						
-																				</td>
+
+</td>
 																		</tr>
 																		<tr>
 																				<td></td>
@@ -100,7 +86,7 @@
 																		</tr>
 																		<tr>
 
-																				<td>*Organization</td><td><input type="select" name="org" size="30"></td>
+<td>*Organization</td><td><input type="select" name="org" size="30"></td>
 																		</tr>
 																		<tr>
 																				<td>*Country</td><td><select>
@@ -111,7 +97,7 @@
 																								<option value="Algeria" >Algeria</option>
 																								<option value="AmericanSamoa1" >American Samoa</option>
 
-																								<option value="Andorra" >Andorra</option>
+<option value="Andorra" >Andorra</option>
 																								<option value="Angola" >Angola</option>
 																								<option value="Anguilla" >Anguilla</option>
 																								<option value="Antarctica" >Antarctica</option>
@@ -121,7 +107,7 @@
 																								<option value="Aruba" >Aruba</option>
 																								<option value="Australia" >Australia</option>
 
-																								<option value="Austria" >Austria</option>
+<option value="Austria" >Austria</option>
 																								<option value="Azerbaijan" >Azerbaijan</option>
 																								<option value="Bahamas" >Bahamas</option>
 																								<option value="Bahrain" >Bahrain</option>
@@ -131,7 +117,7 @@
 																								<option value="Belgium" >Belgium</option>
 																								<option value="Belize" >Belize</option>
 
-																								<option value="Benin" >Benin</option>
+<option value="Benin" >Benin</option>
 																								<option value="Bermuda" >Bermuda</option>
 																								<option value="Bhutan" >Bhutan</option>
 																								<option value="Bolivia" >Bolivia</option>
@@ -141,7 +127,7 @@
 																								<option value="Brazil" >Brazil</option>
 																								<option value="BritishIndianOce" >British Indian Ocean Territory</option>
 
-																								<option value="Brunei" >Brunei</option>
+<option value="Brunei" >Brunei</option>
 																								<option value="Bulgaria" >Bulgaria</option>
 																								<option value="BurkinaFaso" >Burkina Faso</option>
 																								<option value="Burundi" >Burundi</option>
@@ -151,7 +137,7 @@
 																								<option value="CapeVerde" >Cape Verde</option>
 																								<option value="CaymanIslands" >Cayman Islands</option>
 
-																								<option value="CentralAfricanRe" >Central African Republic</option>
+<option value="CentralAfricanRe" >Central African Republic</option>
 																								<option value="Chad" >Chad</option>
 																								<option value="Chile" >Chile</option>
 																								<option value="China" >China</option>
@@ -161,7 +147,7 @@
 																								<option value="Comoros" >Comoros</option>
 																								<option value="Congo" >Congo</option>
 
-																								<option value="CookIslands" >Cook Islands</option>
+<option value="CookIslands" >Cook Islands</option>
 																								<option value="CostaRica" >Costa Rica</option>
 																								<option value="CotedIvoire" >Cote d ' Ivoire</option>
 																								<option value="CroatiaHrvatska" >Croatia ( Hrvatska )</option>
@@ -171,7 +157,7 @@
 																								<option value="CongoDRC" >Congo ( DRC )</option>
 																								<option value="Denmark" >Denmark</option>
 
-																								<option value="Djibouti" >Djibouti</option>
+<option value="Djibouti" >Djibouti</option>
 																								<option value="Dominica" >Dominica</option>
 																								<option value="DominicanRepubli" >Dominican Republic</option>
 																								<option value="EastTimor" >East Timor</option>
@@ -181,7 +167,7 @@
 																								<option value="EquatorialGuinea" >Equatorial Guinea</option>
 																								<option value="Eritrea" >Eritrea</option>
 
-																								<option value="Estonia" >Estonia</option>
+<option value="Estonia" >Estonia</option>
 																								<option value="Ethiopia" >Ethiopia</option>
 																								<option value="FalklandIslandsI" >Falkland Islands ( Islas Malvinas )</option>
 																								<option value="FaroeIslands" >Faroe Islands</option>
@@ -191,7 +177,7 @@
 																								<option value="FrenchGuiana" >French Guiana</option>
 																								<option value="FrenchPolynesia" >French Polynesia</option>
 
-																								<option value="FrenchSouthernan" >French Southern and Antarctic Lands</option>
+<option value="FrenchSouthernan" >French Southern and Antarctic Lands</option>
 																								<option value="Gabon" >Gabon</option>
 																								<option value="Gambia" >Gambia</option>
 																								<option value="Georgia1" >Georgia</option>
@@ -201,7 +187,7 @@
 																								<option value="Greece" >Greece</option>
 																								<option value="Greenland" >Greenland</option>
 
-																								<option value="Grenada" >Grenada</option>
+<option value="Grenada" >Grenada</option>
 																								<option value="Guadeloupe" >Guadeloupe</option>
 																								<option value="Guam1" >Guam</option>
 																								<option value="Guatemala" >Guatemala</option>
@@ -211,7 +197,7 @@
 																								<option value="Haiti" >Haiti</option>
 																								<option value="HeardIslandandMc" >Heard Island and McDonald Islands</option>
 
-																								<option value="Honduras" >Honduras</option>
+<option value="Honduras" >Honduras</option>
 																								<option value="HongKongSAR" >Hong Kong SAR</option>
 																								<option value="Hungary" >Hungary</option>
 																								<option value="Iceland" >Iceland</option>
@@ -221,7 +207,7 @@
 																								<option value="Iraq" >Iraq</option>
 																								<option value="Ireland" >Ireland</option>
 
-																								<option value="Israel" >Israel</option>
+<option value="Israel" >Israel</option>
 																								<option value="Italy" >Italy</option>
 																								<option value="Jamaica" >Jamaica</option>
 																								<option value="Japan" >Japan</option>
@@ -231,7 +217,7 @@
 																								<option value="Kiribati" >Kiribati</option>
 																								<option value="Korea" >Korea</option>
 
-																								<option value="Kuwait" >Kuwait</option>
+<option value="Kuwait" >Kuwait</option>
 																								<option value="Kyrgyzstan" >Kyrgyzstan</option>
 																								<option value="Laos" >Laos</option>
 																								<option value="Latvia" >Latvia</option>
@@ -241,7 +227,7 @@
 																								<option value="Libya" >Libya</option>
 																								<option value="Liechtenstein" >Liechtenstein</option>
 
-																								<option value="Lithuania" >Lithuania</option>
+<option value="Lithuania" >Lithuania</option>
 																								<option value="Luxembourg" >Luxembourg</option>
 																								<option value="MacaoSAR" >Macao SAR</option>
 																								<option value="MacedoniaFormerY" >Macedonia, Former Yugoslav Republic of</option>
@@ -251,7 +237,7 @@
 																								<option value="Maldives" >Maldives</option>
 																								<option value="Mali" >Mali</option>
 
-																								<option value="Malta" >Malta</option>
+<option value="Malta" >Malta</option>
 																								<option value="MarshallIslands" >Marshall Islands</option>
 																								<option value="Martinique" >Martinique</option>
 																								<option value="Mauritania" >Mauritania</option>
@@ -261,7 +247,7 @@
 																								<option value="Micronesia" >Micronesia</option>
 																								<option value="Moldova" >Moldova</option>
 
-																								<option value="Monaco" >Monaco</option>
+<option value="Monaco" >Monaco</option>
 																								<option value="Mongolia" >Mongolia</option>
 																								<option value="Montserrat" >Montserrat</option>
 																								<option value="Morocco" >Morocco</option>
@@ -271,7 +257,7 @@
 																								<option value="Nauru" >Nauru</option>
 																								<option value="Nepal" >Nepal</option>
 
-																								<option value="Netherlands" >Netherlands</option>
+<option value="Netherlands" >Netherlands</option>
 																								<option value="NetherlandsAntil" >Netherlands Antilles</option>
 																								<option value="NewCaledonia" >New Caledonia</option>
 																								<option value="NewZealand" >New Zealand</option>
@@ -281,7 +267,7 @@
 																								<option value="Niue" >Niue</option>
 																								<option value="NorfolkIsland" >Norfolk Island</option>
 
-																								<option value="NorthKorea" >North Korea</option>
+<option value="NorthKorea" >North Korea</option>
 																								<option value="NorthernMarianaI1" >Northern Mariana Islands</option>
 																								<option value="Norway" >Norway</option>
 																								<option value="Oman" >Oman</option>
@@ -291,7 +277,7 @@
 																								<option value="PapuaNewGuinea" >Papua New Guinea</option>
 																								<option value="Paraguay" >Paraguay</option>
 
-																								<option value="Peru" >Peru</option>
+<option value="Peru" >Peru</option>
 																								<option value="Philippines" >Philippines</option>
 																								<option value="PitcairnIslands" >Pitcairn Islands</option>
 																								<option value="Poland" >Poland</option>
@@ -301,7 +287,7 @@
 																								<option value="Reunion" >Reunion</option>
 																								<option value="Romania" >Romania</option>
 
-																								<option value="Russia" >Russia</option>
+<option value="Russia" >Russia</option>
 																								<option value="Rwanda" >Rwanda</option>
 																								<option value="Samoa" >Samoa</option>
 																								<option value="SanMarino" >San Marino</option>
@@ -311,7 +297,7 @@
 																								<option value="SerbiaandMontene" >Serbia and Montenegro</option>
 																								<option value="Seychelles" >Seychelles</option>
 
-																								<option value="SierraLeone" >Sierra Leone</option>
+<option value="SierraLeone" >Sierra Leone</option>
 																								<option value="Singapore" >Singapore</option>
 																								<option value="Slovakia" >Slovakia</option>
 																								<option value="Slovenia" >Slovenia</option>
@@ -321,7 +307,7 @@
 																								<option value="SouthGeorgiaandt" >South Georgia and the South Sandwich Islands</option>
 																								<option value="Spain" >Spain</option>
 
-																								<option value="SriLanka" >Sri Lanka</option>
+<option value="SriLanka" >Sri Lanka</option>
 																								<option value="StHelena" >St. Helena</option>
 																								<option value="StKittsandNevis" >St. Kitts and Nevis</option>
 																								<option value="StLucia" >St. Lucia</option>
@@ -331,7 +317,7 @@
 																								<option value="Suriname" >Suriname</option>
 																								<option value="SvalbardandJanMa" >Svalbard and Jan Mayen</option>
 
-																								<option value="Swaziland" >Swaziland</option>
+<option value="Swaziland" >Swaziland</option>
 																								<option value="Sweden" >Sweden</option>
 																								<option value="Switzerland" >Switzerland</option>
 																								<option value="Syria" >Syria</option>
@@ -341,7 +327,7 @@
 																								<option value="Thailand" >Thailand</option>
 																								<option value="Togo" >Togo</option>
 
-																								<option value="Tokelau" >Tokelau</option>
+<option value="Tokelau" >Tokelau</option>
 																								<option value="Tonga" >Tonga</option>
 																								<option value="TrinidadandTobag" >Trinidad and Tobago</option>
 																								<option value="Tunisia" >Tunisia</option>
@@ -351,7 +337,7 @@
 																								<option value="Tuvalu" >Tuvalu</option>
 																								<option value="Uganda" >Uganda</option>
 
-																								<option value="Ukraine" >Ukraine</option>
+<option value="Ukraine" >Ukraine</option>
 																								<option value="UnitedArabEmirat" >United Arab Emirates</option>
 																								<option value="UnitedKingdom" >United Kingdom</option>
 																								<option value="UnitedStatesMino" >United States Minor Outlying Islands</option>
@@ -361,7 +347,7 @@
 																								<option value="VaticanCity" >Vatican City</option>
 																								<option value="Venezuela" >Venezuela</option>
 
-																								<option value="VietNam" >Viet Nam</option>
+<option value="VietNam" >Viet Nam</option>
 																								<option value="VirginIslandsBri" >Virgin Islands ( British )</option>
 																								<option value="VirginIslands" >Virgin Islands</option>
 																								<option value="WallisandFutuna" >Wallis and Futuna</option>
@@ -373,9 +359,9 @@
 																		</tr>
 																		<tr>
 
-																				<td>Comments</td><td><textarea rows="5" cols="30" name="comments"></textarea> </td>
-																				
-																				</tr>
+<td>Comments</td><td><textarea rows="5" cols="30" name="comments"></textarea> </td>
+
+</tr>
 																		<tr>
 																				<td>
 																						<input type="hidden" value="${mice}" name="mice">
@@ -384,16 +370,12 @@
 																		</tr>
 																</table>
 
-														</form>
+</form>
 
-												</td>
+</td>
 
-										</tr>
+</tr>
 								</table>
 
-</section>
-</div>
-
-</body>
-</html>
+</jax:mmhcpage>
 

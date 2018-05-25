@@ -2,12 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Synteny Viewer"/>
-	<c:import url="../../../meta.jsp"/>
-	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+
+<jax:mmhcpage title="Synteny Viewer">
+
+<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/PagingStore.js"></script>
@@ -19,21 +17,21 @@
 				// number of pixels for largest chromosome
 				var maxSize = 100;
 
-				var humanBandingURL = 'viewer.do?method=getHumanBands';
-		
-				var mouseBandingURL = 'viewer.do?method=getBands';
-		
-				// used to link chromosome bands to ucsc details
+var humanBandingURL = 'viewer.do?method=getHumanBands';
+
+var mouseBandingURL = 'viewer.do?method=getBands';
+
+// used to link chromosome bands to ucsc details
 				// use empty string for no link
-			
-				var localURL = 'http://narsil:8080/mtbwi/';
-			
-				var karyoPanel = null;
+
+var localURL = 'http://narsil:8080/mtbwi/';
+
+var karyoPanel = null;
 				var qtlStore = null;
-		
-				Ext.onReady(function() {
-		 
-						FeatureRecord = Ext.data.Record.create([
+
+Ext.onReady(function() {
+
+FeatureRecord = Ext.data.Record.create([
 								{name:'chromosome'},
 								{name:'start'},
 								{name:'end'},
@@ -47,7 +45,7 @@
 								{name:'track'}
 						]);
 
-						var syntenyForm = new Ext.FormPanel({
+var syntenyForm = new Ext.FormPanel({
 								id:'syntenyForm',
 								frame: true,
 								bodyStyle: 'padding: 5px 5px 0px 5px;',
@@ -91,25 +89,25 @@
 												handler:syntenyHandler
 										}]
 						});
-				
-						function syntenyHandler(){
+
+function syntenyHandler(){
 								syntenyWin.hide();
 								var ch = syntenyForm.getForm().findField('chromosome').getValue();
 								var start = syntenyForm.getForm().findField('start').getValue();
 								var end = syntenyForm.getForm().findField('end').getValue();
 								var source = syntenyForm.getForm().items.items[0].getValue().inputValue
-			 
-								syntenyStore.proxy.setUrl(localURL+'viewer.do?method=getSyntenicFeatures&source='+source+'&chromosome='+ch+'&start='+start+'&end='+end, true);
-				
-								if (source != loadedBands)
+
+syntenyStore.proxy.setUrl(localURL+'viewer.do?method=getSyntenicFeatures&source='+source+'&chromosome='+ch+'&start='+start+'&end='+end, true);
+
+if (source != loadedBands)
 								{
 										// need to reload bands then load syntenic regions
 										karyoPanel.on('afterBuild', afterKaryoBuild);
-						
-										// remove all features
+
+// remove all features
 										syntenyStore.removeAll(true);
-						
-										if(source == 'human'){
+
+if(source == 'human'){
 												karyoPanel.reloadBands(mouseBandingURL);
 												loadedBands = 'human';
 										}else{
@@ -121,13 +119,13 @@
 								}
 								syntenyForm.getForm().reset();
 						};
-				
-						function afterKaryoBuild(){
+
+function afterKaryoBuild(){
 								syntenyStore.load({add:true});	
 								karyoPanel.removeListener('afterBuild', afterKaryoBuild);
 						};
-				
-						var syntenyWin =	new Ext.Window({
+
+var syntenyWin =	new Ext.Window({
 								layout:'fit',
 								target: Ext.getBody(),
 								closeAction:'hide', 
@@ -135,17 +133,15 @@
 								title: 'Synteny Query',
 								items:[syntenyForm]
 						});
-			 
-						function syntenyWinHandler(){
+
+function syntenyWinHandler(){
 								syntenyWin.show();		
 								window.getAttention();
 						};
-						
-						
-		 
-						var loadedBands = "human";
-		 
-						var karyoPanel = new org.jax.mgi.kmap.KaryoPanel({
+
+var loadedBands = "human";
+
+var karyoPanel = new org.jax.mgi.kmap.KaryoPanel({
 								bandingFile:humanBandingURL,
 								title:'<div>MTB Synteny Viewer</div>',
 								id:'kPanel',
@@ -165,10 +161,10 @@
 								hideEmptyChr: true,
 								expandFeatures: false	
 						});
-				
-						karyoPanel.getTopToolbar().get(0).hide();
-			
-						var	syntenyStore = new Ext.data.XmlStore({
+
+karyoPanel.getTopToolbar().get(0).hide();
+
+var	syntenyStore = new Ext.data.XmlStore({
 								autoDestroy: true,
 								storeId: 'syntenyStore',
 								url:'toConfigureProxy',
@@ -189,15 +185,15 @@
 										'track'
 								]	
 						});	
-				
-						karyoPanel.setFeatureStore(syntenyStore);
-			
-						karyoPanel.getTopToolbar().addButton({
+
+karyoPanel.setFeatureStore(syntenyStore);
+
+karyoPanel.getTopToolbar().addButton({
 								text:'Load Syntenic Regions',
 								handler:syntenyWinHandler
 						});
-			
-						var featureGrid = new org.jax.mgi.kmap.FeatureGrid({
+
+var featureGrid = new org.jax.mgi.kmap.FeatureGrid({
 								id:'featureGrid',
 								rowspan:1,
 								colspan:1,
@@ -213,9 +209,8 @@
 										prependButtons: true
 								})
 						});
-						
-			
-						// table for the center
+
+// table for the center
 						var centerTable = new Ext.Panel({
 								region: 'center',
 								layout:'table',
@@ -223,7 +218,7 @@
 								items:[karyoPanel,featureGrid]
 						});
 
-						// Legend Panel to the west
+// Legend Panel to the west
 						var legendPanel = new org.jax.mgi.kmap.LegendPanel({
 								autoScroll:true,
 								title:'Legend',
@@ -236,9 +231,8 @@
 								style:{borderstyle:'none'},
 								karyoPanel:karyoPanel
 						});
-						
-						
-						var mainContainer = new Ext.Container({
+
+var mainContainer = new Ext.Container({
 								height:780,	
 								layout: 'border',
 								renderTo:'mainDiv',
@@ -246,23 +240,16 @@
 								style:{background:'white'}
 						});
 
-						mainContainer.doLayout();
-			
-						karyoPanel.loadBands();
-																												
-						featureGrid.doLayout();
-			
-				});	//end onReady()
+mainContainer.doLayout();
+
+karyoPanel.loadBands();
+
+featureGrid.doLayout();
+
+});	//end onReady()
 	</script>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-								<table>
+<table>
 										<tr>
 												<td id="main-div" colspan="2" style="width:100%">
 														<noscript>
@@ -278,12 +265,9 @@
 										<tr>
 								</table>
 
-</section>
-</div>
 <form action="" id="export-form" target="_blank" method="post" >
 		<input type="hidden" name="export" value="true">
 		<input type="hidden" id="export-x-mL" name="exportXML" value="">
 </form>
-</body>
-</html>
+</jax:mmhcpage>
 

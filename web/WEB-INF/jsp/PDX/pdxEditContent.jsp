@@ -5,10 +5,8 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Edit PDX Content"/>
+
+<jax:mmhcpage title="Edit PDX Content" help="pdxAddContent">
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 	<style type="text/css">
 						.upload-icon {
@@ -22,20 +20,18 @@
 								float: left;
 						}
 	</style>
-	<c:import url="../../../meta.jsp"/>
-	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+
+<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-</head>
-	<script type="text/javascript">
-				
-		Ext.onReady(function(){
-				
-			 
-				Ext.QuickTips.init();
 
-			 
-				var piForm = new Ext.FormPanel({
+<script type="text/javascript">
+
+Ext.onReady(function(){
+
+Ext.QuickTips.init();
+
+var piForm = new Ext.FormPanel({
 						hidden:${hidePiForm},
 						renderTo: 'piForm',
 						fileUpload: false,
@@ -88,8 +84,8 @@
 										fieldLabel: 'Image',
 										name: 'piFilePath',
 										disabled:true
-										
-								}],
+
+}],
 						buttons: [{
 										text: 'Edit',
 										handler: function(){
@@ -104,8 +100,8 @@
 																},
 																failure: function(form,o){
 																		Ext.Msg.alert('Failure','Image edit failed.');
-																		
-																}
+
+}
 														});
 												}else{
 												 Ext.Msg.alert('','Please correct invalid fields.');
@@ -126,19 +122,15 @@
 														},
 														failure: function(form,o){
 																Ext.Msg.alert('Failure','Image delete failed.');
-																		
-														}
+
+}
 												});
 										}
 								}
 						]
 				});
-				
-				
-				
-				
-				
-				var linkForm = new Ext.FormPanel({
+
+var linkForm = new Ext.FormPanel({
 						hidden:${hideLinkForm},
 						renderTo: 'linkForm',
 						fileUpload: false,
@@ -186,8 +178,8 @@
 																},
 																failure: function(form,o){
 																		Ext.Msg.alert('Failure','Link edit failed.');
-																		
-																}
+
+}
 														});
 												 }else{
 												 Ext.Msg.alert('','Please correct invalid fields.');
@@ -208,18 +200,15 @@
 														},
 														failure: function(form,o){
 																Ext.Msg.alert('Failure','Link delete failed.');
-																		
-														}
+
+}
 												});
 										}
 								}
 						]
 				});
-				
-				
-				
-				
-				var documentForm = new Ext.FormPanel({
+
+var documentForm = new Ext.FormPanel({
 						hidden:${hideDocumentForm},
 						renderTo: 'documentForm',
 						fileUpload: false,
@@ -268,8 +257,8 @@
 																},
 																failure: function(form,o){
 																		Ext.Msg.alert('Failure','Document edit failed.');
-																		
-																}
+
+}
 														});
 												 }else{
 												 Ext.Msg.alert('','Please correct invalid fields.');
@@ -290,16 +279,15 @@
 														},
 														failure: function(form,o){
 																Ext.Msg.alert('Failure','Document delete failed.');
-																		
-														}
+
+}
 												});
 										}
 								}
 						]
 				});
-				
-				
-				var graphicForm = new Ext.FormPanel({
+
+var graphicForm = new Ext.FormPanel({
 						hidden:${hideGraphicForm},
 						renderTo: 'graphicForm',
 						fileUpload: false,
@@ -350,8 +338,8 @@
 																},
 																failure: function(form,o){
 																		Ext.Msg.alert('Failure','Graphic edit failed.');
-																		
-																}
+
+}
 														});
 												 }else{
 												 Ext.Msg.alert('','Please correct invalid fields.');
@@ -372,15 +360,15 @@
 														},
 														failure: function(form,o){
 																Ext.Msg.alert('Failure','Graphic delete failed.');
-																		
-														}
+
+}
 												});
 										}
 								}
 						]
 				});
 
-				var commentForm = new Ext.FormPanel({
+var commentForm = new Ext.FormPanel({
 						hidden:${hideCommentForm},
 						renderTo: 'commentForm',
 						fileUpload: false,
@@ -417,8 +405,8 @@
 																},
 																failure: function(form,o){
 																		Ext.Msg.alert('Failure','Comment edit failed.');
-																		
-																}
+
+}
 														});
 												 }else{
 												 Ext.Msg.alert('','Please correct invalid fields.');
@@ -439,40 +427,27 @@
 														},
 														failure: function(form,o){
 																Ext.Msg.alert('Failure','Comment delete failed.');
-																		
-														}
+
+}
 												});
 										}
 								}
 						]
 				});
-				
-				
 
-				// end onReady
+// end onReady
 
-		});
+});
 	</script>		
 
-<body>
-	<c:import url="../../../body.jsp" />
-
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#pdxAddContent"></a>
-</header>
-<table >
+<table>
 
 <!-- ////  Start Search Summary  //// -->
 
 <tr class="summary">
 												<td colspan="11">
 
-														<table>
+<table>
 																<tr><td>
 																				<h1>Additional Content for ${modelID}</h1>
 																				<h1></h1>
@@ -486,15 +461,10 @@
 																				<h1></h1>
 																				<div id="comment-form"></div>
 
-														</table>
+</table>
 												</td>
 										</tr>
 								</table>
-								
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
 

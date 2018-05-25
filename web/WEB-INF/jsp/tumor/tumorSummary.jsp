@@ -3,23 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Tumor Summary"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp"/></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#tumorsummary"></a>
-</header>
+<jax:mmhcpage title="Tumor Summary" help="tumorsummary">
 
 <table>
 		<tr>
@@ -33,10 +18,10 @@
 										<td>
 												<span class="enhance">
 												<c:out value="${tumor.organOfOrigin}" escapeXml="false"/>
-												
+
 <!-- \n -->
 
-												<c:out value="${tumor.tumorClassification}" escapeXml="false"/>
+<c:out value="${tumor.tumorClassification}" escapeXml="false"/>
 												</span>
 										</td>
 								</tr>
@@ -48,7 +33,7 @@
 								</tr>
 	<c:set var="lbl" value="1"/>
 
-								<c:choose>
+<c:choose>
 								<c:when test="${not empty tumor.tumorSynonyms}">
 	<c:set var="lbl" value="${lbl+1}"/>
 										<tr class="stripe${(lbl%2)+1}">
@@ -61,7 +46,7 @@
 												</c:otherwise>
 												</c:choose>
 
-												<td>
+<td>
 														<c:forEach var="synonym" items="${tumor.tumorSynonyms}" varStatus="status">
 																${synonym.key}
 																<c:if test="${status.last != true}">
@@ -76,7 +61,7 @@
 								</c:otherwise>
 								</c:choose>
 
-						</table>
+</table>
 				</td>
 
 <!-- ////  End Top Left (Tumor)  //// -->
@@ -95,7 +80,7 @@
 																<td class="enhance" colspan="2"><a href="strainDetails.do?key=${tumor.strainKey}"><c:out value="${tumor.strainName}" escapeXml="false"/></a></td>
 														</tr>
 
-												<c:if test="${not empty tumor.strainTypes}">
+<c:if test="${not empty tumor.strainTypes}">
 														<tr>
 																<c:choose>
 																<c:when test="${fn:length(tumor.strainTypes)>1}">
@@ -150,7 +135,7 @@
 								</c:otherwise>
 								</c:choose>
 
-						</table>
+</table>
 				</td>
 
 <!-- ////  End Top Right (Strain)  //// -->
@@ -192,17 +177,17 @@ Information</td>
 	<c:set var="previousParent" value="-100"/>
 	<c:set var="rowClass" value="stripe1"/>
 
-						<c:forEach var="rec" items="${tumor.frequencyRecs}" varStatus="status">
-						
-							<c:if test="${(status.index == 1) && not empty byExample}">
+<c:forEach var="rec" items="${tumor.frequencyRecs}" varStatus="status">
+
+<c:if test="${(status.index == 1) && not empty byExample}">
 							<tr>
 								<td class="results-header" colspan="11">Additional tumor frequency records with the same strain, classification and treatment type </td>
-								
-							</tr>
+
+</tr>
 						</c:if>
 	<c:set var="currentParent" value="${rec.sortOrder}"/>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${currentParent!=previousParent}">
 	<c:set var="lbl" value="${lbl+1}"/>
 	<c:set var="previousParent" value="${rec.sortOrder}"/>
@@ -212,9 +197,9 @@ Information</td>
 										</c:otherwise>
 								</c:choose>
 
-								<tr class="${rowClass}">
+<tr class="${rowClass}">
 
-								<c:choose>
+<c:choose>
 										<c:when test="${rec.tumorFrequencyKey!=rec.parentFrequencyKey}">
 												<td class="hilite">
 										</c:when>
@@ -224,10 +209,10 @@ Information</td>
 								</c:choose>
 												MTB:${rec.tumorFrequencyKey}
 												<c:if test="${rec.tumorFrequencyKey!=rec.parentFrequencyKey}">
-														
+
 <!-- \n -->
 
-														<div class="nowrap"><span size="-2"><em>(metastasis
+<div class="nowrap"><span size="-2"><em>(metastasis
 <!-- \n -->
 from MTB:${rec.parentFrequencyKey})</em></span></div>
 												</c:if>
@@ -236,19 +221,19 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 										<td>
 												<c:out value="${tumor.treatmentType}" escapeXml="false"/>
 
-												<c:if test="${not empty rec.sortedAgents}">
+<c:if test="${not empty rec.sortedAgents}">
 														<span size="-2">
 														<em>
 														<c:forEach var="agent" items="${rec.sortedAgents}" varStatus="status">
-																
+
 <!-- \n -->
 
-																<c:out value="${agent}" escapeXml="false"/>
+<c:out value="${agent}" escapeXml="false"/>
 																<c:choose>
 																	<c:when test="${status.last != true}">
 																		<c:out value=", "/>
-																		
-																	</c:when>
+
+</c:when>
 																</c:choose>
 														</c:forEach>
 														</em>
@@ -261,10 +246,10 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 										<td>
 												<c:out value="${rec.frequencyString}" escapeXml="false" default="&nbsp;"/>
 												<c:if test="${rec.numMiceAffected>=0&&rec.colonySize>=0}">
-														
+
 <!-- \n -->
 
-														(${rec.numMiceAffected} of ${rec.colonySize} mice)
+(${rec.numMiceAffected} of ${rec.colonySize} mice)
 												</c:if>
 										</td>
 										<td><c:out value="${rec.ageOnset}" escapeXml="false" default="&nbsp;"/></td>
@@ -284,14 +269,14 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 												<c:when test="${rec.numImages<=0&&rec.numPathEntries>0}">
 	<c:set var="additionalInfoText" value="<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=pathology', '${rec.tumorFrequencyKey}');return false;\">Pathology Reports</a> "/>
 												</c:when>
-											 
-												</c:choose>
 
-												<%-- Check to see if we have genetic information about the tumor --%>
+</c:choose>
+
+<%-- Check to see if we have genetic information about the tumor --%>
 												<c:choose>
 												<c:when test="${rec.numGenetics>0}">
-												
-														 <c:choose>
+
+<c:choose>
 																<c:when test="${not empty additionalInfoText}">
 	<c:set var="additionalInfoText" value="${additionalInfoText}"/>
 																</c:when>
@@ -310,7 +295,7 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 												</c:otherwise>
 												</c:choose>
 
-												<%-- Check to see if we have additional notes about the tumor --%>
+<%-- Check to see if we have additional notes about the tumor --%>
 	<c:set var="notesLinkName" value=""/>
 												<c:choose>
 												<c:when test="${rec.numNotes>0}">
@@ -324,14 +309,14 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=notes', '${rec.tumorFrequencyKey}');return false;\">Additional Notes</a>" />
 															</c:when>
 														</c:choose>
-															
-												</c:when>
+
+</c:when>
 												<c:otherwise>
 														<!-- No additional Notes //-->
 												</c:otherwise>
 												</c:choose>
-												
-												<c:choose>
+
+<c:choose>
 												<c:when test="${not empty rec.note}">
 														<c:choose>
 																<c:when test="${not empty additionalInfoText}">
@@ -343,11 +328,11 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('tumorFrequencyDetails.do?key=${rec.tumorFrequencyKey}&amp;page=tnotes', '${rec.tumorFrequencyKey}');return false;\">Treatment Note</a>" />
 															</c:when>
 														</c:choose>
-															
-												</c:when>
+
+</c:when>
 											</c:choose>
-											
-											<c:choose>
+
+<c:choose>
 												<c:when test="${rec.numSamples > 0}">
 														<c:choose>
 																<c:when test="${not empty additionalInfoText}">
@@ -359,17 +344,17 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 	<c:set var="additionalInfoText" value="${additionalInfoText}<a href=\"nojavascript.jsp\" onClick=\"popPathWin('geneExpressionSearchResults.do?tfKey=${rec.tumorFrequencyKey}&amp;page=arrays', '${rec.tumorFrequencyKey}');return false;\">Expression Data</a>" />
 															</c:when>
 														</c:choose>
-															
-												</c:when>
+
+</c:when>
 											</c:choose>
 
-												<c:choose>
+<c:choose>
 														<c:when test="${not empty additionalInfoText}">
 																${additionalInfoText}
 														</c:when>
 														<c:otherwise>
-																
-														</c:otherwise>
+
+</c:otherwise>
 												</c:choose>
 												</span>
 										</td>
@@ -379,8 +364,8 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 														<a href="referenceDetails.do?accId=${rec.reference}">${rec.reference}</a>
 												</c:when>
 												<c:otherwise>
-														
-												</c:otherwise>
+
+</c:otherwise>
 												</c:choose>
 										</td>
 								</tr>
@@ -396,8 +381,5 @@ from MTB:${rec.parentFrequencyKey})</em></span></div>
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-</div>
-</body>
-</html>
+</jax:mmhcpage>
 

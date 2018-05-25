@@ -3,23 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Tumor Details"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp"/></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#tumordetails"></a>
-</header>
+<jax:mmhcpage title="Tumor Details" help="tumordetails">
 
 <!-- ////  Start Detail Section  //// -->
 
@@ -31,12 +16,11 @@
 <!-- ////  Start Top Left (Tumor)  //// -->
 
 <td width="49%">
-						
 
 <table class="results">
 	<c:set var="lbl" value="1"/>
-								
-								<c:choose>
+
+<c:choose>
 										<c:when test="${tumorFreq.parentFrequencyKey>0}">
 	<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 												<tr class="stripe${lbl}">
@@ -60,10 +44,10 @@
 														<span class="enhance">
 												</c:if>
 												<c:out value="${tumorFreq.organOfOrigin}" escapeXml="false"/>
-												
+
 <!-- \n -->
 
-												<c:out value="${tumorFreq.tumorClassification}" escapeXml="false"/>
+<c:out value="${tumorFreq.tumorClassification}" escapeXml="false"/>
 												<c:if test="${tumorFreq.parentFrequencyKey<=0}">
 														</span>
 												</c:if>
@@ -76,8 +60,8 @@
 												<c:out value="${tumorFreq.treatmentType}" escapeXml="false"/>
 										</td>
 								</tr>
-								
-								<c:choose>
+
+<c:choose>
 								<c:when test="${not empty tumorFreq.tumorSynonyms}">
 	<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 										<tr class="stripe${lbl}">
@@ -90,7 +74,7 @@
 												</c:otherwise>
 												</c:choose>
 
-												<td class="data${lbl}">
+<td class="data${lbl}">
 														<c:forEach var="synonym" items="${tumorFreq.tumorSynonyms}" varStatus="status">
 																${synonym}
 																<c:if test="${status.last != true}">
@@ -105,7 +89,7 @@
 								</c:otherwise>
 								</c:choose>
 
-								<c:choose>
+<c:choose>
 										<c:when test="${tumorFreq.parentFrequencyKey<=0}">
 												<c:choose>
 												<c:when test="${not empty tumorFreq.associatedFrequencyInfo}">
@@ -159,7 +143,6 @@
 <!-- ////  Start Top Right (Strain)  //// -->
 	<c:set var="lbl" value="1"/>
 				<td width="49%">
-						
 
 <table class="results">
 								<tr class="stripe-1">
@@ -170,7 +153,7 @@
 																<td class="enhance" colspan="2"><a href="strainDetails.do?key=${tumorFreq.strainKey}"><c:out value="${tumorFreq.strainName}" escapeXml="false"/></a></td>
 														</tr>
 
-												<c:if test="${not empty tumorFreq.strainTypes}">
+<c:if test="${not empty tumorFreq.strainTypes}">
 														<tr>
 																<c:choose>
 																<c:when test="${fn:length(tumorFreq.strainTypes)>1}">
@@ -238,8 +221,6 @@
 
 <!-- \n -->
 
-		
-
 <table class="results">
 				<tr>
 						<td class="results-header">MTB ID</td>
@@ -275,8 +256,8 @@ Detection</td>
 										</c:choose>
 								</c:when>
 								<c:otherwise>
-										
-										<!--There is no organ affected associated with this tumor frequency record . //-->
+
+<!--There is no organ affected associated with this tumor frequency record . //-->
 								</c:otherwise>
 								</c:choose>
 						</td>
@@ -289,10 +270,10 @@ Detection</td>
 														<span size="-2">
 														${agent}
 														<c:if test="${status.last != true}">
-																
+
 <!-- \n -->
 
-														</c:if>
+</c:if>
 														</span>
 												</c:forEach>
 										</c:when>
@@ -306,10 +287,10 @@ Detection</td>
 						<td>
 								${tumorFreq.frequencyString}
 								<c:if test="${rec.numMiceAffected>=0&&rec.colonySize>=0}">
-										
+
 <!-- \n -->
 
-										(${rec.numMiceAffected} of ${rec.colonySize} mice)
+(${rec.numMiceAffected} of ${rec.colonySize} mice)
 								</c:if>
 						</td>
 						<td><c:out value="${tumorFreq.ageOnset}" default="&nbsp;" escapeXml="false"/></td>
@@ -330,8 +311,8 @@ and Images</a>
 										<a href="#pathology">Reports</a>
 								</c:when>
 								<c:otherwise>
-										
-								</c:otherwise>
+
+</c:otherwise>
 								</c:choose>
 								</span>
 						</td>
@@ -342,8 +323,8 @@ and Images</a>
 												<a href="referenceDetails.do?accId=${tumorFreq.reference}">${tumorFreq.reference}</a>
 										</c:when>
 										<c:otherwise>
-												
-												<!--There is no reference associated with this tumor frequency record . //-->
+
+<!--There is no reference associated with this tumor frequency record . //-->
 										</c:otherwise>
 								</c:choose>
 						</td>
@@ -353,10 +334,8 @@ and Images</a>
 
 <c:choose>
 		<c:when test="${not empty tumorFreq.tumorGenetics}">
-				
-<!-- \n -->
 
-				
+<!-- \n -->
 
 <table class="results">
 						<tr>
@@ -382,7 +361,7 @@ Types</td>
 Change</td>
 						</tr>
 
-										<c:forEach var="genetics" items="${tumorFreq.tumorGenetics}" varStatus="status">
+<c:forEach var="genetics" items="${tumorFreq.tumorGenetics}" varStatus="status">
 												<c:choose>
 														<c:when test="${status.index%2==0}">
 																<tr class="stripe-1">
@@ -404,8 +383,8 @@ Change</td>
 																		</c:choose>
 																</c:when>
 																<c:otherwise>
-																		
-																</c:otherwise>
+
+</c:otherwise>
 																</c:choose>
 														</td>
 														<td>
@@ -417,13 +396,13 @@ Change</td>
 														<td>
 																<c:out value="${genetics.alleleType}" escapeXml="false"/>
 														</td>
-														
-														<td>
+
+<td>
 																<c:forEach var="row" items="${genetics.genotypes}" varStatus="status">
 																		${row.allele1Symbol} / ${row.allele2Symbol}
 																</c:forEach>
-														
-														</td>
+
+</td>
 												</tr>
 										</c:forEach>
 				</table>
@@ -439,10 +418,8 @@ Change</td>
 
 <c:choose>
 		<c:when test="${(not empty tumorFreq.additionalNotes) || (not empty tumorFreq.note)}">
-				
-<!-- \n -->
 
-				
+<!-- \n -->
 
 <table class="results">
 						<tr>
@@ -455,16 +432,16 @@ Change</td>
 								<td class="results-header">Reference</td>
 						</tr>
 	<c:set var="noteRow" value="2"/>
-						
-						<c:if test="${not empty tumorFreq.note}">
+
+<c:if test="${not empty tumorFreq.note}">
 	<c:set var="noteRow" value="1"/>
 								<tr class="stripe-1">
 										<td><c:out value="${tumorFreq.note}"/></td>
 										<td><a href="referenceDetails.do?accId=${tumorFreq.reference}">${tumorFreq.reference}</a></td>
 								</tr>
 						</c:if>
-						
-						<c:forEach var="rec" items="${tumorFreq.additionalNotes}" varStatus="status">
+
+<c:forEach var="rec" items="${tumorFreq.additionalNotes}" varStatus="status">
 	<c:set var="noteRow" value="${noteRow == 1 ? 2 : 1}"/>
 								<tr class="stripe${noteRow}">
 										<td><c:out value="${rec.label}" escapeXml="false"/></td>
@@ -487,7 +464,6 @@ Change</td>
 				<a name="pathology">
 <!-- \n -->
 </a>
-				
 
 <table class="results">
 						<tr>
@@ -521,31 +497,31 @@ Change</td>
 						</tr>
 	<c:set var="lbl" value="1"/>
 	<c:set var="rowClass" value="stripe1"/>
-						
-						<c:forEach var="rec" items="${tumorFreq.pathologyRecs}" varStatus="status">
+
+<c:forEach var="rec" items="${tumorFreq.pathologyRecs}" varStatus="status">
 	<c:set var="lbl" value="${lbl+1}"/>
 	<c:set var="rowClass" value="stripe${(lbl%2)+1}"/>
 	<c:set var="rowSpan" value="${fn:length(rec.images)}"/>
-								
-								<c:if test="${rowSpan<1}">
+
+<c:if test="${rowSpan<1}">
 	<c:set var="rowSpan" value="1"/>
 								</c:if>
-								
-								<tr class="${rowClass}">
-						
-										<td rowspan="${rowSpan}"><c:out value="${rec.ageAtNecropsy}" escapeXml="false" default="&nbsp;"/></td>
+
+<tr class="${rowClass}">
+
+<td rowspan="${rowSpan}"><c:out value="${rec.ageAtNecropsy}" escapeXml="false" default="&nbsp;"/></td>
 										<td rowspan="${rowSpan}"><c:out value="${rec.description}" escapeXml="false" default="&nbsp;"/></td>
 										<td rowspan="${rowSpan}"><c:out value="${rec.note}" escapeXml="false" default="&nbsp;"/></td>
-										
-												<c:choose>
+
+<c:choose>
 												<c:when test="${not empty rec.images}">
 														<c:forEach var="image" items="${rec.images}" varStatus="status2">
-														
-																<c:if test="${status2.first!=true}">
+
+<c:if test="${status2.first!=true}">
 																		<tr class="${rowClass}">
 																</c:if>
-														
-														<td>																
+
+<td>																
 																<table>
 																		<tr>
 																				<td width="160">
@@ -583,12 +559,12 @@ Change</td>
 																						<strong>Image Caption</strong>:
 <!-- \n -->
 
-																						${image.imageCaption}
+${image.imageCaption}
 																				</td>
 																		</tr>
 																</table>
-														
-																</td>
+
+</td>
 														</tr>
 														</c:forEach>
 												</c:when>
@@ -609,8 +585,5 @@ Change</td>
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

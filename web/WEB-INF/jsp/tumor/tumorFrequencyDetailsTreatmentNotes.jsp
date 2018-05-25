@@ -2,23 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Tumor Treatment Note"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-<div class="wrap">
-<section class="main-alt">
+<jax:mmhcpage title="Tumor Treatment Note">
 
 <!-- ////  Start Additional Notes Records  //// -->
 
 <c:choose>
 		<c:when test="${not empty tumorFreq.note}">
-				
 
 <table class="results">
 						<tr>
@@ -31,15 +21,15 @@
 								<td class="results-header">Reference</td>
 						</tr>
 
-						<c:if test="${not empty tumorFreq.note}">
+<c:if test="${not empty tumorFreq.note}">
 	<c:set var="noteRow" value="1"/>
 								<tr class="stripe-1">
 										<td>${tumorFreq.note}</td>
 										<td><a href="nojavascript.jsp" onclick="focusBackToOpener('referenceDetails.do?accId=${tumorFreq.reference}');return false;">${tumorFreq.reference}</a></td>
 								</tr>
 						</c:if>
-					 
-				</table>
+
+</table>
 		</c:when>
 		<c:otherwise>
 				<!-- No notes for this frequency record //-->
@@ -48,8 +38,5 @@
 
 <!-- ////  End Additional Notes Records  //// -->
 
-</section>
-</div>
-</body>
-</html>
+</jax:mmhcpage>
 

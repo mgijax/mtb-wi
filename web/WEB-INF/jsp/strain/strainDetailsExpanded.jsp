@@ -2,29 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
 
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Strain Tumor Overview (Expanded View)"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
-
-<body>
-	<c:import url="../../../body.jsp" />
-	<div class="wrap">
-		<nav><c:import url="../../../toolBar.jsp"/></nav>
-		<section class="main">
-		<header>
-			<h1>Strain Tumor Overview<pan class="normal">Expanded View</span></h1>
-			<a class="help" href="userHelp.jsp#straindetail"></a>
-</header>
+<jax:mmhcpage title="Strain Tumor Overview (Expanded View)" help="straindetail">
 
 <table class="results">
-
-<!-- ////  Start Detail Section  //// -->
-
-<!-- ////  Start Strain Header  //// -->
 
 <tr class="stripe-1">
 				<td class="cat-1">
@@ -59,8 +40,8 @@
 																<!-- There are no synonyms associated with this strain. -->
 														</c:otherwise>
 														</c:choose>
-	
-												<c:if test="${not empty strain.description}">
+
+<c:if test="${not empty strain.description}">
 														<tr>
 																<td class="label">Strain Note: </td>
 																<td>${strain.description}</td>
@@ -89,18 +70,16 @@
 						<td class="data${num}">
 	<c:set var="statsBean" value="${strain.tumorStats}"/>
 								${statsBean.label} unique tumor sub-types displayed. <!-- representing ${statsBean.value} tumor detail records. -->
-								
-<!-- \n -->
 
-<!-- \n -->
-
-								<em>A tumor sub-type is a set of tumors that share the same tumor name, organ affected, treatment agent, and metastatic status/localization.</em>
-								
 <!-- \n -->
 
 <!-- \n -->
 
-								
+<em>A tumor sub-type is a set of tumors that share the same tumor name, organ affected, treatment agent, and metastatic status/localization.</em>
+
+<!-- \n -->
+
+<!-- \n -->
 
 <table class="results">
 										<tr>
@@ -132,17 +111,17 @@ Tumor Sub-type Records</td>
 														<td width="200">
 																<c:out value="${tumor.treatmentType}" escapeXml="false"/>
 																<c:if test="${not empty tumor.agents}">
-																		
+
 <!-- \n -->
 
-																		<span size="-2"><em>
+<span size="-2"><em>
 																		<c:forEach var="agent" items="${tumor.agents}" varStatus="status">
 																				<c:out value="${agent}" escapeXml="false"/>
 																				<c:if test="${status.last != true}">
-																						
+
 <!-- \n -->
 
-																				</c:if>
+</c:if>
 																		</c:forEach>
 																		</em></span> 
 																</c:if>
@@ -153,15 +132,15 @@ Tumor Sub-type Records</td>
 																		<c:forEach var="organ" items="${tumor.metastasizesToDisplay}" varStatus="status">
 																				${organ}
 																				<c:if test="${status.last != true}">
-																						
+
 <!-- \n -->
 
-																				</c:if>
+</c:if>
 																		</c:forEach>
 																</c:when>
 																<c:otherwise>
-																		
-																</c:otherwise>
+
+</c:otherwise>
 																</c:choose>
 														</td>
 														<td>
@@ -170,15 +149,15 @@ Tumor Sub-type Records</td>
 																		<c:forEach var="ref" items="${tumor.sortedRefAccIds}" varStatus="status">
 																				<a href="referenceDetails.do?accId=${ref}">${ref}</a>
 																				<c:if test="${status.last != true}">
-																						
+
 <!-- \n -->
 
-																				</c:if>
+</c:if>
 																		</c:forEach>
 																</c:when>
 																<c:otherwise>
-																		
-																</c:otherwise>
+
+</c:otherwise>
 																</c:choose>
 														</td>
 														<td>
@@ -206,7 +185,6 @@ Tumor Sub-type Records</td>
 				<tr class="stripe${num}">
 						<td class="cat${num}">Other Database Links</td>
 						<td class="data${num}">
-								
 
 <table class="results">
 										<c:choose>
@@ -236,7 +214,7 @@ Tumor Sub-type Records</td>
 										</c:otherwise>
 										</c:choose>
 
-										<c:choose>
+<c:choose>
 										<c:when test="${not empty strain.linksGeneral}">
 												<tr>
 														<td class="header-label" colspan=2><strong>Information about mice carrying the same mutant allele(s):</strong></td>
@@ -250,8 +228,8 @@ Tumor Sub-type Records</td>
 																		<tr class="stripe-2">
 																</c:otherwise>
 														</c:choose>
-													 
-															 <td><a href="${linkGeneral.siteUrl}" target="${linkGeneral.siteName}"><c:out value="${linkGeneral.siteName}" escapeXml="false"/></a></td>
+
+<td><a href="${linkGeneral.siteUrl}" target="${linkGeneral.siteName}"><c:out value="${linkGeneral.siteName}" escapeXml="false"/></a></td>
 														<td><a href="${linkGeneral.accessionUrl}" target="${linkGeneral.siteName}"><c:out value="${linkGeneral.accessionUrl}" escapeXml="false"/></a></td>
 														</tr>
 												</c:forEach>
@@ -275,9 +253,5 @@ Tumor Sub-type Records</td>
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
 

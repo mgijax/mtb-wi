@@ -2,24 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Tumor Pathology Report/Images"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-<div class="wrap">
-<section class="main-alt">
+<jax:mmhcpage title="Tumor Pathology Report/Images">
 
 <!-- ////  Start Pathology Records  //// -->
 
 <c:choose>
 		<c:when test="${not empty tumorFreq.pathologyRecs}">
 				<a name="pathology"></a>
-				
 
 <table class="results">
 						<tr>
@@ -53,36 +43,36 @@
 						</tr>
 	<c:set var="lbl" value="1"/>
 	<c:set var="rowClass" value="stripe1"/>
-						
-						<c:forEach var="rec" items="${tumorFreq.pathologyRecs}" varStatus="status">
+
+<c:forEach var="rec" items="${tumorFreq.pathologyRecs}" varStatus="status">
 	<c:set var="lbl" value="${lbl+1}"/>
 	<c:set var="rowClass" value="stripe${(lbl%2)+1}"/>
 	<c:set var="rowSpan" value="${fn:length(rec.images)}"/>
-								
-								<c:if test="${rowSpan<1}">
+
+<c:if test="${rowSpan<1}">
 	<c:set var="rowSpan" value="1"/>
 								</c:if>
-								
-								<tr class="${rowClass}">
-						
-										<td rowspan="${rowSpan}"><c:out value="${rec.ageAtNecropsy}" escapeXml="false" default="&nbsp;"/></td>
+
+<tr class="${rowClass}">
+
+<td rowspan="${rowSpan}"><c:out value="${rec.ageAtNecropsy}" escapeXml="false" default="&nbsp;"/></td>
 										<td rowspan="${rowSpan}"><c:out value="${rec.description}" escapeXml="false" default="&nbsp;"/></td>
 										<td rowspan="${rowSpan}"><c:out value="${rec.note}" escapeXml="false" default="&nbsp;"/></td>
-										
-												<c:choose>
+
+<c:choose>
 												<c:when test="${not empty rec.images}">
 														<c:forEach var="image" items="${rec.images}" varStatus="status2">
-														
-																<c:if test="${status2.first!=true}">
+
+<c:if test="${status2.first!=true}">
 																		<tr class="${rowClass}">
 																</c:if>
-														
-														<td>																
+
+<td>																
 																<table>
 																		<tr>
 																				<td width="160">
-																				
-																						<a href="pathologyImageDetails.do?key=${image.imageId}">
+
+<a href="pathologyImageDetails.do?key=${image.imageId}">
 																						<img width="150" src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${image.imageThumbName}"></a>
 																				</td>
 																				<td align="left">
@@ -116,12 +106,12 @@
 																						<strong>Image Caption</strong>:
 <!-- \n -->
 
-																						${image.imageCaption}
+${image.imageCaption}
 																				</td>
 																		</tr>
 																</table>
-														
-																</td>
+
+</td>
 														</tr>
 														</c:forEach>
 												</c:when>
@@ -140,8 +130,5 @@
 
 <!-- ////  End Pathology Records  //// -->
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

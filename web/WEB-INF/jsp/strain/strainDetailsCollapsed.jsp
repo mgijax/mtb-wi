@@ -3,29 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
 
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Strain Tumor Overview (Collapsed View)"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
-
-<body>
-	<c:import url="../../../body.jsp" />
-	<div class="wrap">
-		<nav><c:import url="../../../toolBar.jsp"/></nav>
-		<section class="main">
-		<header>
-			<h1>Strain Tumor Overview<pan class="normal">Collapsed View</span></h1>
-			<a class="help" href="userHelp.jsp#straindetail"></a>
-</header>
+<jax:mmhcpage title="Strain Tumor Overview (Collapsed View)" help="straindetail">
 
 <table class="results">
-
-<!-- ////  Start Detail Section  //// -->
-
-<!-- ////  Start Strain Header  //// -->
 
 <tr class="stripe-1">
 				<td class="cat-1">
@@ -92,18 +73,16 @@
 						<td class="data${num}">
 	<c:set var="statsBean" value="${strain.tumorStats}"/>
 								${statsBean.label} unique tumor types displayed.
-								
-<!-- \n -->
 
-<!-- \n -->
-
-								<em>A tumor group is a set of tumors that share the same tumor name, organ(s) affected, and treatment type.</em>
-								
 <!-- \n -->
 
 <!-- \n -->
 
-								
+<em>A tumor group is a set of tumors that share the same tumor name, organ(s) affected, and treatment type.</em>
+
+<!-- \n -->
+
+<!-- \n -->
 
 <table class="results">
 										<tr>
@@ -151,7 +130,6 @@ Tumor Group Records</td>
 				<tr class="stripe${num}">
 						<td class="cat${num}">Other Database Links</td>
 						<td class="data${num}">
-								
 
 <table class="results">
 										<c:choose>
@@ -181,7 +159,7 @@ Tumor Group Records</td>
 										</c:otherwise>
 										</c:choose>
 
-										<c:choose>
+<c:choose>
 										<c:when test="${not empty strain.linksGeneral}">
 												<tr>
 														<td class="header-label" colspan=2><strong>Information about mice carrying the same mutant allele(s):</strong></td>
@@ -219,8 +197,5 @@ Tumor Group Records</td>
 
 <!-- ////  End Detail Section  //// -->
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

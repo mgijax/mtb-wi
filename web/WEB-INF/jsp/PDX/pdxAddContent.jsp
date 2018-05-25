@@ -5,10 +5,8 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Add PDX Content"/>
+
+<jax:mmhcpage title="Add PDX Content" help="pdxAddContent">
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/GViewer/javascript/fileUpload.css"/>
 	<style type="text/css">
@@ -23,19 +21,19 @@
 								float: left;
 						}
 	</style>
-	<c:import url="../../../meta.jsp"/>
-	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+
+<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FileUploadField.js"></script>
-</head>
-	<script type="text/javascript">
-				
-		Ext.onReady(function(){
-				
-				Ext.apply(Ext.form.VTypes, {
-				
-				'imagefile': function(){
+
+<script type="text/javascript">
+
+Ext.onReady(function(){
+
+Ext.apply(Ext.form.VTypes, {
+
+'imagefile': function(){
 								return function(v){
 										v = v.replace(/^\s|\s$/g, ""); //trims string
 													 if (v.match(/([^\/\\]+)\.(bmp|gif|png|jpg|jpeg)$/i) )
@@ -47,10 +45,9 @@
 								'imagefileText' : 'Must be a valid image file: GIF, JPG, BMP, PNG'
 				});
 
-				Ext.QuickTips.init();
+Ext.QuickTips.init();
 
-			 
-				var piForm = new Ext.FormPanel({
+var piForm = new Ext.FormPanel({
 						hidden:${hidePImage},
 						renderTo: 'piForm',
 						fileUpload: true,
@@ -102,8 +99,8 @@
 										buttonCfg: {
 												iconCls: 'upload-icon'
 										}
-										
-								}],
+
+}],
 						buttons: [{
 										text: 'Upload',
 										handler: function(){
@@ -118,8 +115,8 @@
 																},
 																failure: function(form,o){
 																		Ext.Msg.alert('Failure','Image upload failed.');
-																		
-																}
+
+}
 														});
 												 }else{
 												 Ext.Msg.alert('','Please correct invalid fields.');
@@ -134,12 +131,8 @@
 								}
 						]
 				});
-				
-				
-				
-				
-				
-				 var linkForm = new Ext.FormPanel({
+
+var linkForm = new Ext.FormPanel({
 						hidden:${hideLink},
 						renderTo: 'linkForm',
 						fileUpload: false,
@@ -164,8 +157,8 @@
 										id:'linkURL',
 										fieldLabel:'Link URL',
 										name:'linkURL'
-										
-								}
+
+}
 								,{ xtype:'textfield',
 										id:'linkText',
 										fieldLabel:'Link Text',
@@ -185,8 +178,8 @@
 																},
 																failure: function(form,o){
 																		Ext.Msg.alert('Failure','Link creation failed.');
-																		
-																}
+
+}
 														});
 												 }else{
 												 Ext.Msg.alert('','Please correct invalid fields.');
@@ -201,11 +194,8 @@
 								}
 						]
 				});
-				
-				
-				
-				
-					var documentForm = new Ext.FormPanel({
+
+var documentForm = new Ext.FormPanel({
 						hidden:${hideDocument},
 						renderTo: 'documentForm',
 						fileUpload: true,
@@ -230,8 +220,8 @@
 										id:'documentLinkText',
 										fieldLabel:'Link text',
 										name:'documentLinkText'
-									 
-								},
+
+},
 								{ xtype: 'fileuploadfield',
 										id: 'documentPath',
 										emptyText: 'Select a Document',
@@ -256,8 +246,8 @@
 																},
 																failure: function(form,o){
 																		Ext.Msg.alert('Failure','Document upload failed.');
-																		
-																}
+
+}
 														});
 												 }else{
 												 Ext.Msg.alert('','Please correct invalid fields.');
@@ -272,9 +262,8 @@
 								}
 						]
 				});
-				
-				
-				 var graphicForm = new Ext.FormPanel({
+
+var graphicForm = new Ext.FormPanel({
 						hidden:${hideGraphic},
 						renderTo: 'graphicForm',
 						fileUpload: true,
@@ -327,8 +316,8 @@
 																},
 																failure: function(form,o){
 																		Ext.Msg.alert('Failure','Graphic upload failed.');
-																		
-																}
+
+}
 														});
 												 }else{
 												 Ext.Msg.alert('','Please correct invalid fields.');
@@ -344,7 +333,7 @@
 						]
 				});
 
-				 var commentForm = new Ext.FormPanel({
+var commentForm = new Ext.FormPanel({
 						hidden:${hideComment},
 						renderTo: 'commentForm',
 						fileUpload: false,
@@ -380,8 +369,8 @@
 																},
 																failure: function(form,o){
 																		Ext.Msg.alert('Failure','Comment creation failed.');
-																		
-																}
+
+}
 														});
 												 }else{
 												 Ext.Msg.alert('','Please correct invalid fields.');
@@ -396,30 +385,17 @@
 								}
 						]
 				});
-				
-				
-				
-				var test = '${documentLinkText}';
+
+var test = '${documentLinkText}';
 				if(true){
 						documentForm.findField('documentFilePath').disabled=true;
 				}
 
 // end onReady
 
-		});
+});
 	</script>		
 
-<body>
-	<c:import url="../../../body.jsp" />
-
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#pdxAddContent"></a>
-</header>
 <table>
 
 <!-- ////  Start Search Summary  //// -->
@@ -427,7 +403,7 @@
 <tr class="summary">
 												<td colspan="11">
 
-														<table>
+<table>
 																<tr><td>
 																				<h1>Additional ${characterization} content for ${modelID}</h1>
 																				<h1></h1>
@@ -444,11 +420,6 @@
 												</td>
 										</tr>
 								</table>
-								
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
 

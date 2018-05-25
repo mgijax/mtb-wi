@@ -3,24 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Quick Search Results"/>
-	<c:import url="../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../body.jsp" />
-
-<div class="wrap">
-<nav><c:import url="../../toolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#interpreting"></a>
-</header>
+<jax:mmhcpage title="Quick Search Results" help="interpreting">
 
 <table>
 
@@ -31,13 +15,13 @@
 						<span class="label">Search Summary</span>
 <!-- \n -->
 
-						<span class="label">Search For:</span> contains "${quickSearchTerm}"
+<span class="label">Search For:</span> contains "${quickSearchTerm}"
 <!-- \n -->
 
-						<span class="label">In these sections:</span> ${searchSections}
+<span class="label">In these sections:</span> ${searchSections}
 <!-- \n -->
 
-				</td>
+</td>
 		</tr>
 
 <!-- ////  End Search Summary  //// -->
@@ -55,7 +39,6 @@
 
 <tr>
 										<td>
-												
 
 <table class="results">
 														<tr class="page-title">
@@ -95,7 +78,6 @@
 																				</table>
 																		</c:when>
 																		<c:otherwise>
-																				
 
 <table class="results">
 																						${result.searchResultsText}
@@ -104,18 +86,17 @@
 																</c:choose>
 														</c:when>
 														<c:otherwise>
-																
-														</c:otherwise>
+
+</c:otherwise>
 												</c:choose>
-												
-												<c:if test="${not fn:contains(result.searchResultsText, 'No results found')}">
-														
+
+<c:if test="${not fn:contains(result.searchResultsText, 'No results found')}">
+
 <!-- \n -->
 
-														<a href="${result.viewAllUrl}">All...</a>
+<a href="${result.viewAllUrl}">All...</a>
 												</c:if>
 
-												
 <!-- \n -->
 
 <!-- \n -->
@@ -124,7 +105,7 @@
 
 <!-- \n -->
 
-										</td>
+</td>
 								</tr>
 
 <!-- ////  End ${result.searchName}  //// -->
@@ -139,8 +120,5 @@
 
 <!-- ////  End Search Results List  //// -->
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

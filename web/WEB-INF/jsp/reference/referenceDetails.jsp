@@ -1,24 +1,9 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Reference Detail"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
+<jax:mmhcpage title="Reference Detail" help="referencedetail">
 
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#referencedetail"></a>
-</header>
 <table class="results">
 
 <!-- ////  Start Reference Detail //// -->
@@ -81,8 +66,8 @@
 
 <!-- ////  Start Reference Additional Info  //// -->
 	<c:set var="lbl" value="2"/>
-		
-		<c:choose>
+
+<c:choose>
 		<c:when test="${not empty reference.additionalInfo}">
 				<c:if test="${reference.hasAdditionalInfo}">
 	<c:set var="lbl" value="${lbl+1}"/>
@@ -170,9 +155,5 @@ IDs</td>
 
 </table>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
 

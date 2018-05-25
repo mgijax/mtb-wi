@@ -3,22 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="PDX Image Detail"/>
-	<c:import url="../../../meta.jsp"/>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-<div class="wrap">
-<section class="main-alt">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#imagedetail"></a>
-</header>
+<jax:mmhcpage title="PDX Image Detail" help="imagedetail">
 
 <table class="results">
 
@@ -30,9 +16,9 @@
 																<td colspan="2">
 																		<div>
 
-																				<img height=800 width=800 src="${applicationScope.pdxFileURL}${fileName}">
+<img height=800 width=800 src="${applicationScope.pdxFileURL}${fileName}">
 
-																		</div>
+</div>
 																</td>
 														</tr>
 
@@ -49,9 +35,5 @@
 
 </table>
 
-</section>
-</div>
-</body>
-</html>
- 
+</jax:mmhcpage>
 

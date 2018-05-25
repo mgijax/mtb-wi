@@ -1,21 +1,19 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Patient Derived Xenograft Dashboard"/>
-	<c:import url="../../../meta.jsp"/>
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<jax:mmhcpage title="Patient Derived Xenograft Dashboard" help="pdxDashboard">
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript">
-				
-				var disableResult = "${disableResults}";
+
+var disableResult = "${disableResults}";
 				if(disableResult.length > 0){
 						disableResult = disableResult.replace(/,/g, "\n");
 						alert(disableResult);
 				}
-				
-				function disableClick(){
+
+function disableClick(){
 						var count = document.getElementById("disableIDs").value.split(",").length
 						ok = confirm("You are about to disable "+count+" mice.\n"+document.getElementById("disableIDs").value.replace(/,/g,"\n"));
 						if(ok==true){
@@ -23,19 +21,19 @@
 						}
 						return false;
 				}
-				
-				google.load("visualization", "1", {packages:["corechart"]});
+
+google.load("visualization", "1", {packages:["corechart"]});
 				google.setOnLoadCallback(drawCharts);
-			
-				function drawCharts(){
+
+function drawCharts(){
 						drawPieChart();
 						drawBarChart();
 				}
-			
-				function drawPieChart() {
+
+function drawPieChart() {
 						var data = google.visualization.arrayToDataTable([${modelStats}]);
 
-						var options = { 
+var options = { 
 								colors: ["#109618","#dc3912","#3366cc","#ff9900","#b82e2e","#316395","#994499","#22aa99","#aaaa11"],
 								title: 'PDX Mouse Engraftment (${tissue}, ${site}) ',
 								chartArea: {top: 40, left:0, width:"100%"},
@@ -44,25 +42,22 @@
 								legend:{textStyle: {fontSize: 11}}
 						};
 
-						var pieChart = new google.visualization.PieChart(document.getElementById('pie_chart_div'));
+var pieChart = new google.visualization.PieChart(document.getElementById('pie_chart_div'));
 						pieChart.draw(data, options);
 				}
-			
-			
-				
-				function selectHandler(e){
+
+function selectHandler(e){
 						var selection = barChart.getSelection();
 						var item = selection[0];
 						if (item.row != null){
 								window.open("pdxSearchResults.do?primarySites="+barData.getValue(item.row,0),"barData.getValue(item.row,0)");
 						}	
 				}
-			
-			
-				function drawBarChart() {
+
+function drawBarChart() {
 						barData = google.visualization.arrayToDataTable([${modelStatsByTissue}]);
 
-						var options = {
+var options = {
 								title: 'Engraftment by Primary Site',
 								vAxis: {title: 'Tissue', titleTextStyle: {color: 'red'}},
 								hAxis: {title: 'Engrafted Mice',titleTextStyle: {color: 'red'}},
@@ -71,38 +66,24 @@
 								 ${stacked}
 						};
 
-						barChart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
-						
-						google.visualization.events.addListener(barChart, 'select', selectHandler);
-						
-						barChart.draw(barData, options);
-				
-				
-				}
+barChart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
+
+google.visualization.events.addListener(barChart, 'select', selectHandler);
+
+barChart.draw(barData, options);
+
+}
 	</script>
-</head>
-
-<body>
-	<c:import url="../../../body.jsp" />
-
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
-
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#pdxDashboard"></a>
-</header>
 
 <table class="results">
 
-										<tr class="buttons">
+<tr class="buttons">
 												<td colspan="2">
 														<input type="button" value="Open PDX Genomics Dashboard" onclick="window.open('	http://pdx-dashboard.jax.org/v4/');">
 												</td>
 										</tr>
 
-										<tr class="buttons">
+<tr class="buttons">
 												<td colspan="2">
 														<table>
 																<tr>
@@ -111,7 +92,7 @@
 																		</td>
 																</tr>
 
-																<tr>
+<tr>
 																		<td>
 																<html:form action="pdxDashboard" method="POST">
 																		<input type="submit" name="statusReport" VALUE="PDX Status Report">
@@ -133,23 +114,23 @@
 						</html:form>
 						</td>
 
-						<td>
+<td>
 						<html:form action="pdxDashboard" method="POST">
 								<input type="submit" name="consortium" VALUE="PDX Consortium Report"> 
 						</html:form>
 						</td>
-						
-						 <td>
-						
-								 <a class="none" href="http://bhmtbdb01.jax.org/usrlocalmgi/mtb/live/www/pdx/treatment_response_summary.xlsx"><input type="button"	VALUE="Drug Response Summary"></a>
-						
-						</td>
+
+<td>
+
+<a class="none" href="http://bhmtbdb01.jax.org/usrlocalmgi/mtb/live/www/pdx/treatment_response_summary.xlsx"><input type="button"	VALUE="Drug Response Summary"></a>
+
+</td>
 						</tr>
 						<tr>
 								<td colspan=5>
 										Reports loaded ${freshnessDate} E.S.T. 
 
-								</td>
+</td>
 						<tr>
 								<td colspan=5>
 						<html:form action="pdxDashboard" method="POST">
@@ -196,9 +177,9 @@
 										</html:select>
 										</td>
 
-										</tr>
+</tr>
 
-										<tr>
+<tr>
 												<td>
 														<input type="submit" VALUE="Update Pie Chart">
 												</td>
@@ -244,15 +225,15 @@
 												</td>
 										</tr>
 
-										<tr>
+<tr>
 
-												<td>
+<td>
 														<input type="submit" name="aipReport" VALUE="Available or in progress">
 												</td>
 										</tr>
 										<tr>
 
-												<td>
+<td>
 														<input type="submit" name="aipReportSheet" VALUE="Available or in progress-Spreadsheet">
 												</td>
 										</tr>
@@ -269,7 +250,7 @@
 								</table>
 						</html:form>
 
-						<td>
+<td>
 						<c:if test="${not empty modelStatsByTissue}">
 								<div id="bar_chart_div" style="width: 100%; height: ${divSize}px;"></div>
 						</c:if>
@@ -291,7 +272,7 @@
 						</tr>
 						<tr>
 
-								<td>
+<td>
 						<html:form action="pdxDashboard" method="post" onsubmit="return disableClick()" >
 								Enter mouse ID's to disable 
 								<input type="text" name="disableIDs" size="100" id="disable-i-ds">
@@ -306,13 +287,10 @@
 
 </table>
 
-</section>
-</div>
 <c:if test="${not empty bySite}">
 	<script>
 				document.location="#sites"
 	</script>
 </c:if>
-</body>
-</html>
- 
+</jax:mmhcpage>
+

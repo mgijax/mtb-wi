@@ -3,30 +3,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!doctype html>
-<html>
-<head>
-	<c:set var="pageTitle" scope="request" value="Cancer QTL Selection Details"/>
+
+<jax:mmhcpage title="Cancer QTL Selection Details" help="GViewerDetails">
 	<style type="text/css">
-		
-		.no-icon {
+
+.no-icon {
 	display : none;
 	background-image:'' !important;
 	}
 	</style>
-	<c:import url="../../../meta.jsp"/>
-	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+
+<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-</head>
 
-<body>
-	<c:import url="../../../body.jsp" />
-	<script type="text/javascript">
-		
-		var treePanel;
-		
-		var fTypeMap =	[];
+<script type="text/javascript">
+
+var treePanel;
+
+var fTypeMap =	[];
 		fTypeMap['all feature types'] =6238159;
 		fTypeMap['gene'] = 6238160;
 		fTypeMap['protein coding gene'] = 6238161;
@@ -56,10 +51,9 @@
 		fTypeMap['other genome feature'] = 6238178;
 		fTypeMap['DNA segment'] = 6238179;
 
-		Ext.onReady(function(){
-		
+Ext.onReady(function(){
 
-		treePanel = new Ext.tree.TreePanel({
+treePanel = new Ext.tree.TreePanel({
 				renderTo:'featureTypeSelection',
 				height: 100,
 				width: 450,
@@ -77,11 +71,11 @@
 						checked:false,
 						iconCls:'no-icon'
 				},
-				
-				// auto create TreeLoader
+
+// auto create TreeLoader
 				dataUrl:'${applicationScope.urlBase}/GViewer/data/featureTypes.json',
-				
-				listeners: {
+
+listeners: {
 						'checkchange': function(node, checked){
 										var i=0, children = node.childNodes;
 										for(i; i < children.length; i++){
@@ -91,80 +85,63 @@
 				}
 		});
 
-		treePanel.expandAll();
+treePanel.expandAll();
 	//	treePanel.collapseAll();
 });
-		
-		
-	
-		function batchSwap() {
+
+function batchSwap() {
 			changeVisibility("summary");
 			changeVisibility("params");
 		}
 
-		function changeVisibility(id) {
+function changeVisibility(id) {
 
-			var myID = document.getElementById(id);
+var myID = document.getElementById(id);
 
-			if (myID.style.display == "block"){
+if (myID.style.display == "block"){
 				myID.style.display = "none";
 			} else {
 				myID.style.display = "block";
 			}
 		}
-		
-		function viewerSubmit(){
-		
-			// get the data from the form
+
+function viewerSubmit(){
+
+// get the data from the form
 			var ch = ${QTLForm.chrom};
 			var start = document.forms[1].searchStart.value;
 			var end = document.forms[1].searchEnd.value;
-			
-			
-			var pheno = document.forms[1].phenotype.value;
-		
-			
-			var ontologyKeys = ""
+
+var pheno = document.forms[1].phenotype.value;
+
+var ontologyKeys = ""
 			for(var i = 0; i < document.forms[1].ontology_key.length; i++){
 				if(document.forms[1].ontology_key[i].checked){
 					ontologyKeys = ontologyKeys + ('&ontology_key='+document.forms[1].ontology_key[i].value);
 				}
 			}
-					
-			var goOp = document.forms[1].go_op.value
+
+var goOp = document.forms[1].go_op.value
 			var goTerm = document.forms[1].go_term.value
-			
-			var mcvs = '', selNodes = treePanel.getChecked();
-			
-			Ext.each(selNodes, function(node){
+
+var mcvs = '', selNodes = treePanel.getChecked();
+
+Ext.each(selNodes, function(node){
 					if(mcvs.length > 0){
 							mcvs += '&';
 					}
 					mcvs +="mcv="+fTypeMap[node.text];
 			});
-			
-			window.opener.qtlStore.proxy.setUrl('viewer.do?chromosome='+ch+'&start='+start+'&end='+end
-				+'&phenotype='+pheno+'&go_op='+goOp+'&go_term='+goTerm+''+ontologyKeys+"&"+mcvs);
-			
-			window.opener.qtlStore.load({add:true});
-		 
-			window.opener.alert("Loading MGD results.");
-			
-		}
-	</script>
-	
-	
-	
-	
-<div class="wrap">
-<nav><c:import url="../../../toolBar.jsp" /></nav>
-<section class="main">
 
-<header>
-	<h1>${pageTitle}</h1>
-	<a class="help" href="userHelp.jsp#GViewerDetails">
-													</a>
-</header>
+window.opener.qtlStore.proxy.setUrl('viewer.do?chromosome='+ch+'&start='+start+'&end='+end
+				+'&phenotype='+pheno+'&go_op='+goOp+'&go_term='+goTerm+''+ontologyKeys+"&"+mcvs);
+
+window.opener.qtlStore.load({add:true});
+
+window.opener.alert("Loading MGD results.");
+
+}
+	</script>
 
 <table class="results">
 
@@ -172,14 +149,10 @@
 
 <tr class="stripe-1">
 									<td colspan="2">
-										
-										
-										
-										
-										<table width="560">
-											
-											
-											<c:choose>
+
+<table width="560">
+
+<c:choose>
 												<c:when test="${not empty QTLForm.label}">
 													<tr class="stripe-2">
 														<td class="cat-2">
@@ -198,16 +171,16 @@
 														</td>
 													</tr>								
 												</c:when>
-												
-											</c:choose>
-											
-											<tr class="stripe-2">
+
+</c:choose>
+
+<tr class="stripe-2">
 												<td class="cat-2">Location</td><td><a href="nojavascript.jsp" onClick="popPathWin('http://genome.ucsc.edu/cgi-bin/hgTracks?org=Mouse&position=Chr${QTLForm.chrom}:${QTLForm.qtlStart}-${QTLForm.qtlEnd}');return false;" >${QTLForm.chrom}:${QTLForm.qtlStart}..${QTLForm.qtlEnd}</a> &nbsp; (links to UCSC genome browser) 
 <!-- \n -->
  <em>Build 37</em> </td>
 											</tr>
-											
-											<tr class="stripe-1">
+
+<tr class="stripe-1">
 												<td class="cat-1">Primary Reference</td><td><a href="http://www.informatics.jax.org/searches/reference.cgi?${QTLForm.primeRefId}">${QTLForm.primeRef}</a></td>
 											</tr>
 											<tr class="stripe-2">
@@ -232,8 +205,8 @@
 													</c:choose>
 												</td>
 											</tr>
-											
-										</table>
+
+</table>
 									</td>
 								</tr>
 								<tr class="stripe-1">
@@ -243,13 +216,13 @@
 												<tr>
 													<td colspan="6">
 														<strong>Search for genes within the selected coordinates.</strong>
-														
+
 <!-- \n -->
 
-														Refine search with the following critera.
+Refine search with the following critera.
 <!-- \n -->
 
-													</td>
+</td>
 												</tr>
 												<tr class="stripe-2">
 													<td class="cat-2">Chromosome</td>
@@ -273,20 +246,19 @@
 														<em>Enter any combination of phenotype terms, disease terms, or IDs </em>
 <!-- \n -->
 
-														<html:textarea property="phenotype" rows="2" cols="50"/>
-														
+<html:textarea property="phenotype" rows="2" cols="50"/>
+
 <!-- \n -->
 
-														Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.jax.org/searches/MP_form.shtml');return false;">Mammalian Phenotype Ontology (MP)</a>
-														
+Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.jax.org/searches/MP_form.shtml');return false;">Mammalian Phenotype Ontology (MP)</a>
+
 <!-- \n -->
 
-														Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=omimVocab&subset=A');return false;">Human Disease Vocabulary (OMIM)</a>
+Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=omimVocab&subset=A');return false;">Human Disease Vocabulary (OMIM)</a>
 													</td>
 												</tr>
-												
-												
-												<tr	class="stripe-2">
+
+<tr	class="stripe-2">
 													<td class="cat-2">
 														Gene Ontology(GO) Classification
 													</td>
@@ -298,28 +270,26 @@
 															<html:option value="contains">contains</html:option>
 															<html:option value="like">like</html:option>
 														</html:select>
-														
-														<html:text property="go_term" size="40"/>&nbsp;in
+
+<html:text property="go_term" size="40"/>&nbsp;in
 <!-- \n -->
 
-														
-														<html:multibox property="ontology_key" value="Molecular+Function"/>Molecular Function
+<html:multibox property="ontology_key" value="Molecular+Function"/>Molecular Function
 <!-- \n -->
 
-														<html:multibox property="ontology_key" value="Biological+Process"/>Biological Process
+<html:multibox property="ontology_key" value="Biological+Process"/>Biological Process
 <!-- \n -->
 
-														<html:multibox property="ontology_key" value="Cellular+Component"/>Cellular Component
+<html:multibox property="ontology_key" value="Cellular+Component"/>Cellular Component
 <!-- \n -->
 
-														
 <!-- \n -->
 
-														Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.jax.org/userdocs/marker_help.shtml#gene_ontology');return false;">Gene Ontology</a>
+Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.jax.org/userdocs/marker_help.shtml#gene_ontology');return false;">Gene Ontology</a>
 													</td>
 												</tr>
-												
-												<tr class="stripe-1">
+
+<tr class="stripe-1">
 													<td class="cat-1">
 														Display Results as
 													</td>
@@ -334,24 +304,24 @@
 													</td>
 													<td>
 														<html:radio property="sortBy" value="nomen">Nomenclature</html:radio>
-														
+
 <!-- \n -->
 
-														<html:radio property="sortBy" value="coord">Coordinates</html:radio>
-														
+<html:radio property="sortBy" value="coord">Coordinates</html:radio>
+
 <!-- \n -->
 
-														<html:radio property="sortBy" value="cm">cM Position</html:radio>
+<html:radio property="sortBy" value="cm">cM Position</html:radio>
 													</td>
 												</tr>
-												
-												<tr>
-													
-													<td>
-														
-														<input type="submit" value="Search"/>
-														
-														<html:hidden property="chrom"/>
+
+<tr>
+
+<td>
+
+<input type="submit" value="Search"/>
+
+<html:hidden property="chrom"/>
 														<html:hidden property="types"/>
 														<html:hidden property="label"/>
 														<html:hidden property="primeRef"/>
@@ -361,10 +331,10 @@
 														<html:hidden property="qtlStart"/>
 														<html:hidden property="qtlEnd"/>
 														<html:hidden property="featureTypes"/>
-														
-													</td>
-													
-													<td colspan="5">
+
+</td>
+
+<td colspan="5">
 														<input type="reset" value="Reset" />
 													</td>
 												</tr> 
@@ -382,21 +352,21 @@
 																	<input type="hidden" name="IDType" value="MGIMarker" />
 																	<input type="hidden" name="IDSet" value="${ids}"/>
 																	<input type="submit" value="Submit results to MGI Batch Query"/> 
-																	
-																	<div id='params' style='display: none;'>
+
+<div id='params' style='display: none;'>
 																		<table>
 																			<tbody>
 																				<tr>
 																					<a href='#'	onclick='batchSwap()' class='example'>Hide batch query parameters</a>
 																				</tr>
 																				<tr>
-																					
-																					<td>
+
+<td>
 																						<table>
 																							<tr class="stripe-2">
 																								<td class="cat-2"><span class='label'>Gene Attributes:</span></td>
-																								
-																								<td	colspan='4'>
+
+<td	colspan='4'>
 																									<table>
 																										<tr>
 																											<td><input type='checkbox' name='returnSet' value='Nomenclature' checked="checked" />Nomenclature</td>
@@ -417,14 +387,14 @@
 																									<tr>
 																										<td ><input type='radio' name='returnRad' value='GO' />Gene&nbsp;Ontology&nbsp;(GO)</td>
 																										<td colspan="2"><input type='radio' name='returnRad' value='MP' />Mammalian&nbsp;Phenotype&nbsp;(MP)</td>
-																										
-																									</tr>
+
+</tr>
 																									<tr >
 																										<td><input type='radio' name='returnRad' value='omim' />Human Disease (OMIM)</td>
 																										<td><input type='radio' name='returnRad' value='MGIAllele' />Alleles</td>
 																										<td><input type='radio' name='returnRad' value='RefSNP'/>RefSNP&nbsp;ID</td>
-																										
-																									</tr>
+
+</tr>
 																									<tr> 
 																										<td><input type='radio' name='returnRad' value='UniProt'/>UniProt&nbsp;ID</td>
 																										<td><input type='radio' name='returnRad' value='GenBankRefSeq' />GenBank/RefSeq&nbsp;ID</td>
@@ -432,8 +402,8 @@
 																									</tr>
 																								</table>
 																							</td>
-																							
-																							<tr class="stripe-2">
+
+<tr class="stripe-2">
 																								<td class="cat-2">Format</td>
 																								<td	colspan='4'>
 																									<table>
@@ -451,19 +421,17 @@
 																						</table>
 																					</td>
 																				</tr>
-																				
-																			</tbody>
+
+</tbody>
 																		</table>
 																	</div>
 																	<div id="summary" style="display: block" >
 																		<a href='#' onclick='batchSwap()' class='example'>Modify batch query parameters</a>
 																	</div>
-																	
-																	
-																	
-																</form>
-																
-															</td>
+
+</form>
+
+</td>
 														</tr>
 														<tr> 
 														<td colspan="6">
@@ -481,8 +449,8 @@
 																		<td>${feature.name}</td>
 																		<td>${feature.chromosome}:${feature.start}..${feature.end}</td>
 																		<td><a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=markerDetail&id=${feature.mgiId}">${feature.mgiId}</a></td>
-																		
-																	</tr>
+
+</tr>
 																</c:forEach>
 															</table>
 														</td>
@@ -490,9 +458,8 @@
 														</tr>										
 													</c:when>
 													<c:when test="${not empty noResults}">
-														
-														<td colspan="6">
-															
+
+<td colspan="6">
 
 <table class="results">
 																<tr>
@@ -500,19 +467,15 @@
 																</tr>
 															</table>
 														</td>
-														
-													</c:when>
+
+</c:when>
 												</c:choose>
 											</tr>
-											
-										</table>
+
+</table>
 									</td> 
 								</tr>
 							</table>
 
-</section>
-</div>
-</body>
-	
-</html>
+</jax:mmhcpage>
 
