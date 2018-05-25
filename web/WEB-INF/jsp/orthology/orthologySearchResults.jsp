@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
 <jax:mmhcpage title="Orthology Search Results" help="humangeneresults">
 
@@ -13,27 +14,27 @@
 <!-- ////  Start Search Summary  //// -->
 
 <tr class="summary">
-							<td>
-								<span class="label">Search Summary</span>
+	<td>
+		<span class="label">Search Summary</span>
 <!-- \n -->
 
 </td> 
-						</tr>
-						<tr class="summary">
-							<td>
+	</tr>
+		<tr class="summary">
+			<td>
 
 <!-- ////  Start Display Limit  //// -->
 
 <table>
-							<tr>
-								<td><strong>Gene Identifier(s):</strong>
-								<td>
-								 ${humanGS}
-								</td>
-							</tr>
+	<tr>
+		<td><strong>Gene Identifier(s):</strong>
+			<td>
+				 ${humanGS}
+					</td>
+						</tr>
 						</tr>
 						<tr>
-								<td><strong>Sort By:</strong>
+							<td><strong>Sort By:</strong>
 								<td>
 								 ${sortBy}
 								</td>
@@ -44,7 +45,7 @@
 <!-- ////  End Display Limit  //// -->
 
 </td>
-			</tr>
+	</tr>
 		</table>
 
 <!-- ////  End Search Summary  //// -->
@@ -56,8 +57,8 @@
 <!-- ////  Start Strain Genetics Results List  //// -->
 
 <table class="results">
-		<tr>
-			<td class="results-header-left" colspan="6"><span class="larger"></span></td>
+	<tr>
+		<td class="results-header-left" colspan="6"><span class="larger"></span></td>
 		</tr>				
 		<tr>
 			<td class="results-header">Human Gene Symbol</td>
@@ -70,8 +71,8 @@
 <c:forEach var="rec" items="${orthos}" varStatus="status">
 
 <c:choose>
-			<c:when test="${status.index%2==0}">
-				<tr class="stripe-1">
+	<c:when test="${status.index%2==0}">
+		<tr class="stripe-1">
 			</c:when>
 			<c:otherwise>
 				<tr class="stripe-2">
@@ -79,7 +80,7 @@
 		</c:choose>
 
 <td><c:out value="${rec.humanGS}" default="&nbsp;" escapeXml="false"/></td>
-		<td><a href="http://www.informatics.jax.org/marker/key/${rec.mgiGSKey}">${rec.mouseGS}</a></td>
+	<td><a href="http://www.informatics.jax.org/marker/key/${rec.mgiGSKey}">${rec.mouseGS}</a></td>
 		<td>${rec.symbol}</td>
 		<c:choose>
 		<c:when test="${rec.strains!='0'}">

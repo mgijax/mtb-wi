@@ -7,15 +7,17 @@
 <%@ attribute name="keywords" required="false" %>
 <%@ attribute name="description" required="false" %>
 <%@ attribute name="help" required="false" %>
+<%@ attribute name="head" fragment="true" %>
 
 <jax:toolpage title="${title}" keywords="${keywords}" description="${description}" defaultTitle="Mouse Models of Human Cancer"
 	defaultKeywords="mtb, mmhc, mouse, tumor, biology, jax, lab, laboratory, jackson, mgi, genome, informatics"
 	defaultDescription="MMHC has been designed to aid researchers in such areas as choosing experimental models, reviewing patterns of mutations in specific cancers, and identifying genes that are commonly mutated across a spectrum of cancers.">
-	<jsp:attribute name="head">
+	<jsp:attribute name="defaultHead">
 		<link rel="icon" href="${applicationScope.urlImageDir}/favicon.ico" type="image/ico">
 		<link href="${applicationScope.urlStyleSheet}" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="${applicationScope.urlBase}/js/jquery.min.js"></script>
 		<script type="text/javascript" src="${applicationScope.urlJavaScript}"></script>
+		<jsp:invoke fragment="head" />
 	</jsp:attribute>		
 	<jsp:attribute name="header">
 		<!-- To do: include tag manager -->

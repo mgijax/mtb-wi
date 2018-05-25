@@ -22,8 +22,8 @@
 	</ul>
 
 <table class="mi-table">
-		<tr><td border="5px">
-			<p class="mi-title">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
+	<tr><td border="5px">
+		<p class="mi-title">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
 			<ul>
 				<li class="real-list"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a></li>
 				<li class="real-list"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a></li>
@@ -35,18 +35,18 @@
 <hr>
 
 <div id="mc">		
-		<div>
-				${modelCounts}
+	<div>
+		${modelCounts}
 		</div> 
 	</div>
 	<div id="all-mc" style="display: none">
 		<div>
-				${allModelCounts}
+			${allModelCounts}
 		</div>
 	</div>
 
 <hr>
-		<span class="toolbar-title">What's new in MTB?</span>
+	<span class="toolbar-title">What's new in MTB?</span>
 		${whatsNewText}
 		(<a href="whatsNew.jsp">View all...</a>)
 

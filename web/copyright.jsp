@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
 <jax:mmhcpage title="Warranty Disclaimer &amp; Copyright Notice" help="#">
-
-<table class="results">
-
-</table>
-
-<!-- ////  Start Warranty and Disclaimer  //// -->
 
 <pre>
 Warranty Disclaimer and Copyright Notice
@@ -31,7 +26,4 @@ Copyright &#169; 1998, 2001, 2004, 2007, 2010, 2012 by The Jackson Laboratory
 All Rights Reserved
 </pre>
 
-<!-- ////  End Warranty and Disclaimer  //// -->
-
 </jax:mmhcpage>
-

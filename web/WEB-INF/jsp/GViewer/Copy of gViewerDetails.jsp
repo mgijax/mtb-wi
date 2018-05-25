@@ -3,8 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
 <jax:mmhcpage title="Cancer QTL Selection Details" help="GViewerDetails">
+	<jsp:attribute name="head">
 	<style type="text/css">
 
 .no-icon {
@@ -13,7 +15,7 @@
 	}
 	</style>
 
-<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 
@@ -54,9 +56,9 @@ var fTypeMap =	[];
 Ext.onReady(function(){
 
 treePanel = new Ext.tree.TreePanel({
-				renderTo:'featureTypeSelection',
-				height: 100,
-				width: 450,
+	renderTo:'featureTypeSelection',
+		height: 100,
+			width: 450,
 				useArrows:true,
 				autoScroll:false,
 				autoHeight:true,
@@ -66,21 +68,21 @@ treePanel = new Ext.tree.TreePanel({
 				rootVisible: true,
 				frame: false,
 				root: {
-						nodeType: 'async',
+					nodeType: 'async',
 						text:'all feature types',
 						checked:false,
 						iconCls:'no-icon'
 				},
 
 // auto create TreeLoader
-				dataUrl:'${applicationScope.urlBase}/GViewer/data/featureTypes.json',
+	dataUrl:'${applicationScope.urlBase}/GViewer/data/featureTypes.json',
 
 listeners: {
-						'checkchange': function(node, checked){
-										var i=0, children = node.childNodes;
-										for(i; i < children.length; i++){
-												children[i].getUI().toggleCheck(checked);
-										}
+	'checkchange': function(node, checked){
+		var i=0, children = node.childNodes;
+			for(i; i < children.length; i++){
+				children[i].getUI().toggleCheck(checked);
+					}
 						}
 				}
 		});
@@ -90,8 +92,8 @@ treePanel.expandAll();
 });
 
 function batchSwap() {
-			changeVisibility("summary");
-			changeVisibility("params");
+	changeVisibility("summary");
+		changeVisibility("params");
 		}
 
 function changeVisibility(id) {
@@ -99,42 +101,42 @@ function changeVisibility(id) {
 var myID = document.getElementById(id);
 
 if (myID.style.display == "block"){
-				myID.style.display = "none";
-			} else {
-				myID.style.display = "block";
+	myID.style.display = "none";
+		} else {
+			myID.style.display = "block";
 			}
 		}
 
 function viewerSubmit(){
 
 // get the data from the form
-			var ch = ${QTLForm.chrom};
-			var start = document.forms[1].searchStart.value;
+	var ch = ${QTLForm.chrom};
+		var start = document.forms[1].searchStart.value;
 			var end = document.forms[1].searchEnd.value;
 
 var pheno = document.forms[1].phenotype.value;
 
 var ontologyKeys = ""
-			for(var i = 0; i < document.forms[1].ontology_key.length; i++){
-				if(document.forms[1].ontology_key[i].checked){
-					ontologyKeys = ontologyKeys + ('&ontology_key='+document.forms[1].ontology_key[i].value);
+	for(var i = 0; i < document.forms[1].ontology_key.length; i++){
+		if(document.forms[1].ontology_key[i].checked){
+			ontologyKeys = ontologyKeys + ('&ontology_key='+document.forms[1].ontology_key[i].value);
 				}
 			}
 
 var goOp = document.forms[1].go_op.value
-			var goTerm = document.forms[1].go_term.value
+	var goTerm = document.forms[1].go_term.value
 
 var mcvs = '', selNodes = treePanel.getChecked();
 
 Ext.each(selNodes, function(node){
-					if(mcvs.length > 0){
-							mcvs += '&';
-					}
-					mcvs +="mcv="+fTypeMap[node.text];
+	if(mcvs.length > 0){
+		mcvs += '&';
+			}
+				mcvs +="mcv="+fTypeMap[node.text];
 			});
 
 window.opener.qtlStore.proxy.setUrl('viewer.do?chromosome='+ch+'&start='+start+'&end='+end
-				+'&phenotype='+pheno+'&go_op='+goOp+'&go_term='+goTerm+''+ontologyKeys+"&"+mcvs);
+	+'&phenotype='+pheno+'&go_op='+goOp+'&go_term='+goTerm+''+ontologyKeys+"&"+mcvs);
 
 window.opener.qtlStore.load({add:true});
 
@@ -142,30 +144,31 @@ window.opener.alert("Loading MGD results.");
 
 }
 	</script>
+</jsp:attribute>
 
 <table class="results">
 
 <!-- ////  Start Detail Section  //// -->
 
 <tr class="stripe-1">
-									<td colspan="2">
+	<td colspan="2">
 
 <table width="560">
 
 <c:choose>
-												<c:when test="${not empty QTLForm.label}">
-													<tr class="stripe-2">
-														<td class="cat-2">
-															QTL
-														</td> 
-														<td>
-															<a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=markerDetail&id=${QTLForm.mgiId}">${QTLForm.label}</a> &nbsp; (links to MGI detail)
-														</td>
-													</tr>
-													<tr class="stripe-1">
-														<td class="cat-1">
-															Name
-														</td>
+	<c:when test="${not empty QTLForm.label}">
+		<tr class="stripe-2">
+			<td class="cat-2">
+				QTL
+					</td> 
+						<td>
+							<a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=markerDetail&id=${QTLForm.mgiId}">${QTLForm.label}</a> &nbsp; (links to MGI detail)
+								</td>
+									</tr>
+										<tr class="stripe-1">
+											<td class="cat-1">
+												Name
+													</td>
 														<td>
 															${QTLForm.qtlName}
 														</td>
@@ -175,27 +178,27 @@ window.opener.alert("Loading MGD results.");
 </c:choose>
 
 <tr class="stripe-2">
-												<td class="cat-2">Location</td><td><a href="nojavascript.jsp" onClick="popPathWin('http://genome.ucsc.edu/cgi-bin/hgTracks?org=Mouse&position=Chr${QTLForm.chrom}:${QTLForm.qtlStart}-${QTLForm.qtlEnd}');return false;" >${QTLForm.chrom}:${QTLForm.qtlStart}..${QTLForm.qtlEnd}</a> &nbsp; (links to UCSC genome browser) 
+	<td class="cat-2">Location</td><td><a href="nojavascript.jsp" onClick="popPathWin('http://genome.ucsc.edu/cgi-bin/hgTracks?org=Mouse&position=Chr${QTLForm.chrom}:${QTLForm.qtlStart}-${QTLForm.qtlEnd}');return false;" >${QTLForm.chrom}:${QTLForm.qtlStart}..${QTLForm.qtlEnd}</a> &nbsp; (links to UCSC genome browser) 
 <!-- \n -->
  <em>Build 37</em> </td>
-											</tr>
+	</tr>
 
 <tr class="stripe-1">
-												<td class="cat-1">Primary Reference</td><td><a href="http://www.informatics.jax.org/searches/reference.cgi?${QTLForm.primeRefId}">${QTLForm.primeRef}</a></td>
-											</tr>
-											<tr class="stripe-2">
-												<td class="cat-2">Strain tumor overview</td>
-												<td>
-													<c:choose>
-														<c:when test="${not empty strains}">
-															<c:forEach var="strain" items="${strains}" varStatus="count">
-																<c:choose>
-																	<c:when test="${not empty strain.value}">
-																		<a href='strainDetails.do?page=collapsed&key=${strain.value}'>${strain.label}</a>
-																	</c:when>
-																	<c:otherwise>
-																		${strain.label}&nbsp;
-																	</c:otherwise>
+	<td class="cat-1">Primary Reference</td><td><a href="http://www.informatics.jax.org/searches/reference.cgi?${QTLForm.primeRefId}">${QTLForm.primeRef}</a></td>
+		</tr>
+			<tr class="stripe-2">
+				<td class="cat-2">Strain tumor overview</td>
+					<td>
+						<c:choose>
+							<c:when test="${not empty strains}">
+								<c:forEach var="strain" items="${strains}" varStatus="count">
+									<c:choose>
+										<c:when test="${not empty strain.value}">
+											<a href='strainDetails.do?page=collapsed&key=${strain.value}'>${strain.label}</a>
+												</c:when>
+													<c:otherwise>
+														${strain.label}&nbsp;
+															</c:otherwise>
 																</c:choose>
 															</c:forEach>
 														</c:when>
@@ -207,15 +210,15 @@ window.opener.alert("Loading MGD results.");
 											</tr>
 
 </table>
-									</td>
-								</tr>
-								<tr class="stripe-1">
-									<td colspan="2">
-										<table width="560">
-											<html:form action="gViewerDetails" method="GET" >
-												<tr>
-													<td colspan="6">
-														<strong>Search for genes within the selected coordinates.</strong>
+	</td>
+		</tr>
+			<tr class="stripe-1">
+				<td colspan="2">
+					<table width="560">
+						<html:form action="gViewerDetails" method="GET" >
+							<tr>
+								<td colspan="6">
+									<strong>Search for genes within the selected coordinates.</strong>
 
 <!-- \n -->
 
@@ -223,18 +226,18 @@ Refine search with the following critera.
 <!-- \n -->
 
 </td>
-												</tr>
-												<tr class="stripe-2">
-													<td class="cat-2">Chromosome</td>
-													<td>${QTLForm.chrom}</td>
-													<td class="cat-2">Start (bp)</td>
-													<td><input type="text" name="searchStart" value="${QTLForm.searchStart}"></td>
-													<td class="cat-2">End (bp)</td>
-													<td><input type="text" name="searchEnd" value="${QTLForm.searchEnd}"></td>
-												</tr>
-												<tr class="stripe-1">
-													<td class ="cat-1">
-														Feature Type
+	</tr>
+		<tr class="stripe-2">
+			<td class="cat-2">Chromosome</td>
+				<td>${QTLForm.chrom}</td>
+					<td class="cat-2">Start (bp)</td>
+						<td><input type="text" name="searchStart" value="${QTLForm.searchStart}"></td>
+							<td class="cat-2">End (bp)</td>
+								<td><input type="text" name="searchEnd" value="${QTLForm.searchEnd}"></td>
+									</tr>
+										<tr class="stripe-1">
+											<td class ="cat-1">
+												Feature Type
 													</td>
 													<td colspan ="5" id="feature-type-selection"></td>
 												</tr>
@@ -255,8 +258,8 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 <!-- \n -->
 
 Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=omimVocab&subset=A');return false;">Human Disease Vocabulary (OMIM)</a>
-													</td>
-												</tr>
+	</td>
+		</tr>
 
 <tr	class="stripe-2">
 													<td class="cat-2">
@@ -286,22 +289,22 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 <!-- \n -->
 
 Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.jax.org/userdocs/marker_help.shtml#gene_ontology');return false;">Gene Ontology</a>
-													</td>
-												</tr>
+	</td>
+		</tr>
 
 <tr class="stripe-1">
-													<td class="cat-1">
-														Display Results as
-													</td>
-													<td colspan="3"> 
-														<select size="1" name="display">
-															<option value="web">HTML</option>
-															<option value="tab">Tab Delimited</option>
-														</select>
-													</td>
-													<td class="cat-1">
-														Sort by
-													</td>
+	<td class="cat-1">
+		Display Results as
+			</td>
+				<td colspan="3"> 
+					<select size="1" name="display">
+						<option value="web">HTML</option>
+							<option value="tab">Tab Delimited</option>
+								</select>
+									</td>
+										<td class="cat-1">
+											Sort by
+												</td>
 													<td>
 														<html:radio property="sortBy" value="nomen">Nomenclature</html:radio>
 
@@ -312,8 +315,8 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 <!-- \n -->
 
 <html:radio property="sortBy" value="cm">cM Position</html:radio>
-													</td>
-												</tr>
+	</td>
+		</tr>
 
 <tr>
 
@@ -322,49 +325,49 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 <input type="submit" value="Search"/>
 
 <html:hidden property="chrom"/>
-														<html:hidden property="types"/>
-														<html:hidden property="label"/>
-														<html:hidden property="primeRef"/>
-														<html:hidden property="primeRefId"/>
-														<html:hidden property="mgiId"/>
-														<html:hidden property="qtlName"/>
-														<html:hidden property="qtlStart"/>
-														<html:hidden property="qtlEnd"/>
-														<html:hidden property="featureTypes"/>
+	<html:hidden property="types"/>
+		<html:hidden property="label"/>
+			<html:hidden property="primeRef"/>
+				<html:hidden property="primeRefId"/>
+					<html:hidden property="mgiId"/>
+						<html:hidden property="qtlName"/>
+							<html:hidden property="qtlStart"/>
+								<html:hidden property="qtlEnd"/>
+									<html:hidden property="featureTypes"/>
 
 </td>
 
 <td colspan="5">
-														<input type="reset" value="Reset" />
-													</td>
-												</tr> 
-											</html:form>
-											<tr>
-												<c:choose>
-													<c:when test="${not empty features}">
-														<tr>
-															 <td colspan="6"><input type='button' value="Send results to QTL viewer" onclick="viewerSubmit()"></td>
-														 </tr>
-														 <tr>
-															<td colspan="6">
-																<form method="post" action="http://www.informatics.jax.org/javawi2/servlet/WIFetch">
-																	<input type="hidden" name="page" value="batchSummary"/>
-																	<input type="hidden" name="IDType" value="MGIMarker" />
-																	<input type="hidden" name="IDSet" value="${ids}"/>
+	<input type="reset" value="Reset" />
+		</td>
+			</tr> 
+				</html:form>
+					<tr>
+						<c:choose>
+							<c:when test="${not empty features}">
+								<tr>
+									 <td colspan="6"><input type='button' value="Send results to QTL viewer" onclick="viewerSubmit()"></td>
+										 </tr>
+											 <tr>
+												<td colspan="6">
+													<form method="post" action="http://www.informatics.jax.org/javawi2/servlet/WIFetch">
+														<input type="hidden" name="page" value="batchSummary"/>
+															<input type="hidden" name="IDType" value="MGIMarker" />
+																<input type="hidden" name="IDSet" value="${ids}"/>
 																	<input type="submit" value="Submit results to MGI Batch Query"/> 
 
 <div id='params' style='display: none;'>
-																		<table>
-																			<tbody>
-																				<tr>
-																					<a href='#'	onclick='batchSwap()' class='example'>Hide batch query parameters</a>
+	<table>
+		<tbody>
+			<tr>
+				<a href='#'	onclick='batchSwap()' class='example'>Hide batch query parameters</a>
 																				</tr>
 																				<tr>
 
 <td>
-																						<table>
-																							<tr class="stripe-2">
-																								<td class="cat-2"><span class='label'>Gene Attributes:</span></td>
+	<table>
+		<tr class="stripe-2">
+			<td class="cat-2"><span class='label'>Gene Attributes:</span></td>
 
 <td	colspan='4'>
 																									<table>
@@ -389,23 +392,23 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 																										<td colspan="2"><input type='radio' name='returnRad' value='MP' />Mammalian&nbsp;Phenotype&nbsp;(MP)</td>
 
 </tr>
-																									<tr >
-																										<td><input type='radio' name='returnRad' value='omim' />Human Disease (OMIM)</td>
-																										<td><input type='radio' name='returnRad' value='MGIAllele' />Alleles</td>
-																										<td><input type='radio' name='returnRad' value='RefSNP'/>RefSNP&nbsp;ID</td>
+	<tr >
+		<td><input type='radio' name='returnRad' value='omim' />Human Disease (OMIM)</td>
+			<td><input type='radio' name='returnRad' value='MGIAllele' />Alleles</td>
+				<td><input type='radio' name='returnRad' value='RefSNP'/>RefSNP&nbsp;ID</td>
 
 </tr>
-																									<tr> 
-																										<td><input type='radio' name='returnRad' value='UniProt'/>UniProt&nbsp;ID</td>
-																										<td><input type='radio' name='returnRad' value='GenBankRefSeq' />GenBank/RefSeq&nbsp;ID</td>
-																										<td><input type='radio' name='returnRad' value='None' checked="checked" />None</td>
-																									</tr>
-																								</table>
-																							</td>
+	<tr> 
+		<td><input type='radio' name='returnRad' value='UniProt'/>UniProt&nbsp;ID</td>
+			<td><input type='radio' name='returnRad' value='GenBankRefSeq' />GenBank/RefSeq&nbsp;ID</td>
+				<td><input type='radio' name='returnRad' value='None' checked="checked" />None</td>
+					</tr>
+						</table>
+							</td>
 
 <tr class="stripe-2">
-																								<td class="cat-2">Format</td>
-																								<td	colspan='4'>
+	<td class="cat-2">Format</td>
+		<td	colspan='4'>
 																									<table>
 																										<tr>
 																											<td>
@@ -423,59 +426,59 @@ Browse <a href="nojavascript.jsp" onClick="popPathWin('http://www.informatics.ja
 																				</tr>
 
 </tbody>
-																		</table>
-																	</div>
-																	<div id="summary" style="display: block" >
-																		<a href='#' onclick='batchSwap()' class='example'>Modify batch query parameters</a>
-																	</div>
+	</table>
+		</div>
+			<div id="summary" style="display: block" >
+				<a href='#' onclick='batchSwap()' class='example'>Modify batch query parameters</a>
+					</div>
 
 </form>
 
 </td>
-														</tr>
-														<tr> 
-														<td colspan="6">
-															<table width="560" class="results">
-																<tr>
-																	<td class="results-header">Gene</td>
-																	<td class="results-header">Name</td>
-																	<td class="results-header">Chromosome:Start..End</td>
-																	<td class="results-header">MGI ID</td>
-																</tr>
-																<c:forEach var="feature" items="${features}" varStatus="count">
+	</tr>
+		<tr> 
+			<td colspan="6">
+				<table width="560" class="results">
+					<tr>
+						<td class="results-header">Gene</td>
+							<td class="results-header">Name</td>
+								<td class="results-header">Chromosome:Start..End</td>
+									<td class="results-header">MGI ID</td>
+										</tr>
+											<c:forEach var="feature" items="${features}" varStatus="count">
 	<c:set var="num" value="${num == 1 ? 2 : 1}"/>
-																	<tr class="stripe${num}">
-																		<td>${feature.label}</td>
-																		<td>${feature.name}</td>
-																		<td>${feature.chromosome}:${feature.start}..${feature.end}</td>
-																		<td><a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=markerDetail&id=${feature.mgiId}">${feature.mgiId}</a></td>
+		<tr class="stripe${num}">
+			<td>${feature.label}</td>
+				<td>${feature.name}</td>
+					<td>${feature.chromosome}:${feature.start}..${feature.end}</td>
+						<td><a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=markerDetail&id=${feature.mgiId}">${feature.mgiId}</a></td>
 
 </tr>
-																</c:forEach>
-															</table>
-														</td>
-														<tr>
-														</tr>										
-													</c:when>
-													<c:when test="${not empty noResults}">
+	</c:forEach>
+		</table>
+			</td>
+				<tr>
+					</tr>										
+						</c:when>
+							<c:when test="${not empty noResults}">
 
 <td colspan="6">
 
 <table class="results">
-																<tr>
-																	<td class="results-header">0 Matching Genes</td>
-																</tr>
-															</table>
-														</td>
+	<tr>
+		<td class="results-header">0 Matching Genes</td>
+			</tr>
+				</table>
+					</td>
 
 </c:when>
-												</c:choose>
-											</tr>
+	</c:choose>
+		</tr>
 
 </table>
-									</td> 
-								</tr>
-							</table>
+	</td> 
+		</tr>
+			</table>
 
 </jax:mmhcpage>
 

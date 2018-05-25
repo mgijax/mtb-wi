@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
 <jax:mmhcpage title="Genetics Search Results" help="geneticsresults">
 
@@ -13,31 +14,31 @@
 <!-- ////  Start Search Summary  //// -->
 
 <tr class="summary">
-							<td>
-								<span class="label">Search Summary</span>
+	<td>
+		<span class="label">Search Summary</span>
 <!-- \n -->
 
 <c:if test="${not empty alleleName}">
-									<span class="label">Allele Name:</span> ${alleleNameComparison} "${alleleName}"
+	<span class="label">Allele Name:</span> ${alleleNameComparison} "${alleleName}"
 <!-- \n -->
 
 </c:if>
 
 <c:if test="${not empty markerName}">
-									<span class="label">Marker Name:</span> ${markerNameComparison} "${markerName}"
+	<span class="label">Marker Name:</span> ${markerNameComparison} "${markerName}"
 <!-- \n -->
 
 </c:if>
 
 <c:if test="${not empty chromosomes}">
-									<c:choose>
-										<c:when test="${chromosomes>'1'}">
-											<span class="label">Chromosomes:</span>
-										</c:when>
-										<c:otherwise>
-											<span class="label">Chromosome:</span>
-										</c:otherwise>
-									</c:choose>
+	<c:choose>
+		<c:when test="${chromosomes>'1'}">
+			<span class="label">Chromosomes:</span>
+				</c:when>
+					<c:otherwise>
+						<span class="label">Chromosome:</span>
+							</c:otherwise>
+								</c:choose>
 
 ${chromosomes}
 
@@ -46,14 +47,14 @@ ${chromosomes}
 </c:if>
 
 <c:if test="${not empty mutations}">
-									<c:choose>
-										<c:when test="${mutations>'1'}">
-											<span class="label">Mutations / Aberrations:</span>
-										</c:when>
-										<c:otherwise>
-											<span class="label">Mutation / Aberration:</span>
-										</c:otherwise>
-									</c:choose>
+	<c:choose>
+		<c:when test="${mutations>'1'}">
+			<span class="label">Mutations / Aberrations:</span>
+				</c:when>
+					<c:otherwise>
+						<span class="label">Mutation / Aberration:</span>
+							</c:otherwise>
+								</c:choose>
 
 ${mutations}
 
@@ -62,7 +63,7 @@ ${mutations}
 </c:if>
 
 <c:if test="${not empty assayImages}">
-									<span class="label">Restrict results to records that include assay images</span>
+	<span class="label">Restrict results to records that include assay images</span>
 <!-- \n -->
 
 </c:if>
@@ -71,61 +72,61 @@ ${mutations}
 <!-- \n -->
 
 <span class="label">Display Limit:</span> ${maxItems} in each section
-							</td>
-						</tr>
-						<tr class="summary">
-							<td>
+	</td>
+		</tr>
+			<tr class="summary">
+				<td>
 
 <!-- ////  Start Display Limit  //// -->
 
 <table>
-							<tr>
+	<tr>
 
 <td>
-									<c:choose>
-										<c:when test="${numberOfResultsStrains != totalResultsStrains}">
-											${numberOfResultsStrains} of ${totalResultsStrains} matching strains displayed.
-										</c:when>
-										<c:otherwise>
-											<c:out value="${numberOfResultsStrains}" default="0"/> matching strains displayed.
-										</c:otherwise>
-									</c:choose>
+	<c:choose>
+		<c:when test="${numberOfResultsStrains != totalResultsStrains}">
+			${numberOfResultsStrains} of ${totalResultsStrains} matching strains displayed.
+				</c:when>
+					<c:otherwise>
+						<c:out value="${numberOfResultsStrains}" default="0"/> matching strains displayed.
+							</c:otherwise>
+								</c:choose>
 								</td>
 							</tr>
 							<tr>
 
 <td>
-									<c:choose>
-										<c:when test="${numberOfResultsTumors != totalResultsTumors}">
-											${numberOfResultsTumors} of ${totalResultsTumors} matching markers analyzed in the tumor displayed.
-										</c:when>
-										<c:otherwise>
-											<c:out value="${numberOfResultsTumors}" default="0"/> matching markers analyzed in the tumor displayed.
-										</c:otherwise>
-									</c:choose>
+	<c:choose>
+		<c:when test="${numberOfResultsTumors != totalResultsTumors}">
+			${numberOfResultsTumors} of ${totalResultsTumors} matching markers analyzed in the tumor displayed.
+				</c:when>
+					<c:otherwise>
+						<c:out value="${numberOfResultsTumors}" default="0"/> matching markers analyzed in the tumor displayed.
+							</c:otherwise>
+								</c:choose>
 								</td>
 							</tr>
 
 <tr>
-								<td>
-									<c:choose>
-										<c:when test="${numberOfCytoTumors != totalCytoTumors}">
-											${numberOfCytoTumors} of ${totalCytoTumors} matching cytogenetic observations in tumors displayed.
-										</c:when>
-										<c:otherwise>
-											<c:out value="${numberOfCytoTumors}" default="0"/> matching cytogenetic observations in tumors displayed.
-										</c:otherwise>
+	<td>
+		<c:choose>
+			<c:when test="${numberOfCytoTumors != totalCytoTumors}">
+				${numberOfCytoTumors} of ${totalCytoTumors} matching cytogenetic observations in tumors displayed.
+					</c:when>
+						<c:otherwise>
+							<c:out value="${numberOfCytoTumors}" default="0"/> matching cytogenetic observations in tumors displayed.
+								</c:otherwise>
 									</c:choose>
 								</td>
 							</tr>
 
 </tr>
-					</table>
+	</table>
 
 <!-- ////  End Display Limit  //// -->
 
 </td>
-			</tr>
+	</tr>
 		</table>
 
 <!-- ////  End Search Summary  //// -->
@@ -137,7 +138,7 @@ ${mutations}
 <!-- ////  Start Strain Genetics Results List  //// -->
 
 <c:choose>
-		<c:when test="${not empty strainGenetics}">
+	<c:when test="${not empty strainGenetics}">
 		<a name="strainGenetics"></a>
 		<c:if test="${not empty tumorGenetics}">
 			<div align="right"><a href="#tumorGenetics"><img align="middle" src="${applicationScope.urlImageDir}/down_arrow.png" alt="Jump to Genetic Changes in Tumors">Jump to Genetic Changes in Tumors</a></div>
@@ -148,7 +149,7 @@ ${mutations}
 </c:if>
 
 <c:if test="${not empty cytoGenetics}">
-			<div align="right"><a href="#cytoGenetics"><img align="middle" src="${applicationScope.urlImageDir}/down_arrow.png" alt="Jump to Cytogenetic Changes in Tumors">Jump to Cytogenetic Changes in Tumors</a></div>
+	<div align="right"><a href="#cytoGenetics"><img align="middle" src="${applicationScope.urlImageDir}/down_arrow.png" alt="Jump to Cytogenetic Changes in Tumors">Jump to Cytogenetic Changes in Tumors</a></div>
 <!-- \n -->
 
 <!-- \n -->
@@ -156,25 +157,25 @@ ${mutations}
 </c:if>
 
 <table class="results">
-		<tr>
-			<td class="results-header-left" colspan="4"><span class="larger">Genes, Alleles and Transgenes carried by Strains</span></td>
+	<tr>
+		<td class="results-header-left" colspan="4"><h3>Genes, Alleles and Transgenes carried by Strains</h3></td>
 		</tr>				
 		<tr>
 
 <td class="results-header">Mouse
 <!-- \n -->
 Chrom.</td>
-			<td class="results-header">Symbol, Name</td>
-			<td class="results-header">Type</td>
+	<td class="results-header">Symbol, Name</td>
+		<td class="results-header">Type</td>
 			<td class="results-header">Genotype
 <!-- \n -->
 <small>(number of associated strains)</small></td>
-		</tr>
+	</tr>
 
 <c:forEach var="rec" items="${strainGenetics}" varStatus="status">
-		<c:choose>
-			<c:when test="${status.index%2==0}">
-				<tr class="stripe-1">
+	<c:choose>
+		<c:when test="${status.index%2==0}">
+			<tr class="stripe-1">
 			</c:when>
 			<c:otherwise>
 				<tr class="stripe-2">
@@ -182,10 +183,10 @@ Chrom.</td>
 		</c:choose>
 
 <td><c:out value="${rec.chromosome}" default="&nbsp;" escapeXml="false"/></td>
-		<td>
-			<c:choose>
-				<c:when test="${empty rec.geneSymbol}">
-					${rec.geneName}
+	<td>
+		<c:choose>
+			<c:when test="${empty rec.geneSymbol}">
+				${rec.geneName}
 				</c:when>
 				<c:otherwise>
 					${rec.geneSymbol}, ${rec.geneName}
@@ -199,17 +200,17 @@ Chrom.</td>
 <small style="font-size:90%">
 <!-- \n -->
 ${pe}</small>
-			</c:forEach>
+	</c:forEach>
 		</td>
 		<td>${rec.alleleType}</td>
 		<td>
 
 <c:choose>
-				<c:when test="${not empty rec.allele2Symbol}">
-					<c:choose>
-						<c:when test="${rec.isTransgene==true}">
-							${rec.allele1Symbol}/${rec.allele2Symbol}
-						</c:when>
+	<c:when test="${not empty rec.allele2Symbol}">
+		<c:choose>
+			<c:when test="${rec.isTransgene==true}">
+				${rec.allele1Symbol}/${rec.allele2Symbol}
+					</c:when>
 						<c:otherwise>
 							<em>${rec.allele1Symbol}/${rec.allele2Symbol}</em>
 						</c:otherwise>
@@ -228,8 +229,8 @@ ${pe}</small>
 			</c:choose>
 
 <c:if test="${rec.allelePairCount>0}">
-				(<a href="strainSearchResults.do?allelePairKey=${rec.allelePairKey}&amp;maxItems=No+Limit">${rec.allelePairCount}</a>)
-			</c:if>
+	(<a href="strainSearchResults.do?allelePairKey=${rec.allelePairKey}&amp;maxItems=No+Limit">${rec.allelePairCount}</a>)
+		</c:if>
 
 <c:if test="${status.last != true}">
 
@@ -268,7 +269,7 @@ ${pe}</small>
 
 <table class="results">
 <tr>
-	<td class="results-header-left" colspan="3"><span class="larger">Genetic Markers analyzed in the Tumor</span></td>
+	<td class="results-header-left" colspan="3"><h3>Genetic Markers analyzed in the Tumor</h3></td>
 </tr>				
 <tr>
 	<td class="results-header">Mouse
@@ -296,8 +297,8 @@ Chrom.</td>
 			<c:when test="${fn:containsIgnoreCase(rec.geneName, 'placeholder')}">
 
 </c:when>
-			<c:otherwise>
-				${rec.geneSymbol}, ${rec.geneName}
+	<c:otherwise>
+		${rec.geneSymbol}, ${rec.geneName}
 			</c:otherwise>
 		</c:choose>
 	</td>
@@ -331,7 +332,7 @@ Chrom.</td>
 
 <table class="results">
 <tr>
-	<td class="results-header-left" colspan="4"><span class="larger">Cytogenetic observations in the Tumor</span></td>
+	<td class="results-header-left" colspan="4"><h3>Cytogenetic observations in the Tumor</h3></td>
 </tr>				
 <tr>
 	<td class="results-header">Mouse
@@ -358,12 +359,12 @@ ${rec.displayChromosomes}
 	</td>
 
 <td>
-		${rec.alleleTypeName}
+	${rec.alleleTypeName}
 		(<a href="tumorSummary.do?tumorChangeKeys=${rec.keys}">${rec.size}</a>)	 
 
 <c:choose>	
-			<c:when test="${rec.hasImages==true}">
-				<img src="${applicationScope.urlImageDir}/pic.gif" alt="Records include assay images" title="Records include assay images">
+	<c:when test="${rec.hasImages==true}">
+		<img src="${applicationScope.urlImageDir}/pic.gif" alt="Records include assay images" title="Records include assay images">
 			</c:when>
 
 <c:otherwise>

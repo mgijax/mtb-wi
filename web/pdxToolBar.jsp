@@ -11,32 +11,32 @@
 <!-- ////  Start Include Navigation Menu  //// -->
 
 <table class="toolbar">			
-		<tr>
-				<td>
-					 <a href="<c:url value='/index.do'/>"><img src="${applicationScope.urlImageDir}/mtb_logo_side.png" alt="Mouse Tumor Biology Database (MTB)"></a>
+	<tr>
+		<td>
+			 <a href="<c:url value='/index.do'/>"><img src="${applicationScope.urlImageDir}/mtb_logo_side.png" alt="Mouse Tumor Biology Database (MTB)"></a>
 
 <!-- \n -->
 
 <a href="<c:url value='/index.do'/>">MTB Home</a>&nbsp;&nbsp;&nbsp;<a href="<c:url value='/userHelp.jsp'/>">Help</a>
-				</td>
+	</td>
 		</tr>
 
 <tr>
-				<td>
+	<td>
 
 <table class="results">
-								<tr>
-										<td>
-								<form name="placeholder" ></form>
-										</td>
-								</tr>
+	<tr>
+		<td>
+			<form name="placeholder" ></form>
+				</td>
+					</tr>
 						</table>
 				</td>
 		</tr>
 		<tr>
-				<td>
-						<div class="toolbar-title">Search Forms</div>
-						<a href="<c:url value='/tumorSearch.do'/>">Tumor</a>
+			<td>
+				<div class="toolbar-title">Search Forms</div>
+					<a href="<c:url value='/tumorSearch.do'/>">Tumor</a>
 
 <!-- \n -->
 
@@ -71,13 +71,13 @@
 <div><hr></div>
 
 </td>
-		</tr>
+	</tr>
 		<tr>
-				<td>
-						<div class="toolbar-title">Additional Resources</div>
+			<td>
+				<div class="toolbar-title">Additional Resources</div>
 
 <img src="${applicationScope.urlImageDir}/new.jpg" alt="new">
-						<a href="http://www.pdxfinder.org">PDX Finder</a> 
+	<a href="http://www.pdxfinder.org">PDX Finder</a> 
 
 <!-- \n -->
 
@@ -100,17 +100,17 @@
 <!-- \n -->
 
 </c:if>			
-						 <a href="<c:url value='/viewer.do'/>">Cancer QTL Viewer</a>
+	 <a href="<c:url value='/viewer.do'/>">Cancer QTL Viewer</a>
 
 <!-- \n -->
 
 <c:if test="${not empty applicationScope.urlMTBPathWI}">
-								<span style="white-space:nowrap"><a href="${applicationScope.urlMTBPathWI}">Submit Pathology Images</a></span>
+	<span style="white-space:nowrap"><a href="${applicationScope.urlMTBPathWI}">Submit Pathology Images</a></span>
 
 <!-- \n -->
 
 </c:if>
-						<span style="white-space:nowrap"><a href="<c:url value='/tumorFrequencyGrid.do'/>">Tumor Frequency Grid</a></span>
+	<span style="white-space:nowrap"><a href="<c:url value='/tumorFrequencyGrid.do'/>">Tumor Frequency Grid</a></span>
 
 <!-- \n -->
 
@@ -127,23 +127,23 @@
 <!-- \n -->
 
 <a href="<c:url value='/lymphomaPathology.jsp'/>">Lymphoma Pathology</a>
-						<div><hr></div>
-				</td>
+	<div><hr></div>
+		</td>
 		</tr>
 		<tr>
-				<td>
-						<div>
-						<a href="http://www.informatics.jax.org"><img src="${applicationScope.urlImageDir}/logos/mgi_logo.gif" alt="Mouse Genome Informatics"></a>
+			<td>
+				<div>
+					<a href="http://www.informatics.jax.org"><img src="${applicationScope.urlImageDir}/logos/mgi_logo.gif" alt="Mouse Genome Informatics"></a>
 <!-- \n -->
 
 <a href="http://www.jax.org/"><img height=80 width=160 src="${applicationScope.urlImageDir}/JaxLogo.gif" alt="The Jackson Laboratory"></a>
-						<hr>
-						</div>
-				</td>
+	<hr>
+		</div>
+			</td>
 		</tr>
 		<tr>
-				<td>
-						<a href="<c:url value='/citation.jsp'/>">Citing These Resources</a>
+			<td>
+				<a href="<c:url value='/citation.jsp'/>">Citing These Resources</a>
 
 <!-- \n -->
 
@@ -156,20 +156,20 @@
 Send Questions and 
 <!-- \n -->
 Comments to
-						<a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support</a>.
-						<div>
-						<hr>
-						<div class="toolbar-small">
-						Last Database Update
+	<a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support</a>.
+		<div>
+			<hr>
+				<div class="toolbar-small">
+					Last Database Update
 <!-- \n -->
 
 ${applicationScope.dbLastUpdateDate}
 <!-- \n -->
 
 MTB ${applicationScope.wiVersion}
-						</div>
-						</div>
-				</td>
+	</div>
+		</div>
+			</td>
 		</tr>
 </table>
 

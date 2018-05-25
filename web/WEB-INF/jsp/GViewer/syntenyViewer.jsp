@@ -2,10 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
 <jax:mmhcpage title="Synteny Viewer">
-
-<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<jsp:attribute name="head">
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/PagingStore.js"></script>
@@ -14,31 +15,31 @@
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FeatureGrid.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/Legend.js"></script>
 	<script type="text/javascript">
-				// number of pixels for largest chromosome
-				var maxSize = 100;
+		// number of pixels for largest chromosome
+			var maxSize = 100;
 
 var humanBandingURL = 'viewer.do?method=getHumanBands';
 
 var mouseBandingURL = 'viewer.do?method=getBands';
 
 // used to link chromosome bands to ucsc details
-				// use empty string for no link
+	// use empty string for no link
 
 var localURL = 'http://narsil:8080/mtbwi/';
 
 var karyoPanel = null;
-				var qtlStore = null;
+	var qtlStore = null;
 
 Ext.onReady(function() {
 
 FeatureRecord = Ext.data.Record.create([
-								{name:'chromosome'},
-								{name:'start'},
-								{name:'end'},
-								{name:'type'},
-								{name:'color'},
-								{name:'label'},
-								{name:'link'},
+	{name:'chromosome'},
+		{name:'start'},
+			{name:'end'},
+				{name:'type'},
+					{name:'color'},
+						{name:'label'},
+							{name:'link'},
 								{name:'mgiid'},
 								{name:'name'},
 								{name:'group'},
@@ -46,38 +47,38 @@ FeatureRecord = Ext.data.Record.create([
 						]);
 
 var syntenyForm = new Ext.FormPanel({
-								id:'syntenyForm',
-								frame: true,
-								bodyStyle: 'padding: 5px 5px 0px 5px;',
-								defaults: {
-										anchor: '95%',
-										msgTarget: 'side'
-								},
+	id:'syntenyForm',
+		frame: true,
+			bodyStyle: 'padding: 5px 5px 0px 5px;',
+				defaults: {
+					anchor: '95%',
+						msgTarget: 'side'
+							},
 								autoHeight: true,
 								labelWidth: 60,
 								items: [
-										{
-												xtype: 'radiogroup',
-												fieldLabel: 'Source Organism',
+									{
+										xtype: 'radiogroup',
+											fieldLabel: 'Source Organism',
 												columns: 1,
 												items: [
-														{boxLabel: 'Mouse', name: 'organism', inputValue: 'mouse', checked: true},
+													{boxLabel: 'Mouse', name: 'organism', inputValue: 'mouse', checked: true},
 														{boxLabel: 'Human', name: 'organism', inputValue: 'human'}
 												]
 										}, 
 										{ xtype:'textfield',
-												fieldLabel:'Chr', 
+											fieldLabel:'Chr', 
 												name:'chromosome',
 												width:165
 										},
 										{ xtype:'numberfield',
-												fieldLabel:'Start',
+											fieldLabel:'Start',
 												name:'start',
 												minValue:0,
 												width:165
 										},
 										{ xtype:'numberfield',
-												fieldLabel:'End',
+											fieldLabel:'End',
 												name:'end',
 												minValue:0,
 												width:165
@@ -85,45 +86,45 @@ var syntenyForm = new Ext.FormPanel({
 								],
 								buttonAlign:'center',
 								buttons: [{
-												text: 'Get Syntenic Regions',
-												handler:syntenyHandler
+									text: 'Get Syntenic Regions',
+										handler:syntenyHandler
 										}]
 						});
 
 function syntenyHandler(){
-								syntenyWin.hide();
-								var ch = syntenyForm.getForm().findField('chromosome').getValue();
-								var start = syntenyForm.getForm().findField('start').getValue();
-								var end = syntenyForm.getForm().findField('end').getValue();
-								var source = syntenyForm.getForm().items.items[0].getValue().inputValue
+	syntenyWin.hide();
+		var ch = syntenyForm.getForm().findField('chromosome').getValue();
+			var start = syntenyForm.getForm().findField('start').getValue();
+				var end = syntenyForm.getForm().findField('end').getValue();
+					var source = syntenyForm.getForm().items.items[0].getValue().inputValue
 
 syntenyStore.proxy.setUrl(localURL+'viewer.do?method=getSyntenicFeatures&source='+source+'&chromosome='+ch+'&start='+start+'&end='+end, true);
 
 if (source != loadedBands)
-								{
-										// need to reload bands then load syntenic regions
-										karyoPanel.on('afterBuild', afterKaryoBuild);
+	{
+		// need to reload bands then load syntenic regions
+			karyoPanel.on('afterBuild', afterKaryoBuild);
 
 // remove all features
-										syntenyStore.removeAll(true);
+	syntenyStore.removeAll(true);
 
 if(source == 'human'){
-												karyoPanel.reloadBands(mouseBandingURL);
-												loadedBands = 'human';
-										}else{
-												karyoPanel.reloadBands(humanBandingURL);
-												loadedBands = 'mouse';
-										}
-								}else{
-										syntenyStore.load({add:true});
+	karyoPanel.reloadBands(mouseBandingURL);
+		loadedBands = 'human';
+			}else{
+				karyoPanel.reloadBands(humanBandingURL);
+					loadedBands = 'mouse';
+						}
+							}else{
+								syntenyStore.load({add:true});
 								}
 								syntenyForm.getForm().reset();
 						};
 
 function afterKaryoBuild(){
-								syntenyStore.load({add:true});	
-								karyoPanel.removeListener('afterBuild', afterKaryoBuild);
-						};
+	syntenyStore.load({add:true});	
+		karyoPanel.removeListener('afterBuild', afterKaryoBuild);
+			};
 
 var syntenyWin =	new Ext.Window({
 								layout:'fit',
@@ -135,20 +136,20 @@ var syntenyWin =	new Ext.Window({
 						});
 
 function syntenyWinHandler(){
-								syntenyWin.show();		
-								window.getAttention();
-						};
+	syntenyWin.show();		
+		window.getAttention();
+			};
 
 var loadedBands = "human";
 
 var karyoPanel = new org.jax.mgi.kmap.KaryoPanel({
-								bandingFile:humanBandingURL,
-								title:'<div>MTB Synteny Viewer</div>',
-								id:'kPanel',
-								maxKaryoSize:maxSize,
-								bandLink:"",
-								localLink:localURL,
-								columns:12,
+	bandingFile:humanBandingURL,
+		title:'<div>MTB Synteny Viewer</div>',
+			id:'kPanel',
+				maxKaryoSize:maxSize,
+					bandLink:"",
+						localLink:localURL,
+							columns:12,
 								allowZoom:false,
 								chromosomeWidth:11,
 								featureGap:2,
@@ -172,7 +173,7 @@ var	syntenyStore = new Ext.data.XmlStore({
 								autoLoad:false,
 								autoSave:false,
 								fields: [			
-										'chromosome',	
+									'chromosome',	
 										'start',			 
 										'end',				 
 										'type',
@@ -189,43 +190,43 @@ var	syntenyStore = new Ext.data.XmlStore({
 karyoPanel.setFeatureStore(syntenyStore);
 
 karyoPanel.getTopToolbar().addButton({
-								text:'Load Syntenic Regions',
-								handler:syntenyWinHandler
-						});
+	text:'Load Syntenic Regions',
+		handler:syntenyWinHandler
+			});
 
 var featureGrid = new org.jax.mgi.kmap.FeatureGrid({
-								id:'featureGrid',
-								rowspan:1,
-								colspan:1,
-								editable:false,
-								hideTopToolbar:true,
-								kPanel:karyoPanel,
-								localLink:localURL,
+	id:'featureGrid',
+		rowspan:1,
+			colspan:1,
+				editable:false,
+					hideTopToolbar:true,
+						kPanel:karyoPanel,
+							localLink:localURL,
 								viewConfig:{autoFill:true, markDirty:false},
 								tbar: new Ext.Toolbar({}),
 								bbar: new Ext.PagingToolbar({			
-										displayInfo: true,
+									displayInfo: true,
 										pageSize:5,
 										prependButtons: true
 								})
 						});
 
 // table for the center
-						var centerTable = new Ext.Panel({
-								region: 'center',
-								layout:'table',
-								layoutConfig:{columns:1},
-								items:[karyoPanel,featureGrid]
+	var centerTable = new Ext.Panel({
+		region: 'center',
+			layout:'table',
+				layoutConfig:{columns:1},
+					items:[karyoPanel,featureGrid]
 						});
 
 // Legend Panel to the west
-						var legendPanel = new org.jax.mgi.kmap.LegendPanel({
-								autoScroll:true,
-								title:'Legend',
-								id:'legendPanel',
-								region: 'west',
-								split: true,
-								width: 350,
+	var legendPanel = new org.jax.mgi.kmap.LegendPanel({
+		autoScroll:true,
+			title:'Legend',
+				id:'legendPanel',
+					region: 'west',
+						split: true,
+							width: 350,
 								collapsible:true,
 								collapsed:true,
 								style:{borderstyle:'none'},
@@ -233,11 +234,11 @@ var featureGrid = new org.jax.mgi.kmap.FeatureGrid({
 						});
 
 var mainContainer = new Ext.Container({
-								height:780,	
-								layout: 'border',
-								renderTo:'mainDiv',
-								items: [centerTable,legendPanel],
-								style:{background:'white'}
+	height:780,	
+		layout: 'border',
+			renderTo:'mainDiv',
+				items: [centerTable,legendPanel],
+					style:{background:'white'}
 						});
 
 mainContainer.doLayout();
@@ -248,11 +249,12 @@ featureGrid.doLayout();
 
 });	//end onReady()
 	</script>
+</jsp:attribute>
 
 <table>
-										<tr>
-												<td id="main-div" colspan="2" style="width:100%">
-														<noscript>
+	<tr>
+		<td id="main-div" colspan="2" style="width:100%">
+			<noscript>
 <!-- \n -->
 
 <!-- \n -->
@@ -261,12 +263,12 @@ featureGrid.doLayout();
 
 <!-- \n -->
 <h2>The QTL Viewer requires Javascript which is disabled or unavailable on your browser.</h2></noscript>
-												</td>
-										<tr>
-								</table>
+	</td>
+		<tr>
+			</table>
 
 <form action="" id="export-form" target="_blank" method="post" >
-		<input type="hidden" name="export" value="true">
+	<input type="hidden" name="export" value="true">
 		<input type="hidden" id="export-x-mL" name="exportXML" value="">
 </form>
 </jax:mmhcpage>

@@ -1,11 +1,8 @@
 <%@ page language="java" isErrorPage="true" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
 <jax:mmhcpage title="Invalid URL" help="#">
-
-<table class="results">
-
-</table>
 
 <p>
 If you arrived here from a bookmark generated from a previous version of MTB, 
@@ -15,8 +12,8 @@ search forms to the left.
 
 <hr>
 
-If you need assistance searching the new version of MTB or coding URL links to 
-specific data in the database please contact <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support</a>. 
+<p>If you need assistance searching the new version of MTB or coding URL links to 
+specific data in the database please contact <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support</a>. </p>
 
 <!--
 
@@ -51,9 +48,9 @@ Headers
 Protocol: <%= request.getProtocol() %>
 Method: <%= request.getMethod() %>
 <%
-		java.util.Enumeration names = request.getHeaderNames();
+	java.util.Enumeration names = request.getHeaderNames();
 		while (names.hasMoreElements()) {
-				String name = (String)names.nextElement();
+			String name = (String)names.nextElement();
 				out.println(name +": " + request.getHeader(name));
 		}
 %>

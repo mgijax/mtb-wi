@@ -5,66 +5,67 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %> 
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
 <jax:mmhcpage title="Dynamic Tumor Frequency Grid" help="dynamicgrid">
 
-<script language="javascript" >
+<script type="text/javascript">
 
 function checkChecks(){
-		var checked = false;
+	var checked = false;
 
 try{
-				if(document.DynamicGridForm.organChk.checked){
-						checked = true;
-				}
+	if(document.DynamicGridForm.organChk.checked){
+		checked = true;
+			}
 		}catch(err){}
 
 try{
-				for(i=0; i < document.DynamicGridForm.organChk.length; i++){
-					if(document.DynamicGridForm.organChk[i].checked){
-						checked = true;	 
+	for(i=0; i < document.DynamicGridForm.organChk.length; i++){
+		if(document.DynamicGridForm.organChk[i].checked){
+			checked = true;	 
 					}
 				}
 		}catch(err){}
 
 if(!checked){
-		 toggleOrgans();
+	 toggleOrgans();
 		}
 
 checked = false;
 
 try{
-				if(document.DynamicGridForm.strainChk !== null){
-					for(i=0; i < document.DynamicGridForm.strainChk.length; i++){
-						if(document.DynamicGridForm.strainChk[i].checked){
-								checked = true;
-						}
+	if(document.DynamicGridForm.strainChk !== null){
+		for(i=0; i < document.DynamicGridForm.strainChk.length; i++){
+			if(document.DynamicGridForm.strainChk[i].checked){
+				checked = true;
+					}
 					}
 			}
 		}catch(err){}
 
 try{
-			if(document.DynamicGridForm.strainChk.length === null){
-				if(document.DynamicGridForm.strainChk.checked){
-					checked = true;
+	if(document.DynamicGridForm.strainChk.length === null){
+		if(document.DynamicGridForm.strainChk.checked){
+			checked = true;
 				}
 			}
 		}catch(err){}
 
 try{
-				if(document.DynamicGridForm.strainFamilyChk !== null){
-					for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
-						if(document.DynamicGridForm.strainFamilyChk[i].checked){
-								checked = true;
-						}
+	if(document.DynamicGridForm.strainFamilyChk !== null){
+		for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
+			if(document.DynamicGridForm.strainFamilyChk[i].checked){
+				checked = true;
+					}
 					}
 				}
 		}catch(err){}
 
 try{		
-			if(document.DynamicGridForm.strainFamilyChk.length == null){
-				if(document.DynamicGridForm.strainFamilyChk.checked){
-						checked = true;
+	if(document.DynamicGridForm.strainFamilyChk.length == null){
+		if(document.DynamicGridForm.strainFamilyChk.checked){
+			checked = true;
 				}
 			}
 		}catch(err){} 
@@ -81,7 +82,7 @@ document.DynamicGridForm.submit();
 function toggleOrgans(){
 
 for(i=0; i < document.DynamicGridForm.organChk.length; i++){
-			document.DynamicGridForm.organChk[i].checked= !document.DynamicGridForm.organChk[i].checked;
+	document.DynamicGridForm.organChk[i].checked= !document.DynamicGridForm.organChk[i].checked;
 		}
 		if(document.DynamicGridForm.organChk.length == null){
 			document.DynamicGridForm.organChk.checked= !document.DynamicGridForm.organChk.checked;
@@ -92,8 +93,8 @@ for(i=0; i < document.DynamicGridForm.organChk.length; i++){
 function toggleStrains(){
 
 if(document.DynamicGridForm.strainChk != null){
-			for(i=0; i < document.DynamicGridForm.strainChk.length; i++){
-				document.DynamicGridForm.strainChk[i].checked= !document.DynamicGridForm.strainChk[i].checked;
+	for(i=0; i < document.DynamicGridForm.strainChk.length; i++){
+		document.DynamicGridForm.strainChk[i].checked= !document.DynamicGridForm.strainChk[i].checked;
 			}
 			if(document.DynamicGridForm.strainChk.length == null){
 				document.DynamicGridForm.strainChk.checked= !document.DynamicGridForm.strainChk.checked;
@@ -101,8 +102,8 @@ if(document.DynamicGridForm.strainChk != null){
 		}
 
 if(document.DynamicGridForm.strainFamilyChk != null){
-			for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
-				document.DynamicGridForm.strainFamilyChk[i].checked= !document.DynamicGridForm.strainFamilyChk[i].checked;
+	for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
+		document.DynamicGridForm.strainFamilyChk[i].checked= !document.DynamicGridForm.strainFamilyChk[i].checked;
 			}
 			if(document.DynamicGridForm.strainFamilyChk.length == null){
 				document.DynamicGridForm.strainFamilyChk.checked= !document.DynamicGridForm.strainFamilyChk.checked;
@@ -111,18 +112,18 @@ if(document.DynamicGridForm.strainFamilyChk != null){
 	}
 
 function hideChecks(){
-		if(document.DynamicGridForm.strainChk != null){
-			if(document.DynamicGridForm.strainChk.length != null){
-				for(i=0; i < document.DynamicGridForm.strainChk.length; i++){
-					if(document.DynamicGridForm.strainChk[i].style.display!="none"){
-						document.DynamicGridForm.strainChk[i].style.display="none";
+	if(document.DynamicGridForm.strainChk != null){
+		if(document.DynamicGridForm.strainChk.length != null){
+			for(i=0; i < document.DynamicGridForm.strainChk.length; i++){
+				if(document.DynamicGridForm.strainChk[i].style.display!="none"){
+					document.DynamicGridForm.strainChk[i].style.display="none";
 					}else{
 						document.DynamicGridForm.strainChk[i].style.display="inline";
 					}
 				}
 			}else{
 				if(document.DynamicGridForm.strainChk.style.display!="none"){
-						document.DynamicGridForm.strainChk.style.display="none";
+					document.DynamicGridForm.strainChk.style.display="none";
 					}else{
 						document.DynamicGridForm.strainChk.style.display="inline";
 					}
@@ -130,8 +131,8 @@ function hideChecks(){
 		}
 
 for(i=0; i < document.DynamicGridForm.organChk.length; i++){
-			if(document.DynamicGridForm.organChk[i].style.display!="none"){
-				document.DynamicGridForm.organChk[i].style.display="none";
+	if(document.DynamicGridForm.organChk[i].style.display!="none"){
+		document.DynamicGridForm.organChk[i].style.display="none";
 			}else{
 				document.DynamicGridForm.organChk[i].style.display="inline";
 			}
@@ -146,7 +147,7 @@ for(i=0; i < document.DynamicGridForm.organChk.length; i++){
 }
 
 if(document.DynamicGridForm.strainFamilyChk != null){
-			if(document.DynamicGridForm.strainFamilyChk.length != null){	 
+	if(document.DynamicGridForm.strainFamilyChk.length != null){	 
 				for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
 					if(document.DynamicGridForm.strainFamilyChk[i].style.display!="none"){
 						document.DynamicGridForm.strainFamilyChk[i].style.display="none";
@@ -156,7 +157,7 @@ if(document.DynamicGridForm.strainFamilyChk != null){
 			}
 		}else{
 			 if(document.DynamicGridForm.strainFamilyChk.style.display!="none"){
-						document.DynamicGridForm.strainFamilyChk.style.display="none";
+				document.DynamicGridForm.strainFamilyChk.style.display="none";
 					}else{
 						document.DynamicGridForm.strainFamilyChk.style.display="inline";
 					}
@@ -168,7 +169,7 @@ if(document.DynamicGridForm.strainFamilyChk != null){
 
 <!-- ////  Start Detail Section  //// -->
 
-<span class="larger">Tumor Frequency Grid (Inbred Strain Family x Organ)</span>
+<h3>Tumor Frequency Grid (Inbred Strain Family x Organ)</h3>
 
 <!-- \n -->
 
@@ -221,7 +222,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 	<c:set var="colspan" value="${fn:length(organParent.organs) + colspan - 1}"/>
 
 </c:forEach>
-		<th colspan="${colspan}"><img src="dynamicText?text=${anatomicalSystem.anatomicalSystemName}&amp;size=10" alt="X">
+	<th colspan="${colspan}"><img src="dynamicText?text=${anatomicalSystem.anatomicalSystemName}&amp;size=10" alt="X">
 <!-- \n -->
 <img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" "></th>
 	</c:forEach>
@@ -235,7 +236,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 	<c:set var="totalColumns" value="${totalColumns + 1}"/> 
 
 <th>
-				<img src="${applicationScope.urlImageDir}/grid/${organ.organKey}.png" alt="X">
+	<img src="${applicationScope.urlImageDir}/grid/${organ.organKey}.png" alt="X">
 <!-- \n -->
 
 <img src="${applicationScope.urlImageDir}/grid/grid_spacer.png">
@@ -245,7 +246,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 <!-- \n -->
 
 <input type ="checkbox" name="organChk" value="${organ.organKey}" >
-				</th>
+	</th>
 
 </c:forEach>
 
@@ -267,37 +268,37 @@ cell. <em>(Requires JavaScript support.)</em></p>
 		<%--Getting heredity...for ${rowHeredity.strainHeredityName}
 <!-- \n -->
 --%>
-		<%--Figure out how many rows each Heredity label needs to span
-				If all strains are displayed count all the strains for each family
-				otherwise just count the selected strains for each family
+	<%--Figure out how many rows each Heredity label needs to span
+		If all strains are displayed count all the strains for each family
+			otherwise just count the selected strains for each family
 		--%>
 		<c:forEach var="heredityItem" items="${gridData}" varStatus="status2">
 			<c:if test="${empty heredityGrid}">
 				<c:if test="${heredityItem.value.strainHeredityKey == rowHeredity.strainHeredityKey}">
 	<c:set var="heredityGrid" value="${heredityItem.value}"/>
 	<c:set var="heredityAll" value="${rowHeredity}"/>
-				</c:if>
+		</c:if>
 			</c:if>
 		</c:forEach>
 	<c:set var="rowSpan" value="${fn:length(rowHeredity.families)}"/>
 		<c:if test="${not empty heredityGrid}">
 
 <c:choose>
-		 <c:when test="${not empty showAllStrains}">
+	 <c:when test="${not empty showAllStrains}">
 
 <c:forEach var="fam" items="${heredityAll.families}" varStatus="status3">
 	<c:set var="rowSpan" value="${fn:length(fam.strains) + rowSpan}"/>	
 
 </c:forEach>
-		</c:when>
+	</c:when>
 		<c:otherwise>
 
 <c:forEach var="fam" items="${heredityAll.families}" varStatus="status3">
-				<c:forEach var="st" items="${fam.strains}">
-				 <c:forEach var="checkStrain" items="${strainChk}">
-				 <c:if test="${st.strainKey == checkStrain}">
+	<c:forEach var="st" items="${fam.strains}">
+		 <c:forEach var="checkStrain" items="${strainChk}">
+			 <c:if test="${st.strainKey == checkStrain}">
 	<c:set var="rowSpan" value="${rowSpan + 1}"/>	
-				 </c:if>
+		 </c:if>
 			 </c:forEach>
 		 </c:forEach>
 	 </c:forEach>
@@ -307,13 +308,13 @@ cell. <em>(Requires JavaScript support.)</em></p>
 		<%-- else need to add only fam.strains that have been selected --%>
 
 </c:if>
-		<td class="grid" align="right" valign="middle" rowspan="${rowSpan}">
-			<img src="${applicationScope.urlImageDir}/grid/sh${rowHeredity.strainHeredityKey}.png" alt="${rowHeredity.strainHeredityName}">
+	<td class="grid" align="right" valign="middle" rowspan="${rowSpan}">
+		<img src="${applicationScope.urlImageDir}/grid/sh${rowHeredity.strainHeredityKey}.png" alt="${rowHeredity.strainHeredityName}">
 		<img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" "></td>
 		<%--Done Heredity!
 <!-- \n -->
 --%>
-		<c:choose>
+	<c:choose>
 		<c:when test="${not empty heredityGrid}">
 
 <c:forEach var="fam" items="${heredityAll.families}" varStatus="status3">
@@ -326,10 +327,10 @@ cell. <em>(Requires JavaScript support.)</em></p>
 			<%--===> looking for ${fam.strainFamilyName}
 <!-- \n -->
 --%>
-			<c:if test="${familyItem.value.strainFamilyKey == fam.strainFamilyKey}">
+	<c:if test="${familyItem.value.strainFamilyKey == fam.strainFamilyKey}">
 	<c:set var="familyGrid" value="${familyItem.value}"/>
 	<c:set var="familyAll" value="${fam}"/>
-			</c:if>
+		</c:if>
 		</c:forEach>
 		<c:choose>
 		<c:when test="${not empty familyGrid}">
@@ -341,15 +342,15 @@ cell. <em>(Requires JavaScript support.)</em></p>
 <%-- DETERMINE STRAIN FAMILY IMAGE EXPANDED OR COLLAPSED --%>
 
 <td class="grid" align="right"> 
-			 <span style="white-space:nowrap">
-					 &nbsp;${familyGrid.strainFamilyName} (Summary)<html:multibox property="strainFamilyChk" value="${familyGrid.strainFamilyKey}" />
+	 <span style="white-space:nowrap">
+		 &nbsp;${familyGrid.strainFamilyName} (Summary)<html:multibox property="strainFamilyChk" value="${familyGrid.strainFamilyKey}" />
 			 </span>
 		</td>
 
 <%-- DETERMINE IF WE HAVE EXPANDED STRAINS OR NOT --%>
 
 <%----------------------------------- START Strain Family and expanded Strains ---------------------------%>
-		<%----------------------------------- START Strain Family ------------------------------------------------%>																											 
+	<%----------------------------------- START Strain Family ------------------------------------------------%>																											 
 		<c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
 			<c:forEach var="organParent" items="${anatomicalSystem.organs}" varStatus="status">
 	<c:set var="organ" value=""/>
@@ -357,41 +358,41 @@ cell. <em>(Requires JavaScript support.)</em></p>
 <%-- ------------ LOOP THROUGH SUB ORGANS ------------------
 <!-- \n -->
  --%>
-				<c:forEach var="subOrgan" items="${organParent.organs}" varStatus="status">
-					<%-- SUBORGAN NAME: ${subOrgan.organName}
+	<c:forEach var="subOrgan" items="${organParent.organs}" varStatus="status">
+		<%-- SUBORGAN NAME: ${subOrgan.organName}
 <!-- \n -->
  --%>
 	<c:set var="organ" value=""/>
-					<c:forEach var="organItem" items="${familyGrid.organs}" varStatus="status">
-						<c:forEach var="subOrganItem" items="${organItem.value.organs}" varStatus="status">
-							<c:if test="${subOrgan.organKey == subOrganItem.value.organKey}">
+		<c:forEach var="organItem" items="${familyGrid.organs}" varStatus="status">
+			<c:forEach var="subOrganItem" items="${organItem.value.organs}" varStatus="status">
+				<c:if test="${subOrgan.organKey == subOrganItem.value.organKey}">
 	<c:set var="organ" value="${subOrganItem.value}"/>
-							</c:if>
-						</c:forEach>
-					</c:forEach>
+		</c:if>
+			</c:forEach>
+				</c:forEach>
 					<c:choose>
 						<c:when test="${not empty organ}">
 	<c:set var="tdOut" value=""/>
-							<c:choose>
-								<c:when test="${organ.frequencyDetail.noTumors}">
+		<c:choose>
+			<c:when test="${organ.frequencyDetail.noTumors}">
 	<c:set var="tdOut" value="0"/>
-								</c:when>
-								<c:otherwise>
+		</c:when>
+			<c:otherwise>
 	<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='-' ' height='100%'>" />
-								</c:otherwise>
-							</c:choose>
+		</c:otherwise>
+			</c:choose>
 
 <td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}" style="text-decoration: none; cursor:help;" onmouseover="return overlib('<table class=\'gridDetails\'><tr><td class=\'gridDetails\'>Strain Family:</td><td class=\'gridDetails\'>${familyGrid.strainFamilyName}</td></tr><tr><td class=\'gridDetails\'>Organ:</td><td class=\'gridDetails\'>${organ.organName}</td></tr><tr><td class=\'gridDetails\'>Highest reported tumor frequency:</td><td class=\'gridDetails\'>${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class=\'gridDetails\'># Tumor Frequency Records:</td><td class=\'gridDetails\'>${organ.frequencyDetail.count}</td></tr></table>');" onmouseout="return nd();">${tdOut}</a></td>
-						</c:when>
-						<c:otherwise>
-							<td></td>
-						</c:otherwise>
+	</c:when>
+		<c:otherwise>
+			<td></td>
+				</c:otherwise>
 					</c:choose>
 	<c:set var="organ" value=""/>
-				</c:forEach>
+		</c:forEach>
 
 </c:forEach>
-		</c:forEach>
+	</c:forEach>
 
 </tr>
 
@@ -407,7 +408,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 	</c:if>
 
 <c:forEach var="selectStrain" items="${strainChk}">
-		<c:if test="${selectStrain == strainCat.strainKey}" >
+	<c:if test="${selectStrain == strainCat.strainKey}" >
 	<c:set var="showStrain" value="true"/>
 		</c:if>
 	</c:forEach>
@@ -417,7 +418,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 		<c:forEach var="strainItem" items="${familyGrid.strains}" varStatus="status2001">
 			<c:if test="${strainCat.strainKey == strainItem.value.strainKey}">
 	<c:set var="theStrain" value="${strainItem.value}"/>
-			</c:if>
+		</c:if>
 		</c:forEach>
 		<tr class="grid">
 			<td class="grid" align="right" >
@@ -435,58 +436,58 @@ cell. <em>(Requires JavaScript support.)</em></p>
 <%-- ------------ LOOP THROUGH SUB ORGANS ------------------
 <!-- \n -->
  --%>
-							<c:forEach var="subOrgan" items="${organParent.organs}" varStatus="status">
-								<%-- SUBORGAN NAME: ${subOrgan.organName}
+	<c:forEach var="subOrgan" items="${organParent.organs}" varStatus="status">
+		<%-- SUBORGAN NAME: ${subOrgan.organName}
 <!-- \n -->
  --%>
 	<c:set var="organ" value=""/>
-								<c:forEach var="organItem" items="${theStrain.organs}" varStatus="status">
+		<c:forEach var="organItem" items="${theStrain.organs}" varStatus="status">
 
 <c:forEach var="subOrganItem" items="${organItem.value.organs}" varStatus="status">
 
 <c:if test="${subOrgan.organKey == subOrganItem.value.organKey}">
 	<c:set var="organ" value="${subOrganItem.value}"/>
-										</c:if>
-									</c:forEach>
-								</c:forEach>
-								<c:choose>
-									<c:when test="${not empty organ}">
+		</c:if>
+			</c:forEach>
+				</c:forEach>
+					<c:choose>
+						<c:when test="${not empty organ}">
 	<c:set var="tdOut" value=""/>
-										<c:choose>
-											<c:when test="${organ.frequencyDetail.noTumors}">
+		<c:choose>
+			<c:when test="${organ.frequencyDetail.noTumors}">
 	<c:set var="tdOut" value="0"/>
-											</c:when>
-											<c:otherwise>
+		</c:when>
+			<c:otherwise>
 	<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
-											</c:otherwise>
-										</c:choose>
-										<td>
-											<a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organKey=${organ.organKey}" 
-												 style="text-decoration: none; cursor:help;" 
-											 onmouseover="return overlib('<table class=\'gridDetails\'><tr><td class=\'gridDetails\'>Strain:</td><td class=\'gridDetails\'>${theStrain.strainName}</td></tr><tr><td class=\'gridDetails\'>Organ:</td><td class=\'gridDetails\'>${organ.organName}</td></tr><tr><td class=\'gridDetails\'>Highest reported tumor frequency:</td><td class=\'gridDetails\'>${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class=\'gridDetails\'># Tumor Frequency Records:</td><td class=\'gridDetails\'>${organ.frequencyDetail.count}</td></tr></table>');" onmouseout="return nd();">${tdOut}</a></td>
-									</c:when>
+		</c:otherwise>
+			</c:choose>
+				<td>
+					<a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organKey=${organ.organKey}" 
+						 style="text-decoration: none; cursor:help;" 
+							 onmouseover="return overlib('<table class=\'gridDetails\'><tr><td class=\'gridDetails\'>Strain:</td><td class=\'gridDetails\'>${theStrain.strainName}</td></tr><tr><td class=\'gridDetails\'>Organ:</td><td class=\'gridDetails\'>${organ.organName}</td></tr><tr><td class=\'gridDetails\'>Highest reported tumor frequency:</td><td class=\'gridDetails\'>${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class=\'gridDetails\'># Tumor Frequency Records:</td><td class=\'gridDetails\'>${organ.frequencyDetail.count}</td></tr></table>');" onmouseout="return nd();">${tdOut}</a></td>
+								</c:when>
 									<c:otherwise>
 										<td></td>
 									</c:otherwise>
 								</c:choose>
 	<c:set var="organ" value=""/>
-							</c:forEach>
+		</c:forEach>
 
 </c:forEach>
-					</c:forEach>
+	</c:forEach>
 
 </c:when>
 
 <c:otherwise>
-					<%--We <strong>DO NOT</strong> have a strain value...dump out a row of empty values.
+	<%--We <strong>DO NOT</strong> have a strain value...dump out a row of empty values.
 <!-- \n -->
 --%>
 	<c:set var="startColumn" value="3"/>
 
 <c:forEach var="i" begin="${startColumn}" end="${totalColumns}">
-						<td bgcolor="#ffffff"></td>
-					</c:forEach>
-				</c:otherwise>
+	<td bgcolor="#ffffff"></td>
+		</c:forEach>
+			</c:otherwise>
 			</c:choose>
 		</tr>
 
@@ -502,7 +503,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 	<c:set var="startColumn" value="4"/>
 
 <c:forEach var="i" begin="${startColumn}" end="${totalColumns}">
-		<td bgcolor="#ffffff"></td>
+	<td bgcolor="#ffffff"></td>
 	</c:forEach>
 </c:otherwise>
 </c:choose>
@@ -523,7 +524,7 @@ cell. <em>(Requires JavaScript support.)</em></p>
 	<c:set var="startColumn" value="4"/> 
 
 <c:forEach var="i" begin="${startColumn}" end="${totalColumns}">
-		<td bgcolor="#ffffff"></td>
+	<td bgcolor="#ffffff"></td>
 	</c:forEach>
 	</tr>	 
 </c:forEach>
@@ -550,24 +551,24 @@ cell. <em>(Requires JavaScript support.)</em></p>
 	&gt;80% and 100% as well as frequnecies reported to be "very high"</li>
 
 <li>
-		"High" - includes frequencies reported in the literature as being between
+	"High" - includes frequencies reported in the literature as being between
 	&gt;50% and 80% as well as frequencies reported to be "high"</li>
 
 <li>
-		"Moderate" - includes frequencies reported in the literature as being between
+	"Moderate" - includes frequencies reported in the literature as being between
 	&gt;20% and 50% as well as frequencies reported to be "moderate"</li>
 
 <li>
-		"Low" - includes frequencies reported in the literature as being between
+	"Low" - includes frequencies reported in the literature as being between
 	&gt;10% and 20% as well as frequencies reported to be "low"</li>
 
 <li>
-		"Very Low" - includes frequencies reported in the literature as being between
+	"Very Low" - includes frequencies reported in the literature as being between
 		&gt;0% and 10% as well as frequencies reported to be "sporadic" and "very
 	low"</li>
 
 <li>
-		"Observed" - the literature reported that tumors were observed but the
+	"Observed" - the literature reported that tumors were observed but the
 	authors did not indicate frequency</li>
 
 <li>
@@ -584,13 +585,13 @@ cell. <em>(Requires JavaScript support.)</em></p>
 	each strain family/organ or organ system combination.</li>
 
 <li>
-		The strain families used in this grid are grouped according to the mouse
+	The strain families used in this grid are grouped according to the mouse
 		strain genealogy published in Beck JA, Lloyd S, Hafezparast M, Lennon-Pierce
 		M, Eppig JT, Festing MFW, Fisher EMC. 2000. Nature Genetics 24: 23-25.
 	The strain genealogy chart from that reference may be accessed via <a href="http://www.informatics.jax.org/mgihome/genealogy/">http://www.informatics.jax.org/mgihome/genealogy/</a>.</li>
 
 <li>
-		Most of the above strains are projected to be used in the Mouse Phenome
+	Most of the above strains are projected to be used in the Mouse Phenome
 		Project (<a href="http://link.springer-ny.com/link/service/journals/00335/bibs/0011009/00110715.html">Paigen
 		K, Eppig JT. 2000. Mamm Genome 11(9):715-7</a>). The exceptions are DBA/1,
 	NZO, and RIII.</li>

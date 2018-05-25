@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
 <jax:mmhcpage title="Human Gene List">
 
@@ -12,8 +13,8 @@
 <!-- ////  Start Strain Genetics Results List  //// -->
 
 <table class="results">
-		<tr>
-			<td class="results-header-left" colspan="6"><span class="larger"></span></td>
+	<tr>
+		<td class="results-header-left" colspan="6"><span class="larger"></span></td>
 		</tr>				
 		<tr>
 			<td class="results-header">Entrez Gene ID</td>
@@ -24,8 +25,8 @@
 <c:forEach var="rec" items="${symbols}" varStatus="status">
 
 <c:choose>
-			<c:when test="${status.index%2==0}">
-				<tr class="stripe-1">
+	<c:when test="${status.index%2==0}">
+		<tr class="stripe-1">
 			</c:when>
 			<c:otherwise>
 				<tr class="stripe-2">
@@ -33,7 +34,7 @@
 		</c:choose>
 
 <td><c:out value="GeneID:${rec.value}" default="&nbsp;" escapeXml="false"/>
-		</td>
+	</td>
 		<td>${rec.label}</td>
 		<td>${rec.data}</td>
 	 </tr>

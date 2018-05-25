@@ -2,43 +2,44 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
 <jax:mmhcpage title="Patient Derived Xenograft Comparison">
-
-<script type="text/javascript">
+	<jsp:attribute name="head">
+	<script type="text/javascript">
 
 function showAllMutations(){
-						var genes = document.getElementsByName("mtGene");
+	var genes = document.getElementsByName("mtGene");
 
 for(var i=0; i<genes.length; i++){
-								if(genes[i].style.cursor == "pointer"){
-										showMutations(genes[i].textContent);
-								}
-						}
-						if(document.getElementById("show-all").textContent =="+"){
-								document.getElementById("show-all").textContent ="-";
+	if(genes[i].style.cursor == "pointer"){
+		showMutations(genes[i].textContent);
+			}
+				}
+					if(document.getElementById("show-all").textContent =="+"){
+						document.getElementById("show-all").textContent ="-";
 						}else{
-								document.getElementById("show-all").textContent="+";
+							document.getElementById("show-all").textContent="+";
 						}
 
 }
 
 function showMutations(gene){
-						var tds = document.getElementsByName(gene);
-						for(var i=0; i< tds.length; i++){
-										if(tds[i].textContent.length > 1){
-														tds[i].textContent=" ";
-														tds[i].style ="background-color:#000000";
+	var tds = document.getElementsByName(gene);
+		for(var i=0; i< tds.length; i++){
+			if(tds[i].textContent.length > 1){
+				tds[i].textContent=" ";
+					tds[i].style ="background-color:#000000";
 
 }else{
-														tds[i].removeAttribute("style");
-														tds[i].textContent = tds[i].getAttribute("mutation");
-										}
-						}
+	tds[i].removeAttribute("style");
+		tds[i].textContent = tds[i].getAttribute("mutation");
+			}
+				}
 				}
 	</script>
+</jsp:attribute>
 
-<c:import url="../../../pdxToolBar.jsp" />
 
 <html:form action="pdxComparison" method="GET">
 
@@ -48,83 +49,83 @@ function showMutations(gene){
 <table>
 
 <tr class="summary">
-												<td >
-														<span class="label">Search Summary</span>
+	<td >
+		<span class="label">Search Summary</span>
 <!-- \n -->
 
 <c:choose>
-												<c:when test="${not empty primarySites}">
-														<c:choose>
-																<c:when test="${fn:length(primarySites)>1}">
-																		<span class="label">Primary Sites:</span>
-																</c:when>
-																<c:otherwise>
-																		<span class="label">Primary Site:</span>
-																</c:otherwise>
-														</c:choose>
+	<c:when test="${not empty primarySites}">
+		<c:choose>
+			<c:when test="${fn:length(primarySites)>1}">
+				<span class="label">Primary Sites:</span>
+					</c:when>
+						<c:otherwise>
+							<span class="label">Primary Site:</span>
+								</c:otherwise>
+									</c:choose>
 
 <c:forEach var="site" items="${primarySites}" varStatus="status">
-																<c:choose>
-																		<c:when test="${status.last != true}">
-																				${site},
-																		</c:when>
-																		<c:otherwise>
-																				${site}
-																		</c:otherwise>
-																</c:choose>
-														</c:forEach>
+	<c:choose>
+		<c:when test="${status.last != true}">
+			${site},
+				</c:when>
+					<c:otherwise>
+						${site}
+							</c:otherwise>
+								</c:choose>
+									</c:forEach>
 
 <!-- \n -->
 
 </c:when>
-												<c:otherwise>
-														<span class="label">Primary Sites:</span> Any
+	<c:otherwise>
+		<span class="label">Primary Sites:</span> Any
 <!-- \n -->
 
 </c:otherwise>
-										</c:choose>
+	</c:choose>
 
 <c:choose>
-												<c:when test="${not empty diagnoses}">
-														<c:choose>
-																<c:when test="${fn:length(diagnoses)>1}">
-																		<span class="label">Diagnoses:</span>
-																</c:when>
-																<c:otherwise>
-																		<span class="label">Diagnosis:</span>
-																</c:otherwise>
-														</c:choose>
+	<c:when test="${not empty diagnoses}">
+		<c:choose>
+			<c:when test="${fn:length(diagnoses)>1}">
+				<span class="label">Diagnoses:</span>
+					</c:when>
+						<c:otherwise>
+							<span class="label">Diagnosis:</span>
+								</c:otherwise>
+									</c:choose>
 
 <c:forEach var="diagnosis" items="${diagnoses}" varStatus="status">
-																<c:choose>
-																		<c:when test="${status.last != true}">
-																				${diagnosis},
-																		</c:when>
-																		<c:otherwise>
-																				${diagnosis}
-																		</c:otherwise>
-																</c:choose>
-														</c:forEach>
+	<c:choose>
+		<c:when test="${status.last != true}">
+			${diagnosis},
+				</c:when>
+					<c:otherwise>
+						${diagnosis}
+							</c:otherwise>
+								</c:choose>
+									</c:forEach>
 
 <!-- \n -->
 
 </c:when>
-												<c:otherwise>
-														<span class="label">Diagnosis:</span> Any
+	<c:otherwise>
+		<span class="label">Diagnosis:</span> Any
 <!-- \n -->
 
 </c:otherwise>
-										</c:choose>
-								</td> 
-								<td>
-										 <table>
+	</c:choose>
+		</td> 
+			<td>
+				 <table>
 		<tr><td>Rank Z based expression scale</td>
 		<tr>
-				<td>
-						<table>
-								<tr>
-								<td style="text-align:center;color:#FFFFFF;background-color:#006900">-15</td>
-								<td style="text-align:center;color:#FFFFFF;background-color:#007300">-14</td>
+			<td>
+				<table>
+					<tr>
+						<td style="text-align:center;color:#FFFFFF;background-color:#006900">-15</td>
+							<td style="text-align:center;color:#FFFFFF;background-color:#007300">-14</td>
 								<td style="text-align:center;color:#FFFFFF;background-color:#007d00">-13</td>
 								<td style="text-align:center;color:#FFFFFF;background-color:#008700">-12</td>
 								<td style="text-align:center;color:#FFFFFF;background-color:#009100">-11</td>
@@ -159,49 +160,49 @@ function showMutations(gene){
 						</table>
 
 </td>
-		</tr>
+	</tr>
 		<tr><td>
-						<table>
-								<tr><td>CNV color coding</td></tr>
-								<tr>
-										<td style="text-align:center;color:#000000;background-color:#FFA500">Amplification</td>
-										<td style="text-align:center;color:#000000;background-color:#0000FF">Deletion</td>
-										<td style="text-align:center;color:#000000;background-color:#808080">Normal</td>
-										<td style="text-align:center;color:#000000;background-color:#FFFFFF">No Value</td>
+			<table>
+				<tr><td>CNV color coding</td></tr>
+					<tr>
+						<td style="text-align:center;color:#000000;background-color:#FFA500">Amplification</td>
+							<td style="text-align:center;color:#000000;background-color:#0000FF">Deletion</td>
+								<td style="text-align:center;color:#000000;background-color:#808080">Normal</td>
+									<td style="text-align:center;color:#000000;background-color:#FFFFFF">No Value</td>
 								</tr>
 						</table>
 				</td>
 		</tr>
 	</table>
-								</td>
-								</tr>
+		</td>
+			</tr>
 
 <tr>
-										<tr><td colspan="4">
-														${table}
-												</td>
-										</tr>
-						<!--				<tr><td>Rank Z based expression scale</td>
+	<tr><td colspan="4">
+		${table}
+			</td>
+				</tr>
+					<!--				<tr><td>Rank Z based expression scale</td>
 										<tr>
-												<td>
-														${gradient}
+											<td>
+												${gradient}
 												</td>
 										</tr>
 										<tr><td>
-														<table>
-																<tr><td>CNV color coding</td></tr>
-																<tr>
-																		<td style="text-align:center;color:#000000;background-color:#FFA500">Amplification</td>
-																		<td style="text-align:center;color:#000000;background-color:#0000FF">Deletion</td>
-																		<td style="text-align:center;color:#000000;background-color:#808080">Normal</td>
-																		<td style="text-align:center;color:#000000;background-color:#FFFFFF">No Value</td>
+											<table>
+												<tr><td>CNV color coding</td></tr>
+													<tr>
+														<td style="text-align:center;color:#000000;background-color:#FFA500">Amplification</td>
+															<td style="text-align:center;color:#000000;background-color:#0000FF">Deletion</td>
+																<td style="text-align:center;color:#000000;background-color:#808080">Normal</td>
+																	<td style="text-align:center;color:#000000;background-color:#FFFFFF">No Value</td>
 																</tr>
 														</table>
 												</td>
 										</tr>		-->
 
 </table>
-						</html:form>
+	</html:form>
 
 </jax:mmhcpage>
 

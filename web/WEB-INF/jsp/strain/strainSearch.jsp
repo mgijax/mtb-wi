@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
 <jax:mmhcpage title="Strain Search Form" help="strains">
 	<html:form action="strainSearchResults" method="GET">
@@ -9,27 +10,27 @@
 <table class="results">
 
 <tr class="buttons">
-				<td colspan="2">
-						<table>
+	<td colspan="2">
+		<table>
+			<tr>
+				<td>
+					<input type="submit" VALUE="Search">
+						<input type="reset" VALUE="Reset">
+							</td>
+								</tr>
 								<tr>
-										<td>
-												<input type="submit" VALUE="Search">
-												<input type="reset" VALUE="Reset">
+									<td>
+										<span class="label">Sort By:</span>
+											<html:radio property="sortBy" value="name">Strain Name</html:radio>  
+												<html:radio property="sortBy" value="type">Strain Type</html:radio>
 										</td>
 								</tr>
 								<tr>
-										<td>
-												<span class="label">Sort By:</span>
-														<html:radio property="sortBy" value="name">Strain Name</html:radio>  
-														<html:radio property="sortBy" value="type">Strain Type</html:radio>
-										</td>
-								</tr>
-								<tr>
-										<td>
-												<span class="label">Max number of items returned:</span>
-														<html:radio property="maxItems" value="25">25</html:radio>  
-														<html:radio property="maxItems" value="100">100</html:radio>  
-														<html:radio property="maxItems" value="500">500</html:radio>  
+									<td>
+										<span class="label">Max number of items returned:</span>
+											<html:radio property="maxItems" value="25">25</html:radio>  
+												<html:radio property="maxItems" value="100">100</html:radio>  
+													<html:radio property="maxItems" value="500">500</html:radio>  
 														<html:radio property="maxItems" value="No Limit">No Limit</html:radio>
 										</td>
 								</tr>
@@ -41,12 +42,12 @@
 
 <%--
 <logic:messagesPresent message="true">
-		<tr class="error">
-				<td class="error-label">Errors</td>
-				<td class="error-value">
-						<ul>
+	<tr class="error">
+		<td class="error-label">Errors</td>
+			<td class="error-value">
+				<ul>
 					 <html:messages id="message" message="true">
-							 <li>${message}</li>
+						 <li>${message}</li>
 					 </html:messages>
 					 </ul>
 			 </td>
@@ -57,31 +58,31 @@
 <!-- ////  End Error Section  //// -->
 
 <tr class="stripe-1">
-				<td class="cat-1">
-						Strain
-				</td>
+	<td class="cat-1">
+		Strain
+			</td>
 				<td class="data-1">
-						<table>
-								<tr>
-										<td>
-												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.', CAPTION, 'Strain Name');" onmouseout="return nd();">Strain Name:</a></strong>
+					<table>
+						<tr>
+							<td>
+								<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.', CAPTION, 'Strain Name');" onmouseout="return nd();">Strain Name:</a></strong>
 
 <!-- \n -->
 
 <html:select property="likeClause">
-														<html:option value="Contains"> Contains </html:option>
-														<html:option value="Begins"> Begins </html:option>
-														<html:option value="Equals"> Equals </html:option>
-												</html:select>
-												<html:text property="strainName" size="30" maxlength="255"/>
-												<%--
-												<html:checkbox property="caseSensitive" value="1"/>Case Sensitive
-												--%>
-										</td>
+	<html:option value="Contains"> Contains </html:option>
+		<html:option value="Begins"> Begins </html:option>
+			<html:option value="Equals"> Equals </html:option>
+				</html:select>
+					<html:text property="strainName" size="30" maxlength="255"/>
+						<%--
+							<html:checkbox property="caseSensitive" value="1"/>Case Sensitive
+								--%>
+									</td>
 								</tr>
 								<tr>
-										<td>
-												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Indicates method of strain derivation.
+									<td>
+										<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Indicates method of strain derivation.
 <!-- \n -->
 
 <!-- \n -->
@@ -90,23 +91,23 @@ The values for these fields are selected from lists of controlled vocabulary ter
 <!-- \n -->
 
 <html:select property="strainTypes" size="8" multiple="true">
-														<html:option value="">ANY</html:option>
-														<html:options collection="strainTypeValues" property="value" labelProperty="label"/>
-												</html:select>
-										</td>
-								</tr>
+	<html:option value="">ANY</html:option>
+		<html:options collection="strainTypeValues" property="value" labelProperty="label"/>
+			</html:select>
+				</td>
+					</tr>
 						</table>
 				</td>
 		</tr>
 		<tr class="stripe-2">
-				<td class="cat-2">
-						Genetics
+			<td class="cat-2">
+				Genetics
 				</td>
 				<td class="data-2">
-						<table>
-								<tr>
-										<td>
-												<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('This field offers a text based search for strains with known germline genotype at specific genes/loci.
+					<table>
+						<tr>
+							<td>
+								<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('This field offers a text based search for strains with known germline genotype at specific genes/loci.
 <!-- \n -->
 
 <!-- \n -->
@@ -119,27 +120,27 @@ If you have difficulty locating records of interest, you may want to consult the
 <!-- \n -->
 
 <html:text property="geneticName" size="30" maxlength="255"/> <em>(Symbol/Name/Synonym)</em>
-										</td>
-								</tr>
-						</table>
+	</td>
+		</tr>
+			</table>
 				</td>
 		</tr>
 		<tr class="stripe-1">
-				<td class="cat-1">
-						Other Database Links
+			<td class="cat-1">
+				Other Database Links
 				</td>
 				<td class="data-2">
-						<table>
-								<tr>
-										<td>
-												<strong>Search for strain records with <a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('You can restrict your search for strains that were obtained from the JAX&reg;Mice or NCI Mouse Repositories.', CAPTION, 'Other Database Links');" onmouseout="return nd();">outside links</a> to:</strong>
+					<table>
+						<tr>
+							<td>
+								<strong>Search for strain records with <a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('You can restrict your search for strains that were obtained from the JAX&reg;Mice or NCI Mouse Repositories.', CAPTION, 'Other Database Links');" onmouseout="return nd();">outside links</a> to:</strong>
 
 <!-- \n -->
 
 <table>
-														<tr>
-																<td>
-																		<html:checkbox property="siteJaxMice"/>JAX<sup>&reg;</sup>Mice &nbsp; &nbsp; <a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('A serial stock number assigned to strains sold by The Jackson Laboratory.
+	<tr>
+		<td>
+			<html:checkbox property="siteJaxMice"/>JAX<sup>&reg;</sup>Mice &nbsp; &nbsp; <a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('A serial stock number assigned to strains sold by The Jackson Laboratory.
 <!-- \n -->
 
 <!-- \n -->
@@ -148,23 +149,23 @@ Users interested in a specific strain of mouse that is offered through The Jacks
 <!-- \n -->
 
 <html:checkbox property="siteNCIMR"/>NCI Mouse Repository
-																</td>
-														</tr>
+	</td>
+		</tr>
 
 </table>
-										</td>
-								</tr>
-						</table>
+	</td>
+		</tr>
+			</table>
 				</td>
 		</tr>
 		<tr class="buttons">
-				<td colspan="2">
-						<table>
-								<tr>
-										<td>
-												<input type="submit" VALUE="Search">
-												<input type="reset" VALUE="Reset">
-										</td>
+			<td colspan="2">
+				<table>
+					<tr>
+						<td>
+							<input type="submit" VALUE="Search">
+								<input type="reset" VALUE="Reset">
+									</td>
 								</tr>
 						</table>
 				</td>

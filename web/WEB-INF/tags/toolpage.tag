@@ -8,7 +8,7 @@
 <%@ attribute name="title" required="false" %>
 <%@ attribute name="keywords" required="false" %>
 <%@ attribute name="description" required="false" %>
-<%@ attribute name="head" fragment="true" %>
+<%@ attribute name="defaultHead" fragment="true" %>
 <%@ attribute name="header" fragment="true" %>
 <%@ attribute name="sectionHeader" fragment="true" %>
 <%@ attribute name="footer" fragment="true" %>
@@ -41,7 +41,7 @@
 	<title><c:out value="${title}" escapeXml="false"/></title>
 	</c:otherwise>	 
 	</c:choose>		   
-	<jsp:invoke fragment="head" />
+	<jsp:invoke fragment="defaultHead" />
 </head>
 
 <body>
