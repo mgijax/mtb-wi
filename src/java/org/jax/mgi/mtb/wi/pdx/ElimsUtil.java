@@ -306,7 +306,7 @@ public class ElimsUtil {
                         report.append(clean(result[i].getMouseSex())).append(",");
                         report.append(clean(fixEngraftment(result[i].getEngraftmentSite()))).append(",");
                         report.append(clean(result[i].getCollecting_Site())).append(",");  // organization
-                        report.append(clean(result[i].getCollection_Date())).append(",");
+                        report.append(cleanDate(result[i].getCollection_Date())).append(",");
                         report.append(cleanDate(result[i].getReceived_Date())).append(",");
                         report.append(cleanDate(result[i].getAccession_Date())).append(",");
                         report.append(cleanDate(result[i].getImplantation_Date())).append(",");
@@ -379,7 +379,7 @@ public class ElimsUtil {
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMouseSex())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(fixEngraftment(result[i].getEngraftmentSite()))).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getCollecting_Site())).append(",\n");  // organization
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getCollection_Date())).append(",\n");  
+                        report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getCollection_Date())).append("\",\n");  
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getReceived_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getAccession_Date())).append("\",\n");
                         report.append("\"").append(columns[j++]).append("\":\"").append(cleanDate(result[i].getImplantation_Date())).append("\",\n");
