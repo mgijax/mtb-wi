@@ -141,7 +141,7 @@
 	var	sortCols = ['organOrigin','organAffected','strain','freqNum'];
 	var	filters =[];
 	var	displayFilters=[];
-	var	url = "/mtbwi/solrQuery.do";
+	var	url = "${pageContext.request.contextPath}/solrQuery.do";
 	var	resLimit = 25; // normally 25
 	var	facetLimit = 25;
 	var	fs = 0;
@@ -585,14 +585,14 @@
 					'
 				}
 				for(var j=0; j < doc.reference.length; j++){
-					html +="&nbsp;&nbsp;&nbsp;<a href='nojavascript.jsp' onclick='popSizedPathWin(&quot; /mtbwi/referenceDetails.do?accId="+ doc.reference[j]
+					html +="&nbsp;&nbsp;&nbsp;<a href='nojavascript.jsp' onclick='popSizedPathWin(&quot; ${pageContext.request.contextPath}/referenceDetails.do?accId="+ doc.reference[j]
 					html += "&quot; ,&quot; &quot; ,500,1200);return false;'>"+doc.reference[j]+"</a>
 					<!-- \n -->
 					";
 				}
 			}
 			if(doc.hasOwnProperty("pathologyImages")){
-				html +="&nbsp;<a href='nojavascript.jsp' onclick='popSizedPathWin(&quot; /mtbwi/pathologyImageSearchResults.do?tfKeys="+tfKeys;
+				html +="&nbsp;<a href='nojavascript.jsp' onclick='popSizedPathWin(&quot; ${pageContext.request.contextPath}/pathologyImageSearchResults.do?tfKeys="+tfKeys;
 				if(doc.pathologyImages == 1){
 					html += "&quot; ,&quot; id&quot; ,500,1200);return false;'>"+doc.pathologyImages+" Pathology Image</a>
 					<!-- \n -->
@@ -604,7 +604,7 @@
 				}
 			}
 			if(doc.hasOwnProperty("cytoImages")){
-				html +="&nbsp;<a href='nojavascript.jsp' onclick='popSizedPathWin(&quot; /mtbwi/tumorFrequencyDetails.do?page=cytogenetics&key="+doc.cytoImages;
+				html +="&nbsp;<a href='nojavascript.jsp' onclick='popSizedPathWin(&quot; ${pageContext.request.contextPath}/tumorFrequencyDetails.do?page=cytogenetics&key="+doc.cytoImages;
 				if(doc.cytoCount== 1){
 					html += "&quot; ,&quot; id&quot; ,500,1200);return false;'>1 Cytogenetic Image</a>
 					<!-- \n -->
@@ -616,14 +616,14 @@
 				}
 			}
 			if(doc.geneExpression){
-				html +="&nbsp;<a href='nojavascript.jsp' onclick='popSizedPathWin(&quot; /mtbwi/geneExpressionSearchResults.do?tfKeys="+tfKeys;
+				html +="&nbsp;<a href='nojavascript.jsp' onclick='popSizedPathWin(&quot; ${pageContext.request.contextPath}/geneExpressionSearchResults.do?tfKeys="+tfKeys;
 				html += "&quot; ,&quot; id&quot; ,500,1200);return false;'>Gene Expression Data</a>
 				<!-- \n -->
 				";
 			}
 			html += "
 			<!-- \n -->
-			<a href='nojavascript.jsp' onclick='popSizedPathWin(&quot; /mtbwi/tumorSummary.do?tumorFrequencyKeys="+tfKeys;
+			<a href='nojavascript.jsp' onclick='popSizedPathWin(&quot; ${pageContext.request.contextPath}/tumorSummary.do?tumorFrequencyKeys="+tfKeys;
 			html += "&quot; ,&quot; &quot; ,500,1200);return false;'>Model Summary</a>
 			<!-- \n -->
 			";

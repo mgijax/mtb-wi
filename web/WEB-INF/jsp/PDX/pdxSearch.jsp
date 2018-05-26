@@ -9,9 +9,7 @@
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 	<script type="text/javascript">
 	function updateVariants(){
-		document.getElementById("variant-result").innerHTML="
-		<!-- \n -->
-		Please wait..."
+		document.getElementById("variant-result").innerHTML="Please wait...";
 		document.forms[1].action="pdxSearch.do";
 		document.forms[1].submit();
 	}
@@ -60,7 +58,7 @@
 			//				,pageSize:10
 		});
 		var dataProxy = new Ext.data.HttpProxy({
-			url: '/mtbwi/pdxHumanGenes.do'
+			url: '${pageContext.request.contextPath}/pdxHumanGenes.do'
 		})
 		var humanGenestore = new Ext.data.ArrayStore({
 			id:'thestore',

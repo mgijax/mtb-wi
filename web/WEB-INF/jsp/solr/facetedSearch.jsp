@@ -130,7 +130,7 @@
 		var	sortCols = ['organOrigin','organAffected','strain','freqNum'];
 		var	filters =[];
 		var	displayFilters=[];
-		var	url = "/mtbwi/solrQuery.do";
+		var	url = "${pageContext.request.contextPath}/solrQuery.do";
 		var	resLimit = 25; // normally 25
 		var	facetLimit = 25;
 		var	fs = 0;
@@ -615,14 +615,14 @@
 						'
 					}
 					for(var j=0; j < doc.reference.length; j++){
-						html +="&nbsp;&nbsp;&nbsp;<a href='/mtbwi/referenceDetails.do?accId="+ doc.reference[j]+"' target='_blank'>";
+						html +="&nbsp;&nbsp;&nbsp;<a href='${pageContext.request.contextPath}/referenceDetails.do?accId="+ doc.reference[j]+"' target='_blank'>";
 						html += doc.reference[j]+"</a>
 						<!-- \n -->
 						";
 					}
 				}
 				if(doc.hasOwnProperty("pathologyImages")){
-					html +="&nbsp;<a href='/mtbwi/pathologyImageSearchResults.do?tfKeys="+tfKeys+"' target='_blank'>";
+					html +="&nbsp;<a href='${pageContext.request.contextPath}/pathologyImageSearchResults.do?tfKeys="+tfKeys+"' target='_blank'>";
 					if(doc.pathologyImages == 1){
 						html += doc.pathologyImages+" Pathology Image</a>
 						<!-- \n -->
@@ -634,7 +634,7 @@
 					}
 				}
 				if(doc.hasOwnProperty("cytoImages")){
-					html +="&nbsp;<a href='/mtbwi/tumorFrequencyDetails.do?page=cytogenetics&key="+doc.cytoImages+"' target='_blank'>";
+					html +="&nbsp;<a href='${pageContext.request.contextPath}/tumorFrequencyDetails.do?page=cytogenetics&key="+doc.cytoImages+"' target='_blank'>";
 					if(doc.cytoCount== 1){
 						html += "1 Cytogenetic Image</a>
 						<!-- \n -->
@@ -646,14 +646,14 @@
 					}
 				}
 				if(doc.geneExpression){
-					html +="&nbsp;<a href='/mtbwi/geneExpressionSearchResults.do?tfKeys="+tfKeys+"' target='_blank'>";
+					html +="&nbsp;<a href='${pageContext.request.contextPath}/geneExpressionSearchResults.do?tfKeys="+tfKeys+"' target='_blank'>";
 					html += "Gene Expression Data</a>
 					<!-- \n -->
 					";
 				}
 				html += "
 				<!-- \n -->
-				<a href='/mtbwi/tumorSummary.do?tumorFrequencyKeys="+tfKeys+"' target='_blank'>";
+				<a href='${pageContext.request.contextPath}/tumorSummary.do?tumorFrequencyKeys="+tfKeys+"' target='_blank'>";
 				html += "Model Summary</a>
 				<!-- \n -->
 				";
@@ -730,21 +730,21 @@
 				}
 				html +="',";
 				if(doc.hasOwnProperty("pathologyImages")){
-					html +="'http://tumor.informatics.jax.org/mtbwi/pathologyImageSearchResults.do?tfKeys="+tfKeys+"',";
+					html +="'${pageContext.request.contextPath}/pathologyImageSearchResults.do?tfKeys="+tfKeys+"',";
 				}else{
 					html +="'',"
 				}
 				if(doc.hasOwnProperty("cytoImages")){
-					html +="'http://tumor.informatics.jax.org/mtbwi/tumorFrequencyDetails.do?page=cytogenetics&key="+doc.cytoImages+"',";	 
+					html +="'${pageContext.request.contextPath}/tumorFrequencyDetails.do?page=cytogenetics&key="+doc.cytoImages+"',";	 
 				}else{
 					html +="'',"
 				}
 				if(doc.geneExpression){
-					html +="'http://tumor.informatics.jax.org/mtbwi/geneExpressionSearchResults.do?tfKeys="+tfKeys+"',";
+					html +="'${pageContext.request.contextPath}/geneExpressionSearchResults.do?tfKeys="+tfKeys+"',";
 				}else{
 					html +="'',"
 				}
-				html += "'http://tumor.informatics.jax.org/mtbwi/tumorSummary.do?tumorFrequencyKeys="+tfKeys+"'";
+				html += "'${pageContext.request.contextPath}/tumorSummary.do?tumorFrequencyKeys="+tfKeys+"'";
 				html +="
 				<!-- \n -->
 				";

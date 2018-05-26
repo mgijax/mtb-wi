@@ -105,7 +105,7 @@
 	}
 	Ext.onReady(function () {
 		var dataProxy = new Ext.data.HttpProxy({
-			url: '/mtbwi/pdxVariationData.do?modelID=${modelID}',
+			url: '${pageContext.request.contextPath}/pdxVariationData.do?modelID=${modelID}',
 			timeout: 7000000
 		})
 		var fields = [

@@ -109,7 +109,7 @@
 	}
 	var rsp;
 	Ext.onReady(function () {
-		var url = '/mtbwi/solrQuery.do';
+		var url = '${pageContext.request.contextPath}/solrQuery.do';
 		var markerURL = 'wt=json&indent=on&facet=true&facet.field=strainMarker&facet.sort=name&fq=singleMutant:true&fq=metastatic:false&q=humanTissue:*&facet.mincount=1&rows=1&start=0&facet.limit=-1';
 		doXMLReq();
 		// might be sorting on a column off the screen, focus on it
@@ -193,7 +193,7 @@
 <!--	 Some really great explanatory text goes here. 
 Use check boxes to limit organs in grid (check desired organs and click 'Generate Grid'). 
 Sort highest to lowest frequency for an organ by clicking the organ name. -->
-<form name="gridForm" action="/mtbwi/markerGrid.do" method="GET">
+<form name="gridForm" action="${pageContext.request.contextPath}/markerGrid.do" method="GET">
 	<input type="hidden" id="sort-organ" name="sortOrgan" value="">
 	<!-- old marker is the current marker but if the user selects a new marker
 	it will be the old marker when the form is submitted -->

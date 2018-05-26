@@ -21,7 +21,7 @@
 	</jsp:attribute>		
 	<jsp:attribute name="header">
 		<!-- To do: include tag manager -->
-		<a href="${applicationScope.urlBase}/index.do">
+		<a href="${pageContext.request.contextPath}/index.do">
 			<img src="${applicationScope.urlImageDir}/mmhc-logo.png" alt="Mouse Models of Human Cancer">
 			<h3>Mouse&nbsp;Models<br>of&nbsp;Human&nbsp;Cancer</h3>
 		</a>
