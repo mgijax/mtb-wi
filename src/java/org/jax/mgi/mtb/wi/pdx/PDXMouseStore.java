@@ -14,6 +14,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -107,6 +108,11 @@ public class PDXMouseStore {
     private static final String allGenes = "all-genes.json";
     private static final String variantsForGene = "variants-for-gene-?.json";  // replace ? with gene symbol
     private static final String allVariants = "all-variants.json";
+    
+    
+    private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M", "DAXX", "EHMT2", "EPHB6", "HLA-A", "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4", "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
+    private static final String RNA_SEQ = "RNA_Seq";
+    private static final HashMap<String, String> AFFECTED_GENES = new HashMap<>();
 
     public PDXMouseStore() {
 
@@ -115,6 +121,11 @@ public class PDXMouseStore {
                 synchronized (PDXMouseStore.class) {
                     loadData();
                 }
+            }
+            if(AFFECTED_GENES.size()==0){
+                  for (String g : BUILD_38_AFFECTED_GENES) {
+                        AFFECTED_GENES.put(g, g);
+                    }
             }
         } catch (Exception e) {
             log.error("Unable to initalize pdx mouse store", e);
@@ -920,6 +931,106 @@ public class PDXMouseStore {
         return data;
 
     }
+    
+     public String getNewModelExpression(String modelID) {
+
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        StringBuffer result = new StringBuffer();
+        HashMap<String, String> sampleMap = new HashMap();
+        HashMap<String, HashMap<String, String>> genes = new HashMap();
+        HashMap<String, String> platformMap = new HashMap();
+        HashMap<String, String> samplePlatformMap = new HashMap();
+       
+        String url = "http://pdxdata.jax.org/api/expression?&all_ctp_genes=yes&filter=true&model="+modelID;
+         
+        try {
+            JSONObject job = new JSONObject(getJSON(url));
+            JSONArray array = (JSONArray) job.get("data"); 
+            for(int i =0; i < array.length(); i++) {
+                JSONObject data = array.getJSONObject(i);
+                
+                String sample = data.getString("sample_name");
+                String gene = data.getString("gene_symbol");
+                String platform = data.getString("platform");
+                String rankZ = df.format(data.getDouble("z_score_percentile_rank"));
+
+                
+                platformMap.put(platform, platform);
+                sampleMap.put(sample, sample);
+                samplePlatformMap.put(sample,platform);
+                if (genes.containsKey(gene)) {
+                    genes.get(gene).put(sample, rankZ);
+                } else {
+                    HashMap<String, String> map = new HashMap();
+                    map.put(sample, rankZ);
+                    genes.put(gene, map);
+                }
+
+            }
+            ArrayList<String> samples = new ArrayList<String>();
+            samples.addAll(sampleMap.keySet());
+
+            Collections.sort(samples);
+
+            ArrayList<String> platforms = new ArrayList<String>();
+            platforms.addAll(platformMap.keySet());
+
+            Collections.sort(platforms);
+            for (String pform : platforms) {
+                if (result.length() > 0) {
+                    result.append(", ");
+                }
+                result.append(pform);
+            }
+            // build the column definitions gene then one or more samples
+            result.append("['Gene'");
+            for (String sam : samples) {
+                result.append(",'").append(sam).append("',{role:'certainty'}");
+            }
+            result.append("]");
+
+            // group the expression values by gene across one or more samples
+            ArrayList<String> geneList = new ArrayList<String>();
+            geneList.addAll(genes.keySet());
+            Collections.sort(geneList);
+            for (String g : geneList) {
+                result.append(",['").append(g).append("'");
+                HashMap<String, String> map = genes.get(g);
+                for (String sam : samples) {
+                    if (map.get(sam) != null) {
+                        // affected genes are only for samples from platform RNA_Seq
+                        if (AFFECTED_GENES.containsKey(g) && RNA_SEQ.equals(samplePlatformMap.get(sam))) {
+                            result.append(",").append(map.get(sam)).append(",false");
+                        } else {
+                            result.append(",").append(map.get(sam)).append(",true");
+                        }
+                    } else {
+                        result.append(",null,true");
+                    }
+
+                }
+
+                result.append("]");
+
+            }
+
+            if (genes.size() == 0) {
+                result.delete(0, result.length());
+            }
+
+        } catch (Exception e) {
+            log.error(e);
+        }
+
+        return result.toString();
+
+    }
+    
+    
+    
+    
+    
     public String getModelTPM(String modelID) {
         String data = PDXDAO.getInstance().getModelTPM(modelID);
         return data;
@@ -931,6 +1042,93 @@ public class PDXMouseStore {
         return data;
 
     }
+    
+    
+     public String getNewModelCNV(String modelID) {
+
+        DecimalFormat df = new DecimalFormat("##.####");
+
+        StringBuffer result = new StringBuffer();
+
+
+        HashMap<String, String> ploidyMap = new HashMap();
+        HashMap<String, HashMap<String, String>> genes = new HashMap();
+        try {
+           
+            String url = "http://pdxdata.jax.org/api/cnv_gene?all_ctp_genes=yes&model="+modelID;
+            
+            
+            JSONObject job = new JSONObject(getJSON(url));
+            JSONArray array = (JSONArray) job.get("data"); 
+            for(int i =0; i < array.length(); i++) {
+                JSONObject data = array.getJSONObject(i);
+            
+                String gene = data.getString("gene_symbol");
+                String sample = data.getString("platform");
+                String cn = df.format(data.getDouble("logratio_ploidy"));
+                String ploidy = df.format(data.getDouble("ploidy"));
+
+             //   Double val = Math.log(cn / ploidy) / Math.log(2);
+
+                if (genes.containsKey(gene)) {
+                    genes.get(gene).put(sample, cn);
+                } else {
+                    HashMap map = new HashMap();
+                    map.put(sample, cn);
+                    genes.put(gene, map);
+                }
+
+                ploidyMap.put(sample, ploidy + "");
+
+            }
+
+            ArrayList<String> samples = new ArrayList<String>();
+            samples.addAll(ploidyMap.keySet());
+
+            Collections.sort(samples);
+
+            for (String key : ploidyMap.keySet()) {
+                result.append(key + ":" + ploidyMap.get(key) + ",");
+            }
+
+            result.append("|");
+
+            // build the column definitions gene then one or more samples
+            result.append("['Gene'");
+            for (String sam : samples) {
+                result.append(",'").append(sam).append(" Sample Ploidy:").append(ploidyMap.get(sam)).append("'");
+            }
+            result.append("]");
+
+            // group the expression values by gene across one or more samples
+            ArrayList<String> geneList = new ArrayList();
+            geneList.addAll(genes.keySet());
+            Collections.sort(geneList);
+            for (String g : geneList) {
+                result.append(",['").append(g).append("'");
+                HashMap<String, String> map = genes.get(g);
+                for (String sam : samples) {
+                    if (map.get(sam) != null) {
+                        result.append(",").append(map.get(sam));
+                    } else {
+                        result.append(",null");
+                    }
+                }
+                result.append("]");
+            }
+
+            if (genes.size() == 0) {
+                result.delete(0, result.length());
+            }
+
+        } catch (Exception e) {
+            log.error(e);
+        } 
+        return result.toString();
+
+    }
+    
+    
 
     public String getExpression(String gene, ArrayList<PDXMouse> mice) {
         return PDXDAO.getInstance().getExpression(gene, mice);
@@ -1063,10 +1261,14 @@ public class PDXMouseStore {
 
         String params = "{\"model\":[\"" + model + "\"],\"skip\": \"" + start + "\", \"limit\": \"" + limit + "\", \"sort_by\": \"" + sort + "\", \"sort_dir\": \"" + dir + "\", \"filter\": \"" + filter + "\"}";
 
+    
         StringBuffer result = new StringBuffer("{'total':");
         try {
-
-            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allVariants, params) + "}");
+            // for new APIs
+     //    params = "?model="+model+"&skip="+start+"&limit="+limit+"&sort_by="+sort+"&sort_dir="+dir+"&filter="+filter;
+     //       JSONObject job = new JSONObject("{\"data\":" + getJSON("http://pdxdata.jax.org/api/variants"+params) + "}");
+     
+         JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allVariants, params) + "}");
 
             job = (JSONObject) job.get("data");
 
