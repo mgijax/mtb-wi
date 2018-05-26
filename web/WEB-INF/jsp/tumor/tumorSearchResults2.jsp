@@ -5,6 +5,8 @@
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
+<%-- !todo --%>
+
 <jax:mmhcpage title="Tumor Search Results" help="tumorresults">
 
 	<jsp:attribute name="head">
@@ -18,9 +20,7 @@
 
 <!-- ////  Start Search Summary  //// -->
 
-<tr class="summary">
-	<td colspan="11" align="left">
-		<span class="label">Search Summary</span>
+<caption><span class="label">Search Summary</span>
 <!-- \n -->
 
 <c:if test="${not empty anatomicalSystemOriginName}">
@@ -223,12 +223,8 @@
 <!-- \n -->
 
 <span class="label">Display Limit:</span> ${maxItems}
-	</td>
-		</tr>
-			<tr class="summary">
-				<td colspan="11">
-
-<!-- ////  Start Display Limit  //// -->
+	</caption>
+			<caption><!-- ////  Start Display Limit  //// -->
 
 <c:choose>
 	<c:when test="${numberOfResults != totalResults}">
@@ -283,8 +279,7 @@
 
 <!-- ////  End Display Limit  //// -->
 
-</td>
-	</tr>
+</caption>
 
 <!-- ////  End Search Summary  //// -->
 
@@ -445,7 +440,7 @@ return {
 				}();
 					});
 	</script>
-		<tr class="summary"><td><div class="yui-skin-sam" id="results-table">There should be stuff here</div></td></tr>
+		<caption><div class="yui-skin-sam" id="results-table">There should be stuff here</div></caption>
 			</c:when>
 				<c:otherwise>
 					<!-- No results found. //-->

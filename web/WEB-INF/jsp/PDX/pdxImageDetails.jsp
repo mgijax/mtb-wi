@@ -4,9 +4,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-
 <jax:mmhcpage title="PDX Image Detail" help="imagedetail">
-
 	<table class="results">
 		<tr>
 			<td colspan="2">
@@ -20,5 +18,5 @@
 			<td>${description}</td>
 		</tr>
 	</table>
-
 </jax:mmhcpage>
+

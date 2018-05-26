@@ -11,29 +11,29 @@
 		 <td colspan="2">JVM Information</td>
 	 </tr>
 <c:choose>
-	<c:when test="${not empty jvm}">
-		<tr>
-			<td width="250" class="results-header">Attribute</td>
-				<td class="results-header">Value</td>
-				</tr>
+<c:when test="${not empty jvm}">
+<tr>
+	<td width="250" class="results-header">Attribute</td>
+				<th>Value</th>
+			</tr>
 
 <c:forEach var="jvmItem" items="${jvm}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
-					<c:otherwise>
-						<tr>
+				<c:otherwise>
+				<tr>
 							</c:otherwise>
 						</c:choose>
 
 <td width="250">${jvmItem.label}</td>
 	<td>${jvmItem.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<!-- No results found.	//-->
+		<!-- No results found.	//-->
 		</c:otherwise>
 </c:choose>
 </table>
@@ -49,29 +49,29 @@
 		 <td colspan="2">OS Information</td>
 	 </tr>
 <c:choose>
-	<c:when test="${not empty os}">
-		<tr>
-			<td width="250"	class="results-header">Attribute</td>
-						<td class="results-header">Value</td>
+<c:when test="${not empty os}">
+<tr>
+	<td width="250"	class="results-header">Attribute</td>
+						<th>Value</th>
 				</tr>
 
 <c:forEach var="osInfoItem" items="${os}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
-					<c:otherwise>
-						<tr>
+				<c:otherwise>
+				<tr>
 							</c:otherwise>
 						</c:choose>
 
 <td width="250" >${osInfoItem.label}</td>
 	<td>${osInfoItem.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<!-- No results found.	//-->
+		<!-- No results found.	//-->
 		</c:otherwise>
 </c:choose>
 </table>
@@ -87,29 +87,29 @@
 		 <td colspan="2">System Properties</td>
 	 </tr>
 <c:choose>
-	<c:when test="${not empty sysProps}">
-		<tr>
-			<td width="250" class="results-header">Attribute</td>
-				<td class="results-header">Value</td>
-				</tr>
+<c:when test="${not empty sysProps}">
+<tr>
+	<td width="250" class="results-header">Attribute</td>
+				<th>Value</th>
+			</tr>
 
 <c:forEach var="itemVar" items="${sysProps}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
-					<c:otherwise>
-						<tr>
+				<c:otherwise>
+				<tr>
 							</c:otherwise>
 						</c:choose>
 
 <td width="250">${itemVar.label}</td>
 	<td width="750">${itemVar.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<!-- No results found.	//-->
+		<!-- No results found.	//-->
 		</c:otherwise>
 </c:choose>
 </table>
@@ -136,53 +136,53 @@
 <%-- Use the request object to show the user's preferred locale --%>
 	 The request <strong>locale</strong> is 
 		 <strong><c:out value='${pageContext.request.locale}'/>.</strong>
-			</td>
-		</tr>
+	</td>
+</tr>
 <c:choose>
-	<c:when test="${not empty requestAttributes}">
-		<tr>
-			<td width="250" class="results-header">Attribute</td>
-				<td class="results-header">Value</td>
-				</tr>
+<c:when test="${not empty requestAttributes}">
+<tr>
+	<td width="250" class="results-header">Attribute</td>
+				<th>Value</th>
+			</tr>
 
 <c:forEach var="reqAtt" items="${requestAttributes}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
-					<c:otherwise>
-						<tr>
+				<c:otherwise>
+				<tr>
 							</c:otherwise>
 						</c:choose>
 
 <td width="250">${reqAtt.label}</td>
 	<td>${reqAtt.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<!-- No results found.	//-->
+		<!-- No results found.	//-->
 		</c:otherwise>
 </c:choose>
 <c:choose>
-	<c:when test="${not empty detailRequestInfo}">
-		<c:forEach var="reqAttDetail" items="${detailRequestInfo}" varStatus="status">
-			<c:choose>
-				<c:when test="${status.index%2==0}">
-					<tr>
+<c:when test="${not empty detailRequestInfo}">
+<c:forEach var="reqAttDetail" items="${detailRequestInfo}" varStatus="status">
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 						</c:when>
-							<c:otherwise>
-								<tr>
+						<c:otherwise>
+						<tr>
 								</c:otherwise>
 						</c:choose>
 
 <td width="250">${reqAttDetail.label}</td>
 	<td>${reqAttDetail.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<!-- No results found.	//-->
+		<!-- No results found.	//-->
 		</c:otherwise>
 </c:choose>
 
@@ -208,13 +208,13 @@
 		 The <strong>response
 			 <c:choose>
 				<c:when test='${pageContext.response.committed}'>
-					 has
+				 has
 						</c:when>
 
 <c:otherwise>
-	 has not
+ has not
 		</c:otherwise>
-			 </c:choose>	 
+		 </c:choose>	 
 						 </strong> been committed.
 				</td>
 		</tr>
@@ -231,29 +231,29 @@
 		 <td colspan="2">Servlet Initialization Parameters</td>
 	 </tr>
 <c:choose>
-	<c:when test="${not empty servletInitParams}">
-		<tr>
-			<td width="250" class="results-header">Attribute</td>
-				<td class="results-header">Value</td>
-				</tr>
+<c:when test="${not empty servletInitParams}">
+<tr>
+	<td width="250" class="results-header">Attribute</td>
+				<th>Value</th>
+			</tr>
 
 <c:forEach var="servletParamItem" items="${servletInitParams}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
-					<c:otherwise>
-						<tr>
+				<c:otherwise>
+				<tr>
 							</c:otherwise>
 						</c:choose>
 
 <td width="250">${servletParamItem.label}</td>
 	<td>${servletParamItem.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<!-- No results found.	//-->
+		<!-- No results found.	//-->
 		</c:otherwise>
 </c:choose>
 </table>
@@ -269,31 +269,31 @@
 		 <td colspan="2">Context Attributes</td>
 	 </tr>
 <c:choose>
-	<c:when test="${not empty contextAttributes}">
-		<tr>
-			<td width="250" class="results-header">Attribute</td>
-				<td class="results-header">Value</td>
-				</tr>
+<c:when test="${not empty contextAttributes}">
+<tr>
+	<td width="250" class="results-header">Attribute</td>
+				<th>Value</th>
+			</tr>
 
 <c:forEach var="contextAtt" items="${contextAttributes}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
-					<c:otherwise>
-						<tr>
+				<c:otherwise>
+				<tr>
 							</c:otherwise>
 						</c:choose>
 
 <td width="250">${contextAtt.label}</td>
 	<td>${contextAtt.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<tr>
-				<td colspan="2">No context information</td>
-				</tr>
+		<tr>
+			<td colspan="2">No context information</td>
+		</tr>
 		</c:otherwise>
 </c:choose>
 </table>
@@ -320,29 +320,29 @@ Max Session Inactive Interval:<strong>
 				</td>
 		</tr>
 <c:choose>
-	<c:when test="${not empty sessionInfo}">
-		<tr>
-			<td width="250" class="results-header">Attribute</td>
-				<td class="results-header">Value</td>
-				</tr>
+<c:when test="${not empty sessionInfo}">
+<tr>
+	<td width="250" class="results-header">Attribute</td>
+				<th>Value</th>
+			</tr>
 
 <c:forEach var="sessInfoItem" items="${sessionInfo}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
-					<c:otherwise>
-						<tr>
+				<c:otherwise>
+				<tr>
 							</c:otherwise>
 						</c:choose>
 
 <td width="250">${sessInfoItem.label}</td>
 	<td>${sessInfoItem.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<!-- No results found.	//-->
+		<!-- No results found.	//-->
 		</c:otherwise>
 </c:choose>
 </table>
@@ -395,20 +395,20 @@ Max Session Inactive Interval:<strong>
 			 </td>
 	 </tr>
 		<tr>
-			<td class="results-header">Name</td>
-				<td class="results-header">Value</td>
+			<th>Name</th>
+				<th>Value</th>
 		</tr>
 <c:forEach items='${headerValues}' var='hv' varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
 				<c:otherwise>
-					<tr>
+				<tr>
 				</c:otherwise>
 		</c:choose>
-			<%-- Display the key of the current item; that item
-				 is a Map.Entry --%>
+		<%-- Display the key of the current item; that item
+			 is a Map.Entry --%>
 			<td width="250"><c:out value='${hv.key}'/></td>
 			<td>
 				<%-- The value of the current item, which is
@@ -417,11 +417,11 @@ Max Session Inactive Interval:<strong>
 							 representing request header values, so
 							 we iterate over that array of strings --%>
 					<c:forEach items='${hv.value}' var='value'>
-						 <c:out value='${value}'/>
+					 <c:out value='${value}'/>
 <!-- \n -->
 
 </c:forEach>
-	</td>
+</td>
 	 </tr>
 </c:forEach>
 </table>
@@ -437,29 +437,29 @@ Max Session Inactive Interval:<strong>
 		 <td colspan="2">Header Information</td>
 	 </tr>
 <c:choose>
-	<c:when test="${not empty headers}">
-		<tr>
-			<td width="250" class="results-header">Attribute</td>
-				<td class="results-header">Value</td>
-				</tr>
+<c:when test="${not empty headers}">
+<tr>
+	<td width="250" class="results-header">Attribute</td>
+				<th>Value</th>
+			</tr>
 
 <c:forEach var="headerItem" items="${headers}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
-					<c:otherwise>
-						<tr>
+				<c:otherwise>
+				<tr>
 							</c:otherwise>
 						</c:choose>
 
 <td width="250">${headerItem.label}</td>
 	<td>${headerItem.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<!-- No results found.	//-->
+		<!-- No results found.	//-->
 		</c:otherwise>
 </c:choose>
 </table>
@@ -475,31 +475,31 @@ Max Session Inactive Interval:<strong>
 		 <td colspan="2">Param Names</td>
 	 </tr>
 <c:choose>
-	<c:when test="${not empty paramNames}">
-		<tr>
-			<td width="250" class="results-header">Attribute</td>
-				<td class="results-header">Value</td>
-				</tr>
+<c:when test="${not empty paramNames}">
+<tr>
+	<td width="250" class="results-header">Attribute</td>
+				<th>Value</th>
+			</tr>
 
 <c:forEach var="paramNamesItem" items="${paramNames}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
-					<c:otherwise>
-						<tr>
+				<c:otherwise>
+				<tr>
 							</c:otherwise>
 						</c:choose>
 
 <td width="250">${paramNamesItem.label}</td>
 	<td>${paramNamesItem.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<tr>
-				<td colspan="2">No param name information</td>
-				</tr>
+		<tr>
+			<td colspan="2">No param name information</td>
+		</tr>
 		</c:otherwise>
 </c:choose>
 </table>
@@ -515,31 +515,31 @@ Max Session Inactive Interval:<strong>
 		 <td colspan="2">Cookie Information</td>
 	 </tr>
 <c:choose>
-	<c:when test="${not empty cookies}">
-		<tr>
-			<td width="250" class="results-header">Attribute</td>
-				<td class="results-header">Value</td>
-				</tr>
+<c:when test="${not empty cookies}">
+<tr>
+	<td width="250" class="results-header">Attribute</td>
+				<th>Value</th>
+			</tr>
 
 <c:forEach var="cookiesItem" items="${cookies}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
-			<tr>
+<c:choose>
+<c:when test="${status.index%2==0}">
+<tr>
 				</c:when>
-					<c:otherwise>
-						<tr>
+				<c:otherwise>
+				<tr>
 							</c:otherwise>
 						</c:choose>
 
 <td width="250">${cookiesItem.label}</td>
 	<td>${cookiesItem.value}</td>
-		</tr>
+</tr>
 			</c:forEach>
 		</c:when>
 		<c:otherwise>
-			<tr>
-				<td colspan="2">No cookie information</td>
-				</tr>
+		<tr>
+			<td colspan="2">No cookie information</td>
+		</tr>
 		</c:otherwise>
 </c:choose>
 </table>

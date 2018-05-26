@@ -2,49 +2,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-
 <jax:mmhcpage title="Reference Tumor Type Associations" help="referenceresults">
-
-<table class="results">
-
-<!-- ////  Start Search Summary  //// -->
-
-<tr class="summary">
-	<td colspan="2">
-		Probably put some reference details here
-			</td>
-				</tr>
-
-<!-- ////  Start Display Limit  //// -->
-
-<c:if test="${not empty tumorTypes}">
-
-<tr class="results">
-	<td class="results-header">Tumor Type</td>
-		<td class="results-header">Index Type</td>
-			</tr>
-
-<c:forEach var="tt" items="${tumorTypes}" varStatus="status">
-	<c:choose>
-		<c:when test="${status.index%2==0}">
+	<table>
+		<caption>Probably put some reference details here</caption>
+		<c:if test="${not empty tumorTypes}">
+		<thead>
 			<tr>
-				</c:when>
-					<c:otherwise>
-						<tr>
-							</c:otherwise>
-						</c:choose>
-
-<td>${tt.label}</td>
-	<td>${tt.value}</td>
-
-</tr>
-	</c:forEach>
-
-</c:if>
-
-<!-- ////  End Display Limit  //// -->
-
-</table>
-
+				<th>Tumor Type</th>
+				<th>Index Type</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<c:forEach var="tt" items="${tumorTypes}" varStatus="status">
+			<tr>
+				<td>${tt.label}</td>
+				<td>${tt.value}</td>
+			</tr>
+			</c:forEach>
+			</c:if>
+		</tbody>
+		
+	</table>
 </jax:mmhcpage>
 
