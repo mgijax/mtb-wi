@@ -47,7 +47,9 @@
 <jsp:body>
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
 <table>
-	<caption><h5 class="label">Search Summary</h5>
+	<caption>
+	<div class="search-summary">
+		<h4>Search Summary</h4>
 		<!-- \n -->
 		<c:choose>
 		<c:when test="${not empty modelID}">

@@ -5,7 +5,9 @@
 <jax:mmhcpage title="Reference Search Results" help="referenceresults">
 	<table>
 		<!-- ////  Start Search Summary  //// -->
-		<caption><h5 class="label">Search Summary</h5>
+		<caption>
+	<div class="search-summary">
+		<h4>Search Summary</h4>
 			<!-- \n -->
 			<c:if test="${not empty accId}">
 			<h5 class="label">Accession Id:</h5> ${accId}

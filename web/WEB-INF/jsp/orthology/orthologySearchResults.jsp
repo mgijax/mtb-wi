@@ -7,7 +7,9 @@
 	<a name="top"></a>
 	<table>
 		<!-- ////  Start Search Summary  //// -->
-		<caption><h5 class="label">Search Summary</h5>
+		<caption>
+	<div class="search-summary">
+		<h4>Search Summary</h4>
 			<!-- \n -->
 		</caption>
 		<caption><!-- ////  Start Display Limit  //// -->

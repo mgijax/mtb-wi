@@ -6,7 +6,9 @@
 <jax:mmhcpage title="Pathology Image Search Results" help="pathresults">
 	<table>
 		<!-- ////  Start Search Summary  //// -->
-		<caption><h5 class="label">Search Summary</h5>
+		<caption>
+	<div class="search-summary">
+		<h4>Search Summary</h4>
 			<!-- \n -->
 			<c:if test="${not empty organOriginSelected}">
 			<c:choose>
