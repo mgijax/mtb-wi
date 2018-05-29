@@ -395,7 +395,7 @@
 										</tr>
 										<c:if test="${not empty pathology.strainTypes}">
 										<tr>
-											<td class="label">Strain Types: </td>
+											<td><h4>Strain Types: </h4></td>
 											<td>
 												<c:forEach var="type" items="${pathology.strainTypes}" varStatus="status">
 												${type.type}
@@ -408,7 +408,7 @@
 										</c:if>
 										<c:if test="${not empty pathology.strainNote}">
 										<tr>
-											<td class="label">General Note: </td>
+											<td><h4>General Note: </h4></td>
 											<td>${pathology.strainNote}</td>
 										</tr>
 										</c:if>

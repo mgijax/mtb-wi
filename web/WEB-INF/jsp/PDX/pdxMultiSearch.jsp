@@ -100,15 +100,15 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="cat-1">
+							<td>
 								Enter Case information here:
 							</td>
-							<td class="data-1">
+							<td>
 								<input type="checkbox" name="asCSV" value="asCSV"/> Return results as a CSV file &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="actionable" value="actionable"/> Include models with actionable variants for supplied genes
 								<!-- \n -->
 								<textarea rows="20" cols="50" name="cases">${cases}</textarea>
 							</td>
-							<td class="data-1">
+							<td>
 								${table}
 							</td>
 						</tr>

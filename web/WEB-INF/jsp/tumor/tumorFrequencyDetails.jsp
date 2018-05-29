@@ -12,7 +12,7 @@
 		<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 		<tr>
 			<td><h4>Metastatic Tumor</h4></td>
-			<td class="data${lbl}">
+			<td>
 				<h5>
 					<c:out value="${tumorFreq.organAffected}"/>
 				</h5>
@@ -26,7 +26,7 @@
 		<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 		<tr>
 			<td><h4>Tumor Name</h4></td>
-			<td class="data${lbl}">
+			<td>
 				<c:if test="${tumorFreq.parentFrequencyKey<=0}">
 				<h5>
 					</c:if>
@@ -41,7 +41,7 @@
 		<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 		<tr>
 			<td><h4>Treatment Type</h4></td>
-			<td class="data${lbl}">
+			<td>
 				<c:out value="${tumorFreq.treatmentType}" escapeXml="false"/>
 			</td>
 		</tr>
@@ -57,7 +57,7 @@
 			<td><h4>Tumor Synonym</h4></td>
 			</c:otherwise>
 			</c:choose>
-			<td class="data${lbl}">
+			<td>
 				<c:forEach var="synonym" items="${tumorFreq.tumorSynonyms}" varStatus="status">
 				${synonym}
 				<c:if test="${status.last != true}">
@@ -79,7 +79,7 @@
 		<c:set var="pmets" value="-1"/>
 		<tr>
 			<td><h4>Metastases</h4></td>
-			<td class="data${lbl}">
+			<td>
 				<table>
 					<c:forEach var="mets" items="${tumorFreq.associatedFrequencyInfo}" varStatus="status">
 					<%-- Don't incluse ourself in the list --%>
@@ -121,7 +121,7 @@
 	<table id="tumor-strain-info">
 		<tr>
 			<td><h4>Strain</h4></td>
-			<td class="data${(lbl%2)+1}">
+			<td>
 				<table align="left">
 					<tr>
 						<td class="enhance" colspan="2"><a href="strainDetails.do?key=${tumorFreq.strainKey}"><c:out value="${tumorFreq.strainName}" escapeXml="false"/></a></td>
@@ -130,10 +130,10 @@
 					<tr>
 						<c:choose>
 						<c:when test="${fn:length(tumorFreq.strainTypes)>1}">
-						<td class="label"><span class="nowrap">Strain Types:</span> </td>
+						<td><h4><span class="nowrap">Strain Types:</span> </h4></td>
 						</c:when>
 						<c:otherwise>
-						<td class="label"><span class="nowrap">Strain Type:</span> </td>
+						<td><h4><span class="nowrap">Strain Type:</span> </h4></td>
 						</c:otherwise>
 						</c:choose>
 						<td>
@@ -148,7 +148,7 @@
 					</c:if>
 					<c:if test="${not empty tumorFreq.strainNote}">
 					<tr>
-						<td class="label"><span class="nowrap">General Note:</span> </td>
+						<td><h4><span class="nowrap">General Note:</span> </h4></td>
 						<td>${tumorFreq.strainNote}</td>
 					</tr>
 					</c:if>
@@ -168,7 +168,7 @@
 			<td><h4>Strain Synonym</h4></td>
 			</c:otherwise>
 			</c:choose>
-			<td class="data${lbl}">
+			<td>
 				<c:forEach var="synonym" items="${tumorFreq.strainSynonyms}" varStatus="status">
 				<span class="syn-div-2"><c:out value="${synonym.name}" escapeXml="false"/></span>																
 				<c:if test="${status.last != true}">
@@ -295,21 +295,21 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="header-label">Marker
+			<th>Marker
 				<!-- \n -->
-			Symbol</td>
-			<td class="header-label">Marker
+			Symbol</th>
+			<th>Marker
 				<!-- \n -->
-			Name</td>
-			<td class="header-label">Mouse
+			Name</th>
+			<th>Mouse
 				<!-- \n -->
-			Chromosome</td>
-			<td class="header-label">Mutation
+			Chromosome</th>
+			<th>Mutation
 				<!-- \n -->
-			Types</td>
-			<td class="header-label">Genetic
+			Types</th>
+			<th>Genetic
 				<!-- \n -->
-			Change</td>
+			Change</th>
 		</tr>
 		<c:forEach var="genetics" items="${tumorFreq.tumorGenetics}" varStatus="status">
 		<tr>

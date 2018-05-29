@@ -53,10 +53,10 @@
 		--%>
 		<!-- ////  End Error Section  //// -->
 		<tr>
-			<td class="cat-1">
+			<td>
 				Strain and Tumor Genetics:
 			</td>
-			<td class="data-1">
+			<td>
 				<table>
 					<tr>
 						<td>

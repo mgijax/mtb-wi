@@ -18,10 +18,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="cat-1">
+			<td>
 				Search Criteria
 			</td>
-			<td class="data-1">
+			<td>
 				<table>
 					<tr>
 						<td>

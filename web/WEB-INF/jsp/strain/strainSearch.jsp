@@ -50,10 +50,10 @@
 		--%>
 		<!-- ////  End Error Section  //// -->
 		<tr>
-			<td class="cat-1">
+			<td>
 				Strain
 			</td>
-			<td class="data-1">
+			<td>
 				<table>
 					<tr>
 						<td>
@@ -87,10 +87,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="cat-2">
+		<td>
 			Genetics
 		</td>
-		<td class="data-2">
+		<td>
 			<table>
 				<tr>
 					<td>
@@ -109,10 +109,10 @@
 	</td>
 </tr>
 <tr>
-	<td class="cat-1">
+	<td>
 		Other Database Links
 	</td>
-	<td class="data-2">
+	<td>
 		<table>
 			<tr>
 				<td>

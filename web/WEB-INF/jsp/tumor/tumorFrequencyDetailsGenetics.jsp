@@ -14,21 +14,21 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="header-label">Marker
+			<th>Marker
 				<!-- \n -->
-			Symbol</td>
-			<td class="header-label">Marker
+			Symbol</th>
+			<th>Marker
 				<!-- \n -->
-			Name</td>
-			<td class="header-label">Mouse
+			Name</th>
+			<th>Mouse
 				<!-- \n -->
-			Chromosome</td>
-			<td class="header-label">Mutation
+			Chromosome</th>
+			<th>Mutation
 				<!-- \n -->
-			Types</td>
-			<td class="header-label">Genetic
+			Types</th>
+			<th>Genetic
 				<!-- \n -->
-			Change</td>
+			Change</th>
 		</tr>
 		<c:forEach var="genetics" items="${tumorFreq.tumorGenetics}" varStatus="status">
 		<tr>
@@ -99,18 +99,18 @@
 	</table>
 	<table class="results">
 		<tr>
-			<td class="header-label">Name</td>
-			<td class="header-label">Mouse
+			<th>Name</th>
+			<th>Mouse
 				<!-- \n -->
-			Chromosome</td>
-			<td class="header-label">Mutation
+			Chromosome</th>
+			<th>Mutation
 				<!-- \n -->
-			Types</td>
-			<td class="header-label">Assay
+			Types</th>
+			<th>Assay
 				<!-- \n -->
-			Type</td>
-			<td class="header-label">Notes</td>
-			<td class="header-label">Images</td>
+			Type</th>
+			<th>Notes</th>
+			<th>Images</th>
 		</tr>
 		<c:forEach var="genetics" items="${tumorFreq.tumorCytogenetics}" varStatus="status">
 		<tr>

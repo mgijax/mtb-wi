@@ -127,7 +127,7 @@
 				<c:choose>
 				<c:when test="${not empty QTLForm.label}">
 				<tr>
-					<td class="cat-2">
+					<td>
 						QTL
 					</td> 
 					<td>
@@ -135,7 +135,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="cat-1">
+					<td>
 						Name
 					</td>
 					<td>
@@ -204,7 +204,7 @@
 					<td colspan ="5" id="feature-type-selection"></td>
 				</tr>
 				<tr>
-					<td class="cat-1">
+					<td>
 						Mouse phenotypes & mouse models of human disease
 					</td>
 					<td colspan="5">
@@ -218,7 +218,7 @@
 					</td>
 				</tr>
 				<tr	class="stripe-2">
-					<td class="cat-2">
+					<td>
 						Gene Ontology(GO) Classification
 					</td>
 					<td colspan="5">
@@ -242,7 +242,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="cat-1">
+					<td>
 						Display Results as
 					</td>
 					<td colspan="3"> 
@@ -251,7 +251,7 @@
 							<option value="tab">Tab Delimited</option>
 						</select>
 					</td>
-					<td class="cat-1">
+					<td>
 						Sort by
 					</td>
 					<td>

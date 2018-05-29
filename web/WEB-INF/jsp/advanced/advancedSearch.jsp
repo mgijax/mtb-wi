@@ -53,10 +53,10 @@
 		--%>
 		<!-- ////  End Error Section  //// -->
 		<tr>
-			<td class="cat-1">
+			<td>
 				Strain / Genetics
 			</td>
-			<td class="data-1">
+			<td>
 				<table>
 					<tr>
 						<td>
@@ -100,10 +100,10 @@
 	</td>
 </tr>
 <tr>
-	<td class="cat-2">
+	<td>
 		Tumor
 	</td>
-	<td class="data-2">
+	<td>
 		<table>
 			<tr>
 				<td>

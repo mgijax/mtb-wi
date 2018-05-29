@@ -10,7 +10,7 @@
 <%@ attribute name="description" required="false" %>
 <%@ attribute name="defaultHead" fragment="true" %>
 <%@ attribute name="header" fragment="true" %>
-<%@ attribute name="sectionHeader" fragment="true" %>
+<%@ attribute name="defaultSubnav" fragment="true" %>
 <%@ attribute name="footer" fragment="true" %>
 <!doctype html>
 <html>
@@ -53,7 +53,7 @@
 	<section>
 		<header>
 			<h1>${title}</h1>
-			<jsp:invoke fragment="sectionHeader" />
+			<jsp:invoke fragment="defaultSubnav" />
 		</header>
 		<jsp:doBody/>
 	</section>

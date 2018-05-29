@@ -376,7 +376,7 @@
 			'</tr>'+
 			'<tr><td><h4>Feature Type</h4></td><td colspan="5" id="feature-type-selection"></td></tr>'+
 			'<tr>'+
-			'<td class="cat-2">'+
+			'<td>'+
 			'Mouse phenotypes & mouse models of human disease'+
 			'</td>'+
 			'<td colspan="5">'+
@@ -395,7 +395,7 @@
 			'</td>'+
 			'</tr>'+
 			'<tr	class="stripe-1">'+
-			'<td class="cat-1">'+
+			'<td>'+
 			'Gene Ontology(GO) Classification'+
 			'</td>'+
 			'<td colspan="3">'+

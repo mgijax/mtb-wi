@@ -96,10 +96,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="cat-2">
+			<td>
 				Limit models by primary cancer site
 			</td>
-			<td class="data-2">
+			<td>
 				<table>
 					<tr>
 						<td>
@@ -118,10 +118,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="cat-1">
+		<td>
 			Limit models by diagnosis
 		</td>
-		<td class="data-1">
+		<td>
 			<table>
 				<tr>
 					<td>
@@ -140,10 +140,10 @@
 	</td>
 </tr>
 <tr>
-	<td class="cat-2">
+	<td>
 		Select genes for comparison
 	</td>
-	<td class="data-2">
+	<td>
 		<table>
 			<tr>
 				<td>

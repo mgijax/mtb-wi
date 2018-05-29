@@ -51,10 +51,10 @@
 		--%>
 		<!-- ////  End Error Section  //// -->
 		<tr>
-			<td class="cat-1">
+			<td>
 				Associated Tumors
 			</td>
-			<td class="data-1">
+			<td>
 				<table>
 					<tr>
 						<td>

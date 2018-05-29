@@ -475,10 +475,10 @@
 	</tr>
 	</c:if>		 
 	<tr>
-		<td class="cat-1">
+		<td>
 			Model Details
 		</td>
-		<td class="data-1">
+		<td>
 			<table>
 				<tr>
 					<td colspan="6" class="normal" style="width:100%; text-align:center">
@@ -497,15 +497,15 @@
 						</c:if>
 					</tr>
 					<tr>
-						<td class="label">Primary Site:</td><td class="normal" >${mouse.primarySite}</td>
-						<td class="label">Initial Diagnosis:</td><td class="normal" >${mouse.initialDiagnosis}</td>
-						<td class="label">Final Diagnosis:</td><td class="normal" >${mouse.clinicalDiagnosis}</td>
+						<td><h4>Primary Site:</h4></td><td class="normal" >${mouse.primarySite}</td>
+						<td><h4>Initial Diagnosis:</h4></td><td class="normal" >${mouse.initialDiagnosis}</td>
+						<td><h4>Final Diagnosis:</h4></td><td class="normal" >${mouse.clinicalDiagnosis}</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class="label">Tumor Site:</td><td class="normal" >${mouse.tissue}</td>
-						<td class="label">Tumor Type:</td><td class="normal" >${mouse.tumorType}</td>
-						<td class="label">Stage / Grade:</td><td class="normal" >${mouse.stage} / ${mouse.grade}<td></td>
+						<td><h4>Tumor Site:</h4></td><td class="normal" >${mouse.tissue}</td>
+						<td><h4>Tumor Type:</h4></td><td class="normal" >${mouse.tumorType}</td>
+						<td><h4>Stage / Grade:</h4></td><td class="normal" >${mouse.stage} / ${mouse.grade}<td></td>
 						</tr>
 						<c:if test="${not empty mouse.fusionGenes}">
 						<tr>
@@ -516,10 +516,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="cat-2">
+				<td>
 					Patient
 				</td>
-				<td class="data-2">
+				<td>
 					<table>
 						<tr>
 							<td class="label" style="width:10%">Sex:</td><td class="normal" style="width:22%">${mouse.sex}</td>
@@ -527,7 +527,7 @@
 							<td class="label" style="width:14%">Race / Ethnicity:</td><td class="normal" style="width:26%">${mouse.race} / ${mouse.ethnicity}</td>
 						</tr>
 						<tr>
-							<td class="label">Treatment Naive:</td><td class="normal">${mouse.treatmentNaive}</td>
+							<td><h4>Treatment Naive:</h4></td><td class="normal">${mouse.treatmentNaive}</td>
 							<td></td><td></td>
 							<td></td><td></td>
 						</tr>
@@ -535,10 +535,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="cat-1">
+				<td>
 					Engraftment Host
 				</td>
-				<td class="data-1">
+				<td>
 					<table>
 						<tr>
 							<td class="label" style="width:10%">Strain:</td><td class="normal"	style="width:22%">${mouse.strain}</td>
@@ -554,10 +554,10 @@
 			<c:set var="a" value="2"/>
 			<c:set var="b" value="1"/>
 			<tr>
-				<td class="cat${a}">
+				<td>
 					Publications citing this model
 				</td>
-				<td class="data${a}">
+				<td>
 					<div id="references">
 						<c:if test="${not empty sessionScope.pdxEditor}" > 
 						<input type="submit" name="reference" value="add">
@@ -567,10 +567,10 @@
 			</tr>
 			</c:if>
 			<tr>
-				<td class="cat${b}">
+				<td>
 					Variant Summary
 				</td>
-				<td class="data${b}">
+				<td>
 					<table id="no-variant-summary" style="display: none">
 						<tr>
 							<td class="normal">
@@ -591,10 +591,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="cat${a}">
+				<td>
 					Gene Expression
 				</td>
-				<td class="data${a}">
+				<td>
 					<c:choose>
 					<c:when test="${not empty geneExpressionData}">
 					Platforms:${platforms} 
@@ -625,10 +625,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="cat${b}">
+				<td>
 					Gene CNV
 				</td>
-				<td class="data${b}">
+				<td>
 					<c:choose>
 					<c:when test="${not empty geneCNVData}">
 					<div id="gene-c-nV"></div>
@@ -646,10 +646,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="cat${a}">
+				<td>
 					Model Characterization
 				</td>
-				<td class="data${a}">
+				<td>
 					<table>
 						<!-- Histology -->								
 						<c:choose>
@@ -1044,7 +1044,7 @@
 <c:when test="${mouse.socGraph > 0}">
 <c:forEach var="socGraph" begin="1" end="${mouse.socGraph}" >
 <tr>
-	<td class="cat${b}">
+	<td>
 		Dosing Studies:
 	</td>
 	<td style="border:0px none">

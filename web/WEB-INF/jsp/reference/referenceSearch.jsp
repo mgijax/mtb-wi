@@ -37,10 +37,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="cat-1">
+			<td>
 				Reference
 			</td>
-			<td class="data-1">
+			<td>
 				<table>
 					<tr>
 						<td>
@@ -119,10 +119,10 @@
 	</tr>
 	<!--
 	<tr>
-		<td class="cat-2">
+		<td>
 			Tumor Type
 		</td>
-		<td class="data-1">
+		<td>
 			<table>
 				<tr>
 					<td>

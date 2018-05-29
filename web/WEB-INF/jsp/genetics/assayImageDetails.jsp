@@ -294,7 +294,7 @@
 								</tr>
 								<c:if test="${not empty assayImage.strainTypes}">
 								<tr>
-									<td class="label">Strain Types: </td>
+									<td><h4>Strain Types: </h4></td>
 									<td>
 										<c:forEach var="type" items="${assayImage.strainTypes}" varStatus="status">
 										${type.type}
@@ -307,7 +307,7 @@
 								</c:if>
 								<c:if test="${not empty assayImage.strainNote}">
 								<tr>
-									<td class="label">General Note: </td>
+									<td><h4>General Note: </h4></td>
 									<td>${assayImage.strainNote}</td>
 								</tr>
 								</c:if>

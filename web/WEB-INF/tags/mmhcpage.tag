@@ -8,6 +8,7 @@
 <%@ attribute name="description" required="false" %>
 <%@ attribute name="help" required="false" %>
 <%@ attribute name="head" fragment="true" %>
+<%@ attribute name="subnav" fragment="true" %>
 
 <jax:toolpage title="${title}" keywords="${keywords}" description="${description}" defaultTitle="Mouse Models of Human Cancer"
 	defaultKeywords="mtb, mmhc, mouse, tumor, biology, jax, lab, laboratory, jackson, mgi, genome, informatics"
@@ -61,12 +62,13 @@
 			</li>	
 		</ul>
 	</jsp:attribute>
-	<jsp:attribute name="sectionHeader">
+	<jsp:attribute name="defaultSubnav">
 		<c:choose>
 		<c:when test="${not empty help}">
 			<a class="help" href="${help}"></a>
 		</c:when>
 		</c:choose>
+		<jsp:invoke fragment="subnav" />
 	</jsp:attribute>
 	<jsp:attribute name="footer">
 		<ul>

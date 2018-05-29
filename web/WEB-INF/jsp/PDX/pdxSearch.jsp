@@ -177,7 +177,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="cat-1">
+		<td>
 			Search by PDX model identifier
 		</td>
 		<td class="data-1" >
@@ -196,10 +196,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="cat-2">
+		<td>
 			Search by primary cancer site
 		</td>
-		<td class="data-2">
+		<td>
 			<table>
 				<tr>
 					<td>
@@ -235,10 +235,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="cat-1">
+		<td>
 			Search by diagnosis
 		</td>
-		<td class="data-1">
+		<td>
 			<table>
 				<tr>
 					<td>
@@ -254,10 +254,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="cat-2">
+		<td>
 			Search by dosing study results
 		</td>
-		<td class="data-2">
+		<td>
 			<table>
 				<tr>
 					<td>
@@ -279,10 +279,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="cat-2">
+		<td>
 			Search by fusion gene
 		</td>
-		<td class="data-2">
+		<td>
 			<table>
 				<tr>
 					<td>
@@ -298,10 +298,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="cat-1">
+		<td>
 			Search by gene variants (in engrafted tumors)
 		</td>
-		<td class="data-1">
+		<td>
 			<table>
 				<tr>
 					<td>
@@ -337,20 +337,20 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="cat-2">
+		<td>
 			Display a chart of gene expression across PDX models for a gene
 		</td>
-		<td class="data-2">
+		<td>
 			<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a gene to view expression values', CAPTION, 'Gene');" onmouseout="return nd();">Gene</a></strong>
 			<!-- \n -->
 			<div id="gene-select-oMatic2"></div>
 		</td>
 	</tr>
 	<tr>
-		<td class="cat-1">
+		<td>
 			Search by gene amplification and deletion
 		</td>
-		<td class="data-1">
+		<td>
 			<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a gene', CAPTION, 'Gene');" onmouseout="return nd();">Gene</a></strong>
 			<!-- \n -->
 			<div id="gene-select-oMatic3"></div>
@@ -358,12 +358,12 @@
 	</tr>
 	<!--
 	<tr>
-		<td class="cat-2">
+		<td>
 			Search by chromosome amplification and deletion	
 			<!-- \n -->
 			<strong>WORK IN PROGRESS </strong>
 		</td>
-		<td class="data-2">
+		<td>
 			<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a chromosome', CAPTION, 'Chromosome');" onmouseout="return nd();">Chromosome</a></strong>
 			<!-- \n -->
 			<html:select property="chrCNV" size="8"	styleId="chrCNV" onclick="clearGenes()">

@@ -26,10 +26,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="cat-1">
+			<td>
 				Human Genes:
 			</td>
-			<td class="data-1">
+			<td>
 				<table>
 					<tr>
 						<td>

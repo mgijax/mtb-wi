@@ -8,25 +8,25 @@
 		<!-- ////  Start Genetics Summary Header  //// -->
 		<tr>
 			<td><h4>Gene Symbol</h4></td>
-			<td class="data-1">
+			<td>
 				<c:out value="${genetics.geneSymbol}" escapeXml="false"/>
 			</td>
 		</tr>
 		<tr>
 			<td><h4>Gene Name</h4></td>
-			<td class="data-2">
+			<td>
 				<c:out value="${genetics.geneName}" escapeXml="false"/>
 			</td>
 		</tr>
 		<tr>
 			<td><h4>Mouse Chromosome</h4></td>
-			<td class="data-1">
+			<td>
 				<c:out value="${genetics.mouseChromosome}" escapeXml="false"/>
 			</td>
 		</tr>
 		<tr>
 			<td><h4>Genetic Change Type</h4></td>
-			<td class="data-2">
+			<td>
 				<c:out value="${genetics.geneticChangeTypeName}" escapeXml="false"/>
 			</td>
 		</tr>
