@@ -7,7 +7,7 @@
 	<!- Cytogenetics -->
 	<c:choose>
 	<c:when test="${not empty tumorFreqs}">
-	<table class="results">
+	<table>
 		<tr>
 			<td colspan="6" class="results-header-left">
 				<h3>Tumor Cytogenetics</h3>
@@ -16,7 +16,7 @@
 	</table>
 	<c:forEach var="tumorFreq" items="${tumorFreqs}" varStatus="statusTF">
 	<!-----------------------------------  ------------------------------------------->
-	<table class="results">
+	<table>
 		<tr>
 			<th>MTB ID</th>
 			<th>Organ Affected</th>
@@ -55,12 +55,12 @@
 				<c:when test="${not empty tumorFreq.agents}">
 				<em>
 					<c:forEach var="agent" items="${tumorFreq.agents}" varStatus="status">
-					<span size="-2">
+					
 						${agent}
 						<c:if test="${status.last != true}">
 						<!-- \n -->
 						</c:if>
-					</span>
+					
 					</c:forEach>
 					</c:when>
 					<c:otherwise>
@@ -91,7 +91,7 @@
 				</td>
 			</table>	 
 			<!------------------------------------------------------------------------>
-			<table class="results">
+			<table>
 				<tr>
 					<th>Name</th>
 					<th>Mouse

@@ -119,7 +119,7 @@
 </script>
 </jsp:attribute>
 <jsp:body>
-<table class="results">
+<table>
 	<!-- ////  Start Detail Section  //// -->
 	<tr>
 		<td colspan="2">
@@ -368,7 +368,7 @@
 						</tr>
 						<tr> 
 							<td colspan="6">
-								<table width="560" class="results">
+								<table width="560">
 									<tr>
 										<th>Gene</th>
 										<th>Name</th>
@@ -391,7 +391,7 @@
 							</c:when>
 							<c:when test="${not empty noResults}">
 							<td colspan="6">
-								<table class="results">
+								<table>
 									<tr>
 										<th>0 Matching Genes</th>
 									</tr>

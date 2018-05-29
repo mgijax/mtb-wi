@@ -62,7 +62,7 @@
 </script>
 </jsp:attribute>
 <jsp:body>
-<table class="results">
+<table>
 	<tr class="buttons">
 		<td colspan="2">
 			<input type="button" value="Open PDX Genomics Dashboard" onclick="window.open('	http://pdx-dashboard.jax.org/v4/');">

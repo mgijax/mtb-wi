@@ -68,14 +68,14 @@
 				<td>
 					<c:out value="${tumor.treatmentType}" escapeXml="false"/>
 					<c:if test="${not empty tumor.agents}">
-					<span size="-2"><em>
+					<em>
 							<c:forEach var="agent" items="${tumor.agents}" varStatus="status">
 							<c:out value="${agent}" escapeXml="false"/>
 							<c:if test="${status.last != true}">
 							<!-- \n -->
 							</c:if>
 							</c:forEach>
-					</em></span> 
+					</em> 
 					</c:if>
 				</td>
 				<td>

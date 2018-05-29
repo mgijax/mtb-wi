@@ -4,7 +4,7 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Strain Search Form" help="strains">
 	<html:form action="strainSearchResults" method="GET">
-	<table class="results">
+	<table>
 		<tr class="buttons">
 			<td colspan="2">
 				<table>
@@ -16,14 +16,14 @@
 					</tr>
 					<tr>
 						<td>
-							<span class="label">Sort By:</span>
+							<h5 class="label">Sort By:</h5>
 							<html:radio property="sortBy" value="name">Strain Name</html:radio>  
 							<html:radio property="sortBy" value="type">Strain Type</html:radio>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<span class="label">Max number of items returned:</span>
+							<h5 class="label">Max number of items returned:</h5>
 							<html:radio property="maxItems" value="25">25</html:radio>  
 							<html:radio property="maxItems" value="100">100</html:radio>  
 							<html:radio property="maxItems" value="500">500</html:radio>  

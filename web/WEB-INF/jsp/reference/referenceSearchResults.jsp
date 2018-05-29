@@ -3,40 +3,40 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Reference Search Results" help="referenceresults">
-	<table class="results">
+	<table>
 		<!-- ////  Start Search Summary  //// -->
-		<caption><span class="label">Search Summary</span>
+		<caption><h5 class="label">Search Summary</h5>
 			<!-- \n -->
 			<c:if test="${not empty accId}">
-			<span class="label">Accession Id:</span> ${accId}
+			<h5 class="label">Accession Id:</h5> ${accId}
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty firstAuthor}">
-			<span class="label">First Author:</span> ${firstAuthorComparison} "${firstAuthor}"
+			<h5 class="label">First Author:</h5> ${firstAuthorComparison} "${firstAuthor}"
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty authors}">
-			<span class="label">Authors:</span> Contains "${authors}"
+			<h5 class="label">Authors:</h5> Contains "${authors}"
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty journal}">
-			<span class="label">Journal:</span> ${journalComparison} "${journal}"
+			<h5 class="label">Journal:</h5> ${journalComparison} "${journal}"
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty year}">
-			<span class="label">Year:</span> ${yearComparison} ${year}
+			<h5 class="label">Year:</h5> ${yearComparison} ${year}
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty volume}">
-			<span class="label">Volume:</span> ${volumeComparison} "${volume}"
+			<h5 class="label">Volume:</h5> ${volumeComparison} "${volume}"
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty pages}">
-			<span class="label">Pages:</span> ${pagesComparison} "${pages}"
+			<h5 class="label">Pages:</h5> ${pagesComparison} "${pages}"
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty title}">
-			<span class="label">Title:</span> ${titleComparison} "${title}"
+			<h5 class="label">Title:</h5> ${titleComparison} "${title}"
 			<!-- \n -->
 			</c:if>
 			<%--
@@ -45,9 +45,9 @@
 			<!-- \n -->
 			</c:if>
 			--%>
-			<span class="label">Sort By:</span> ${sortBy}
+			<h5 class="label">Sort By:</h5> ${sortBy}
 			<!-- \n -->
-			<span class="label">Display Limit:</span> ${maxItems} 
+			<h5 class="label">Display Limit:</h5> ${maxItems} 
 		</caption>
 		<caption><!-- ////  Start Display Limit  //// -->
 			<c:choose>
@@ -64,7 +64,7 @@
 		<!-- ////  Start Results  //// -->
 		<c:choose>
 		<c:when test="${not empty references}">
-		<tr class="results">
+		<tr>
 			<th>Accession Id</th>
 			<th>Reference</th>
 		</tr>

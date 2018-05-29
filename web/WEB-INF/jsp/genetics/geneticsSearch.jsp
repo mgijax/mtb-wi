@@ -4,7 +4,7 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Strain and Tumor Genetics Search Form" help="genetics">
 	<html:form action="geneticsSearchResults" method="GET">
-	<table class="results">
+	<table>
 		<tr class="page-info">
 		</tr>
 		<tr class="buttons">
@@ -18,7 +18,7 @@
 					</tr>
 					<tr>
 						<td>
-							<span class="label">Sort By:</span>
+							<h5 class="label">Sort By:</h5>
 							<html:radio property="sortBy" value="Gene Symbol">Gene Symbol</html:radio>  
 							<html:radio property="sortBy" value="Mutation Type">Mutation Type</html:radio>  
 							<html:radio property="sortBy" value="Chromosome">Chromosome</html:radio>  
@@ -26,7 +26,7 @@
 					</tr>
 					<tr>
 						<td>
-							<span class="label">Max number of items returned:</span>
+							<h5 class="label">Max number of items returned:</h5>
 							<html:radio property="maxItems" value="25">25</html:radio>  
 							<html:radio property="maxItems" value="100">100</html:radio>  
 							<html:radio property="maxItems" value="500">500</html:radio>  

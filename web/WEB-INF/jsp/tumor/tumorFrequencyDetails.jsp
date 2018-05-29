@@ -94,7 +94,7 @@
 							<c:set var="pmets" value="${mets.label}"/>
 							</c:when>
 							<c:otherwise>
-							<span size="-2"><em>(metastasis from MTB:${pmets})</em></span>
+							<em>(metastasis from MTB:${pmets})</em>
 							</c:otherwise>
 							</c:choose>
 							--%>
@@ -189,7 +189,7 @@
 			<th>Organ Affected</th>
 			<th>Treatment Type
 				<!-- \n -->
-				<span size="-2"><em>Agents</em></span></th>
+				<em>Agents</em></th>
 			<th>Strain Sex</th>
 			<th>Reproductive Status</th>
 			<th>Frequency</th>
@@ -227,12 +227,12 @@
 				<c:choose>
 				<c:when test="${not empty tumorFreq.agents}">
 				<c:forEach var="agent" items="${tumorFreq.agents}" varStatus="status">
-				<span size="-2">
+				
 					${agent}
 					<c:if test="${status.last != true}">
 					<!-- \n -->
 					</c:if>
-				</span>
+				
 				</c:forEach>
 				</c:when>
 				<c:otherwise>
@@ -253,7 +253,7 @@
 			<td><c:out value="${tumorFreq.ageDetection}" default="&nbsp;" escapeXml="false"/></td>
 			<%--
 			<td>
-				<span size="-2">
+				
 					<c:choose>
 					<c:when test="${tumorFreq.numImages>0&&(not empty(tumorFreq.pathologyRecs))}">
 					<a href="#pathology">Reports
@@ -269,7 +269,7 @@
 					<c:otherwise>
 					</c:otherwise>
 					</c:choose>
-				</span>
+				
 			</td>
 			--%>
 			<td>

@@ -283,7 +283,7 @@
 </script>
 </jsp:attribute>
 <jsp:body>
-<table class="results">
+<table>
 	<!-- ////  Start Detail Section  //// -->
 	<tr>
 		<td colspan="2">

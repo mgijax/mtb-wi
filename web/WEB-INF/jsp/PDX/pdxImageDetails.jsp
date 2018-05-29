@@ -4,7 +4,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="PDX Image Detail" help="imagedetail">
-	<table class="results">
+	<table>
 		<tr>
 			<td colspan="2">
 				<div>

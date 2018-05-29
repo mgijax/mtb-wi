@@ -6,7 +6,7 @@
 
 <!-- ////  Start JVM Information  //// -->
 
-<table width="1000" class="results">
+<table width="1000">
 	 <tr class="page-title">
 		 <td colspan="2">JVM Information</td>
 	 </tr>
@@ -44,7 +44,7 @@
 
 <!-- ////  Start OS Information  //// -->
 
-<table width="1000" class="results">
+<table width="1000">
 	 <tr class="page-title">
 		 <td colspan="2">OS Information</td>
 	 </tr>
@@ -82,7 +82,7 @@
 
 <!-- ////  Start System Property Information  //// -->
 
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td colspan="2">System Properties</td>
 	 </tr>
@@ -120,7 +120,7 @@
 
 <!-- ////  Start Request Information  //// -->
 
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td colspan="2">Request Information</td>
 	 </tr>
@@ -194,7 +194,7 @@
 
 <!-- ////  Start Response Information  //// -->
 
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td>Response Information</td>
 	 </tr>
@@ -226,7 +226,7 @@
 
 <!-- ////  Start Servlet Init Params Information  //// -->
 
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td colspan="2">Servlet Initialization Parameters</td>
 	 </tr>
@@ -264,7 +264,7 @@
 
 <!-- ////  Start Context Information  //// -->
 
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td colspan="2">Context Attributes</td>
 	 </tr>
@@ -304,7 +304,7 @@
 
 <!-- ////  Start Session Information  //// -->
 
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td colspan="2">Session Information</td>
 	 </tr>
@@ -353,7 +353,7 @@ Max Session Inactive Interval:<strong>
 
 <!-- ////  Start Application Information  //// -->
 
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td colspan="2">Application Information</td>
 	 </tr>
@@ -388,7 +388,7 @@ Max Session Inactive Interval:<strong>
 
 <%-- Loop over the JSTL headerValues implicit object,
 	 which is a map --%>
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td colspan="2">
 			 JSTL Header Values
@@ -432,7 +432,7 @@ Max Session Inactive Interval:<strong>
 
 <!-- ////  Start Header Information  //// -->
 
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td colspan="2">Header Information</td>
 	 </tr>
@@ -470,7 +470,7 @@ Max Session Inactive Interval:<strong>
 
 <!-- ////  Start Param Names Information  //// -->
 
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td colspan="2">Param Names</td>
 	 </tr>
@@ -510,7 +510,7 @@ Max Session Inactive Interval:<strong>
 
 <!-- ////  Start Cookie Information  //// -->
 
-<table class="results">
+<table>
 	 <tr class="page-title">
 		 <td colspan="2">Cookie Information</td>
 	 </tr>

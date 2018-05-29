@@ -4,17 +4,17 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Gene Expression Data Set Search Results" help="geneexpression">
-	<table class="results">
+	<table>
 		<!-- ////  Start Search Summary  //// -->
-		<caption><span class="label">Search Summary</span>
+		<caption><h5 class="label">Search Summary</h5>
 			<!-- \n -->
 			<c:if test="${not empty organs}">
 			<c:choose>
 			<c:when test="${fn:length(organs)>1}">
-			<span class="label">Organs:</span>
+			<h5 class="label">Organs:</h5>
 			</c:when>
 			<c:otherwise>	
-			<span class="label">Organ:</span>
+			<h5 class="label">Organ:</h5>
 			</c:otherwise>
 			</c:choose>
 			<c:forEach var="organ" items="${organs}" varStatus="status">
@@ -32,10 +32,10 @@
 			<c:if test="${not empty tumorClassifications}">
 			<c:choose>
 			<c:when test="${fn:length(tumorClassifications)>1}">
-			<span class="label">Tumor Classifications:</span>
+			<h5 class="label">Tumor Classifications:</h5>
 			</c:when>
 			<c:otherwise>	
-			<span class="label">Tumor Classification:</span>
+			<h5 class="label">Tumor Classification:</h5>
 			</c:otherwise>
 			</c:choose>
 			<c:forEach var="classification" items="${tumorClassifications}" varStatus="status">
@@ -51,16 +51,16 @@
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty strainName}">
-			<span class="label">Strain:</span> ${strainName}
+			<h5 class="label">Strain:</h5> ${strainName}
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty platforms}">
 			<c:choose>
 			<c:when test="${fn:length(platforms)>1}">
-			<span class="label">Platforms:</span>
+			<h5 class="label">Platforms:</h5>
 			</c:when>
 			<c:otherwise>	
-			<span class="label">Platform:</span>
+			<h5 class="label">Platform:</h5>
 			</c:otherwise>
 			</c:choose>
 			<c:forEach var="platform" items="${platforms}" varStatus="status">
@@ -81,11 +81,11 @@
 			<c:when test="${not empty seriesWSamples}">
 			<c:choose>
 			<c:when test="${seriesWSamples == '1'}">
-			<span class="label">${seriesWSamples} series has matching samples </span>
+			<h5 class="label">${seriesWSamples} series has matching samples </h5>
 			<!-- \n -->
 			</c:when>
 			<c:otherwise>
-			<span class="label">${seriesWSamples} series have matching samples </span>
+			<h5 class="label">${seriesWSamples} series have matching samples </h5>
 			<c:forEach var="series" items="${results}" >
 			<c:choose>
 			<c:when test="${not empty series.series.id}">
@@ -102,11 +102,11 @@
 			<!-- \n -->
 			<c:choose>
 			<c:when test="${samplesWOSeries == '1'}">
-			<span class="label">${samplesWOSeries} matching sample not associated with a series </span>
+			<h5 class="label">${samplesWOSeries} matching sample not associated with a series </h5>
 			<!-- \n -->
 			</c:when>
 			<c:otherwise>
-			<span class="label">${samplesWOSeries} matching samples not associated with any series </span>
+			<h5 class="label">${samplesWOSeries} matching samples not associated with any series </h5>
 			<!-- \n -->
 			</c:otherwise>
 			</c:choose>
@@ -114,7 +114,7 @@
 			</c:choose>
 			</c:when>
 			<c:otherwise>
-			<span class="label">All samples for ${seriesId} </span>
+			<h5 class="label">All samples for ${seriesId} </h5>
 			<!-- \n -->
 			</c:otherwise>
 			</c:choose>
@@ -128,10 +128,10 @@
 		<c:forEach var="series" items="${results}" >
 		<c:choose>
 		<c:when test="${not empty series.series.id}">
-		<tr class="results">
-			<td class="results-header" colspan="1"><a name="${series.series.id}">Series ID</a></td>
-			<td class="results-header" colspan="2">Title</td>
-			<td class="results-header" colspan="2">Summary</td>
+		<tr>
+			<th><a name="${series.series.id}">Series ID</a></th>
+			<th>Title</th>
+			<th>Summary</th>
 		</tr>
 		<tr>
 			<td colspan="1"><a href="${series.siteURL}${series.series.id}"><c:out value="${series.series.id} " escapeXml="false"/></a>
@@ -153,17 +153,17 @@
 		</tr>
 		</c:when>
 		<c:otherwise>
-		<tr class="results">
-			<td class="results-header" colspan="5">Matching samples not associated with any series</td>
+		<tr>
+			<th>Matching samples not associated with any series</th>
 		</tr>
 		</c:otherwise>
 		</c:choose>
-		<tr class="results">
-			<td class="results-header" colspan="1">Sample ID</td>
-			<td class="results-header" colspan="1">Title</td>
-			<td class="results-header" colspan="1">Summary</td>
-			<td class="results-header" colspan="1">Platform</td>
-			<td class="results-header" colspan="1">MTB Details</td>
+		<tr>
+			<th>Sample ID</th>
+			<th>Title</th>
+			<th>Summary</th>
+			<th>Platform</th>
+			<th>MTB Details</th>
 		</tr>
 		<c:forEach var="sample" items="${series.samples}" varStatus="status">
 		<c:choose>

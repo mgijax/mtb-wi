@@ -4,17 +4,17 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Pathology Image Search Results" help="pathresults">
-	<table class="results">
+	<table>
 		<!-- ////  Start Search Summary  //// -->
-		<caption><span class="label">Search Summary</span>
+		<caption><h5 class="label">Search Summary</h5>
 			<!-- \n -->
 			<c:if test="${not empty organOriginSelected}">
 			<c:choose>
 			<c:when test="${fn:length(organOriginSelected)>1}">
-			<span class="label">Organs/Tissues of Origin:</span> 
+			<h5 class="label">Organs/Tissues of Origin:</h5> 
 			</c:when>
 			<c:otherwise>
-			<span class="label">Organ/Tissue of Origin:</span> 
+			<h5 class="label">Organ/Tissue of Origin:</h5> 
 			</c:otherwise>
 			</c:choose>
 			<c:forEach var="organ" items="${organOriginSelected}" varStatus="status">
@@ -32,10 +32,10 @@
 			<c:if test="${not empty tumorClassificationsSelected}">
 			<c:choose>
 			<c:when test="${fn:length(tumorClassificationsSelected)>1}">
-			<span class="label">Tumor Classifications:</span> 
+			<h5 class="label">Tumor Classifications:</h5> 
 			</c:when>
 			<c:otherwise>
-			<span class="label">Tumor Classification:</span> 
+			<h5 class="label">Tumor Classification:</h5> 
 			</c:otherwise>
 			</c:choose>
 			<c:forEach var="classification" items="${tumorClassificationsSelected}" varStatus="status">
@@ -51,24 +51,24 @@
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty organsAffectedSelected}">
-			<span class="label">Organ/Tissue Affected:</span> ${organsAffectedSelected}
+			<h5 class="label">Organ/Tissue Affected:</h5> ${organsAffectedSelected}
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty diagnosisDescription}">
-			<span class="label">Diagnosis or Description:</span> Contains "${diagnosisDescription}"
+			<h5 class="label">Diagnosis or Description:</h5> Contains "${diagnosisDescription}"
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty methodSelected}">
-			<span class="label">Method:</span> ${methodSelected}
+			<h5 class="label">Method:</h5> ${methodSelected}
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty antibodiesSelected}">
 			<c:choose>
 			<c:when test="${fn:length(antibodiesSelected)>1}">
-			<span class="label">Antibodies:</span> 
+			<h5 class="label">Antibodies:</h5> 
 			</c:when>
 			<c:otherwise>
-			<span class="label">Antibody:</span> 
+			<h5 class="label">Antibody:</h5> 
 			</c:otherwise>
 			</c:choose>
 			<c:forEach var="antibody" items="${antibodiesSelected}" varStatus="status">
@@ -86,10 +86,10 @@
 			<c:if test="${not empty imageContributors}">
 			<c:choose>
 			<c:when test="${fn:length(imageContributors)>1}">
-			<span class="label">Contributors:</span> 
+			<h5 class="label">Contributors:</h5> 
 			</c:when>
 			<c:otherwise>
-			<span class="label">Contributor:</span> 
+			<h5 class="label">Contributor:</h5> 
 			</c:otherwise>
 			</c:choose>
 			<c:forEach var="contributor" items="${imageContributors}" varStatus="status">
@@ -105,12 +105,12 @@
 			<!-- \n -->
 			</c:if>
 			<c:if test="${not empty accId}">
-			<span class="label">Accession Id:</span> ${accId}
+			<h5 class="label">Accession Id:</h5> ${accId}
 			<!-- \n -->
 			</c:if>
-			<span class="label">Sort By:</span> ${sortBy}
+			<h5 class="label">Sort By:</h5> ${sortBy}
 			<!-- \n -->
-			<span class="label">Display Limit:</span> ${maxItems}
+			<h5 class="label">Display Limit:</h5> ${maxItems}
 		</caption>
 		<caption><!-- ////  Start Display Limit  //// -->
 			<c:choose>
@@ -131,7 +131,7 @@
 	<c:forEach var="pathRec" items="${pathologyImages}" varStatus="status">
 	<!-- \n -->
 	<!-- \n -->
-	<table class="results">
+	<table>
 		<tr>
 			<td width="8%" class="results-header">MTB ID</td>
 			<td width="14%" class="results-header">Tumor Name</td>
@@ -161,14 +161,14 @@
 				<c:out value="${pathRec.treatmentType}" escapeXml="false"/>
 				<c:if test="${not empty pathRec.agents}">
 				<!-- \n -->
-				<span size="-2"><em>
+				<em>
 						<c:forEach var="agent" items="${pathRec.agents}" varStatus="status">
 						<c:out value="${agent}" escapeXml="false"/>
 						<c:if test="${status.last != true}">
 						<!-- \n -->
 						</c:if>
 						</c:forEach>
-				</em></span> 
+				</em> 
 				</c:if>
 			</td>
 			<td>
@@ -204,17 +204,17 @@
 							<td width=250>
 								<table>
 									<tr>
-										<td class="small" align="right"><div class="nowrap"><span class="label">Image ID:</span></div></td>
+										<td class="small" align="right"><div class="nowrap"><h5 class="label">Image ID:</h5></div></td>
 										<td class="small">${image.imageId}</td>
 									</tr>
 									<tr>
-										<td class="small" align="right"><div class="nowrap"><span class="label">Source of Image:</span></div></td>
+										<td class="small" align="right"><div class="nowrap"><h5 class="label">Source of Image:</h5></div></td>
 										<td class="small">
 											${image.sourceOfImage}
 										</td>
 									</tr>
 									<tr>
-										<td class="small" align="right"><div class="nowrap"><span class="label">Pathologist:</span></div></td>
+										<td class="small" align="right"><div class="nowrap"><h5 class="label">Pathologist:</h5></div></td>
 										<td class="small">
 											${image.pathologist}
 										</td>
@@ -222,7 +222,7 @@
 									<c:choose>
 									<c:when test="${not empty image.stainMethod}">
 									<tr>
-										<td class="small" align="right"><div class="nowrap"><span class="label">Method / Stain:</span></div></td>
+										<td class="small" align="right"><div class="nowrap"><h5 class="label">Method / Stain:</h5></div></td>
 										<td class="small">${image.stainMethod}</td>
 									</tr>
 									</c:when>
@@ -230,7 +230,7 @@
 								</table>
 							</td>
 							<td class="small" colspan=5>
-								<span class="label">Image Caption</span>:
+								<h5 class="label">Image Caption</h5>:
 								<!-- \n -->
 								${image.imageCaption}
 							</td>

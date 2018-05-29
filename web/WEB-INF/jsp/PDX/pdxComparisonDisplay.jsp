@@ -40,16 +40,16 @@
 	<table>
 		<tr class="summary">
 			<td >
-				<span class="label">Search Summary</span>
+				<h5 class="label">Search Summary</h5>
 				<!-- \n -->
 				<c:choose>
 				<c:when test="${not empty primarySites}">
 				<c:choose>
 				<c:when test="${fn:length(primarySites)>1}">
-				<span class="label">Primary Sites:</span>
+				<h5 class="label">Primary Sites:</h5>
 				</c:when>
 				<c:otherwise>
-				<span class="label">Primary Site:</span>
+				<h5 class="label">Primary Site:</h5>
 				</c:otherwise>
 				</c:choose>
 				<c:forEach var="site" items="${primarySites}" varStatus="status">
@@ -65,7 +65,7 @@
 				<!-- \n -->
 				</c:when>
 				<c:otherwise>
-				<span class="label">Primary Sites:</span> Any
+				<h5 class="label">Primary Sites:</h5> Any
 				<!-- \n -->
 				</c:otherwise>
 				</c:choose>
@@ -73,10 +73,10 @@
 				<c:when test="${not empty diagnoses}">
 				<c:choose>
 				<c:when test="${fn:length(diagnoses)>1}">
-				<span class="label">Diagnoses:</span>
+				<h5 class="label">Diagnoses:</h5>
 				</c:when>
 				<c:otherwise>
-				<span class="label">Diagnosis:</span>
+				<h5 class="label">Diagnosis:</h5>
 				</c:otherwise>
 				</c:choose>
 				<c:forEach var="diagnosis" items="${diagnoses}" varStatus="status">
@@ -92,7 +92,7 @@
 				<!-- \n -->
 				</c:when>
 				<c:otherwise>
-				<span class="label">Diagnosis:</span> Any
+				<h5 class="label">Diagnosis:</h5> Any
 				<!-- \n -->
 				</c:otherwise>
 				</c:choose>

@@ -236,13 +236,13 @@
 </jsp:attribute>
 <jsp:body>
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
-<table class="results" >
+<table >
 	<!-- ////  Start Search Summary  //// -->
-	<caption><span class="label">Search Summary</span>
+	<caption><h5 class="label">Search Summary</h5>
 		<!-- \n -->
 		<c:choose>
 		<c:when test="${not empty modelID}">
-		<span class="label">Model ID:</span>${modelID}
+		<h5 class="label">Model ID:</h5>${modelID}
 		<!-- \n -->
 		</c:when>
 		</c:choose>
@@ -250,10 +250,10 @@
 		<c:when test="${not empty primarySites}">
 		<c:choose>
 		<c:when test="${fn:length(primarySites)>1}">
-		<span class="label">Primary Sites:</span>
+		<h5 class="label">Primary Sites:</h5>
 		</c:when>
 		<c:otherwise>
-		<span class="label">Primary Site:</span>
+		<h5 class="label">Primary Site:</h5>
 		</c:otherwise>
 		</c:choose>
 		<c:forEach var="site" items="${primarySites}" varStatus="status">
@@ -269,7 +269,7 @@
 		<!-- \n -->
 		</c:when>
 		<c:otherwise>
-		<span class="label">Primary Sites:</span> Any
+		<h5 class="label">Primary Sites:</h5> Any
 		<!-- \n -->
 		</c:otherwise>
 		</c:choose>
@@ -277,10 +277,10 @@
 		<c:when test="${not empty diagnoses}">
 		<c:choose>
 		<c:when test="${fn:length(diagnoses)>1}">
-		<span class="label">Diagnoses:</span>
+		<h5 class="label">Diagnoses:</h5>
 		</c:when>
 		<c:otherwise>
-		<span class="label">Diagnosis:</span>
+		<h5 class="label">Diagnosis:</h5>
 		</c:otherwise>
 		</c:choose>
 		<c:forEach var="diagnosis" items="${diagnoses}" varStatus="status">
@@ -296,7 +296,7 @@
 		<!-- \n -->
 		</c:when>
 		<c:otherwise>
-		<span class="label">Diagnosis:</span> Any
+		<h5 class="label">Diagnosis:</h5> Any
 		<!-- \n -->
 		</c:otherwise>
 		</c:choose>
@@ -304,10 +304,10 @@
 		<c:when test="${not empty tags}">
 		<c:choose>
 		<c:when test="${fn:length(tags)>1}">
-		<span class="label">Tags:</span>
+		<h5 class="label">Tags:</h5>
 		</c:when>
 		<c:otherwise>
-		<span class="label">Tag:</span>
+		<h5 class="label">Tag:</h5>
 		</c:otherwise>
 		</c:choose>
 		<c:forEach var="tag" items="${tags}" varStatus="status">
@@ -323,7 +323,7 @@
 		<!-- \n -->
 		</c:when>
 		<c:otherwise>
-		<span class="label">Tags:</span> Any
+		<h5 class="label">Tags:</h5> Any
 		<!-- \n -->
 		</c:otherwise>
 		</c:choose>
@@ -331,10 +331,10 @@
 		<c:when test="${not empty genes}">
 		<c:choose>
 		<c:when test="${fn:length(genes)>1}">
-		<span class="label">Genes:</span>
+		<h5 class="label">Genes:</h5>
 		</c:when>
 		<c:otherwise>
-		<span class="label">Gene:</span>
+		<h5 class="label">Gene:</h5>
 		</c:otherwise>
 		</c:choose>
 		<c:forEach var="gene" items="${genes}" varStatus="status">
@@ -350,7 +350,7 @@
 		<!-- \n -->
 		</c:when>
 		<c:otherwise>
-		<span class="label">Genes:</span> Any
+		<h5 class="label">Genes:</h5> Any
 		<!-- \n -->
 		</c:otherwise>
 		</c:choose>
@@ -358,10 +358,10 @@
 		<c:when test="${not empty variants}">
 		<c:choose>
 		<c:when test="${fn:length(variants)>1}">
-		<span class="label">Variants:</span>
+		<h5 class="label">Variants:</h5>
 		</c:when>
 		<c:otherwise>
-		<span class="label">Variant:</span>
+		<h5 class="label">Variant:</h5>
 		</c:otherwise>
 		</c:choose>
 		<c:forEach var="variant" items="${variants}" varStatus="status">
@@ -377,32 +377,32 @@
 		<!-- \n -->
 		</c:when>
 		<c:otherwise>
-		<span class="label">Variants:</span> Any
+		<h5 class="label">Variants:</h5> Any
 		<!-- \n -->
 		</c:otherwise>
 		</c:choose>
 		<c:if test="${not empty fusionGenes}">
-		<span class="label">Fusion Gene:</span> ${fusionGenes}
+		<h5 class="label">Fusion Gene:</h5> ${fusionGenes}
 		<!-- \n -->
 		</c:if>	
 		<c:if test="${not empty tumorGrowth}">
-		<span class="label">Tumor Growth Data:</span> Required
+		<h5 class="label">Tumor Growth Data:</h5> Required
 		<!-- \n -->
 		</c:if>		
 		<c:if test="${not empty dosingStudy}">
-		<span class="label">Dosing Studies:</span> Required
+		<h5 class="label">Dosing Studies:</h5> Required
 		<!-- \n -->
 		</c:if>	
 		<c:if test="${not empty treatmentNaive}">
-		<span class="label">Treatment Naive Patient:</span> Required
+		<h5 class="label">Treatment Naive Patient:</h5> Required
 		<!-- \n -->
 		</c:if> 
 		<c:if test="${not empty recistDrug}">
-		<span class="label">RECIST Drug:</span> ${recistDrug}
+		<h5 class="label">RECIST Drug:</h5> ${recistDrug}
 		<!-- \n -->
 		</c:if>	
 		<c:if test="${not empty recistResponse}">
-		<span class="label">RECIST Response:</span> ${recistResponse}
+		<h5 class="label">RECIST Response:</h5> ${recistResponse}
 		<!-- \n -->
 		</c:if> 
 	</caption>

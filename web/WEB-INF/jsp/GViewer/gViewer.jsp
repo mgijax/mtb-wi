@@ -59,7 +59,7 @@
 </script>
 </jsp:attribute>
 <jsp:body>
-<table class="results">
+<table>
 	<!-- ////  Start Detail Section  //// -->
 	<%--			 <html:form action="gViewer" method="GET"> --%>
 	<tr>

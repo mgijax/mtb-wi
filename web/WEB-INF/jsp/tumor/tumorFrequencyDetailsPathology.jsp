@@ -8,7 +8,7 @@
 	<c:choose>
 	<c:when test="${not empty tumorFreq.pathologyRecs}">
 	<a name="pathology"></a>
-	<table class="results">
+	<table>
 		<tr>
 			<td colspan="4" class="results-header-left">
 				<h3>Pathology</h3>

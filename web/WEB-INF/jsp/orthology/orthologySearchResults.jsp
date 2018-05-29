@@ -5,9 +5,9 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Orthology Search Results" help="humangeneresults">
 	<a name="top"></a>
-	<table class="results">
+	<table>
 		<!-- ////  Start Search Summary  //// -->
-		<caption><span class="label">Search Summary</span>
+		<caption><h5 class="label">Search Summary</h5>
 			<!-- \n -->
 		</caption>
 		<caption><!-- ////  Start Display Limit  //// -->
@@ -33,10 +33,8 @@
 		<!-- \n -->
 		<!-- ////  Start Results  //// -->
 		<!-- ////  Start Strain Genetics Results List  //// -->
-		<table class="results">
-			<tr>
-				<td class="results-header-left" colspan="6"><span class="larger"></span></td>
-			</tr>				
+		<table>
+			<caption><span class="larger"></span></caption>				
 			<tr>
 				<th>Human Gene Symbol</th>
 				<th>Mouse Gene Symbol</th>

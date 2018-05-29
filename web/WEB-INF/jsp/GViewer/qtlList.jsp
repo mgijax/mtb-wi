@@ -9,7 +9,7 @@
 		<c:when test="${not empty features}">
 		<tr>
 			<td colspan="2">
-				<table class="results">
+				<table>
 					<tr>
 						<th>MGI ID</th>
 						<th>QTL</th>

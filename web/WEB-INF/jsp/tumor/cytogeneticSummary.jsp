@@ -7,7 +7,7 @@
 	<!-- ////  Start Frequency Records  //// -->
 	<c:choose>
 	<c:when test="${not empty tumor}">
-	<table class="results">
+	<table>
 		<tr>
 			<th>Chromosomes</th>
 			<th>Name</th>

@@ -6,9 +6,7 @@
 <jax:mmhcpage title="Human Gene List">
 	<a name="top"></a>
 	<table>
-		<tr>
-			<td class="results-header-left" colspan="6"><span class="larger"></span></td>
-		</tr>				
+		<caption><span class="larger"></span></caption>				
 		<tr>
 			<th>Entrez Gene ID</th>
 			<th>Human Gene Symbol</th>

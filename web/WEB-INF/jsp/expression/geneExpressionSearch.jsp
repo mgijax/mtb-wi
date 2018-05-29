@@ -4,7 +4,7 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Gene Expression Data Set Search Form" help="geneexpression">
 	<html:form action="geneExpressionSearchResults" method="GET">
-	<table class="results">
+	<table>
 		<tr class="buttons">
 			<td colspan="2">
 				<table>

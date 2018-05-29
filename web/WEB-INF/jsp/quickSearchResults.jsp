@@ -7,11 +7,11 @@
 <jax:mmhcpage title="Quick Search Results" help="interpreting">
 	<table>
 		<!-- ////  Start Search Summary  //// -->
-		<caption><span class="label">Search Summary</span>
+		<caption><h5 class="label">Search Summary</h5>
 			<!-- \n -->
-			<span class="label">Search For:</span> contains "${quickSearchTerm}"
+			<h5 class="label">Search For:</h5> contains "${quickSearchTerm}"
 			<!-- \n -->
-			<span class="label">In these sections:</span> ${searchSections}
+			<h5 class="label">In these sections:</h5> ${searchSections}
 			<!-- \n -->
 		</caption>
 		<!-- ////  End Search Summary  //// -->
@@ -24,7 +24,7 @@
 		<!-- ////  Start ${result.searchName}  //// -->
 		<tr>
 			<td>
-				<table class="results">
+				<table>
 					<tr class="page-title">
 						<td>
 							<table>
@@ -62,7 +62,7 @@
 				</table>
 				</c:when>
 				<c:otherwise>
-				<table class="results">
+				<table>
 					${result.searchResultsText}
 				</table>
 				</c:otherwise>

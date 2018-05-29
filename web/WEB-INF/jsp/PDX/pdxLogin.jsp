@@ -34,7 +34,7 @@
 						As of Sept 18, the password has changed. Please contact <a href="mailto:emily.jocoy@jax.org">Emily Jocoy</a> for the new password					
 						<!-- \n -->
 						<html:form action="pdxLogin">
-						<table class="results">
+						<table>
 							<tr>
 								<td>
 									<table class="quick-search">

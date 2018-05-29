@@ -4,7 +4,7 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Human Gene Search Form" help="humangene">
 	<html:form action="orthologySearch" method="GET" >
-	<table class="results">
+	<table>
 		<tr class="page-info"></tr>
 		<tr class="buttons">
 			<td colspan="2">
@@ -17,7 +17,7 @@
 					</tr>
 					<tr>
 						<td>
-							<span class="label">Sort By:</span>
+							<h5 class="label">Sort By:</h5>
 							<html:radio property="sortBy" value="HumanGS">Human Gene Symbol</html:radio>  
 							<html:radio property="sortBy" value="MouseGS">Mouse Gene Symbol</html:radio>  
 						</td>

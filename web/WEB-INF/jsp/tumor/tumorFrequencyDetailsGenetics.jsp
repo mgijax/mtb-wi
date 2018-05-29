@@ -7,7 +7,7 @@
 	<!-- ////  Start Tumor Genetics Section  //// -->
 	<c:choose>
 	<c:when test="${not empty tumorFreq.tumorGenetics}">
-	<table class="results">
+	<table>
 		<tr>
 			<td colspan="5" class="results-header-left">
 				<h3>Tumor Genetics</h3>
@@ -90,14 +90,14 @@
 	<!-- Cytogenetics -->
 	<c:choose>
 	<c:when test="${not empty tumorFreq.tumorCytogenetics}">
-	<table class="results">
+	<table>
 		<tr>
 			<td colspan="6" class="results-header-left">
 				<h3>Tumor Cytogenetics</h3>
 			</td>
 		</tr>
 	</table>
-	<table class="results">
+	<table>
 		<tr>
 			<th>Name</th>
 			<th>Mouse

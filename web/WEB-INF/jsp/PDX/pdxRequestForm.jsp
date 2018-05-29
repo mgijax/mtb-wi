@@ -21,7 +21,7 @@
 	</script>
 	</jsp:attribute>
 	<jsp:body>
-	<table class="results">
+	<table>
 		<tr class="buttons">
 			<td colspan="2">
 				<form action="pdxRequest.do" method="GET" name="requestForm">

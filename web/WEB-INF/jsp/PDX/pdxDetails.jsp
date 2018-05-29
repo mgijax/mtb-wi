@@ -463,7 +463,7 @@
 <input type="button" value="Request more &#x00A; information on this &#x00A; PDX model." class="pdx-request-button" onclick="window.location='pdxRequest.do?mice=${mouse.modelID}'">
 <html:form action="pdxAddContent" method="GET">
 <input type="hidden" name="modelID" value="${mouse.modelID}"/>
-<table class="results">
+<table>
 	<c:if test="${fn:contains(mouse.institution,'Dana-Farber')}">
 	<tr>
 		<td><h4>Notices</h4></td>

@@ -46,12 +46,12 @@
 </jsp:attribute>
 <jsp:body>
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
-<table class="results">
-	<caption><span class="label">Search Summary</span>
+<table>
+	<caption><h5 class="label">Search Summary</h5>
 		<!-- \n -->
 		<c:choose>
 		<c:when test="${not empty modelID}">
-		<span class="label">Model ID:</span>${modelID}
+		<h5 class="label">Model ID:</h5>${modelID}
 		<!-- \n -->
 		</c:when>
 		</c:choose>
@@ -59,10 +59,10 @@
 		<c:when test="${not empty primarySites}">
 		<c:choose>
 		<c:when test="${fn:length(primarySites)>1}">
-		<span class="label">Primary Sites:</span>
+		<h5 class="label">Primary Sites:</h5>
 		</c:when>
 		<c:otherwise>
-		<span class="label">Primary Site:</span>
+		<h5 class="label">Primary Site:</h5>
 		</c:otherwise>
 		</c:choose>
 		<c:forEach var="site" items="${primarySites}" varStatus="status">
@@ -78,7 +78,7 @@
 		<!-- \n -->
 		</c:when>
 		<c:otherwise>
-		<span class="label">Primary Sites:</span> Any
+		<h5 class="label">Primary Sites:</h5> Any
 		<!-- \n -->
 		</c:otherwise>
 		</c:choose>
@@ -86,10 +86,10 @@
 		<c:when test="${not empty diagnoses}">
 		<c:choose>
 		<c:when test="${fn:length(diagnoses)>1}">
-		<span class="label">Diagnoses:</span>
+		<h5 class="label">Diagnoses:</h5>
 		</c:when>
 		<c:otherwise>
-		<span class="label">Diagnosis:</span>
+		<h5 class="label">Diagnosis:</h5>
 		</c:otherwise>
 		</c:choose>
 		<c:forEach var="diagnosis" items="${diagnoses}" varStatus="status">
@@ -105,15 +105,15 @@
 		<!-- \n -->
 		</c:when>
 		<c:otherwise>
-		<span class="label">Diagnosis:</span> Any
+		<h5 class="label">Diagnosis:</h5> Any
 		<!-- \n -->
 		</c:otherwise>
 		</c:choose>
-		<span class="label">Gene:</span>${gene2}
+		<h5 class="label">Gene:</h5>${gene2}
 		<!-- \n -->
 		<c:choose>
 		<c:when test="${not empty variant}">
-		<span class="label">Variant:</span>${variant}
+		<h5 class="label">Variant:</h5>${variant}
 		<!-- \n -->
 		</c:when>
 		</c:choose>

@@ -134,7 +134,7 @@
 <jsp:body>
 <html:form action="pdxSearchResults" method="GET">
 <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
-<table class="results">
+<table>
 	<tr class="page-info">
 		<td colspan="2">
 			<table>

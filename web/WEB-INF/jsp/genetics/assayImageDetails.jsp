@@ -4,7 +4,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Assay Image Detail" help="assayImageDetail">
-	<table class="results">
+	<table>
 		<!-- ////  Start Detail Section  //// -->
 		<!-- ////  Start assayImage Image  //// -->
 		<tr>
@@ -63,7 +63,7 @@
 	</table>
 	<tr>
 		<td>
-			<table class="results" >
+			<table >
 				<tr>
 					<th>Mouse Chromosomes</th>
 					<th>Name</th>
@@ -140,7 +140,7 @@
 			<!-- ////  Start Bottom Left  //// -->
 			<c:set var="num" value="1"/>
 			<td width="49%" >
-				<table class="results">
+				<table>
 					<c:choose>
 					<c:when test="${not empty assayImage.tumorFrequencyKey}">
 					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
@@ -281,7 +281,7 @@
 			<!-- ////  Start Bottom Right  //// -->
 			<c:set var="num" value="1"/>
 			<td width="49%">
-				<table class="results">
+				<table>
 					<c:choose>
 					<c:when test="${not empty assayImage.strainName}">
 					<c:set var="num" value="${num == 1 ? 2 : 1}"/>

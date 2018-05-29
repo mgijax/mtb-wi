@@ -101,7 +101,7 @@
 			}
 		}
 	</script>
-	<table class="results">
+	<table>
 	</table>
 	<!-- ////  Start Detail Section  //// -->
 	<h3>Tumor Frequency Grid (Inbred Strain Family x Organ)</h3>

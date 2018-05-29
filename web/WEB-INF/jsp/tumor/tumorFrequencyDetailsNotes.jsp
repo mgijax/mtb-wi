@@ -10,7 +10,7 @@
 				<!-- ////  Start Additional Notes Records  //// -->
 				<c:choose>
 				<c:when test="${not empty tumorFreq.additionalNotes}">
-				<table class="results">
+				<table>
 					<tr>
 						<td colspan="2" class="results-header-left">
 							<h3>Additional Notes</h3>

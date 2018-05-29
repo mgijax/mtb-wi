@@ -53,7 +53,7 @@
 	</script>
 	</jsp:attribute>
 	<jsp:body>
-	<table class="results">
+	<table>
 		<!-- ////  Start Detail Section  //// -->
 		<!-- ////  Start Pathology Image  //// -->
 		<tr>
@@ -199,7 +199,7 @@
 	<c:choose>
 	<c:when test="${not empty pathology.probes}">
 	<!-- \n -->
-	<table class="results">
+	<table>
 		<tr>
 			<td colspan="4" class="cat-title">Image Probes</td>
 		</tr>
@@ -241,7 +241,7 @@
 					<!-- ////  Start Bottom Left  //// -->
 					<c:set var="num" value="1"/>
 					<td width="49%" >
-						<table class="results">
+						<table>
 							<c:choose>
 							<c:when test="${not empty pathology.tumorFrequencyKey}">
 							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
@@ -382,7 +382,7 @@
 					<!-- ////  Start Bottom Right  //// -->
 					<c:set var="num" value="1"/>
 					<td width="49%">
-						<table class="results">
+						<table>
 							<c:choose>
 							<c:when test="${not empty pathology.strainName}">
 							<c:set var="num" value="${num == 1 ? 2 : 1}"/>

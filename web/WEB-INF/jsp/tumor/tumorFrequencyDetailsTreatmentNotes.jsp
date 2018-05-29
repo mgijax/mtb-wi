@@ -7,23 +7,22 @@
 	<!-- ////  Start Additional Notes Records  //// -->
 	<c:choose>
 	<c:when test="${not empty tumorFreq.note}">
-	<table class="results">
-		<tr>
-			<td colspan="2" class="results-header-left">
-				<h3>Treatment Note</h3>
-			</td>
-		</tr>
-		<tr>
-			<th>Note</th>
-			<th>Reference</th>
-		</tr>
-		<c:if test="${not empty tumorFreq.note}">
-		<c:set var="noteRow" value="1"/>
-		<tr>
-			<td>${tumorFreq.note}</td>
-			<td><a href="nojavascript.jsp" onclick="focusBackToOpener('referenceDetails.do?accId=${tumorFreq.reference}');return false;">${tumorFreq.reference}</a></td>
-		</tr>
-		</c:if>
+	<table>
+		<caption>
+			<h2>Treatment Note</h2>
+		</caption>
+		<thead>
+			<tr>
+				<th>Note</th>
+				<th>Reference</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>${tumorFreq.note}</td>
+				<td><a href="nojavascript.jsp" onclick="focusBackToOpener('referenceDetails.do?accId=${tumorFreq.reference}');return false;">${tumorFreq.reference}</a></td>
+			</tr>
+		</tbody>
 	</table>
 	</c:when>
 	<c:otherwise>
@@ -32,4 +31,3 @@
 	</c:choose>
 	<!-- ////  End Additional Notes Records  //// -->
 </jax:mmhcpage>
-

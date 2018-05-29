@@ -4,7 +4,7 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Pathology Image Search Form" help="pathology">
 	<html:form action="pathologyImageSearchResults" method="GET">
-	<table class="results">
+	<table>
 		<tr class="buttons">
 			<td colspan="2">
 				<table>
@@ -16,7 +16,7 @@
 					</tr>
 					<tr>
 						<td>
-							<span class="label">Sort By:</span>
+							<h5 class="label">Sort By:</h5>
 							<html:radio property="sortBy" value="organ">Organ of origin</html:radio>  
 							<html:radio property="sortBy" value="strain">Strain of origin</html:radio>  
 							<html:radio property="sortBy" value="method">Method</html:radio>  
@@ -25,7 +25,7 @@
 					</tr>
 					<tr>
 						<td>
-							<span class="label">Max number of pathology reports returned:</span>
+							<h5 class="label">Max number of pathology reports returned:</h5>
 							<html:radio property="maxItems" value="5">5</html:radio>  
 							<html:radio property="maxItems" value="10">10</html:radio>  
 							<html:radio property="maxItems" value="100">100</html:radio>  

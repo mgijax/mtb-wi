@@ -4,7 +4,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Genetic Change Summary" help="geneticchange">
-	<table class="results">
+	<table>
 		<!-- ////  Start Genetics Summary Header  //// -->
 		<tr>
 			<td><h4>Gene Symbol</h4></td>
@@ -36,8 +36,8 @@
 	<!-- ////  Start Search Results List  //// -->
 	<c:choose>
 	<c:when test="${not empty genetics.alleleRecs}">
-	<table class="results">
-		<tr class="results">
+	<table>
+		<tr>
 			<th>Mutation Location</th>
 			<th>Tumor Name</th>
 			<th>Treatment Type</th>
@@ -65,7 +65,7 @@
 				${mutationSymbols[key]}
 				<c:if test="${not empty names[key]}">
 				<!-- \n -->
-				<span size="-2"><em>${names[key]}</em></span>
+				<em>${names[key]}</em>
 				</c:if>
 			</td>
 			</c:when>
@@ -74,7 +74,7 @@
 				${mutationSymbols[key]}
 				<c:if test="${not empty names[key]}">
 				<!-- \n -->
-				<span size="-2"><em>${names[key]}</em></span>
+				<em>${names[key]}</em>
 				</c:if>
 			</td>
 			</c:otherwise>
