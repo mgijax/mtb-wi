@@ -4,4 +4,3 @@
 <jax:mmhcpage title="Web-Based Resources for Basic Cancer Research" help="#">
 	<c:import url="/live/www/html/cancerLinks.html"/>
 </jax:mmhcpage>
-

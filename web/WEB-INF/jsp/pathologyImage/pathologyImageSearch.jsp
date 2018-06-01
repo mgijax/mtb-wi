@@ -59,10 +59,10 @@
 				<table>
 					<tr>
 						<td>
-							<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The specific organ (or tissue) in which tumor cells originate.
+							<dl class="tip"><dt>Organ/Tissue of Origin</dt><dd>The specific organ (or tissue) in which tumor cells originate.
 								<!-- \n -->
 								<!-- \n -->
-						The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ/Tissue of Origin');" onmouseout="return nd();">Organ/Tissue of Origin</a>:</strong>
+						The value for this field is selected from a list of controlled vocabulary terms.</dd></dl>:
 						<!-- \n -->
 						<html:select property="organTissueOrigin" size="8" multiple="true">
 						<html:option value="">ANY</html:option>
@@ -72,10 +72,10 @@
 				</tr>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The value for this field is selected from a list of controlled vocabulary terms.
+						<dl class="tip"><dt>Tumor Classification</dt><dd>The value for this field is selected from a list of controlled vocabulary terms.
 							<!-- \n -->
 							<!-- \n -->
-					This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.', CAPTION, 'Tumor Classification');" onmouseout="return nd();">Tumor Classification</a>:</strong>
+					This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.</dd></dl>:
 					<!-- \n -->
 					<html:select property="tumorClassification" size="8" multiple="true">
 					<html:option value="">ANY</html:option>
@@ -85,13 +85,13 @@
 			</tr>
 			<tr>
 				<td>
-					<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The organ (or tissue) in which tumor cells are found.
+					<dl class="tip"><dt>Organ/Tissue Affected</dt><dd>The organ (or tissue) in which tumor cells are found.
 						<!-- \n -->
 						<!-- \n -->
 						The organ/tissue affected by a tumor can be different than the organ/tissue of tumor origin when there is a metastatic event or if the original tumor is transplanted into a different mouse.
 						<!-- \n -->
 						<!-- \n -->
-				The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ/Tissue Affected');" onmouseout="return nd();">Organ/Tissue Affected</a>:</strong>
+				The value for this field is selected from a list of controlled vocabulary terms.</dd></dl>:
 				<!-- \n -->
 				<html:select property="organTissueAffected" size="8" multiple="false">
 				<html:option value="">ANY</html:option>
@@ -111,7 +111,7 @@
 			<%--
 			<tr>
 				<td>
-					<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('This field offers a text based search against the diagnosis and description fields associated with a Pathological record.', CAPTION, 'Diagnosis or Description');" onmouseout="return nd();">Diagnosis or Description</a>:</strong>
+					<dl class="tip"><dt>Diagnosis or Description</dt><dd>This field offers a text based search against the diagnosis and description fields associated with a Pathological record.</dd></dl>:
 					<!-- \n -->
 					contains &nbsp;
 					<html:text property="diagnosisDescription" size="40" maxlength="50"/>
@@ -120,7 +120,7 @@
 			--%>
 			<tr>
 				<td>
-					<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('This field searches for specific histological procedures from a select list of procedures.', CAPTION, 'Stain / Method');" onmouseout="return nd();">Stain / Method</a>:</strong>
+					<dl class="tip"><dt>Stain / Method</dt><dd>This field searches for specific histological procedures from a select list of procedures.</dd></dl>:
 					<!-- \n -->
 					<html:select property="method">
 					<html:option value="">ANY</html:option>
@@ -130,10 +130,10 @@
 			</tr>
 			<tr>
 				<td>
-					<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('This field searches for antibodies used in staining procedures.
+					<dl class="tip"><dt>Antibody</dt><dd>This field searches for antibodies used in staining procedures.
 						<!-- \n -->
 						<!-- \n -->
-				Searches are conducted from a list of antibody names which include clone numbers, when available.', CAPTION, 'Antibody');" onmouseout="return nd();">Antibody</a>:</strong>
+				Searches are conducted from a list of antibody names which include clone numbers, when available.</dd></dl>:
 				<!-- \n -->
 				<html:select property="antibody" size="8" multiple="true">
 				<html:option value="">ANY</html:option>

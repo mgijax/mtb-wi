@@ -66,7 +66,7 @@
 									<td></td>
 								</tr>
 								<tr>
-									<td align="right"><strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('This field offers a text based search against Marker Symbol, Name and Synonym records. If a gene of interest is not found on the list please check the Mouse Genome Database to ensure that the gene symbol and name you are searching for is current.', CAPTION, 'Gene / Marker');" onmouseout="return nd();">Gene / Marker</a>:</strong></td>
+									<td align="right"><dl class="tip"><dt>Gene / Marker</dt><dd>This field offers a text based search against Marker Symbol, Name and Synonym records. If a gene of interest is not found on the list please check the Mouse Genome Database to ensure that the gene symbol and name you are searching for is current.</dd></dl>:</td>
 									<td>
 										<html:select property="markerNameComparison">
 										<html:option value="Contains"> Contains </html:option>
@@ -77,7 +77,7 @@
 									<td><html:text property="markerName" size="20" maxlength="50"/></td>
 								</tr>
 								<tr>
-									<td align="right"><strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('If a gene of interest is not found on the list please check the Mouse Genome Database to ensure that the gene symbol and name you are searching for is current.', CAPTION, 'Allele');" onmouseout="return nd();">Allele</a>:</strong></td>
+									<td align="right"><dl class="tip"><dt>Allele</dt><dd>If a gene of interest is not found on the list please check the Mouse Genome Database to ensure that the gene symbol and name you are searching for is current.</dd></dl>:</td>
 									<td>
 										<html:select property="alleleNameComparison">
 										<html:option value="Contains"> Contains </html:option>
@@ -95,7 +95,7 @@
 							<table>
 								<tr>
 									<td>
-										<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The type of mutation, chromosomal aberration, or other genetic change observed in the strain and/or in the tumor tissue. The values for type of genetic change are selected from a controlled vocabulary list.', CAPTION, 'Mutations / Aberrations');" onmouseout="return nd();">Mutations / Aberrations</a>:</strong>
+										<dl class="tip"><dt>Mutations / Aberrations</dt><dd>The type of mutation, chromosomal aberration, or other genetic change observed in the strain and/or in the tumor tissue. The values for type of genetic change are selected from a controlled vocabulary list.</dd></dl>:
 										<!-- \n -->
 										<html:select property="alleleGroupType" size="8" multiple="true">
 										<html:option value="">ANY</html:option>
@@ -103,7 +103,7 @@
 										</html:select>
 									</td>
 									<td>
-										<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Chromosome number an allele is found on. This search is used to find allele records associated with a specific chromosome number using a pick list.', CAPTION, 'Chromosome');" onmouseout="return nd();">Chromosome</a>:</strong>
+										<dl class="tip"><dt>Chromosome</dt><dd>Chromosome number an allele is found on. This search is used to find allele records associated with a specific chromosome number using a pick list.</dd></dl>:
 										<!-- \n -->
 										<html:select property="chromosome" size="8" multiple="true">
 										<html:option value="">ANY</html:option>
@@ -113,7 +113,7 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Some cytogenetic records include assay images selecting this check box will return only cytognetic records with assay images.', CAPTION, 'Assay Images');" onmouseout="return nd();">Assay Images</a>:</strong>
+										<dl class="tip"><dt>Assay Images</dt><dd>Some cytogenetic records include assay images selecting this check box will return only cytognetic records with assay images.</dd></dl>:
 										<!-- \n -->
 										<html:checkbox property="assayImages">Restrict search to entries with associated assay images. </html:checkbox>
 									</td>

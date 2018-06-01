@@ -4,4 +4,3 @@
 <jax:mmhcpage title="What's New?" help="#">
 	<c:import url="/live/www/html/whatsNew.html"/>
 </jax:mmhcpage>
-

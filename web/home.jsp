@@ -8,7 +8,6 @@
 <body>
 	<p>If your browser doesn't automatically redirect, please use the link below to enter the MTB database.</p>
 	<p><a href="${pageContext.request.contextPath}/index.do">Enter the MTB Database.</a></p>
-	
 </body>
 </html>
 

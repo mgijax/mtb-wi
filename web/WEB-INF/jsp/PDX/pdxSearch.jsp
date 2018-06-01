@@ -187,7 +187,7 @@
 				</tr>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Enter a Model ID (eg TM:00001) as search criteria.', CAPTION, 'Model ID');" onmouseout="return nd();">Model ID</a></strong>
+						<dl class="tip"><dt>Model ID</dt><dd>Enter a Model ID (eg TM:00001) as search criteria.</dd></dl>
 						<!-- \n -->
 						<div id ="model-i-dCombo"></div>&nbsp;eg. TM00001
 					</td>
@@ -203,7 +203,7 @@
 			<table>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select one or more primary sites as search criteria', CAPTION, 'Primary Site');" onmouseout="return nd();">Primary Site</a></strong>
+						<dl class="tip"><dt>Primary Site</dt><dd>Select one or more primary sites as search criteria</dd></dl>
 						<!-- \n -->
 						<html:select property="primarySites" size="8" multiple="true">
 						<html:option value="">ANY</html:option>
@@ -212,17 +212,17 @@
 					</td>
 					<td></td>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Only return models with selected additional information.', CAPTION, 'Limit results');" onmouseout="return nd();">Limit results to models</a></strong>		 
+						<dl class="tip"><dt>Limit results to models</dt><dd>Only return models with selected additional information.</dd></dl>		 
 						<!-- \n -->
 						<html:checkbox property="dosingStudy"/> with dosing study data, <html:checkbox property="tumorGrowth"/> with tumor growth graphs, <html:checkbox property="treatmentNaive"/> 
-						<a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('PDX models are considered treatment naive if the patient did not receive chemotherapy, immunotherapy, hormone therapy or radiation therapy for this primary cancer within 5 years prior to sample collection and/or within 1 year for a different cancer.', CAPTION, 'Treatment Naive');" onmouseout="return nd();">
+						<dl class="tip"><dt>
 							from treatment naive patients.
 							<!-- \n -->
-						</a>
+						</dt><dd>PDX models are considered treatment naive if the patient did not receive chemotherapy, immunotherapy, hormone therapy or radiation therapy for this primary cancer within 5 years prior to sample collection and/or within 1 year for a different cancer.</dd></dl>
 						<!-- \n -->
 						<c:choose>
 						<c:when test="${not empty tagsValues}">
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Only return models tagged as.', CAPTION, 'Limit results');" onmouseout="return nd();">Limit results to models tagged as</a></strong>		 
+						<dl class="tip"><dt>Limit results to models tagged as</dt><dd>Only return models tagged as.</dd></dl>		 
 						<!-- \n -->
 						<html:select property="tags" size="4" multiple="true">
 						<html:options collection="tagsValues" property="value" labelProperty="label"/>
@@ -242,7 +242,7 @@
 			<table>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a diagnosis or diagnoses as search criteria.', CAPTION, 'Diagnosis');" onmouseout="return nd();">Diagnosis</a></strong>
+						<dl class="tip"><dt>Diagnosis</dt><dd>Select a diagnosis or diagnoses as search criteria.</dd></dl>
 						<!-- \n -->
 						<html:select property="diagnoses" size="8" multiple="true">
 						<html:option value="">ANY</html:option>
@@ -261,14 +261,14 @@
 			<table>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('RECIST drug.', CAPTION, 'RECIST drug');" onmouseout="return nd();">Drug</a></strong>
+						<dl class="tip"><dt>Drug</dt><dd>RECIST drug.</dd></dl>
 						<!-- \n -->
 						<html:select property="recistDrugs" size="4" >
 						<html:options collection="recistDrugs" property="value" labelProperty="label"/>
 						</html:select>
 					</td>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('RECIST response.', CAPTION, 'RECIST response');" onmouseout="return nd();">Response</a></strong>
+						<dl class="tip"><dt>Response</dt><dd>RECIST response.</dd></dl>
 						<!-- \n -->
 						<html:select property="recistResponses" size="4" >
 						<html:options collection="recistResponses" property="value" labelProperty="label"/>
@@ -286,7 +286,7 @@
 			<table>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a fusion gene as search criteria.', CAPTION, 'Fusion Gene');" onmouseout="return nd();">Fusion Gene</a></strong>
+						<dl class="tip"><dt>Fusion Gene</dt><dd>Select a fusion gene as search criteria.</dd></dl>
 						<!-- \n -->
 						<html:select property="fusionGenes" size="4" >
 						<html:option value="Any">ANY</html:option><!-- this has a value because it is a constraint ie only some models have fusion genes	-->
@@ -305,7 +305,7 @@
 			<table>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select one or more genes as search criteria', CAPTION, 'Genes');" onmouseout="return nd();">Gene</a></strong>
+						<dl class="tip"><dt>Gene</dt><dd>Select one or more genes as search criteria</dd></dl>
 						<!-- \n -->
 						<div id="gene-select-oMatic"></div>
 					</td>
@@ -317,7 +317,7 @@
 					<c:choose>
 					<c:when test="${not empty variantsValues}">
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select one or more variants as search criteria', CAPTION, 'Variants');" onmouseout="return nd();">Variants</a></strong>
+						<dl class="tip"><dt>Variants</dt><dd>Select one or more variants as search criteria</dd></dl>
 						<!-- \n -->
 						<html:select property="variants" size="8" multiple="false" styleId="variantSelect">
 						<html:option value="">ANY</html:option>
@@ -341,7 +341,7 @@
 			Display a chart of gene expression across PDX models for a gene
 		</td>
 		<td>
-			<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a gene to view expression values', CAPTION, 'Gene');" onmouseout="return nd();">Gene</a></strong>
+			<dl class="tip"><dt>Gene</dt><dd>Select a gene to view expression values</dd></dl>
 			<!-- \n -->
 			<div id="gene-select-oMatic2"></div>
 		</td>
@@ -351,7 +351,7 @@
 			Search by gene amplification and deletion
 		</td>
 		<td>
-			<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a gene', CAPTION, 'Gene');" onmouseout="return nd();">Gene</a></strong>
+			<dl class="tip"><dt>Gene</dt><dd>Select a gene</dd></dl>
 			<!-- \n -->
 			<div id="gene-select-oMatic3"></div>
 		</td>
@@ -364,7 +364,7 @@
 			<strong>WORK IN PROGRESS </strong>
 		</td>
 		<td>
-			<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a chromosome', CAPTION, 'Chromosome');" onmouseout="return nd();">Chromosome</a></strong>
+			<dl class="tip"><dt>Chromosome</dt><dd>Select a chromosome</dd></dl>
 			<!-- \n -->
 			<html:select property="chrCNV" size="8"	styleId="chrCNV" onclick="clearGenes()">
 			<html:options collection="chrValuesCNV" property="value" labelProperty="label"/>

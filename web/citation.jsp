@@ -11,4 +11,3 @@
 			http://www.informatics.jax.org/). (October, 1998 i.e., the date you
 	retrieved the data cited). </strong></p>
 </jax:mmhcpage>
-

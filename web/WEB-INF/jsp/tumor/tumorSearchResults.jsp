@@ -291,7 +291,7 @@
 				<td>
 					<c:choose>
 					<c:when test="${tumor.images==true}">
-					<div><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Images aviable from Pathology Reports link on Summary Page');" onmouseout="return nd();"><img src="${applicationScope.urlImageDir}/pic.gif" alt="X"></a></div>
+					<div><dl class="tip"><dt><img src="${applicationScope.urlImageDir}/pic.gif" alt="X"></dt><dd>Images aviable from Pathology Reports link on Summary Page</dd></dl></div>
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>

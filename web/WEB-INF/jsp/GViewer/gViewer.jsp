@@ -72,9 +72,8 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" 
-							onmouseover="return overlib('Select a type of QTL using a pick list. Ctrl+Click to select more than one.', CAPTION, 'QTL Type');" onmouseout="return nd();">
-					Select QTL Type(s) to view</a>:</strong>
+						<dl class="tip"><dt>
+					Select QTL Type(s) to view</dt><dd>Select a type of QTL using a pick list. Ctrl+Click to select more than one.</dd></dl>:
 					<!-- \n -->
 					<%--						<html:select property="selectedQTLTypes" size="8" multiple="true">
 					<html:option value="ALL">ALL</html:option>

@@ -547,7 +547,7 @@
 			html += "<th onclick='colSort(2)'>Strain Name <img src='"+getSortImage(2)+"'>
 			<!-- \n -->
 			<span class='type'>Strain Types</span></th>";
-			html += "<th onclick='colSort(3)' onmouseover='return overlib(`"+legend+"`, CAPTION, `Frequency Color Legend`);' onmouseout='return nd();'> Reported Frequency (sex) <img src='"+getSortImage(3)+"'>"
+		html += "<th onclick='colSort(3)'><dl class=\"tip\"><dt>Reported Frequency (sex)</dt><dd><h4>Frequency Color Legend</h4>" + legend + "</dd></dl> <img src='"+getSortImage(3)+"'>";
 			html += "</th><th>Metastasizes
 			<!-- \n -->
 			To</th>";

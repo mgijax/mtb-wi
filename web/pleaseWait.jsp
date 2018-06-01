@@ -17,4 +17,3 @@
 	<h3>Please wait&hellip;</h3>
 	</jsp:body>
 </jax:mmhcpage>
-

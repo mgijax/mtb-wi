@@ -44,7 +44,7 @@
 				<table>
 					<tr>
 						<td>
-							<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search against first author names.', CAPTION, 'First Author');" onmouseout="return nd();">First Author</a>:</strong>
+							<dl class="tip"><dt>First Author</dt><dd>Conducts a text string search against first author names.</dd></dl>:
 							<!-- \n -->
 							<html:select property="firstAuthorComparison">
 							<html:option value="Contains"> Contains </html:option>
@@ -56,14 +56,14 @@
 					</tr>
 					<tr>
 						<td>
-							<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search against all author names.', CAPTION, 'Authors');" onmouseout="return nd();">Authors</a>:</strong>
+							<dl class="tip"><dt>Authors</dt><dd>Conducts a text string search against all author names.</dd></dl>:
 							<!-- \n -->
 							contains <html:text property="authors" size="40" maxlength="255"/>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Text string search against the abbreviated name of the journal in which the published reference appears.', CAPTION, 'Journal');" onmouseout="return nd();">Journal</a>:</strong>
+							<dl class="tip"><dt>Journal</dt><dd>Text string search against the abbreviated name of the journal in which the published reference appears.</dd></dl>:
 							<!-- \n -->
 							<html:select property="journalComparison">
 							<html:option value="Contains"> Contains </html:option>
@@ -78,7 +78,7 @@
 							<table>
 								<tr>
 									<td>
-										<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search for publication year.', CAPTION, 'Year');" onmouseout="return nd();">Year</a>:</strong>
+										<dl class="tip"><dt>Year</dt><dd>Conducts a text string search for publication year.</dd></dl>:
 										<!-- \n -->
 										<html:select property="yearComparison">
 										<html:option value="="> Equals </html:option>
@@ -89,13 +89,13 @@
 									</td>
 									<td width="30"></td>
 									<td>
-										<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search for the volume of a journal in which an article was published.', CAPTION, 'Volume');" onmouseout="return nd();">Volume</a>:</strong>
+										<dl class="tip"><dt>Volume</dt><dd>Conducts a text string search for the volume of a journal in which an article was published.</dd></dl>:
 										<!-- \n -->
 										<html:text property="volume" size="10" maxlength="20"/>
 									</td>
 									<td width="30"></td>
 									<td>
-										<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search for the <em>BEGINNING</em> page number of a journal article.', CAPTION, 'Page');" onmouseout="return nd();">Page</a>:</strong>
+										<dl class="tip"><dt>Page</dt><dd>Conducts a text string search for the <em>BEGINNING</em> page number of a journal article.</dd></dl>:
 									<!-- \n -->
 									<html:text property="pages"	size="10" maxlength="20"/>
 								</td>
@@ -105,7 +105,7 @@
 				</tr>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Conducts a text string search for an article title.', CAPTION, 'Title');" onmouseout="return nd();">Title</a>:</strong>
+						<dl class="tip"><dt>Title</dt><dd>Conducts a text string search for an article title.</dd></dl>:
 						<!-- \n -->
 						<html:select property="titleComparison">
 						<html:option value="Contains"> Contains </html:option>
@@ -126,10 +126,10 @@
 			<table>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The specific organ (or tissue) in which tumor cells originate.
+						<dl class="tip"><dt>Organ/Tissue of Origin</dt><dd>The specific organ (or tissue) in which tumor cells originate.
 							<!-- \n -->
 							<!-- \n -->
-					The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ/Tissue of Origin');" onmouseout="return nd();">Organ/Tissue of Origin</a>:</strong>
+					The value for this field is selected from a list of controlled vocabulary terms.</dd></dl>:
 					<!-- \n -->
 					<html:select property="organTissue" size="5" >
 					<html:option value="">ANY</html:option>
@@ -139,10 +139,10 @@
 			</tr>
 			<tr>
 				<td>
-					<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The value for this field is selected from a list of controlled vocabulary terms.
+					<dl class="tip"><dt>Tumor Classification</dt><dd>The value for this field is selected from a list of controlled vocabulary terms.
 						<!-- \n -->
 						<!-- \n -->
-				This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.', CAPTION, 'Tumor Classification');" onmouseout="return nd();">Tumor Classification</a>:</strong>
+				This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.</dd></dl>:
 				<!-- \n -->
 				<html:select property="tumorClassification" size="5" >
 				<html:option value="">ANY</html:option>

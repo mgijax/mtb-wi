@@ -13,8 +13,6 @@
 	</jsp:attribute>
 	<jsp:body>
 	<h4>Generating Tumor Frequency Grid</h4>
-	<img src="${applicationScope.urlImageDir}/loading.gif"/>
-	
+	<img src="${applicationScope.urlImageDir}/loading.gif"/>	
 	</jsp:body>
 </jax:mmhcpage>
-

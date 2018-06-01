@@ -6,7 +6,6 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Quick Search Results" help="interpreting">
 	<table>
-		<!-- ////  Start Search Summary  //// -->
 		<caption>
 			<div class="search-summary">				
 				<h4>Search Summary</h4>

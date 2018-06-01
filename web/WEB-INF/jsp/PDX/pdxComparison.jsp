@@ -103,10 +103,8 @@
 				<table>
 					<tr>
 						<td>
-							<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" 
-								onmouseover="return overlib('Select one or more primary sites as search criteria', CAPTION, 'Primary Site');" 
-							onmouseout="return nd();">Primary Site</a>
-						</strong>
+							<dl class="tip"><dt>Primary Site</dt><dd>Select one or more primary sites as search criteria</dd></dl>
+						
 						<!-- \n -->
 						<html:select property="primarySites" size="8" multiple="true">
 						<html:option value="">ANY</html:option>
@@ -125,10 +123,8 @@
 			<table>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" 
-							onmouseover="return overlib('Select a diagnosis or diagnoses as search criteria.', CAPTION, 'Diagnosis');"
-						onmouseout="return nd();">Diagnosis</a>
-					</strong>
+						<dl class="tip"><dt>Diagnosis</dt><dd>Select a diagnosis or diagnoses as search criteria.</dd></dl>
+					
 					<!-- \n -->
 					<html:select property="diagnoses" size="8" multiple="true">
 					<html:option value="">ANY</html:option>
@@ -147,9 +143,7 @@
 		<table>
 			<tr>
 				<td>
-					<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" 
-						onmouseover="return overlib('Select one or more genes as display criteria', CAPTION, 'Genes');" 
-				onmouseout="return nd();">Gene</a></strong>
+					<dl class="tip"><dt>Gene</dt><dd>Select one or more genes as display criteria</dd></dl>
 				<!-- \n -->
 				<html:select property="genes" size="8"	styleId="genes" multiple="true" >
 				<html:options collection="genesValues" property="value" labelProperty="label"/>
@@ -160,13 +154,11 @@
 				<!-- \n -->
 			</td>
 			<td>
-				<span name="geneSave" id="gene-save-txt"><strong>
-						<a href="javascript:void(0);" style="text-decoration: none; cursor:help;"
-						onmouseover="return overlib('Create a list of saved genes for display criteria.
+				<span name="geneSave" id="gene-save-txt">
+						<dl class="tip"><dt>Saved Genes</dt><dd>Create a list of saved genes for display criteria.
 						<!-- \n -->
-						The saved gene list will be used by default.', CAPTION, 'Saved genes');"
-					onmouseout="return nd();">Saved Genes</a>
-				</strong>
+						The saved gene list will be used by default.</dd></dl>
+				
 			</span>
 			<!-- \n -->
 			<select name="geneSave" id="saved-genes" multiple="multiple" size="8" style="width:100px">

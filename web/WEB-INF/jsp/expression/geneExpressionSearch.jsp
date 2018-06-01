@@ -25,9 +25,9 @@
 				<table>
 					<tr>
 						<td>
-							<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Organ
+							<dl class="tip"><dt>Organ</dt><dd>Organ
 								<!-- \n -->
-						The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ');" onmouseout="return nd();">Organ</a>:</strong>
+						The value for this field is selected from a list of controlled vocabulary terms.</dd></dl>:
 						<!-- \n -->
 						<html:select property="organ" size="8" multiple="true">
 						<html:option value="">ANY</html:option>
@@ -37,10 +37,10 @@
 				</tr>
 				<tr>
 					<td>
-						<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The value for this field is selected from a list of controlled vocabulary terms.
+						<dl class="tip"><dt>Tumor Classification</dt><dd>The value for this field is selected from a list of controlled vocabulary terms.
 							<!-- \n -->
 							<!-- \n -->
-					This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.', CAPTION, 'Tumor Classification');" onmouseout="return nd();">Tumor Classification</a>:</strong>
+					This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.</dd></dl>:
 					<!-- \n -->
 					<html:select property="tumorClassification" size="8" multiple="true">
 					<html:option value="">ANY</html:option>
@@ -50,7 +50,7 @@
 			</tr>
 			<tr>
 				<td>
-					<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.', CAPTION, 'Strain Name');" onmouseout="return nd();">Strain Name:</a></strong>
+					<dl class="tip"><dt>Strain Name:</dt><dd>Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.</dd></dl>
 					<!-- \n -->
 					<html:select property="likeClause">
 					<html:option value="Contains"> Contains </html:option>
@@ -62,7 +62,7 @@
 			</tr>
 			<tr>
 				<td>
-					<strong><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Platforms.', CAPTION, 'Platforms');" onmouseout="return nd();">Platform</a>:</strong>
+					<dl class="tip"><dt>Platform</dt><dd>Platforms.</dd></dl>:
 					<!-- \n -->
 					<html:select property="platform" size="8" multiple="true">
 					<html:option value="">ANY</html:option>
