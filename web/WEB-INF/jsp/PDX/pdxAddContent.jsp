@@ -40,7 +40,7 @@
 		Ext.QuickTips.init();
 		var piForm = new Ext.FormPanel({
 			hidden:${hidePImage},
-			renderTo: 'piForm',
+			renderTo: 'pi-form',
 			fileUpload: true,
 			width: 500,
 			frame: true,
@@ -122,7 +122,7 @@
 		});
 		var linkForm = new Ext.FormPanel({
 			hidden:${hideLink},
-			renderTo: 'linkForm',
+			renderTo: 'link-form',
 			fileUpload: false,
 			width: 500,
 			frame: true,
@@ -182,7 +182,7 @@
 		});
 		var documentForm = new Ext.FormPanel({
 			hidden:${hideDocument},
-			renderTo: 'documentForm',
+			renderTo: 'document-form',
 			fileUpload: true,
 			width: 500,
 			frame: true,
@@ -247,7 +247,7 @@
 		});
 		var graphicForm = new Ext.FormPanel({
 			hidden:${hideGraphic},
-			renderTo: 'graphicForm',
+			renderTo: 'graphic-form',
 			fileUpload: true,
 			width: 500,
 			frame: true,
@@ -315,7 +315,7 @@
 		});
 		var commentForm = new Ext.FormPanel({
 			hidden:${hideComment},
-			renderTo: 'commentForm',
+			renderTo: 'comment-form',
 			fileUpload: false,
 			width: 500,
 			frame: true,

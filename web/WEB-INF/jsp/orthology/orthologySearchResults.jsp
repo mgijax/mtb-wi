@@ -11,8 +11,9 @@
 	<div class="search-summary">
 		<h4>Search Summary</h4>
 			<!-- \n -->
-		</caption>
-		<caption><!-- ////  Start Display Limit  //// -->
+		</div>
+<div class="display-counts">
+
 			<table>
 				<tr>
 					<td><strong>Gene Identifier(s):</strong>
@@ -45,15 +46,7 @@
 				<th>Classes of Tumor Specific Alterations</th>
 			</tr>
 			<c:forEach var="rec" items="${orthos}" varStatus="status">
-			<c:choose>
-			<c:when test="${status.index%2==0}">
-			<tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-					</c:otherwise>
-					</c:choose>
-					<td><c:out value="${rec.humanGS}" default="&nbsp;" escapeXml="false"/></td>
+			<tr>					<td><c:out value="${rec.humanGS}" default="&nbsp;" escapeXml="false"/></td>
 					<td><a href="http://www.informatics.jax.org/marker/key/${rec.mgiGSKey}">${rec.mouseGS}</a></td>
 					<td>${rec.symbol}</td>
 					<c:choose>

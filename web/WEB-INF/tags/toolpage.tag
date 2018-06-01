@@ -59,7 +59,7 @@
 	</section>
 	<footer>
 		<div>
-			<a href="https://www.jax.org"><img src="${applicationScope.urlImageDir}/jax-logo.png" alt="The Jackson Laboratory"></a>
+			<a href="https://www.jax.org"><img src="/_res/img/logo-mono.png" alt="The Jackson Laboratory"></a>
 			<jsp:invoke fragment="footer" />
 		</div>
 	</footer>

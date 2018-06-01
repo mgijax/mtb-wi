@@ -107,7 +107,7 @@
 			width:900
 		});
 		treePanel = new Ext.tree.TreePanel({
-			renderTo:'featureTypeSelection',
+			renderTo:'feature-type-selection',
 			height: 100,
 			width: 450,
 			useArrows:true,

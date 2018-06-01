@@ -18,15 +18,7 @@
 			</tr>
 
 <c:forEach var="jvmItem" items="${jvm}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-							</c:otherwise>
-						</c:choose>
-
 <td width="250">${jvmItem.label}</td>
 	<td>${jvmItem.value}</td>
 </tr>
@@ -56,14 +48,7 @@
 				</tr>
 
 <c:forEach var="osInfoItem" items="${os}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-							</c:otherwise>
-						</c:choose>
 
 <td width="250" >${osInfoItem.label}</td>
 	<td>${osInfoItem.value}</td>
@@ -94,15 +79,7 @@
 			</tr>
 
 <c:forEach var="itemVar" items="${sysProps}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-							</c:otherwise>
-						</c:choose>
-
 <td width="250">${itemVar.label}</td>
 	<td width="750">${itemVar.value}</td>
 </tr>
@@ -146,15 +123,7 @@
 			</tr>
 
 <c:forEach var="reqAtt" items="${requestAttributes}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-							</c:otherwise>
-						</c:choose>
-
 <td width="250">${reqAtt.label}</td>
 	<td>${reqAtt.value}</td>
 </tr>
@@ -167,15 +136,7 @@
 <c:choose>
 <c:when test="${not empty detailRequestInfo}">
 <c:forEach var="reqAttDetail" items="${detailRequestInfo}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-						</c:when>
-						<c:otherwise>
-						<tr>
-								</c:otherwise>
-						</c:choose>
-
 <td width="250">${reqAttDetail.label}</td>
 	<td>${reqAttDetail.value}</td>
 </tr>
@@ -238,15 +199,7 @@
 			</tr>
 
 <c:forEach var="servletParamItem" items="${servletInitParams}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-							</c:otherwise>
-						</c:choose>
-
 <td width="250">${servletParamItem.label}</td>
 	<td>${servletParamItem.value}</td>
 </tr>
@@ -276,15 +229,7 @@
 			</tr>
 
 <c:forEach var="contextAtt" items="${contextAttributes}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-							</c:otherwise>
-						</c:choose>
-
 <td width="250">${contextAtt.label}</td>
 	<td>${contextAtt.value}</td>
 </tr>
@@ -327,15 +272,7 @@ Max Session Inactive Interval:<strong>
 			</tr>
 
 <c:forEach var="sessInfoItem" items="${sessionInfo}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-							</c:otherwise>
-						</c:choose>
-
 <td width="250">${sessInfoItem.label}</td>
 	<td>${sessInfoItem.value}</td>
 </tr>
@@ -399,15 +336,7 @@ Max Session Inactive Interval:<strong>
 				<th>Value</th>
 		</tr>
 <c:forEach items='${headerValues}' var='hv' varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
-<tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-				</c:otherwise>
-		</c:choose>
-		<%-- Display the key of the current item; that item
+<tr>		<%-- Display the key of the current item; that item
 			 is a Map.Entry --%>
 			<td width="250"><c:out value='${hv.key}'/></td>
 			<td>
@@ -444,15 +373,7 @@ Max Session Inactive Interval:<strong>
 			</tr>
 
 <c:forEach var="headerItem" items="${headers}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-							</c:otherwise>
-						</c:choose>
-
 <td width="250">${headerItem.label}</td>
 	<td>${headerItem.value}</td>
 </tr>
@@ -482,15 +403,7 @@ Max Session Inactive Interval:<strong>
 			</tr>
 
 <c:forEach var="paramNamesItem" items="${paramNames}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-							</c:otherwise>
-						</c:choose>
-
 <td width="250">${paramNamesItem.label}</td>
 	<td>${paramNamesItem.value}</td>
 </tr>
@@ -522,15 +435,7 @@ Max Session Inactive Interval:<strong>
 			</tr>
 
 <c:forEach var="cookiesItem" items="${cookies}" varStatus="status">
-<c:choose>
-<c:when test="${status.index%2==0}">
 <tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-							</c:otherwise>
-						</c:choose>
-
 <td width="250">${cookiesItem.label}</td>
 	<td>${cookiesItem.value}</td>
 </tr>

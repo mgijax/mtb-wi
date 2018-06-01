@@ -6,10 +6,8 @@
 <jax:mmhcpage title="Tumor Details" help="tumordetails">
 	<!-- ////  Start Top Left (Tumor)  //// -->
 	<table id="tumor-info">
-		<c:set var="lbl" value="1"/>
 		<c:choose>
 		<c:when test="${tumorFreq.parentFrequencyKey>0}">
-		<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 		<tr>
 			<td><h4>Metastatic Tumor</h4></td>
 			<td>
@@ -23,7 +21,6 @@
 		<!-- Not a metastatic tumor //-->
 		</c:otherwise>
 		</c:choose>
-		<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 		<tr>
 			<td><h4>Tumor Name</h4></td>
 			<td>
@@ -38,7 +35,6 @@
 				</c:if>
 			</td>
 		</tr>
-		<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 		<tr>
 			<td><h4>Treatment Type</h4></td>
 			<td>
@@ -47,7 +43,6 @@
 		</tr>
 		<c:choose>
 		<c:when test="${not empty tumorFreq.tumorSynonyms}">
-		<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 		<tr>
 			<c:choose>
 			<c:when test="${fn:length(tumor.agents)>1}">
@@ -75,7 +70,6 @@
 		<c:when test="${tumorFreq.parentFrequencyKey<=0}">
 		<c:choose>
 		<c:when test="${not empty tumorFreq.associatedFrequencyInfo}">
-		<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 		<c:set var="pmets" value="-1"/>
 		<tr>
 			<td><h4>Metastases</h4></td>
@@ -117,7 +111,7 @@
 		</c:choose>
 	</table>
 	<!-- ////  Start Top Right (Strain)  //// -->
-	<c:set var="lbl" value="1"/>
+
 	<table id="tumor-strain-info">
 		<tr>
 			<td><h4>Strain</h4></td>
@@ -155,10 +149,8 @@
 				</table>
 			</td>
 		</tr>
-		<c:set var="lbl" value="1"/>
 		<c:choose>
 		<c:when test="${not empty tumorFreq.strainSynonyms}">
-		<c:set var="lbl" value="${lbl == 1 ? 2 : 1}"/>
 		<tr>
 			<c:choose>
 			<c:when test="${fn:length(tumorFreq.strainSynonyms)>1}">
@@ -422,16 +414,12 @@
 			<th>Notes</th>
 			<th>Images</th>
 		</tr>
-		<c:set var="lbl" value="1"/>
-		<c:set var="rowClass" value="stripe1"/>
 		<c:forEach var="rec" items="${tumorFreq.pathologyRecs}" varStatus="status">
-		<c:set var="lbl" value="${lbl+1}"/>
-		<c:set var="rowClass" value="stripe${(lbl%2)+1}"/>
 		<c:set var="rowSpan" value="${fn:length(rec.images)}"/>
 		<c:if test="${rowSpan<1}">
 		<c:set var="rowSpan" value="1"/>
 		</c:if>
-		<tr class="${rowClass}">
+		<tr>
 			<td rowspan="${rowSpan}"><c:out value="${rec.ageAtNecropsy}" escapeXml="false" default="&nbsp;"/></td>
 			<td rowspan="${rowSpan}"><c:out value="${rec.description}" escapeXml="false" default="&nbsp;"/></td>
 			<td rowspan="${rowSpan}"><c:out value="${rec.note}" escapeXml="false" default="&nbsp;"/></td>
@@ -439,7 +427,7 @@
 			<c:when test="${not empty rec.images}">
 			<c:forEach var="image" items="${rec.images}" varStatus="status2">
 			<c:if test="${status2.first!=true}">
-			<tr class="${rowClass}">
+			<tr>
 				</c:if>
 				<td>																
 					<table>

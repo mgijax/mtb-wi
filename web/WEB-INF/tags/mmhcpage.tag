@@ -15,8 +15,10 @@
 	defaultDescription="MMHC has been designed to aid researchers in such areas as choosing experimental models, reviewing patterns of mutations in specific cancers, and identifying genes that are commonly mutated across a spectrum of cancers.">
 	<jsp:attribute name="defaultHead">
 		<link rel="icon" href="${applicationScope.urlImageDir}/favicon.ico" type="image/ico">
-		<link href="${applicationScope.urlStyleSheet}" rel="stylesheet" type="text/css"/>
-		<script type="text/javascript" src="${applicationScope.urlBase}/js/jquery.min.js"></script>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/_res/css/fonts.css"/>
+		<link rel="stylesheet" type="text/css" href="${applicationScope.urlStyleSheet}"/>
+		<script type="text/javascript" src="/_res/js/jquery.min.js"></script>
 		<script type="text/javascript" src="${applicationScope.urlJavaScript}"></script>
 		<jsp:invoke fragment="head" />
 	</jsp:attribute>		
@@ -63,16 +65,14 @@
 		</ul>
 	</jsp:attribute>
 	<jsp:attribute name="defaultSubnav">
-		<c:choose>
-		<c:when test="${not empty help}">
+		<c:if test="${not empty help}">
 			<a class="help" href="${help}"></a>
-		</c:when>
-		</c:choose>
+		</c:if>
 		<jsp:invoke fragment="subnav" />
 	</jsp:attribute>
 	<jsp:attribute name="footer">
 		<ul>
-			<li><a href="http://www.informatics.jax.org"><img src="${applicationScope.urlImageDir}/mgi-logo.png" alt="Mouse Genome Informatics"></a></li>
+			<li><a href="http://www.informatics.jax.org"><img src="/_res/img/mgi-logo.png" alt="Mouse Genome Informatics"></a></li>
 			<li>
 				<p><a href="${applicationScope.urlBase}/citation.jsp">Citing These Resources</a></p>
 				<p><a href="${applicationScope.urlBase}/copyright.jsp">Warranty Disclaimer &amp; Copyright Notice</a></p>
@@ -88,9 +88,4 @@
 	<jsp:body>
         <jsp:doBody/>
     </jsp:body>
-
 </jax:toolpage>
-
-
-
-

@@ -26,7 +26,7 @@
 		Ext.QuickTips.init();
 		var piForm = new Ext.FormPanel({
 			hidden:${hidePiForm},
-			renderTo: 'piForm',
+			renderTo: 'pi-form',
 			fileUpload: false,
 			width: 500,
 			frame: true,
@@ -121,7 +121,7 @@
 		});
 		var linkForm = new Ext.FormPanel({
 			hidden:${hideLinkForm},
-			renderTo: 'linkForm',
+			renderTo: 'link-form',
 			fileUpload: false,
 			width: 500,
 			frame: true,
@@ -196,7 +196,7 @@
 		});
 		var documentForm = new Ext.FormPanel({
 			hidden:${hideDocumentForm},
-			renderTo: 'documentForm',
+			renderTo: 'document-form',
 			fileUpload: false,
 			width: 500,
 			frame: true,
@@ -272,7 +272,7 @@
 		});
 		var graphicForm = new Ext.FormPanel({
 			hidden:${hideGraphicForm},
-			renderTo: 'graphicForm',
+			renderTo: 'graphic-form',
 			fileUpload: false,
 			width: 500,
 			frame: true,
@@ -350,7 +350,7 @@
 		});
 		var commentForm = new Ext.FormPanel({
 			hidden:${hideCommentForm},
-			renderTo: 'commentForm',
+			renderTo: 'comment-form',
 			fileUpload: false,
 			width: 500,
 			frame: true,
@@ -417,24 +417,18 @@
 </script>		
 </jsp:attribute>
 <jsp:body>
-<table>
-	<!-- ////  Start Search Summary  //// -->
-	<caption><table>
-			<tr><td>
-					<h1>Additional Content for ${modelID}</h1>
-					<h1></h1>
-					<div id="pi-form"></div>
-					<h1></h1>
-					<div id="link-form"></div>
-					<h1></h1>
-					<div id="document-form"></div>
-					<h1></h1>
-					<div id="graphic-form"></div>
-					<h1></h1>
-					<div id="comment-form"></div>
-				</table>
-			</caption>
-		</table>
-		</jsp:body>
-	</jax:mmhcpage>
-	
+<h2>Additional Content for ${modelID}</h2>
+<h3></h3>
+<div id="pi-form"></div>
+<h3></h3>
+<div id="link-form"></div>
+<h3></h3>
+<div id="document-form"></div>
+<h3></h3>
+<div id="graphic-form"></div>
+<h3></h3>
+<div id="comment-form"></div>
+</jsp:body>
+</jax:mmhcpage>
+
+

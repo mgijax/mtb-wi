@@ -135,7 +135,7 @@
 					<c:when test="${not empty genetics.assayImages}">
 					<c:forEach var="image" items="${genetics.assayImages}" varStatus="status2">
 					<c:if test="${status2.first!=true}">
-					<tr class="${rowClass}">
+					<tr>
 						</c:if>
 						<td>																
 							<table>

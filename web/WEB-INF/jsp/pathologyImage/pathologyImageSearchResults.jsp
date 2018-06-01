@@ -7,123 +7,123 @@
 	<table>
 		<!-- ////  Start Search Summary  //// -->
 		<caption>
-	<div class="search-summary">
-		<h4>Search Summary</h4>
-			<!-- \n -->
-			<c:if test="${not empty organOriginSelected}">
-			<c:choose>
-			<c:when test="${fn:length(organOriginSelected)>1}">
-			<h5 class="label">Organs/Tissues of Origin:</h5> 
-			</c:when>
-			<c:otherwise>
-			<h5 class="label">Organ/Tissue of Origin:</h5> 
-			</c:otherwise>
-			</c:choose>
-			<c:forEach var="organ" items="${organOriginSelected}" varStatus="status">
-			<c:choose>
-			<c:when test="${status.last != true}">
-			${organ},
-			</c:when>
-			<c:otherwise>
-			${organ}
-			</c:otherwise>
-			</c:choose>
-			</c:forEach>
-			<!-- \n -->
-			</c:if>
-			<c:if test="${not empty tumorClassificationsSelected}">
-			<c:choose>
-			<c:when test="${fn:length(tumorClassificationsSelected)>1}">
-			<h5 class="label">Tumor Classifications:</h5> 
-			</c:when>
-			<c:otherwise>
-			<h5 class="label">Tumor Classification:</h5> 
-			</c:otherwise>
-			</c:choose>
-			<c:forEach var="classification" items="${tumorClassificationsSelected}" varStatus="status">
-			<c:choose>
-			<c:when test="${status.last != true}">
-			${classification},
-			</c:when>
-			<c:otherwise>
-			${classification}
-			</c:otherwise>
-			</c:choose>
-			</c:forEach>
-			<!-- \n -->
-			</c:if>
-			<c:if test="${not empty organsAffectedSelected}">
-			<h5 class="label">Organ/Tissue Affected:</h5> ${organsAffectedSelected}
-			<!-- \n -->
-			</c:if>
-			<c:if test="${not empty diagnosisDescription}">
-			<h5 class="label">Diagnosis or Description:</h5> Contains "${diagnosisDescription}"
-			<!-- \n -->
-			</c:if>
-			<c:if test="${not empty methodSelected}">
-			<h5 class="label">Method:</h5> ${methodSelected}
-			<!-- \n -->
-			</c:if>
-			<c:if test="${not empty antibodiesSelected}">
-			<c:choose>
-			<c:when test="${fn:length(antibodiesSelected)>1}">
-			<h5 class="label">Antibodies:</h5> 
-			</c:when>
-			<c:otherwise>
-			<h5 class="label">Antibody:</h5> 
-			</c:otherwise>
-			</c:choose>
-			<c:forEach var="antibody" items="${antibodiesSelected}" varStatus="status">
-			<c:choose>
-			<c:when test="${status.last != true}">
-			${antibody},
-			</c:when>
-			<c:otherwise>
-			${antibody}
-			</c:otherwise>
-			</c:choose>
-			</c:forEach>
-			<!-- \n -->
-			</c:if>
-			<c:if test="${not empty imageContributors}">
-			<c:choose>
-			<c:when test="${fn:length(imageContributors)>1}">
-			<h5 class="label">Contributors:</h5> 
-			</c:when>
-			<c:otherwise>
-			<h5 class="label">Contributor:</h5> 
-			</c:otherwise>
-			</c:choose>
-			<c:forEach var="contributor" items="${imageContributors}" varStatus="status">
-			<c:choose>
-			<c:when test="${status.last != true}">
-			${contributor},
-			</c:when>
-			<c:otherwise>
-			${contributor}
-			</c:otherwise>
-			</c:choose>
-			</c:forEach>
-			<!-- \n -->
-			</c:if>
-			<c:if test="${not empty accId}">
-			<h5 class="label">Accession Id:</h5> ${accId}
-			<!-- \n -->
-			</c:if>
-			<h5 class="label">Sort By:</h5> ${sortBy}
-			<!-- \n -->
-			<h5 class="label">Display Limit:</h5> ${maxItems}
-		</caption>
-		<caption><!-- ////  Start Display Limit  //// -->
-			<c:choose>
-			<c:when test="${numberOfResults != totalResults}">
-			<c:out value="${numberOfResults}" default="0"/> (of <c:out value="${totalResults}" default="0"/>) pathology reports displayed, including <c:out value="${totalNumOfPathImages}" default="0"/>	images.
-			</c:when>
-			<c:otherwise>
-			<c:out value="${numberOfResults}" default="0"/> (of <c:out value="${totalResults}" default="0"/>) pathology reports displayed, including <c:out value="${totalNumOfPathImages}" default="0"/>	images.
-			</c:otherwise>
-			</c:choose>
-			<!-- ////  End Display Limit  //// -->
+			<div class="search-summary">
+				<h4>Search Summary</h4>
+				<!-- \n -->
+				<c:if test="${not empty organOriginSelected}">
+				<c:choose>
+				<c:when test="${fn:length(organOriginSelected)>1}">
+				<h5 class="label">Organs/Tissues of Origin:</h5> 
+				</c:when>
+				<c:otherwise>
+				<h5 class="label">Organ/Tissue of Origin:</h5> 
+				</c:otherwise>
+				</c:choose>
+				<c:forEach var="organ" items="${organOriginSelected}" varStatus="status">
+				<c:choose>
+				<c:when test="${status.last != true}">
+				${organ},
+				</c:when>
+				<c:otherwise>
+				${organ}
+				</c:otherwise>
+				</c:choose>
+				</c:forEach>
+				<!-- \n -->
+				</c:if>
+				<c:if test="${not empty tumorClassificationsSelected}">
+				<c:choose>
+				<c:when test="${fn:length(tumorClassificationsSelected)>1}">
+				<h5 class="label">Tumor Classifications:</h5> 
+				</c:when>
+				<c:otherwise>
+				<h5 class="label">Tumor Classification:</h5> 
+				</c:otherwise>
+				</c:choose>
+				<c:forEach var="classification" items="${tumorClassificationsSelected}" varStatus="status">
+				<c:choose>
+				<c:when test="${status.last != true}">
+				${classification},
+				</c:when>
+				<c:otherwise>
+				${classification}
+				</c:otherwise>
+				</c:choose>
+				</c:forEach>
+				<!-- \n -->
+				</c:if>
+				<c:if test="${not empty organsAffectedSelected}">
+				<h5 class="label">Organ/Tissue Affected:</h5> ${organsAffectedSelected}
+				<!-- \n -->
+				</c:if>
+				<c:if test="${not empty diagnosisDescription}">
+				<h5 class="label">Diagnosis or Description:</h5> Contains "${diagnosisDescription}"
+				<!-- \n -->
+				</c:if>
+				<c:if test="${not empty methodSelected}">
+				<h5 class="label">Method:</h5> ${methodSelected}
+				<!-- \n -->
+				</c:if>
+				<c:if test="${not empty antibodiesSelected}">
+				<c:choose>
+				<c:when test="${fn:length(antibodiesSelected)>1}">
+				<h5 class="label">Antibodies:</h5> 
+				</c:when>
+				<c:otherwise>
+				<h5 class="label">Antibody:</h5> 
+				</c:otherwise>
+				</c:choose>
+				<c:forEach var="antibody" items="${antibodiesSelected}" varStatus="status">
+				<c:choose>
+				<c:when test="${status.last != true}">
+				${antibody},
+				</c:when>
+				<c:otherwise>
+				${antibody}
+				</c:otherwise>
+				</c:choose>
+				</c:forEach>
+				<!-- \n -->
+				</c:if>
+				<c:if test="${not empty imageContributors}">
+				<c:choose>
+				<c:when test="${fn:length(imageContributors)>1}">
+				<h5 class="label">Contributors:</h5> 
+				</c:when>
+				<c:otherwise>
+				<h5 class="label">Contributor:</h5> 
+				</c:otherwise>
+				</c:choose>
+				<c:forEach var="contributor" items="${imageContributors}" varStatus="status">
+				<c:choose>
+				<c:when test="${status.last != true}">
+				${contributor},
+				</c:when>
+				<c:otherwise>
+				${contributor}
+				</c:otherwise>
+				</c:choose>
+				</c:forEach>
+				<!-- \n -->
+				</c:if>
+				<c:if test="${not empty accId}">
+				<h5 class="label">Accession Id:</h5> ${accId}
+				<!-- \n -->
+				</c:if>
+				<h5 class="label">Sort By:</h5> ${sortBy}
+				<!-- \n -->
+				<h5 class="label">Display Limit:</h5> ${maxItems}
+			</div>
+			<div class="display-counts">
+				<c:choose>
+				<c:when test="${numberOfResults != totalResults}">
+				<c:out value="${numberOfResults}" default="0"/> (of <c:out value="${totalResults}" default="0"/>) pathology reports displayed, including <c:out value="${totalNumOfPathImages}" default="0"/>	images.
+				</c:when>
+				<c:otherwise>
+				<c:out value="${numberOfResults}" default="0"/> (of <c:out value="${totalResults}" default="0"/>) pathology reports displayed, including <c:out value="${totalNumOfPathImages}" default="0"/>	images.
+				</c:otherwise>
+				</c:choose>
+			</div>
 		</caption>
 	</table>
 	<!-- ////  End Search Summary  //// -->
@@ -164,12 +164,12 @@
 				<c:if test="${not empty pathRec.agents}">
 				<!-- \n -->
 				<em>
-						<c:forEach var="agent" items="${pathRec.agents}" varStatus="status">
-						<c:out value="${agent}" escapeXml="false"/>
-						<c:if test="${status.last != true}">
-						<!-- \n -->
-						</c:if>
-						</c:forEach>
+					<c:forEach var="agent" items="${pathRec.agents}" varStatus="status">
+					<c:out value="${agent}" escapeXml="false"/>
+					<c:if test="${status.last != true}">
+					<!-- \n -->
+					</c:if>
+					</c:forEach>
 				</em> 
 				</c:if>
 			</td>
@@ -188,66 +188,60 @@
 			<td><a href="referenceDetails.do?accId=${pathRec.accID}">${pathRec.accID}</a></td>
 		</tr>
 		<c:forEach var="image" items="${pathRec.images}" varStatus="status">
-		<c:choose>
-		<c:when test="${status.index%2==1}">
 		<tr>
-			</c:when>
-			<c:otherwise>
-			<tr>
-				</c:otherwise>
-				</c:choose>
-				<td colspan=9>
-					<table>
-						<tr>
-							<td>
-								<a href="nojavascript.jsp" onClick="popPathWin('pathologyImageDetails.do?key=${image.imageId}', 'ImageId${image.imageId}');return false;">
-								<img width=150 src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${image.imageThumbName}" alt="${image.imageId}"></a>
-							</td>
-							<td width=250>
-								<table>
-									<tr>
-										<td class="small" align="right"><div class="nowrap"><h5 class="label">Image ID:</h5></div></td>
-										<td class="small">${image.imageId}</td>
-									</tr>
-									<tr>
-										<td class="small" align="right"><div class="nowrap"><h5 class="label">Source of Image:</h5></div></td>
-										<td class="small">
-											${image.sourceOfImage}
-										</td>
-									</tr>
-									<tr>
-										<td class="small" align="right"><div class="nowrap"><h5 class="label">Pathologist:</h5></div></td>
-										<td class="small">
-											${image.pathologist}
-										</td>
-									</tr>
-									<c:choose>
-									<c:when test="${not empty image.stainMethod}">
-									<tr>
-										<td class="small" align="right"><div class="nowrap"><h5 class="label">Method / Stain:</h5></div></td>
-										<td class="small">${image.stainMethod}</td>
-									</tr>
-									</c:when>
-									</c:choose>
-								</table>
-							</td>
-							<td class="small" colspan=5>
-								<h5 class="label">Image Caption</h5>:
-								<!-- \n -->
-								${image.imageCaption}
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			</c:forEach>
-		</table>
+			<td colspan="9">
+				<table>
+					<tr>
+						<td>
+							<a href="nojavascript.jsp" onClick="popPathWin('pathologyImageDetails.do?key=${image.imageId}', 'ImageId${image.imageId}');return false;">
+							<img width=150 src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${image.imageThumbName}" alt="${image.imageId}"></a>
+						</td>
+						<td width=250>
+							<table>
+								<tr>
+									<td class="small" align="right"><div class="nowrap"><h5 class="label">Image ID:</h5></div></td>
+									<td class="small">${image.imageId}</td>
+								</tr>
+								<tr>
+									<td class="small" align="right"><div class="nowrap"><h5 class="label">Source of Image:</h5></div></td>
+									<td class="small">
+										${image.sourceOfImage}
+									</td>
+								</tr>
+								<tr>
+									<td class="small" align="right"><div class="nowrap"><h5 class="label">Pathologist:</h5></div></td>
+									<td class="small">
+										${image.pathologist}
+									</td>
+								</tr>
+								<c:choose>
+								<c:when test="${not empty image.stainMethod}">
+								<tr>
+									<td class="small" align="right"><div class="nowrap"><h5 class="label">Method / Stain:</h5></div></td>
+									<td class="small">${image.stainMethod}</td>
+								</tr>
+								</c:when>
+								</c:choose>
+							</table>
+						</td>
+						<td class="small" colspan=5>
+							<h5 class="label">Image Caption</h5>:
+							<!-- \n -->
+							${image.imageCaption}
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
 		</c:forEach>
-		</c:when>
-		<c:otherwise>
-		<!-- No results found. //-->
-		</c:otherwise>
-		</c:choose>
-		<!-- ////  End Results  //// -->
-	</jax:mmhcpage>
-	
+	</table>
+	</c:forEach>
+	</c:when>
+	<c:otherwise>
+	<!-- No results found. //-->
+	</c:otherwise>
+	</c:choose>
+	<!-- ////  End Results  //// -->
+</jax:mmhcpage>
+
+

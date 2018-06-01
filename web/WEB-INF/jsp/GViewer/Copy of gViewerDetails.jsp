@@ -47,7 +47,7 @@
 	fTypeMap['DNA segment'] = 6238179;
 	Ext.onReady(function(){
 		treePanel = new Ext.tree.TreePanel({
-			renderTo:'featureTypeSelection',
+			renderTo:'feature-type-selection',
 			height: 100,
 			width: 450,
 			useArrows:true,
@@ -376,7 +376,7 @@
 										<th>MGI ID</th>
 									</tr>
 									<c:forEach var="feature" items="${features}" varStatus="count">
-									<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+									
 									<tr>
 										<td>${feature.label}</td>
 										<td>${feature.name}</td>

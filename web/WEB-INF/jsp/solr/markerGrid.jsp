@@ -182,7 +182,7 @@
 			hiddenName: 'marker',
 			//	width:200,
 			listEmptyText: 'no matching gene',
-			renderTo: 'markerSelect',
+			renderTo: 'marker-select',
 			ctCls: 'center',
 			value: '${marker}'
 		});

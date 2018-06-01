@@ -89,10 +89,10 @@
 		</tr>
 		<!-- ////  End Pathology Image  //// -->
 		<!-- ////  Start Pathology  //// -->
-		<c:set var="num" value="1"/>
+		
 		<c:choose>
 		<c:when test="${not empty pathology.caption}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Caption</h4></td>
 			<td>${pathology.caption}</td>
@@ -104,7 +104,7 @@
 		</c:choose>
 		<c:choose>
 		<c:when test="${not empty pathology.pathologyDescription}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Description</h4></td>
 			<td>${pathology.pathologyDescription}</td>
@@ -116,7 +116,7 @@
 		</c:choose>
 		<c:choose>
 		<c:when test="${not empty pathology.ageAtNecropsy}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Age at Necropsy</h4></td>
 			<td>${pathology.ageAtNecropsy}</td>
@@ -128,7 +128,7 @@
 		</c:choose>
 		<c:choose>
 		<c:when test="${not empty pathology.pathologyNote}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Notes</h4></td>
 			<td>${pathology.pathologyNote}</td>
@@ -140,7 +140,7 @@
 		</c:choose>
 		<c:choose>
 		<c:when test="${not empty pathology.sourceOfImage}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Contributor</h4></td>
 			<td>
@@ -155,7 +155,7 @@
 		</c:choose>
 		<c:choose>
 		<c:when test="${not empty pathology.pathologist}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Pathologist</h4></td>
 			<td>
@@ -170,7 +170,7 @@
 		</c:choose>
 		<c:choose>
 		<c:when test="${not empty pathology.copyright}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Copyright</h4></td>
 			<td>
@@ -184,7 +184,7 @@
 		</c:choose>
 		<c:choose>
 		<c:when test="${not empty pathology.method}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Method</h4></td>
 			<td>${pathology.method}</td>
@@ -239,12 +239,12 @@
 			<table>
 				<tr>
 					<!-- ////  Start Bottom Left  //// -->
-					<c:set var="num" value="1"/>
+					
 					<td width="49%" >
 						<table>
 							<c:choose>
 							<c:when test="${not empty pathology.tumorFrequencyKey}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>MTB ID</h4></td>
 								<td class="enhance">
@@ -258,7 +258,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.tumorClassName}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Tumor Name</h4></td>
 								<td>
@@ -276,7 +276,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.treatmentType}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Treatment Type</h4></td>
 								<td>${pathology.treatmentType}</td>
@@ -288,7 +288,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.agents}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Agents</h4></td>
 								<td>
@@ -307,7 +307,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.tumorSynonyms}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Tumor Synonyms</h4></td>
 								<td>
@@ -326,7 +326,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.organAffected}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Organ Affected</h4></td>
 								<td>${pathology.organAffected}</td>
@@ -338,7 +338,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.frequency}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Frequency</h4></td>
 								<td>${pathology.frequencyString}</td>
@@ -350,7 +350,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.frequencyNote}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Frequency Note</h4></td>
 								<td>${pathology.frequencyNote}</td>
@@ -362,7 +362,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${(not empty pathology.referenceKey) && (not empty pathology.accessionId)}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Reference</h4></td>
 								<td>
@@ -380,12 +380,12 @@
 					<td width="20">
 					</td>
 					<!-- ////  Start Bottom Right  //// -->
-					<c:set var="num" value="1"/>
+					
 					<td width="49%">
 						<table>
 							<c:choose>
 							<c:when test="${not empty pathology.strainName}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Strain</h4></td>
 								<td>
@@ -422,7 +422,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.strainSynonyms}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Strain Synonyms</h4></td>
 								<td>
@@ -441,7 +441,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.sex}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Strain Sex</h4></td>
 								<td>${pathology.sex}</td>
@@ -453,7 +453,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.reproductiveStatus}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Reproductive Status</h4></td>
 								<td>${pathology.reproductiveStatus}</td>
@@ -465,7 +465,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.ageOfOnset}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Age of Onset</h4></td>
 								<td>${pathology.ageOfOnset}</td>
@@ -477,7 +477,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${not empty pathology.ageOfDetection}">
-							<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+							
 							<tr>
 								<td><h4>Age of Detection</h4></td>
 								<td>${pathology.ageOfDetection}</td>

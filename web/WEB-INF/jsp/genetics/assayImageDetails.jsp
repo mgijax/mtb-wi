@@ -16,10 +16,10 @@
 		</tr>
 		<!-- ////  End assayImage Image  //// -->
 		<!-- ////  Start assayImage  //// -->
-		<c:set var="num" value="1"/>
+		
 		<c:choose>
 		<c:when test="${not empty assayImage.caption}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Caption</h4></td>
 			<td>${assayImage.caption}</td>
@@ -31,7 +31,7 @@
 		</c:choose>
 		<c:choose>
 		<c:when test="${not empty assayImage.sourceOfImage}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Contributor</h4></td>
 			<td>
@@ -50,7 +50,7 @@
 		</c:choose>
 		<c:choose>
 		<c:when test="${not empty assayImage.copyright}">
-		<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+		
 		<tr>
 			<td><h4>Copyright</h4></td>
 			<td>${assayImage.copyright}</td>
@@ -72,7 +72,7 @@
 					<th>Notes</th>
 				</tr>
 				<c:forEach var="dtoTGC" items="${dtoTGCs}">
-				<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+				
 				<tr>
 					<c:choose>
 					<c:when test="${not empty dtoTGC.displayChromosomes}">
@@ -138,12 +138,12 @@
 	<table>
 		<tr>
 			<!-- ////  Start Bottom Left  //// -->
-			<c:set var="num" value="1"/>
+			
 			<td width="49%" >
 				<table>
 					<c:choose>
 					<c:when test="${not empty assayImage.tumorFrequencyKey}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>MTB ID</h4></td>
 						<td class="enhance">
@@ -157,7 +157,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.tumorClassName}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Tumor Name</h4></td>
 						<td>
@@ -175,7 +175,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.treatmentType}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Treatment Type</h4></td>
 						<td>${assayImage.treatmentType}</td>
@@ -187,7 +187,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.agents}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Agents</h4></td>
 						<td>
@@ -206,7 +206,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.tumorSynonyms}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Tumor Synonyms</h4></td>
 						<td>
@@ -225,7 +225,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.organAffected}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Organ Affected</h4></td>
 						<td>${assayImage.organAffected}</td>
@@ -237,7 +237,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.frequency}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Frequency</h4></td>
 						<td>${assayImage.frequencyString}</td>
@@ -249,7 +249,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.frequencyNote}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Frequency Note</h4></td>
 						<td>${assayImage.frequencyNote}</td>
@@ -261,7 +261,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${(not empty assayImage.referenceKey) && (not empty assayImage.accessionId)}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Reference</h4></td>
 						<td>
@@ -279,12 +279,12 @@
 			<td width="20">
 			</td>
 			<!-- ////  Start Bottom Right  //// -->
-			<c:set var="num" value="1"/>
+			
 			<td width="49%">
 				<table>
 					<c:choose>
 					<c:when test="${not empty assayImage.strainName}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Strain</h4></td>
 						<td>
@@ -321,7 +321,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.strainSynonyms}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Strain Synonyms</h4></td>
 						<td>
@@ -340,7 +340,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.sex}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Strain Sex</h4></td>
 						<td>${assayImage.sex}</td>
@@ -352,7 +352,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.reproductiveStatus}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Reproductive Status</h4></td>
 						<td>${assayImage.reproductiveStatus}</td>
@@ -364,7 +364,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.ageOfOnset}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Age of Onset</h4></td>
 						<td>${assayImage.ageOfOnset}</td>
@@ -376,7 +376,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${not empty assayImage.ageOfDetection}">
-					<c:set var="num" value="${num == 1 ? 2 : 1}"/>
+					
 					<tr>
 						<td><h4>Age of Detection</h4></td>
 						<td>${assayImage.ageOfDetection}</td>

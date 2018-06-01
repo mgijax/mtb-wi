@@ -50,8 +50,9 @@
 			<h5 class="label">Sort By:</h5> ${sortBy}
 			<!-- \n -->
 			<h5 class="label">Display Limit:</h5> ${maxItems} 
-		</caption>
-		<caption><!-- ////  Start Display Limit  //// -->
+		</div>
+<div class="display-counts">
+
 			<c:choose>
 			<c:when test="${numberOfResults != totalResults}">
 			${numberOfResults} of ${totalResults} matching items displayed.
@@ -60,8 +61,8 @@
 			<c:out value="${numberOfResults}" default="0"/> matching items displayed.
 			</c:otherwise>
 			</c:choose>
-			<!-- ////  End Display Limit  //// -->
-		</caption>
+			</div>
+</caption>
 		<!-- ////  End Search Summary  //// -->
 		<!-- ////  Start Results  //// -->
 		<c:choose>
@@ -71,15 +72,7 @@
 			<th>Reference</th>
 		</tr>
 		<c:forEach var="reference" items="${references}" varStatus="status">
-		<c:choose>
-		<c:when test="${status.index%2==0}">
-		<tr>
-			</c:when>
-			<c:otherwise>
-			<tr>
-				</c:otherwise>
-				</c:choose>
-				<td><a href="referenceDetails.do?key=${reference.key}">${reference.accId}</a></td>
+		<tr>				<td><a href="referenceDetails.do?key=${reference.key}">${reference.accId}</a></td>
 				<td>${reference.authors}, ${reference.title}, ${reference.citation}</td>
 			</tr>
 			</c:forEach>

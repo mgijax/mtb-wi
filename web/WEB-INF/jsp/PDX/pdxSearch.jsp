@@ -54,7 +54,7 @@
 			hiddenName:'modelID',
 			width:360,
 			listEmptyText:'no matching model',
-			renderTo: 'modelIDCombo'
+			renderTo: 'model-id-combo'
 			//				,pageSize:10
 		});
 		var dataProxy = new Ext.data.HttpProxy({
@@ -83,7 +83,7 @@
 			hiddenName:'gene',
 			width:260,
 			listEmptyText:'no matching gene',
-			renderTo: 'geneSelectOMatic'
+			renderTo: 'gene-select-o-matic'
 			//				,pageSize:10
 		});
 		combo.setValue('${gene}');
@@ -109,7 +109,7 @@
 			hiddenName:'genes2',
 			width:260,
 			listEmptyText:'no matching gene',
-			renderTo: 'geneSelectOMatic2'
+			renderTo: 'gene-select-o-matic-2'
 		});
 		var combo3 = new Ext.form.ComboBox({
 			store: ctpStore,
@@ -126,7 +126,7 @@
 			hiddenName:'genesCNV',
 			width:260,
 			listEmptyText:'no matching gene',
-			renderTo: 'geneSelectOMatic3'
+			renderTo: 'gene-select-o-matic-3'
 		});
 	});
 </script>

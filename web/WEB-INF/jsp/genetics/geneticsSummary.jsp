@@ -50,15 +50,7 @@
 		<c:forEach var="rec" items="${genetics.alleleRecs}" varStatus="status">
 		<c:set var="key" value="${rec.key}"/>
 		<c:set var="counter" value="${counter+1}"/>
-		<c:choose>
-		<c:when test="${status.index%2==0}">
-		<c:set var="classVal" value="stripe1"/>
-		</c:when>
-		<c:otherwise>
-		<c:set var="classVal" value="stripe2"/>
-		</c:otherwise>
-		</c:choose>
-		<tr class="${classVal}">
+		<tr>
 			<c:choose>
 			<c:when test="${fn:length(rec.value.recsCollection)>1}">
 			<td rowspan="${fn:length(rec.value.recsCollection)}">

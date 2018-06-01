@@ -107,15 +107,7 @@
 					<th>Images</th>
 				</tr>
 				<c:forEach var="genetics" items="${tumorFreq.tumorCytogenetics}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.index%2==0}">
-				<tr>
-					</c:when>
-					<c:otherwise>
-					<tr>
-						</c:otherwise>
-						</c:choose>
-						<td>
+				<tr>						<td>
 							<c:out value="${genetics.name}" escapeXml="false"/>
 						</td>
 						<td>
@@ -136,7 +128,7 @@
 								<c:when test="${not empty genetics.assayImages}">
 								<c:forEach var="image" items="${genetics.assayImages}" varStatus="status2">
 								<c:if test="${status2.first!=true}">
-								<tr class="${rowClass}">
+								<tr>
 									</c:if>
 									<td>																
 										<table>

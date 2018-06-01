@@ -137,7 +137,7 @@
 			fCanvasWidth:20,
 			//bandMaskDiv:'mainDiv',
 			width:1000,
-			renderTo:'mainDiv',
+			renderTo:'main-div',
 			deDupOnMgiId:false,
 			hideEmptyChr: true,
 			expandFeatures: false	
@@ -208,7 +208,7 @@
 		var mainContainer = new Ext.Container({
 			height:780,	
 			layout: 'border',
-			renderTo:'mainDiv',
+			renderTo:'main-div',
 			items: [centerTable,legendPanel],
 			style:{background:'white'}
 		});

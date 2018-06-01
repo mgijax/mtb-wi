@@ -477,7 +477,7 @@
 			}
 		});
 		function showTree(){
-			treePanel.render(document.getElementById('featureTypeSelection'))
+			treePanel.render(document.getElementById('feature-type-selection'))
 		}
 		mgdWin.on('afterrender',showTree);
 		var regionWin =	new Ext.Window({
@@ -694,7 +694,7 @@
 			height:780,	// the kPanel height is based on the size of the chromosomes so this value is really how the legend panel is sized
 			//	width:1200,
 			layout: 'border',
-			renderTo:'mainDiv',
+			renderTo:'main-div',
 			items: [legendPanel,centerTable],
 			style:{background:'white'}
 		});
