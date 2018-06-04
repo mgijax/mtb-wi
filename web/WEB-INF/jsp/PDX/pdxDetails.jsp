@@ -27,6 +27,7 @@
             p{
                 margin-bottom: 2px;
             }
+            
 
         </style>
 
@@ -36,6 +37,7 @@
 
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+        <script type="text/javascript" src="${applicationScope.urlBase}/extjs/columnHeader.js"></script>
 
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
@@ -170,13 +172,17 @@
                     {name: 'allele_frequency'},
                     {name: 'transcript_id'},
                     {name: 'filtered_rationale'},
+                    {name: 'filter'},
                     {name: 'passage_num'},
                     {name: 'ckb_molpro_link'},
                     {name: 'ckb_molpro_name'},
-                    {name: 'ckb_gene_link'},
+                    {name: 'ckb_gene_id'},
                     {name: 'ckb_potential_treat_approach'},
                     {name: 'ckb_protein_effect'},
-                    {name: 'gene_id'},
+                    {name: 'ckb_nclinical_resist'},
+                    {name: 'ckb_nclinical_sens'},
+                    {name: 'ckb_npreclinical_resist'},	
+                    {name: 'ckb_npreclinical_sens'},
                     {name: 'count_human_reads'},
                     {name: 'pct_human_reads'}
                     
@@ -199,6 +205,14 @@
                     fields: fields,
                     proxy: dataProxy
                 });
+                
+                var ckb = [{header: '', colspan: 2, align: 'center'},
+                        {header: 'JAX Clinical Knowledgebase (CKB) annotations', colspan: 7, align: 'center'},
+                    {header: '', colspan: 17, align: 'center'}]
+                
+                 var group = new Ext.ux.grid.ColumnHeaderGroup({
+                    rows: [ckb]
+                });
 
                 store.setDefaultSort('gene_symbol', 'ASC');
 
@@ -206,7 +220,7 @@
                     store: store,
                     columns: [
                         {
-                            header: 'Sample',
+                            text: 'Sample',
                             width: 85,
                             sortable: true,
                             dataIndex: 'sample_name'
@@ -215,34 +229,55 @@
                             header: 'Gene',
                             width: 60,
                             sortable: true,
-                            dataIndex: 'gene_symbol'
+                            dataIndex: 'gene_symbol',
+                           
                         },
-                        {
-                            header: 'CKB Gene',
-                            width: 70,
-                            sortable: true,
-                            dataIndex: 'ckb_gene_link',
-                            renderer: ckbGeneRenderer
-                        },
+                        
                        {
-                            header: 'CKB Mol Profile',
-                            width: 120,
+                            header: 'CKB<br>molecular<br>profile',
+                            width: 100,
                             sortable: true,
-                            dataIndex: 'ckb_molpro_link',
+                            dataIndex: 'ckb_molpro_name',
                             renderer: ckbMolProRenderer
                         },
                         {
-                            header: 'CKB potential treatment approach',
-                            width: 70,
+                            header: 'CKB<br>potential<br>treatment<br>approach',
+                            width: 100,
                             sortable: true,
                             dataIndex: 'ckb_potential_treat_approach'
                         },               
                         {
-                            header: 'CKB protein effect',
+                            header: 'CKB<br>protein<br>effect',
                             width: 70,
                             sortable: true,
                             dataIndex: 'ckb_protein_effect'
                         },
+                                    
+                        {
+                            header: '# <b>Clinical</b><br>annotations<br>predicting<br>sensitivity',
+                            width: 70,
+                            sortable: true,
+                            dataIndex: 'ckb_nclinical_sens'
+                        },
+                        {
+                            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>sensitivity',
+                            width: 70,
+                            sortable: true,
+                            dataIndex: 'ckb_npreclinical_sens'
+                        },
+                        {
+                            header: '# <b>Clinical</b><br>annotations<br>predicting<br>resistance',
+                            width: 70,
+                            sortable: true,
+                            dataIndex: 'ckb_nclinical_resist'
+                        }, 
+                        {
+                            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>resistance',
+                            width: 70,
+                            sortable: true,
+                            dataIndex: 'ckb_npreclinical_resist'
+                        },               
+                        
                         {
                             header: 'Platform',
                             width: 80,
@@ -319,6 +354,13 @@
 
                         },
                         {
+                            header: 'Filter',
+                            width: 50,
+                            sortable: true,
+                            dataIndex: 'filter'
+
+                        },
+                        {
                             header: 'Passage Num',
                             width: 50,
                             sortable: true,
@@ -353,27 +395,36 @@
                         store: store,
                         displayInfo: true,
                         displayMsg: 'Displaying results {0} - {1} of {2}'
-                    })
+                    }),
+                    plugins:group
 
 
 
                 });
                 
+                // not used
                  function ckbGeneRenderer(value, p, record){
-                    if(record.get("ckb_gene_link").length>0){
-                        return String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_gene_link"),record.get("gene_symbol"));
+                    if(record.get("ckb_gene_id").length>0){
+                        return String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_gene_id"),record.get("gene_symbol"));
                     }else{
-                        return "";
+                        if(record.get("gene_symbol")){
+                            return record.get("gene_symbol");
+                        }else{
+                            return "";
+                        }
                     }
                    
                 }
                 
                  function ckbMolProRenderer(value, p, record){
+                     val = "";
+                     
                      if(record.get("ckb_molpro_name").length>0){
-                        return String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
-                    }else{
-                        return "";
+                        val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
                     }
+                        
+                    return val;
+                    
                 }
 
                 Ext.EventManager.onWindowResize(function (w, h) {
@@ -386,10 +437,14 @@
                 colNames.push('sample_name');
                 colNames.push('gene_symbol');
                 colNames.push('gene_id');
-                colNames.push('ckb_gene_link');
-                colNames.push('ckb_molpro_link');
+          //      colNames.push('ckb_gene_link');
+                colNames.push('ckb_molpro_name');
                 colNames.push('ckb_potential_treat_approach');
                 colNames.push('ckb_protein_effect');
+                colNames.push('ckb_nclinical_resist');	
+                colNames.push('ckb_nclinical_sens');
+                colNames.push('ckb_npreclinical_resist');
+                colNames.push('ckb_npreclinical_sens');
                 colNames.push('platform');
                 colNames.push('chromosome');
                 colNames.push('seq_position');
@@ -402,6 +457,7 @@
                 colNames.push('allele_frequency');
                 colNames.push('transcript_id');
                 colNames.push('filtered_rationale');
+                colNames.push('filter');
                 colNames.push('passage_num');
                 colNames.push('count_human_reads');
                 colNames.push('pct_human_reads');
@@ -443,6 +499,8 @@
                 panel.render();
 
                 panel.doLayout();
+                
+              //  grid.getView().renderHeaders();
 
                 checkVariants = function () {
                     if (store.getTotalCount() == 0) {

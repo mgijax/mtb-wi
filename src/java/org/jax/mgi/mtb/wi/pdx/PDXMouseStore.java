@@ -100,8 +100,8 @@ public class PDXMouseStore {
     private static final String CKB_MOLPRO_PUBLIC = "https://ckb.jax.org/molecularProfile/show/";
     private static final String CKB_GENE_PUBLIC = "https://ckb.jax.org/gene/show?geneId=";
     
-    private static final String CKB_MOLPRO_INTERNAL = "https://cga.jax.org/ckb-utilities/molecularProfile/show/";
-    private static final String CKB_GENE_INTERNAL = "https://cga.jax.org/ckb-utilities/gene/show?geneId=";
+    private static final String CKB_MOLPRO_INTERNAL = "https://myckb.jax.org/molecularProfile/show/";
+    private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
 
     public PDXMouseStore() {
 
@@ -1252,9 +1252,11 @@ public class PDXMouseStore {
     public String getCSVVariants(String model) {
 
         StringBuilder result = new StringBuilder("Model,Sample,Gene,Platform,Chromosome,Seq Position,Ref Allele,Alt Allele,");
-        result.append("Consequence,Amino Acid Change,RS Variants,Read Depth,Allele Frequency,Transcript ID,Filtered Rationale,");
-        result.append("Passage Num,Gene ID,CKB Evidence,Actionable Cancer Types,Drug Class,Count Human Reads,PCT Human Reads,");
-        result.append("Variant Num Trials,Variant NCT IDs\n");
+        result.append("Consequence,Amino Acid Change,RS Variants,Read Depth,Allele Frequency,Transcript ID,Filtered Rationale,Filter,");
+        result.append("Passage Num,CKB Molecular Profile Link, CKB Molecular Profile Name, CKB Gene Link,CKB Potential Treatment Appr,CKB Protein Effect,No. clinical annotations predicting sensitivity,");
+        result.append("No. preclinical annotations predicting sensitivity,No. clinical annotations predicting resistance,No. preclinical annotations predicting resistance,");
+        result.append("Count Human Reads,PCT Human Reads");
+        
 
         int start = 0;
         int limit = 15000;
@@ -1290,45 +1292,30 @@ public class PDXMouseStore {
         return result.toString();
 
     }
+    
+    
+    public String getCSVVariantsNewBroken(String model) {
+
+        StringBuilder result = new StringBuilder();
+
+        try {
+
+                String params = "?keepnulls=yes&model=" + model + "&csv=yes";
+                result.append(getJSON(VARIANTS + params));
+
+
+        } catch (Exception e) {
+            log.error("Error getting variants for " + model, e);
+
+        }
+
+        return result.toString();
+
+    }
 
     private String getVariantFields(JSONArray array) throws JSONException {
         StringBuilder result = new StringBuilder();
-        /*
-                allele_frequency	"0.0"
-                alt_allele	"G"
-                amino_acid_change	"R213fs"
-                caller	"Pindel"
-                chromosome	"17"
-                ckb_clinically_relevant	"yes"
-                ckb_gene_id	7157
-                ckb_molpro_id	26001
-                ckb_molpro_name	"TP53 R213fs"
-                ckb_potential_treat_approach	"p53 Gene Therapy"
-                ckb_protein_effect	"loss of function - predicted"
-                ckb_public_status	"public"
-                codon_change	"c.636delT"
-                consequence	"frameshift_variant"
-                count_human_reads	731136
-                entrez_gene_id	7157
-                filter	"lowAF"
-                gene_symbol	"TP53"
-                impact	"HIGH"
-                model_id	13
-                model_name	"TM00013"
-                mtb_flag	1
-                passage_num	"P0"
-                pct_human_reads	98.907
-                platform	"Truseq_JAX"
-                read_depth	"3341"
-                ref_allele	"GA"
-                refresh_date	"2018-05-02"
-                row_id	7701
-                rs_variants	"COSM4425031"
-                sample_id	239
-                sample_name	"BL0058F037P0"
-                seq_position	7674894
-                transcript_id	"ENST00000269305.8"
-        */
+       
 
         for (int i = 0; i < array.length(); i++) {
 
@@ -1347,6 +1334,9 @@ public class PDXMouseStore {
             result.append("'").append(getField(array.getJSONObject(i), "allele_frequency")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "transcript_id")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "filtered_rationale")).append("',");
+            if(!WIConstants.getInstance().getPublicDeployment()){
+                result.append("'").append(getField(array.getJSONObject(i), "filter")).append("',");
+            }
             result.append("'").append(getField(array.getJSONObject(i), "passage_num")).append("',");
             
             String ckbGeneID =getField(array.getJSONObject(i),"ckb_gene_id");
@@ -1358,7 +1348,11 @@ public class PDXMouseStore {
                    
                     result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
                     result.append("'").append(ckbMolProName).append("',");
-                    result.append("'").append(CKB_GENE_PUBLIC).append(ckbGeneID).append("',");
+                    if(ckbGeneID.length()>0 && !ckbGeneID.equals("null")){
+                        result.append("'").append(CKB_GENE_PUBLIC).append(ckbGeneID).append("',");
+                    }else{
+                        result.append("'',");
+                    }
                     result.append("'").append(getField(array.getJSONObject(i), "ckb_potential_treat_approach")).append("',");
                     result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
                 }
@@ -1369,15 +1363,30 @@ public class PDXMouseStore {
                 result.append("'',");
             }else{
                 //link to internal site
-                    result.append("'").append(CKB_MOLPRO_INTERNAL).append(ckbMolProID).append("',");
-                    result.append("'").append(ckbMolProName).append("',");
-                    result.append("'").append(CKB_GENE_INTERNAL).append(ckbGeneID).append("',");
+                    if(ckbMolProName.length()>0 && !ckbMolProName.equals("null")){
+                        result.append("'").append(CKB_MOLPRO_INTERNAL).append(ckbMolProID).append("',");
+                        result.append("'").append(ckbMolProName).append("',");
+                    }else{
+                         result.append("'',");
+                         result.append("'',");
+               
+                    }
+                    if(ckbGeneID.length()>0 && !ckbGeneID.equals("null")){
+                        result.append("'").append(CKB_GENE_INTERNAL).append(ckbGeneID).append("',");
+                    }else{
+                         result.append("'',");
+                    }
+                        
                     result.append("'").append(getField(array.getJSONObject(i), "ckb_potential_treat_approach")).append("',");
                     result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
                     
             }
            
-           
+            
+           result.append("'").append(getField(array.getJSONObject(i), "ckb_nclinical_resist")).append("',");
+           result.append("'").append(getField(array.getJSONObject(i), "ckb_nclinical_sens")).append("',");
+           result.append("'").append(getField(array.getJSONObject(i), "ckb_npreclinical_resist")).append("',");
+           result.append("'").append(getField(array.getJSONObject(i), "ckb_npreclinical_sens")).append("',");
 
             result.append("'").append(getField(array.getJSONObject(i), "count_human_reads")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "pct_human_reads")).append("'],");
