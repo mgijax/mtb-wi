@@ -77,116 +77,49 @@
 	</script>
 	</jsp:attribute>
 	<jsp:body>
-	<html:form action="pdxComparison" method="GET">
-	<input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." 
-	class="pdx-request-button" onclick="window.location='pdxRequest.do'">
-	<table>
-		<tr class="page-info">
-		</tr>
-		<tr class="buttons">
-			<td colspan="2">
-				<table>
-					<tr>
-						<td>
-							<input type="submit" VALUE="Search">
-							<input type="button" VALUE="Reset" onclick="resetForm()">
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Limit models by primary cancer site
-			</td>
-			<td>
-				<table>
-					<tr>
-						<td>
-							<a data-tip="Select one or more primary sites as search criteria">Primary Site</a>
-						
-						<!-- \n -->
-						<html:select property="primarySites" size="8" multiple="true">
-						<html:option value="">ANY</html:option>
-						<html:options collection="primarySitesValues" property="value" labelProperty="label"/>
-						</html:select>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			Limit models by diagnosis
-		</td>
-		<td>
-			<table>
-				<tr>
-					<td>
-						<a data-tip="Select a diagnosis or diagnoses as search criteria.">Diagnosis</a>
-					
-					<!-- \n -->
-					<html:select property="diagnoses" size="8" multiple="true">
-					<html:option value="">ANY</html:option>
-					<html:options collection="diagnosesValues" property="value" labelProperty="label"/>
-					</html:select>
-				</td>
-			</tr>
-		</table>
-	</td>
-</tr>
-<tr>
-	<td>
-		Select genes for comparison
-	</td>
-	<td>
-		<table>
-			<tr>
-				<td>
-					<a data-tip="Select one or more genes as display criteria">Gene</a>
-				<!-- \n -->
-				<html:select property="genes" size="8"	styleId="genes" multiple="true" >
-				<html:options collection="genesValues" property="value" labelProperty="label"/>
-				</html:select>
-			</td>
-			<td>
-				<input name="geneSave" type="button" value="Add" onclick="addGenes();"/>
-				<!-- \n -->
-			</td>
-			<td>
-				<span name="geneSave" id="gene-save-txt">
-						<a data-tip="Create a list of saved genes for display criteria.&#10;The saved gene list will be used by default.">Saved Genes</a>
-				
-			</span>
-			<!-- \n -->
+	
+	<a href="pdxRequest.do" target="_blank">Request more information on the JAX PDX program.</a>
+	
+	<jax:searchform action="pdxComparison">
+	<fieldset>
+		<legend>Limit models by primary cancer site</legend>
+		<fieldset>
+			<legend data-tip="Select one or more primary sites as search criteria">Primary Site</legend>
+			<html:select property="primarySites" size="8" multiple="true">
+			<html:option value="">ANY</html:option>
+			<html:options collection="primarySitesValues" property="value" labelProperty="label"/>
+			</html:select>
+		</fieldset>
+	</fieldset>
+	<fieldset>
+		<legend>Limit models by diagnosis</legend>
+		<fieldset>
+			<legend data-tip="Select a diagnosis or diagnoses as search criteria.">Diagnosis</legend>
+			<html:select property="diagnoses" size="8" multiple="true">
+			<html:option value="">ANY</html:option>
+			<html:options collection="diagnosesValues" property="value" labelProperty="label"/>
+			</html:select>
+		</fieldset>
+	</fieldset>
+	<fieldset>
+		<legend>Select genes for comparison</legend>
+		<fieldset>
+			<legend data-tip="Select one or more genes as display criteria">Gene</legend>
+			<html:select property="genes" size="8"	styleId="genes" multiple="true" >
+			<html:options collection="genesValues" property="value" labelProperty="label"/>
+			</html:select>
+		</fieldset>
+		<input name="geneSave" type="button" value="Add" onclick="addGenes();"/>
+		<fieldset>
+			<legend data-tip="Create a list of saved genes for display criteria.&#10;The saved gene list will be used by default.">Saved Genes</legend>
 			<select name="geneSave" id="saved-genes" multiple="multiple" size="8" style="width:100px">
 			</select>
-		</td>
-		<td>
 			<input name="geneSave" type="button" value="Remove" onclick="removeGenes();"/>
-			<!-- \n -->
 			<input name="geneSave" type="button" value="Clear" onclick="clearGenes();"/>
-			<!-- \n -->
 			<input type="hidden" name="savedGenesList" id="saved-genes-list" />
-		</td>
-	</tr>
-</table>
-</td>
-</tr>
-<tr class="buttons">
-	<td colspan="2">
-		<table>
-			<tr>
-				<td>
-					<input type="submit" VALUE="Search">
-					<input type="button" VALUE="Reset" onclick="resetForm()">
-				</td>
-			</tr>
-		</table>
-	</td>
-</tr>
-</table>
-</html:form>
-</jsp:body>
+		</fieldset>
+	</fieldset>
+	</jax:searchform>
+	</jsp:body>
 </jax:mmhcpage>
 
