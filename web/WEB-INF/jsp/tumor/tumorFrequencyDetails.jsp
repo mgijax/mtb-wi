@@ -116,7 +116,7 @@
 		<tr>
 			<td><h4>Strain</h4></td>
 			<td>
-				<table align="left">
+				<table>
 					<tr>
 						<td class="enhance" colspan="2"><a href="strainDetails.do?key=${tumorFreq.strainKey}"><c:out value="${tumorFreq.strainName}" escapeXml="false"/></a></td>
 					</tr>
@@ -436,14 +436,14 @@
 								<a href="nojavascript.jsp" onClick="popPathWin('pathologyImageDetails.do?key=${image.imageId}', 'ImageID${image.imageId}');return false;">
 								<img width="150" src="${image.imageUrl}/${image.imageUrlPath}/${image.imageThumbName}"></a>
 							</td>
-							<td align="left">
-								<table align="left">
+							<td>
+								<table>
 									<tr>
-										<td class="small" align="right"><strong>Image ID</strong>:</td>
+										<td class="small"><strong>Image ID</strong>:</td>
 										<td class="small">${image.imageId}</td>
 									</tr>
 									<tr>
-										<td class="small" align="right"><strong>Source of Image</strong>:</td>
+										<td class="small"><strong>Source of Image</strong>:</td>
 										<td class="small">
 											<c:choose>
 											<c:when test="${not empty image.institution}">
@@ -456,7 +456,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="small" align="right"><strong>Method / Stain</strong>:</td>
+										<td class="small"><strong>Method / Stain</strong>:</td>
 										<td class="small">${image.stainMethod}</td>
 									</tr>
 								</table>

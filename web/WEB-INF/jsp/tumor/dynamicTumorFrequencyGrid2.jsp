@@ -254,7 +254,7 @@
 			</c:choose>
 			<%-- else need to add only fam.strains that have been selected --%>
 			</c:if>
-			<td class="grid" align="right" valign="middle" rowspan="${rowSpan}">
+			<td class="grid" rowspan="${rowSpan}">
 				<img src="${applicationScope.urlImageDir}/grid/sh${rowHeredity.strainHeredityKey}.png" alt="${rowHeredity.strainHeredityName}">
 			<img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" "></td>
 			<%--Done Heredity!
@@ -282,7 +282,7 @@
 				<c:forEach var="strainFam" items="${strainFamilyChk}" >
 				<c:if test="${strainFam == familyGrid.strainFamilyKey}">
 				<%-- DETERMINE STRAIN FAMILY IMAGE EXPANDED OR COLLAPSED --%>
-				<td class="grid" align="right"> 
+				<td class="grid"> 
 					<span style="white-space:nowrap">
 						&nbsp;${familyGrid.strainFamilyName} (Summary)<html:multibox property="strainFamilyChk" value="${familyGrid.strainFamilyKey}" />
 					</span>
@@ -319,7 +319,7 @@
 				<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='-' ' height='100%'>" />
 				</c:otherwise>
 				</c:choose>
-				<td><dl class="tip"><dt><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}">${tdOut}</a></dt><dd><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></dd></dl></td>
+				<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -351,7 +351,7 @@
 </c:if>
 </c:forEach>
 <tr class="grid">
-	<td class="grid" align="right" >
+	<td class="grid" >
 		<span style="white-space:nowrap">
 			<c:out value="${strainCat.strainName}" escapeXml="false"/>
 			<input type="checkbox" name="strainChk" value="${strainCat.strainKey}" >
@@ -388,8 +388,7 @@
 	<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
 	</c:otherwise>
 	</c:choose>
-	<td>
-		<dl class="tip"><dt><a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organKey=${organ.organKey}">${tdOut}</a></dt><dd><table class="gridDetails"><tr><td class="gridDetails">Strain:</td><td class="gridDetails">${theStrain.strainName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></dd></dl></td>
+	<td><a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain:</td><td class="gridDetails">${theStrain.strainName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>

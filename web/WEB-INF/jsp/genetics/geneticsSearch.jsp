@@ -3,140 +3,61 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Strain and Tumor Genetics Search Form" help="genetics">
-	<html:form action="geneticsSearchResults" method="GET">
-	<table>
-		<tr class="page-info">
-		</tr>
-		<tr class="buttons">
-			<td colspan="2">
-				<table>
-					<tr>
-						<td>
-							<input type="submit" VALUE="Search">
-							<input type="reset" VALUE="Reset">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<h5 class="label">Sort By:</h5>
-							<html:radio property="sortBy" value="Gene Symbol">Gene Symbol</html:radio>  
-							<html:radio property="sortBy" value="Mutation Type">Mutation Type</html:radio>  
-							<html:radio property="sortBy" value="Chromosome">Chromosome</html:radio>  
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<h5 class="label">Max number of items returned:</h5>
-							<html:radio property="maxItems" value="25">25</html:radio>  
-							<html:radio property="maxItems" value="100">100</html:radio>  
-							<html:radio property="maxItems" value="500">500</html:radio>  
-							<html:radio property="maxItems" value="No Limit">No Limit</html:radio>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<!-- ////  Start Error Section  //// -->
-		<%--
-		<logic:messagesPresent message="true">
-		<tr class="error">
-			<td class="error-label">Errors</td>
-			<td class="error-value">
-				<ul>
-					<html:messages id="message" message="true">
-					<li>${message}</li>
-					</html:messages>
-				</ul>
-			</td>
-		</tr>
-		</logic:messagesPresent>
-		--%>
-		<!-- ////  End Error Section  //// -->
-		<tr>
-			<td>
-				Strain and Tumor Genetics:
-			</td>
-			<td>
-				<table>
-					<tr>
-						<td>
-							<table>
-								<tr>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td align="right"><dl class="tip"><dt>Gene / Marker</dt><dd>This field offers a text based search against Marker Symbol, Name and Synonym records. If a gene of interest is not found on the list please check the Mouse Genome Database to ensure that the gene symbol and name you are searching for is current.</dd></dl>:</td>
-									<td>
-										<html:select property="markerNameComparison">
-										<html:option value="Contains"> Contains </html:option>
-										<html:option value="Begins"> Begins </html:option>
-										<html:option value="Equals"> Equals </html:option>
-										</html:select>
-									</td>
-									<td><html:text property="markerName" size="20" maxlength="50"/></td>
-								</tr>
-								<tr>
-									<td align="right"><dl class="tip"><dt>Allele</dt><dd>If a gene of interest is not found on the list please check the Mouse Genome Database to ensure that the gene symbol and name you are searching for is current.</dd></dl>:</td>
-									<td>
-										<html:select property="alleleNameComparison">
-										<html:option value="Contains"> Contains </html:option>
-										<html:option value="Begins"> Begins </html:option>
-										<html:option value="Equals"> Equals </html:option>
-										</html:select>
-									</td>
-									<td><html:text property="alleleName" size="20" maxlength="50"/></td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<table>
-								<tr>
-									<td>
-										<dl class="tip"><dt>Mutations / Aberrations</dt><dd>The type of mutation, chromosomal aberration, or other genetic change observed in the strain and/or in the tumor tissue. The values for type of genetic change are selected from a controlled vocabulary list.</dd></dl>:
-										<!-- \n -->
-										<html:select property="alleleGroupType" size="8" multiple="true">
-										<html:option value="">ANY</html:option>
-										<html:options collection="alleleGroupTypeValues" property="value" labelProperty="label"/>
-										</html:select>
-									</td>
-									<td>
-										<dl class="tip"><dt>Chromosome</dt><dd>Chromosome number an allele is found on. This search is used to find allele records associated with a specific chromosome number using a pick list.</dd></dl>:
-										<!-- \n -->
-										<html:select property="chromosome" size="8" multiple="true">
-										<html:option value="">ANY</html:option>
-										<html:options collection="chromosomeValues" property="value" labelProperty="label"/>
-										</html:select>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<dl class="tip"><dt>Assay Images</dt><dd>Some cytogenetic records include assay images selecting this check box will return only cytognetic records with assay images.</dd></dl>:
-										<!-- \n -->
-										<html:checkbox property="assayImages">Restrict search to entries with associated assay images. </html:checkbox>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr class="buttons">
-			<td colspan="2">
-				<table>
-					<tr>
-						<td>
-							<input type="submit" VALUE="Search">
-							<input type="reset" VALUE="Reset">
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-	</html:form>
+	<jax:searchform action="geneticsSearchResults" sortby="Gene Symbol,Mutation Type,Chromosome">
+	<fieldset>
+		<legend>Strain and Tumor Genetics</legend>
+		<fieldset>
+			<legend class="tip">
+				Gene/Marker
+				<small>This field offers a text based search against Marker Symbol, Name and Synonym records. If a gene of interest is not found on the list please check the Mouse Genome Database to ensure that the gene symbol and name you are searching for is current.</small>				
+			</legend>
+			<html:select property="markerNameComparison">
+			<html:option value="Contains"> Contains </html:option>
+			<html:option value="Begins"> Begins </html:option>
+			<html:option value="Equals"> Equals </html:option>
+			</html:select>
+			<html:text property="markerName" size="20" maxlength="50"/>
+		</fieldset>
+		<fieldset>
+			<legend class="tip">
+				Allele
+				<small>If a gene of interest is not found on the list please check the Mouse Genome Database to ensure that the gene symbol and name you are searching for is current.</small>		
+			</legend>
+			<html:select property="alleleNameComparison">
+			<html:option value="Contains"> Contains </html:option>
+			<html:option value="Begins"> Begins </html:option>
+			<html:option value="Equals"> Equals </html:option>
+			</html:select>
+			<html:text property="alleleName" size="20" maxlength="50"/>
+		</fieldset>
+		<fieldset>
+			<legend class="tip">
+				Mutations/Aberrations
+				<small>The type of mutation, chromosomal aberration, or other genetic change observed in the strain and/or in the tumor tissue. The values for type of genetic change are selected from a controlled vocabulary list.</small>
+			</legend>
+			<html:select property="alleleGroupType" size="8" multiple="true">
+			<html:option value="">ANY</html:option>
+			<html:options collection="alleleGroupTypeValues" property="value" labelProperty="label"/>
+			</html:select>
+		</fieldset>
+		<fieldset>
+			<legend class="tip">
+				Chromosome
+				<small>Chromosome number an allele is found on. This search is used to find allele records associated with a specific chromosome number using a pick list.</small>
+			</legend>
+			<html:select property="chromosome" size="8" multiple="true">
+			<html:option value="">ANY</html:option>
+			<html:options collection="chromosomeValues" property="value" labelProperty="label"/>
+			</html:select>
+		</fieldset>
+		<fieldset>
+			<legend class="tip">
+				Assay Images
+				<small>Some cytogenetic records include assay images selecting this check box will return only cytognetic records with assay images.</small>
+			</legend>
+			<html:checkbox property="assayImages">Restrict search to entries with associated assay images. </html:checkbox>
+		</fieldset>
+	</fieldset>	
+	</jax:searchform>
 </jax:mmhcpage>
 

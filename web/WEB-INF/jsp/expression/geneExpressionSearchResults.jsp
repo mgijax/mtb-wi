@@ -197,6 +197,3 @@
 		</tbody>
 	</table>
 </jax:mmhcpage>
-
-
-

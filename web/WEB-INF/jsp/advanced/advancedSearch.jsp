@@ -60,20 +60,19 @@
 				<table>
 					<tr>
 						<td>
-							<dl class="tip"><dt>Strain Name:</dt><dd><p>Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.</dd></dl>
-							<!-- \n -->
-							<html:select property="strainNameComparison">
-							<html:option value="Contains"> Contains </html:option>
-							<html:option value="Begins"> Begins </html:option>
-							<html:option value="Equals"> Equals </html:option>
-							</html:select>
-							<html:text property="strainName" size="30" maxlength="255"/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<dl class="tip"><dt>Strain Type:</dt><dd>Indicates method of strain derivation. </p><p> The values for these fields are selected from lists of controlled vocabulary terms.</p></dd></dl>
-							<!-- \n -->
+							<a data-tip="Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.">Strain Name:</a>
+								<!-- \n -->
+								<html:select property="strainNameComparison">
+								<html:option value="Contains"> Contains </html:option>
+								<html:option value="Begins"> Begins </html:option>
+								<html:option value="Equals"> Equals </html:option>
+								</html:select>
+								<html:text property="strainName" size="30" maxlength="255"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a data-tip="Indicates method of strain derivation.&#10;The values for these fields are selected from lists of controlled vocabulary terms.">Strain Type:</a>							<!-- \n -->
 							<html:select property="strainTypes" size="8" multiple="true">
 							<html:option value="">ANY</html:option>
 							<html:options collection="strainTypeValues" property="value" labelProperty="label"/>
@@ -82,7 +81,7 @@
 					</tr>
 					<tr>
 						<td>
-							<dl class="tip"><dt>Gene or Allele:</dt><dd><p>This field offers a text based search for strains with known germline genotype at specific genes/loci. </p><p> This field searches Gene symbols, Gene names, and synonyms. The default operator for this search is "CONTAINS". || If you have difficulty locating records of interest, you may want to consult the Mouse Genome Database to ensure that the search string is appropriate for the gene/locus of interest.</p></dd></dl>
+							<a data-tip="This field offers a text based search for strains with known germline genotype at specific genes/loci.&#10;This field searches Gene symbols, Gene names, and synonyms. The default operator for this search is CONTAINS.&#10;If you have difficulty locating records of interest, you may want to consult the Mouse Genome Database to ensure that the search string is appropriate for the gene/locus of interest.">Gene or Allele:</a>							
 							<html:text property="geneticName" size="30" maxlength="255"/> <em>(Symbol/Name/Synonym)</em>
 						</td>
 					</tr>
@@ -97,18 +96,16 @@
 				<table>
 					<tr>
 						<td>
-							<dl class="tip"><dt>Organ/Tissue of Origin</dt><dd><p><p>The specific organ (or tissue) in which tumor cells originate. </p><p> The value for this field is selected from a list of controlled vocabulary terms.</p></dd></dl>:
-							<!-- \n -->
-							<html:select property="organTissueOrigin" size="8" multiple="true">
-							<html:option value="">ANY</html:option>
-							<html:options collection="organTissueValues" property="value" labelProperty="label"/>
-							</html:select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<dl class="tip"><dt>Tumor Classification</dt><dd>The value for this field is selected from a list of controlled vocabulary terms. </p><p> This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.</p></dd></dl>:
-							<!-- \n -->
+							<a data-tip="The specific organ (or tissue) in which tumor cells originate.&#10;The value for this field is selected from a list of controlled vocabulary terms.">Organ/Tissue of Origin</a>:
+								<html:select property="organTissueOrigin" size="8" multiple="true">
+								<html:option value="">ANY</html:option>
+								<html:options collection="organTissueValues" property="value" labelProperty="label"/>
+								</html:select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a data-tip="The value for this field is selected from a list of controlled vocabulary terms.&#10;This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.">Tumor Classification</a>:
 							<html:select property="tumorClassification" size="8" multiple="true">
 							<html:option value="">ANY</html:option>
 							<html:options collection="tumorClassificationValues" property="value" labelProperty="label"/>
@@ -117,7 +114,7 @@
 					</tr>
 					<tr>
 						<td>
-							<dl class="tip"><dt>Treatment Type</dt><dd><p>This field is used to distinguish tumors that arose under particular treatment conditions from those that arose spontaneously. </p><p> Treatment type offers a means to search for tumors induced by agents falling under a shared classification (based on source/mechanism of action). || The value for this field is selected from a list of controlled vocabulary terms.</p></dd></dl>:
+							<a data-tip="This field is used to distinguish tumors that arose under particular treatment conditions from those that arose spontaneously.&#10;Treatment type offers a means to search for tumors induced by agents falling under a shared classification (based on source/mechanism of action).&#10;The value for this field is selected from a list of controlled vocabulary terms.">Treatment Type</a>:
 							<html:select property="agentType">
 							<html:option value="">ANY</html:option>
 							<html:options collection="agentTypes" property="value" labelProperty="label"/>
@@ -126,33 +123,32 @@
 					</tr>
 					<tr>
 						<td>
-							<dl class="tip"><dt>Metastasis</dt><dd><p>Used to search for tumors that have been reported to metastasize to a particular organ. </p><p> First choose the <em>Restrict search to metastasis tumors only</em> then select an organ from the <em>Metastasizes to the</em> menu.</p></dd></dl>:
-					<html:checkbox property="metastasisLimit"/> Restrict search to metastatic tumors only. 
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<dl class="tip"><dt>Pathology Images</dt><dd><p>Pathology images (histology photomicrographs) of the tumor. </p><p> To search for tumor records associated with Pathology images, choose the box next to <em>Restrict search to entries with associated pathology images</em>.</p></dd></dl>:
-				<!-- \n -->
-				<html:checkbox property="mustHaveImages"/> Restrict search to entries with associated pathology images.
+							<a class="tip">Metastasis<div role="tooltip"><p>Used to search for tumors that have been reported to metastasize to a particular organ.</p><p>First choose the <em>Restrict search to metastasis tumors only</em> then select an organ from the <em>Metastasizes to the</em> menu.</p></div></a>:
+							<html:checkbox property="metastasisLimit"/> Restrict search to metastatic tumors only. 
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a class="tip">Pathology Images<div role="tooltip"><p>Pathology images (histology photomicrographs) of the tumor.</p><p> To search for tumor records associated with Pathology images, choose the box next to <em>Restrict search to entries with associated pathology images</em></p></div></a>:
+							<html:checkbox property="mustHaveImages"/> Restrict search to entries with associated pathology images.
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr class="buttons">
+			<td colspan="2">
+				<table>
+					<tr>
+						<td>
+							<input type="submit" VALUE="Search">
+							<input type="reset" VALUE="Reset">
+						</td>
+					</tr>
+				</table>
 			</td>
 		</tr>
 	</table>
-</td>
-</tr>
-<tr class="buttons">
-	<td colspan="2">
-		<table>
-			<tr>
-				<td>
-					<input type="submit" VALUE="Search">
-					<input type="reset" VALUE="Reset">
-				</td>
-			</tr>
-		</table>
-	</td>
-</tr>
-</table>
-</html:form>
+	</html:form>
 </jax:mmhcpage>
 

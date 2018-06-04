@@ -44,7 +44,7 @@
 				<table>
 					<tr>
 						<td>
-							<dl class="tip"><dt>First Author</dt><dd>Conducts a text string search against first author names.</dd></dl>:
+							<a data-tip="Conducts a text string search against first author names.">First Author</a>:
 							<!-- \n -->
 							<html:select property="firstAuthorComparison">
 							<html:option value="Contains"> Contains </html:option>
@@ -56,14 +56,14 @@
 					</tr>
 					<tr>
 						<td>
-							<dl class="tip"><dt>Authors</dt><dd>Conducts a text string search against all author names.</dd></dl>:
+							<a data-tip="Conducts a text string search against all author names.">Authors</a>:
 							<!-- \n -->
 							contains <html:text property="authors" size="40" maxlength="255"/>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<dl class="tip"><dt>Journal</dt><dd>Text string search against the abbreviated name of the journal in which the published reference appears.</dd></dl>:
+							<a data-tip="Text string search against the abbreviated name of the journal in which the published reference appears.">Journal</a>:
 							<!-- \n -->
 							<html:select property="journalComparison">
 							<html:option value="Contains"> Contains </html:option>
@@ -78,7 +78,7 @@
 							<table>
 								<tr>
 									<td>
-										<dl class="tip"><dt>Year</dt><dd>Conducts a text string search for publication year.</dd></dl>:
+										<a data-tip="Conducts a text string search for publication year.">Year</a>:
 										<!-- \n -->
 										<html:select property="yearComparison">
 										<html:option value="="> Equals </html:option>
@@ -89,13 +89,13 @@
 									</td>
 									<td width="30"></td>
 									<td>
-										<dl class="tip"><dt>Volume</dt><dd>Conducts a text string search for the volume of a journal in which an article was published.</dd></dl>:
+										<a data-tip="Conducts a text string search for the volume of a journal in which an article was published.">Volume</a>:
 										<!-- \n -->
 										<html:text property="volume" size="10" maxlength="20"/>
 									</td>
 									<td width="30"></td>
 									<td>
-										<dl class="tip"><dt>Page</dt><dd>Conducts a text string search for the <em>BEGINNING</em> page number of a journal article.</dd></dl>:
+										<a data-tip="Conducts a text string search for the BEGINNING page number of a journal article.">Page</a>:
 									<!-- \n -->
 									<html:text property="pages"	size="10" maxlength="20"/>
 								</td>
@@ -105,7 +105,7 @@
 				</tr>
 				<tr>
 					<td>
-						<dl class="tip"><dt>Title</dt><dd>Conducts a text string search for an article title.</dd></dl>:
+						<a data-tip="Conducts a text string search for an article title.">Title</a>:
 						<!-- \n -->
 						<html:select property="titleComparison">
 						<html:option value="Contains"> Contains </html:option>
@@ -126,11 +126,7 @@
 			<table>
 				<tr>
 					<td>
-						<dl class="tip"><dt>Organ/Tissue of Origin</dt><dd>The specific organ (or tissue) in which tumor cells originate.
-							<!-- \n -->
-							<!-- \n -->
-					The value for this field is selected from a list of controlled vocabulary terms.</dd></dl>:
-					<!-- \n -->
+						<a data-tip="The specific organ (or tissue) in which tumor cells originate.&#10;The value for this field is selected from a list of controlled vocabulary terms.">Organ/Tissue of Origin</a>:
 					<html:select property="organTissue" size="5" >
 					<html:option value="">ANY</html:option>
 					<html:options collection="organTissueValues" property="value" labelProperty="label"/>
@@ -139,11 +135,7 @@
 			</tr>
 			<tr>
 				<td>
-					<dl class="tip"><dt>Tumor Classification</dt><dd>The value for this field is selected from a list of controlled vocabulary terms.
-						<!-- \n -->
-						<!-- \n -->
-				This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.</dd></dl>:
-				<!-- \n -->
+					<a data-tip="The value for this field is selected from a list of controlled vocabulary terms.&#10;This controlled vocabulary was developed using the animal pathology community tumor classification standards whenever possible.">Tumor Classification</a>:
 				<html:select property="tumorClassification" size="5" >
 				<html:option value="">ANY</html:option>
 				<html:options collection="tumorClassificationValues" property="value" labelProperty="label"/>

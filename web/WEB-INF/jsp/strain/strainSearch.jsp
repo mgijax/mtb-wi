@@ -57,7 +57,7 @@
 				<table>
 					<tr>
 						<td>
-							<dl class="tip"><dt>Strain Name:</dt><dd>Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.</dd></dl>
+							<a data-tip="Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.">Strain Name:</a>
 							<!-- \n -->
 							<html:select property="likeClause">
 							<html:option value="Contains"> Contains </html:option>
@@ -72,10 +72,7 @@
 					</tr>
 					<tr>
 						<td>
-							<dl class="tip"><dt>Strain Type:</dt><dd>Indicates method of strain derivation.
-								<!-- \n -->
-								<!-- \n -->
-						The values for these fields are selected from lists of controlled vocabulary terms.</dd></dl>
+							<a data-tip="Indicates method of strain derivation.&#10;The values for these fields are selected from lists of controlled vocabulary terms.">Strain Type:</a>
 						<!-- \n -->
 						<html:select property="strainTypes" size="8" multiple="true">
 						<html:option value="">ANY</html:option>
@@ -94,14 +91,7 @@
 			<table>
 				<tr>
 					<td>
-						<dl class="tip"><dt>Gene or Allele:</dt><dd>This field offers a text based search for strains with known germline genotype at specific genes/loci.
-							<!-- \n -->
-							<!-- \n -->
-							This field searches Gene symbols, Gene names, and synonyms. The default operator for this search is \'CONTAINS\'.
-							<!-- \n -->
-							<!-- \n -->
-					If you have difficulty locating records of interest, you may want to consult the Mouse Genome Database to ensure that the search string is appropriate for the gene/locus of interest.</dd></dl>
-					<!-- \n -->
+						<a data-tip="This field offers a text based search for strains with known germline genotype at specific genes/loci.&#10;This field searches Gene symbols, Gene names, and synonyms. The default operator for this search is CONTAINS.&#10;If you have difficulty locating records of interest, you may want to consult the Mouse Genome Database to ensure that the search string is appropriate for the gene/locus of interest.">Gene or Allele:</a>
 					<html:text property="geneticName" size="30" maxlength="255"/> <em>(Symbol/Name/Synonym)</em>
 				</td>
 			</tr>
@@ -116,15 +106,12 @@
 		<table>
 			<tr>
 				<td>
-					Search for strain records with <dl class="tip"><dt>outside links</dt><dd>You can restrict your search for strains that were obtained from the JAX&reg;Mice or NCI Mouse Repositories.</dd></dl> to:
+					Search for strain records with <a data-tip="You can restrict your search for strains that were obtained from the JAX&reg;Mice or NCI Mouse Repositories.">outside links</a> to:
 					<!-- \n -->
 					<table>
 						<tr>
 							<td>
-								<html:checkbox property="siteJaxMice"/>JAX<sup>&reg;</sup>Mice &nbsp; &nbsp; <dl class="tip"><dt>Stock No.</dt><dd>A serial stock number assigned to strains sold by The Jackson Laboratory.
-								<!-- \n -->
-								<!-- \n -->
-							Users interested in a specific strain of mouse that is offered through The Jackson Laboratorys JAX Research Systems can query by the stock number of that mouse.</dd></dl>:<html:text property="jaxStockNumber" size="6" maxlength="10"/>
+								<html:checkbox property="siteJaxMice"/>JAX<sup>&reg;</sup>Mice &nbsp; &nbsp; <a data-tip="A serial stock number assigned to strains sold by The Jackson Laboratory.&#10;Users interested in a specific strain of mouse that is offered through The Jackson Laboratorys JAX Research Systems can query by the stock number of that mouse.">Stock No.</a>:<html:text property="jaxStockNumber" size="6" maxlength="10"/>
 							<!-- \n -->
 							<html:checkbox property="siteNCIMR"/>NCI Mouse Repository
 						</td>

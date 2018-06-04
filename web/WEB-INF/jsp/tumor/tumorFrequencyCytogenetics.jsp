@@ -137,14 +137,14 @@
 													<a href="assayImageDetails.do?key=${image.assayImagesKey}">
 													<img width="150" src="${applicationScope.assayImageURL}/${applicationScope.assayImagePath}/${image.lowResName}"></a>
 												</td>
-												<td align="left">
-													<table align="left">
+												<td>
+													<table>
 														<tr>
-															<td class="small" align="right"><strong>Image ID</strong>:</td>
+															<td class="small"><strong>Image ID</strong>:</td>
 															<td class="small">${image.assayImagesKey}</td>
 														</tr>
 														<tr>
-															<td class="small" align="right"><strong>Source</strong>:</td>
+															<td class="small"><strong>Source</strong>:</td>
 															<td class="small">
 																${image.createUser}
 															</td>

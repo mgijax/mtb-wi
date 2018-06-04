@@ -287,7 +287,7 @@
 	<!-- ////  Start Detail Section  //// -->
 	<tr>
 		<td colspan="2">
-			<table width="560">	
+			<table>	
 				<c:choose>
 				<c:when test="${not empty QTLForm.mgiId}">
 				<tr>
@@ -349,12 +349,12 @@
 	</tr>
 	<tr>
 		<td>
-			<table width="280">
+			<table>
 				<tr><td id="viewer"></td></tr>
 			</table>
 		</td>
 		<td>
-			<table width="280">
+			<table>
 				<html:form action="gViewerDetails" method="GET" onsubmit="return loadMGI()">
 				<tr>
 					<td colspan="6">
@@ -447,7 +447,7 @@
 							<option value="tab">Tab Delimited</option>
 						</select>
 					</td>
-					<td align="right" colspan="2">
+					<td colspan="2">
 						<input type="submit" value="Search"/>
 						<html:hidden property="featureTypes"/>
 						<html:hidden property="chrom"/>
@@ -467,7 +467,7 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<table width="560">
+			<table>
 				<tr><td id="grid"></td></tr>
 				<tr>
 					<td colspan="6"><div id="viewer-submit-div"><input type='button' value="Send results to QTL viewer" onclick="viewerSubmit()"></div></td>

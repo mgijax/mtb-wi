@@ -199,17 +199,17 @@
 						<td width=250>
 							<table>
 								<tr>
-									<td class="small" align="right"><div class="nowrap"><h5 class="label">Image ID:</h5></div></td>
+									<td class="small"><div class="nowrap"><h5 class="label">Image ID:</h5></div></td>
 									<td class="small">${image.imageId}</td>
 								</tr>
 								<tr>
-									<td class="small" align="right"><div class="nowrap"><h5 class="label">Source of Image:</h5></div></td>
+									<td class="small"><div class="nowrap"><h5 class="label">Source of Image:</h5></div></td>
 									<td class="small">
 										${image.sourceOfImage}
 									</td>
 								</tr>
 								<tr>
-									<td class="small" align="right"><div class="nowrap"><h5 class="label">Pathologist:</h5></div></td>
+									<td class="small"><div class="nowrap"><h5 class="label">Pathologist:</h5></div></td>
 									<td class="small">
 										${image.pathologist}
 									</td>
@@ -217,7 +217,7 @@
 								<c:choose>
 								<c:when test="${not empty image.stainMethod}">
 								<tr>
-									<td class="small" align="right"><div class="nowrap"><h5 class="label">Method / Stain:</h5></div></td>
+									<td class="small"><div class="nowrap"><h5 class="label">Method / Stain:</h5></div></td>
 									<td class="small">${image.stainMethod}</td>
 								</tr>
 								</c:when>

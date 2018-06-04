@@ -103,7 +103,7 @@
 				<table>
 					<tr>
 						<td>
-							<dl class="tip"><dt>Primary Site</dt><dd>Select one or more primary sites as search criteria</dd></dl>
+							<a data-tip="Select one or more primary sites as search criteria">Primary Site</a>
 						
 						<!-- \n -->
 						<html:select property="primarySites" size="8" multiple="true">
@@ -123,7 +123,7 @@
 			<table>
 				<tr>
 					<td>
-						<dl class="tip"><dt>Diagnosis</dt><dd>Select a diagnosis or diagnoses as search criteria.</dd></dl>
+						<a data-tip="Select a diagnosis or diagnoses as search criteria.">Diagnosis</a>
 					
 					<!-- \n -->
 					<html:select property="diagnoses" size="8" multiple="true">
@@ -143,7 +143,7 @@
 		<table>
 			<tr>
 				<td>
-					<dl class="tip"><dt>Gene</dt><dd>Select one or more genes as display criteria</dd></dl>
+					<a data-tip="Select one or more genes as display criteria">Gene</a>
 				<!-- \n -->
 				<html:select property="genes" size="8"	styleId="genes" multiple="true" >
 				<html:options collection="genesValues" property="value" labelProperty="label"/>
@@ -155,9 +155,7 @@
 			</td>
 			<td>
 				<span name="geneSave" id="gene-save-txt">
-						<dl class="tip"><dt>Saved Genes</dt><dd>Create a list of saved genes for display criteria.
-						<!-- \n -->
-						The saved gene list will be used by default.</dd></dl>
+						<a data-tip="Create a list of saved genes for display criteria.&#10;The saved gene list will be used by default.">Saved Genes</a>
 				
 			</span>
 			<!-- \n -->

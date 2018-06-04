@@ -339,7 +339,48 @@ footer img {
 
 
 
+/* Tooltips */
 
+.tip {
+	position:relative;
+}
+
+a.tip,
+span.tip,
+em.tip,
+strong.tip,
+small.tip,
+button.tip,
+input.tip,
+label.tip {
+	display:inline-block;
+}
+
+[role="tooltip"] {
+	display:none;
+	position:absolute;
+	z-index:8888;
+	top:100%;
+	left:-0.5em;
+	right:-0.5em;
+	min-width:25em;
+	margin:0;
+	padding:1em 0.5em 0.5em;
+	background-color:white;
+	box-shadow:0 8px 8px rgba(0,0,0,0.25);
+}
+
+.tip:hover > [role="tooltip"],
+.tip:focus > [role="toolltip"],
+.tip.show-tip > [role="tooltip"] {
+	display:block;
+}
+
+/* Non-js fallback */
+
+[data-tip]:hover:after { 
+	content: attr(data-tip); 
+}
 
 
 

@@ -187,7 +187,7 @@
 				</tr>
 				<tr>
 					<td>
-						<dl class="tip"><dt>Model ID</dt><dd>Enter a Model ID (eg TM:00001) as search criteria.</dd></dl>
+						<a data-tip="Enter a Model ID (eg TM:00001) as search criteria.">Model ID</a>
 						<!-- \n -->
 						<div id ="model-i-dCombo"></div>&nbsp;eg. TM00001
 					</td>
@@ -203,7 +203,7 @@
 			<table>
 				<tr>
 					<td>
-						<dl class="tip"><dt>Primary Site</dt><dd>Select one or more primary sites as search criteria</dd></dl>
+						<a data-tip="Select one or more primary sites as search criteria">Primary Site</a>
 						<!-- \n -->
 						<html:select property="primarySites" size="8" multiple="true">
 						<html:option value="">ANY</html:option>
@@ -212,17 +212,17 @@
 					</td>
 					<td></td>
 					<td>
-						<dl class="tip"><dt>Limit results to models</dt><dd>Only return models with selected additional information.</dd></dl>		 
+						<a data-tip="Only return models with selected additional information.">Limit results to models</a>		 
 						<!-- \n -->
 						<html:checkbox property="dosingStudy"/> with dosing study data, <html:checkbox property="tumorGrowth"/> with tumor growth graphs, <html:checkbox property="treatmentNaive"/> 
-						<dl class="tip"><dt>
+						<a data-tip="PDX models are considered treatment naive if the patient did not receive chemotherapy, immunotherapy, hormone therapy or radiation therapy for this primary cancer within 5 years prior to sample collection and/or within 1 year for a different cancer.">
 							from treatment naive patients.
 							<!-- \n -->
-						</dt><dd>PDX models are considered treatment naive if the patient did not receive chemotherapy, immunotherapy, hormone therapy or radiation therapy for this primary cancer within 5 years prior to sample collection and/or within 1 year for a different cancer.</dd></dl>
+						</a>
 						<!-- \n -->
 						<c:choose>
 						<c:when test="${not empty tagsValues}">
-						<dl class="tip"><dt>Limit results to models tagged as</dt><dd>Only return models tagged as.</dd></dl>		 
+						<a data-tip="Only return models tagged as.">Limit results to models tagged as</a>		 
 						<!-- \n -->
 						<html:select property="tags" size="4" multiple="true">
 						<html:options collection="tagsValues" property="value" labelProperty="label"/>
@@ -242,7 +242,7 @@
 			<table>
 				<tr>
 					<td>
-						<dl class="tip"><dt>Diagnosis</dt><dd>Select a diagnosis or diagnoses as search criteria.</dd></dl>
+						<a data-tip="Select a diagnosis or diagnoses as search criteria.">Diagnosis</a>
 						<!-- \n -->
 						<html:select property="diagnoses" size="8" multiple="true">
 						<html:option value="">ANY</html:option>
@@ -261,14 +261,14 @@
 			<table>
 				<tr>
 					<td>
-						<dl class="tip"><dt>Drug</dt><dd>RECIST drug.</dd></dl>
+						<a data-tip="RECIST drug.">Drug</a>
 						<!-- \n -->
 						<html:select property="recistDrugs" size="4" >
 						<html:options collection="recistDrugs" property="value" labelProperty="label"/>
 						</html:select>
 					</td>
 					<td>
-						<dl class="tip"><dt>Response</dt><dd>RECIST response.</dd></dl>
+						<a data-tip="RECIST response.">Response</a>
 						<!-- \n -->
 						<html:select property="recistResponses" size="4" >
 						<html:options collection="recistResponses" property="value" labelProperty="label"/>
@@ -286,7 +286,7 @@
 			<table>
 				<tr>
 					<td>
-						<dl class="tip"><dt>Fusion Gene</dt><dd>Select a fusion gene as search criteria.</dd></dl>
+						<a data-tip="Select a fusion gene as search criteria.">Fusion Gene</a>
 						<!-- \n -->
 						<html:select property="fusionGenes" size="4" >
 						<html:option value="Any">ANY</html:option><!-- this has a value because it is a constraint ie only some models have fusion genes	-->
@@ -305,7 +305,7 @@
 			<table>
 				<tr>
 					<td>
-						<dl class="tip"><dt>Gene</dt><dd>Select one or more genes as search criteria</dd></dl>
+						<a data-tip="Select one or more genes as search criteria">Gene</a>
 						<!-- \n -->
 						<div id="gene-select-oMatic"></div>
 					</td>
@@ -317,7 +317,7 @@
 					<c:choose>
 					<c:when test="${not empty variantsValues}">
 					<td>
-						<dl class="tip"><dt>Variants</dt><dd>Select one or more variants as search criteria</dd></dl>
+						<a data-tip="Select one or more variants as search criteria">Variants</a>
 						<!-- \n -->
 						<html:select property="variants" size="8" multiple="false" styleId="variantSelect">
 						<html:option value="">ANY</html:option>
@@ -341,7 +341,7 @@
 			Display a chart of gene expression across PDX models for a gene
 		</td>
 		<td>
-			<dl class="tip"><dt>Gene</dt><dd>Select a gene to view expression values</dd></dl>
+			<a data-tip="Select a gene to view expression values">Gene</a>
 			<!-- \n -->
 			<div id="gene-select-oMatic2"></div>
 		</td>
@@ -351,7 +351,7 @@
 			Search by gene amplification and deletion
 		</td>
 		<td>
-			<dl class="tip"><dt>Gene</dt><dd>Select a gene</dd></dl>
+			<a data-tip="Select a gene">Gene</a>
 			<!-- \n -->
 			<div id="gene-select-oMatic3"></div>
 		</td>
@@ -364,7 +364,7 @@
 			<strong>WORK IN PROGRESS </strong>
 		</td>
 		<td>
-			<dl class="tip"><dt>Chromosome</dt><dd>Select a chromosome</dd></dl>
+			<a data-tip="Select a chromosome">Chromosome</a>
 			<!-- \n -->
 			<html:select property="chrCNV" size="8"	styleId="chrCNV" onclick="clearGenes()">
 			<html:options collection="chrValuesCNV" property="value" labelProperty="label"/>

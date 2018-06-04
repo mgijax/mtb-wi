@@ -291,7 +291,7 @@
 				<td>
 					<c:choose>
 					<c:when test="${tumor.images==true}">
-					<div><dl class="tip"><dt><img src="${applicationScope.urlImageDir}/pic.gif" alt="X"></dt><dd>Images aviable from Pathology Reports link on Summary Page</dd></dl></div>
+					<div><a data-tip="Images aviable from Pathology Reports link on Summary Page"><img src="${applicationScope.urlImageDir}/pic.gif" alt="X"></a></div>
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>
