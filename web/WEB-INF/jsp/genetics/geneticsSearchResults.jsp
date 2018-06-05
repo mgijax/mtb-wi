@@ -7,50 +7,17 @@
 	<a name="top"></a>
 	<table>
 		<caption>
-			<div class="search-summary">		
+			<div class="result-summary">		
 				<h4>Search Summary</h4>
-				<!-- \n -->
-				<c:if test="${not empty alleleName}">
-				<h5 class="label">Allele Name:</h5> ${alleleNameComparison} "${alleleName}"
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty markerName}">
-				<h5 class="label">Marker Name:</h5> ${markerNameComparison} "${markerName}"
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty chromosomes}">
-				<c:choose>
-				<c:when test="${chromosomes>'1'}">
-				<h5 class="label">Chromosomes:</h5>
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Chromosome:</h5>
-				</c:otherwise>
-				</c:choose>
-				${chromosomes}
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty mutations}">
-				<c:choose>
-				<c:when test="${mutations>'1'}">
-				<h5 class="label">Mutations / Aberrations:</h5>
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Mutation / Aberration:</h5>
-				</c:otherwise>
-				</c:choose>
-				${mutations}
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty assayImages}">
-				<h5 class="label">Restrict results to records that include assay images</h5>
-				<!-- \n -->
-				</c:if>
-				<h5 class="label">Sort By:</h5> ${sortBy}
-				<!-- \n -->
-				<h5 class="label">Display Limit:</h5> ${maxItems} in each section
+				<jax:dl dt="Allele Name" dd="${alleleName}"/>
+				<jax:dl dt="Marker Name" dd="${markerName}"/>
+				<jax:dl dt="Chromosome" dds="${chromosomes}"/>
+				<jax:dl dt="Mutations/Aberrations" dd="${mutations}"/>
+				<jax:dl dt="Restrict results to records that include assay images" test="${not empty assayImages}"/>
+				<jax:dl dt="Sort By" dd="${sortBy}"/>
+				<jax:dl dt="Display Limit" dd="${maxItems} in each section"/>
 			</div>
-			<div class="display-counts">
+			<div class="result-count">
 				<p>
 					<c:choose>
 					<c:when test="${numberOfResultsStrains != totalResultsStrains}">

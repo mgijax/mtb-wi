@@ -8,123 +8,55 @@
 		<caption>
 			<div class="search-summary">
 				<h4>Search Summary</h4>
-				<c:if test="${not empty organs}">
-				<c:choose>
-				<c:when test="${fn:length(organs)>1}">
-				<h5 class="label">Organs:</h5>
-				</c:when>
-				<c:otherwise>	
-				<h5 class="label">Organ:</h5>
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="organ" items="${organs}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${organ},
-				</c:when>
-				<c:otherwise>
-				${organ}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty tumorClassifications}">
-				<c:choose>
-				<c:when test="${fn:length(tumorClassifications)>1}">
-				<h5 class="label">Tumor Classifications:</h5>
-				</c:when>
-				<c:otherwise>	
-				<h5 class="label">Tumor Classification:</h5>
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="classification" items="${tumorClassifications}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${classification},
-				</c:when>
-				<c:otherwise>
-				${classification}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty strainName}">
-				<h5 class="label">Strain:</h5> ${strainName}
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty platforms}">
-				<c:choose>
-				<c:when test="${fn:length(platforms)>1}">
-				<h5 class="label">Platforms:</h5>
-				</c:when>
-				<c:otherwise>	
-				<h5 class="label">Platform:</h5>
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="platform" items="${platforms}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${platform},
-				</c:when>
-				<c:otherwise>
-				${platform}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				<!-- \n -->
-				</c:if>
-				<c:choose>
-				<c:when test="${not empty samplesWOSeries || not empty seriesWSamples}">
-				<c:choose>
-				<c:when test="${not empty seriesWSamples}">
-				<c:choose>
-				<c:when test="${seriesWSamples == '1'}">
-				<h5 class="label">${seriesWSamples} series has matching samples </h5>
-				<!-- \n -->
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">${seriesWSamples} series have matching samples </h5>
-				<c:forEach var="series" items="${results}" >
-				<c:choose>
-				<c:when test="${not empty series.series.id}">
-				<a href="#${series.series.id}">${series.series.id}</a>
-				</c:when>
-				</c:choose>
-				</c:forEach>
-				</c:otherwise>
-				</c:choose>
-				</c:when>
-				</c:choose>
-				<c:choose>
-				<c:when test="${not empty samplesWOSeries}">
-				<!-- \n -->
-				<c:choose>
-				<c:when test="${samplesWOSeries == '1'}">
-				<h5 class="label">${samplesWOSeries} matching sample not associated with a series </h5>
-				<!-- \n -->
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">${samplesWOSeries} matching samples not associated with any series </h5>
-				<!-- \n -->
-				</c:otherwise>
-				</c:choose>
-				</c:when>
-				</c:choose>
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">All samples for ${seriesId} </h5>
-				<!-- \n -->
-				</c:otherwise>
-				</c:choose>
+				<jax:dl dt="Organ" dds="${organs}"/>
+				<jax:dl dt="Tumor Classification" dds="${tumorClassifications}"/>
+				<jax:dl dt="Strain" dd="${strainName}"/>
+				<jax:dl dt="Platform" dds="${platforms}"/>		
+				<dl>
+					<c:choose>
+					<c:when test="${not empty samplesWOSeries || not empty seriesWSamples}">
+					<c:choose>
+					<c:when test="${not empty seriesWSamples}">
+					<c:choose>
+					<c:when test="${seriesWSamples == '1'}">
+					<dt>${seriesWSamples} series has matching samples</dt>
+					</c:when>
+					<c:otherwise>
+					<dt>${seriesWSamples} series have matching samples</dt>
+					<c:forEach var="series" items="${results}" >
+					<c:choose>
+					<c:when test="${not empty series.series.id}">
+					<dd><a href="#${series.series.id}">${series.series.id}</a></dd>
+					</c:when>
+					</c:choose>
+					</c:forEach>
+					</c:otherwise>
+					</c:choose>
+					</c:when>
+					</c:choose>
+					<c:choose>
+					<c:when test="${not empty samplesWOSeries}">
+					<c:choose>
+					<c:when test="${samplesWOSeries == '1'}">
+					<dt>${samplesWOSeries} matching sample not associated with a series</dt>
+					</c:when>
+					<c:otherwise>
+					<dt>${samplesWOSeries} matching samples not associated with any series</dt>
+					</c:otherwise>
+					</c:choose>
+					</c:when>
+					</c:choose>
+					</c:when>
+					<c:otherwise>
+					<dt>All samples for ${seriesId}</dt>
+					</c:otherwise>
+					</c:choose>
+				</dl>
 			</div>
 		</caption>
 		<tbody>
-			<!-- ////  Start Results  //// -->
 			<c:choose>
-			<c:when test="${not empty results}"> 
-			
+			<c:when test="${not empty results}"> 			
 			<c:forEach var="series" items="${results}">
 			<c:choose>
 			<c:when test="${not empty series.series.id}">

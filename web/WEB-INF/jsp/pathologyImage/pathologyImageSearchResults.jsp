@@ -7,127 +7,32 @@
 	<table>
 		<!-- ////  Start Search Summary  //// -->
 		<caption>
-			<div class="search-summary">
+			<div class="result-summary">
 				<h4>Search Summary</h4>
-				<!-- \n -->
-				<c:if test="${not empty organOriginSelected}">
-				<c:choose>
-				<c:when test="${fn:length(organOriginSelected)>1}">
-				<h5 class="label">Organs/Tissues of Origin:</h5> 
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Organ/Tissue of Origin:</h5> 
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="organ" items="${organOriginSelected}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${organ},
-				</c:when>
-				<c:otherwise>
-				${organ}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty tumorClassificationsSelected}">
-				<c:choose>
-				<c:when test="${fn:length(tumorClassificationsSelected)>1}">
-				<h5 class="label">Tumor Classifications:</h5> 
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Tumor Classification:</h5> 
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="classification" items="${tumorClassificationsSelected}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${classification},
-				</c:when>
-				<c:otherwise>
-				${classification}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty organsAffectedSelected}">
-				<h5 class="label">Organ/Tissue Affected:</h5> ${organsAffectedSelected}
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty diagnosisDescription}">
-				<h5 class="label">Diagnosis or Description:</h5> Contains "${diagnosisDescription}"
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty methodSelected}">
-				<h5 class="label">Method:</h5> ${methodSelected}
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty antibodiesSelected}">
-				<c:choose>
-				<c:when test="${fn:length(antibodiesSelected)>1}">
-				<h5 class="label">Antibodies:</h5> 
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Antibody:</h5> 
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="antibody" items="${antibodiesSelected}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${antibody},
-				</c:when>
-				<c:otherwise>
-				${antibody}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty imageContributors}">
-				<c:choose>
-				<c:when test="${fn:length(imageContributors)>1}">
-				<h5 class="label">Contributors:</h5> 
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Contributor:</h5> 
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="contributor" items="${imageContributors}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${contributor},
-				</c:when>
-				<c:otherwise>
-				${contributor}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty accId}">
-				<h5 class="label">Accession Id:</h5> ${accId}
-				<!-- \n -->
-				</c:if>
-				<h5 class="label">Sort By:</h5> ${sortBy}
-				<!-- \n -->
-				<h5 class="label">Display Limit:</h5> ${maxItems}
+				<jax:dl dt="Organ/Tissue of Origin" dts="Organs/Tissues of Origin" dds="${organOriginSelected}"/>
+				<jax:dl dt="Tumor Classification" dds="${tumorClassificationsSelected}"/>
+				<jax:dl dt="Organ/Tissue Affected" dd="${organsAffectedSelected}"/>
+				<jax:dl dt="Diagnosis or Description" dd="Contains '${diagnosisDescription}'"/>
+				<jax:dl dt="Method" dd="${methodSelected}"/>
+				<jax:dl dt="Antibody" dts="Antibodies" dds="${antibodiesSelected}"/>
+				<jax:dl dt="Contributor" dds="${imageContributors}"/>
+				<jax:dl dt="Accession Id" dd="${accId}"/>
+				<jax:dl dt="Sort By" dd="${sortBy}"/>
+				<jax:dl dt="Display Limit" dd="${maxItems}"/>
 			</div>
-			<div class="display-counts">
+			<div class="result-count">
 				<c:choose>
 				<c:when test="${numberOfResults != totalResults}">
-				<c:out value="${numberOfResults}" default="0"/> (of <c:out value="${totalResults}" default="0"/>) pathology reports displayed, including <c:out value="${totalNumOfPathImages}" default="0"/>	images.
+				<c:out value="${numberOfResults}" default="0"/> (of <c:out value="${totalResults}" default="0"/>) pathology reports displayed, including <c:out value="${totalNumOfPathImages}" default="0"/> images.
 				</c:when>
 				<c:otherwise>
-				<c:out value="${numberOfResults}" default="0"/> (of <c:out value="${totalResults}" default="0"/>) pathology reports displayed, including <c:out value="${totalNumOfPathImages}" default="0"/>	images.
+				<c:out value="${numberOfResults}" default="0"/> (of <c:out value="${totalResults}" default="0"/>) pathology reports displayed, including <c:out value="${totalNumOfPathImages}" default="0"/> images.
 				</c:otherwise>
 				</c:choose>
 			</div>
 		</caption>
 	</table>
-	<!-- ////  End Search Summary  //// -->
-	<!-- ////  Start Results  //// -->
+
 	<c:choose>
 	<c:when test="${not empty pathologyImages}">
 	<c:forEach var="pathRec" items="${pathologyImages}" varStatus="status">

@@ -255,6 +255,7 @@ nav input[type="submit"] {
 	text-transform: uppercase;
 	font-size:16px;
 	padding:0;
+	margin:0;
 	width:40px;
 }
 
@@ -300,7 +301,9 @@ footer ul {
 
 @media (min-width:1052px) {
 	nav,
-	footer > div {
+	body > section > header,
+	footer > div,
+	.search-form {
 		width:992px;
 		margin:0 auto;
 	}	
@@ -343,6 +346,22 @@ footer img {
 
 .tip {
 	position:relative;
+	padding-right:1.4em;
+	cursor:help;
+}
+
+.tip:after {
+	content:'\a0\f059';
+	font-family: FontAwesome;
+	opacity:0.5;
+	position:absolute;
+	top:50%;
+	right:0.25em;
+	padding:0;
+	margin:-0.55em 0 0 0;
+	font-size:0.9em;
+	display:block;
+	line-height:1;
 }
 
 a.tip,
@@ -361,13 +380,16 @@ label.tip {
 	position:absolute;
 	z-index:8888;
 	top:100%;
-	left:-0.5em;
-	right:-0.5em;
+	left:-1em;
+	right:-1em;
 	min-width:25em;
 	margin:0;
-	padding:1em 0.5em 0.5em;
+	padding:1.1em 1em 0.75em;
 	background-color:white;
 	box-shadow:0 8px 8px rgba(0,0,0,0.25);
+	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	font-size:12px;
+	line-height:14px;
 }
 
 .tip:hover > [role="tooltip"],
@@ -375,6 +397,13 @@ label.tip {
 .tip.show-tip > [role="tooltip"] {
 	display:block;
 }
+
+.tip:hover:after,
+.tip:focus:after,
+.tip.show-tip:after {
+	opacity:1;
+}
+
 
 /* Non-js fallback */
 
@@ -384,6 +413,155 @@ label.tip {
 
 
 
+input[type="button"],
+button,
+input[type="submit"],
+input[type="reset"] {
+	border:0;
+	text-transform: uppercase;
+	
+	color:white;
+	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	font-size:0.9em;
+	letter-spacing: 1px;
+	line-height:1;
+	padding:0.75em 1em 0.6em;
+	cursor:pointer;
+	display:block;
+	float:left;
+	margin:0 15px 0 0;
+}
+
+input[type="button"],
+input[type="reset"],
+button {
+	background-color: rgba(144,157,163,0.4);
+color: #05396b;
+}
+
+input[type="submit"] {
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;	
+	background-color: #009ed0;	
+}
+
+
+input[type="reset"] {
+	
+}
+
+input[type="button"]:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+	background-color:#04c3ff;
+}
+
+input[type="button"]:hover,
+button:hover,
+input[type="reset"]:hover {
+	background-color: rgba(5,57,107,0.25);
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+	margin-left:15px;
+	margin-right:4px;
+}
+
+input[type="radio"]:first-of-type,
+input[type="checkbox"]:first-of-type {
+	margin-left:0;
+}
+
+
+/* Search forms */
+
+
+.search-form {
+	background-color: rgba(144,157,163,0.12);
+	padding:0;
+	margin-top:0;
+	margin-bottom:50px;
+	border-top:4px dashed rgba(5,57,107,0.05); /* rgba(5,57,107,0.15); */
+	border-bottom:4px dashed rgba(5,57,107,0.05);
+}
+
+.search-form > fieldset {
+	margin:20px 0;
+	padding:0 15px 10px;
+	border:0;
+/* 	border-top:2px dashed white; */
+	
+}
+
+.search-form > fieldset:nth-child(even) {
+/* 	background-color: rgba(5,57,107,0.05); */
+}
+
+fieldset {
+	padding:15px;
+	box-sizing:border-box;
+}
+
+fieldset fieldset {
+	border:0;
+	margin:10px 0;
+	
+}
+
+.search-form > fieldset > legend {
+	font-size:1.15em;
+	padding:0;
+}
+
+fieldset legend {
+	color:#05396b;
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+}
+
+
+
+.search-form > fieldset > fieldset {
+	float:left;
+	width:25%;
+	padding:0 15px;
+}
+
+.search-form > fieldset > fieldset > fieldset {
+	padding:0;
+}
+
+fieldset label {
+	padding-left:15px;
+}
+
+fieldset select[multiple] {
+	display:block;
+	width:100%;
+}
+
+.search-form > fieldset.form-buttons {
+	font-size:16px;
+	margin:0;
+/* 	background-color:transparent; */
+	padding:25px 15px;
+	border-top:0;
+}
+
+.search-form > fieldset.form-sort,
+.search-form > fieldset.form-max-items {
+	background-color: white;
+	border-top:1.5em solid white;
+	margin:0;
+	padding:5px 15px 15px;
+	width:50%;
+	float:left;
+}
+
+
+option:checked {
+  background: #009ed0 linear-gradient(0deg, #009ed0 0%, #009ed0 100%);;
+}
 
 
 
@@ -408,14 +586,20 @@ img {
 	max-width:100%;
 }
 
-h1 {
-	color:#3a6a96;
-}
+
 
 h1, h2, h3, h4, h5, h6, b, b > a, th, thead > td, strong {
 	font-weight:normal;
 	padding:0;
 	margin-top:0;
+}
+
+h1 {
+	font-size:4em;
+	color:#3a6a96;
+	line-height:1;
+	padding:0 0 0.4em;
+	margin:0;
 }
 
 /* Headings */
@@ -426,69 +610,17 @@ h1, h2 {
 	background-color:transparent;
 }
 
-td.pageTitle {
-	font-family: "DIN Next W01 Bold", Helvetica, Arial, sans-serif;
-	color:#05396b;
-	font-size:2.5em;
-}
-
-h1 {
-	font-size:4em;
-}
-
-td.cat1,
-.toolBarTitle,
-font.toolBarSearchTitle,
-font.label,
-.facetLabel,
-b,b > a,strong,label {
-	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
-	padding:0;
-}
-
-.toolBarTitle {
-	margin:0 0 0.25em;
-}
-
-table.toolBar > tbody > tr:first-child > td > a:first-child:after {
-	content:'Mouse Models \0a of Human Cancer';
-	display:block;
-	font-family: "DINNextW01-CondensedLig", Helvetica, Arial, sans-serif;
-	font-size:16px;
-	text-transform: uppercase;	
-	white-space: pre-wrap;
-	padding:0;
-	margin:4px 0 12px 0;
-	color:#05396b;
-} 
 
 /* General */
 
-a.help {
-	display:none;
-}
-
-.facet,
 a,a:link {
 	color:#009ed0;
 	text-decoration: none;
 }
 
-.facet:hover,
 a:link:hover {
 	color:#04c3ff;
 	text-decoration: underline;
-}
-
-a[onmouseover] {
-	color:#05396b;
-	display:inline-block;
-}
-
-a[onmouseover]:after {
-	content:'\a0\f059';
-	font-family: FontAwesome;
-	opacity:0.5;
 }
 
 hr {

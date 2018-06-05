@@ -10,154 +10,167 @@
 			<div class="search-summary">
 				<h4>Search Summary</h4>
 				<c:if test="${not empty anatomicalSystemOriginName}">
-				<h5 class="label">Anatomical System of Origin:</h5> ${anatomicalSystemOriginName}
+				<dl>
+					<dt>Anatomical System of Origin</dt>
+					<dd>${anatomicalSystemOriginName}</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty organTissueOrigins}">
-				
 				<c:choose>
-				<c:when test="${fn:length(organTissueOrigins)>1}">
-				<h5 class="label">Organs/Tissues of Origin:</h5>
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Organ/Tissue of Origin:</h5>
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="organ" items="${organTissueOrigins}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${organ},
-				</c:when>
-				<c:otherwise>
-				${organ}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				
+				<dl>
+					<c:when test="${fn:length(organTissueOrigins)>1}">
+					<dt>Organs/Tissues of Origin</dt>
+					</c:when>
+					<c:otherwise>
+					<dt>Organ/Tissue of Origin</dt>
+					</c:otherwise>
+					</c:choose>
+					<c:forEach var="organ" items="${organTissueOrigins}" varStatus="status">
+					<dd>${organ}</dd>
+					</c:forEach>
+				</dl>
 				</c:if>
 				<c:if test="${not empty organOriginName}">
-				<h5 class="label">Organ/Tissue of Origin:</h5> ${organOriginName}
+				<dl>
+					<dt>Organ/Tissue of Origin:</dt>
+					<dd>${organOriginName}</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty organOfOriginName}">
-				<h5 class="label">Organ/Tissue of Origin:</h5> Contains "${organOfOriginName}"
+				<dl>
+					<dt>Organ/Tissue of Origin</dt>
+					<dd>Contains "${organOfOriginName}"</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty tumorClassifications}">
-				<c:choose>
-				<c:when test="${fn:length(tumorClassifications)>1}">
-				<h5 class="label">Tumor Classifications:</h5>
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Tumor Classification:</h5>
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="classification" items="${tumorClassifications}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${classification},
-				</c:when>
-				<c:otherwise>
-				${classification}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
+				<dl>
+					<c:choose>
+					<c:when test="${fn:length(tumorClassifications)>1}">
+					<dt>Tumor Classifications</dt>
+					</c:when>
+					<c:otherwise>
+					<dt>Tumor Classification</dt>
+					</c:otherwise>
+					</c:choose>
+					<c:forEach var="classification" items="${tumorClassifications}" varStatus="status">
+					<dd>${classification}</dd>
+					</c:forEach>
+				</dl>
 				</c:if>
 				<c:if test="${not empty tumorName}">
-				<h5 class="label">Tumor Name:</h5> Contains "${tumorName}"
-				<!-- \n -->
+				<dl><dt>Tumor Name</dt>
+					<dd>Contains "${tumorName}"</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty agentType}">
-				<h5 class="label">Treatment Type:</h5> ${agentType}
-				<!-- \n -->
+				<dl>
+					<dt>Treatment Type</dt>
+					<dd>${agentType}</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty agent}">
-				<h5 class="label">Treatment:</h5>	Contains "${agent}"
-				<!-- \n -->
+				<dl>
+					<dt>Treatment</dt>
+					<dd>Contains "${agent}"</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty metastasisLimit}">
-				<h5 class="label">Restrict search to metastatic tumors only.</h5>
-				<!-- \n -->
+				<dl>
+					<dt>Restrict search to metastatic tumors only.</dt>
+				</dl>
 				</c:if>
 				<c:if test="${not empty organsAffected}">
-				<c:choose>
-				<c:when test="${fn:length(organsAffected)>1}">
-				<h5 class="label">Organs/Tissues Affected:</h5>
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Organ/Tissue Affected:</h5>
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="organ" items="${organsAffected}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${organ},
-				</c:when>
-				<c:otherwise>
-				${organ}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				<!-- \n -->
+				<dl>
+					<c:choose>
+					<c:when test="${fn:length(organsAffected)>1}">
+					<dt>Organs/Tissues Affected</dt>
+					</c:when>
+					<c:otherwise>
+					<dt>Organ/Tissue Affected</dt>
+					</c:otherwise>
+					</c:choose>
+					<c:forEach var="organ" items="${organsAffected}" varStatus="status">
+					<dd>${organ}</dd>
+					</c:forEach>
+				</dl>
 				</c:if>
 				<c:if test="${not empty organAffectedName}">
-				<h5 class="label">Organ/Tissue Affected:</h5> ${organAffectedName}
-				<!-- \n -->
+				<dl>
+					<dt>Organ/Tissue Affected</dt>
+					<dd>${organAffectedName}</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty mustHaveImages}">
-				<h5 class="label">Restrict search to entries with associated pathology images.</h5>
-				<!-- \n -->
+				<dl>
+					<dt>Restrict search to entries with associated pathology images.</dt>
+				</dl>
 				</c:if>
 				<c:if test="${not empty geneticChange}">
-				<h5 class="label">Genetic Change:</h5> ${geneticChange}
-				<!-- \n -->
+				<dl>
+					<dt>Genetic Change</dt>
+					<dd>${geneticChange}</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty cytogeneticChange}">
-				<h5 class="label">Cytogenetic Change:</h5> ${cytogeneticChange}
-				<!-- \n -->
+				<dl>
+					<dt>Cytogenetic Change</dt>
+					<dd>${cytogeneticChange}</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty colonySize}">
-				<h5 class="label">Colony Size:</h5> ${colonySize}
-				<!-- \n -->
+				<dl>
+					<dt>Colony Size</dt>
+					<dd>${colonySize}</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty frequency}">
-				<h5 class="label">Frequency:</h5> ${frequency}
-				<!-- \n -->
+				<dl>
+					<dt>Frequency</dt>
+					<dd>${frequency}</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty strainName}">
-				<h5 class="label">Strain:</h5> ${strainName}
-				<!-- \n -->
+				<dl>
+					<dt>Strain</dt>
+					<dd>${strainName}</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty strainFamilyName}">
-				<h5 class="label">Strain Family:</h5> ${strainFamilyName}
-				<!-- \n -->
+				<dl>
+					<dt>Strain Family:</dt>
+					<dd>${strainFamilyName}</dd>
+				</dl>
 				</c:if>
 				<c:if test="${not empty strainTypes}">
-				<c:choose>
-				<c:when test="${strainTypesSize>'1'}">
-				<h5 class="label">Strain Types:</h5>
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Strain Type:</h5>
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="strainType" items="${strainTypes}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${strainType},
-				</c:when>
-				<c:otherwise>
-				${strainType}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				<!-- \n -->
+				<dl>
+					<c:choose>
+					<c:when test="${strainTypesSize>'1'}">
+					<dt>Strain Types</dt>
+					</c:when>
+					<c:otherwise>
+					<dt>Strain Type</dt>
+					</c:otherwise>
+					</c:choose>
+					<c:forEach var="strainType" items="${strainTypes}" varStatus="status">
+					<dd>${strainType}</dd>							
+					</c:forEach>
+				</dl>
 				</c:if>
 				<c:if test="${not empty accId}">
-				<h5 class="label">Accession Id:</h5> ${accId}
-				<!-- \n -->
+				<dl>
+					<dt>Accession Id</dt>
+					<dd>${accId}</dd>
+				</dl>
 				</c:if>
-				<h5 class="label">Sort By:</h5> ${sortBy}
-				<!-- \n -->
-				<h5 class="label">Display Limit:</h5> ${maxItems}
-			</div>
+				<dl>
+					<dt>Sort By</dt>
+					<dd>${sortBy}</dd>
+				</dl>
+				<dl>
+					<dt>Display Limit</dt>
+					<dd>${maxItems}</dd>
+				</dl>
+			</div>			
 			<div class="display-counts">
 				<c:choose>
 				<c:when test="${numberOfResults != totalResults}">
@@ -209,11 +222,8 @@
 				</c:choose>
 				</c:otherwise>
 				</c:choose>
-				<!-- ////  End Display Limit  //// -->
 			</div>
-		</caption>
-		<!-- ////  End Search Summary  //// -->
-		<!-- ////  Start Results  //// -->
+		</caption>		
 		<c:choose>
 		<c:when test="${not empty tumors}">
 		<thead>
