@@ -25,15 +25,18 @@
 	</c:forEach>
 </dl>
 </c:when>
+<c:when test="${test}">
+<dl>
+	<dt>${dt}</dt>
+	<c:if test="${not empty dd}">
+	<dd>${dd}</dd>
+	</c:if>
+</dl>
+</c:when>
 <c:when test="${dd != null}">
 <dl>
 	<dt>${dt}</dt>
 	<dd>${dd}</dd>
-</dl>
-</c:when>
-<c:when test="${test}">
-<dl>
-	<dt>${dt}</dt>
 </dl>
 </c:when>
 </c:choose>

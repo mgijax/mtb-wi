@@ -5,7 +5,6 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Pathology Image Search Results" help="pathresults">
 	<table>
-		<!-- ////  Start Search Summary  //// -->
 		<caption>
 			<div class="result-summary">
 				<h4>Search Summary</h4>

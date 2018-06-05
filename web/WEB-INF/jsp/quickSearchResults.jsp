@@ -7,25 +7,24 @@
 <jax:mmhcpage title="Quick Search Results" help="interpreting">
 	<table>
 		<caption>
-			<div class="search-summary">				
+			<div class="result-summary">				
 				<h4>Search Summary</h4>
-				<h5 class="label">Search For:</h5> contains "${quickSearchTerm}"
-				<h5 class="label">In these sections:</h5> ${searchSections}
+				<jax:dl dt="Search For" dd="contains '${quickSearchTerm}'"/>
+				<jax:dl dt="In these sections" dd="${searchSections}"/>
 			</div>
 		</caption>
 	</table>	
 	<c:choose>
 	<c:when test="${not empty data}">
 	<c:forEach var="result" items="${data}" varStatus="status">
-	
-	<table class="quick-search-results">
+	<table>
 		<caption>
-			<div class="search-summary">
-				<h2>${result.searchName}</h2>
-				<h3><a href="${result.mainSearchUrl}">${result.mainSearchName}</a></h3>
-			</div>
-			<div class="display-counts">
-				${result.searchCriteriaText}
+			<div class="result-summary">
+				<h4>${result.searchName}</h4>
+				<h5><a href="${result.mainSearchUrl}">${result.mainSearchName}</a></h5>
+				<div>
+					${result.searchCriteriaText}
+				</div>
 			</div>
 		</caption>
 		<c:choose>
@@ -65,3 +64,4 @@
 	</c:otherwise>
 	</c:choose>
 </jax:mmhcpage>
+

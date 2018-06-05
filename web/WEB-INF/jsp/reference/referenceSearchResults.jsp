@@ -4,54 +4,22 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Reference Search Results" help="referenceresults">
 	<table>
-		<!-- ////  Start Search Summary  //// -->
 		<caption>
-			<div class="search-summary">
+			<div class="result-summary">
 				<h4>Search Summary</h4>
-				<!-- \n -->
-				<c:if test="${not empty accId}">
-				<h5 class="label">Accession Id:</h5> ${accId}
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty firstAuthor}">
-				<h5 class="label">First Author:</h5> ${firstAuthorComparison} "${firstAuthor}"
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty authors}">
-				<h5 class="label">Authors:</h5> Contains "${authors}"
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty journal}">
-				<h5 class="label">Journal:</h5> ${journalComparison} "${journal}"
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty year}">
-				<h5 class="label">Year:</h5> ${yearComparison} ${year}
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty volume}">
-				<h5 class="label">Volume:</h5> ${volumeComparison} "${volume}"
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty pages}">
-				<h5 class="label">Pages:</h5> ${pagesComparison} "${pages}"
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty title}">
-				<h5 class="label">Title:</h5> ${titleComparison} "${title}"
-				<!-- \n -->
-				</c:if>
-				<%--
-				<c:if test="${not empty abstract}">
-				<strong>Abstract:</strong> contains ${abstract}
-				<!-- \n -->
-				</c:if>
-				--%>
-				<h5 class="label">Sort By:</h5> ${sortBy}
-				<!-- \n -->
-				<h5 class="label">Display Limit:</h5> ${maxItems} 
+				<jax:dl dt="Accession Id" dd="${accId}"/>
+				<jax:dl dt="First Author" dd="${firstAuthorComparison} '${firstAuthor}'"/>
+				<jax:dl dt="Authors" dd="Contains '${authors}'"/>
+				<jax:dl dt="Journal" dd="${journalComparison} '${journal}'"/> 
+				<jax:dl dt="Year" dd="${yearComparison} ${year}"/>
+				<jax:dl dt="Volume" dd="${volumeComparison} '${volume}'"/>
+				<jax:dl dt="Pages" dd="${pagesComparison} '${pages}'"/>
+				<jax:dl dt="Title" dd="${titleComparison} '${title}'"/>
+				<%-- <jax:dl dt="Abstract" dd="contains '${abstract}'"/> --%>
+				<jax:dl dt="Sort By" dd="${sortBy}"/>
+				<jax:dl dt="Display Limit" dd="${maxItems}"/>
 			</div>
-			<div class="display-counts">
+			<div class="result-count">
 				<c:choose>
 				<c:when test="${numberOfResults != totalResults}">
 				${numberOfResults} of ${totalResults} matching items displayed.
@@ -62,8 +30,6 @@
 				</c:choose>
 			</div>
 		</caption>
-		<!-- ////  End Search Summary  //// -->
-		<!-- ////  Start Results  //// -->
 		<c:choose>
 		<c:when test="${not empty references}">
 		<tr>
@@ -80,8 +46,5 @@
 		<!-- No results found. //-->
 		</c:otherwise>
 		</c:choose>
-		<!-- ////  End Results  //// -->
 	</table>
 </jax:mmhcpage>
-
-

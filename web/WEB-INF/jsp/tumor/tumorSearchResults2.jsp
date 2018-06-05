@@ -14,171 +14,30 @@
 	</jsp:attribute>
 	<table>
 		<caption>
-			<div class="search-summary">
+			<div class="result-summary">
 				<h4>Search Summary</h4>
-				<c:if test="${not empty anatomicalSystemOriginName}">
-				<dl>
-					<dt>Anatomical System of Origin</dt>
-					<dd>${anatomicalSystemOriginName}</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty organTissueOrigins}">
-				<c:choose>
-				<dl>
-					<c:when test="${fn:length(organTissueOrigins)>1}">
-					<dt>Organs/Tissues of Origin</dt>
-					</c:when>
-					<c:otherwise>
-					<dt>Organ/Tissue of Origin</dt>
-					</c:otherwise>
-					</c:choose>
-					<c:forEach var="organ" items="${organTissueOrigins}" varStatus="status">
-					<dd>${organ}</dd>
-					</c:forEach>
-				</dl>
-				</c:if>
-				<c:if test="${not empty organOriginName}">
-				<dl>
-					<dt>Organ/Tissue of Origin:</dt>
-					<dd>${organOriginName}</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty organOfOriginName}">
-				<dl>
-					<dt>Organ/Tissue of Origin</dt>
-					<dd>Contains "${organOfOriginName}"</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty tumorClassifications}">
-				<dl>
-					<c:choose>
-					<c:when test="${fn:length(tumorClassifications)>1}">
-					<dt>Tumor Classifications</dt>
-					</c:when>
-					<c:otherwise>
-					<dt>Tumor Classification</dt>
-					</c:otherwise>
-					</c:choose>
-					<c:forEach var="classification" items="${tumorClassifications}" varStatus="status">
-					<dd>${classification}</dd>
-					</c:forEach>
-				</dl>
-				</c:if>
-				<c:if test="${not empty tumorName}">
-				<dl><dt>Tumor Name</dt>
-					<dd>Contains "${tumorName}"</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty agentType}">
-				<dl>
-					<dt>Treatment Type</dt>
-					<dd>${agentType}</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty agent}">
-				<dl>
-					<dt>Treatment</dt>
-					<dd>Contains "${agent}"</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty metastasisLimit}">
-				<dl>
-					<dt>Restrict search to metastatic tumors only.</dt>
-				</dl>
-				</c:if>
-				<c:if test="${not empty organsAffected}">
-				<dl>
-					<c:choose>
-					<c:when test="${fn:length(organsAffected)>1}">
-					<dt>Organs/Tissues Affected</dt>
-					</c:when>
-					<c:otherwise>
-					<dt>Organ/Tissue Affected</dt>
-					</c:otherwise>
-					</c:choose>
-					<c:forEach var="organ" items="${organsAffected}" varStatus="status">
-					<dd>${organ}</dd>
-					</c:forEach>
-				</dl>
-				</c:if>
-				<c:if test="${not empty organAffectedName}">
-				<dl>
-					<dt>Organ/Tissue Affected</dt>
-					<dd>${organAffectedName}</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty mustHaveImages}">
-				<dl>
-					<dt>Restrict search to entries with associated pathology images.</dt>
-				</dl>
-				</c:if>
-				<c:if test="${not empty geneticChange}">
-				<dl>
-					<dt>Genetic Change</dt>
-					<dd>${geneticChange}</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty cytogeneticChange}">
-				<dl>
-					<dt>Cytogenetic Change</dt>
-					<dd>${cytogeneticChange}</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty colonySize}">
-				<dl>
-					<dt>Colony Size</dt>
-					<dd>${colonySize}</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty frequency}">
-				<dl>
-					<dt>Frequency</dt>
-					<dd>${frequency}</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty strainName}">
-				<dl>
-					<dt>Strain</dt>
-					<dd>${strainName}</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty strainFamilyName}">
-				<dl>
-					<dt>Strain Family:</dt>
-					<dd>${strainFamilyName}</dd>
-				</dl>
-				</c:if>
-				<c:if test="${not empty strainTypes}">
-				<dl>
-					<c:choose>
-					<c:when test="${strainTypesSize>'1'}">
-					<dt>Strain Types</dt>
-					</c:when>
-					<c:otherwise>
-					<dt>Strain Type</dt>
-					</c:otherwise>
-					</c:choose>
-					<c:forEach var="strainType" items="${strainTypes}" varStatus="status">
-					<dd>${strainType}</dd>							
-					</c:forEach>
-				</dl>
-				</c:if>
-				<c:if test="${not empty accId}">
-				<dl>
-					<dt>Accession Id</dt>
-					<dd>${accId}</dd>
-				</dl>
-				</c:if>
-				<dl>
-					<dt>Sort By</dt>
-					<dd>${sortBy}</dd>
-				</dl>
-				<dl>
-					<dt>Display Limit</dt>
-					<dd>${maxItems}</dd>
-				</dl>
+				<jax:dl dt="Anatomical System of Origin" dd="${anatomicalSystemOriginName}"/>
+				<jax:dl dt="Organ/Tissue of Origin" dts="Organs/Tissues of Origin" dds="${organTissueOrigins}" dd="${organOriginName}" />
+				<jax:dl dt="Organ/Tissue of Origin" dd="Contains '${organOfOriginName}'"/>
+				<jax:dl dt="Tumor Classification" dds="${tumorClassifications}"/>
+				<jax:dl dt="Tumor Name" dd="Contains '${tumorName}'"/>
+				<jax:dl dt="Treatment Type" dd="${agentType}"/>
+				<jax:dl dt="Treatment" dd="${agent}"/>
+				<jax:dl dt="Restrict search to metastatic tumors only" test="${not empty metastasisLimit}"/>
+				<jax:dl dt="Organ/Tissue Affected" dts="Organs/Tissues Affected" dds="${organsAffected}" dd="${organAffectedName}" />
+				<jax:dl dt="Restrict search to entries with associated pathology images" test="${not empty mustHaveImages}"/>
+				<jax:dl dt="Genetic Change" dd="${geneticChange}"/>
+				<jax:dl dt="Cytogenetic Change" dd="${cytogeneticChange}"/>
+				<jax:dl dt="Colony Size" dd="${colonySize}"/>
+				<jax:dl dt="Frequency" dd="${frequency}"/>
+				<jax:dl dt="Strain" dd="${strainName}"/>
+				<jax:dl dt="Strain Family" dd="${strainFamilyName}"/>
+				<jax:dl dt="Strain Type" dds="${strainTypes}"/>
+				<jax:dl dt="Accession Id" dd="${accId}"/>
+				<jax:dl dt="Sort By" dd="${sortBy}"/>
+				<jax:dl dt="Display Limit" dd="${maxItems}"/>
 			</div>			
-			<div class="display-counts">
+			<div class="result-count">
 				<c:choose>
 				<c:when test="${numberOfResults != totalResults}">
 				<c:choose>

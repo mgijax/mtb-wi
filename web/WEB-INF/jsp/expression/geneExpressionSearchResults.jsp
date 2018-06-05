@@ -6,7 +6,7 @@
 <jax:mmhcpage title="Gene Expression Data Set Search Results" help="geneexpression">
 	<table>
 		<caption>
-			<div class="search-summary">
+			<div class="result-summary">
 				<h4>Search Summary</h4>
 				<jax:dl dt="Organ" dds="${organs}"/>
 				<jax:dl dt="Tumor Classification" dds="${tumorClassifications}"/>

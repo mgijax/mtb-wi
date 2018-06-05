@@ -5,54 +5,29 @@
 <jax:mmhcpage title="Strain Search Results" help="straindetail">
 	<table>
 		<caption>
-			<div class="search-summary">
+			<div class="result-summary">
 				<h4>Search Summary</h4>
-				<!-- \n -->
-				<c:if test="${not empty strainName}">
-				<h5 class="label">Strain Name:</h5> ${strainComparison} "${strainName}"
-				<!-- \n -->
-				</c:if>
-				<c:if test="${not empty strainTypes}">
-				<c:choose>
-				<c:when test="${strainTypesSize>'1'}">
-				<h5 class="label">Strain Types:</h5>
-				</c:when>
-				<c:otherwise>
-				<h5 class="label">Strain Type:</h5>
-				</c:otherwise>
-				</c:choose>
-				<c:forEach var="strainType" items="${strainTypes}" varStatus="status">
-				<c:choose>
-				<c:when test="${status.last != true}">
-				${strainType},
-				</c:when>
-				<c:otherwise>
-				${strainType}
-				</c:otherwise>
-				</c:choose>
-				</c:forEach>
-				</c:if>
+				<jax:dl dt="Strain Name" dd="${strainComparison} '${strainName}'"/>
+				<jax:dl dt="Strain Type" dds="${strainTypes}"/>
 				<c:if test="${not empty geneticName}">
-				<h5 class="label">Gene or Allele</h5> <em>(Symbol/Name/Synonym)</em>: Contains "${geneticName}"
+				<dl>
+					<dt>Gene or Allele <em>(Symbol/Name/Synonym)</em></dt>
+					<dd>Contains '${geneticName}'</dd>
+				</dl>
 				</c:if>
-				<%--
-				<c:if test="${not empty strainNotes}">
-				<strong>Strain Notes:</strong> contains ${strainNotes}
-				</c:if>
-				--%>
-				<c:if test="${not empty sites}">
-				<h5 class="label">Other Database Links:</h5> ${sites}
-				</c:if>
+				<%-- <jax:dl dt="Strain Notes" dd="contains '${strainNotes}'"> --%>
+				<jax:dl dt="Other Database Links" dd="${sites}"/>
 				<c:if test="${not empty jaxMiceStockNumber}">
-				<h5 class="label">JAX<sup>&reg;</sup>Mice Stock No.:</h5> ${jaxMiceStockNumber}
+				<dl>
+					<dt>JAX<sup>&reg;</sup>Mice Stock No.:</dt>
+					<dd>${jaxMiceStockNumber}</dd>
+				</dl>
 				</c:if>
-				<c:if test="${not empty accId}">
-				<h5 class="label">Accession ID:</h5> ${accId}
-				</c:if>
-				<h5 class="label">Sort By:</h5> ${sortBy}
-				<h5 class="label">Display Limit:</h5> ${maxItems}
+				<jax:dl dt="Accession ID" dd="${accId}"/>
+				<jax:dl dt="Sort By" dd="${sortBy}"/>
+				<jax:dl dt="Display Limit" dd="${maxItems}"/>
 			</div>
-			<div class="display-counts"><!-- ////  Start Display Limit  //// -->
+			<div class="result-count">
 				<c:choose>
 				<c:when test="${numberOfResults != totalResults}">
 				${numberOfResults} of ${totalResults} matching items displayed.
@@ -63,8 +38,6 @@
 				</c:choose>
 			</div>
 		</caption>
-
-		<!-- ////  Start Results  //// -->
 		<c:choose>
 		<c:when test="${not empty strains}">
 		<thead>
@@ -95,7 +68,5 @@
 		<!-- No results found.	//-->
 		</c:otherwise>
 		</c:choose>
-		<!-- ////  End Results  //// -->
 	</table>
 </jax:mmhcpage>
-

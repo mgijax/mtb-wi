@@ -10,7 +10,7 @@
 	<table>
 		<caption>
 			<h2>Pathology</h2>
-			<div class="display-counts">
+			<div class="result-count">
 				<c:choose>
 				<c:when test="${tumorFreq.numPathologyRecs!=1}">
 				${tumorFreq.numPathologyRecs} entries
