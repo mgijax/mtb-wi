@@ -39,6 +39,50 @@ p {
 	margin:0 0 0.25em;
 }
 
+div {
+	box-sizing:border-box;
+}
+
+td {
+	padding:3px 6px;
+}
+
+th {
+	text-align:left;
+
+	padding:3px 6px 8px;
+	border-bottom:1px solid #05396b;
+	
+}
+
+td > h4,
+th {
+	color:#05396b;
+	font-size:1.16666em;	
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+}
+
+td > h5 {
+	font-size:1em;
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+	line-height:1.1;
+}
+
+td > h4,
+td > h5 {
+	margin:0;
+	padding:0;
+}
+
+table {
+	margin:15px 0 30px;
+}
+
+caption {
+	margin:0 0 15px;
+}
+
+
 /* Header */
 
 body > header {
@@ -285,6 +329,85 @@ body > section {
 	padding:30px;
 }
 
+body > section > div {
+	padding:0;
+	margin-bottom:50px;
+}
+
+#home-summary {
+	width:33.3333%;
+	
+	float:left;
+	padding:25px;
+}
+
+#home-summary p {
+	font-size:1.16666em;
+	line-height:1.25;
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+	margin-top:2em;
+}
+
+#updates {
+	clear:both;
+	padding:25px;
+}
+
+#updates ul {
+	list-style: none;
+	font-size:
+}
+
+#mc {
+	width:66.6666%;
+	float:left;
+	padding:25px;
+}
+
+#mc table {
+/* 	font-size:1.16666em; */
+}
+
+#mc th {
+	padding:6px 6px 12px;
+	vertical-align: bottom;
+	text-align:left;
+}
+
+#mc tr:nth-child(odd) > td {
+	background-color:rgba(144, 157, 163, 0.25);
+}
+
+#mc tr > td:nth-child(4),
+#mc tr > td:nth-child(5),
+#mc tr > td:nth-child(6) {
+	background-color:rgba(66, 176, 42, 0.1);
+}
+
+#mc tr:nth-child(odd) > td:nth-child(4),
+#mc tr:nth-child(odd) > td:nth-child(5),
+#mc tr:nth-child(odd) > td:nth-child(6) {
+	background-color:rgba(66, 176, 42, 0.25);
+}
+
+
+
+#mc td {
+	padding:3px 6px;
+}
+
+#mc th + th,
+#mc td + td {
+	text-align:center;
+}
+
+
+#tumor-info td:first-child,
+#tumor-strain-info td:first-child {
+	width:25%;
+}
+
+
 
 
 
@@ -294,7 +417,7 @@ footer > div > a {
 	display:block;
 	float:left;
 	width:25%;
-	padding:30px;
+	padding:25px;
 	box-sizing:border-box;
 }
 
@@ -310,16 +433,26 @@ footer ul {
 @media (min-width:1052px) {
 	nav,
 	body > section > header,
+	.container,
 	footer > div,
+	#strain-info,
 	caption,
 	.search-form {
 		width:992px;
-		margin:0 auto;
+		margin-left:auto;
+		margin-right:auto;
 	}	
+	
+	#strain-info > caption {
+		margin-left:0;
+		margin-right:0;
+		width:auto;
+	}
 
+	.row,
 	footer ul {
-		margin-left:-30px;
-		margin-right:-30px;	
+		margin-left:-25px;
+		margin-right:-25px;	
 	}
 	
 	
@@ -492,7 +625,7 @@ input[type="checkbox"]:first-of-type {
 
 
 .search-form {
-	background-color: rgba(144,157,163,0.12);
+	background-color: rgba(144,157,163,0.15);
 	padding:0;
 	margin-top:0;
 	margin-bottom:50px;
@@ -504,7 +637,7 @@ input[type="checkbox"]:first-of-type {
 	margin:20px 0;
 	padding:0 15px 10px;
 	border:0;
-/* 	border-top:2px dashed white; */
+	border-top:2px dashed white;
 	
 }
 
@@ -564,10 +697,10 @@ fieldset select[multiple] {
 
 .search-form > fieldset.form-sort,
 .search-form > fieldset.form-max-items {
-	background-color: white;
-	border-top:1.5em solid white;
+/* 	background-color: white; */
+/* 	border-top:1.5em solid white; */
 	margin:0;
-	padding:5px 15px 15px;
+	padding:5px 15px 30px;
 	width:50%;
 	float:left;
 }
@@ -623,8 +756,17 @@ dd {
 }
 
 section > table > tbody > tr:nth-child(odd) > td {
-	background-color: rgba(144,157,163,0.12);
+	background-color: rgba(144,157,163,0.15);
 }
+
+
+
+
+
+
+
+
+/* Global */
 
 
 img {
@@ -634,8 +776,14 @@ img {
 	max-width:100%;
 }
 
+th {
+	line-height:1.1;
+}
+
+th,
 strong {
 	font-weight:normal;
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -661,7 +809,7 @@ h1, h2 {
 
 h4 {
 	font-family: "DIN Next W01 Bold", Helvetica, Arial, sans-serif;
-	font-size:1.5em;
+	font-size:1.25em;
 	color:#05396b;
 	margin:0 0 0.4em;
 }
@@ -694,8 +842,6 @@ hr {
 
 table {
 	border-collapse:collapse;
-/* 	width:99.5%; */
-	margin:1px;
 	box-sizing:border-box;
 	width:100%;
 }

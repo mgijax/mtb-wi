@@ -6,6 +6,7 @@
 	<jsp:attribute name="subnav">
 	<a href="strainDetails.do?page=collapsed&amp;key=${strain.strainKey}">Strain Tumor Overview Collapsed View</a>
 	</jsp:attribute>
+	<jsp:body>
 	<table id="strain-info">
 		<caption>
 			<h2>Strain</h2>
@@ -170,5 +171,6 @@
 	<!-- There are no other database links associated with this strain. -->
 	</c:otherwise>
 	</c:choose>
+	</jsp:body>
 </jax:mmhcpage>
 

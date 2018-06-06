@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html" %>
-<form>
+<form action="quickSearchResults.do" method="GET">
 	<select id="search-type" name="quickSearchSections">
 		<option value="any" data-ph="Tumor, organ, strain, gene, or allele" selected="selected">Any</option>
 		<option value="tumor" data-ph="Classification or name">Tumor</option>

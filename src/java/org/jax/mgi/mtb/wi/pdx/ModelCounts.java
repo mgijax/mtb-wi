@@ -279,7 +279,7 @@ public class ModelCounts {
 
         StringBuilder html = new StringBuilder();
         html.append("<table>\n");
-        html.append("<tbody><tr>\n<td rowspan=\"2\">");
+        html.append("<thead><tr>\n<th rowspan=\"2\">");
         
  //       if(this.minFC.length() > 0){
  //           html.append("<input type=\"button\" value=\"Don't restrict model counts\" onclick=\"toggle()\">");
@@ -287,42 +287,38 @@ public class ModelCounts {
  //           html.append("<input type=\"button\" value=\"Restrict model counts\" onclick=\"toggle()\">");
  //       }
    
-        html.append("<br>&nbsp;<br><strong>Cancer Site</strong></td>\n");
-        html.append("<td rowspan=\"2\"><div><a target='_blank' href='"+PDF_LINK+"'><strong>"+YEAR+"<br>ACS Est.<br>Human<br>Mortality<br>Rank</strong></a></div></td>\n");
-        html.append("<td rowspan=\"2\"><div><a target='_blank' href='"+PDF_LINK+"'><strong>No. of est.<br>deaths<br>USA "+YEAR+"</strong></a></div></td>\n");
-        html.append("<td colspan=\"3\"><strong></strong><strong>Mouse Models of Human Cancer</strong><br>");
+        html.append("Cancer Site</th>\n");
+        html.append("<th rowspan=\"2\"><a target='_blank' href='"+PDF_LINK+"'>"+YEAR+"<br>ACS Est.<br>Human<br>Mortality<br>Rank</a></th>\n");
+        html.append("<th rowspan=\"2\"><a target='_blank' href='"+PDF_LINK+"'>No. of est.<br>deaths<br>USA "+YEAR+"</a></th>\n");
+        html.append("<th colspan=\"3\">Mouse Models of Human Cancer<br>");
 
         if (this.minFC.length() > 0) {
-            html.append("<div>(restricted to reports where <br><strong>n&#8805;20 mice</strong> and <strong>tumor frequency&#8805;80%</strong>)</div></td>\n");
+            html.append("(restricted to reports where <br><strong>n&#8805;20 mice</strong> and <strong>tumor frequency&#8805;80%</strong>)</th>\n");
         }else{
-            html.append("<div>(restricted to reports where <br><strong>n&#8805;20 mice</strong> and <strong>tumor frequency&#8805;80%</strong>)</div></td>\n");
+            html.append("(restricted to reports where <br><strong>n&#8805;20 mice</strong> and <strong>tumor frequency&#8805;80%</strong>)</th>\n");
         }
 
         html.append("<!-- Potential models, in addition to being restricted by colony size and tumor frequency, also omitted records for the following: atypia, cyst, dysplasia, foci, hyperplasia, lesion, metaplasia, nevus, normal tissue (control), preneoplastic lesion, squamous cell hyperplasia, or transitional cell hyperplasia. -->\n");
-        html.append("<td rowspan=\"2\"><div><strong>");
+        html.append("<th rowspan=\"2\">");
 
         html.append("<a data-tip=\"Patient derived xenograft.\">");
-        html.append("PDX Models</a></strong></div></td></tr>\n");
+        html.append("PDX Models</a></th></tr>\n");
 
-        html.append("<tr><td><div>");
+        html.append("<tr><th>");
         html.append("<a data-tip=\"targeted, transgenic, gene trapped, chemically induced, radiation induced, etc.\">");
-        html.append("<strong>Mutant<br>Strains</strong>");
-        html.append("</a></div></td>\n");
+        html.append("Mutant<br>Strains");
+        html.append("</a></th>\n");
 
         html.append("<!-- Models that have a strain with an attached allelepair except allelepairs that are normal/normal, allele not specified/normal, or that involve a QTL region. -->\n");
-        html.append("<td><div>");
+        html.append("<th>");
 
         html.append("<a data-tip=\"inbred, hybrid, outbred, fostered, chimeric, etc.\">\n");
 
-        html.append("<strong>Other <br>Strains</strong>");
+        html.append("Other<br>Strains");
 
-        html.append("</a></div></td>\n");
-        html.append("<td><div><strong>All<br>Strains</strong></div></td>\n");
-        html.append("</tr>\n");
-        html.append("<tr>\n<td><hr></td>\n<td><hr></td>\n<td><hr></td>\n");
-        html.append("<td colspan=\"3\"><hr></td>\n");
-        html.append("<td><hr></td>\n");
-        html.append("</tr>");
+        html.append("</a></th>\n");
+        html.append("<th>All<br>Strains</th>\n");
+        html.append("</tr>\n<tbody>\n");
 
         // iterate over object and create table rows
         String[] color1 = {"", "#e7e7e7"};
