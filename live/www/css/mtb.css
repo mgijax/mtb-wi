@@ -35,10 +35,14 @@ footer {
 	position:relative;
 }
 
+p {
+	margin:0 0 0.25em;
+}
+
 /* Header */
 
 body > header {
-	background-color:#3a6a96;
+	background-color:#3c5771; /* #244a6e; */ /* #3a6a96 */
 	overflow:visible;
 }
 
@@ -58,17 +62,20 @@ nav form {
 
 /* Wordmark */
 
-nav > a {
+nav > a,
+nav > a:link {
 	display:block;
 	float:left;
+	color:#04c3ff;
+	font-size:14px;
 }
 
 nav > a h3 {
-	line-height:16px;
+	line-height:17px;
 	float:right;
-	margin:0;
-	padding:21px 0 17px;
-	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;	
+	margin:0 0 0 -5px;
+	padding:19px 0 17px;
+	font-family: "DIN Next W01 Bold", Helvetica, Arial, sans-serif;	
 	width:100px;
 }
 
@@ -92,8 +99,9 @@ nav ul {
 	margin:0;
 }
 
-nav ul a {
-	color:#44d4ff;
+nav ul a,
+nav ul a:link {
+	color:#1dcaff;
 }
 
 nav ul a:hover {
@@ -303,6 +311,7 @@ footer ul {
 	nav,
 	body > section > header,
 	footer > div,
+	caption,
 	.search-form {
 		width:992px;
 		margin:0 auto;
@@ -319,7 +328,7 @@ footer ul {
 
 
 footer {
-
+	color:white;
 	
 }
 
@@ -333,10 +342,15 @@ footer li {
 	width:33.3333%;
 	float:left;
 	box-sizing: border-box;
-	padding:30px;
+	padding:40px 30px;
 }
 footer img {
 	width:100%;
+	margin-top:-30px;
+}
+
+footer > div > a > img {
+	padding-top:20%;
 }
 
 
@@ -567,16 +581,50 @@ option:checked {
 
 
 
+/* Search results */
 
+caption {
+	text-align:left;
+}
 
+.result-summary {
+	overflow:auto;
+	zoom:1;
+}
 
+dl {
+	margin:0;
+	display:block;
+	float:left;
+	width:16.6666%;
+}
 
+dt {
+	margin:0.5em 0 0;
+	font-weight:normal;
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+	color:black;
+}
 
+dd {
+	margin:0;
+	min-height:1em;
+}
 
+.result-count {
+	clear:both;
+	margin-top:15px;
+	padding-top:10px;
+	border-top:1px solid #05396b;
+}
 
+.result-count p {
+	margin:0 0 0.25em;
+}
 
-
-
+section > table > tbody > tr:nth-child(odd) > td {
+	background-color: rgba(144,157,163,0.12);
+}
 
 
 img {
@@ -586,20 +634,21 @@ img {
 	max-width:100%;
 }
 
+strong {
+	font-weight:normal;
+}
 
-
-h1, h2, h3, h4, h5, h6, b, b > a, th, thead > td, strong {
+h1, h2, h3, h4, h5, h6 {
 	font-weight:normal;
 	padding:0;
-	margin-top:0;
+	margin:0 0 0.4em;
 }
 
 h1 {
 	font-size:4em;
-	color:#3a6a96;
+	color:rgba(25, 74, 121, 0.9);
 	line-height:1;
-	padding:0 0 0.4em;
-	margin:0;
+	padding:0;
 }
 
 /* Headings */
@@ -608,6 +657,18 @@ h1, h2 {
 	font-family: "DINNextW01-CondensedMed", Helvetica, Arial, sans-serif;
 	text-transform: uppercase;
 	background-color:transparent;
+}
+
+h4 {
+	font-family: "DIN Next W01 Bold", Helvetica, Arial, sans-serif;
+	font-size:1.5em;
+	color:#05396b;
+	margin:0 0 0.4em;
+}
+
+h6 {
+	font-size:1em;
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
 }
 
 
@@ -633,9 +694,10 @@ hr {
 
 table {
 	border-collapse:collapse;
-	width:99.5%;
+/* 	width:99.5%; */
 	margin:1px;
-	
+	box-sizing:border-box;
+	width:100%;
 }
 
 

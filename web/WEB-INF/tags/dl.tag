@@ -8,7 +8,7 @@
 <%@ attribute name="test" type="java.lang.Boolean" required="false" %>
 <c:choose>
 <c:when test="${not empty dds}">
-<c:if test="${empty dts}>
+<c:if test="${empty dts}">
 <c:set var="dts" value="${dt}"/>
 </c:if>
 <dl>

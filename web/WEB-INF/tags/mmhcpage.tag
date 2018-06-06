@@ -32,34 +32,34 @@
 		<ul>
 			<li class="dropdown"><span>Advanced Search</span>
 				<ul>
-					<li><a>Tumor</a></li>
-					<li><a>Strain</a></li>
-					<li><a>Genetics</a></li>
-					<li><a>Pathology Images</a></li>
-					<li><a>Reference</a></li>
-					<li><a>Tumor + Strain + Genetics</a></li>
-					<li><a>Human Genes</a></li>
-					<li><a>Gene Expression</a></li>
+					<li><a href="${pageContext.request.contextPath}/tumorSearch.do">Tumor</a></li>
+					<li><a href="${pageContext.request.contextPath}/strainSearch.do">Strain</a></li>
+					<li><a href="${pageContext.request.contextPath}/geneticsSearch.do">Genetics</a></li>
+					<li><a href="${pageContext.request.contextPath}/pathologyImageSearch.do">Pathology Images</a></li>
+					<li><a href="${pageContext.request.contextPath}/referenceSearch.do">Reference</a></li>
+					<li><a href="${pageContext.request.contextPath}/advancedSearch.do">Tumor + Strain + Genetics</a></li>
+					<li><a href="${pageContext.request.contextPath}/orthologySearch.do">Human Genes</a></li>
+					<li><a href="${pageContext.request.contextPath}/geneExpressionSearch.do">Gene Expression</a></li>
 				</ul>
 			</li>
-			<li><a>Faceted Tumor Search</a></li>
-			<li><a>PDX Model Search</a></li>						
+			<li><a href="${pageContext.request.contextPath}/facetedSearch.do">Faceted Tumor Search</a></li>
+			<li><a href="${pageContext.request.contextPath}/pdxSearch.do">PDX Model Search</a></li>						
 			<li class="dropdown"><a>PDX Tools</a>
 				<ul>
-					<li><a>PDX Comparison</a></li>
-					<li><a>PDX Genomics Dashboard</a></li>
-					<li><a>PDX Sample Name Lookup</a></li>
-					<li><a>PDX Sample Sheet Generator</a></li>
+					<li><a href="${pageContext.request.contextPath}/pdxComparison.do">PDX Comparison</a></li>
+					<li><a href="${pageContext.request.contextPath}/index.do">PDX Genomics Dashboard</a></li>
+					<li><a href="${pageContext.request.contextPath}/index.do">PDX Sample Name Lookup</a></li>
+					<li><a href="${pageContext.request.contextPath}/index.do">PDX Sample Sheet Generator</a></li>
 				</ul>
 			</li>
 			<li class="dropdown"><span>Additional Resources</span>
 				<ul>
-					<li><a>Cancer QTL Viewer</a></li>
-					<li><a>Tumor Frequency Grid</a></li>
-					<li><a>Dynamic Tumor Frequency Grid</a></li>					
-					<li><a>Immunohistochemistry</a></li>
-					<li><a>Lymphoma Pathology</a></li>
-					<li><a>Cancer Web Resources</a></li>
+					<li><a href="${pageContext.request.contextPath}/viewer.do">Cancer QTL Viewer</a></li>
+					<li><a href="${pageContext.request.contextPath}/tumorFrequencyGrid.do">Tumor Frequency Grid</a></li>
+					<li><a href="${pageContext.request.contextPath}/dynamicGrid.do">Dynamic Tumor Frequency Grid</a></li>					
+					<li><a href="${pageContext.request.contextPath}/immunohistochemistry.jsp">Immunohistochemistry</a></li>
+					<li><a href="${pageContext.request.contextPath}/lymphomaPathology.jsp">Lymphoma Pathology</a></li>
+					<li><a href="${pageContext.request.contextPath}/cancerLinks.jsp">Cancer Web Resources</a></li>
 				</ul>
 			</li>	
 		</ul>
