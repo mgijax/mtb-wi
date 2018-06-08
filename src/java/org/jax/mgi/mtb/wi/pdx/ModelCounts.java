@@ -71,7 +71,7 @@ public class ModelCounts {
         "Uterus, Cervix",
         "Kidney, Renal pelvis",
         "Ovary",
-        "Skin, Sking gland",
+        "Skin, Skin gland",
         "Stomach, Forestomach (mouse-specific)",
         "Oral cavity, Pharynx, Gingiva, Mouth, Salivary gland, Tongue, Tooth",
         "Abdominal cavity, Abdominal wall, Adipose tissue, Connective tissue, Mediastinum, Mesodermal cell/mesoblast, Mesothelium, Muscle, Myoepithelial cell, Notochord, Pericardium, Pericyte, Periosteum, Perirenal tissue, Peritoneal cavity, Peritoneum, Pleura, Pleural cavity, Retroperitoneum, Thoracic cavity, Blood vessel, Heart",
