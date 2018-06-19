@@ -53,7 +53,7 @@ public class PDXSearchAction extends Action {
 
         if (geneStr != null) {
 
-            // this is very slow
+            
             ArrayList<String> variants = pdxMouseStore.getVariants(geneStr);
             if (variants != null && variants.size() > 0) {
 
@@ -84,7 +84,7 @@ public class PDXSearchAction extends Action {
 
         // request.setAttribute("genesValuesCNV",pdxMouseStore.getExomePanelGenesLVB());
 
-        request.setAttribute("exomePanelGenes", pdxMouseStore.getExomePanelGenesWebFormat());
+        request.setAttribute("exomePanelGenes", pdxMouseStore.getCTPGenesWebFormat());
 
         Map mapChromosomes = WIConstants.getInstance().getChromosomes();
 

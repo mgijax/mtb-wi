@@ -240,12 +240,14 @@ public class PDXDetailsAction extends Action {
             request.setAttribute("collapseReferences", collapseReferences);
             request.setAttribute("referenceLinks", referenceLinks);
 
-            String expData ="";
+            
+            boolean useTPM = false;
             if(DANA_FARBER.equals(mouse.getInstitution()) || BAYLOR.equals(mouse.getInstitution())){
-                expData = store.getModelTPM(modelID);
-            }else{
-                expData = store.getModelExpression(modelID);
+                useTPM = true;
             }
+            
+            String expData = store.getModelExpression(modelID,useTPM);
+            
             int split = expData.indexOf("[");
             if (split > 0) {
                 String platforms = expData.substring(0, split);
@@ -256,7 +258,7 @@ public class PDXDetailsAction extends Action {
 
             request.setAttribute("geneExpressionData", expData);
 
-            // 3500px is about right for the 350 or so genes in the exome panel
+            // 3500px is about right for the 350 or so genes in the CTP panel
             // some models will have multiple samples 
             // adjust the 3500px as necessary 
             int pxPerBar = 15;
@@ -284,10 +286,7 @@ public class PDXDetailsAction extends Action {
                 request.setAttribute("samplePloidy", ploidy);
                 cnvData = parts[1];
 
-                //cnvData = cnvData.replaceAll("Amplification", "orange");
-                //cnvData = cnvData.replaceAll("Deletion", "blue");
-                //cnvData = cnvData.replaceAll("Normal", "grey");
-                // cnvData = cnvData.replaceAll("Sample Ploidy", "Sample Ploidy");
+                
                 request.setAttribute("geneCNVData", cnvData);
 
                 int cnvChartSize = 250;

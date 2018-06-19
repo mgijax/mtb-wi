@@ -56,7 +56,7 @@ public class PDXComparisonAction extends Action {
 
             primarySites = pdxMouseStore.getPrimarySitesList();
             diagnoses = pdxMouseStore.getDiagnosesList();
-            genes = pdxMouseStore.getExomePanelGenes();
+            genes = pdxMouseStore.getCTPGenes();
 
             ArrayList<LabelValueBean<String, String>> diagnosesLVB = new ArrayList<LabelValueBean<String, String>>();
             ArrayList<LabelValueBean<String, String>> primarySitesLVB = new ArrayList<LabelValueBean<String, String>>();
@@ -88,7 +88,7 @@ public class PDXComparisonAction extends Action {
 
                 ArrayList<PDXMouse> mice = null;
 
-                mice = pdxMouseStore.findMice("", primarySites, diagnoses, no, no, no, no, false, false, no, "",false, null,null);
+                mice = pdxMouseStore.findMice("", primarySites, diagnoses, no, no, "", no, false, false, no, "",false, null,null);
 
                 StringBuffer table = new StringBuffer("<table><tr><td></td>");
 

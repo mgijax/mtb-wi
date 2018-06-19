@@ -65,7 +65,7 @@ public class PDXSearchResultsAction extends Action {
         // include gene variant consequence in cvs
         boolean showGVC = false;
 
-        ArrayList<String> genes = new ArrayList<>();
+       
 
         String hideGene = "false";
         
@@ -73,7 +73,6 @@ public class PDXSearchResultsAction extends Action {
         String hideFusionGenes = "true";
 
         if (gene != null && gene.trim().length() > 0) {
-            genes.add(gene);
             showGVC = true;
         } else {
             hideGene = "true";
@@ -89,7 +88,7 @@ public class PDXSearchResultsAction extends Action {
             request.setAttribute("tissuseOfOrigin", toa);
         } else {
             mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, types,
-                    markers, genes, variants, dosingStudy, tumorGrowth, tags, 
+                    markers, gene, variants, dosingStudy, tumorGrowth, tags, 
                     fusionGenes,treatmentNaive, recistDrug, recistResponse);
         }
 
