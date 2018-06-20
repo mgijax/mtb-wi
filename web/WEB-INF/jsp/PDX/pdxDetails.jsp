@@ -174,15 +174,15 @@
                     {name: 'filtered_rationale'},
                     {name: 'filter'},
                     {name: 'passage_num'},
-                    {name: 'ckb_molpro_link'},
-                    {name: 'ckb_molpro_name'},
-                    {name: 'ckb_gene_id'},
-                    {name: 'ckb_potential_treat_approach'},
-                    {name: 'ckb_protein_effect'},
-                    {name: 'ckb_nclinical_resist'},
-                    {name: 'ckb_nclinical_sens'},
-                    {name: 'ckb_npreclinical_resist'},	
-                    {name: 'ckb_npreclinical_sens'},
+            //        {name: 'ckb_molpro_link'},
+            //        {name: 'ckb_molpro_name'},
+            //        {name: 'ckb_gene_id'},
+            //        {name: 'ckb_potential_treat_approach'},
+            //        {name: 'ckb_protein_effect'},
+            //        {name: 'ckb_nclinical_resist'},
+            //        {name: 'ckb_nclinical_sens'},
+           //         {name: 'ckb_npreclinical_resist'},	
+           //         {name: 'ckb_npreclinical_sens'},
                     {name: 'count_human_reads'},
                     {name: 'pct_human_reads'}
                     
@@ -233,50 +233,50 @@
                            
                         },
                         
-                       {
-                            header: 'CKB<br>molecular<br>profile',
-                            width: 100,
-                            sortable: true,
-                            dataIndex: 'ckb_molpro_name',
-                            renderer: ckbMolProRenderer
-                        },
-                        {
-                            header: 'CKB<br>potential<br>treatment<br>approach',
-                            width: 100,
-                            sortable: true,
-                            dataIndex: 'ckb_potential_treat_approach'
-                        },               
-                        {
-                            header: 'CKB<br>protein<br>effect',
-                            width: 70,
-                            sortable: true,
-                            dataIndex: 'ckb_protein_effect'
-                        },
-                                    
-                        {
-                            header: '# <b>Clinical</b><br>annotations<br>predicting<br>sensitivity',
-                            width: 70,
-                            sortable: true,
-                            dataIndex: 'ckb_nclinical_sens'
-                        },
-                        {
-                            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>sensitivity',
-                            width: 70,
-                            sortable: true,
-                            dataIndex: 'ckb_npreclinical_sens'
-                        },
-                        {
-                            header: '# <b>Clinical</b><br>annotations<br>predicting<br>resistance',
-                            width: 70,
-                            sortable: true,
-                            dataIndex: 'ckb_nclinical_resist'
-                        }, 
-                        {
-                            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>resistance',
-                            width: 70,
-                            sortable: true,
-                            dataIndex: 'ckb_npreclinical_resist'
-                        },               
+//         //             {
+//         //                   header: 'CKB<br>molecular<br>profile',
+//         //                   width: 100,
+//         //                   sortable: true,
+//         //                   dataIndex: 'ckb_molpro_name',
+//         //                   renderer: ckbMolProRenderer
+//         //               },
+//         //               {
+//         //                   header: 'CKB<br>potential<br>treatment<br>approach',
+//                            width: 100,
+//                            sortable: true,
+//                            dataIndex: 'ckb_potential_treat_approach'
+//                        },               
+//                        {
+//                            header: 'CKB<br>protein<br>effect',
+//                            width: 70,
+//                            sortable: true,
+//                            dataIndex: 'ckb_protein_effect'
+//                        },
+//                                    
+//                        {
+//                            header: '# <b>Clinical</b><br>annotations<br>predicting<br>sensitivity',
+//                            width: 70,
+//                            sortable: true,
+//                            dataIndex: 'ckb_nclinical_sens'
+//                        },
+//                        {
+//                            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>sensitivity',
+//                            width: 70,
+//                            sortable: true,
+//                            dataIndex: 'ckb_npreclinical_sens'
+//                        },
+//                        {
+//                            header: '# <b>Clinical</b><br>annotations<br>predicting<br>resistance',
+//                            width: 70,
+//                            sortable: true,
+//                            dataIndex: 'ckb_nclinical_resist'
+//                        }, 
+//                        {
+//                            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>resistance',
+//                            width: 70,
+//                            sortable: true,
+//                            dataIndex: 'ckb_npreclinical_resist'
+//                        },         --%>      
                         
                         {
                             header: 'Platform',
@@ -396,7 +396,7 @@
                         displayInfo: true,
                         displayMsg: 'Displaying results {0} - {1} of {2}'
                     }),
-                    plugins:group
+                //    plugins:group
 
 
 
@@ -438,13 +438,13 @@
                 colNames.push('gene_symbol');
                 colNames.push('gene_id');
           //      colNames.push('ckb_gene_link');
-                colNames.push('ckb_molpro_name');
-                colNames.push('ckb_potential_treat_approach');
-                colNames.push('ckb_protein_effect');
-                colNames.push('ckb_nclinical_resist');	
-                colNames.push('ckb_nclinical_sens');
-                colNames.push('ckb_npreclinical_resist');
-                colNames.push('ckb_npreclinical_sens');
+          //      colNames.push('ckb_molpro_name');
+          //      colNames.push('ckb_potential_treat_approach');
+          //      colNames.push('ckb_protein_effect');
+          //      colNames.push('ckb_nclinical_resist');	
+         //       colNames.push('ckb_nclinical_sens');
+         //       colNames.push('ckb_npreclinical_resist');
+         //       colNames.push('ckb_npreclinical_sens');
                 colNames.push('platform');
                 colNames.push('chromosome');
                 colNames.push('seq_position');

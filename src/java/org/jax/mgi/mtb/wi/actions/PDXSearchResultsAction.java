@@ -117,7 +117,7 @@ public class PDXSearchResultsAction extends Action {
         if (genes2 != null && genes2.trim().length() > 0) {
 
             if (mice.size() > 0) {
-                String expr = pdxMouseStore.getExpression(genes2, mice);
+                String expr = pdxMouseStore.getExpression(mice,genes2);
                 if (expr != null && expr.length() > 1) {
                     String data = "['Expression','Expression Level', 'Model Name']," + expr;
                     request.setAttribute("rank", data);

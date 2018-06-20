@@ -1080,9 +1080,7 @@ public class PDXMouseStore {
 
     }
 
-    public String getExpression(String gene, ArrayList<PDXMouse> mice) {
-        return PDXDAO.getInstance().getExpression(gene, mice);
-    }
+ 
 
     public String getIds() {
         return this.idList;
@@ -1092,20 +1090,14 @@ public class PDXMouseStore {
         return PDXDAO.getInstance().getComparisonData(models, genes);
     }
 
-    private ArrayList<PDXMouse> getMiceByGeneVariant(ArrayList<PDXMouse> mice, String gene, ArrayList<String> variants) {
+    public ArrayList<PDXMouse> getMiceByGeneVariant(ArrayList<PDXMouse> mice, String gene, ArrayList<String> variants) {
 
-        // turn model ids into an array of ints
-        // use the all-variants.json service to return all matching models
-        // populate matching models with gene, 
-        // if variants then populate consequence
+        
+       
         ArrayList<PDXMouse> matchingMice = new ArrayList<>();
         StringBuilder ids = new StringBuilder();
         StringBuilder variantList = new StringBuilder();
-        for (PDXMouse m : mice) {
-            ids.append(m.getModelID()).append(",");
-
-        }
-
+       
         for (String variant : variants) {
             variantList.append(variant).append(",");
         }
@@ -1113,7 +1105,7 @@ public class PDXMouseStore {
 
         params.append("?gene_symbol=").append(gene);
         params.append("&amino_acid_change=").append(variantList.toString());
-        params.append("model=").append(ids.toString());
+     
 
         HashMap<String, ArrayList<StringBuilder>> data = new HashMap<>();
         try {
@@ -1196,24 +1188,7 @@ public class PDXMouseStore {
 
     }
 
-    // need to add links for ckb varying on pubilc availability and site prod/pub
-    
-    //https://ckb.jax.org/molecularProfile/show/369<ckb_molpro_id>
-    //https://ckb.jax.org/gene/show?geneId=1956<ckb_gene_id>
-    /*
-     "ckb_clinically_relevant": null, 
-      "ckb_gene_id": null, 
-      "ckb_molpro_id": null, 
-      "ckb_molpro_name": null, 
-      "ckb_nclinical_resist": null, 
-      "ckb_nclinical_sens": null, 
-      "ckb_npreclinical_resist": null, 
-      "ckb_npreclinical_sens": null, 
-      "ckb_potential_treat_approach": null, 
-      "ckb_protein_effect": null, 
-      "ckb_public_status": null, 
-    
-    */
+   
     
     public String getVariationData(String model, String limit, String start, String sort, String dir) {
 
@@ -1294,24 +1269,7 @@ public class PDXMouseStore {
     }
     
     
-    public String getCSVVariantsNewBroken(String model) {
-
-        StringBuilder result = new StringBuilder();
-
-        try {
-
-                String params = "?keepnulls=yes&model=" + model + "&csv=yes";
-                result.append(getJSON(VARIANTS + params));
-
-
-        } catch (Exception e) {
-            log.error("Error getting variants for " + model, e);
-
-        }
-
-        return result.toString();
-
-    }
+    
 
     private String getVariantFields(JSONArray array) throws JSONException {
         StringBuilder result = new StringBuilder();
@@ -1560,6 +1518,10 @@ public class PDXMouseStore {
 
     public String getCNVExpression(ArrayList<PDXMouse> mice, String gene) {
         return PDXDAO.getInstance().getCNVExpression(gene, mice);
+    }
+    
+    public String getExpression(ArrayList<PDXMouse> mice, String gene){
+        return PDXDAO.getInstance().getExpression(mice, gene);
     }
 
     private String getFilterStr() {
