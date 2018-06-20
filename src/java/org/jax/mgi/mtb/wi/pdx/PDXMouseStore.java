@@ -1104,7 +1104,9 @@ public class PDXMouseStore {
         StringBuilder params = new StringBuilder();
 
         params.append("?gene_symbol=").append(gene);
-        params.append("&amino_acid_change=").append(variantList.toString());
+        if(variants != null && variants.size()>0){
+            params.append("&amino_acid_change=").append(variantList.toString());
+        }
      
 
         HashMap<String, ArrayList<StringBuilder>> data = new HashMap<>();
