@@ -174,15 +174,15 @@
                     {name: 'filtered_rationale'},
                     {name: 'filter'},
                     {name: 'passage_num'},
-            //        {name: 'ckb_molpro_link'},
-            //        {name: 'ckb_molpro_name'},
-            //        {name: 'ckb_gene_id'},
-            //        {name: 'ckb_potential_treat_approach'},
-            //        {name: 'ckb_protein_effect'},
-            //        {name: 'ckb_nclinical_resist'},
-            //        {name: 'ckb_nclinical_sens'},
-           //         {name: 'ckb_npreclinical_resist'},	
-           //         {name: 'ckb_npreclinical_sens'},
+                    {name: 'ckb_molpro_link'},
+                    {name: 'ckb_molpro_name'},
+                    {name: 'ckb_gene_id'},
+                    {name: 'ckb_potential_treat_approach'},
+                    {name: 'ckb_protein_effect'},
+                    {name: 'ckb_nclinical_resist'},
+                    {name: 'ckb_nclinical_sens'},
+                    {name: 'ckb_npreclinical_resist'},	
+                    {name: 'ckb_npreclinical_sens'},
                     {name: 'count_human_reads'},
                     {name: 'pct_human_reads'}
                     
@@ -206,13 +206,13 @@
                     proxy: dataProxy
                 });
                 
-                var ckb = [{header: '', colspan: 2, align: 'center'},
-                        {header: 'JAX Clinical Knowledgebase (CKB) annotations', colspan: 7, align: 'center'},
-                    {header: '', colspan: 17, align: 'center'}]
+            //    var ckb = [{header: '', colspan: 2, align: 'center'},
+            //            {header: 'JAX Clinical Knowledgebase (CKB) annotations', colspan: 7, align: 'center'},
+            //        {header: '', colspan: 17, align: 'center'}]
                 
-                 var group = new Ext.ux.grid.ColumnHeaderGroup({
-                    rows: [ckb]
-                });
+            //     var group = new Ext.ux.grid.ColumnHeaderGroup({
+            //        rows: [ckb]
+            //    });
 
                 store.setDefaultSort('gene_symbol', 'ASC');
 
@@ -220,7 +220,7 @@
                     store: store,
                     columns: [
                         {
-                            text: 'Sample',
+                            header: 'Sample',
                             width: 85,
                             sortable: true,
                             dataIndex: 'sample_name'
@@ -312,7 +312,7 @@
                         },
                         {
                             header: 'Consequence',
-                            width: 170,
+                            width: 120,
                             sortable: true,
                             dataIndex: 'consequence'
                         },
@@ -346,32 +346,26 @@
                             sortable: true,
                             dataIndex: 'transcript_id'
                         },
-                        {
-                            header: 'Filtered Rationale',
-                            width: 100,
-                            sortable: true,
-                            dataIndex: 'filtered_rationale'
-
-                        },
-                        {
-                            header: 'Filter',
-                            width: 50,
-                            sortable: true,
-                            dataIndex: 'filter'
-
-                        },
+//                        {
+//                            header: 'Filtered Rationale',
+//                            width: 100,
+//                            sortable: true,
+//                            dataIndex: 'filtered_rationale'
+//
+//                        },
+  //                      {
+  //                          header: 'Filter',
+  //                          width: 50,
+  //                          sortable: true,
+  //                          dataIndex: 'filter'
+  //                      },
                         {
                             header: 'Passage Num',
                             width: 50,
                             sortable: true,
                             dataIndex: 'passage_num'
                         },
-                        {
-                            header: 'Gene ID',
-                            width: 60,
-                            sortable: true,
-                            dataIndex: 'gene_id'
-                        },
+                       
                         {
                             header: 'Count Human Reads',
                             width: 70,
@@ -389,7 +383,8 @@
                     stripeRows: true,
                     height: 700,
                     width: 1000,
-                    id: 'pdxGrid'
+                    id: 'pdxGrid',
+                    autoExpandColumn:0
                     , bbar: new Ext.PagingToolbar({
                         pageSize: 30,
                         store: store,
@@ -433,18 +428,8 @@
 
                 // there must be a better way...
                 var colNames = [];
-                colNames.push('model_id');
                 colNames.push('sample_name');
                 colNames.push('gene_symbol');
-                colNames.push('gene_id');
-          //      colNames.push('ckb_gene_link');
-          //      colNames.push('ckb_molpro_name');
-          //      colNames.push('ckb_potential_treat_approach');
-          //      colNames.push('ckb_protein_effect');
-          //      colNames.push('ckb_nclinical_resist');	
-         //       colNames.push('ckb_nclinical_sens');
-         //       colNames.push('ckb_npreclinical_resist');
-         //       colNames.push('ckb_npreclinical_sens');
                 colNames.push('platform');
                 colNames.push('chromosome');
                 colNames.push('seq_position');
@@ -456,8 +441,6 @@
                 colNames.push('read_depth');
                 colNames.push('allele_frequency');
                 colNames.push('transcript_id');
-                colNames.push('filtered_rationale');
-                colNames.push('filter');
                 colNames.push('passage_num');
                 colNames.push('count_human_reads');
                 colNames.push('pct_human_reads');

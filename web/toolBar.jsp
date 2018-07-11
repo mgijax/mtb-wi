@@ -142,7 +142,12 @@
             <hr width=90%>
             <div class="toolBarSmall">
             Last Database Update<br>
+             <c:if test="${applicationScope.publicDeployment == true}">
             ${applicationScope.dbLastUpdateDate}<br>
+             </c:if>
+             <c:if test="${applicationScope.publicDeployment == false}">
+                 Daily<br>
+             </c:if>
             MTB ${applicationScope.wiVersion}
             </div>
             </center>

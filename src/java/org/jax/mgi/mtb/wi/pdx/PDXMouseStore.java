@@ -77,7 +77,7 @@ public class PDXMouseStore {
 
     private static String baseURL = WIConstants.getInstance().getPDXWebservice();
 
-    private static String MODEL_EXPRESSION = baseURL + "expression?&all_ctp_genes=yes&model=";
+    private static String MODEL_EXPRESSION = baseURL + "expression?all_ctp_genes=yes&model=";
 
     private static String MODEL_CNV = baseURL + "cnv_gene?all_ctp_genes=yes&model=";
 
@@ -96,10 +96,10 @@ public class PDXMouseStore {
     private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M", "DAXX", "EHMT2", "EPHB6", "HLA-A", "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4", "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
     private static final String RNA_SEQ = "RNA_Seq";
     private static final HashMap<String, String> AFFECTED_GENES = new HashMap<>();
-    
+
     private static final String CKB_MOLPRO_PUBLIC = "https://ckb.jax.org/molecularProfile/show/";
     private static final String CKB_GENE_PUBLIC = "https://ckb.jax.org/gene/show?geneId=";
-    
+
     private static final String CKB_MOLPRO_INTERNAL = "https://myckb.jax.org/molecularProfile/show/";
     private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
 
@@ -699,8 +699,6 @@ public class PDXMouseStore {
         return (ArrayList<LabelValueBean<String, String>>) tagsLVB;
     }
 
-    
-
     public ArrayList<LabelValueBean<String, String>> getFusionGenesLVB() {
         return (ArrayList<LabelValueBean<String, String>>) fusionGenesLVB;
     }
@@ -921,11 +919,11 @@ public class PDXMouseStore {
                 String gene = data.getString("gene_symbol");
                 String platform = data.getString("platform");
                 Double value = data.getDouble(valueToGet);
-                
-                if(useTPM){
-                   value = (Math.log(value+1)/Math.log(2));
+
+                if (useTPM) {
+                    value = (Math.log(value + 1) / Math.log(2));
                 }
-                
+
                 String valueStr = df.format(value);
 
                 platformMap.put(platform, platform);
@@ -1080,8 +1078,6 @@ public class PDXMouseStore {
 
     }
 
- 
-
     public String getIds() {
         return this.idList;
     }
@@ -1092,22 +1088,19 @@ public class PDXMouseStore {
 
     public ArrayList<PDXMouse> getMiceByGeneVariant(ArrayList<PDXMouse> mice, String gene, ArrayList<String> variants) {
 
-        
-       
         ArrayList<PDXMouse> matchingMice = new ArrayList<>();
         StringBuilder ids = new StringBuilder();
         StringBuilder variantList = new StringBuilder();
-       
+
         for (String variant : variants) {
             variantList.append(variant).append(",");
         }
         StringBuilder params = new StringBuilder();
 
         params.append("?gene_symbol=").append(gene);
-        if(variants != null && variants.size()>0){
+        if (variants != null && variants.size() > 0) {
             params.append("&amino_acid_change=").append(variantList.toString());
         }
-     
 
         HashMap<String, ArrayList<StringBuilder>> data = new HashMap<>();
         try {
@@ -1190,14 +1183,17 @@ public class PDXMouseStore {
 
     }
 
-   
-    
     public String getVariationData(String model, String limit, String start, String sort, String dir) {
 
         StringBuffer result = new StringBuffer("{'total':");
         try {
 
             String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
+
+            if ("-1".equals(limit)) {
+                params = "?keepnulls=yes&model=" + model + "&sort_by=" + sort + "&sort_dir=" + dir;
+            }
+
             JSONObject job = new JSONObject(getJSON(VARIANTS + params));
 
             String total = ((Integer) job.get("total_rows")).toString();
@@ -1213,9 +1209,8 @@ public class PDXMouseStore {
 
         } catch (Exception e) {
             log.error("Error getting variants for " + model, e);
-            
-             result.append("0,'variation':[ ]}");
 
+            result.append("0,'variation':[ ]}");
 
         }
 
@@ -1233,7 +1228,6 @@ public class PDXMouseStore {
         result.append("Passage Num,CKB Molecular Profile Link, CKB Molecular Profile Name, CKB Gene Link,CKB Potential Treatment Appr,CKB Protein Effect,No. clinical annotations predicting sensitivity,");
         result.append("No. preclinical annotations predicting sensitivity,No. clinical annotations predicting resistance,No. preclinical annotations predicting resistance,");
         result.append("Count Human Reads,PCT Human Reads");
-        
 
         int start = 0;
         int limit = 15000;
@@ -1269,13 +1263,9 @@ public class PDXMouseStore {
         return result.toString();
 
     }
-    
-    
-    
 
     private String getVariantFields(JSONArray array) throws JSONException {
         StringBuilder result = new StringBuilder();
-       
 
         for (int i = 0; i < array.length(); i++) {
 
@@ -1294,59 +1284,58 @@ public class PDXMouseStore {
             result.append("'").append(getField(array.getJSONObject(i), "allele_frequency")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "transcript_id")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "filtered_rationale")).append("',");
-            if(!WIConstants.getInstance().getPublicDeployment()){
-                result.append("'").append(getField(array.getJSONObject(i), "filter")).append("',");
-            }
+            result.append("'").append(getField(array.getJSONObject(i), "filter")).append("',");
+
             result.append("'").append(getField(array.getJSONObject(i), "passage_num")).append("',");
-            
-            String ckbGeneID =getField(array.getJSONObject(i),"ckb_gene_id");
-            String ckbMolProID = getField(array.getJSONObject(i),"ckb_molpro_id");
-            String ckbMolProName = getField(array.getJSONObject(i),"ckb_molpro_name");
-            
-            if(WIConstants.getInstance().getPublicDeployment()){
-                if("public".equals(getField(array.getJSONObject(i),"ckb_public_status"))){
-                   
+
+            String ckbGeneID = getField(array.getJSONObject(i), "ckb_gene_id");
+            String ckbMolProID = getField(array.getJSONObject(i), "ckb_molpro_id");
+            String ckbMolProName = getField(array.getJSONObject(i), "ckb_molpro_name");
+
+            if (WIConstants.getInstance().getPublicDeployment()) {
+                if ("public".equals(getField(array.getJSONObject(i), "ckb_public_status"))) {
+
                     result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
                     result.append("'").append(ckbMolProName).append("',");
-                    if(ckbGeneID.length()>0 && !ckbGeneID.equals("null")){
+                    if (ckbGeneID.length() > 0 && !ckbGeneID.equals("null")) {
                         result.append("'").append(CKB_GENE_PUBLIC).append(ckbGeneID).append("',");
-                    }else{
+                    } else {
                         result.append("'',");
                     }
                     result.append("'").append(getField(array.getJSONObject(i), "ckb_potential_treat_approach")).append("',");
                     result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
+                } else {
+                    result.append("'',");
+                    result.append("'',");
+                    result.append("'',");
+                    result.append("'',");
+                    result.append("'',");
                 }
-                result.append("'',");
-                result.append("'',");
-                result.append("'',");
-                result.append("'',");
-                result.append("'',");
-            }else{
+            } else {
                 //link to internal site
-                    if(ckbMolProName.length()>0 && !ckbMolProName.equals("null")){
-                        result.append("'").append(CKB_MOLPRO_INTERNAL).append(ckbMolProID).append("',");
-                        result.append("'").append(ckbMolProName).append("',");
-                    }else{
-                         result.append("'',");
-                         result.append("'',");
-               
-                    }
-                    if(ckbGeneID.length()>0 && !ckbGeneID.equals("null")){
-                        result.append("'").append(CKB_GENE_INTERNAL).append(ckbGeneID).append("',");
-                    }else{
-                         result.append("'',");
-                    }
-                        
-                    result.append("'").append(getField(array.getJSONObject(i), "ckb_potential_treat_approach")).append("',");
-                    result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
-                    
+                if (ckbMolProName.length() > 0 && !ckbMolProName.equals("null")) {
+                    result.append("'").append(CKB_MOLPRO_INTERNAL).append(ckbMolProID).append("',");
+                    result.append("'").append(ckbMolProName).append("',");
+                } else {
+                    result.append("'',");
+                    result.append("'',");
+
+                }
+                if (ckbGeneID.length() > 0 && !ckbGeneID.equals("null")) {
+                    result.append("'").append(CKB_GENE_INTERNAL).append(ckbGeneID).append("',");
+                } else {
+                    result.append("'',");
+                }
+
+                result.append("'").append(getField(array.getJSONObject(i), "ckb_potential_treat_approach")).append("',");
+                result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
+
             }
-           
-            
-           result.append("'").append(getField(array.getJSONObject(i), "ckb_nclinical_resist")).append("',");
-           result.append("'").append(getField(array.getJSONObject(i), "ckb_nclinical_sens")).append("',");
-           result.append("'").append(getField(array.getJSONObject(i), "ckb_npreclinical_resist")).append("',");
-           result.append("'").append(getField(array.getJSONObject(i), "ckb_npreclinical_sens")).append("',");
+
+            result.append("'").append(getField(array.getJSONObject(i), "ckb_nclinical_resist")).append("',");
+            result.append("'").append(getField(array.getJSONObject(i), "ckb_nclinical_sens")).append("',");
+            result.append("'").append(getField(array.getJSONObject(i), "ckb_npreclinical_resist")).append("',");
+            result.append("'").append(getField(array.getJSONObject(i), "ckb_npreclinical_sens")).append("',");
 
             result.append("'").append(getField(array.getJSONObject(i), "count_human_reads")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "pct_human_reads")).append("'],");
@@ -1373,13 +1362,13 @@ public class PDXMouseStore {
 
     private ArrayList<String> getFusionModels(String fusionGenes) {
         ArrayList<String> models = new ArrayList<String>();
-        HashMap<String,String> modelsMap = new HashMap();
+        HashMap<String, String> modelsMap = new HashMap();
         try {
             String url = FUSION_MODELS_BY_GENE + fusionGenes;
             JSONObject job = new JSONObject(getJSON(url));
             JSONArray jarray = (JSONArray) job.get("data");
             for (int i = 0; i < jarray.length(); i++) {
-                modelsMap.put(jarray.getJSONObject(i).getString("model_name"),jarray.getJSONObject(i).getString("model_name"));
+                modelsMap.put(jarray.getJSONObject(i).getString("model_name"), jarray.getJSONObject(i).getString("model_name"));
             }
 
         } catch (Exception e) {
@@ -1421,9 +1410,9 @@ public class PDXMouseStore {
             for (int i = 0; i < jarray.length(); i++) {
                 try {
                     String model = jarray.getJSONObject(i).getString("model_name");
-                    log.error("Fusion model "+model);
+                    log.error("Fusion model " + model);
                     String sample = jarray.getJSONObject(i).getString("sample_name");
-                    String variant = jarray.getJSONObject(i).getString("up_gene")+" - "+jarray.getJSONObject(i).getString("dw_gene");
+                    String variant = jarray.getJSONObject(i).getString("up_gene") + " - " + jarray.getJSONObject(i).getString("dw_gene");
 
                     if (map.containsKey(model)) {
                         if (map.get(model).containsKey(sample)) {
@@ -1448,13 +1437,12 @@ public class PDXMouseStore {
                 StringBuilder display = new StringBuilder();
                 for (String sample : map.get(model).keySet()) {
                     display.append("Sample ").append(sample).append(" has fusion gene");
-                    
-                     if (map.get(model).get(sample).keySet().size() > 1) {
-                            display.append("s");
-                        }
+
+                    if (map.get(model).get(sample).keySet().size() > 1) {
+                        display.append("s");
+                    }
                     for (String variant : map.get(model).get(sample).keySet()) {
 
-                       
                         display.append(" ").append(variant).append(",");
                     }
                     // remove trailing comma
@@ -1463,8 +1451,8 @@ public class PDXMouseStore {
                         display.append("<br>");
                     }
                 }
-                log.error(model+" "+display.toString());
-                
+                log.error(model + " " + display.toString());
+
                 fusionModelsMap.put(model, display.toString());
             }
         } catch (Exception e) {
@@ -1521,8 +1509,8 @@ public class PDXMouseStore {
     public String getCNVExpression(ArrayList<PDXMouse> mice, String gene) {
         return PDXDAO.getInstance().getCNVExpression(gene, mice);
     }
-    
-    public String getExpression(ArrayList<PDXMouse> mice, String gene){
+
+    public String getExpression(ArrayList<PDXMouse> mice, String gene) {
         return PDXDAO.getInstance().getExpression(mice, gene);
     }
 
