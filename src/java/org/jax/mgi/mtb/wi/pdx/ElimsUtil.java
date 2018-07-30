@@ -544,7 +544,15 @@ public class ElimsUtil {
                         mouse.setInstitution(results[i].getCollecting_Site());
                         mouse.setTissue(results[i].getSpecimen_Site());
                         mouse.setSex(results[i].getGender());  // patient sex, not mouse
-                        mouse.setAge(results[i].getPatient_Age());
+                        String age = results[i].getPatient_Age();
+                        try{
+                            Integer a = new Integer(age);
+                            if(a >= 90){
+                                age = "90 or above";
+                                
+                            }
+                        }catch(Exception e){}
+                        mouse.setAge(age);
                         mouse.setInitialDiagnosis(results[i].getInitial_Diagnosis());
                         mouse.setClinicalDiagnosis(results[i].getClinical_Diagnosis()); // displayed as Final Diaganosis
                         mouse.setSampleType(results[i].getSample_Type());
