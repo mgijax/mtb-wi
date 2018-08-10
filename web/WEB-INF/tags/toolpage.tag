@@ -40,7 +40,15 @@
 	<c:otherwise>
 	<title><c:out value="${title}" escapeXml="false"/></title>
 	</c:otherwise>	 
-	</c:choose>		   
+	</c:choose>	
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/_res/css/fonts.css"/>	
+	<link rel="stylesheet" type="text/css" href="/_res/css/tool-base.css"/>
+	<script type="text/javascript" src="/_res/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/_res/js/tool-base.js"></script>
+	<script type="text/javascript">
+		var mods = [];
+	</script>
 	<jsp:invoke fragment="defaultHead" />
 </head>
 
@@ -63,7 +71,48 @@
 			<jsp:invoke fragment="footer" />
 		</div>
 	</footer>
-	
+	<script type="text/javascript" id="mod-loader">
+        (function () {
+            var i, l, u, s, c, modLoader,
+                modLoader = document.getElementById('mod-loader'),
+                docHead = document.getElementsByTagName('head')[0],
+                jsPath = '/_res/js/',
+                cssPath = '/_res/css/',
+                sf = [],
+                cf = [];
+
+            if (typeof mods !== 'undefined' && Array.isArray(mods) && mods.length > 0) {
+                u = {};
+                for (i = 0, l = mods.length; i < l; i += 1) {
+                    if (!u.hasOwnProperty(mods[i])) {
+	                    if (/\.js$/.test(mods[i])) {
+		                    sf.push(jsPath + mods[i]);
+	                    } else if (/\.css$/.test(mods[i])) {
+		                    cf.push(cssPath + mods[i]);
+	                    } else {
+		                    sf.push(jsPath + mods[i] + '.js');
+		                    cf.push(cssPath + mods[i] + '.css');
+	                    }
+                        u[mods[i]] = 1;
+                    }
+                }
+            }
+            for (i = 0, l = sf.length; i < l; i += 1) {
+                s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = false;
+                s.src = sf[i];
+                modLoader.parentNode.insertBefore(s, modLoader);
+            }
+            for (i = 0, l = cf.length; i < l; i += 1) {
+                c = document.createElement('link');
+                c.type = 'text/css';
+                c.rel = 'stylesheet';
+                c.href = cf[i];
+                docHead.appendChild(c);
+            }
+        })();
+    </script>	
 </body>
 
 </html>

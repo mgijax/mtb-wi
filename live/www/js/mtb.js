@@ -32,5 +32,5 @@ $(function() {
 			$(this).toggleClass('show-tip');
 		});		
 	});
-
+	
 });

@@ -15,10 +15,7 @@
 	defaultDescription="MMHC has been designed to aid researchers in such areas as choosing experimental models, reviewing patterns of mutations in specific cancers, and identifying genes that are commonly mutated across a spectrum of cancers.">
 	<jsp:attribute name="defaultHead">
 		<link rel="icon" href="${applicationScope.urlImageDir}/favicon.ico" type="image/ico">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="/_res/css/fonts.css"/>
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlStyleSheet}"/>
-		<script type="text/javascript" src="/_res/js/jquery.min.js"></script>
 		<script type="text/javascript" src="${applicationScope.urlJavaScript}"></script>
 		<jsp:invoke fragment="head" />
 	</jsp:attribute>		
@@ -28,7 +25,7 @@
 			<img src="${applicationScope.urlImageDir}/mmhc-logo.png" alt="Mouse Models of Human Cancer">
 			<h3>Mouse&nbsp;Models<br>of&nbsp;Human&nbsp;Cancer</h3>
 		</a>
-		<c:import url="/quick-search.jsp" />
+		<c:import url="/search/quick.jsp" />
 		<ul>
 			<li class="dropdown"><span>Advanced Search</span>
 				<ul>

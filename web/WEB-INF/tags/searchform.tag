@@ -41,3 +41,6 @@
 	<input type="reset" value="Reset">
 </fieldset>
 </html:form>
+<script type="text/javascript">
+	mods.push('jquery-ui-tag-it.min.js', 'tag-it.min.js', 'tag-it.css', 'search-form');	
+</script>
