@@ -111,7 +111,7 @@
                                             &lt;Gene&gt;:MUT=&lt;VARIANT&gt;<br>
                                             &lt;Gene&gt;:Amp<br>
                                             &lt;Gene&gt;:Del<br>
-
+                                            <br>
                                             Example:<br><br>
                                             CASE 1<br>
                                             KRAS:Amp            (search for models with amplified KRAS)<br>

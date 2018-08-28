@@ -32,8 +32,9 @@ import org.jax.mgi.mtb.wi.WIConstants;
  */
 public class ParseGeneCases {
 
-    private static final String baseURL = WIConstants.getInstance().getPDXWebservice();
+    //private  String baseURL = WIConstants.getInstance().getPDXWebservice();
 
+     static final String baseURL = "http://pdxdata.jax.org:335/api/";
     private static final String VARIANTS = baseURL + "variants";
 
     private static final String CNV = baseURL + "cnv_gene";
@@ -427,7 +428,7 @@ public class ParseGeneCases {
 
         ArrayList<String> mice = new ArrayList<>();
         StringBuilder params = new StringBuilder();
-        params.append("?gene_symbol=").append(gene);
+        params.append("?min_lr_ploidy="+AMP+"&gene_symbol=").append(gene);
         try {
 
             JSONObject job = new JSONObject(getJSON(CNV + params.toString(), ""));
@@ -437,10 +438,9 @@ public class ParseGeneCases {
                 Double lrp = job.getDouble("logratio_ploidy");
                 String id = job.getString("model_name");
                 
-                if (lrp > AMP) {
                     mice.add(id);
-                    System.out.println("AMP "+id+ " has lrp="+lrp);
-                }
+                    System.out.println("AMP "+id+ " has lrp = "+lrp);
+               
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -452,7 +452,8 @@ public class ParseGeneCases {
 
         ArrayList<String> mice = new ArrayList<>();
         StringBuilder params = new StringBuilder();
-        params.append("?gene_symbol=").append(gene);
+        params.append("?max_lr_ploidy="+DEL+"&gene_symbol=").append(gene);
+        
         try {
 
             JSONObject job = new JSONObject(getJSON(CNV + params.toString(), ""));
@@ -462,10 +463,10 @@ public class ParseGeneCases {
                 Double lrp = job.getDouble("logratio_ploidy");
                 String id = job.getString("model_name");
                 
-                if (lrp < DEL) {
+                
                     mice.add(id);
-                    System.out.println("DEL "+id+ " has lrp="+lrp);
-                }
+                    System.out.println("DEL "+id+ " has lrp = "+lrp);
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -474,6 +475,7 @@ public class ParseGeneCases {
     }
 
     private void getModelDetails() {
+        if(detailsMap == null || detailsMap.size()==0){
         try {
             JSONObject job = new JSONObject(getJSON("http://tumor.informatics.jax.org/PDXInfo/JSONData.do?allModels=gimme", null));
             JSONArray models = job.getJSONArray("pdxInfo");
@@ -490,6 +492,7 @@ public class ParseGeneCases {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
         }
     }
 
