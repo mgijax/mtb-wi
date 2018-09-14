@@ -180,7 +180,7 @@ public class PDXComparisonAction extends Action {
                                 vals.add("noValue");
                                 vals.add(" ");
                             }
-                            expr.append("<td style=\"background-color:").append(expLevelToColor(vals.get(0))).append("\">&nbsp;</td>");
+                            expr.append("<td style=\"background-color:").append(expLevelToColor(vals.get(0))).append("\">").append(formatExpressionValue(vals.get(0))).append("</td>");
                             cnv.append("<td style=\"background-color:").append(ampDelToColor(vals.get(1))).append("\">&nbsp</td>");
                             if (vals.get(2) != null && vals.get(2).trim().length() > 0) {
                                 mutation.append("<td style=\"background-color:#000000; text-decoration:none;\" onmouseover=\"return overlib('");
@@ -340,5 +340,15 @@ public class PDXComparisonAction extends Action {
         }
 
         return color;
+    }
+    
+    private String formatExpressionValue(String in){
+        try{
+            in = String.format("%.2f", new Double(in));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        if("0.00".equals(in) || "noValue".equals(in))in ="";
+        return in;
     }
 }

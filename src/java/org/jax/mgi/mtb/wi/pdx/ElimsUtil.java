@@ -255,7 +255,7 @@ public class ElimsUtil {
     }
 
     // Any changes here need to get relayed to Al Simons as he comsumes this as JSON and these are field keys
-    private static final String STATUS_COLUMNS = "Model ID,Project Type,Model Status,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,"
+    private static final String STATUS_COLUMNS = "Model ID,Project Type,Model Status,Location,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,"
             + "Specimen Site,Primary Site,Initial Diagnosis,Clinical Diagnosis,Other Diagnosis Info,"
             + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,"
             + "Engraftment Site,Collecting Site,Collection Date,Received Date,Accession Date,P0 Engraftment Date,P0 Success Date,"
@@ -292,6 +292,7 @@ public class ElimsUtil {
                         report.append(id).append(",");
                         report.append(clean(result[i].getProjectType())).append(",");
                         report.append(clean(result[i].getModel_Status())).append(",");
+                        report.append(clean(result[i].getLocation())).append(",");
                         report.append(clean(result[i].getModel())).append(",");
                         report.append(clean(result[i].getModel_Aka())).append(",");
                         report.append(clean(result[i].getMedical_Record_Number())).append(",");
@@ -366,6 +367,7 @@ public class ElimsUtil {
                         report.append("\"").append(columns[j++]).append("\":").append(clean(id)).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getProjectType())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getModel_Status())).append(",\n");
+                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getLocation())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getModel())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getModel_Aka())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMedical_Record_Number())).append(",\n");
