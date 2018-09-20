@@ -91,7 +91,7 @@ public class PDXMouseStore {
 
     private static final String ALL_GENES = baseURL + "all_genes";
 
-    private static HashMap<String, String> fusionModelsMap = new HashMap<String, String>();
+    private static HashMap<String, String> fusionModelsMap = new HashMap();
 
     private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M", "DAXX", "EHMT2", "EPHB6", "HLA-A", "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4", "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
     private static final String RNA_SEQ = "RNA_Seq";
@@ -102,6 +102,10 @@ public class PDXMouseStore {
     
     private static final String CKB_MOLPRO_INTERNAL = "https://myckb.jax.org/molecularProfile/show/";
     private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
+    
+    
+    
+    private static final HashMap<String, ArrayList<String>> cnvPlots = new HashMap<>();
 
     public PDXMouseStore() {
 
@@ -236,6 +240,10 @@ public class PDXMouseStore {
             }
             genesBuffer.append("]");
             ctpGenesWebFormat = genesBuffer.toString();
+            
+            
+            loadCNVPlots();
+            log.info("Loaded cnv plots for "+cnvPlots.size()+" models.");
         }
     }
 
@@ -1195,12 +1203,14 @@ public class PDXMouseStore {
     public String getVariationData(String model, String limit, String start, String sort, String dir) {
 
         StringBuffer result = new StringBuffer("{'total':");
+        
+        String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
+        
         try {
 
-            String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
             JSONObject job = new JSONObject(getJSON(VARIANTS + params));
 
-            String total = ((Integer) job.get("total_rows")).toString();
+            String total = ((Integer) job.get("count")).toString();
             result.append(total);
 
             JSONArray array = (JSONArray) job.get("data");
@@ -1212,7 +1222,7 @@ public class PDXMouseStore {
             result.replace(result.length() - 1, result.length(), "]}");
 
         } catch (Exception e) {
-            log.error("Error getting variants for " + model, e);
+            log.error("Error getting variants for " + model +" from "+VARIANTS+params,e);
             
              result.append("0,'variation':[ ]}");
 
@@ -1516,6 +1526,28 @@ public class PDXMouseStore {
         }
         ctpGeneList = genes;
 
+    }
+    
+    private void loadCNVPlots(){
+        //get this from webconstants
+        String path = WIConstants.getInstance().getCNVPlotsPath();
+        File cnvFile = new File(path);
+        for(File file : cnvFile.listFiles()){
+            String name = file.getName();
+            String model = file.getName().split("_")[0];
+            if(cnvPlots.containsKey(model)){
+                cnvPlots.get(model).add(name);
+            }else{
+                ArrayList<String> fileNames = new ArrayList<>();
+                fileNames.add(name);
+                cnvPlots.put(model,fileNames);
+                
+            }
+        }
+    }
+    
+    public ArrayList<String> getCNVPlotsForModel(String modelID){
+        return cnvPlots.get(modelID);
     }
 
     public String getCNVExpression(ArrayList<PDXMouse> mice, String gene) {

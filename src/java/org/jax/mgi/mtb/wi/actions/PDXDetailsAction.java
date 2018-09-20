@@ -301,6 +301,8 @@ public class PDXDetailsAction extends Action {
                 request.setAttribute("cnvChartSize", cnvChartSize + "");
                 // will need to set cnv data here
             }
+            
+            request.setAttribute("cnvPlots", store.getCNVPlotsForModel(modelID));
 
             request.setAttribute("modelID", modelID);
 

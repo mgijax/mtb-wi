@@ -304,7 +304,7 @@ public class ElimsUtil {
                         report.append(clean(result[i].getPrimary_Site())).append(",");
                         report.append(clean(result[i].getInitial_Diagnosis())).append(",");
                         report.append(clean(result[i].getClinical_Diagnosis())).append(",");
-                        report.append(clean(result[i].getOther_Diagnosis_Info())).append(",");
+                        report.append(clean(result[i].getOther_Diagnosis_Info())).append(",");    // we can remove this (per margaret)
                         report.append(clean(result[i].getTumor_Type())).append(",");
                         report.append(clean(result[i].getGrades())).append(",");
                         report.append(clean(result[i].getMarkers())).append(",");

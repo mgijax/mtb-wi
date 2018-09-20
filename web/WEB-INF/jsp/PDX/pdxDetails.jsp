@@ -872,6 +872,34 @@
 
                                         </td>
                                     </tr>
+                                    
+                                    <c:choose>
+                                        <c:when test="${not empty cnvPlots}">
+                                            
+                                        <tr class="stripe${a}">
+                                            <td class="cat${a}">
+                                                CNV Plots
+                                            </td>
+                                            <td class="data${a}">
+                                                        <table  border=0 cellpadding=5 cellspacing=0 width="100%">
+                                                            <tr>
+                                                                <td class="normal">
+                                                                     <c:forEach var="plot" items="${cnvPlots}" varStatus="status">
+                                                                         <img src="${applicationScope.pdxFileURL}../cnvPlots/tumor_only/${plot}" height="450" width="975"/>
+                                                                         <br>
+                                                                     </c:forEach>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+
+                                            </td>
+                                        </tr>
+                                         <c:set var="oldA" value="${a}"/>
+                                         <c:set var="a" value="${b}"/>
+                                         <c:set var="b" value="${oldA}"/>
+                                        </c:when>
+                                    </c:choose>
+                                    
                                     <tr class="stripe${a}">
                                         <td class="cat${a}">
                                             Model Characterization

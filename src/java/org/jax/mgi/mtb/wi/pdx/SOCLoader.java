@@ -47,6 +47,8 @@ public class SOCLoader {
         } catch (Exception e) {
             log.error("Unable to load SOC model data",e);
         }
+        
+        models.remove("J000077451");
 
         return models;
     }
