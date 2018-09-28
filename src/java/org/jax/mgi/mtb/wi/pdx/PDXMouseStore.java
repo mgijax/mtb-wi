@@ -707,8 +707,6 @@ public class PDXMouseStore {
         return (ArrayList<LabelValueBean<String, String>>) tagsLVB;
     }
 
-    
-
     public ArrayList<LabelValueBean<String, String>> getFusionGenesLVB() {
         return (ArrayList<LabelValueBean<String, String>>) fusionGenesLVB;
     }
@@ -1088,7 +1086,6 @@ public class PDXMouseStore {
 
     }
 
- 
 
     public String getIds() {
         return this.idList;
@@ -1100,8 +1097,6 @@ public class PDXMouseStore {
 
     public ArrayList<PDXMouse> getMiceByGeneVariant(ArrayList<PDXMouse> mice, String gene, ArrayList<String> variants) {
 
-        
-       
         ArrayList<PDXMouse> matchingMice = new ArrayList<>();
         StringBuilder ids = new StringBuilder();
         StringBuilder variantList = new StringBuilder();
@@ -1529,7 +1524,9 @@ public class PDXMouseStore {
     }
     
     private void loadCNVPlots(){
-        //get this from webconstants
+        
+        cnvPlots.clear();
+        
         String path = WIConstants.getInstance().getCNVPlotsPath();
         File cnvFile = new File(path);
         for(File file : cnvFile.listFiles()){
@@ -1543,6 +1540,9 @@ public class PDXMouseStore {
                 cnvPlots.put(model,fileNames);
                 
             }
+        }
+        for(ArrayList<String> list : cnvPlots.values()){
+            Collections.sort(list);
         }
     }
     
