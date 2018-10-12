@@ -605,7 +605,39 @@
                        panel4.doLayout();
                 }
                 
+          
+            
+             if(document.getElementById("cnvPlots") != null){
+                panel5 = new Ext.Panel({
+                        applyTo: 'cnvPlots',
+                        collapsible: true,
+                        collapsed: true,
+                        collapseFirst: false,
+                        title: 'Click to expand/collapse',
+                        forceLayout: true,
+                        layout: {
+                            type: 'fit',
+                            align: 'stretch',
+                            pack: 'start'
+                        },
+                        titleCollapse: true,
+                        hideCollapseTool: true,
+                           items: [{html:'<c:forEach var="plot" items="${cnvPlots}" varStatus="status">
+                                                <div style="text-align:center"> <img src="${applicationScope.pdxFileURL}../cnvPlots/tumor_only/${plot}" height="450" width="975"/></div><br>\
+                                             </c:forEach>'
+                                   }]
+
+                       });
+
+                       panel5.render();
+                       panel5.doLayout();
+                }
+                
+                
             });
+            
+            
+            
 
         </script>
 
@@ -791,7 +823,7 @@
 
                                     <tr class="stripe${b}">
                                         <td class="cat${b}">
-                                            Variant Summary
+                                            Variant Summary <a class="help" href="userHelp.jsp#pdxVariant"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                         </td>
                                         <td class="data${b}">
 
@@ -818,7 +850,7 @@
 
                                     <tr class="stripe${a}">
                                         <td class="cat${a}">
-                                            Gene Expression
+                                            Gene Expression <a class="help" href="userHelp.jsp#pdxExpression"><img src="${applicationScope.urlImageDir}/help_small2.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                         </td>
                                         <td class="data${a}">
                                             <c:choose>
@@ -852,7 +884,7 @@
 
                                     <tr class="stripe${b}">
                                         <td class="cat${b}">
-                                            Gene CNV
+                                            Gene CNV <a class="help" href="userHelp.jsp#pdxCNV"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                         </td>
                                         <td class="data${b}">
                                             <c:choose>
@@ -873,38 +905,36 @@
                                         </td>
                                     </tr>
                                     
-                                    <c:choose>
-                                        <c:when test="${not empty cnvPlots}">
-                                            
-                                        <tr class="stripe${a}">
+                                     <tr class="stripe${a}">
                                             <td class="cat${a}">
-                                                CNV Plots
+                                                CNV Plots <a class="help" href="userHelp.jsp#pdxCNV"><img src="${applicationScope.urlImageDir}/help_small2.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                             </td>
                                             <td class="data${a}">
-                                                        <table  border=0 cellpadding=5 cellspacing=0 width="100%">
-                                                            <tr>
-                                                                <td class="normal">
-                                                                     <c:forEach var="plot" items="${cnvPlots}" varStatus="status">
-                                                                         <img src="${applicationScope.pdxFileURL}../cnvPlots/tumor_only/${plot}" height="450" width="975"/>
-                                                                         <br>
-                                                                     </c:forEach>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
+                                            <c:choose>
+                                                <c:when test="${not empty cnvPlots}">
+                                                    <div id ="cnvPlots"></div>
+                                                </c:when>
 
-                                            </td>
-                                        </tr>
-                                         <c:set var="oldA" value="${a}"/>
-                                         <c:set var="a" value="${b}"/>
-                                         <c:set var="b" value="${oldA}"/>
-                                        </c:when>
-                                    </c:choose>
-                                    
-                                    <tr class="stripe${a}">
-                                        <td class="cat${a}">
+                                                 <c:otherwise>
+                                                    <table  border=0 cellpadding=5 cellspacing=0 width="100%">
+                                                        <tr>
+                                                            <td class="normal">
+                                                                No gene CNV plots currently available.
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                 </c:otherwise>
+
+                                            </c:choose>
+                                    </tr>
+                                             
+                                             
+                                        
+                                    <tr class="stripe${b}">
+                                        <td class="cat${b}">
                                             Model Characterization
                                         </td>
-                                        <td class="data${a}">
+                                        <td class="data${b}">
                                             <table  border=0 cellpadding=5 cellspacing=0 width="100%">
 
                                                 <!-- Histology -->                

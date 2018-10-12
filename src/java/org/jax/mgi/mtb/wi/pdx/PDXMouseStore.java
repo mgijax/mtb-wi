@@ -923,7 +923,9 @@ public class PDXMouseStore {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject data = array.getJSONObject(i);
 
-                String sample = data.getString("sample_name");
+                String sample = data.getString("sample_name")+" "+ data.getString("passage_num") ;
+                
+               
                 String gene = data.getString("gene_symbol");
                 String platform = data.getString("platform");
                 Double value = data.getDouble(valueToGet);
@@ -1023,7 +1025,7 @@ public class PDXMouseStore {
                 JSONObject data = array.getJSONObject(i);
 
                 String gene = data.getString("gene_symbol");
-                String sample = data.getString("sample_name");
+                String sample = data.getString("sample_name")+" "+data.getString("passage_num");
                 String cn = df.format(data.getDouble("logratio_ploidy"));
                 String ploidy = df.format(data.getDouble("ploidy"));
 
