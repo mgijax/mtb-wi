@@ -81,15 +81,7 @@
              <a href="<c:url value='/pdxLogin.do'/>">PDX Login</a>
             <br>
             </c:if>      
-             <a href="<c:url value='/viewer.do'/>">Cancer QTL Viewer</a>
-            <br>
-            <c:if test="${not empty applicationScope.urlMTBPathWI}">
-                <span style="white-space:nowrap"><a href="${applicationScope.urlMTBPathWI}">Submit Pathology Images</a></span>
-                <br>
-            </c:if>
-            <span style="white-space:nowrap"><a href="<c:url value='/tumorFrequencyGrid.do'/>">Tumor Frequency Grid</a></span>
-           
-            <br>
+            
              <span style="white-space:nowrap"><a href="<c:url value='/dynamicGrid.do'/>">Dynamic Tumor Frequency Grid</a></span> 
          
            

@@ -926,10 +926,10 @@ public class ElimsUtil {
         return in;
     }
 
-    // if engraftment site is not provided it is Sub Q 
+    // if engraftment site is not provided it is NOT! Sub Q 
     private String fixEngraftment(String in) {
         if (in == null || in.trim().length() == 0) {
-            return "Subcutaneous";
+            return "";
         } else {
             return in;
         }
