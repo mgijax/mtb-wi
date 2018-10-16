@@ -1207,7 +1207,7 @@ public class PDXMouseStore {
 
             JSONObject job = new JSONObject(getJSON(VARIANTS + params));
 
-            String total = ((Integer) job.get("count")).toString();
+            String total = ((Integer) job.get("total_rows")).toString();
             result.append(total);
 
             JSONArray array = (JSONArray) job.get("data");
@@ -1303,6 +1303,8 @@ public class PDXMouseStore {
             result.append("'").append(getField(array.getJSONObject(i), "filtered_rationale")).append("',");
             if(!WIConstants.getInstance().getPublicDeployment()){
                 result.append("'").append(getField(array.getJSONObject(i), "filter")).append("',");
+            }else{
+                result.append("'',");
             }
             result.append("'").append(getField(array.getJSONObject(i), "passage_num")).append("',");
             

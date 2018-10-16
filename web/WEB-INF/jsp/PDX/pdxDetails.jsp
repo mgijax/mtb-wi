@@ -207,8 +207,8 @@
                 });
                 
                 var ckb = [{header: '', colspan: 2, align: 'center'},
-                        {header: 'JAX Clinical Knowledgebase (CKB) annotations', colspan: 7, align: 'center'},
-                    {header: '', colspan: 17, align: 'center'}]
+                        {header: 'JAX Clinical Knowledgebase (CKB) annotations', colspan: 6, align: 'center'},
+                        {header: '', colspan: 16, align: 'center'}]
                 
                  var group = new Ext.ux.grid.ColumnHeaderGroup({
                     rows: [ckb]
@@ -220,7 +220,7 @@
                     store: store,
                     columns: [
                         {
-                            text: 'Sample',
+                            header: 'Sample',
                             width: 85,
                             sortable: true,
                             dataIndex: 'sample_name'
@@ -234,18 +234,19 @@
                         },
                         
                         {
-                            header: 'CKB<br>molecular<br>profile',
+                            header: 'Variant',
                             width: 100,
                             sortable: true,
                             dataIndex: 'ckb_molpro_name',
                             renderer: ckbMolProRenderer
                         },
                         {
-                            header: 'CKB<br>potential<br>treatment<br>approach',
-                            width: 100,
+                            header: 'Variant effect',
+                            width: 90,
                             sortable: true,
-                            dataIndex: 'ckb_potential_treat_approach'
-                        },               
+                            dataIndex: 'consequence'
+                        },
+                                      
                         {
                             header: 'CKB<br>protein<br>effect',
                             width: 70,
@@ -254,29 +255,38 @@
                         },
                                     
                         {
-                            header: '# <b>Clinical</b><br>annotations<br>predicting<br>sensitivity',
-                            width: 70,
+                            header: '# <b>Clinical/Preclinical</b><br>annotations<br>predicting<br>sensitivity',
+                            width: 130,
                             sortable: true,
-                            dataIndex: 'ckb_nclinical_sens'
+                            dataIndex: 'ckb_nclinical_sens',
+                            renderer: ckbSensitivityRenderer
                         },
+               //         {
+               //             header: '# <b>Preclinical</b><br>annotations<br>predicting<br>sensitivity',
+               //             width: 70,
+               //             sortable: true,
+               //             dataIndex: 'ckb_npreclinical_sens'
+               //         },
                         {
-                            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>sensitivity',
-                            width: 70,
+                            header: '# <b>Clinical/Preclinical</b><br>annotations<br>predicting<br>resistance',
+                            width: 130,
                             sortable: true,
-                            dataIndex: 'ckb_npreclinical_sens'
-                        },
-                        {
-                            header: '# <b>Clinical</b><br>annotations<br>predicting<br>resistance',
-                            width: 70,
-                            sortable: true,
-                            dataIndex: 'ckb_nclinical_resist'
+                            dataIndex: 'ckb_nclinical_resist',
+                            renderer: ckbResistanceRenderer
                         }, 
+                //        {
+                //            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>resistance',
+                //            width: 70,
+                //            sortable: true,
+                //            dataIndex: 'ckb_npreclinical_resist'
+                //        },  
                         {
-                            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>resistance',
-                            width: 70,
+                            header: 'Potential<br>treatment<br>approaches',
+                            width: 100,
                             sortable: true,
-                            dataIndex: 'ckb_npreclinical_resist'
-                        },          
+                            dataIndex: 'ckb_potential_treat_approach',
+                            renderer: ckbPotTreatRenderer
+                        }, 
                         
                         {
                             header: 'Platform',
@@ -310,12 +320,7 @@
                             dataIndex: 'alt_allele'
 
                         },
-                        {
-                            header: 'Consequence',
-                            width: 170,
-                            sortable: true,
-                            dataIndex: 'consequence'
-                        },
+                        
                         {
                             header: 'Amino Acid Change',
                             width: 110,
@@ -425,6 +430,50 @@
                         
                     return val;
                     
+                }
+                
+                function ckbPotTreatRenderer(value, p, record){
+                     val = "";
+                     
+                     if(record.get("ckb_potential_treat_approach").length>0){
+                        val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link")+"?tabType=TREATMENT_APPROACH_EVIDENCE", record.get("ckb_potential_treat_approach"));
+                    }
+                        
+                    return val;
+                    
+                }
+                
+                function ckbResistanceRenderer(value, p, record){
+                    val = "";
+                    if(record.get("ckb_nclinical_resist").trim().length>0 || record.get("ckb_npreclinical_resist").trim().length>0){
+                        val = "0/";
+                        if(record.get("ckb_nclinical_resist").trim().length>0){
+                            val = record.get("ckb_nclinical_resist")+"/"
+                        }            
+                        if(record.get("ckb_npreclinical_resist").trim().length>0){
+                            val = val+record.get("ckb_npreclinical_resist");
+                        }else{
+                            val = val+"0";
+                        }
+                    }
+                    return val;
+                }
+                
+                
+                function ckbSensitivityRenderer(value, p, record){
+                    val = "";
+                    if(record.get("ckb_nclinical_sens").trim().length>0 || record.get("ckb_npreclinical_sens").trim().length>0){
+                        val = "0/";
+                        if(record.get("ckb_nclinical_sens").trim().length>0){
+                            val = record.get("ckb_nclinical_sens")+"/"
+                        }            
+                        if(record.get("ckb_npreclinical_sens").trim().length>0){
+                            val = val+record.get("ckb_npreclinical_sens");
+                        }else{
+                            val = val+"0";
+                        }
+                    }
+                    return val;
                 }
 
                 Ext.EventManager.onWindowResize(function (w, h) {
