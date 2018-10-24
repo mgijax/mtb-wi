@@ -28,8 +28,7 @@ import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
  */
 public class PDXDetailsAction extends Action {
     
-    private static final String BAYLOR = "Baylor College of Medicine";
-    private static final String DANA_FARBER = "Dana-Farber Cancer Institute";
+    
 
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
@@ -242,7 +241,7 @@ public class PDXDetailsAction extends Action {
 
             
             boolean useTPM = false;
-            if(DANA_FARBER.equals(mouse.getInstitution()) || BAYLOR.equals(mouse.getInstitution())){
+            if(store.DANA_FARBER.equals(mouse.getInstitution()) || store.BAYLOR.equals(mouse.getInstitution())){
                 useTPM = true;
             }
             

@@ -422,9 +422,9 @@
                 }
                 
                  function ckbMolProRenderer(value, p, record){
-                     val = "";
+                     val = record.get("ckb_molpro_name");
                      
-                     if(record.get("ckb_molpro_name").length>0){
+                     if(record.get("ckb_molpro_name").length>0 && record.get("ckb_molpro_link").length>0){
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
                     }
                         
@@ -433,9 +433,9 @@
                 }
                 
                 function ckbPotTreatRenderer(value, p, record){
-                     val = "";
+                     val = record.get("ckb_potential_treat_approach");
                      
-                     if(record.get("ckb_potential_treat_approach").length>0){
+                     if(record.get("ckb_potential_treat_approach").length>0 && record.get("ckb_molpro_link").length>0){
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link")+"?tabType=TREATMENT_APPROACH_EVIDENCE", record.get("ckb_potential_treat_approach"));
                     }
                         
@@ -482,34 +482,30 @@
 
                 // there must be a better way...
                 var colNames = [];
-                colNames.push('model_id');
-                colNames.push('sample_name');
-                colNames.push('gene_symbol');
-                colNames.push('gene_id');
-                colNames.push('ckb_gene_link');
-                colNames.push('ckb_molpro_name');
+                colNames.push( 'sample_name');
+                colNames.push( 'gene_symbol');
+                colNames.push( 'ckb_molpro_name');
+                colNames.push( 'consequence');
+                colNames.push( 'ckb_protein_effect');
+                colNames.push( 'ckb_nclinical_sens');
+                colNames.push( 'ckb_nclinical_resist');
                 colNames.push('ckb_potential_treat_approach');
-                colNames.push('ckb_protein_effect');
-                colNames.push('ckb_nclinical_resist');	
-                colNames.push('ckb_nclinical_sens');
-                colNames.push('ckb_npreclinical_resist');
-                colNames.push('ckb_npreclinical_sens');
-                colNames.push('platform');
-                colNames.push('chromosome');
-                colNames.push('seq_position');
-                colNames.push('ref_allele');
-                colNames.push('alt_allele');
-                colNames.push('consequence');
-                colNames.push('amino_acid_change');
-                colNames.push('rs_variants');
-                colNames.push('read_depth');
-                colNames.push('allele_frequency');
-                colNames.push('transcript_id');
-                colNames.push('filtered_rationale');
-                colNames.push('filter');
-                colNames.push('passage_num');
-                colNames.push('count_human_reads');
-                colNames.push('pct_human_reads');
+                colNames.push( 'platform');
+                colNames.push( 'chromosome');
+                colNames.push( 'seq_position');
+                colNames.push( 'ref_allele');
+                colNames.push( 'alt_allele');
+                colNames.push( 'amino_acid_change');
+                colNames.push( 'rs_variants');
+                colNames.push( 'read_depth');
+                colNames.push( 'allele_frequency');
+                colNames.push( 'transcript_id');
+                colNames.push( 'filtered_rationale');
+                colNames.push( 'filter');
+                colNames.push( 'passage_num');
+                colNames.push( 'gene_id');
+                colNames.push( 'count_human_reads');
+                colNames.push( 'pct_human_reads');
      
 
 

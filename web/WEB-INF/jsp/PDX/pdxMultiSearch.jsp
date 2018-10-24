@@ -47,7 +47,7 @@
                             <!--======================= Start Main Section =============================-->
 
                             <!--======================= Start Form Header ==============================-->
-                            <html:form action="pdxMultiSearch" method="GET">
+                            <html:form action="pdxMultiSearch" method="POST">
 
                                 <table border="0" cellpadding="5" cellspacing="1" width="100%" class="results">
                                     <tr class="pageTitle">

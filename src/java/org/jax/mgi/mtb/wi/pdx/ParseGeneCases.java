@@ -472,6 +472,7 @@ public class ParseGeneCases {
             e.printStackTrace();
         }
         return mice;
+        
     }
 
     private void getModelDetails() {
@@ -495,6 +496,8 @@ public class ParseGeneCases {
         }
         }
     }
+    
+    
 
     private String getJSON(String uri, String json) {
 

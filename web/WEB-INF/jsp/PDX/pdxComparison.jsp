@@ -4,6 +4,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
+           <link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
+         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+        
     <c:import url="../../../meta.jsp">
         <c:param name="pageTitle" value="Patient Derived Xenograft Comparison"/>
     </c:import>
@@ -55,6 +59,19 @@
             }
             doStorage();
         }
+        
+        function addGenesNew(){
+            var sel = document.forms[1].gene.value;
+            var save = document.getElementById("savedGenes");
+            var opt = document.createElement("option");
+            opt.value = sel;
+            opt.text = sel;
+            save.add(opt);
+
+            
+            doStorage();
+        }
+        
 
         function removeGenes() {
             var save = document.getElementById("savedGenes");
@@ -86,7 +103,42 @@
             }
             document.getElementById("savedGenesList").value=geneList;
         }
-
+        
+          Ext.onReady(function(){
+        
+          var dataProxy = new Ext.data.HttpProxy({
+                url: '/mtbwi/pdxHumanGenes.do'
+            })
+        
+            var humanGenestore = new Ext.data.ArrayStore({
+                id:'thestore',
+     //           pageSize: 10, 
+                root:'data',
+                totalProperty: 'total',
+                fields: [{name:'symbol'}, {name:'display'}],
+                proxy: dataProxy,
+                autoLoad:false
+            });
+            
+            var combo = new Ext.form.ComboBox({
+                store: humanGenestore,
+                minChars:2,
+                valueField:'symbol',
+                displayField:'display',
+                typeAhead: true,
+                mode: 'remote',
+                forceSelection: false,
+                triggerAction: 'all',
+                selectOnFocus:true,
+                hideTrigger:true,
+                hiddenName:'gene',
+                width:260,
+                listEmptyText:'no matching gene',
+                renderTo: 'geneSelect'
+        //        ,pageSize:10
+            });
+	
+        });
         
          
     </script>
@@ -214,12 +266,16 @@
                           onmouseover="return overlib('Select one or more genes as display criteria', CAPTION, 'Genes');" 
                           onmouseout="return nd();">Gene</a></b>
                     <br>
-            <html:select property="genes" size="8"  styleId="genes" multiple="true" >
-                <html:options collection="genesValues" property="value" labelProperty="label"/>
-            </html:select>
+                    <%--  <html:select property="genes" size="8"  styleId="genes" multiple="true" >
+                          <html:options collection="genesValues" property="value" labelProperty="label"/>
+                      </html:select> --%>
+          
+          <div id="geneSelect"></div>
+          
+            
     </td>
-    <td>
-        <input name="geneSave" type="button" value="Add" onclick="addGenes();"/><br>
+    <td><br>
+        <input name="geneSave" type="button" value="Add" onclick="addGenesNew();"/><br>
     </td>
     <td>
         <span name="geneSave" id="geneSaveTxt"><b>
