@@ -30,6 +30,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDocument;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXGraphic;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXLink;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
+import org.jax.mgi.mtb.dao.utils.DAOUtils;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.wi.WIConstants;
@@ -77,11 +78,11 @@ public class PDXMouseStore {
 
     private static String baseURL = WIConstants.getInstance().getPDXWebservice();
 
-    private static final String MODEL_EXPRESSION = baseURL + "expression?all_ctp_genes=yes&model=";
+    private static final String MODEL_EXPRESSION = baseURL + "expression?all_ctp_genes=yes&keepnulls=yes&model=";
 
-    private static final String GENE_EXPRESSION = baseURL + "expression?gene_symbol=";
+    private static final String GENE_EXPRESSION = baseURL + "expression?&keepnulls=yesgene_symbol=";
 
-    private static final String MODEL_CNV = baseURL + "cnv_gene?all_ctp_genes=yes&model=";
+    private static final String MODEL_CNV = baseURL + "cnv_gene?all_ctp_genes=yes&keepnulls=yes&model=";
 
     private static final String CNV_AMP = baseURL + "cnv_gene?min_lr_ploidy=0.5&gene_symbol=";
     private static final String CNV_DEL = baseURL + "cnv_gene?max_lr_ploidy=-0.5&gene_symbol=";
@@ -931,7 +932,7 @@ public class PDXMouseStore {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject data = array.getJSONObject(i);
 
-                String sample = data.getString("sample_name") + " " + data.getString("passage_num");
+                String sample = data.getString("sample_name") + " " + getField(data,"passage_num");
 
                 String gene = data.getString("gene_symbol");
                 String platform = data.getString("platform");
@@ -1032,11 +1033,10 @@ public class PDXMouseStore {
                 JSONObject data = array.getJSONObject(i);
 
                 String gene = data.getString("gene_symbol");
-                String sample = data.getString("sample_name") + " " + data.getString("passage_num");
+                String sample = data.getString("sample_name") + " " + getField(data,"passage_num");
                 String cn = df.format(data.getDouble("logratio_ploidy"));
                 String ploidy = df.format(data.getDouble("ploidy"));
 
-                //   Double val = Math.log(cn / ploidy) / Math.log(2);
                 if (genes.containsKey(gene)) {
                     genes.get(gene).put(sample, cn);
                 } else {
@@ -1100,7 +1100,91 @@ public class PDXMouseStore {
     }
 
     public HashMap<String, HashMap<String, ArrayList<String>>> getComparisonData(ArrayList<String> models, ArrayList<String> genes) {
-        return PDXDAO.getInstance().getComparisonData(models, genes);
+
+        HashMap<String, HashMap<String, ArrayList<String>>> results = new HashMap<String, HashMap<String, ArrayList<String>>>();
+
+        StringBuffer query = new StringBuffer(GENE_EXPRESSION);
+
+        query.append(DAOUtils.collectionToString(genes, ",", ""));
+
+        // maybe do it for all models then only pick the selected ones
+        if (!models.isEmpty() && models.size() < 100) {
+            query.append("&model=").append(DAOUtils.collectionToString(models, ",", ""));
+        }
+        DecimalFormat df = new DecimalFormat("###.##");
+        try {
+
+            /* build ampDel map
+            for each gene in list query for amp gene -> amp samples
+                                  query for del gene -> del samples
+            combine
+            get(gene).get(model)->amp or del
+             */
+            HashMap<String, HashMap<String, String>> ampDelMap = new HashMap<>();
+            JSONObject job;
+            for (String gene : genes) {
+                job = new JSONObject(getJSON(CNV_AMP + gene));
+                JSONArray array = (JSONArray) job.get("data");
+                HashMap<String, String> ad = new HashMap<>();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject data = array.getJSONObject(i);
+                    ad.put(data.getString("sample_name"), "Ampilfication");
+                }
+                job = new JSONObject(getJSON(CNV_DEL + gene));
+                array = (JSONArray) job.get("data");
+                HashMap<String, String> del = new HashMap<>();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject data = array.getJSONObject(i);
+                    ad.put(data.getString("sample_name"), "Deletion");
+                }
+                ampDelMap.put(gene,ad);
+            }
+            
+            job = new JSONObject(getJSON(query.toString()));
+            JSONArray array = (JSONArray) job.get("data");
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject data = array.getJSONObject(i);
+                String model = data.getString("model_name");
+                String gene = data.getString("gene_symbol");
+                String sample = data.getString("sample_name") + " " + getField(data,"passage_num");
+
+                // this will fail for baylor and dfci models wich should be used
+                // to exclude them from the results.
+                String rankZ = df.format(data.getDouble("z_score_percentile_rank"));
+                String ampDel = "Normal";
+                try {
+                    ampDel = ampDelMap.get(gene).get(sample);
+                } catch (NullPointerException npe) {
+                    // its normal
+                }
+                //1         2           3    4                   5                6
+                //"select modelID, sampleName, gene, rankZ as expression, ampDel as cnv, mutation ");
+                if (results.containsKey(gene)) {
+                    HashMap samples = results.get(gene);
+                    ArrayList<String> list = new ArrayList<>();
+                    list.add(rankZ);
+                    list.add(ampDel);
+                    list.add("mutation");
+                    samples.put(model + "-" + sample, list);
+                } else {
+                    HashMap<String, ArrayList<String>> samples = new HashMap<>();
+                    ArrayList<String> list = new ArrayList<>();
+                    list.add(rankZ);
+                    list.add(ampDel);
+                    list.add("mutation");
+                    samples.put(model + "-" + sample, list);
+                    results.put(gene, samples);
+                }
+
+            }
+        } catch (JSONException e) {
+            log.error(e);
+        } finally {
+
+        }
+
+        return results;
+
     }
 
     public ArrayList<PDXMouse> getMiceByGeneVariant(ArrayList<PDXMouse> mice, String gene, ArrayList<String> variants) {
@@ -1621,12 +1705,12 @@ public class PDXMouseStore {
                 for (int k = 0; k < jarray.length(); k++) {
                     model = jarray.getJSONObject(k).getString("model_name");
                     sample = jarray.getJSONObject(k).getString("sample_name");
-                    passage = jarray.getJSONObject(k).getString("passage_num");
+                    passage = getField(jarray.getJSONObject(k),"passage_num");
                     rankZ = jarray.getJSONObject(k).getDouble("z_score_percentile_rank");
 
                     if (cnv) {
                         ampDelStr = "Normal";
-                        if(ampDel.containsKey(model)){
+                        if (ampDel.containsKey(model)) {
                             ampDelStr = ampDel.get(model);
                         }
                         result.append("['" + model + " : " + sample + "'," + df.format(rankZ) + ",'" + model + "','" + ampDelStr + "'],");
@@ -1661,17 +1745,17 @@ public class PDXMouseStore {
             JSONArray jarray = job.getJSONArray("data");
 
             for (int i = 0; i < jarray.length(); i++) {
-                
-                ampDel.put(jarray.getJSONObject(i).getString("model_name"),"Amplification");
+
+                ampDel.put(jarray.getJSONObject(i).getString("model_name"), "Amplification");
             }
-            
+
             job = new JSONObject(getJSON(CNV_DEL + gene));
 
             jarray = job.getJSONArray("data");
 
             for (int i = 0; i < jarray.length(); i++) {
-                
-                ampDel.put(jarray.getJSONObject(i).getString("model_name"),"Deletion");
+
+                ampDel.put(jarray.getJSONObject(i).getString("model_name"), "Deletion");
             }
 
         } catch (JSONException e) {
