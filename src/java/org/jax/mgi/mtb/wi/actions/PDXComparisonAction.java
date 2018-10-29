@@ -175,7 +175,7 @@ public class PDXComparisonAction extends Action {
                         for (String sample : samplesList) {
                             ArrayList<String> vals = sampleData.get(sample);
                             if (vals == null || vals.isEmpty()) {
-                                // we have a problem
+                               // this is an error state
                                 vals = new ArrayList<String>();
                                 vals.add("noValue");
                                 vals.add("noValue");
@@ -242,8 +242,8 @@ public class PDXComparisonAction extends Action {
     }
 
     // hard coded min and max expected values for the rankZ expression
-    private static final int MIN_RANK_Z = -15;
-    private static final int MAX_RANK_Z = 15;
+    private static final int MIN_RANK_Z = -5;
+    private static final int MAX_RANK_Z = 5;
     private static final int HUE_LIMIT = 150; // 255 is max but beyond 150 it gets hard to tell them apart
     private static final String DELETION = "#0000FF";
     private static final String AMPLIFICATION = "#FFA500";

@@ -80,7 +80,7 @@ public class PDXMouseStore {
 
     private static final String MODEL_EXPRESSION = baseURL + "expression?all_ctp_genes=yes&keepnulls=yes&model=";
 
-    private static final String GENE_EXPRESSION = baseURL + "expression?&keepnulls=yesgene_symbol=";
+    private static final String GENE_EXPRESSION = baseURL + "expression?&keepnulls=yes&gene_symbol=";
 
     private static final String MODEL_CNV = baseURL + "cnv_gene?all_ctp_genes=yes&keepnulls=yes&model=";
 
@@ -1101,7 +1101,7 @@ public class PDXMouseStore {
 
     public HashMap<String, HashMap<String, ArrayList<String>>> getComparisonData(ArrayList<String> models, ArrayList<String> genes) {
 
-        HashMap<String, HashMap<String, ArrayList<String>>> results = new HashMap<String, HashMap<String, ArrayList<String>>>();
+        HashMap<String, HashMap<String, ArrayList<String>>> results = new HashMap<>();
 
         StringBuffer query = new StringBuffer(GENE_EXPRESSION);
 
@@ -1117,7 +1117,6 @@ public class PDXMouseStore {
             /* build ampDel map
             for each gene in list query for amp gene -> amp samples
                                   query for del gene -> del samples
-            combine
             get(gene).get(model)->amp or del
              */
             HashMap<String, HashMap<String, String>> ampDelMap = new HashMap<>();
@@ -1128,11 +1127,10 @@ public class PDXMouseStore {
                 HashMap<String, String> ad = new HashMap<>();
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject data = array.getJSONObject(i);
-                    ad.put(data.getString("sample_name"), "Ampilfication");
+                    ad.put(data.getString("sample_name"), "Amplification");
                 }
                 job = new JSONObject(getJSON(CNV_DEL + gene));
                 array = (JSONArray) job.get("data");
-                HashMap<String, String> del = new HashMap<>();
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject data = array.getJSONObject(i);
                     ad.put(data.getString("sample_name"), "Deletion");
@@ -1146,33 +1144,36 @@ public class PDXMouseStore {
                 JSONObject data = array.getJSONObject(i);
                 String model = data.getString("model_name");
                 String gene = data.getString("gene_symbol");
-                String sample = data.getString("sample_name") + " " + getField(data,"passage_num");
+                String sample = data.getString("sample_name");
+                String passage = getField(data,"passage_num");
 
                 // this will fail for baylor and dfci models wich should be used
                 // to exclude them from the results.
                 String rankZ = df.format(data.getDouble("z_score_percentile_rank"));
-                String ampDel = "Normal";
+                String ampDel = null;
                 try {
                     ampDel = ampDelMap.get(gene).get(sample);
                 } catch (NullPointerException npe) {
-                    // its normal
+                    // its normal or ?unknown?
                 }
-                //1         2           3    4                   5                6
-                //"select modelID, sampleName, gene, rankZ as expression, ampDel as cnv, mutation ");
+                if(ampDel == null){
+                    ampDel = "Unknown";
+                }
+               
                 if (results.containsKey(gene)) {
                     HashMap samples = results.get(gene);
                     ArrayList<String> list = new ArrayList<>();
                     list.add(rankZ);
                     list.add(ampDel);
                     list.add("mutation");
-                    samples.put(model + "-" + sample, list);
+                    samples.put(model + "-" + sample +" "+passage, list);
                 } else {
                     HashMap<String, ArrayList<String>> samples = new HashMap<>();
                     ArrayList<String> list = new ArrayList<>();
                     list.add(rankZ);
                     list.add(ampDel);
                     list.add("mutation");
-                    samples.put(model + "-" + sample, list);
+                    samples.put(model + "-" + sample+" "+passage, list);
                     results.put(gene, samples);
                 }
 
