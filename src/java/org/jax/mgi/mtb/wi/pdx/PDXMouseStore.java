@@ -99,15 +99,21 @@ public class PDXMouseStore {
 
     private static HashMap<String, String> fusionModelsMap = new HashMap();
 
-    private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M", "DAXX", "EHMT2", "EPHB6", "HLA-A", "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4", "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
+    private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M", 
+                                            "DAXX", "EHMT2", "EPHB6", "HLA-A",
+                                            "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4", 
+                                            "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
+    
     private static final String RNA_SEQ = "RNA_Seq";
     private static final HashMap<String, String> AFFECTED_GENES = new HashMap<>();
 
     private static final String CKB_MOLPRO_PUBLIC = "https://ckb.jax.org/molecularProfile/show/";
-    private static final String CKB_GENE_PUBLIC = "https://ckb.jax.org/gene/show?geneId=";
+ //   private static final String CKB_GENE_PUBLIC = "https://ckb.jax.org/gene/show?geneId=";
 
     private static final String CKB_MOLPRO_INTERNAL = "https://myckb.jax.org/molecularProfile/show/";
-    private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
+  //  private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
+    
+    private static final String CKB_HOME = "https://ckb.jax.org/";
 
     public static final String BAYLOR = "Baylor College of Medicine";
     public static final String DANA_FARBER = "Dana-Farber Cancer Institute";
@@ -1296,7 +1302,12 @@ public class PDXMouseStore {
 
             JSONObject job = new JSONObject(getJSON(VARIANTS + params));
 
-            String total = ((Integer) job.get("total_rows")).toString();
+            String total = "0";
+            try{
+                total = ((Integer) job.get("total_rows")).toString();
+            }catch(JSONException jse){
+                // will happen if there are no results
+            }
             result.append(total);
 
             JSONArray array = (JSONArray) job.get("data");
@@ -1402,23 +1413,36 @@ public class PDXMouseStore {
             String ckbGeneID = getField(array.getJSONObject(i), "ckb_gene_id");
             String ckbMolProID = getField(array.getJSONObject(i), "ckb_molpro_id");
             String ckbMolProName = getField(array.getJSONObject(i), "ckb_molpro_name");
+            String ckbTreatment = getField(array.getJSONObject(i), "ckb_potential_treat_approach");
             boolean ckbPublic = "public".equals(getField(array.getJSONObject(i), "ckb_public_status"));
 
             if (WIConstants.getInstance().getPublicDeployment()) {
-                if (ckbPublic) {
-                    result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
-                } else {
-                    result.append("'',");
+                
+                // don't? have links for 
+                if(ckbMolProName.length() > 0 && !ckbMolProName.equals("null")){
+                    if (ckbPublic) {
+                        result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
+                    } else {
+                        result.append("'").append(CKB_HOME).append("',");
+                    }
+                }else{
+                        result.append("'',");
                 }
 
                 result.append("'").append(ckbMolProName).append("',");
 
-                if (ckbPublic && ckbGeneID.length() > 0 && !ckbGeneID.equals("null")) {
-                    result.append("'").append(CKB_GENE_PUBLIC).append(ckbGeneID).append("',");
-                } else {
-                    result.append("'',");
+                if(ckbTreatment.trim().length() > 0 && !ckbTreatment.equals("null")){
+                    if (ckbPublic ) {
+                        result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
+                    } else {
+                        result.append("'").append(CKB_HOME).append("',");
+                    }
+                }else{
+                        result.append("'',");
                 }
-                result.append("'").append(getField(array.getJSONObject(i), "ckb_potential_treat_approach")).append("',");
+                
+            
+                result.append("'").append(ckbTreatment).append("',");
                 result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
 
             } else {
@@ -1431,8 +1455,8 @@ public class PDXMouseStore {
                     result.append("'',");
 
                 }
-                if (ckbGeneID.length() > 0 && !ckbGeneID.equals("null")) {
-                    result.append("'").append(CKB_GENE_INTERNAL).append(ckbGeneID).append("',");
+                if (ckbTreatment.length() > 0 && !ckbTreatment.equals("null")) {
+                    result.append("'").append(CKB_MOLPRO_INTERNAL).append(ckbMolProID).append("',");
                 } else {
                     result.append("'',");
                 }

@@ -33,6 +33,8 @@ public class ElimsUtil {
     private static String password;
     
     private static final String BCM = "BCM"; // to identify Bayolor MRN IDs for search by ID
+    
+    private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ  (aka, NSG or NOD Scid gamma)";
 
     public ElimsUtil() {
     }
@@ -315,7 +317,7 @@ public class ElimsUtil {
                         report.append(clean(result[i].getTumor_T_Stage())).append(",");
                         report.append(clean(result[i].getSample_Type())).append(",");
                         report.append(clean(result[i].getStockNumber())).append(",");
-                        report.append(clean(result[i].getStrain())).append(",");
+                        report.append(fixStrain(result[i].getStrain())).append(",");
                         report.append(clean(result[i].getMouseSex())).append(",");
                         report.append(clean(fixEngraftment(result[i].getEngraftmentSite()))).append(",");
                         report.append(clean(result[i].getCollecting_Site())).append(",");  // organization
@@ -390,7 +392,7 @@ public class ElimsUtil {
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_T_Stage())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getSample_Type())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getStockNumber())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getStrain())).append(",\n");
+                        report.append("\"").append(columns[j++]).append("\":").append(fixStrain(result[i].getStrain())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMouseSex())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(fixEngraftment(result[i].getEngraftmentSite()))).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getCollecting_Site())).append(",\n");  // organization
@@ -554,13 +556,12 @@ public class ElimsUtil {
                         mouse.setRace(results[i].getRace());
                         mouse.setEthnicity(results[i].getEthnicity());
                         mouse.setPrimarySite(results[i].getPrimary_Site());
-                        mouse.setStrain(results[i].getStrain());
+                        mouse.setStrain(fixStrain(results[i].getStrain()));
 
                         mouse.setTumorType(results[i].getTumor_Type());
                         mouse.setTumorMarkers(clean(results[i].getMarkers()));
                         mouse.setStage(results[i].getTumor_Stage());
                         mouse.setGrade(results[i].getGrades());
-                        mouse.setStrain(results[i].getStrain());
 
                         mouse.setTag(results[i].getModelTags());
 
@@ -802,7 +803,7 @@ public class ElimsUtil {
                         report.append(noQuotesNoCommasClean(result[i].getMarkers()).replaceAll(",", ";")).append(",");
                         report.append(noQuotesNoCommasClean(result[i].getGender())).append(",");
                         report.append(noQuotesNoCommasClean(result[i].getPatient_Age())).append(",");
-                        report.append(noQuotesNoCommasClean(result[i].getStrain())).append(",");
+                        report.append(noQuotesNoCommasClean(fixStrain(result[i].getStrain()))).append(",");
                         if (mouseMap.containsKey(id) && mouseMap.get(id).getAssocData() != null) {
                             report.append(noQuotesNoCommasClean(mouseMap.get(id).getAssocData().replaceAll(",", ";"))).append("\n");
                         } else {
@@ -872,6 +873,14 @@ public class ElimsUtil {
 
         }
         return map;
+    }
+    
+    private String fixStrain(String strain){
+      
+        if(strain != null && strain.startsWith("NSG")){
+            strain =NSG_OFFICIAL_NAME;
+        }
+        return strain;
     }
 
     // right now there is a practice model that needs to be excluded

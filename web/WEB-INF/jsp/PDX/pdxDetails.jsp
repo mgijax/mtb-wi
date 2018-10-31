@@ -27,6 +27,14 @@
             p{
                 margin-bottom: 2px;
             }
+
+
+            a.ckb:link{
+            color:red;
+            }
+            a.ckb:visited{
+            color:red;
+            }
             
 
         </style>
@@ -426,6 +434,10 @@
                      
                      if(record.get("ckb_molpro_name").length>0 && record.get("ckb_molpro_link").length>0){
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
+                        
+                        if(record.get("ckb_molpro_link").length==20){
+                            val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
+                        }
                     }
                         
                     return val;
@@ -435,8 +447,12 @@
                 function ckbPotTreatRenderer(value, p, record){
                      val = record.get("ckb_potential_treat_approach");
                      
-                     if(record.get("ckb_potential_treat_approach").length>0 && record.get("ckb_molpro_link").length>0){
+                     if(record.get("ckb_potential_treat_approach").trim().length>0 && record.get("ckb_molpro_link").length>0){
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link")+"?tabType=TREATMENT_APPROACH_EVIDENCE", record.get("ckb_potential_treat_approach"));
+                        
+                        if(record.get("ckb_molpro_link").length==20){
+                            val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_potential_treat_approach"));
+                        }
                     }
                         
                     return val;
@@ -788,6 +804,12 @@
                                                     <td class="label">Stage / Grade:</td><td class="normal" >${mouse.stage} / ${mouse.grade}<td></td>
 
                                                 </tr>
+                                                <c:if test="${not empty relatedModels}">
+                                                <tr>
+                                                    <td class="label">Related Models:</td>
+                                                    <td style="width:100%" class="normal" colspan="5">${relatedModels}</td>
+                                                </tr>
+                                                </c:if>
 
                                                 <c:if test="${not empty mouse.fusionGenes}">
                                                     <tr>
@@ -832,7 +854,7 @@
                                             <table  border=0 cellpadding=5 cellspacing=0 width="100%">
 
                                                 <tr>
-                                                    <td class="label" style="width:10%">Strain:</td><td class="normal"  style="width:22%">${mouse.strain}</td>
+                                                    <td class="label" style="width:10%">Strain:</td><td class="normal"  style="width:22%">${fn:replace(mouse.strain,'(','<br>(')}</td>
 
                                                     <td class="label" style="width:10%">Implantation Site:</td><td class="normal" style="width:18%">${mouse.location}</td>
 

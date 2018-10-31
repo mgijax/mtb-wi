@@ -33,8 +33,7 @@ import org.jax.mgi.mtb.wi.WIConstants;
 public class ParseGeneCases {
 
     //private  String baseURL = WIConstants.getInstance().getPDXWebservice();
-
-     static final String baseURL = "http://pdxdata.jax.org:335/api/";
+    static final String baseURL = "http://pdxdata.jax.org:335/api/";
     private static final String VARIANTS = baseURL + "variants";
 
     private static final String CNV = baseURL + "cnv_gene";
@@ -68,7 +67,7 @@ public class ParseGeneCases {
     public String parseCases(Scanner s, boolean asHTML, boolean includeActionable) {
         this.html = asHTML;
         this.includeActionable = includeActionable;
-        
+
         StringBuilder result = new StringBuilder();
 
         HashMap<String, ArrayList<String>> caseGenes = new HashMap();
@@ -104,15 +103,12 @@ public class ParseGeneCases {
 
             }
 
-            if(caseNo==""){
+            if (caseNo == "") {
                 result.append("ERORR:\nFist line must start with CASE");
             }
         } catch (Exception e) {
             //e.printStackTrace();
         }
-        
-
-        
 
         getModelDetails();
 
@@ -126,7 +122,6 @@ public class ParseGeneCases {
 
     private String buildTable(String caseNo, ArrayList<String> genes) {
 
-        
         ArrayList<String> k = new ArrayList();
         ArrayList<String> u = new ArrayList();
         String[] vals = null;
@@ -139,11 +134,11 @@ public class ParseGeneCases {
                 } else if (vals[2].trim().equals("U")) {
                     u.add(vals[0] + " " + vals[1]);
                 }
-            }else if(vals.length == 2) {
+            } else if (vals.length == 2) {
                 // no explicit K or U so default to Known
                 k.add(vals[0].trim() + " " + vals[1].trim());
-            }else{
-                return caseNo+"\n"+gene+" is in the wrong format";
+            } else {
+                return caseNo + "\n" + gene + " is in the wrong format";
             }
         }
         Collections.sort(u);
@@ -196,12 +191,12 @@ public class ParseGeneCases {
         for (String gene : uk) {
 
             vals = gene.split(" ");
-            if(vals.length!=2){
-                return "Error\n"+vals+" is not correctly formatted.";
+            if (vals.length != 2) {
+                return "Error\n" + gene + " is not in the correct format.";
             }
             mice = getMice(vals[0], vals[1]);
-            if(mice == null){
-                return "Error\n"+vals[0]+":"+vals[1]+" is not in the correct format.";
+            if (mice == null) {
+                return "Error\n" + vals[0] + ":" + vals[1] + " is not in the correct format.";
             }
             for (String id : mice) {
                 if (modelsMap.containsKey(id)) {
@@ -251,10 +246,10 @@ public class ParseGeneCases {
                         }
                         if (mr.actionable.containsKey(vals[0])) {
                             String s = "";
-                            if(mr.actionable.get(vals[0]).size()>1){
+                            if (mr.actionable.get(vals[0]).size() > 1) {
                                 s = "s";
                             }
-                            table.append("<br>Clinically relevant " + vals[0] + " variant"+s+"<br>");
+                            table.append("<br>Clinically relevant " + vals[0] + " variant" + s + "<br>");
                             for (String variant : mr.actionable.get(vals[0]).keySet()) {
                                 table.append(variant + " ");
                             }
@@ -327,7 +322,7 @@ public class ParseGeneCases {
 
     private ArrayList<String> getMice(String gene, String thing) {
         thing = thing.toLowerCase();
-        
+
         // if we have done this for another case we are done
         if (allMice.containsKey(gene + thing)) {
             System.out.println("Pow " + gene + " " + thing);
@@ -370,10 +365,10 @@ public class ParseGeneCases {
 
             JSONObject job = new JSONObject(getJSON(VARIANTS + params.toString(), ""));
 
-            JSONArray jarray =  job.getJSONArray("data");
+            JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
                 job = jarray.getJSONObject(i);
-               
+
                 String id = job.getString("model_name");
                 String variant = job.getString("amino_acid_change");
                 if (actionable.containsKey(id)) {
@@ -428,7 +423,7 @@ public class ParseGeneCases {
 
         ArrayList<String> mice = new ArrayList<>();
         StringBuilder params = new StringBuilder();
-        params.append("?min_lr_ploidy="+AMP+"&gene_symbol=").append(gene);
+        params.append("?min_lr_ploidy=" + AMP + "&gene_symbol=").append(gene);
         try {
 
             JSONObject job = new JSONObject(getJSON(CNV + params.toString(), ""));
@@ -437,23 +432,22 @@ public class ParseGeneCases {
                 job = jarray.getJSONObject(i);
                 Double lrp = job.getDouble("logratio_ploidy");
                 String id = job.getString("model_name");
-                
-                    mice.add(id);
-                    System.out.println("AMP "+id+ " has lrp = "+lrp);
-               
+
+                mice.add(id);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return mice;
     }
-    
+
     private ArrayList<String> getDeletedModels(String gene) {
 
         ArrayList<String> mice = new ArrayList<>();
         StringBuilder params = new StringBuilder();
-        params.append("?max_lr_ploidy="+DEL+"&gene_symbol=").append(gene);
-        
+        params.append("?max_lr_ploidy=" + DEL + "&gene_symbol=").append(gene);
+
         try {
 
             JSONObject job = new JSONObject(getJSON(CNV + params.toString(), ""));
@@ -462,42 +456,38 @@ public class ParseGeneCases {
                 job = jarray.getJSONObject(i);
                 Double lrp = job.getDouble("logratio_ploidy");
                 String id = job.getString("model_name");
-                
-                
-                    mice.add(id);
-                    System.out.println("DEL "+id+ " has lrp = "+lrp);
-                
+
+                mice.add(id);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return mice;
-        
+
     }
 
     private void getModelDetails() {
-        if(detailsMap == null || detailsMap.size()==0){
-        try {
-            JSONObject job = new JSONObject(getJSON("http://tumor.informatics.jax.org/PDXInfo/JSONData.do?allModels=gimme", null));
-            JSONArray models = job.getJSONArray("pdxInfo");
-            for (int i = 0; i < models.length(); i++) {
-                String id = models.getJSONObject(i).getString("Model ID");
-                String site = models.getJSONObject(i).getString("Primary Site");
-                String iDiag = models.getJSONObject(i).getString("Initial Diagnosis");
-                String cDiag = models.getJSONObject(i).getString("Clinical Diagnosis");
-                if (cDiag.trim().length() == 0) {
-                    cDiag = iDiag;
-                }
-                detailsMap.put(id, cDiag + ":" + site);
+        if (detailsMap == null || detailsMap.size() == 0) {
+            try {
+                JSONObject job = new JSONObject(getJSON("http://tumor.informatics.jax.org/PDXInfo/JSONData.do?allModels=gimme", null));
+                JSONArray models = job.getJSONArray("pdxInfo");
+                for (int i = 0; i < models.length(); i++) {
+                    String id = models.getJSONObject(i).getString("Model ID");
+                    String site = models.getJSONObject(i).getString("Primary Site");
+                    String iDiag = models.getJSONObject(i).getString("Initial Diagnosis");
+                    String cDiag = models.getJSONObject(i).getString("Clinical Diagnosis");
+                    if (cDiag.trim().length() == 0) {
+                        cDiag = iDiag;
+                    }
+                    detailsMap.put(id, cDiag + ":" + site);
 
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         }
     }
-    
-    
 
     private String getJSON(String uri, String json) {
 
