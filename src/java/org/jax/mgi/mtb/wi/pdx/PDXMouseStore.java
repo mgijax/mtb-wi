@@ -96,6 +96,8 @@ public class PDXMouseStore {
     private static final String VARIANTS_FOR_GENE = baseURL + "gene_variants?gene_symbol=";
 
     private static final String ALL_GENES = baseURL + "all_genes";
+    
+    private static final String SAMPLE_PASSAGE = baseURL+"inventory?model=MODEL_ID&sample=SAMPLE_ID&reqitems=passage_num";
 
     private static HashMap<String, String> fusionModelsMap = new HashMap();
 
@@ -114,6 +116,8 @@ public class PDXMouseStore {
   //  private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
     
     private static final String CKB_HOME = "https://ckb.jax.org/";
+    
+   
 
     public static final String BAYLOR = "Baylor College of Medicine";
     public static final String DANA_FARBER = "Dana-Farber Cancer Institute";
@@ -121,7 +125,7 @@ public class PDXMouseStore {
     public static double AMP = 0.5;
     public static double DEL = -0.5;
 
-    private static final HashMap<String, ArrayList<String>> cnvPlots = new HashMap<>();
+    private static final HashMap<String, ArrayList<ArrayList<String>>> cnvPlots = new HashMap<>();
 
     public PDXMouseStore() {
 
@@ -1649,6 +1653,7 @@ public class PDXMouseStore {
 
     }
 
+    // need to get passage number using sample name and display it with each plot
     private void loadCNVPlots() {
 
         cnvPlots.clear();
@@ -1656,36 +1661,65 @@ public class PDXMouseStore {
         String path = WIConstants.getInstance().getCNVPlotsPath();
         File cnvFile = new File(path);
         for (File file : cnvFile.listFiles()) {
-            String name = file.getName();
-            String model = file.getName().split("_")[0];
-            if (cnvPlots.containsKey(model)) {
-                cnvPlots.get(model).add(name);
-            } else {
-                ArrayList<String> fileNames = new ArrayList<>();
-                fileNames.add(name);
-                cnvPlots.put(model, fileNames);
+           try{
+                String name = file.getName();
+               
+                String model = file.getName().split("_")[0];
+                String sample = file.getName().split("_")[1];
+                String passage = getSamplePassage(model,sample);
+                
+                StringBuilder label = new StringBuilder();
+                label.append("Model:").append(model);
+                label.append(" Sample:").append(sample);
+                if(passage.length() > 1){
+                    label.append(" Passage:").append(passage);
+                }
+                ArrayList<String> details = new ArrayList<>();
+                    details.add(label.toString());
+                    details.add(name);
+                
+                if (cnvPlots.containsKey(model)) {
+                    cnvPlots.get(model).add(details);
+                } else {
+                    ArrayList<ArrayList<String>> files = new ArrayList<>();
+                    files.add(details);
+                    cnvPlots.put(model, files);
 
-            }
+                }
+           }catch(Exception e){
+               log.error("undable to parse cnvPlot file"+file.getName());
+           }
         }
+        /*
+        this is no longer so easy
+        
         for (ArrayList<String> list : cnvPlots.values()) {
             Collections.sort(list);
         }
+        */
     }
 
     // returns an array list of plot URLs
-    public ArrayList<String> getCNVPlotsForModel(String modelID) {
+    public ArrayList<ArrayList<String>> getCNVPlotsForModel(String modelID) {
         return cnvPlots.get(modelID);
     }
 
-    /*
-    public String getCNVExpression(ArrayList<PDXMouse> mice, String gene) {
-        return PDXDAO.getInstance().getCNVExpression(gene, mice);
+    private String getSamplePassage(String model, String sample){
+        String passage = "";
+        String query = PDXMouseStore.SAMPLE_PASSAGE;
+        query = query.replace("MODEL_ID", model).replace("SAMPLE_ID", sample);
+        
+        try{
+            JSONObject job = new JSONObject(getJSON(query));
+            JSONArray jarray = job.getJSONArray("data");
+            passage = jarray.getJSONObject(0).getString("passage_num");
+            
+        }catch(Exception e){
+            log.error("unable to get passage for model:"+model+ " and sample:"+sample);
+        }
+        return passage;
+        
     }
-    
-    public String getExpression(ArrayList<PDXMouse> mice, String gene){
-        return PDXDAO.getInstance().getExpression(mice, gene);
-    }
-     */
     /**
      *
      * @param gene String gene name

@@ -34,7 +34,7 @@ public class ElimsUtil {
     
     private static final String BCM = "BCM"; // to identify Bayolor MRN IDs for search by ID
     
-    private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ  (aka, NSG or NOD Scid gamma)";
+    private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ  (aka NSG or NOD Scid gamma)";
 
     public ElimsUtil() {
     }
@@ -263,6 +263,13 @@ public class ElimsUtil {
             + "Engraftment Site,Collecting Site,Collection Date,Received Date,Accession Date,P0 Engraftment Date,P0 Success Date,"
             + "P1 Engraftment Date,P1 Success Date,P2 Engraftment Date,P2 Success Date,Comments";
 
+    private static final String STATUS_COLUMNS_2 = "Model ID,Project Type,Model Status,Location,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,"
+            + "Specimen Site,Primary Site,Clinical Diagnosis,Other Diagnosis Info,"
+            + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,"
+            + "Engraftment Site,Collecting Site,Collection Date,Received Date,Accession Date,P0 Engraftment Date,P0 Success Date,"
+            + "P1 Engraftment Date,P1 Success Date,P2 Engraftment Date,P2 Success Date,Comments";
+
+    
     public String getPDXStatusReport() {
         StringBuffer report = new StringBuffer();
         try {
@@ -279,7 +286,7 @@ public class ElimsUtil {
 
             if (result.length > 0) {
 
-                report.append(STATUS_COLUMNS).append("\n");
+                report.append(STATUS_COLUMNS_2).append("\n");
                 for (int i = 0; i < result.length; i++) {
 
                     String id = result[i].getIdentifier();
@@ -304,7 +311,7 @@ public class ElimsUtil {
                         report.append(clean(result[i].getEthnicity())).append(",");
                         report.append(clean(result[i].getSpecimen_Site())).append(",");
                         report.append(clean(result[i].getPrimary_Site())).append(",");
-                        report.append(clean(result[i].getInitial_Diagnosis())).append(",");
+                      //  report.append(clean(result[i].getInitial_Diagnosis())).append(",");
                         report.append(clean(result[i].getClinical_Diagnosis())).append(",");
                         report.append(clean(result[i].getOther_Diagnosis_Info())).append(",");    // we can remove this (per margaret)
                         report.append(clean(result[i].getTumor_Type())).append(",");
@@ -392,7 +399,7 @@ public class ElimsUtil {
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_T_Stage())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getSample_Type())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getStockNumber())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(fixStrain(result[i].getStrain())).append(",\n");
+                        report.append("\"").append(columns[j++]).append("\":").append(clean(fixStrain(result[i].getStrain()))).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMouseSex())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(fixEngraftment(result[i].getEngraftmentSite()))).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getCollecting_Site())).append(",\n");  // organization

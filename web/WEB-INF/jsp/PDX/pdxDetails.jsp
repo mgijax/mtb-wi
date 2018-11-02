@@ -199,7 +199,7 @@
 
 
 
-
+                
 
 
                 // create the Data Store
@@ -215,7 +215,7 @@
                 });
                 
                 var ckb = [{header: '', colspan: 2, align: 'center'},
-                        {header: 'JAX Clinical Knowledgebase (CKB) annotations', colspan: 6, align: 'center'},
+                        {header: '<a href="https://ckb.jax.org" onclick="openCKB()">JAX Clinical Knowledgebase (CKB)</a> annotations<br><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only."> Details available to registerd CKB users only.', colspan: 6, align: 'center'},
                         {header: '', colspan: 16, align: 'center'}]
                 
                  var group = new Ext.ux.grid.ColumnHeaderGroup({
@@ -263,31 +263,21 @@
                         },
                                     
                         {
-                            header: '# <b>Clinical/Preclinical</b><br>annotations<br>predicting<br>sensitivity',
+                            header: '# Annotations<br>predicting<br><b>sensitivity<b>',
                             width: 130,
                             sortable: true,
                             dataIndex: 'ckb_nclinical_sens',
                             renderer: ckbSensitivityRenderer
                         },
-               //         {
-               //             header: '# <b>Preclinical</b><br>annotations<br>predicting<br>sensitivity',
-               //             width: 70,
-               //             sortable: true,
-               //             dataIndex: 'ckb_npreclinical_sens'
-               //         },
+               
                         {
-                            header: '# <b>Clinical/Preclinical</b><br>annotations<br>predicting<br>resistance',
+                            header: '# Annotations<br>predicting<br><b>resistance</b>',
                             width: 130,
                             sortable: true,
                             dataIndex: 'ckb_nclinical_resist',
                             renderer: ckbResistanceRenderer
                         }, 
-                //        {
-                //            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>resistance',
-                //            width: 70,
-                //            sortable: true,
-                //            dataIndex: 'ckb_npreclinical_resist'
-                //        },  
+              
                         {
                             header: 'Potential<br>treatment<br>approaches',
                             width: 100,
@@ -436,7 +426,7 @@
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
                         
                         if(record.get("ckb_molpro_link").length==20){
-                            val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
+                            val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
                         }
                     }
                         
@@ -451,7 +441,7 @@
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link")+"?tabType=TREATMENT_APPROACH_EVIDENCE", record.get("ckb_potential_treat_approach"));
                         
                         if(record.get("ckb_molpro_link").length==20){
-                            val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_potential_treat_approach"));
+                            val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_potential_treat_approach"));
                         }
                     }
                         
@@ -462,14 +452,14 @@
                 function ckbResistanceRenderer(value, p, record){
                     val = "";
                     if(record.get("ckb_nclinical_resist").trim().length>0 || record.get("ckb_npreclinical_resist").trim().length>0){
-                        val = "0/";
+                        val = "0 clinical/";
                         if(record.get("ckb_nclinical_resist").trim().length>0){
-                            val = record.get("ckb_nclinical_resist")+"/"
+                            val = record.get("ckb_nclinical_resist")+" clincal /"
                         }            
                         if(record.get("ckb_npreclinical_resist").trim().length>0){
-                            val = val+record.get("ckb_npreclinical_resist");
+                            val = val+record.get("ckb_npreclinical_resist")+" preclinical";
                         }else{
-                            val = val+"0";
+                            val = val+"0 preclinical";
                         }
                     }
                     return val;
@@ -479,14 +469,14 @@
                 function ckbSensitivityRenderer(value, p, record){
                     val = "";
                     if(record.get("ckb_nclinical_sens").trim().length>0 || record.get("ckb_npreclinical_sens").trim().length>0){
-                        val = "0/";
+                        val = "0 clinical/";
                         if(record.get("ckb_nclinical_sens").trim().length>0){
-                            val = record.get("ckb_nclinical_sens")+"/"
+                            val = record.get("ckb_nclinical_sens")+" clincal /"
                         }            
                         if(record.get("ckb_npreclinical_sens").trim().length>0){
-                            val = val+record.get("ckb_npreclinical_sens");
+                            val = val+record.get("ckb_npreclinical_sens")+" preclinical";
                         }else{
-                            val = val+"0";
+                            val = val+"0 preclinical";
                         }
                     }
                     return val;
@@ -683,8 +673,10 @@
                         },
                         titleCollapse: true,
                         hideCollapseTool: true,
-                           items: [{html:'<c:forEach var="plot" items="${cnvPlots}" varStatus="status">
-                                                <div style="text-align:center"> <img src="${applicationScope.pdxFileURL}../cnvPlots/tumor_only/${plot}" height="450" width="975"/></div><br>\
+                           items: [{html:'<c:forEach var="imageData" items="${cnvPlots}" varStatus="status">
+                                                <div style="text-align:center">\
+                                                ${imageData.get(0)}\
+                                                <img src="${applicationScope.pdxFileURL}../cnvPlots/tumor_only/${imageData.get(1)}" height="450" width="975"/></div><br>\
                                              </c:forEach>'
                                    }]
 
@@ -697,7 +689,9 @@
                 
             });
             
-            
+            function openCKB(){
+                window.open("https://ckb.jax.org","ckb");
+            }
             
 
         </script>
