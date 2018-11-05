@@ -310,6 +310,7 @@ public class PDXSearchResultsAction extends Action {
             buffer.append(deComma(mouse.getTumorMarkers())).append(",");
             buffer.append(mouse.getSex()).append(",");
             buffer.append(mouse.getAge()).append(",");
+            // this will be htmlified with <sup> and <br>
             buffer.append(mouse.getStrain()).append(",");
             buffer.append(deComma(mouse.getAssocData()));
             if (showGVC) {

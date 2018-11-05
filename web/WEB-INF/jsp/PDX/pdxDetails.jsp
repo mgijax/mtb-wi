@@ -848,7 +848,7 @@
                                             <table  border=0 cellpadding=5 cellspacing=0 width="100%">
 
                                                 <tr>
-                                                    <td class="label" style="width:10%">Strain:</td><td class="normal"  style="width:22%">${fn:replace(mouse.strain,'(','<br>(')}</td>
+                                                    <td class="label" style="width:10%">Strain:</td><td class="normal"  style="width:22%">${mouse.strain}</td>
 
                                                     <td class="label" style="width:10%">Implantation Site:</td><td class="normal" style="width:18%">${mouse.location}</td>
 

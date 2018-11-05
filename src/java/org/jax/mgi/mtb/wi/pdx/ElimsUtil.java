@@ -35,6 +35,7 @@ public class ElimsUtil {
     private static final String BCM = "BCM"; // to identify Bayolor MRN IDs for search by ID
     
     private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ  (aka NSG or NOD Scid gamma)";
+    private static final String NSG_HTML_NAME = "NOD.Cg-Prkdc<sup>scid</sup> Il2rg<sup>tm1Wjl</sup>/SzJ<br>(aka NSG or NOD Scid gamma)";
 
     public ElimsUtil() {
     }
@@ -563,7 +564,7 @@ public class ElimsUtil {
                         mouse.setRace(results[i].getRace());
                         mouse.setEthnicity(results[i].getEthnicity());
                         mouse.setPrimarySite(results[i].getPrimary_Site());
-                        mouse.setStrain(fixStrain(results[i].getStrain()));
+                        mouse.setStrain(fixWebStrain(results[i].getStrain()));
 
                         mouse.setTumorType(results[i].getTumor_Type());
                         mouse.setTumorMarkers(clean(results[i].getMarkers()));
@@ -889,6 +890,15 @@ public class ElimsUtil {
         }
         return strain;
     }
+    
+    private String fixWebStrain(String strain){
+      
+        if(strain != null && strain.startsWith("NSG")){
+            strain =NSG_HTML_NAME;
+        }
+        return strain;
+    }
+    
 
     // right now there is a practice model that needs to be excluded
     // but in theory it could be anyting else at some point.
