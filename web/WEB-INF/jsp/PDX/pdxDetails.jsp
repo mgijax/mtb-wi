@@ -694,6 +694,14 @@
                                                     <td class="label">Stage / Grade:</td><td class="normal" >${mouse.stage} / ${mouse.grade}<td></td>
 
                                                 </tr>
+                                                
+                                                
+                                                <c:if test="${not empty relatedModels}">
+                                                <tr>
+                                                        <td class="label">Related Models:</td>
+                                                        <td style="width:100%" class="normal" colspan="5">${relatedModels}</td>
+                                                </tr>
+                                                </c:if>
 
                                                 <c:if test="${not empty mouse.fusionGenes}">
                                                     <tr>
