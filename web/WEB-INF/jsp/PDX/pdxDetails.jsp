@@ -243,7 +243,7 @@
                         
                         {
                             header: 'Variant',
-                            width: 100,
+                            width: 110,
                             sortable: true,
                             dataIndex: 'ckb_molpro_name',
                             renderer: ckbMolProRenderer
