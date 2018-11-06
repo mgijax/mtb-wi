@@ -4,7 +4,6 @@
  */
 package org.jax.mgi.mtb.wi.actions;
 
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +19,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXLink;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
+import org.jax.mgi.mtb.wi.pdx.RelatedModels;
 
 /**
  * Collects data for PDX details page and sends it along
@@ -309,6 +309,10 @@ public class PDXDetailsAction extends Action {
             // check if no inventory remaining
             if (mouse.getModelStatus().indexOf("Inventory") != -1) {
                 request.setAttribute("unavailable", "unavailable");
+            }
+            
+            if(RelatedModels.getReleationLabel(modelID)!= null){
+                request.setAttribute("relatedModels",RelatedModels.getReleationLabel(modelID));
             }
 
         }//end of else for finding a model;
