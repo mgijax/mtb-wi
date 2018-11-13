@@ -27,6 +27,14 @@
             p{
                 margin-bottom: 2px;
             }
+
+
+            a.ckb:link{
+            color:red;
+            }
+            a.ckb:visited{
+            color:red;
+            }
             
 
         </style>
@@ -191,7 +199,7 @@
 
 
 
-
+                
 
 
                 // create the Data Store
@@ -206,13 +214,13 @@
                     proxy: dataProxy
                 });
                 
-            //    var ckb = [{header: '', colspan: 2, align: 'center'},
-            //            {header: 'JAX Clinical Knowledgebase (CKB) annotations', colspan: 7, align: 'center'},
-            //        {header: '', colspan: 17, align: 'center'}]
+                var ckb = [{header: '', colspan: 2, align: 'center'},
+                        {header: '<a href="https://ckbhome.jax.org" onclick="openCKB()">JAX Clinical Knowledgebase (CKB)</a> annotations<br><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to CKB Boost users with active subscriptions only."> Details available to CKB Boost users with active subscriptions only.', colspan: 6, align: 'center'},
+                        {header: '', colspan: 16, align: 'center'}]
                 
-            //     var group = new Ext.ux.grid.ColumnHeaderGroup({
-            //        rows: [ckb]
-            //    });
+                 var group = new Ext.ux.grid.ColumnHeaderGroup({
+                    rows: [ckb]
+                });
 
                 store.setDefaultSort('gene_symbol', 'ASC');
 
@@ -233,50 +241,50 @@
                            
                         },
                         
-//         //             {
-//         //                   header: 'CKB<br>molecular<br>profile',
-//         //                   width: 100,
-//         //                   sortable: true,
-//         //                   dataIndex: 'ckb_molpro_name',
-//         //                   renderer: ckbMolProRenderer
-//         //               },
-//         //               {
-//         //                   header: 'CKB<br>potential<br>treatment<br>approach',
-//                            width: 100,
-//                            sortable: true,
-//                            dataIndex: 'ckb_potential_treat_approach'
-//                        },               
-//                        {
-//                            header: 'CKB<br>protein<br>effect',
-//                            width: 70,
-//                            sortable: true,
-//                            dataIndex: 'ckb_protein_effect'
-//                        },
-//                                    
-//                        {
-//                            header: '# <b>Clinical</b><br>annotations<br>predicting<br>sensitivity',
-//                            width: 70,
-//                            sortable: true,
-//                            dataIndex: 'ckb_nclinical_sens'
-//                        },
-//                        {
-//                            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>sensitivity',
-//                            width: 70,
-//                            sortable: true,
-//                            dataIndex: 'ckb_npreclinical_sens'
-//                        },
-//                        {
-//                            header: '# <b>Clinical</b><br>annotations<br>predicting<br>resistance',
-//                            width: 70,
-//                            sortable: true,
-//                            dataIndex: 'ckb_nclinical_resist'
-//                        }, 
-//                        {
-//                            header: '# <b>Preclinical</b><br>annotations<br>predicting<br>resistance',
-//                            width: 70,
-//                            sortable: true,
-//                            dataIndex: 'ckb_npreclinical_resist'
-//                        },         --%>      
+                        {
+                            header: 'Variant',
+                            width: 110,
+                            sortable: true,
+                            dataIndex: 'ckb_molpro_name',
+                            renderer: ckbMolProRenderer
+                        },
+                        {
+                            header: 'Variant effect',
+                            width: 90,
+                            sortable: true,
+                            dataIndex: 'consequence'
+                        },
+                                      
+                        {
+                            header: 'CKB<br>protein<br>effect',
+                            width: 70,
+                            sortable: true,
+                            dataIndex: 'ckb_protein_effect'
+                        },
+                                    
+                        {
+                            header: '# Annotations<br>predicting<br><b>sensitivity<b>',
+                            width: 130,
+                            sortable: true,
+                            dataIndex: 'ckb_nclinical_sens',
+                            renderer: ckbSensitivityRenderer
+                        },
+               
+                        {
+                            header: '# Annotations<br>predicting<br><b>resistance</b>',
+                            width: 130,
+                            sortable: true,
+                            dataIndex: 'ckb_nclinical_resist',
+                            renderer: ckbResistanceRenderer
+                        }, 
+              
+                        {
+                            header: 'Potential<br>treatment<br>approaches',
+                            width: 100,
+                            sortable: true,
+                            dataIndex: 'ckb_potential_treat_approach',
+                            renderer: ckbPotTreatRenderer
+                        }, 
                         
                         {
                             header: 'Platform',
@@ -310,12 +318,7 @@
                             dataIndex: 'alt_allele'
 
                         },
-                        {
-                            header: 'Consequence',
-                            width: 120,
-                            sortable: true,
-                            dataIndex: 'consequence'
-                        },
+                        
                         {
                             header: 'Amino Acid Change',
                             width: 110,
@@ -346,26 +349,32 @@
                             sortable: true,
                             dataIndex: 'transcript_id'
                         },
-//                        {
-//                            header: 'Filtered Rationale',
-//                            width: 100,
-//                            sortable: true,
-//                            dataIndex: 'filtered_rationale'
-//
-//                        },
-  //                      {
-  //                          header: 'Filter',
-  //                          width: 50,
-  //                          sortable: true,
-  //                          dataIndex: 'filter'
-  //                      },
+                        {
+                            header: 'Filtered Rationale',
+                            width: 100,
+                            sortable: true,
+                            dataIndex: 'filtered_rationale'
+
+                        },
+                        {
+                            header: 'Filter',
+                            width: 50,
+                            sortable: true,
+                            dataIndex: 'filter'
+
+                        },
                         {
                             header: 'Passage Num',
                             width: 50,
                             sortable: true,
                             dataIndex: 'passage_num'
                         },
-                       
+                        {
+                            header: 'Gene ID',
+                            width: 60,
+                            sortable: true,
+                            dataIndex: 'gene_id'
+                        },
                         {
                             header: 'Count Human Reads',
                             width: 70,
@@ -383,15 +392,14 @@
                     stripeRows: true,
                     height: 700,
                     width: 1000,
-                    id: 'pdxGrid',
-                    autoExpandColumn:0
+                    id: 'pdxGrid'
                     , bbar: new Ext.PagingToolbar({
                         pageSize: 30,
                         store: store,
                         displayInfo: true,
                         displayMsg: 'Displaying results {0} - {1} of {2}'
                     }),
-                //    plugins:group
+                    plugins:group
 
 
 
@@ -412,14 +420,66 @@
                 }
                 
                  function ckbMolProRenderer(value, p, record){
-                     val = "";
+                     val = record.get("ckb_molpro_name");
                      
-                     if(record.get("ckb_molpro_name").length>0){
+                     if(record.get("ckb_molpro_name").length>0 && record.get("ckb_molpro_link").length>0){
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
+                        
+                        if(record.get("ckb_molpro_link").includes("ckbhome")){
+                            val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
+                        }
                     }
                         
                     return val;
                     
+                }
+                
+                function ckbPotTreatRenderer(value, p, record){
+                     val = record.get("ckb_potential_treat_approach");
+                     
+                     if(record.get("ckb_potential_treat_approach").trim().length>0 && record.get("ckb_molpro_link").length>0){
+                        val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link")+"?tabType=TREATMENT_APPROACH_EVIDENCE", record.get("ckb_potential_treat_approach"));
+                        
+                        if(record.get("ckb_molpro_link").includes("ckbhome")){
+                            val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_potential_treat_approach"));
+                        }
+                    }
+                        
+                    return val;
+                    
+                }
+                
+                function ckbResistanceRenderer(value, p, record){
+                    val = "";
+                    if(record.get("ckb_nclinical_resist").trim().length>0 || record.get("ckb_npreclinical_resist").trim().length>0){
+                        val = "0 clinical/";
+                        if(record.get("ckb_nclinical_resist").trim().length>0){
+                            val = record.get("ckb_nclinical_resist")+" clincal /"
+                        }            
+                        if(record.get("ckb_npreclinical_resist").trim().length>0){
+                            val = val+record.get("ckb_npreclinical_resist")+" preclinical";
+                        }else{
+                            val = val+"0 preclinical";
+                        }
+                    }
+                    return val;
+                }
+                
+                
+                function ckbSensitivityRenderer(value, p, record){
+                    val = "";
+                    if(record.get("ckb_nclinical_sens").trim().length>0 || record.get("ckb_npreclinical_sens").trim().length>0){
+                        val = "0 clinical/";
+                        if(record.get("ckb_nclinical_sens").trim().length>0){
+                            val = record.get("ckb_nclinical_sens")+" clincal /"
+                        }            
+                        if(record.get("ckb_npreclinical_sens").trim().length>0){
+                            val = val+record.get("ckb_npreclinical_sens")+" preclinical";
+                        }else{
+                            val = val+"0 preclinical";
+                        }
+                    }
+                    return val;
                 }
 
                 Ext.EventManager.onWindowResize(function (w, h) {
@@ -428,22 +488,30 @@
 
                 // there must be a better way...
                 var colNames = [];
-                colNames.push('sample_name');
-                colNames.push('gene_symbol');
-                colNames.push('platform');
-                colNames.push('chromosome');
-                colNames.push('seq_position');
-                colNames.push('ref_allele');
-                colNames.push('alt_allele');
-                colNames.push('consequence');
-                colNames.push('amino_acid_change');
-                colNames.push('rs_variants');
-                colNames.push('read_depth');
-                colNames.push('allele_frequency');
-                colNames.push('transcript_id');
-                colNames.push('passage_num');
-                colNames.push('count_human_reads');
-                colNames.push('pct_human_reads');
+                colNames.push( 'sample_name');
+                colNames.push( 'gene_symbol');
+                colNames.push( 'ckb_molpro_name');
+                colNames.push( 'consequence');
+                colNames.push( 'ckb_protein_effect');
+                colNames.push( 'ckb_nclinical_sens');
+                colNames.push( 'ckb_nclinical_resist');
+                colNames.push('ckb_potential_treat_approach');
+                colNames.push( 'platform');
+                colNames.push( 'chromosome');
+                colNames.push( 'seq_position');
+                colNames.push( 'ref_allele');
+                colNames.push( 'alt_allele');
+                colNames.push( 'amino_acid_change');
+                colNames.push( 'rs_variants');
+                colNames.push( 'read_depth');
+                colNames.push( 'allele_frequency');
+                colNames.push( 'transcript_id');
+                colNames.push( 'filtered_rationale');
+                colNames.push( 'filter');
+                colNames.push( 'passage_num');
+                colNames.push( 'gene_id');
+                colNames.push( 'count_human_reads');
+                colNames.push( 'pct_human_reads');
      
 
 
@@ -588,7 +656,43 @@
                        panel4.doLayout();
                 }
                 
+          
+            
+             if(document.getElementById("cnvPlots") != null){
+                panel5 = new Ext.Panel({
+                        applyTo: 'cnvPlots',
+                        collapsible: true,
+                        collapsed: true,
+                        collapseFirst: false,
+                        title: 'Click to expand/collapse',
+                        forceLayout: true,
+                        layout: {
+                            type: 'fit',
+                            align: 'stretch',
+                            pack: 'start'
+                        },
+                        titleCollapse: true,
+                        hideCollapseTool: true,
+                           items: [{html:'<c:forEach var="imageData" items="${cnvPlots}" varStatus="status">
+                                                <div style="text-align:center">\
+                                                ${imageData.get(0)}<br>\
+                                                <img src="${applicationScope.pdxFileURL}../cnvPlots/tumor_only/${imageData.get(1)}" height="450" width="975"/></div><br>\
+                                             </c:forEach>'
+                                   }]
+
+                       });
+
+                       panel5.render();
+                       panel5.doLayout();
+                }
+                
+                
             });
+            
+            function openCKB(){
+                window.open("https://ckbhome.jax.org","ckb");
+            }
+            
 
         </script>
 
@@ -694,12 +798,10 @@
                                                     <td class="label">Stage / Grade:</td><td class="normal" >${mouse.stage} / ${mouse.grade}<td></td>
 
                                                 </tr>
-                                                
-                                                
                                                 <c:if test="${not empty relatedModels}">
                                                 <tr>
-                                                        <td class="label">Related Models:</td>
-                                                        <td style="width:100%" class="normal" colspan="5">${relatedModels}</td>
+                                                    <td class="label">Related Models:</td>
+                                                    <td style="width:100%" class="normal" colspan="5">${relatedModels}</td>
                                                 </tr>
                                                 </c:if>
 
@@ -782,7 +884,7 @@
 
                                     <tr class="stripe${b}">
                                         <td class="cat${b}">
-                                            Variant Summary
+                                            Variant Summary <a class="help" href="userHelp.jsp#pdxVariant"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                         </td>
                                         <td class="data${b}">
 
@@ -809,7 +911,7 @@
 
                                     <tr class="stripe${a}">
                                         <td class="cat${a}">
-                                            Gene Expression
+                                            Gene Expression <a class="help" href="userHelp.jsp#pdxExpression"><img src="${applicationScope.urlImageDir}/help_small2.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                         </td>
                                         <td class="data${a}">
                                             <c:choose>
@@ -843,7 +945,7 @@
 
                                     <tr class="stripe${b}">
                                         <td class="cat${b}">
-                                            Gene CNV
+                                            Gene CNV <a class="help" href="userHelp.jsp#pdxCNV"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                         </td>
                                         <td class="data${b}">
                                             <c:choose>
@@ -863,11 +965,37 @@
 
                                         </td>
                                     </tr>
-                                    <tr class="stripe${a}">
-                                        <td class="cat${a}">
+                                    
+                                     <tr class="stripe${a}">
+                                            <td class="cat${a}">
+                                                CNV Plots <a class="help" href="userHelp.jsp#pdxCNV"><img src="${applicationScope.urlImageDir}/help_small2.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
+                                            </td>
+                                            <td class="data${a}">
+                                            <c:choose>
+                                                <c:when test="${not empty cnvPlots}">
+                                                    <div id ="cnvPlots"></div>
+                                                </c:when>
+
+                                                 <c:otherwise>
+                                                    <table  border=0 cellpadding=5 cellspacing=0 width="100%">
+                                                        <tr>
+                                                            <td class="normal">
+                                                                No gene CNV plots currently available.
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                 </c:otherwise>
+
+                                            </c:choose>
+                                    </tr>
+                                             
+                                             
+                                        
+                                    <tr class="stripe${b}">
+                                        <td class="cat${b}">
                                             Model Characterization
                                         </td>
-                                        <td class="data${a}">
+                                        <td class="data${b}">
                                             <table  border=0 cellpadding=5 cellspacing=0 width="100%">
 
                                                 <!-- Histology -->                
@@ -893,6 +1021,45 @@
 
 
                                                                 </c:if>
+                                                                    <!--- add tumor markers which will show if pt is histologically similar to pdx -->
+                                                                    
+                                                             <!--  Tumor Markers -->
+
+                                                <c:choose>
+                                                    <c:when test="${not empty tumorMarkers  ||  not empty sessionScope.pdxEditor}">
+                                                        <tr>
+                                                            <td class="label" style="  padding:5px; width:10%; vertical-align:top;">
+                                                                Tumor Markers:
+
+
+                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
+
+                                                                    <br>
+                                                                    <input type="submit" name="tumorMarkers" value="add">
+
+
+                                                                </c:if>
+                                                            </td>
+                                                            <td>
+                                                                <table>
+                                                                    <c:forEach var="comment" items="${tumorMarkers}" varStatus="status">
+                                                                        <tr>
+                                                                            <td style="border:none;  padding:5px; ">
+                                                                                ${comment.comment}
+                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
+                                                                                    <a href="pdxEditContent.do?contentType=comment&contentKey=${comment.contentKey}&modelID=${modelID}" class="linkedButton">
+                                                                                        <input type="button" value="Edit"/></a>
+                                                                                    </c:if>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    </c:forEach>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </c:when>
+
+                                                </c:choose>        
                                                             </td>
                                                             <td style="padding:5px; vertical-align:top;">
 
@@ -952,43 +1119,7 @@
                                                 </c:choose>        
 
 
-                                                <!--  Tumor Markers -->
-
-                                                <c:choose>
-                                                    <c:when test="${not empty tumorMarkers  ||  not empty sessionScope.pdxEditor}">
-                                                        <tr>
-                                                            <td class="label" style="  padding:5px; width:10%; vertical-align:top;">
-                                                                Tumor Markers:
-
-
-                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-
-                                                                    <br>
-                                                                    <input type="submit" name="tumorMarkers" value="add">
-
-
-                                                                </c:if>
-                                                            </td>
-                                                            <td>
-                                                                <table>
-                                                                    <c:forEach var="comment" items="${tumorMarkers}" varStatus="status">
-                                                                        <tr>
-                                                                            <td style="border:none;  padding:5px; ">
-                                                                                ${comment.comment}
-                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                    <a href="pdxEditContent.do?contentType=comment&contentKey=${comment.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                        <input type="button" value="Edit"/></a>
-                                                                                    </c:if>
-                                                                            </td>
-                                                                        </tr>
-
-                                                                    </c:forEach>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </c:when>
-
-                                                </c:choose>        
+                                               
 
 
                                                 <!-- Gene Expresssion -->                 
