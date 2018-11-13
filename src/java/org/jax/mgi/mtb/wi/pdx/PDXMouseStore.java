@@ -115,7 +115,7 @@ public class PDXMouseStore {
     private static final String CKB_MOLPRO_INTERNAL = "https://myckb.jax.org/molecularProfile/show/";
   //  private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
     
-    private static final String CKB_HOME = "https://ckb.jax.org/";
+    private static final String CKB_HOME = "https://ckbhome.jax.org/";
     
    
 
@@ -1422,7 +1422,7 @@ public class PDXMouseStore {
 
             if (WIConstants.getInstance().getPublicDeployment()) {
                 
-                // don't? have links for 
+               
                 if(ckbMolProName.length() > 0 && !ckbMolProName.equals("null")){
                     if (ckbPublic) {
                         result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");

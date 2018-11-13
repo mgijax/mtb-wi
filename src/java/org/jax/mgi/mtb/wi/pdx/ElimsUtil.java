@@ -32,10 +32,13 @@ public class ElimsUtil {
     private static String userName;
     private static String password;
     
-    private static final String BCM = "BCM"; // to identify Bayolor MRN IDs for search by ID
+    private static final String BCM = "BCM"; // to identify Bayolor MRN IDs for search by ID and show as previous ID
     
     private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ  (aka NSG or NOD Scid gamma)";
     private static final String NSG_HTML_NAME = "NOD.Cg-Prkdc<sup>scid</sup> Il2rg<sup>tm1Wjl</sup>/SzJ<br>(aka NSG or NOD Scid gamma)";
+    
+    // strains starting with this get turned into one of the above.
+    private static final String NSG = "NSG";
 
     public ElimsUtil() {
     }
@@ -265,7 +268,7 @@ public class ElimsUtil {
             + "P1 Engraftment Date,P1 Success Date,P2 Engraftment Date,P2 Success Date,Comments";
 
     private static final String STATUS_COLUMNS_2 = "Model ID,Project Type,Model Status,Location,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,"
-            + "Specimen Site,Primary Site,Clinical Diagnosis,Other Diagnosis Info,"
+            + "Specimen Site,Primary Site,Clinical Diagnosis,"
             + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,"
             + "Engraftment Site,Collecting Site,Collection Date,Received Date,Accession Date,P0 Engraftment Date,P0 Success Date,"
             + "P1 Engraftment Date,P1 Success Date,P2 Engraftment Date,P2 Success Date,Comments";
@@ -314,7 +317,7 @@ public class ElimsUtil {
                         report.append(clean(result[i].getPrimary_Site())).append(",");
                       //  report.append(clean(result[i].getInitial_Diagnosis())).append(",");
                         report.append(clean(result[i].getClinical_Diagnosis())).append(",");
-                        report.append(clean(result[i].getOther_Diagnosis_Info())).append(",");    // we can remove this (per margaret)
+                     //   report.append(clean(result[i].getOther_Diagnosis_Info())).append(",");    // we can remove this (per margaret)
                         report.append(clean(result[i].getTumor_Type())).append(",");
                         report.append(clean(result[i].getGrades())).append(",");
                         report.append(clean(result[i].getMarkers())).append(",");
@@ -600,6 +603,8 @@ public class ElimsUtil {
                             // we want to be able to search on previous IDs as well
                             String pid = mouse.getPreviousID();
                             
+                            
+                            // for Baylor models we want to use MRN as previous ID
                             String mrn = results[i].getMedical_Record_Number();
                             if(mrn != null && mrn.startsWith(BCM)){
                                 pid = mrn;
@@ -885,7 +890,7 @@ public class ElimsUtil {
     
     private String fixStrain(String strain){
       
-        if(strain != null && strain.startsWith("NSG")){
+        if(strain != null && strain.startsWith(NSG)){
             strain =NSG_OFFICIAL_NAME;
         }
         return strain;
@@ -893,7 +898,7 @@ public class ElimsUtil {
     
     private String fixWebStrain(String strain){
       
-        if(strain != null && strain.startsWith("NSG")){
+        if(strain != null && strain.startsWith(NSG)){
             strain =NSG_HTML_NAME;
         }
         return strain;

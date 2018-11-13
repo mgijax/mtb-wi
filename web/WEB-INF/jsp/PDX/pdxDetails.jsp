@@ -215,7 +215,7 @@
                 });
                 
                 var ckb = [{header: '', colspan: 2, align: 'center'},
-                        {header: '<a href="https://ckb.jax.org" onclick="openCKB()">JAX Clinical Knowledgebase (CKB)</a> annotations<br><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only."> Details available to registerd CKB users only.', colspan: 6, align: 'center'},
+                        {header: '<a href="https://ckbhome.jax.org" onclick="openCKB()">JAX Clinical Knowledgebase (CKB)</a> annotations<br><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to CKB Boost users with active subscriptions only."> Details available to CKB Boost users with active subscriptions only.', colspan: 6, align: 'center'},
                         {header: '', colspan: 16, align: 'center'}]
                 
                  var group = new Ext.ux.grid.ColumnHeaderGroup({
@@ -425,7 +425,7 @@
                      if(record.get("ckb_molpro_name").length>0 && record.get("ckb_molpro_link").length>0){
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
                         
-                        if(record.get("ckb_molpro_link").length==20){
+                        if(record.get("ckb_molpro_link").includes("ckbhome")){
                             val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
                         }
                     }
@@ -440,7 +440,7 @@
                      if(record.get("ckb_potential_treat_approach").trim().length>0 && record.get("ckb_molpro_link").length>0){
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link")+"?tabType=TREATMENT_APPROACH_EVIDENCE", record.get("ckb_potential_treat_approach"));
                         
-                        if(record.get("ckb_molpro_link").length==20){
+                        if(record.get("ckb_molpro_link").includes("ckbhome")){
                             val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_potential_treat_approach"));
                         }
                     }
@@ -675,7 +675,7 @@
                         hideCollapseTool: true,
                            items: [{html:'<c:forEach var="imageData" items="${cnvPlots}" varStatus="status">
                                                 <div style="text-align:center">\
-                                                ${imageData.get(0)}\
+                                                ${imageData.get(0)}<br>\
                                                 <img src="${applicationScope.pdxFileURL}../cnvPlots/tumor_only/${imageData.get(1)}" height="450" width="975"/></div><br>\
                                              </c:forEach>'
                                    }]
@@ -690,7 +690,7 @@
             });
             
             function openCKB(){
-                window.open("https://ckb.jax.org","ckb");
+                window.open("https://ckbhome.jax.org","ckb");
             }
             
 
@@ -1021,6 +1021,45 @@
 
 
                                                                 </c:if>
+                                                                    <!--- add tumor markers which will show if pt is histologically similar to pdx -->
+                                                                    
+                                                             <!--  Tumor Markers -->
+
+                                                <c:choose>
+                                                    <c:when test="${not empty tumorMarkers  ||  not empty sessionScope.pdxEditor}">
+                                                        <tr>
+                                                            <td class="label" style="  padding:5px; width:10%; vertical-align:top;">
+                                                                Tumor Markers:
+
+
+                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
+
+                                                                    <br>
+                                                                    <input type="submit" name="tumorMarkers" value="add">
+
+
+                                                                </c:if>
+                                                            </td>
+                                                            <td>
+                                                                <table>
+                                                                    <c:forEach var="comment" items="${tumorMarkers}" varStatus="status">
+                                                                        <tr>
+                                                                            <td style="border:none;  padding:5px; ">
+                                                                                ${comment.comment}
+                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
+                                                                                    <a href="pdxEditContent.do?contentType=comment&contentKey=${comment.contentKey}&modelID=${modelID}" class="linkedButton">
+                                                                                        <input type="button" value="Edit"/></a>
+                                                                                    </c:if>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    </c:forEach>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </c:when>
+
+                                                </c:choose>        
                                                             </td>
                                                             <td style="padding:5px; vertical-align:top;">
 
@@ -1080,43 +1119,7 @@
                                                 </c:choose>        
 
 
-                                                <!--  Tumor Markers -->
-
-                                                <c:choose>
-                                                    <c:when test="${not empty tumorMarkers  ||  not empty sessionScope.pdxEditor}">
-                                                        <tr>
-                                                            <td class="label" style="  padding:5px; width:10%; vertical-align:top;">
-                                                                Tumor Markers:
-
-
-                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-
-                                                                    <br>
-                                                                    <input type="submit" name="tumorMarkers" value="add">
-
-
-                                                                </c:if>
-                                                            </td>
-                                                            <td>
-                                                                <table>
-                                                                    <c:forEach var="comment" items="${tumorMarkers}" varStatus="status">
-                                                                        <tr>
-                                                                            <td style="border:none;  padding:5px; ">
-                                                                                ${comment.comment}
-                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                    <a href="pdxEditContent.do?contentType=comment&contentKey=${comment.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                        <input type="button" value="Edit"/></a>
-                                                                                    </c:if>
-                                                                            </td>
-                                                                        </tr>
-
-                                                                    </c:forEach>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </c:when>
-
-                                                </c:choose>        
+                                               
 
 
                                                 <!-- Gene Expresssion -->                 

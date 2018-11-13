@@ -52,7 +52,7 @@ public class RelatedModels {
     
     public static String getReleationLabel(String modelID){
         if(relations.size()==0){
-            System.out.println("loading PDX relations");
+          //  System.out.println("loading PDX relations");
             load();
         }
         return relations.get(modelID);
