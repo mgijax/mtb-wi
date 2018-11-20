@@ -425,7 +425,7 @@
                      if(record.get("ckb_molpro_name").length>0 && record.get("ckb_molpro_link").length>0){
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
                         
-                        if(record.get("ckb_molpro_link").includes("ckbhome")){
+                        if(record.get("ckb_molpro_link").indexOf("ckbhome") != -1){
                             val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
                         }
                     }
@@ -440,7 +440,7 @@
                      if(record.get("ckb_potential_treat_approach").trim().length>0 && record.get("ckb_molpro_link").length>0){
                         val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link")+"?tabType=TREATMENT_APPROACH_EVIDENCE", record.get("ckb_potential_treat_approach"));
                         
-                        if(record.get("ckb_molpro_link").includes("ckbhome")){
+                        if(record.get("ckb_molpro_link").indexOf("ckbhome") != -1){
                             val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_potential_treat_approach"));
                         }
                     }
