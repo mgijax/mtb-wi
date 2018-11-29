@@ -47,7 +47,7 @@
                             <!--======================= Start Main Section =============================-->
 
                             <!--======================= Start Form Header ==============================-->
-                            <html:form action="pdxMultiSearch" method="POST">
+                            <html:form action="pdxLikeMe" method="POST">
 
                                 <table border="0" cellpadding="5" cellspacing="1" width="100%" class="results">
                                     <tr class="pageTitle">
@@ -111,12 +111,15 @@
                                             &lt;Gene&gt;:MUT=&lt;VARIANT&gt;<br>
                                             &lt;Gene&gt;:Amp<br>
                                             &lt;Gene&gt;:Del<br>
+                                            &lt;Gene&gt;:EXP># (# can be positive or negative integer or decimal value for Z score percentile rank)<br>
+                                            &lt;Gene&gt;:EXP<#
                                             <br>
                                             Example:<br><br>
                                             CASE 1<br>
                                             KRAS:Amp            (search for models with amplified KRAS)<br>
                                             TP53:MUT=A159V      (search for models with A159V variant of TP53)<br>
                                             ALB:Del             (search for models with deleted ALB)<br>
+                                            KIT:EXP>2.5         (search form models with expression of KIT > 2.50)<br>
                                             <br>
                                             CASE 2<br>
                                             CDK4:Amp<br>

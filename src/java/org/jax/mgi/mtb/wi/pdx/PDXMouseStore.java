@@ -947,6 +947,8 @@ public class PDXMouseStore {
                 String platform = data.getString("platform");
                 Double value = data.getDouble(valueToGet);
 
+                sample = sample +" "+ platform;
+                
                 if (useTPM) {
                     value = (Math.log(value + 1) / Math.log(2));
                 }
@@ -956,6 +958,10 @@ public class PDXMouseStore {
                 platformMap.put(platform, platform);
                 sampleMap.put(sample, sample);
                 samplePlatformMap.put(sample, platform);
+                if(gene.equals("KRAS")){
+                    System.out.println(platform+" "+sample+" "+value);
+                
+                }
                 if (genes.containsKey(gene)) {
                     genes.get(gene).put(sample, valueStr);
                 } else {

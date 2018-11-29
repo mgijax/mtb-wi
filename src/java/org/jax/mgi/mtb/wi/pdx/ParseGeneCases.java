@@ -32,11 +32,16 @@ import org.jax.mgi.mtb.wi.WIConstants;
  */
 public class ParseGeneCases {
 
-    //private  String baseURL = WIConstants.getInstance().getPDXWebservice();
-    static final String baseURL = "http://pdxdata.jax.org:335/api/";
+    private static final  String baseURL = WIConstants.getInstance().getPDXWebservice();
+    //static final String baseURL = "http://pdxdata.jax.org/api/";
     private static final String VARIANTS = baseURL + "variants";
 
     private static final String CNV = baseURL + "cnv_gene";
+    
+    private static final String EXP_MIN = baseURL+"expression?keepnulls=yes&gene_symbol=@&min_rankz=";
+    private static final String EXP_MAX = baseURL+"expression?keepnulls=yes&gene_symbol=@&max_rankz=";
+    
+    private static final String PDX_DETAILS_LINK = "pdxDetails.do?modelID=";
 
     private static double AMP = 0.5;
     private static double DEL = -0.5;
@@ -222,6 +227,8 @@ public class ParseGeneCases {
             }
 
         }
+        
+        
 
         ArrayList<ModelRow> modelsList = new ArrayList();
         for (ModelRow mr : modelsMap.values()) {
@@ -233,7 +240,7 @@ public class ParseGeneCases {
             table.append("\n<tr>");
             for (ModelRow mr : modelsList) {
                 if (detailsMap.containsKey(mr.id)) {
-                    table.append("<td><a href=\"http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID=");
+                    table.append("<td><a href=\""+PDX_DETAILS_LINK);
                     table.append(mr.id).append("\">").append(mr.id);
                     table.append("</a><br>").append(detailsMap.get(mr.id)).append("</td>");
                     for (String gene : k) {
@@ -345,10 +352,21 @@ public class ParseGeneCases {
             System.out.println("Finding mice for " + gene + " " + thing + " took " + (System.currentTimeMillis() - start) / 1000);
             allMice.put(gene + thing, mice);
             return mice;
-        } else {
-            // there is a syntax problem
-            return null;
+        } else if (thing.trim().startsWith("exp")){
+            if(thing.contains("<")){
+                thing = thing.substring(4);
+                String url = EXP_MAX.replace("@", gene)+thing;
+                return getExpressionModels(url,"<"+thing);
+            }else if(thing.contains(">")){
+                thing = thing.substring(4);
+                String url = EXP_MIN.replace("@", gene)+thing;
+                return getExpressionModels(url,">"+thing);
+            }
+        
         }
+        // there is a syntax problem
+        return null;
+        
 
     }
 
@@ -371,6 +389,15 @@ public class ParseGeneCases {
 
                 String id = job.getString("model_name");
                 String variant = job.getString("amino_acid_change");
+                try{
+                    variant = variant+"<br>"+job.getString("ckb_protein_effect");
+                }catch (Exception e){}
+                
+                try{
+                    variant = variant+"<br>"+job.getString("ckb_potential_treat_approach");
+                }catch (Exception e){}
+                
+                
                 if (actionable.containsKey(id)) {
                     actionable.get(id).add(variant);
                 } else {
@@ -462,6 +489,32 @@ public class ParseGeneCases {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return mice;
+
+    }
+    
+    
+    private ArrayList<String> getExpressionModels(String url, String test) {
+
+        ArrayList<String> mice = new ArrayList<>();
+        JSONObject job = null;
+        try {
+
+            job = new JSONObject(getJSON(url, ""));
+            JSONArray jarray = job.getJSONArray("data");
+            for (int i = 0; i < jarray.length(); i++) {
+                job = jarray.getJSONObject(i);
+                Double zpr = job.getDouble("z_score_percentile_rank");
+                String id = job.getString("model_name");
+
+                mice.add(id);
+
+                System.out.println(url+"   "+zpr+test);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(job);
         }
         return mice;
 
