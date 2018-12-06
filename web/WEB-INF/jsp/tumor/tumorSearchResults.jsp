@@ -91,7 +91,7 @@
 				<th rowspan="2">Organ Affected</th>
 				<th rowspan="2">Treatment Type <em>Agents</em></th>
 				<th rowspan="2">Strain Name <em>Strain Types</em></th>
-				<th>Tumor Frequency Range</th>
+				<th colspan="4">Tumor Frequency Range</th>
 				<th rowspan="2">Metastasizes To</th>
 				<th rowspan="2">Images</th>
 				<th rowspan="2">Tumor Summary</th>

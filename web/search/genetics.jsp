@@ -22,7 +22,7 @@
 	</fieldset>
 	<fieldset>
 		<legend data-tip="The type of mutation, chromosomal aberration, or other genetic change observed in the strain and/or in the tumor tissue. The values for type of genetic change are selected from a controlled vocabulary list.">Mutations/Aberrations</legend>
-		<html:select property="alleleGroupType" size="8" multiple="true">
+		<html:select property="alleleGroupType" size="8" multiple="true" styleClass="term">
 		<html:option value="">ANY</html:option>
 		<html:options collection="alleleGroupTypeValues" property="value" labelProperty="label"/>
 		</html:select>

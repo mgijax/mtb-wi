@@ -13,7 +13,7 @@
 	</fieldset>
 	<fieldset>
 		<legend data-tip="Indicates method of strain derivation.&#10;The values for these fields are selected from lists of controlled vocabulary terms.">Strain Type:</legend>
-		<html:select property="strainTypes" size="8" multiple="true">
+		<html:select property="strainTypes" size="8" multiple="true" styleClass="term">
 		<html:option value="">ANY</html:option>
 		<html:options collection="strainTypeValues" property="value" labelProperty="label"/>
 		</html:select>

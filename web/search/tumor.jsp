@@ -4,7 +4,7 @@
 	<legend>Tumor</legend>
 	<fieldset>
 		<legend data-tip="Organ of origin, tumor classification, organ affected, tumor synonym, or common name.&#10;The value for this field is selected from a list of controlled vocabulary terms.">Tumor name</legend>
-		<html:select property="organTissueOrigin" size="8" multiple="true" styleClass="term">
+		<html:select property="tumorName" size="8" multiple="true" styleClass="term">
 		<html:option value="">ANY</html:option>
 		<html:options collection="organTissueValues" property="value" labelProperty="label"/>
 		<html:options collection="tumorClassificationValues" property="value" labelProperty="label"/>
@@ -12,7 +12,7 @@
 	</fieldset>
 	<fieldset>
 		<legend data-tip="This field is used to distinguish tumors that arose under particular treatment conditions from those that arose spontaneously.&#10;Treatment type offers a means to search for tumors induced by agents falling under a shared classification (based on source/mechanism of action).&#10;The value for this field is selected from a list of controlled vocabulary terms.">Treatment Type</legend>:
-		<html:select property="agentType">
+		<html:select property="agentType" styleClass="term">
 		<html:option value="">ANY</html:option>
 		<html:options collection="agentTypes" property="value" labelProperty="label"/>
 		</html:select>
