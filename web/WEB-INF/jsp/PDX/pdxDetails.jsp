@@ -64,6 +64,8 @@
             var cnvRankSortDir = true;
 
             var cnvLog = true;
+            
+           
 
 
 
@@ -156,10 +158,10 @@
                 }
             }
 
-
+            
             Ext.onReady(function () {
 
-                var dataProxy = new Ext.data.HttpProxy({
+                dataProxy = new Ext.data.HttpProxy({
                     url: '/mtbwi/pdxVariationData.do?modelID=${modelID}',
                     timeout: 7000000
                 })
@@ -203,7 +205,7 @@
 
 
                 // create the Data Store
-                var store = new Ext.data.ArrayStore({
+               var store = new Ext.data.ArrayStore({
                     root: 'variation',
                     totalProperty: 'total',
                     //    idIndex: 0,
@@ -212,6 +214,7 @@
                     // these need to match the webservice field names for sorting to work
                     fields: fields,
                     proxy: dataProxy
+                    
                 });
                 
                 var ckb = [{header: '', colspan: 2, align: 'center'},
@@ -454,7 +457,7 @@
                     if(record.get("ckb_nclinical_resist").trim().length>0 || record.get("ckb_npreclinical_resist").trim().length>0){
                         val = "0 clinical/";
                         if(record.get("ckb_nclinical_resist").trim().length>0){
-                            val = record.get("ckb_nclinical_resist")+" clincal /"
+                            val = record.get("ckb_nclinical_resist")+" clinical /"
                         }            
                         if(record.get("ckb_npreclinical_resist").trim().length>0){
                             val = val+record.get("ckb_npreclinical_resist")+" preclinical";
@@ -471,7 +474,7 @@
                     if(record.get("ckb_nclinical_sens").trim().length>0 || record.get("ckb_npreclinical_sens").trim().length>0){
                         val = "0 clinical/";
                         if(record.get("ckb_nclinical_sens").trim().length>0){
-                            val = record.get("ckb_nclinical_sens")+" clincal /"
+                            val = record.get("ckb_nclinical_sens")+" clinical /"
                         }            
                         if(record.get("ckb_npreclinical_sens").trim().length>0){
                             val = val+record.get("ckb_npreclinical_sens")+" preclinical";
@@ -693,6 +696,8 @@
                 window.open("https://ckbhome.jax.org","ckb");
             }
             
+           
+                
 
         </script>
 
@@ -898,6 +903,7 @@
 
                                             <div id="variantSummary"></div>
                                             <br>
+                                       
                                             <c:choose>
                                                 <c:when test="${applicationScope.publicDeployment == false}">
                                                 <input id="variantData" type="button" value="Download summary data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">
@@ -1002,7 +1008,7 @@
                                                 <c:choose>
                                                     <c:when test="${not empty histology  ||  not empty sessionScope.pdxEditor || not empty histologySummary}">
                                                         <tr>
-                                                            <td class="label" style="padding:5px; width:12%; vertical-align:top;">
+                                                            <td class="label" style="padding:5px; width:12%; vertical-align:top; text-align:left;">
                                                                 Histology:
 
 
@@ -1024,7 +1030,9 @@
                                                                     <!--- add tumor markers which will show if pt is histologically similar to pdx -->
                                                                     
                                                              <!--  Tumor Markers -->
-
+                                                            </td>
+                                                            
+                                                        </tr>
                                                 <c:choose>
                                                     <c:when test="${not empty tumorMarkers  ||  not empty sessionScope.pdxEditor}">
                                                         <tr>
@@ -1117,9 +1125,6 @@
                                                     </c:when>
 
                                                 </c:choose>        
-
-
-                                               
 
 
                                                 <!-- Gene Expresssion -->                 
@@ -1481,8 +1486,6 @@
 
                                         </c:when>
                                     </c:choose>
-                                                
-
 
                                     <!--======================= End Results ====================================-->
                                 </table>

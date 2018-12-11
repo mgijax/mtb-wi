@@ -1299,6 +1299,8 @@ public class PDXMouseStore {
         return variants;
 
     }
+    
+    
 
     public String getVariationData(String model, String limit, String start, String sort, String dir) {
 
@@ -1306,7 +1308,8 @@ public class PDXMouseStore {
         boolean ckbSort = sort.startsWith("ckb_");
 
         String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
-
+        
+             
         try {
 
             JSONObject job = new JSONObject(getJSON(VARIANTS + params));
@@ -1560,7 +1563,7 @@ public class PDXMouseStore {
             for (int i = 0; i < jarray.length(); i++) {
                 try {
                     String model = jarray.getJSONObject(i).getString("model_name");
-                    log.error("Fusion model " + model);
+                   
                     String sample = jarray.getJSONObject(i).getString("sample_name");
                     String variant = jarray.getJSONObject(i).getString("up_gene") + " - " + jarray.getJSONObject(i).getString("dw_gene");
 

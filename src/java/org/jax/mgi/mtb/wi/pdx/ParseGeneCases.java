@@ -390,11 +390,11 @@ public class ParseGeneCases {
                 String id = job.getString("model_name");
                 String variant = job.getString("amino_acid_change");
                 try{
-                    variant = variant+"<br>"+job.getString("ckb_protein_effect");
+                    variant = variant+"<br>Effect: "+job.getString("ckb_protein_effect");
                 }catch (Exception e){}
                 
                 try{
-                    variant = variant+"<br>"+job.getString("ckb_potential_treat_approach");
+                    variant = variant+"<br>Treatment Approach: "+job.getString("ckb_potential_treat_approach");
                 }catch (Exception e){}
                 
                 
