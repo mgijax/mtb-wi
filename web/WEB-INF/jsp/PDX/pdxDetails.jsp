@@ -454,7 +454,7 @@
                     if(record.get("ckb_nclinical_resist").trim().length>0 || record.get("ckb_npreclinical_resist").trim().length>0){
                         val = "0 clinical/";
                         if(record.get("ckb_nclinical_resist").trim().length>0){
-                            val = record.get("ckb_nclinical_resist")+" clincal /"
+                            val = record.get("ckb_nclinical_resist")+" clinical /"
                         }            
                         if(record.get("ckb_npreclinical_resist").trim().length>0){
                             val = val+record.get("ckb_npreclinical_resist")+" preclinical";
@@ -471,7 +471,7 @@
                     if(record.get("ckb_nclinical_sens").trim().length>0 || record.get("ckb_npreclinical_sens").trim().length>0){
                         val = "0 clinical/";
                         if(record.get("ckb_nclinical_sens").trim().length>0){
-                            val = record.get("ckb_nclinical_sens")+" clincal /"
+                            val = record.get("ckb_nclinical_sens")+" clinical /"
                         }            
                         if(record.get("ckb_npreclinical_sens").trim().length>0){
                             val = val+record.get("ckb_npreclinical_sens")+" preclinical";
