@@ -11,7 +11,7 @@
 </description>
 
 <!--===================== Property Definitions =============================-->
-<property name="tomcat.root"      value="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/"/>
+<property name="tomcat.root"      value="/Users/curria/Projects/eclipse-workspace/apache-tomcat-7.0.70/"/>
 <property name="app.version"      value="1"/>
 <property name="app.name"         value="mtbwi2"/>
 <property name="app.path"         value="/mtbwi2"/>
@@ -174,15 +174,26 @@ invocation even though it may be called more than once.
    <antcall target="projectPrepare"/>
    <antcall target="webdist"/>
    <copy file="dist/mtbwi2.war" 
-         tofile="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/webapps/mtbwi2.war"
+         tofile="/Users/curria/Projects/eclipse-workspace/apache-tomcat-7.0.70/webapps/mtbwi2.war"
          overwrite="true"/>
    <tstamp>
     <format property="current.time" pattern="MM/dd/yyyy hh:mm:ss aa" />
   </tstamp>
 
-  <echo message="finished at ${current.time}" />      
-   
+  <echo message="finished at ${current.time}" />        
 </target>
+
+<target name="projectDeployDev" description="Prepare the dev web application.">
+   <echo message="Preparing WAR file for deployment to DEVELOPMENT..."/>
+   <echo message="Copying conf/build.dev.properties to conf/build.properties"/>
+   <copy file="conf/build.dev.properties"
+         tofile="conf/build.properties"
+         overwrite="true"/>
+   <antcall target="projectPrepare"/>
+   <antcall target="webdist"/>
+   <scp trust="yes" file="dist/mtbwi2.war" todir="tomcat@bhmtbdb01:/usr/local/apache-tomcat-7.0.70/webapps" password="P@55w0rd"/>
+</target>
+
 <target name="projectDistDev" description="Prepare the dev web application.">
    <echo message="Preparing WAR file for DEVELOPMENT..."/>
    <echo message="Copying conf/build.dev.properties to conf/build.properties"/>
@@ -191,7 +202,6 @@ invocation even though it may be called more than once.
          overwrite="true"/>
    <antcall target="projectPrepare"/>
    <antcall target="webdist"/>
-   
 </target>
 
 <target name="projectDistProd" description="Prepare the web application.">
