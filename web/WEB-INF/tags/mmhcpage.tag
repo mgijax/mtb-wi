@@ -27,38 +27,32 @@
 		</a>
 		<c:import url="/search/quick.jsp" />
 		<ul>
-			<li class="dropdown"><span>Advanced Search</span>
-				<ul>
-					<li><a href="${pageContext.request.contextPath}/tumorSearch.do">Tumor</a></li>
-					<li><a href="${pageContext.request.contextPath}/strainSearch.do">Strain</a></li>
-					<li><a href="${pageContext.request.contextPath}/geneticsSearch.do">Genetics</a></li>
-					<li><a href="${pageContext.request.contextPath}/pathologyImageSearch.do">Pathology Images</a></li>
-					<li><a href="${pageContext.request.contextPath}/referenceSearch.do">Reference</a></li>
-					<li><a href="${pageContext.request.contextPath}/advancedSearch.do">Tumor + Strain + Genetics</a></li>
-					<li><a href="${pageContext.request.contextPath}/orthologySearch.do">Human Genes</a></li>
-					<li><a href="${pageContext.request.contextPath}/geneExpressionSearch.do">Gene Expression</a></li>
-				</ul>
-			</li>
-			<li><a href="${pageContext.request.contextPath}/facetedSearch.do">Faceted Tumor Search</a></li>
-			<li><a href="${pageContext.request.contextPath}/pdxSearch.do">PDX Model Search</a></li>						
-			<li class="dropdown"><a>PDX Tools</a>
-				<ul>
-					<li><a href="${pageContext.request.contextPath}/pdxComparison.do">PDX Comparison</a></li>
-					<li><a href="${pageContext.request.contextPath}/index.do">PDX Genomics Dashboard</a></li>
-					<li><a href="${pageContext.request.contextPath}/index.do">PDX Sample Name Lookup</a></li>
-					<li><a href="${pageContext.request.contextPath}/index.do">PDX Sample Sheet Generator</a></li>
-				</ul>
-			</li>
-			<li class="dropdown"><span>Additional Resources</span>
-				<ul>
-					<li><a href="${pageContext.request.contextPath}/viewer.do">Cancer QTL Viewer</a></li>
-					<li><a href="${pageContext.request.contextPath}/tumorFrequencyGrid.do">Tumor Frequency Grid</a></li>
-					<li><a href="${pageContext.request.contextPath}/dynamicGrid.do">Dynamic Tumor Frequency Grid</a></li>					
+			<li><a href="${pageContext.request.contextPath}/advancedSearch.do">Advanced Search</a></li>			
+			<li class="dropdown"><span>Other Resources</span>
+				<ul>			
 					<li><a href="${pageContext.request.contextPath}/immunohistochemistry.jsp">Immunohistochemistry</a></li>
 					<li><a href="${pageContext.request.contextPath}/lymphomaPathology.jsp">Lymphoma Pathology</a></li>
-					<li><a href="${pageContext.request.contextPath}/cancerLinks.jsp">Cancer Web Resources</a></li>
 				</ul>
 			</li>	
+			<li class="dropdown"><span>Searches/Tools</span>
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/facetedSearch.do">Browse Data (Faceted)</a></li>
+					<li><a href="${pageContext.request.contextPath}/advancedSearch.do">Advanced Search</a></li>
+					<li><a href="${pageContext.request.contextPath}/tumorFrequencyGrid.do">Tumor Frequency Grid</a></li>
+					<li><a href="${pageContext.request.contextPath}/pdxSearch.do">PDX Search (JAX)</a></li>	
+					<li><a href="${pageContext.request.contextPath}/">PDX Finder (Global Search)</a></li>	
+				</ul>
+			</li>				
+			
+			<li class="dropdown"><span>About</span>
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/">Database</a></li>
+					<li><a href="${pageContext.request.contextPath}/">Publications</a></li>
+					<li><a href="${pageContext.request.contextPath}/">Help</a></li>					
+					<li><a href="${pageContext.request.contextPath}/">What's New</a></li>
+				</ul>
+			</li>				
+			
 		</ul>
 	</jsp:attribute>
 	<jsp:attribute name="defaultSubnav">
