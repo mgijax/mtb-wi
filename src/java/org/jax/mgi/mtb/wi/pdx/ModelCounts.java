@@ -81,26 +81,26 @@ public class ModelCounts {
 
     // display tissue, rank, fatalaties, solr term
     String[] tissues = {
-        "Lung and other respiratory", "1", "162,420", "Lung",
-        "Lymphohematopoietic", "2", "58,300", "Lymphohematopoietic",
-        "Colon and other intestine", "3", "52,750", "Colon and other intestine",
-        "Pancreas", "4", "43,090", "Pancreas",
-        "Breast", "5", "41,070", "Breast",
-        "Liver and bile duct", "6", "28,920", "Liver and bile duct",
-        "Prostate", "7", "26,730", "Prostate",
-        "Urinary bladder", "8", "16,870", "Urinary bladder",
-        "Brain and other nervous system", "9", "16,700", "Brain and other nervous system",
-        "Esophagus", "10", "15,690", "Esophagus",
-        "Uterus and cervix", "11", "15,130", "Uterus and cervix",
-        "Kidney and renal pelvis", "12", "14,400", "Kidney and renal pelvis",
-        "Ovary", "13", "14,080", "Ovary",
-        "Skin", "14", "13,590", "Skin",
-        "Stomach", "15", "10,960", "Stomach",
-        "Oral cavity and pharynx", "16", "9,700", "Oral cavity",
-        "Soft tissue including heart", "17", "4,990", "Soft tissue including heart",
-        "Gallbladder", "18", "3,830", "Gallbladder",
-        "Endocrine system", "19", "3,100", "Endocrine system",
-        "Bone and joint", "20", "1,550", "Bone and joint"};
+        "Lung and other respiratory", "1", "158,770", "Lung",
+        "Lymphohematopoietic", "2", "58,100", "Lymphohematopoietic",
+        "Colon and other intestine", "3", "53,240", "Colon and other intestine",
+        "Pancreas", "4", "44,330", "Pancreas",
+        "Breast", "5", "41,400", "Breast",
+        "Liver and bile duct", "6", "30,200", "Liver and bile duct",
+        "Prostate", "7", "29,430", "Prostate",
+        "Urinary bladder", "8", "17,240", "Urinary bladder",
+        "Brain and other nervous system", "9", "16,830", "Brain and other nervous system",
+        "Esophagus", "10", "15,850", "Esophagus",
+        "Uterus and cervix", "11", "15,520", "Uterus and cervix",
+        "Kidney and renal pelvis", "12", "14,970", "Kidney and renal pelvis",
+        "Ovary", "13", "14,070", "Ovary",
+        "Skin", "14", "13,460", "Skin",
+        "Stomach", "15", "10,800", "Stomach",
+        "Oral cavity and pharynx", "16", "10,030", "Oral cavity",
+        "Soft tissue including heart", "17", "5,150", "Soft tissue including heart",
+        "Gallbladder", "18", "3,790", "Gallbladder",
+        "Endocrine system", "19", "3,080", "Endocrine system",
+        "Bone and joint", "20", "1,590", "Bone and joint"};
 
     ArrayList<ArrayList<String>> tissuesListList = new ArrayList<ArrayList<String>>();
 
