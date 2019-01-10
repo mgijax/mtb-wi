@@ -748,6 +748,13 @@
                                             <tr class="stripe2">
                                                 <td class="cat2">Notices</td>
                                                 <td class="data2" >
+                                                    <c:if test="${not empty proxeID}">
+                                                        This model is being distributed by The Jackson Laboratory on behalf of the Lymphoma Xenograft core at Dana-Farber Cancer Institute (DFCI).<br>
+                                                        Additional information can be found by registering at DFCI's PRoXe (<a href="https://www.proxe.org/">https://www.proxe.org/</a>) web site.<br>
+                                                        PRoXe model id: ${proxeID}
+                                                        <br>    
+                                                    </c:if>
+                                                        
                                                     The use of this material by a company is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCICompany.pdf">notice</a>.
                                                     <br>
                                                     The use of this material by an academic institution is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCIAcademic.pdf">notice</a>.

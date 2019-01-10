@@ -79,11 +79,11 @@ public class ParseGeneCases {
         ArrayList<String> caseOrder = new ArrayList();
         try {
             String line = s.next();
-            String caseNo = "";
+            String caseNo = "CASE 0";
 
             while (line != null) {
                 if (line.trim().length() > 0) {
-                    if (line.contains("CASE")) {
+                    if (line.toUpperCase().contains("CASE")) {
                         caseNo = line.trim();
                         caseOrder.add(caseNo);
                         line = s.next();
@@ -110,6 +110,7 @@ public class ParseGeneCases {
 
             if (caseNo == "") {
                 result.append("ERORR:\nFist line must start with CASE");
+                return result.toString();
             }
         } catch (Exception e) {
             //e.printStackTrace();

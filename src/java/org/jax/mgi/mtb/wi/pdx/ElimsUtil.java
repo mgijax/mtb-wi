@@ -39,6 +39,10 @@ public class ElimsUtil {
     
     // strains starting with this get turned into one of the above.
     private static final String NSG = "NSG";
+    
+    // all TM models and all J models before J000111056 are considered legacy and should be shown on MTB if they are P1 available
+    // non legacy models are shown at P2 available
+    private static final int legacyCutOff=111056;
 
     public ElimsUtil() {
     }

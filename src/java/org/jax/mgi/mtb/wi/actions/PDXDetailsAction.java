@@ -4,7 +4,6 @@
  */
 package org.jax.mgi.mtb.wi.actions;
 
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -315,6 +314,10 @@ public class PDXDetailsAction extends Action {
             
             if(RelatedModels.getReleationLabel(modelID)!= null){
                 request.setAttribute("relatedModels",RelatedModels.getReleationLabel(modelID));
+            }
+            
+            if(RelatedModels.getProxeId(modelID)!= null){
+                request.setAttribute("proxeID",RelatedModels.getProxeId(modelID));
             }
 
         }//end of else for finding a model;
