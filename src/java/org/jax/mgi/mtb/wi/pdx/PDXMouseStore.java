@@ -263,8 +263,8 @@ public class PDXMouseStore {
             genesBuffer.append("]");
             ctpGenesWebFormat = genesBuffer.toString();
 
-            loadCNVPlots();
-            log.info("Loaded cnv plots for " + cnvPlots.size() + " models.");
+       //     loadCNVPlots();
+       //     log.info("Loaded cnv plots for " + cnvPlots.size() + " models.");
         }
     }
 
