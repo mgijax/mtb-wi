@@ -1604,8 +1604,7 @@ public class PDXMouseStore {
                         display.append("<br>");
                     }
                 }
-                log.error(model + " " + display.toString());
-
+             
                 fusionModelsMap.put(model, display.toString());
             }
         } catch (Exception e) {
