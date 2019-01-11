@@ -88,6 +88,7 @@ public class PDXComparisonAction extends Action {
 
                 ArrayList<PDXMouse> mice = null;
 
+                // this, right here, is a real peice of work...
                 mice = pdxMouseStore.findMice("", primarySites, diagnoses, no, no, "", no, false, false, no, "",false, null,null);
 
                 StringBuffer table = new StringBuffer("<table><tr><td></td>");
@@ -174,13 +175,13 @@ public class PDXComparisonAction extends Action {
                         for (String sample : samplesList) {
                             ArrayList<String> vals = sampleData.get(sample);
                             if (vals == null || vals.isEmpty()) {
-                                // we have a problem
+                               // this is an error state
                                 vals = new ArrayList<String>();
                                 vals.add("noValue");
                                 vals.add("noValue");
                                 vals.add(" ");
                             }
-                            expr.append("<td style=\"background-color:").append(expLevelToColor(vals.get(0))).append("\">&nbsp;</td>");
+                            expr.append("<td style=\"background-color:").append(expLevelToColor(vals.get(0))).append("\">").append(formatExpressionValue(vals.get(0))).append("</td>");
                             cnv.append("<td style=\"background-color:").append(ampDelToColor(vals.get(1))).append("\">&nbsp</td>");
                             if (vals.get(2) != null && vals.get(2).trim().length() > 0) {
                                 mutation.append("<td style=\"background-color:#000000; text-decoration:none;\" onmouseover=\"return overlib('");
@@ -241,8 +242,8 @@ public class PDXComparisonAction extends Action {
     }
 
     // hard coded min and max expected values for the rankZ expression
-    private static final int MIN_RANK_Z = -15;
-    private static final int MAX_RANK_Z = 15;
+    private static final int MIN_RANK_Z = -5;
+    private static final int MAX_RANK_Z = 5;
     private static final int HUE_LIMIT = 150; // 255 is max but beyond 150 it gets hard to tell them apart
     private static final String DELETION = "#0000FF";
     private static final String AMPLIFICATION = "#FFA500";
@@ -340,5 +341,15 @@ public class PDXComparisonAction extends Action {
         }
 
         return color;
+    }
+    
+    private String formatExpressionValue(String in){
+        try{
+            in = String.format("%.2f", new Double(in));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        if("0.00".equals(in) || "noValue".equals(in))in ="";
+        return in;
     }
 }

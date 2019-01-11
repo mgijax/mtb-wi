@@ -39,6 +39,10 @@ public class ElimsUtil {
     
     // strains starting with this get turned into one of the above.
     private static final String NSG = "NSG";
+    
+    // all TM models and all J models before J000111056 are considered legacy and should be shown on MTB if they are P1 available
+    // non legacy models are shown at P2 available
+    private static final int legacyCutOff=111056;
 
     public ElimsUtil() {
     }
@@ -612,7 +616,7 @@ public class ElimsUtil {
                             }
                             
                             if(pid != null && pid.trim().length()>0){
-                                // oh the humanity, the ExtJS widget won't work if IDs are duplicated so we need to pad these id with a space right here ---V
+                                // oh the humanity, the ExtJS combobox widget won't work if IDs are duplicated so we need to pad these id with a space right here ---V
                                 idMap.put( pid+ " ("+mouse.getModelID()+") "+mouse.getPrimarySite() + " " + mouse.getInitialDiagnosis(),mouse.getModelID()+" ");
                             }
                         } else {

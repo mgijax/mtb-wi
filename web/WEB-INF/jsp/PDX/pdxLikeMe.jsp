@@ -47,7 +47,7 @@
                             <!--======================= Start Main Section =============================-->
 
                             <!--======================= Start Form Header ==============================-->
-                            <html:form action="pdxMultiSearch" method="GET">
+                            <html:form action="pdxLikeMe" method="POST">
 
                                 <table border="0" cellpadding="5" cellspacing="1" width="100%" class="results">
                                     <tr class="pageTitle">
@@ -105,22 +105,26 @@
                                         <td colspan="3" style="padding: 20px">
                                             The format for the input should be one or more cases as follows<br>
                                             CASE &lt;unique case identifier&gt;<br>
-                                            Followed by one or more gene descriptions with an optional U or K to indicate known or unknown significance  (U and K are used for formatting and have no bearing on search results)
-                                            Gene descriptions can be of three types, one per line<br>
-                                            &lt;Gene&gt;,&lt;Variant&gt;,&lt;K|U&gt;<br>
-                                            &lt;Gene&gt;,<b>Amplified</b>,&lt;K|U&gt;<br>
-                                            &lt;Gene&gt;,<b>Deleted</b>,&lt;K|U&gt;<br>
-
+                                            Followed by one or more gene descriptions using a simplified Onco Query Language format.
+                                            Gene descriptions can be of four types, one per line<br>
+                                            &lt;Gene&gt;:MUT<br>
+                                            &lt;Gene&gt;:MUT=&lt;VARIANT&gt;<br>
+                                            &lt;Gene&gt;:Amp<br>
+                                            &lt;Gene&gt;:Del<br>
+                                            &lt;Gene&gt;:EXP># (# can be positive or negative integer or decimal value for Z score percentile rank)<br>
+                                            &lt;Gene&gt;:EXP<#
+                                            <br>
                                             Example:<br><br>
                                             CASE 1<br>
-                                            KRAS,Amplified,K (search for models with amplified KRAS, classified as known significance)<br>
-                                            TP53,A159V,K     (search for models with A159V variant of TP53, classified as known significance)<br>
-                                            ALB,Deleted,U    (search for models with deleted ALB, classified as unknown)<br>
+                                            KRAS:Amp            (search for models with amplified KRAS)<br>
+                                            TP53:MUT=A159V      (search for models with A159V variant of TP53)<br>
+                                            ALB:Del             (search for models with deleted ALB)<br>
+                                            KIT:EXP>2.5         (search form models with expression of KIT > 2.50)<br>
                                             <br>
                                             CASE 2<br>
-                                            CDK4,Amplified<br>
-                                            ETNK1,Amplified<br>
-                                            KRAS,Deleted<br>
+                                            CDK4:Amp<br>
+                                            ETNK1:Amp<br>
+                                            KRAS:Del<br>
                                         </td>
                                     </tr>
 
@@ -149,7 +153,7 @@
                                         </td>
 
                                         <td class="data1">
-                                            <input type="checkbox" name="asCSV" value="asCSV"/> Return results as a CSV file &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="actionable" value="actionable"/> Include models with actionable variants for supplied genes
+                                            <input type="checkbox" name="asCSV" value="asCSV"/> Return results as a CSV file &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="actionable" value="actionable"/> Include models with clinically relevant variants for supplied genes
                                             <br>
                                             <textarea rows="20" cols="50" name="cases">${cases}</textarea>
                                         </td>

@@ -32,15 +32,24 @@ import org.jax.mgi.mtb.wi.WIConstants;
  */
 public class ParseGeneCases {
 
-    String baseURL = WIConstants.getInstance().getPDXWebservice();
+    private static final  String baseURL = WIConstants.getInstance().getPDXWebservice();
+    //static final String baseURL = "http://pdxdata.jax.org/api/";
+    private static final String VARIANTS = baseURL + "variants";
+
+    private static final String CNV = baseURL + "cnv_gene";
     
-    String VARIANTS = baseURL + "variants";
+    private static final String EXP_MIN = baseURL+"expression?keepnulls=yes&gene_symbol=@&min_rankz=";
+    private static final String EXP_MAX = baseURL+"expression?keepnulls=yes&gene_symbol=@&max_rankz=";
     
-    
+    private static final String PDX_DETAILS_LINK = "pdxDetails.do?modelID=";
+
+    private static double AMP = 0.5;
+    private static double DEL = -0.5;
+
     static PDXDAO pdxDAO = PDXDAO.getInstance();
 
     HashMap<String, ArrayList<String>> allMice = new HashMap();
-    HashMap<String, String> detailsMap = new HashMap();
+    private static HashMap<String, String> detailsMap = new HashMap();
 
     boolean html = true;
     boolean includeActionable = false;
@@ -64,15 +73,17 @@ public class ParseGeneCases {
         this.html = asHTML;
         this.includeActionable = includeActionable;
 
+        StringBuilder result = new StringBuilder();
+
         HashMap<String, ArrayList<String>> caseGenes = new HashMap();
         ArrayList<String> caseOrder = new ArrayList();
         try {
             String line = s.next();
-            String caseNo = "";
+            String caseNo = "CASE 0";
 
             while (line != null) {
                 if (line.trim().length() > 0) {
-                    if (line.contains("CASE")) {
+                    if (line.toUpperCase().contains("CASE")) {
                         caseNo = line.trim();
                         caseOrder.add(caseNo);
                         line = s.next();
@@ -97,11 +108,13 @@ public class ParseGeneCases {
 
             }
 
+            if (caseNo == "") {
+                result.append("ERORR:\nFist line must start with CASE");
+                return result.toString();
+            }
         } catch (Exception e) {
             //e.printStackTrace();
         }
-
-        StringBuilder result = new StringBuilder();
 
         getModelDetails();
 
@@ -120,18 +133,18 @@ public class ParseGeneCases {
         String[] vals = null;
 
         for (String gene : genes) {
-            vals = gene.split(",");
+            vals = gene.split(":");
             if (vals.length > 2) {
                 if (vals[2].trim().equals("K")) {
                     k.add(vals[0].trim() + " " + vals[1].trim());
                 } else if (vals[2].trim().equals("U")) {
                     u.add(vals[0] + " " + vals[1]);
-                } else {
-                    System.out.println(gene + " has incorrect format");
                 }
-            } else {
+            } else if (vals.length == 2) {
                 // no explicit K or U so default to Known
                 k.add(vals[0].trim() + " " + vals[1].trim());
+            } else {
+                return caseNo + "\n" + gene + " is in the wrong format";
             }
         }
         Collections.sort(u);
@@ -153,17 +166,18 @@ public class ParseGeneCases {
         String[] vals = null;
 
         if (html) {
-            table.append("<b>").append(caseNo).append("</b><table border=\"1\" style=\"border-collapse:collapse\"><th></th><th colspan=\"");
-            table.append(k.size()).append("\">Known Significance</th>");
+            table.append("<b>").append(caseNo).append("</b><table border=\"1\" style=\"border-collapse:collapse\">");
+
             if (u.size() > 0) {
-                table.append("<th colspan=\"").append(u.size()).append("\">Unknown Significance</th>");
+                table.append("<tr><th></th><th  style=\"text-align:center;padding:5px\"colspan=\"").append(k.size()).append("\">");
+                table.append("Known Significance</th><th  style=\"text-align:center;padding:5px\" colspan=\"").append(u.size()).append("\">Unknown Significance</th></tr>");
             }
-            table.append("</tr><tr><td>Model ID</td>");
+            table.append("<tr><td>Model ID</td>");
             for (String kGenes : k) {
-                table.append("<td>").append(kGenes).append("</td>");
+                table.append("<td style=\"text-align:center;padding:5px\">").append(kGenes).append("</td>");
             }
             for (String uGenes : u) {
-                table.append("<td>").append(uGenes).append("</td>");
+                table.append("<td style=\"text-align:center;padding:5px\">").append(uGenes).append("</td>");
             }
             // now the magic
 
@@ -183,7 +197,13 @@ public class ParseGeneCases {
         for (String gene : uk) {
 
             vals = gene.split(" ");
+            if (vals.length != 2) {
+                return "Error\n" + gene + " is not in the correct format.";
+            }
             mice = getMice(vals[0], vals[1]);
+            if (mice == null) {
+                return "Error\n" + vals[0] + ":" + vals[1] + " is not in the correct format.";
+            }
             for (String id : mice) {
                 if (modelsMap.containsKey(id)) {
                     modelsMap.get(id).genes.add(vals[0] + vals[1]);
@@ -208,6 +228,8 @@ public class ParseGeneCases {
             }
 
         }
+        
+        
 
         ArrayList<ModelRow> modelsList = new ArrayList();
         for (ModelRow mr : modelsMap.values()) {
@@ -219,7 +241,7 @@ public class ParseGeneCases {
             table.append("\n<tr>");
             for (ModelRow mr : modelsList) {
                 if (detailsMap.containsKey(mr.id)) {
-                    table.append("<td><a href=\"http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID=");
+                    table.append("<td><a href=\""+PDX_DETAILS_LINK);
                     table.append(mr.id).append("\">").append(mr.id);
                     table.append("</a><br>").append(detailsMap.get(mr.id)).append("</td>");
                     for (String gene : k) {
@@ -231,7 +253,11 @@ public class ParseGeneCases {
                             table.append("<b>X</b>");
                         }
                         if (mr.actionable.containsKey(vals[0])) {
-                            table.append("<br>Actionable " + vals[0] + " variants<br>");
+                            String s = "";
+                            if (mr.actionable.get(vals[0]).size() > 1) {
+                                s = "s";
+                            }
+                            table.append("<br>Clinically relevant " + vals[0] + " variant" + s + "<br>");
                             for (String variant : mr.actionable.get(vals[0]).keySet()) {
                                 table.append(variant + " ");
                             }
@@ -303,25 +329,45 @@ public class ParseGeneCases {
     }
 
     private ArrayList<String> getMice(String gene, String thing) {
+        thing = thing.toLowerCase();
+
+        // if we have done this for another case we are done
         if (allMice.containsKey(gene + thing)) {
             System.out.println("Pow " + gene + " " + thing);
             return allMice.get(gene + thing);
         }
-        if (thing.equals("Amplified")) {
-            ArrayList<String> mice = pdxDAO.getModelsByGeneAmp(gene);
+
+        if (thing.startsWith("amp")) {
+            ArrayList<String> mice = getAmplifiedModels(gene);
             allMice.put(gene + thing, mice);
             return mice;
-        } else if (thing.equals("Deleted")) {
-            ArrayList<String> mice = pdxDAO.getModelsByGeneDel(gene);
+        } else if (thing.startsWith("del")) {
+            ArrayList<String> mice = getDeletedModels(gene);
             allMice.put(gene + thing, mice);
             return mice;
-        } else {
+        } else if (thing.trim().startsWith("mut")) {
+
+            thing = thing.replace("mut", "").replace("=", "");
             long start = System.currentTimeMillis();
             ArrayList<String> mice = getMiceByGeneVariant(gene, thing);
             System.out.println("Finding mice for " + gene + " " + thing + " took " + (System.currentTimeMillis() - start) / 1000);
             allMice.put(gene + thing, mice);
             return mice;
+        } else if (thing.trim().startsWith("exp")){
+            if(thing.contains("<")){
+                thing = thing.substring(4);
+                String url = EXP_MAX.replace("@", gene)+thing;
+                return getExpressionModels(url,"<"+thing);
+            }else if(thing.contains(">")){
+                thing = thing.substring(4);
+                String url = EXP_MIN.replace("@", gene)+thing;
+                return getExpressionModels(url,">"+thing);
+            }
+        
         }
+        // there is a syntax problem
+        return null;
+        
 
     }
 
@@ -338,21 +384,28 @@ public class ParseGeneCases {
 
             JSONObject job = new JSONObject(getJSON(VARIANTS + params.toString(), ""));
 
-            JSONArray jarray = (JSONArray) ((JSONObject) job.get("data")).get("data");
+            JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
                 job = jarray.getJSONObject(i);
-                String types = "";
+
+                String id = job.getString("model_name");
+                String variant = job.getString("amino_acid_change");
+                try{
+                    variant = variant+"<br>Effect: "+job.getString("ckb_protein_effect");
+                }catch (Exception e){}
                 
-                    String id = job.getString("model_name");
-                    String variant = job.getString("amino_acid_change");
-                    if (actionable.containsKey(id)) {
-                        actionable.get(id).add(variant);
-                    } else {
-                        ArrayList<String> variants = new ArrayList();
-                        variants.add(variant);
-                        actionable.put(id, variants);
-                    }
+                try{
+                    variant = variant+"<br>Treatment Approach: "+job.getString("ckb_potential_treat_approach");
+                }catch (Exception e){}
                 
+                
+                if (actionable.containsKey(id)) {
+                    actionable.get(id).add(variant);
+                } else {
+                    ArrayList<String> variants = new ArrayList();
+                    variants.add(variant);
+                    actionable.put(id, variants);
+                }
 
             }
         } catch (Exception e) {
@@ -366,17 +419,20 @@ public class ParseGeneCases {
         HashMap<String, String> ids = new HashMap();
         StringBuilder params = new StringBuilder();
 
-        params.append("?ckb_class=B&gene_symbol=").append(gene).append("&amino_acid_change=").append(variant);
+        params.append("?&gene_symbol=").append(gene);
+
+        if (variant != null && !variant.isEmpty()) {
+            params.append("&amino_acid_change=").append(variant);
+        }
 
         try {
 
             JSONObject job = new JSONObject(getJSON(VARIANTS + params.toString(), ""));
 
-
             JSONArray jarray = (JSONArray) job.get("data");
             for (int i = 0; i < jarray.length(); i++) {
-                String id = jarray.getJSONObject(i).getString( "model_name");
-                ids.put(id,id);
+                String id = jarray.getJSONObject(i).getString("model_name");
+                ids.put(id, id);
             }
 
         } catch (JSONException e) {
@@ -391,23 +447,99 @@ public class ParseGeneCases {
         return idList;
     }
 
-    private void getModelDetails() {
+    private ArrayList<String> getAmplifiedModels(String gene) {
+
+        ArrayList<String> mice = new ArrayList<>();
+        StringBuilder params = new StringBuilder();
+        params.append("?min_lr_ploidy=" + AMP + "&gene_symbol=").append(gene);
         try {
-            JSONObject job = new JSONObject(getJSON("http://tumor.informatics.jax.org/PDXInfo/JSONData.do?allModels=gimme", null));
-            JSONArray models = job.getJSONArray("pdxInfo");
-            for (int i = 0; i < models.length(); i++) {
-                String id = models.getJSONObject(i).getString("Model ID");
-                String site = models.getJSONObject(i).getString("Primary Site");
-                String iDiag = models.getJSONObject(i).getString("Initial Diagnosis");
-                String cDiag = models.getJSONObject(i).getString("Clinical Diagnosis");
-                if (cDiag.trim().length() == 0) {
-                    cDiag = iDiag;
-                }
-                detailsMap.put(id, cDiag + ":" + site);
+
+            JSONObject job = new JSONObject(getJSON(CNV + params.toString(), ""));
+            JSONArray jarray = job.getJSONArray("data");
+            for (int i = 0; i < jarray.length(); i++) {
+                job = jarray.getJSONObject(i);
+                Double lrp = job.getDouble("logratio_ploidy");
+                String id = job.getString("model_name");
+
+                mice.add(id);
 
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return mice;
+    }
+
+    private ArrayList<String> getDeletedModels(String gene) {
+
+        ArrayList<String> mice = new ArrayList<>();
+        StringBuilder params = new StringBuilder();
+        params.append("?max_lr_ploidy=" + DEL + "&gene_symbol=").append(gene);
+
+        try {
+
+            JSONObject job = new JSONObject(getJSON(CNV + params.toString(), ""));
+            JSONArray jarray = job.getJSONArray("data");
+            for (int i = 0; i < jarray.length(); i++) {
+                job = jarray.getJSONObject(i);
+                Double lrp = job.getDouble("logratio_ploidy");
+                String id = job.getString("model_name");
+
+                mice.add(id);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mice;
+
+    }
+    
+    
+    private ArrayList<String> getExpressionModels(String url, String test) {
+
+        ArrayList<String> mice = new ArrayList<>();
+        JSONObject job = null;
+        try {
+
+            job = new JSONObject(getJSON(url, ""));
+            JSONArray jarray = job.getJSONArray("data");
+            for (int i = 0; i < jarray.length(); i++) {
+                job = jarray.getJSONObject(i);
+                Double zpr = job.getDouble("z_score_percentile_rank");
+                String id = job.getString("model_name");
+
+                mice.add(id);
+
+                System.out.println(url+"   "+zpr+test);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(job);
+        }
+        return mice;
+
+    }
+
+    private void getModelDetails() {
+        if (detailsMap == null || detailsMap.size() == 0) {
+            try {
+                JSONObject job = new JSONObject(getJSON("http://tumor.informatics.jax.org/PDXInfo/JSONData.do?allModels=gimme", null));
+                JSONArray models = job.getJSONArray("pdxInfo");
+                for (int i = 0; i < models.length(); i++) {
+                    String id = models.getJSONObject(i).getString("Model ID");
+                    String site = models.getJSONObject(i).getString("Primary Site");
+                    String iDiag = models.getJSONObject(i).getString("Initial Diagnosis");
+                    String cDiag = models.getJSONObject(i).getString("Clinical Diagnosis");
+                    if (cDiag.trim().length() == 0) {
+                        cDiag = iDiag;
+                    }
+                    detailsMap.put(id, cDiag + ":" + site);
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -64,6 +64,8 @@
             var cnvRankSortDir = true;
 
             var cnvLog = true;
+            
+           
 
 
 
@@ -156,10 +158,10 @@
                 }
             }
 
-
+            
             Ext.onReady(function () {
 
-                var dataProxy = new Ext.data.HttpProxy({
+                dataProxy = new Ext.data.HttpProxy({
                     url: '/mtbwi/pdxVariationData.do?modelID=${modelID}',
                     timeout: 7000000
                 })
@@ -203,7 +205,7 @@
 
 
                 // create the Data Store
-                var store = new Ext.data.ArrayStore({
+               var store = new Ext.data.ArrayStore({
                     root: 'variation',
                     totalProperty: 'total',
                     //    idIndex: 0,
@@ -212,6 +214,7 @@
                     // these need to match the webservice field names for sorting to work
                     fields: fields,
                     proxy: dataProxy
+                    
                 });
                 
                 var ckb = [{header: '', colspan: 2, align: 'center'},
@@ -658,7 +661,8 @@
                 
           
             
-             if(document.getElementById("cnvPlots") != null){
+          //   if(document.getElementById("cnvPlots") != null){
+               if(false){
                 panel5 = new Ext.Panel({
                         applyTo: 'cnvPlots',
                         collapsible: true,
@@ -693,6 +697,8 @@
                 window.open("https://ckbhome.jax.org","ckb");
             }
             
+           
+                
 
         </script>
 
@@ -743,6 +749,13 @@
                                             <tr class="stripe2">
                                                 <td class="cat2">Notices</td>
                                                 <td class="data2" >
+                                                    <c:if test="${not empty proxeID}">
+                                                        This model is being distributed by The Jackson Laboratory on behalf of the Lymphoma Xenograft core at Dana-Farber Cancer Institute (DFCI).<br>
+                                                        Additional information can be found by registering at DFCI's PRoXe (<a href="https://www.proxe.org/">https://www.proxe.org/</a>) web site.<br>
+                                                        PRoXe model id: ${proxeID}
+                                                        <br>    
+                                                    </c:if>
+                                                        
                                                     The use of this material by a company is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCICompany.pdf">notice</a>.
                                                     <br>
                                                     The use of this material by an academic institution is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCIAcademic.pdf">notice</a>.
@@ -898,6 +911,7 @@
 
                                             <div id="variantSummary"></div>
                                             <br>
+                                       
                                             <c:choose>
                                                 <c:when test="${applicationScope.publicDeployment == false}">
                                                 <input id="variantData" type="button" value="Download summary data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">
@@ -966,7 +980,7 @@
                                         </td>
                                     </tr>
                                     
-                                     <tr class="stripe${a}">
+          <%--                           <tr class="stripe${a}">
                                             <td class="cat${a}">
                                                 CNV Plots <a class="help" href="userHelp.jsp#pdxCNV"><img src="${applicationScope.urlImageDir}/help_small2.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                             </td>
@@ -989,20 +1003,20 @@
                                             </c:choose>
                                     </tr>
                                              
-                                             
+              --%>                               
                                         
-                                    <tr class="stripe${b}">
-                                        <td class="cat${b}">
+                                    <tr class="stripe${a}">
+                                        <td class="cat${a}">
                                             Model Characterization
                                         </td>
-                                        <td class="data${b}">
+                                        <td class="data${a}">
                                             <table  border=0 cellpadding=5 cellspacing=0 width="100%">
 
                                                 <!-- Histology -->                
                                                 <c:choose>
                                                     <c:when test="${not empty histology  ||  not empty sessionScope.pdxEditor || not empty histologySummary}">
                                                         <tr>
-                                                            <td class="label" style="padding:5px; width:12%; vertical-align:top;">
+                                                            <td class="label" style="padding:5px; width:12%; vertical-align:top; text-align:left;">
                                                                 Histology:
 
 
@@ -1024,7 +1038,9 @@
                                                                     <!--- add tumor markers which will show if pt is histologically similar to pdx -->
                                                                     
                                                              <!--  Tumor Markers -->
-
+                                                            </td>
+                                                            
+                                                        </tr>
                                                 <c:choose>
                                                     <c:when test="${not empty tumorMarkers  ||  not empty sessionScope.pdxEditor}">
                                                         <tr>
@@ -1117,9 +1133,6 @@
                                                     </c:when>
 
                                                 </c:choose>        
-
-
-                                               
 
 
                                                 <!-- Gene Expresssion -->                 
@@ -1481,8 +1494,6 @@
 
                                         </c:when>
                                     </c:choose>
-                                                
-
 
                                     <!--======================= End Results ====================================-->
                                 </table>

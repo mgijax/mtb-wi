@@ -31,8 +31,7 @@ public class PDXMultiSearchAction extends Action {
 
         boolean asHTML = !"asCSV".equals(request.getParameter("asCSV"));
         boolean actionable = "actionable".equals(request.getParameter("actionable"));
-        System.out.println("asHTML:" + asHTML + " /n actionable:" + actionable);
-
+       
         String cases = request.getParameter("cases");
         if (cases != null && cases.trim().length() > 0) {
             Scanner s = new Scanner(cases);

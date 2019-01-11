@@ -15,7 +15,6 @@ import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.wi.forms.PDXForm;
-import org.jax.mgi.mtb.wi.pdx.ElimsUtil;
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
 
 /**
@@ -33,7 +32,7 @@ public class PDXSearchAction extends Action {
 
            PDXMouseStore pdxMouseStore = new PDXMouseStore();
 
-           // who uses this????
+         // steve grub uses this to populate data on the pdx dashboard
         if (request.getParameter("pdxStatusJSON") != null && !WIConstants.getInstance().getPublicDeployment()) {
            
             response.setContentType("application/json");

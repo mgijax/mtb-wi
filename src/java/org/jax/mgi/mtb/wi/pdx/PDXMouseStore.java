@@ -18,6 +18,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import org.apache.log4j.Logger;
@@ -100,23 +101,25 @@ public class PDXMouseStore {
    
     private static HashMap<String, String> fusionModelsMap = new HashMap();
 
-    private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M", 
-                                            "DAXX", "EHMT2", "EPHB6", "HLA-A",
-                                            "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4", 
-                                            "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
-    
+    private static final String SAMPLE_PASSAGE = baseURL + "inventory?model=MODEL_ID&sample=SAMPLE_ID&reqitems=passage_num";
+
+ 
+
+    private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M",
+        "DAXX", "EHMT2", "EPHB6", "HLA-A",
+        "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4",
+        "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
+
     private static final String RNA_SEQ = "RNA_Seq";
     private static final HashMap<String, String> AFFECTED_GENES = new HashMap<>();
 
     private static final String CKB_MOLPRO_PUBLIC = "https://ckb.jax.org/molecularProfile/show/";
- //   private static final String CKB_GENE_PUBLIC = "https://ckb.jax.org/gene/show?geneId=";
+    //   private static final String CKB_GENE_PUBLIC = "https://ckb.jax.org/gene/show?geneId=";
 
     private static final String CKB_MOLPRO_INTERNAL = "https://myckb.jax.org/molecularProfile/show/";
-  //  private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
-    
+    //  private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
+
     private static final String CKB_HOME = "https://ckbhome.jax.org/";
-    
-   
 
     public static final String BAYLOR = "Baylor College of Medicine";
     public static final String DANA_FARBER = "Dana-Farber Cancer Institute";
@@ -260,8 +263,8 @@ public class PDXMouseStore {
             genesBuffer.append("]");
             ctpGenesWebFormat = genesBuffer.toString();
 
-          
-            
+            loadCNVPlots();
+            log.info("Loaded cnv plots for " + cnvPlots.size() + " models.");
         }
     }
 
@@ -941,12 +944,14 @@ public class PDXMouseStore {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject data = array.getJSONObject(i);
 
-                String sample = data.getString("sample_name") + " " + getField(data,"passage_num");
+                String sample = data.getString("sample_name") + " " + getField(data, "passage_num");
 
                 String gene = data.getString("gene_symbol");
                 String platform = data.getString("platform");
                 Double value = data.getDouble(valueToGet);
 
+                sample = sample +" "+ platform;
+                
                 if (useTPM) {
                     value = (Math.log(value + 1) / Math.log(2));
                 }
@@ -956,6 +961,10 @@ public class PDXMouseStore {
                 platformMap.put(platform, platform);
                 sampleMap.put(sample, sample);
                 samplePlatformMap.put(sample, platform);
+                if(gene.equals("KRAS")){
+                    System.out.println(platform+" "+sample+" "+value);
+                
+                }
                 if (genes.containsKey(gene)) {
                     genes.get(gene).put(sample, valueStr);
                 } else {
@@ -1042,7 +1051,7 @@ public class PDXMouseStore {
                 JSONObject data = array.getJSONObject(i);
 
                 String gene = data.getString("gene_symbol");
-                String sample = data.getString("sample_name") + " " + getField(data,"passage_num");
+                String sample = data.getString("sample_name") + " " + getField(data, "passage_num");
                 String cn = df.format(data.getDouble("logratio_ploidy"));
                 String ploidy = df.format(data.getDouble("ploidy"));
 
@@ -1144,9 +1153,9 @@ public class PDXMouseStore {
                     JSONObject data = array.getJSONObject(i);
                     ad.put(data.getString("sample_name"), "Deletion");
                 }
-                ampDelMap.put(gene,ad);
+                ampDelMap.put(gene, ad);
             }
-            
+
             job = new JSONObject(getJSON(query.toString()));
             JSONArray array = (JSONArray) job.get("data");
             for (int i = 0; i < array.length(); i++) {
@@ -1154,7 +1163,7 @@ public class PDXMouseStore {
                 String model = data.getString("model_name");
                 String gene = data.getString("gene_symbol");
                 String sample = data.getString("sample_name");
-                String passage = getField(data,"passage_num");
+                String passage = getField(data, "passage_num");
 
                 // this will fail for baylor and dfci models wich should be used
                 // to exclude them from the results.
@@ -1165,24 +1174,24 @@ public class PDXMouseStore {
                 } catch (NullPointerException npe) {
                     // its normal or ?unknown?
                 }
-                if(ampDel == null){
+                if (ampDel == null) {
                     ampDel = "Unknown";
                 }
-               
+
                 if (results.containsKey(gene)) {
                     HashMap samples = results.get(gene);
                     ArrayList<String> list = new ArrayList<>();
                     list.add(rankZ);
                     list.add(ampDel);
                     list.add("mutation");
-                    samples.put(model + "-" + sample +" "+passage, list);
+                    samples.put(model + "-" + sample + " " + passage, list);
                 } else {
                     HashMap<String, ArrayList<String>> samples = new HashMap<>();
                     ArrayList<String> list = new ArrayList<>();
                     list.add(rankZ);
                     list.add(ampDel);
                     list.add("mutation");
-                    samples.put(model + "-" + sample+" "+passage, list);
+                    samples.put(model + "-" + sample + " " + passage, list);
                     results.put(gene, samples);
                 }
 
@@ -1293,6 +1302,8 @@ public class PDXMouseStore {
         return variants;
 
     }
+    
+    
 
     public String getVariationData(String model, String limit, String start, String sort, String dir) {
 
@@ -1300,15 +1311,16 @@ public class PDXMouseStore {
         boolean ckbSort = sort.startsWith("ckb_");
 
         String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
-
+        
+             
         try {
 
             JSONObject job = new JSONObject(getJSON(VARIANTS + params));
 
             String total = "0";
-            try{
+            try {
                 total = ((Integer) job.get("total_rows")).toString();
-            }catch(JSONException jse){
+            } catch (JSONException jse) {
                 // will happen if there are no results
             }
             result.append(total);
@@ -1420,31 +1432,29 @@ public class PDXMouseStore {
             boolean ckbPublic = "public".equals(getField(array.getJSONObject(i), "ckb_public_status"));
 
             if (WIConstants.getInstance().getPublicDeployment()) {
-                
-               
-                if(ckbMolProName.length() > 0 && !ckbMolProName.equals("null")){
+
+                if (ckbMolProName.length() > 0 && !ckbMolProName.equals("null")) {
                     if (ckbPublic) {
                         result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
                     } else {
                         result.append("'").append(CKB_HOME).append("',");
                     }
-                }else{
-                        result.append("'',");
+                } else {
+                    result.append("'',");
                 }
 
                 result.append("'").append(ckbMolProName).append("',");
 
-                if(ckbTreatment.trim().length() > 0 && !ckbTreatment.equals("null")){
-                    if (ckbPublic ) {
+                if (ckbTreatment.trim().length() > 0 && !ckbTreatment.equals("null")) {
+                    if (ckbPublic) {
                         result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
                     } else {
                         result.append("'").append(CKB_HOME).append("',");
                     }
-                }else{
-                        result.append("'',");
+                } else {
+                    result.append("'',");
                 }
-                
-            
+
                 result.append("'").append(ckbTreatment).append("',");
                 result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
 
@@ -1556,7 +1566,7 @@ public class PDXMouseStore {
             for (int i = 0; i < jarray.length(); i++) {
                 try {
                     String model = jarray.getJSONObject(i).getString("model_name");
-                    log.error("Fusion model " + model);
+                   
                     String sample = jarray.getJSONObject(i).getString("sample_name");
                     String variant = jarray.getJSONObject(i).getString("up_gene") + " - " + jarray.getJSONObject(i).getString("dw_gene");
 
@@ -1597,8 +1607,7 @@ public class PDXMouseStore {
                         display.append("<br>");
                     }
                 }
-                log.error(model + " " + display.toString());
-
+             
                 fusionModelsMap.put(model, display.toString());
             }
         } catch (Exception e) {
@@ -1652,9 +1661,89 @@ public class PDXMouseStore {
 
     }
 
-   
+    // need to get passage number using sample name and display it with each plot
+    private void loadCNVPlots() {
 
-   
+        cnvPlots.clear();
+
+        String path = WIConstants.getInstance().getCNVPlotsPath();
+        File cnvFile = new File(path);
+        for (File file : cnvFile.listFiles()) {
+            try {
+                String name = file.getName();
+
+                String model = file.getName().split("_")[0];
+                String sample = file.getName().split("_")[1];
+                String passage = file.getName().split("_")[2];
+                // String passage = getSamplePassage(model,sample);
+
+                StringBuilder label = new StringBuilder();
+                label.append("Model:").append(model);
+                label.append(" Sample:").append(sample);
+                if (passage.length() > 1) {
+                    label.append(" Passage:").append(passage);
+                }
+                ArrayList<String> details = new ArrayList<>();
+                details.add(label.toString());
+                details.add(name);
+
+           
+                if (cnvPlots.containsKey(model)) {
+                    ArrayList<ArrayList<String>> files = cnvPlots.get(model);
+                    if ("PT".equals(passage)) {
+                        files.add(0, details);
+                    } else {
+                        String lastDetails = files.get(files.size() - 1).get(0);
+                        String lastPassage = lastDetails.substring(lastDetails.length() - 3);
+                        if (lastPassage.compareTo(passage) < 0) {
+                            files.add(files.size() - 1, details);
+                        } else {
+                            files.add(details);
+                        }
+
+                    }
+                } else {
+                    ArrayList<ArrayList<String>> files = new ArrayList<>();
+                    files.add(details);
+                    cnvPlots.put(model, files);
+
+                }
+            } catch (Exception e) {
+                log.error("unable to parse cnvPlot file" + file.getName());
+            }
+        }
+
+        // sort PT first then P0,P1,...
+        Compy compy = new Compy();
+        for (ArrayList<ArrayList<String>> s : cnvPlots.values()) {
+            Collections.sort(s, compy);
+           
+        }
+
+    }
+
+    // returns an array list of plot URLs
+    public ArrayList<ArrayList<String>> getCNVPlotsForModel(String modelID) {
+        return cnvPlots.get(modelID);
+    }
+
+    private String getSamplePassage(String model, String sample) {
+        String passage = "";
+        String query = PDXMouseStore.SAMPLE_PASSAGE;
+        query = query.replace("MODEL_ID", model).replace("SAMPLE_ID", sample);
+
+        try {
+            JSONObject job = new JSONObject(getJSON(query));
+            JSONArray jarray = job.getJSONArray("data");
+            passage = jarray.getJSONObject(0).getString("passage_num");
+
+        } catch (Exception e) {
+            log.error("unable to get passage for model:" + model + " and sample:" + sample);
+        }
+        return passage;
+
+    }
+
     /**
      *
      * @param gene String gene name
@@ -1699,7 +1788,7 @@ public class PDXMouseStore {
                 for (int k = 0; k < jarray.length(); k++) {
                     model = jarray.getJSONObject(k).getString("model_name");
                     sample = jarray.getJSONObject(k).getString("sample_name");
-                    passage = getField(jarray.getJSONObject(k),"passage_num");
+                    passage = getField(jarray.getJSONObject(k), "passage_num");
                     rankZ = jarray.getJSONObject(k).getDouble("z_score_percentile_rank");
 
                     if (cnv) {
@@ -1851,5 +1940,33 @@ public class PDXMouseStore {
 
         return response.toString();
 
+    }
+
+    private class Compy implements Comparator<ArrayList<String>> {
+
+        public int compare(ArrayList<String> a, ArrayList<String> b) {
+
+            String sampleA = a.get(1).split("_")[1];
+            String passageA = a.get(1).split("_")[2];
+
+            String sampleB = b.get(1).split("_")[1];
+            String passageB = b.get(1).split("_")[2];
+
+            if (sampleA.equals(sampleB)) {
+
+                if ("PT".equals(passageA)) {
+                    return 1;
+                } else {
+                    return passageA.compareTo(passageB);
+
+                }
+
+            } else if (sampleA.length() == sampleB.length()) {
+                return sampleA.compareTo(sampleB);
+            } else {
+                return (sampleA.length() > sampleB.length()) ? 1 : -1;
+            }
+
+        }
     }
 }

@@ -29,6 +29,8 @@ public class PDXVariationDataAction extends Action {
 
         String modelID = request.getParameter("modelID");
         
+      
+        
         //TM##### to int to string
         modelID = new Integer(modelID.substring(2)).toString();
 
