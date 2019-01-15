@@ -23,7 +23,6 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
-import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 
 /**
@@ -79,7 +78,7 @@ public class ParseGeneCases {
         ArrayList<String> caseOrder = new ArrayList();
         try {
             String line = s.next();
-            String caseNo = "CASE 0";
+            String caseNo = "";
 
             while (line != null) {
                 if (line.trim().length() > 0) {
@@ -147,8 +146,8 @@ public class ParseGeneCases {
                 return caseNo + "\n" + gene + " is in the wrong format";
             }
         }
-        Collections.sort(u);
-        Collections.sort(k);
+     //   Collections.sort(u);
+     //   Collections.sort(k);
 
         return mouseMagic(caseNo, k, u);
 
@@ -301,7 +300,7 @@ public class ParseGeneCases {
                         if (mr.actionable.containsKey(vals[0])) {
                             table.append("Actionable " + vals[0] + " variants ");
                             for (String variant : mr.actionable.get(vals[0]).keySet()) {
-                                table.append(variant + " ");
+                                table.append(variant.replace("<br>", " ").replace(",","") + " ");
                             }
                         }
                         table.append(",");
@@ -314,7 +313,7 @@ public class ParseGeneCases {
                         if (mr.actionable.containsKey(vals[0])) {
                             table.append("Actionable " + vals[0] + " variants ");
                             for (String variant : mr.actionable.get(vals[0]).keySet()) {
-                                table.append(variant + " ");
+                                table.append(variant.replace("<br>", " ").replace(",","") + " ");
                             }
                         }
                         table.append(",");
@@ -345,6 +344,12 @@ public class ParseGeneCases {
             ArrayList<String> mice = getDeletedModels(gene);
             allMice.put(gene + thing, mice);
             return mice;
+            
+        }else if (thing.startsWith("nocnv")) {
+            ArrayList<String> mice = getNoCNVModels(gene);
+            allMice.put(gene + thing, mice);
+            return mice;
+           
         } else if (thing.trim().startsWith("mut")) {
 
             thing = thing.replace("mut", "").replace("=", "");
@@ -491,6 +496,45 @@ public class ParseGeneCases {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return mice;
+
+    }
+    
+    
+    
+     // models where LRP is "normal" less than AMP and more that DEL
+     private ArrayList<String> getNoCNVModels(String gene) {
+
+        ArrayList<String> mice = new ArrayList<>();
+        
+        StringBuilder params = new StringBuilder();
+        params.append("?max_lr_ploidy=" + AMP + "&gene_symbol=").append(gene);
+
+        
+        try {
+
+            JSONObject job = new JSONObject(getJSON(CNV + params.toString(), ""));
+            JSONArray jarray = job.getJSONArray("data");
+            for (int i = 0; i < jarray.length(); i++) {
+                
+                job = jarray.getJSONObject(i);
+                Double lrp = job.getDouble("logratio_ploidy");
+                String id = job.getString("model_name");
+                if(lrp > DEL){
+                    mice.add(id);
+                    System.out.println(id+ " -0.5< "+ lrp+ " > 0.5");
+                }
+                
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
+        
+       
+        
+        
         return mice;
 
     }

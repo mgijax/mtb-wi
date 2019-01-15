@@ -48,9 +48,9 @@ public class SOCLoader {
 
         // requested by George 12/26/18
         
-        models.remove("J000077451");
-        models.remove("TM00339");
-        models.remove("TM00204");
+      //  models.remove("J000077451");
+      //  models.remove("TM00339");
+      //  models.remove("TM00204");
 
         return models;
     }
