@@ -115,6 +115,13 @@
                                             <tr><td>&lt;Gene&gt;:NOCNV</td><td>LRP is greater than -0.5 and less than 0.5</td></tr>
                                             <tr><td>&lt;Gene&gt;:EXP>#</td><td># can be positive or negative integer or decimal value for Z score percentile rank</td></tr>
                                             <tr><td>&lt;Gene&gt;:EXP<#</td><td></td></tr>
+                                            
+                                            <tr><td>&lt;Gene&gt;:LOF</td><td>Loss of function mutation</td></tr>
+                                            <tr><td>&lt;Gene&gt;:GOF</td><td>Gain of function mutation</td></tr>
+                                            <tr><td>&lt;Gene&gt;:UNK</td><td>Unknown functional mutation</td></tr>
+                                            <tr><td>&lt;Gene&gt;:NONE</td><td>No functional mutation</td></tr>
+                                            
+                                            <tr><td>&nbsp;</td></tr>
                                             <tr><td>&nbsp;</td></tr>
                                             
                                             <tr><td>Example:</td><td></td></tr>
@@ -177,7 +184,11 @@
                                         </td>
 
                                         <td class="data1">
-                                            <input type="checkbox" name="asCSV" value="asCSV"/> Return results as a CSV file &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="actionable" value="actionable"/> Include models with clinically relevant variants for supplied genes
+                                            <input type="checkbox" name="asCSV" value="asCSV" ${csvChecked}/> Return results as a CSV file &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox" name="actionable" value="actionable" ${actionableChecked}/> Include models with clinically relevant variants for supplied genes
+                                            <br>
+                                            <input type="checkbox" name="LRP" value="LRP" ${lrpChecked}> If searching by CNV show log ratio ploidy values &nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox" name="EXP" value="EXP" ${expChecked}> If searching by expression level show Z score percentile rank values
                                             <br>
                                             <textarea rows="20" cols="50" name="cases">${cases}</textarea>
                                         </td>
