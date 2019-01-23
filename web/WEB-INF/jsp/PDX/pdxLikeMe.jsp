@@ -132,7 +132,7 @@
                                                         <tr><td>KRAS:Amp</td></tr>
                                                         <tr><td>TP53:MUT=A159V</td></tr>
                                                         <tr><td>ALB:Del</td></tr>
-                                                        <tr><td>KIT:EXP>2.5</td></tr>
+                                                        <tr><td>KIT:EXP>1.5</td></tr>
                                                         <tr><td>&nbsp;</td></tr>
                                                         <tr><td>CASE 2</td><td></td></tr>
                                                         <tr><td>CDK4:Amp</td><td></td></tr>
@@ -145,7 +145,7 @@
                                                         <tr><td>search for models with amplified KRAS</td></tr>
                                                         <tr><td>search for models with A159V variant of TP53</td></tr>
                                                         <tr><td>search for models with deleted ALB</td></tr>
-                                                        <tr><td>search form models with expression of KIT > 2.50</td></tr>
+                                                        <tr><td>search for models with expression of KIT > 1.50</td></tr>
                                                         <tr><td>&nbsp;</td></tr>
                                                         <tr><td>&nbsp;</td></tr>
                                                         <tr><td>&nbsp;</td></tr>
@@ -179,15 +179,17 @@
                                     <tr class="stripe1">
 
                                         <td class="cat1">
+                                            Output options:
+                                            <br><br><br><br>
                                             Enter Case information here:
 
                                         </td>
 
                                         <td class="data1">
-                                            <input type="checkbox" name="asCSV" value="asCSV" ${csvChecked}/> Return results as a CSV file &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox" name="asCSV" value="asCSV" ${csvChecked}/> Return results as a CSV file<br>
                                             <input type="checkbox" name="actionable" value="actionable" ${actionableChecked}/> Include models with clinically relevant variants for supplied genes
                                             <br>
-                                            <input type="checkbox" name="LRP" value="LRP" ${lrpChecked}> If searching by CNV show log ratio ploidy values &nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox" name="LRP" value="LRP" ${lrpChecked}> If searching by CNV show log ratio ploidy values <br>
                                             <input type="checkbox" name="EXP" value="EXP" ${expChecked}> If searching by expression level show Z score percentile rank values
                                             <br>
                                             <textarea rows="20" cols="50" name="cases">${cases}</textarea>
@@ -196,9 +198,6 @@
                                             ${table}
                                         </td>
                                     </tr>
-
-
-
 
                                     <tr class="buttons">
                                         <td colspan="3">
