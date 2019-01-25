@@ -525,6 +525,9 @@ public class ElimsUtil {
 
             Pdx_model_status[] results = stub.getPDXStatusReport_sessionless(soapRequest).getGetPDXStatusReport_sessionlessResult().getPdx_model_status();
 
+            String status ="";
+            int numericID =111111;
+            
             if (results.length > 0) {
 
                 for (int i = 0; i < results.length; i++) {
@@ -532,9 +535,30 @@ public class ElimsUtil {
                     ArrayList<String> details;
 
                     // should also test for filterOnID()
-                    if ((results[i].getModel_Status().indexOf("Available") != -1)
-                            || (results[i].getModel_Status().indexOf("Blood") != -1)
-                            || (results[i].getModel_Status().indexOf("Data") != -1)) {
+                    
+//                    New MTB PDX Filter criteria
+//                    Active: Available
+//                    Or Active: Available – QC Complete
+//                    Or (Active: P1 Available” + all TM models + all J models less than J000111056)
+//                    No change to Blood or Data filter
+
+                    
+                    status = results[i].getModel_Status();
+                 
+                    try{
+                        numericID = new Integer(results[i].getIdentifier().replaceAll("J",""));
+                    }catch(Exception e){
+                        numericID = 111111;
+                    }
+                    
+                    if (status.contains("Active Available") 
+                        || status.contains("Active: Available")    
+                        || status.contains("Blood")
+                        || status.contains("Data")
+                        || (status.contains("Active: P1 Available") && numericID < 111056 )) {
+                        
+                //        System.out.println(status+"\t"+numericID+"\tACCEPTED");
+                                
 
                         PDXMouse mouse = new PDXMouse();
 
@@ -544,9 +568,8 @@ public class ElimsUtil {
                             mouse.setFormerSmoker(details.get(1));
                             mouse.setTreatmentNaive(details.get(2));
 
-                        } else {
-                            log.error("no clinical details for " + results[i].getIdentifier());
-                        }
+                        } 
+                        
                         try {
 
                             mouse.setModelID("TM" + String.format("%05d", new Integer(results[i].getIdentifier())));
@@ -623,6 +646,8 @@ public class ElimsUtil {
                             log.debug("skipping suspended model " + mouse.getModelID());
                         }
 
+                    }else{
+               //              System.out.println(status+"\t"+numericID+"\tREJECTED");
                     }
                 }
 

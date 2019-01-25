@@ -56,7 +56,9 @@ public class PDXSearchResultsAction extends Action {
         String fusionGenes = pdxForm.getFusionGenes();
         
         boolean dosingStudy = pdxForm.getDosingStudy();
-        boolean tumorGrowth = pdxForm.getTumorGrowth();
+        
+        // removed checkbox on 01-25-18, need to remove logic as well
+        boolean tumorGrowth = false;
         boolean treatmentNaive = pdxForm.getTreatmentNaive();
         
         String recistDrug = pdxForm.getRecistDrugs();
