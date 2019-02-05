@@ -61,23 +61,10 @@
             <td align="center" colspan="11">
                 <table>
                     <tr>
-                        <td align="center">
-                            <input type="button" value="Open PDX Genomics Dashboard" onClick="window.open('http://pdx-dashboard.jax.org/v4/')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center">
+                    <td align="center">
                             <input type="button" value="Open PDX Sample Name Checker" onClick="window.open('http://pdx-dashboard/elims/submission-lookup/')">
                         </td>
                     </tr>
-                    
-                      <tr>
-                     <td align="center">
-                            <input type="button" value="Open PDX Sample Sheet Generator" onClick="window.open('http://pdx-dashboard/elims/generate-sheet/')">
-                        </td>
-                    </tr>
-                    <tr>
-
                     
                     <tr>
                         <td align="center">

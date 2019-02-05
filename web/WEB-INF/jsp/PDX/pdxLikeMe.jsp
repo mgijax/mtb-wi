@@ -10,7 +10,7 @@
 
 
         <c:import url="../../../meta.jsp">
-            <c:param name="pageTitle" value="Patient Derived Xenograft Multi Search Form"/>
+            <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Search"/>
         </c:import>
 
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
@@ -28,7 +28,7 @@
 
 
         <c:import url="../../../body.jsp">
-            <c:param name="pageTitle" value="Patient Derived Xenograft Search Form"/>
+            <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Search"/>
         </c:import>
     </head>
 
@@ -58,7 +58,7 @@
                                                         <a class="help" href="userHelp.jsp#pdxsearch"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
                                                     </td>
                                                     <td width="60%" class="pageTitle">
-                                                        Patient Derived Xenograft Search Form
+                                                        Patient Derived Xenograft PDX Like Me Search
                                                     </td>
                                                     <td width="20%" valign="middle" align="right">
                                                         <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdxRequestButton" onclick="window.location = 'pdxRequest.do'">
@@ -106,26 +106,57 @@
                                             The format for the input should be one or more cases as follows<br>
                                             CASE &lt;unique case identifier&gt;<br>
                                             Followed by one or more gene descriptions using a simplified Onco Query Language format.
-                                            Gene descriptions can be of four types, one per line<br>
-                                            &lt;Gene&gt;:MUT<br>
-                                            &lt;Gene&gt;:MUT=&lt;VARIANT&gt;<br>
-                                            &lt;Gene&gt;:Amp<br>
-                                            &lt;Gene&gt;:Del<br>
-                                            &lt;Gene&gt;:EXP># (# can be positive or negative integer or decimal value for Z score percentile rank)<br>
-                                            &lt;Gene&gt;:EXP<#
-                                            <br>
-                                            Example:<br><br>
-                                            CASE 1<br>
-                                            KRAS:Amp            (search for models with amplified KRAS)<br>
-                                            TP53:MUT=A159V      (search for models with A159V variant of TP53)<br>
-                                            ALB:Del             (search for models with deleted ALB)<br>
-                                            KIT:EXP>2.5         (search form models with expression of KIT > 2.50)<br>
-                                            <br>
-                                            CASE 2<br>
-                                            CDK4:Amp<br>
-                                            ETNK1:Amp<br>
-                                            KRAS:Del<br>
+                                            Gene descriptions can be of seven types, one per line<br>
+                                            <table>
+                                                <tr><td>&lt;Gene&gt;:MUT</td><td></td></tr>
+                                            <tr><td colspan="2">&lt;Gene&gt;:MUT=&lt;VARIANT&gt;</td></tr>
+                                            <tr><td>&lt;Gene&gt;:AMP</td><td>LRP is greater than 0.5   (LRP:Log Ratio Ploidy = log2(raw copy number / ploidy)</td></tr>
+                                            <tr><td>&lt;Gene&gt;:DEL</td><td>LRP is less than -0.5</td></tr>
+                                            <tr><td>&lt;Gene&gt;:NOCNV</td><td>LRP is greater than -0.5 and less than 0.5</td></tr>
+                                            <tr><td>&lt;Gene&gt;:EXP>#</td><td># can be positive or negative integer or decimal value for Z score percentile rank</td></tr>
+                                            <tr><td>&lt;Gene&gt;:EXP<#</td><td></td></tr>
+                                            
+                                            <tr><td>&lt;Gene&gt;:LOF</td><td>Loss of function mutation</td></tr>
+                                            <tr><td>&lt;Gene&gt;:GOF</td><td>Gain of function mutation</td></tr>
+                                            <tr><td>&lt;Gene&gt;:UNK</td><td>Unknown functional mutation</td></tr>
+                                            <tr><td>&lt;Gene&gt;:NONE</td><td>No functional mutation</td></tr>
+                                            
+                                            <tr><td>&nbsp;</td></tr>
+                                            <tr><td>&nbsp;</td></tr>
+                                            
+                                            <tr><td>Example:</td><td></td></tr>
+                                            <tr><td>&nbsp;</td></tr>
+                                            <tr><td>CASE 1</td><td></td></tr>
+                                            <tr><td>
+                                                    <table>
+                                                        <tr><td>KRAS:Amp</td></tr>
+                                                        <tr><td>TP53:MUT=A159V</td></tr>
+                                                        <tr><td>ALB:Del</td></tr>
+                                                        <tr><td>KIT:EXP>1.5</td></tr>
+                                                        <tr><td>&nbsp;</td></tr>
+                                                        <tr><td>CASE 2</td><td></td></tr>
+                                                        <tr><td>CDK4:Amp</td><td></td></tr>
+                                                        <tr><td>ETNK1:Amp</td><td></td></tr>
+                                                        <tr><td>KRAS:Del</td></tr>
+                                                    </table>
+                                                </td>
+                                                <td>
+                                                    <table>
+                                                        <tr><td>search for models with amplified KRAS</td></tr>
+                                                        <tr><td>search for models with A159V variant of TP53</td></tr>
+                                                        <tr><td>search for models with deleted ALB</td></tr>
+                                                        <tr><td>search for models with expression of KIT > 1.50</td></tr>
+                                                        <tr><td>&nbsp;</td></tr>
+                                                        <tr><td>&nbsp;</td></tr>
+                                                        <tr><td>&nbsp;</td></tr>
+                                                        <tr><td>&nbsp;</td></tr>
+                                                        <tr><td>&nbsp;</td></tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
                                         </td>
+                                            
                                     </tr>
 
 
@@ -148,12 +179,18 @@
                                     <tr class="stripe1">
 
                                         <td class="cat1">
+                                            Output options:
+                                            <br><br><br><br>
                                             Enter Case information here:
 
                                         </td>
 
                                         <td class="data1">
-                                            <input type="checkbox" name="asCSV" value="asCSV"/> Return results as a CSV file &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="actionable" value="actionable"/> Include models with clinically relevant variants for supplied genes
+                                            <input type="checkbox" name="asCSV" value="asCSV" ${csvChecked}/> Return results as a CSV file<br>
+                                            <input type="checkbox" name="actionable" value="actionable" ${actionableChecked}/> Include models with clinically relevant variants for supplied genes
+                                            <br>
+                                            <input type="checkbox" name="LRP" value="LRP" ${lrpChecked}> If searching by CNV show log ratio ploidy values <br>
+                                            <input type="checkbox" name="EXP" value="EXP" ${expChecked}> If searching by expression level show Z score percentile rank values
                                             <br>
                                             <textarea rows="20" cols="50" name="cases">${cases}</textarea>
                                         </td>
@@ -161,9 +198,6 @@
                                             ${table}
                                         </td>
                                     </tr>
-
-
-
 
                                     <tr class="buttons">
                                         <td colspan="3">
