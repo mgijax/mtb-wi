@@ -10,7 +10,7 @@
 <%@ attribute name="head" fragment="true" %>
 <%@ attribute name="subnav" fragment="true" %>
 
-<jax:toolpage title="${title}" keywords="${keywords}" description="${description}" defaultTitle="Mouse Models of Human Cancer"
+<jax:toolpage title="${title}" keywords="${keywords}" description="${description}" defaultTitle="Mouse Models of Human Cancer Database"
 	defaultKeywords="mtb, mmhc, mouse, tumor, biology, jax, lab, laboratory, jackson, mgi, genome, informatics"
 	defaultDescription="MMHC has been designed to aid researchers in such areas as choosing experimental models, reviewing patterns of mutations in specific cancers, and identifying genes that are commonly mutated across a spectrum of cancers.">
 	<jsp:attribute name="defaultHead">
@@ -22,14 +22,15 @@
 	<jsp:attribute name="header">
 		<!-- To do: include tag manager -->
 		<a href="${pageContext.request.contextPath}/index.do">
-			<img src="${applicationScope.urlImageDir}/mmhc-logo.png" alt="Mouse Models of Human Cancer">
-			<h3>Mouse&nbsp;Models<br>of&nbsp;Human&nbsp;Cancer</h3>
+			<img src="${applicationScope.urlImageDir}/mmhc-logo.png" alt="Mouse Models of Human Cancer Database">
+			<h3>Mouse&nbsp;Models<br>of&nbsp;Human&nbsp;Cancer<br>Database</h3>
 		</a>
 		<c:import url="/search/quick.jsp" />
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/advancedSearch.do">Advanced Search</a></li>			
 			<li class="dropdown"><span>Other Resources</span>
-				<ul>			
+				<ul>	
+					<li><a href="${pageContext.request.contextPath}/dynamicGrid.do">Tumor Frequency Grid</a></li>		
 					<li><a href="${pageContext.request.contextPath}/immunohistochemistry.jsp">Immunohistochemistry</a></li>
 					<li><a href="${pageContext.request.contextPath}/lymphomaPathology.jsp">Lymphoma Pathology</a></li>
 				</ul>
@@ -40,7 +41,7 @@
 					<li><a href="${pageContext.request.contextPath}/advancedSearch.do">Advanced Search</a></li>
 					<li><a href="${pageContext.request.contextPath}/tumorFrequencyGrid.do">Tumor Frequency Grid</a></li>
 					<li><a href="${pageContext.request.contextPath}/pdxSearch.do">PDX Search (JAX)</a></li>	
-					<li><a href="${pageContext.request.contextPath}/">PDX Finder (Global Search)</a></li>	
+					<li><a href="http://www.pdxfinder.org">PDX Finder (Global Search)</a></li>	
 				</ul>
 			</li>				
 			
@@ -48,8 +49,8 @@
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/">Database</a></li>
 					<li><a href="${pageContext.request.contextPath}/">Publications</a></li>
-					<li><a href="${pageContext.request.contextPath}/">Help</a></li>					
-					<li><a href="${pageContext.request.contextPath}/">What's New</a></li>
+					<li><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">Help</a></li>					
+					<li><a href="${pageContext.request.contextPath}/whatsNew.jsp">What's New</a></li>
 				</ul>
 			</li>				
 			
@@ -63,16 +64,21 @@
 	</jsp:attribute>
 	<jsp:attribute name="footer">
 		<ul>
-			<li><a href="http://www.informatics.jax.org"><img src="/_res/img/mgi-logo.png" alt="Mouse Genome Informatics"></a></li>
+			<li>
+				<p>Part of</p>
+				<a href="http://www.informatics.jax.org"><img src="/_res/img/mgi-logo.png" alt="Mouse Genome Informatics"></a>
+			</li>
 			<li>
 				<p><a href="${applicationScope.urlBase}/citation.jsp">Citing These Resources</a></p>
+				<p><a href="${applicationScope.urlBase}/funding.jsp">Funding Information</a></p>
 				<p><a href="${applicationScope.urlBase}/copyright.jsp">Warranty Disclaimer &amp; Copyright Notice</a></p>
 				<p>Send questions and comments to <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support</a>.</p>
 			</li>
 			<li>
-				<h6>Last Database Update:</h6>
+				<h6>Last Software Update</h6>
+				<p>2017-02-06 | version 3.0</p>
+				<h6>Last Data Update</h6>
 				<p>2017-02-06</p>
-				<p>MTB 3.0</p>
 			</li>
 		</ul>
 	</jsp:attribute>		

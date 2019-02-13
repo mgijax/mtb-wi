@@ -67,13 +67,16 @@
 	</section>
 	<footer>
 		<div>
-			<a href="https://www.jax.org"><img src="/_res/img/logo-mono.png" alt="The Jackson Laboratory"></a>
+			<a href="https://www.jax.org">
+				<p>Hosted by</p>
+				<img src="/_res/img/logo-mono.png" alt="The Jackson Laboratory">
+			</a>
 			<jsp:invoke fragment="footer" />
 		</div>
 	</footer>
 	<script type="text/javascript" id="mod-loader">
         (function () {
-            var i, l, u, s, c, modLoader,
+            var i, l, u, s, c, modLoader, jp, cp,
                 modLoader = document.getElementById('mod-loader'),
                 docHead = document.getElementsByTagName('head')[0],
                 jsPath = '/_res/js/',
@@ -83,15 +86,22 @@
 
             if (typeof mods !== 'undefined' && Array.isArray(mods) && mods.length > 0) {
                 u = {};
-                for (i = 0, l = mods.length; i < l; i += 1) {
+                for (i = 0, l = mods.length; i < l; i += 1) {	                
                     if (!u.hasOwnProperty(mods[i])) {
-	                    if (/\.js$/.test(mods[i])) {
-		                    sf.push(jsPath + mods[i]);
+	                    if (/^[\.\/]/.test(mods[i])) {
+		                    jp = '';
+		                    cp = '';
+		                } else {
+			                jp = jsPath;
+			                cp = cssPath;
+		                }
+		                if (/\.js$/.test(mods[i])) {
+		                    sf.push(jp + mods[i]);
 	                    } else if (/\.css$/.test(mods[i])) {
-		                    cf.push(cssPath + mods[i]);
+		                    cf.push(cp + mods[i]);
 	                    } else {
-		                    sf.push(jsPath + mods[i] + '.js');
-		                    cf.push(cssPath + mods[i] + '.css');
+		                    sf.push(jp + mods[i] + '.js');
+		                    cf.push(cp + mods[i] + '.css');
 	                    }
                         u[mods[i]] = 1;
                     }
@@ -114,5 +124,4 @@
         })();
     </script>	
 </body>
-
 </html>

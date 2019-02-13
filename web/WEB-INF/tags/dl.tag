@@ -7,7 +7,7 @@
 <%@ attribute name="dds" type="java.util.Collection" required="false" %>
 <%@ attribute name="test" type="java.lang.Boolean" required="false" %>
 <c:choose>
-<c:when test="${not empty dds}">
+<c:when test="${not empty dds && test != false}">
 <c:if test="${empty dts}">
 <c:set var="dts" value="${dt}"/>
 </c:if>
@@ -33,7 +33,7 @@
 	</c:if>
 </dl>
 </c:when>
-<c:when test="${dd != null}">
+<c:when test="${not empty dd && test != false}">
 <dl>
 	<dt>${dt}</dt>
 	<dd>${dd}</dd>

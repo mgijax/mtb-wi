@@ -4,11 +4,12 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Advanced Search Results" help="tumorresults">
-	<table>
+	<table class="agro-source">
 		<caption>
 			<div class="result-summary">		
 				<h4>Search Summary</h4>
-				<jax:dl dt="Strain Name" dd="${strainNameComparison} '${strainName}'"/>
+				<p>You searched for&hellip;</p>
+				<jax:dl dt="Strain Name" dd="${strainNameComparison} '${strainName}'" test="${not empty strainName}"/>
 				<jax:dl dt="Strain Type" dds="${strainTypes}"/>
 				<jax:dl dt="Genetic Name" dd="${geneticName}"/>
 				<jax:dl dt="Organ/Tissue of Origin" dts="Organs/Tissues of Origin" dd="${organOfOriginName}" dds="${organTissueOrigins}"/>
@@ -82,26 +83,27 @@
 		<c:when test="${not empty tumors}">
 		<thead>
 			<tr>
-				<th rowspan="2">Tumor Name</th>
-				<th rowspan="2">Organ Affected</th>
-				<th rowspan="2">Treatment Type <em>Agents</em></th>
-				<th rowspan="2">Strain Name <em>Strain Types</em></th>
-				<th>Tumor Frequency Range</th>
-				<th rowspan="2">Metastasizes To</th>
-				<th rowspan="2">Images</th>
-				<th rowspan="2">Tumor Summary</th>
+				<th colspan="4"></th>
+				<th colspan="4">Tumor Frequency Range</th>
+				<th colspan="3"></th>
 			</tr>
 			<tr>
-				<th>F</th>
-				<th>M</th>
-				<th>Mixed</th>
-				<th>Un.</th>
+				<th>Tumor Name</th>
+				<th class="category">Organ Affected</th>
+				<th class="category">Treatment Type <em>Agents</em></th>
+				<th class="category">Strain Name <em>Strain Types</em></th>				
+				<th data-unit="percent" data-legend="fr" data-aggregate="prob-or">F</th>
+				<th data-unit="percent" data-legend="fr" data-aggregate="prob-or">M</th>
+				<th data-unit="percent" data-legend="fr" data-aggregate="prob-or">Mixed</th>
+				<th data-unit="percent" data-legend="fr" data-aggregate="prob-or">Un.</th>
+				<th>Additional Information</th>
+				<th>Tumor Details</th>				
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="tumor" items="${tumors}" varStatus="status">
 			<tr>
-				<td><c:out value="${tumor.tumorName}" escapeXml="false"/></td>
+				<td><c:out value="${tumor.tumorName}" escapeXml="false"/><br>[key: <c:out value="${tumor.organOfOriginKey}" escapeXml="false"/>, name: <c:out value="${tumor.tumorOrganName}" escapeXml="false"/>]</td>
 				<td><c:out value="${tumor.organAffectedName}" escapeXml="false"/></td>
 				<td>
 					<c:out value="${tumor.treatmentType}" escapeXml="false"/>
@@ -130,16 +132,30 @@
 					</em>
 					</c:if>
 				</td>
-				<td class="small-center"><c:out value="${tumor.freqFemaleString}" escapeXml="false" default="&nbsp;"/></td>
+				<td class="small-center">
+					<c:out value="${tumor.freqFemaleString}" escapeXml="false" default="&nbsp;"/> 
+					<c:forEach var="freq" items="${tumor.freqFemale}">
+						<p>${freq}</p>
+					</c:forEach>
+				</td>
+				
+				
+				
+				
 				<td class="small-center"><c:out value="${tumor.freqMaleString}" escapeXml="false" default="&nbsp;"/></td>
 				<td class="small-center"><c:out value="${tumor.freqMixedString}" escapeXml="false" default="&nbsp;"/></td>
-				<td class="small-center"><c:out value="${tumor.freqUnknownString}" escapeXml="false" default="&nbsp;"/></td>
+				<td class="small-center">
+					<c:out value="${tumor.freqUnknownString}" escapeXml="false" default="&nbsp;"/>
+					<c:forEach var="freq" items="${tumor.freqUnknown}">
+						<p>${freq}</p>
+					</c:forEach>
+				</td>
 				<td>
 					<c:choose>
 					<c:when test="${not empty tumor.metastasizesToDisplay}">
 					
 					<c:forEach var="organ" items="${tumor.metastasizesToDisplay}" varStatus="status">
-					${organ}
+					Metastasizes To ${organ}
 					<c:if test="${status.last != true}">
 					<!-- \n -->
 					</c:if>
@@ -149,8 +165,6 @@
 					<c:otherwise>
 					</c:otherwise>
 					</c:choose>
-				</td>
-				<td>
 					<c:choose>
 					<c:when test="${tumor.images==true}">
 					<div><img src="${applicationScope.urlImageDir}/pic.gif" alt="X"></div>
@@ -172,5 +186,7 @@
 		</c:choose>
 		<!-- ////  End Results  //// -->
 	</table>
+	<script type="text/javascript">
+		mods.push('jquery-ui.min.js', '/_res/lib/agro', './live/www/js/results.js');
+	</script>
 </jax:mmhcpage>
-

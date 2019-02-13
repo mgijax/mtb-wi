@@ -3,30 +3,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Advanced Search Form" help="advanced">
-	<jax:searchform action="advancedSearchResults" sortby="Tumor Classification[tumorclassification],Organ of tumor origin[organ],Strain name[strainname],Strain Type[straintype],Treatment Type[treatmenttype]">
-	<fieldset>
-		<legend>>Strain / Genetics</legend>
-		<fieldset>
-			<legend data-tip="Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.">Strain Name</legend>
-			<html:select property="strainNameComparison">
-			<html:option value="Contains"> Contains </html:option>
-			<html:option value="Begins"> Begins </html:option>
-			<html:option value="Equals"> Equals </html:option>
-			</html:select>
-			<html:text property="strainName" size="30" maxlength="255"/>
-		</fieldset>
-		<fieldset>
-			<legend data-tip="Indicates method of strain derivation.&#10;The values for these fields are selected from lists of controlled vocabulary terms.">Strain Type</legend>
-			<html:select property="strainTypes" size="8" multiple="true">
-			<html:option value="">ANY</html:option>
-			<html:options collection="strainTypeValues" property="value" labelProperty="label"/>
-			</html:select>
-		</fieldset>
-		<fieldset>
-			<legend data-tip="This field offers a text based search for strains with known germline genotype at specific genes/loci.&#10;This field searches Gene symbols, Gene names, and synonyms. The default operator for this search is CONTAINS.&#10;If you have difficulty locating records of interest, you may want to consult the Mouse Genome Database to ensure that the search string is appropriate for the gene/locus of interest.">Gene or Allele</legend>							
-			<html:text property="geneticName" size="30" maxlength="255"/> <em>(Symbol/Name/Synonym)</em>
-		</fieldset>
-	</fieldset>
+	<jax:searchform action="advancedSearchResults">
 	<fieldset>
 		<legend>Tumor</legend>
 		<fieldset>
@@ -50,15 +27,28 @@
 			<html:options collection="agentTypes" property="value" labelProperty="label"/>
 			</html:select>
 		</fieldset>
+	</fieldset>
+	<fieldset>
+		<legend>Strain / Genetics</legend>
 		<fieldset>
-			<legend class="tip">Metastasis</legend>
-			<div role="tooltip"><p>Used to search for tumors that have been reported to metastasize to a particular organ.</p><p>First choose the <em>Restrict search to metastasis tumors only</em> then select an organ from the <em>Metastasizes to the</em> menu.</p></div>
-			<html:checkbox property="metastasisLimit"/> Restrict search to metastatic tumors only. 
+			<legend data-tip="Strain names in MTB, where possible, follow the international nomenclature guidelines for the naming of laboratory mouse strains.">Strain Name</legend>
+			<html:select property="strainNameComparison">
+			<html:option value="Contains"> Contains </html:option>
+			<html:option value="Begins"> Begins </html:option>
+			<html:option value="Equals"> Equals </html:option>
+			</html:select>
+			<html:text property="strainName" size="30" maxlength="255"/>
 		</fieldset>
 		<fieldset>
-			<legend class="tip">Pathology Images</legend>
-			<div role="tooltip"><p>Pathology images (histology photomicrographs) of the tumor.</p><p> To search for tumor records associated with Pathology images, choose the box next to <em>Restrict search to entries with associated pathology images</em></p></div>
-			<html:checkbox property="mustHaveImages"/> Restrict search to entries with associated pathology images.
+			<legend data-tip="Indicates method of strain derivation.&#10;The values for these fields are selected from lists of controlled vocabulary terms.">Strain Type</legend>
+			<html:select property="strainTypes" size="8" multiple="true">
+			<html:option value="">ANY</html:option>
+			<html:options collection="strainTypeValues" property="value" labelProperty="label"/>
+			</html:select>
+		</fieldset>
+		<fieldset>
+			<legend data-tip="This field offers a text based search for strains with known germline genotype at specific genes/loci.&#10;This field searches Gene symbols, Gene names, and synonyms. The default operator for this search is CONTAINS.&#10;If you have difficulty locating records of interest, you may want to consult the Mouse Genome Database to ensure that the search string is appropriate for the gene/locus of interest.">Gene or Allele</legend>							
+			<html:text property="geneticName" size="30" maxlength="255"/> <em>(Symbol/Name/Synonym)</em>
 		</fieldset>
 	</fieldset>
 	</jax:searchform>
