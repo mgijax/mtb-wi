@@ -4,7 +4,6 @@
  */
 package org.jax.mgi.mtb.wi.actions;
 
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +19,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXLink;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
+import org.jax.mgi.mtb.wi.pdx.RelatedModels;
 
 /**
  * Collects data for PDX details page and sends it along
@@ -28,8 +28,7 @@ import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
  */
 public class PDXDetailsAction extends Action {
     
-    private static final String BAYLOR = "Baylor College of Medicine";
-    private static final String DANA_FARBER = "Dana-Farber Cancer Institute";
+    
 
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
@@ -240,12 +239,14 @@ public class PDXDetailsAction extends Action {
             request.setAttribute("collapseReferences", collapseReferences);
             request.setAttribute("referenceLinks", referenceLinks);
 
-            String expData ="";
-            if(DANA_FARBER.equals(mouse.getInstitution()) || BAYLOR.equals(mouse.getInstitution())){
-                expData = store.getModelTPM(modelID);
-            }else{
-                expData = store.getModelExpression(modelID);
+            
+            boolean useTPM = false;
+            if(store.DANA_FARBER.equals(mouse.getInstitution()) || store.BAYLOR.equals(mouse.getInstitution())){
+                useTPM = true;
             }
+            
+            String expData = store.getModelExpression(modelID,useTPM);
+            
             int split = expData.indexOf("[");
             if (split > 0) {
                 String platforms = expData.substring(0, split);
@@ -256,7 +257,7 @@ public class PDXDetailsAction extends Action {
 
             request.setAttribute("geneExpressionData", expData);
 
-            // 3500px is about right for the 350 or so genes in the exome panel
+            // 3500px is about right for the 350 or so genes in the CTP panel
             // some models will have multiple samples 
             // adjust the 3500px as necessary 
             int pxPerBar = 15;
@@ -284,10 +285,7 @@ public class PDXDetailsAction extends Action {
                 request.setAttribute("samplePloidy", ploidy);
                 cnvData = parts[1];
 
-                //cnvData = cnvData.replaceAll("Amplification", "orange");
-                //cnvData = cnvData.replaceAll("Deletion", "blue");
-                //cnvData = cnvData.replaceAll("Normal", "grey");
-                // cnvData = cnvData.replaceAll("Sample Ploidy", "Sample Ploidy");
+                
                 request.setAttribute("geneCNVData", cnvData);
 
                 int cnvChartSize = 250;
@@ -302,6 +300,8 @@ public class PDXDetailsAction extends Action {
                 request.setAttribute("cnvChartSize", cnvChartSize + "");
                 // will need to set cnv data here
             }
+            
+            request.setAttribute("cnvPlots", store.getCNVPlotsForModel(modelID));
 
             request.setAttribute("modelID", modelID);
 
@@ -310,6 +310,14 @@ public class PDXDetailsAction extends Action {
             // check if no inventory remaining
             if (mouse.getModelStatus().indexOf("Inventory") != -1) {
                 request.setAttribute("unavailable", "unavailable");
+            }
+            
+            if(RelatedModels.getReleationLabel(modelID)!= null){
+                request.setAttribute("relatedModels",RelatedModels.getReleationLabel(modelID));
+            }
+            
+            if(RelatedModels.getProxeId(modelID)!= null){
+                request.setAttribute("proxeID",RelatedModels.getProxeId(modelID));
             }
 
         }//end of else for finding a model;

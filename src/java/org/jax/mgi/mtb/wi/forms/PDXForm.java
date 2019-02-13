@@ -41,7 +41,6 @@ public class PDXForm extends ActionForm {
     private boolean amplification = false;
     private boolean deletion = false;
     private boolean loh = false;
-    private boolean tumorGrowth = false;
     private boolean dosingStudy = false;
     private boolean treatmentNaive = false;
 
@@ -325,19 +324,7 @@ public class PDXForm extends ActionForm {
         this.cnvChange = cnvChange;
     }
 
-    /**
-     * @return the tumorGrowth
-     */
-    public boolean getTumorGrowth() {
-        return tumorGrowth;
-    }
-
-    /**
-     * @param tumorGrowth the tumorGrowth to set
-     */
-    public void setTumorGrowth(boolean tumorGrowth) {
-        this.tumorGrowth = tumorGrowth;
-    }
+   
 
     /**
      * @return the dosingStudy

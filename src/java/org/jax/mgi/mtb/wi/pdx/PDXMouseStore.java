@@ -18,6 +18,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import org.apache.log4j.Logger;
@@ -30,6 +31,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDocument;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXGraphic;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXLink;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
+import org.jax.mgi.mtb.dao.utils.DAOUtils;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.wi.WIConstants;
@@ -53,16 +55,16 @@ public class PDXMouseStore {
     private static ArrayList<String> tagsList;
     private static ArrayList<String> tumorMarkersList;
     private static ArrayList<String> allGenesList;
+    private static ArrayList<String> ctpGeneList;
     private static ArrayList<LabelValueBean<String, String>> diagnosesLVB = new ArrayList<LabelValueBean<String, String>>();
     private static ArrayList<LabelValueBean<String, String>> primarySitesLVB = new ArrayList<LabelValueBean<String, String>>();
     private static ArrayList<LabelValueBean<String, String>> tagsLVB = new ArrayList<LabelValueBean<String, String>>();
     private static ArrayList<LabelValueBean<String, String>> tumorMarkersLVB = new ArrayList<LabelValueBean<String, String>>();
-    private static ArrayList<LabelValueBean<String, String>> exomePanelGenesLVB = new ArrayList<LabelValueBean<String, String>>();
     private static ArrayList<LabelValueBean<String, String>> fusionGenesLVB = new ArrayList<LabelValueBean<String, String>>();
     private static ArrayList<LabelValueBean<String, String>> recistDrugsLVB = new ArrayList<LabelValueBean<String, String>>();
     private static ArrayList<LabelValueBean<String, String>> recistResponsesLVB = new ArrayList<LabelValueBean<String, String>>();
     private static String allGenesWebFormat;
-    private static String exomePanelGenesWebFormat;
+    private static String ctpGenesWebFormat;
     private static String idList;
     private static HashMap<String, ArrayList<String>> assocData = new HashMap<String, ArrayList<String>>();
     private static ArrayList<ArrayList<String>> status = new ArrayList<ArrayList<String>>();
@@ -74,58 +76,71 @@ public class PDXMouseStore {
     private static Date reportFreshnessDate = null;
     private static String JSON_PDX_STATUS = "Unable to load data from eLIMS";
     private static String JSON_PDX_INFO = "Unable to load data from eLIMS";
-    public static final String[] exomePanelGeneList = {"A1CF", "ABL1", "ACVR1B", "ADAR", "ADARB1", "AFF2", "AICDA", "AKT1", "AKT2", "AKT3", "ALK", "APC", "APOBEC1", "APOBEC2", "APOBEC3A",
-        "APOBEC3C", "APOBEC3D", "APOBEC3F", "APOBEC3G", "APOBEC4", "AR", "ARID1A", "ARID1B", "ARID2", "ASH1L", "ASXL1", "ATM", "ATN1", "ATP10B", "ATR", "ATRX", "AURKA", "AURKB",
-        "AURKC", "AXIN1", "B2M", "BAP1", "BCL2", "BCOR", "BCR", "BID", "BRAF", "BRCA1", "BRCA2", "BRIP1", "BTK", "CARD11", "CARM1", "CASP8", "CBFB", "CBL", "CCND1", "CCNE1", "CCR2",
-        "CDC73", "CDH1", "CDK12", "CDK4", "CDK6", "CDKN1B", "CDKN2A", "CDKN2C", "CEBPA", "CHEK2", "CIC", "CIRBP", "COL18A1", "CREBBP", "CRLF2 (chrX)", "CRLF2 (chrY)", "CSF1R", "CSMD3",
-        "CTCF", "CTNNB1", "CXCR4", "CYLD", "DALRD3", "DAXX", "DDIT4", "DDR2", "DICER1", "DNMT1", "DNMT3A", "DNMT3B", "DOT1L", "DROSHA", "DSPP", "EGFR", "EHMT2", "EIF2C1", "EIF2C2",
-        "EIF2C3", "EIF2C4", "EP300", "EPHA10", "EPHA3", "EPHA5", "EPHB6", "ERBB2", "ERBB3", "ERBB4", "ESR1", "ETV6", "EZH1", "EZH2", "FAM123B", "FAM166A", "FAT4", "FBXO4", "FBXW7",
-        "FER1L5", "FES", "FGFR1", "FGFR2", "FGFR3", "FGFR4", "FLT3", "FOXA1", "FOXL2", "FUBP1", "GATA1", "GATA2", "GATA3", "GLI1", "GLI2", "GLI3", "GLI4", "GNA11", "GNAQ", "GNAS",
-        "GPR32", "GPRIN2", "GPS2", "GRIN2A", "H2AFX", "H3F3A", "HAUS5", "HCFC1R1", "HES1", "HES5", "HEY1", "HEY2", "HGF", "HIST1H1C", "HIST1H2BC", "HIST1H3B", "HLA-A", "HMCN1",
-        "HNF1A", "HRAS", "HSBP1", "HSF1", "HSF2", "HSF4", "HSP90AA1", "ID1", "ID2", "ID3", "ID4", "IDH1", "IDH2", "IGF1R", "IKZF1", "INHBA", "INO80C", "ITPKB", "JAK1", "JAK2", "JAK3",
-        "JMJD1C", "JMJD6", "KCNQ2", "KDM1A", "KDM1B", "KDM2A", "KDM2B", "KDM3A", "KDM3B", "KDM4A", "KDM4B", "KDM4C", "KDM4D", "KDM5A", "KDM5B", "KDM5C", "KDM5D", "KDM6A", "KDM6B",
-        "KDR", "KEAP1", "KIT", "KLF4", "KLHL6", "KLRG2", "KRAS", "LATS1", "LATS2", "LLGL2", "LMO1", "LRFN4", "LRP1B", "LTK", "LYSMD3", "MAP2K1", "MAP2K2", "MAP2K4", "MAP2K7", "MAP3K1",
-        "MAPK8", "MAPK9", "MDM2", "MDM4", "MED12", "MED23", "MEN1", "MET", "MLH1", "MLL2", "MLL3", "MLLT4", "MPL", "MSH2", "MSH6", "MST1", "MTOR", "MUC16", "MUC17", "MUC4", "MUC5B", "MYB",
-        "MYC", "MYCL1", "MYCN", "MYD88", "MYT1L", "NCOA3", "NCOR1", "NEK10", "NF1", "NF2", "NFE2L2", "NKAIN4", "NKX2-1", "NOTCH1", "NOTCH2", "NOTCH3", "NOTCH4", "NPM1", "NRAS", "NSD1",
-        "NTRK1", "NTRK2", "NTRK3", "PAK3", "PALB2", "PAX5", "PBRM1", "PD", "PDGFA", "PDGFB", "PDGFRA", "PDGFRB", "PDL1", "PGR", "PHF6", "PIK3CA", "PIK3R1", "PIP4K2C", "PIWIL1", "PLK1",
-        "PMS1", "PMS2", "POLB", "POLI", "PPEF1", "PPP2R1A", "PQLC2", "PRDM1", "PRDM14", "PRDM2", "PRDM9", "PRKAA1", "PRKAA2", "PRMT1", "PRMT2", "PRMT3", "PRMT5", "PRMT6", "PRRX1", "PTCH1",
-        "PTEN", "PTK2B", "PTPN11", "PTPRD", "PYCRL", "RAD50", "RAD51", "RAD51B", "RAD51C", "RAD51D", "RAD52", "RAD54B", "RAD54L", "RAD54L2", "RAF1", "RASA3", "RASGRF2", "RB1", "RET",
-        "RNF43", "ROR2", "ROS1", "RPGR", "RUNX1", "SAAL1", "SCGB1C1", "SETBP1", "SETD2", "SETD7", "SF3B1", "SKP2", "SLC38A3", "SMAD2", "SMAD4", "SMARCA4", "SMARCB1", "SMO", "SMYD3",
-        "SOCS1", "SOS1", "SOX9", "SPOP", "SRC", "SRSF2", "STAG2", "STK11", "STK3", "SUV39H1", "TARBP2", "TBL1XR1", "TBP", "TBX3", "TCF7L2", "TEAD1", "TEAD2", "TEAD4", "TET2", "TGFBR2",
-        "TLE6", "TMEM82", "TNFAIP3", "TP53", "TP63", "TP73", "TRAF7", "TSC1", "TSHR", "TTC5", "TTN", "U2AF1", "UBC", "USH2A", "VHL", "WHSC1", "WHSC1L1", "WNT7A", "WT1", "WWTR1", "XRCC2",
-        "XRCC3", "YAP1", "YES1", "ZFP36L1", "ZMYND19"};
 
     private static String baseURL = WIConstants.getInstance().getPDXWebservice();
 
-    private static String variationURL = baseURL + "/pdx-variation/";
-    private static final String fusionURL = baseURL + "/pdx-fusion/";
+    private static final String MODEL_EXPRESSION = baseURL + "expression?all_ctp_genes=yes&keepnulls=yes&model=";
 
-    private static final String fusionModels = fusionURL + "models-for-fusion-gene-?.json"; // replace ? with gene
-    private static final String fusionGenes = fusionURL + "all-fusion-genes.json";
-    private static final String allFusionModels = fusionURL + "all-fusion-models.json";
-    private static HashMap<String, String> fusionModelsMap = new HashMap<String, String>();
+    private static final String GENE_EXPRESSION = baseURL + "expression?&keepnulls=yes&gene_symbol=";
 
-    private static final String allGenes = "all-genes.json";
-    private static final String variantsForGene = "variants-for-gene-?.json";  // replace ? with gene symbol
-    private static final String allVariants = "all-variants.json";
+    private static final String MODEL_CNV = baseURL + "cnv_gene?all_ctp_genes=yes&keepnulls=yes&model=";
+
+    private static final String CNV_AMP = baseURL + "cnv_gene?min_lr_ploidy=0.5&gene_symbol=";
+    private static final String CNV_DEL = baseURL + "cnv_gene?max_lr_ploidy=-0.5&gene_symbol=";
+
+    private static final String VARIANTS = baseURL + "variants";
+
+    private static final String FUSION_MODELS_BY_GENE = baseURL + "fusions?ckb_class=B&gene_symbol=";
+
+    private static final String FUSION_GENES = baseURL + "fusion_genes?ckb_class=B";
+
+    private static final String VARIANTS_FOR_GENE = baseURL + "gene_variants?gene_symbol=";
+
+    private static final String ALL_GENES = baseURL + "all_genes";
     
-    
-    private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M", "DAXX", "EHMT2", "EPHB6", "HLA-A", "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4", "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
+   
+    private static HashMap<String, String> fusionModelsMap = new HashMap();
+
+    private static final String SAMPLE_PASSAGE = baseURL + "inventory?model=MODEL_ID&sample=SAMPLE_ID&reqitems=passage_num";
+
+ 
+
+    private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M",
+        "DAXX", "EHMT2", "EPHB6", "HLA-A",
+        "HRAS", "ID3", "KCNQ2", "MUC4", "NOTCH4",
+        "PIWIL1", "PTEN", "PTPRD", "RASA3", "SMARCB1"};
+
     private static final String RNA_SEQ = "RNA_Seq";
     private static final HashMap<String, String> AFFECTED_GENES = new HashMap<>();
+
+    private static final String CKB_MOLPRO_PUBLIC = "https://ckb.jax.org/molecularProfile/show/";
+    //   private static final String CKB_GENE_PUBLIC = "https://ckb.jax.org/gene/show?geneId=";
+
+    private static final String CKB_MOLPRO_INTERNAL = "https://myckb.jax.org/molecularProfile/show/";
+    //  private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
+
+    private static final String CKB_HOME = "https://ckbhome.jax.org/";
+
+    public static final String BAYLOR = "Baylor College of Medicine";
+    public static final String DANA_FARBER = "Dana-Farber Cancer Institute";
+
+    public static double AMP = 0.5;
+    public static double DEL = -0.5;
+
+    private static final HashMap<String, ArrayList<ArrayList<String>>> cnvPlots = new HashMap<>();
 
     public PDXMouseStore() {
 
         try {
-             if (allMice == null ) {
+            if (allMice == null || allMice.isEmpty()) {
                 synchronized (PDXMouseStore.class) {
                     loadData();
                 }
             }
-            if(AFFECTED_GENES.size()==0){
-                  for (String g : BUILD_38_AFFECTED_GENES) {
-                        AFFECTED_GENES.put(g, g);
-                    }
+            if (AFFECTED_GENES.size() == 0) {
+                for (String g : BUILD_38_AFFECTED_GENES) {
+                    AFFECTED_GENES.put(g, g);
+                }
             }
         } catch (Exception e) {
             log.error("Unable to initalize pdx mouse store", e);
@@ -147,21 +162,13 @@ public class PDXMouseStore {
         primarySitesLVB.clear();
         diagnosesLVB.clear();
         tagsLVB.clear();
-        exomePanelGenesLVB.clear();
         fusionGenesLVB.clear();
         recistDrugsLVB.clear();
         recistResponsesLVB.clear();
-        
 
-        log.info("Loading mice from eLIMS");
-        PDXMouseSearchData searchData = new PDXMouseSearchData();
-        try{
-            ElimsUtil eu = new ElimsUtil();
-            searchData = eu.getPDXMouseSearchData();
-        }catch(Exception e){
-            log.info("Unable to get PDX data from ELIMS",e);
-        }
-        
+        log.info("loading mice from eLIMS");
+        ElimsUtil eu = new ElimsUtil();
+        PDXMouseSearchData searchData = eu.getPDXMouseSearchData();
         allMice = searchData.getMice();
         log.info("loaded " + allMice.size() + " mice.");
 
@@ -184,11 +191,6 @@ public class PDXMouseStore {
             tagsLVB.add(lvb);
         }
 
-        for (String gene : exomePanelGeneList) {
-            LabelValueBean lvb = new LabelValueBean(gene, gene);
-            exomePanelGenesLVB.add(lvb);
-        }
-        
         String[] idArray = searchData.getIds().keySet().toArray(new String[searchData.getIds().size()]);
         // unfortunately this sorts by actual id not displayed id.... hrmph
         Arrays.sort(idArray);
@@ -201,21 +203,20 @@ public class PDXMouseStore {
         this.idList = sb.toString();
 
         loadFusionGenes();
-        loadFusionModels();
 
         if (allMice != null && allMice.size() > 0) {
 
             HashMap<String, Integer> socGraphs = SOCLoader.loadSOCModels();
-            
+
             ArrayList<String> recistResponses = SOCLoader.loadRECISTResponses();
             ArrayList<String> recistDrugs = SOCLoader.loadRECISTDrugs();
-            
-            for(String drug: recistDrugs){
-                recistDrugsLVB.add(new LabelValueBean(drug,drug));
+
+            for (String drug : recistDrugs) {
+                recistDrugsLVB.add(new LabelValueBean(drug, drug));
             }
-            
-            for(String response : recistResponses){    
-                recistResponsesLVB.add(new LabelValueBean(response,response));
+
+            for (String response : recistResponses) {
+                recistResponsesLVB.add(new LabelValueBean(response, response));
             }
 
             assocData = PDXDAO.getInstance().getPDXAdditionalContent();
@@ -226,28 +227,15 @@ public class PDXMouseStore {
                 }
                 mouse.setAssocData(assocData.get(mouse.getModelID()));
                 String id = mouse.getModelID();
-                Integer num = null;
-                if (id.startsWith("TM")) {
-                    id = id.substring(2);
-                    num = new Integer(id).intValue();
-                }
-                if (id.startsWith("J")) {
-                    id = id.substring(1);
-                    num = new Integer(id).intValue();
-                }
-                if (num == null) {
-                    log.error("model id " + id + " cant be parsed into an integer");
-                }
 
-                if (fusionModelsMap.get(num.toString()) != null) {
-                    mouse.setFusionGenes(fusionModelsMap.get(num.toString()));
+                if (fusionModelsMap.get(id) != null) {
+                    mouse.setFusionGenes(fusionModelsMap.get(id));
 
                 }
 
-                //   mouseMap.put(num,mouse);
             }
             log.info("Loading genes from webservice.");
-            getAllGenes();
+            loadAllGenes();
 
             StringBuffer genesBuffer = new StringBuffer();
             genesBuffer.append("[");
@@ -261,11 +249,11 @@ public class PDXMouseStore {
             allGenesWebFormat = genesBuffer.toString();
 
             log.info("Loaded " + allGenesList.size() + " genes.");
+
+            loadCTPGenes();
             genesBuffer = new StringBuffer();
-
             genesBuffer.append("[");
-
-            for (String gene : exomePanelGeneList) {
+            for (String gene : ctpGeneList) {
                 if (genesBuffer.length() > 1) {
                     genesBuffer.append(",");
                 }
@@ -273,7 +261,10 @@ public class PDXMouseStore {
 
             }
             genesBuffer.append("]");
-            exomePanelGenesWebFormat = genesBuffer.toString();
+            ctpGenesWebFormat = genesBuffer.toString();
+
+            loadCNVPlots();
+            log.info("Loaded cnv plots for " + cnvPlots.size() + " models.");
         }
     }
 
@@ -359,8 +350,6 @@ public class PDXMouseStore {
         return this.JSON_PDX_STATUS;
     }
 
-    
-
     /**
      * Return the mouse model with ID using cached mouse list Result will be a
      * single mouse or empty. ArrayList for consistency with other find methods
@@ -397,8 +386,8 @@ public class PDXMouseStore {
      */
     public ArrayList<PDXMouse> findMice(String modelID, ArrayList<String> tissues,
             ArrayList<String> diagnoses, ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers,
-            ArrayList<String> genes, ArrayList<String> variants, boolean dosingStudy, 
-            boolean tumorGrowth, ArrayList<String> tags, String fusionGenes, 
+            String gene, ArrayList<String> variants, boolean dosingStudy,
+            boolean tumorGrowth, ArrayList<String> tags, String fusionGenes,
             boolean treatmentNaive, String recistDrug, String recistResponse) {
 
         // may need to do 3 searches
@@ -408,7 +397,7 @@ public class PDXMouseStore {
         ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
 
         // get a list of mice based on search criteria that are in ELIMS
-        mice = findStaticMice(modelID, tissues, diagnoses, tumorTypes, tumorMarkers, 
+        mice = findStaticMice(modelID, tissues, diagnoses, tumorTypes, tumorMarkers,
                 tags, dosingStudy, tumorGrowth, treatmentNaive, recistDrug, recistResponse);
 
         ArrayList<String> ids = new ArrayList<>();
@@ -445,14 +434,20 @@ public class PDXMouseStore {
             }
         }
 
-        if (genes != null && genes.size() > 0 && genes.get(0).trim().length() > 0) {
-            mice2 = getMiceByGeneVariant(mice2, genes, variants);
+        if (gene != null && gene.length() > 0) {
+            mice2 = getMiceByGeneVariant(mice2, gene, variants);
         }
 
         return mice2;
     }
 
     private boolean compareIDs(String display, String numeric) {
+
+        log.error("Comparing " + display + " to " + numeric);
+        if (true) {
+            return display.equals(numeric);
+        }
+
         boolean match = false;
         int numNum = -1;
         int displayNum = 0;
@@ -505,7 +500,7 @@ public class PDXMouseStore {
      * @return ArrayList<PDXMouse> matching mice
      */
     private ArrayList<PDXMouse> findStaticMice(String modelID, ArrayList<String> tissues,
-            ArrayList<String> diagnoses,ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers, 
+            ArrayList<String> diagnoses, ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers,
             ArrayList<String> tags, boolean dosingStudy, boolean tumorGrowth, boolean treatmentNaive,
             String recistDrug, String recistResponse) {
 
@@ -624,18 +619,18 @@ public class PDXMouseStore {
         }
 
         mice2.clear();
-        
-        if(StringUtils.hasValue(recistDrug) || StringUtils.hasValue(recistResponse)){
-            ArrayList<String> recistIDs = SOCLoader.getRECISTModels(recistDrug,recistResponse);
-            for(PDXMouse mouse : mice){
-                if(recistIDs.contains(mouse.getModelID())){
+
+        if (StringUtils.hasValue(recistDrug) || StringUtils.hasValue(recistResponse)) {
+            ArrayList<String> recistIDs = SOCLoader.getRECISTModels(recistDrug, recistResponse);
+            for (PDXMouse mouse : mice) {
+                if (recistIDs.contains(mouse.getModelID())) {
                     mice2.add(mouse);
                 }
             }
-        }else{
+        } else {
             mice2.addAll(mice);
         }
-        
+
         mice.clear();
 
         // deduplicate
@@ -683,8 +678,8 @@ public class PDXMouseStore {
     public String getPDXConsortiumReport(String delimiter) {
         return pdxConsortiumReport;
     }
-    
-    public String getPDXReportWithNoName(){
+
+    public String getPDXReportWithNoName() {
         return new ElimsUtil().getPDXReportWithNoName(allMice);
     }
 
@@ -708,13 +703,12 @@ public class PDXMouseStore {
         return tagsList;
     }
 
-    public ArrayList<String> getExomePanelGenes() {
-        ArrayList<String> genes = new ArrayList<String>(Arrays.asList(exomePanelGeneList));
-        return genes;
+    public ArrayList<String> getCTPGenes() {
+        return ctpGeneList;
     }
 
-    public String getExomePanelGenesWebFormat() {
-        return exomePanelGenesWebFormat;
+    public String getCTPGenesWebFormat() {
+        return ctpGenesWebFormat;
     }
 
     // why the redundant casting??????
@@ -734,18 +728,14 @@ public class PDXMouseStore {
         return (ArrayList<LabelValueBean<String, String>>) tagsLVB;
     }
 
-    public ArrayList<LabelValueBean<String, String>> getExomePanelGenesLVB() {
-        return (ArrayList<LabelValueBean<String, String>>) exomePanelGenesLVB;
-    }
-
     public ArrayList<LabelValueBean<String, String>> getFusionGenesLVB() {
         return (ArrayList<LabelValueBean<String, String>>) fusionGenesLVB;
     }
-    
+
     public ArrayList<LabelValueBean<String, String>> getRECISTDrugsLVB() {
-        return  recistDrugsLVB;
+        return recistDrugsLVB;
     }
-    
+
     public ArrayList<LabelValueBean<String, String>> getRECISTResponsesLVB() {
         return recistResponsesLVB;
     }
@@ -931,13 +921,12 @@ public class PDXMouseStore {
 
     }
 
-    public String getModelExpression(String modelID) {
-        String data = PDXDAO.getInstance().getModelExpression(modelID);
-        return data;
+    public String getModelExpression(String modelID, boolean useTPM) {
 
-    }
-    
-     public String getNewModelExpression(String modelID) {
+        String valueToGet = "z_score_percentile_rank";
+        if (useTPM) {
+            valueToGet = "tpm";
+        }
 
         DecimalFormat df = new DecimalFormat("#.##");
 
@@ -946,29 +935,41 @@ public class PDXMouseStore {
         HashMap<String, HashMap<String, String>> genes = new HashMap();
         HashMap<String, String> platformMap = new HashMap();
         HashMap<String, String> samplePlatformMap = new HashMap();
-       
-        String url = "http://pdxdata.jax.org/api/expression?&all_ctp_genes=yes&filter=true&model="+modelID;
-         
+
+        String url = MODEL_EXPRESSION + modelID;
+
         try {
             JSONObject job = new JSONObject(getJSON(url));
-            JSONArray array = (JSONArray) job.get("data"); 
-            for(int i =0; i < array.length(); i++) {
+            JSONArray array = (JSONArray) job.get("data");
+            for (int i = 0; i < array.length(); i++) {
                 JSONObject data = array.getJSONObject(i);
-                
-                String sample = data.getString("sample_name");
+
+                String sample = data.getString("sample_name") + " " + getField(data, "passage_num");
+
                 String gene = data.getString("gene_symbol");
                 String platform = data.getString("platform");
-                String rankZ = df.format(data.getDouble("z_score_percentile_rank"));
+                Double value = data.getDouble(valueToGet);
 
+                sample = sample +" "+ platform;
                 
+                if (useTPM) {
+                    value = (Math.log(value + 1) / Math.log(2));
+                }
+
+                String valueStr = df.format(value);
+
                 platformMap.put(platform, platform);
                 sampleMap.put(sample, sample);
-                samplePlatformMap.put(sample,platform);
+                samplePlatformMap.put(sample, platform);
+                if(gene.equals("KRAS")){
+                    System.out.println(platform+" "+sample+" "+value);
+                
+                }
                 if (genes.containsKey(gene)) {
-                    genes.get(gene).put(sample, rankZ);
+                    genes.get(gene).put(sample, valueStr);
                 } else {
                     HashMap<String, String> map = new HashMap();
-                    map.put(sample, rankZ);
+                    map.put(sample, valueStr);
                     genes.put(gene, map);
                 }
 
@@ -1031,49 +1032,28 @@ public class PDXMouseStore {
         return result.toString();
 
     }
-    
-    
-    
-    
-    
-    public String getModelTPM(String modelID) {
-        String data = PDXDAO.getInstance().getModelTPM(modelID);
-        return data;
-
-    }
 
     public String getModelCNV(String modelID) {
-        String data = PDXDAO.getInstance().getModelCNV(modelID);
-        return data;
-
-    }
-    
-    
-     public String getNewModelCNV(String modelID) {
 
         DecimalFormat df = new DecimalFormat("##.####");
 
         StringBuffer result = new StringBuffer();
 
-
         HashMap<String, String> ploidyMap = new HashMap();
         HashMap<String, HashMap<String, String>> genes = new HashMap();
         try {
-           
-            String url = "http://pdxdata.jax.org/api/cnv_gene?all_ctp_genes=yes&model="+modelID;
-            
-            
+
+            String url = MODEL_CNV + modelID;
+
             JSONObject job = new JSONObject(getJSON(url));
-            JSONArray array = (JSONArray) job.get("data"); 
-            for(int i =0; i < array.length(); i++) {
+            JSONArray array = (JSONArray) job.get("data");
+            for (int i = 0; i < array.length(); i++) {
                 JSONObject data = array.getJSONObject(i);
-            
+
                 String gene = data.getString("gene_symbol");
-                String sample = data.getString("platform");
+                String sample = data.getString("sample_name") + " " + getField(data, "passage_num");
                 String cn = df.format(data.getDouble("logratio_ploidy"));
                 String ploidy = df.format(data.getDouble("ploidy"));
-
-             //   Double val = Math.log(cn / ploidy) / Math.log(2);
 
                 if (genes.containsKey(gene)) {
                     genes.get(gene).put(sample, cn);
@@ -1128,15 +1108,9 @@ public class PDXMouseStore {
 
         } catch (Exception e) {
             log.error(e);
-        } 
+        }
         return result.toString();
 
-    }
-    
-    
-
-    public String getExpression(String gene, ArrayList<PDXMouse> mice) {
-        return PDXDAO.getInstance().getExpression(gene, mice);
     }
 
     public String getIds() {
@@ -1144,51 +1118,118 @@ public class PDXMouseStore {
     }
 
     public HashMap<String, HashMap<String, ArrayList<String>>> getComparisonData(ArrayList<String> models, ArrayList<String> genes) {
-        return PDXDAO.getInstance().getComparisonData(models, genes);
-    }
-    
-    
-   
-    private ArrayList<PDXMouse> getMiceByGeneVariant(ArrayList<PDXMouse> mice, ArrayList<String> genes, ArrayList<String> variants) {
 
-        // turn model ids into an array of ints
-        // use the all-variants.json service to return all matching models
-        // populate matching models with gene, 
-        // if variants then populate consequence
-        ArrayList<PDXMouse> matchingMice = new ArrayList<>();
-        JSONArray jsonIds = new JSONArray();
-        for (PDXMouse m : mice) {
-            String id = m.getModelID().substring(2);
-            Integer idInt = new Integer(id);
-            jsonIds.put(idInt.toString());
+        HashMap<String, HashMap<String, ArrayList<String>>> results = new HashMap<>();
+
+        StringBuffer query = new StringBuffer(GENE_EXPRESSION);
+
+        query.append(DAOUtils.collectionToString(genes, ",", ""));
+
+        // maybe do it for all models then only pick the selected ones
+        if (!models.isEmpty() && models.size() < 100) {
+            query.append("&model=").append(DAOUtils.collectionToString(models, ",", ""));
+        }
+        DecimalFormat df = new DecimalFormat("###.##");
+        try {
+
+            /* build ampDel map
+            for each gene in list query for amp gene -> amp samples
+                                  query for del gene -> del samples
+            get(gene).get(model)->amp or del
+             */
+            HashMap<String, HashMap<String, String>> ampDelMap = new HashMap<>();
+            JSONObject job;
+            for (String gene : genes) {
+                job = new JSONObject(getJSON(CNV_AMP + gene));
+                JSONArray array = (JSONArray) job.get("data");
+                HashMap<String, String> ad = new HashMap<>();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject data = array.getJSONObject(i);
+                    ad.put(data.getString("sample_name"), "Amplification");
+                }
+                job = new JSONObject(getJSON(CNV_DEL + gene));
+                array = (JSONArray) job.get("data");
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject data = array.getJSONObject(i);
+                    ad.put(data.getString("sample_name"), "Deletion");
+                }
+                ampDelMap.put(gene, ad);
+            }
+
+            job = new JSONObject(getJSON(query.toString()));
+            JSONArray array = (JSONArray) job.get("data");
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject data = array.getJSONObject(i);
+                String model = data.getString("model_name");
+                String gene = data.getString("gene_symbol");
+                String sample = data.getString("sample_name");
+                String passage = getField(data, "passage_num");
+
+                // this will fail for baylor and dfci models wich should be used
+                // to exclude them from the results.
+                String rankZ = df.format(data.getDouble("z_score_percentile_rank"));
+                String ampDel = null;
+                try {
+                    ampDel = ampDelMap.get(gene).get(sample);
+                } catch (NullPointerException npe) {
+                    // its normal or ?unknown?
+                }
+                if (ampDel == null) {
+                    ampDel = "Unknown";
+                }
+
+                if (results.containsKey(gene)) {
+                    HashMap samples = results.get(gene);
+                    ArrayList<String> list = new ArrayList<>();
+                    list.add(rankZ);
+                    list.add(ampDel);
+                    list.add("mutation");
+                    samples.put(model + "-" + sample + " " + passage, list);
+                } else {
+                    HashMap<String, ArrayList<String>> samples = new HashMap<>();
+                    ArrayList<String> list = new ArrayList<>();
+                    list.add(rankZ);
+                    list.add(ampDel);
+                    list.add("mutation");
+                    samples.put(model + "-" + sample + " " + passage, list);
+                    results.put(gene, samples);
+                }
+
+            }
+        } catch (JSONException e) {
+            log.error(e);
+        } finally {
 
         }
-        JSONArray jsonGenes = new JSONArray(genes);
-        JSONArray jsonVariants = new JSONArray(variants);
+
+        return results;
+
+    }
+
+    public ArrayList<PDXMouse> getMiceByGeneVariant(ArrayList<PDXMouse> mice, String gene, ArrayList<String> variants) {
+
+        ArrayList<PDXMouse> matchingMice = new ArrayList<>();
+        StringBuilder ids = new StringBuilder();
+        StringBuilder variantList = new StringBuilder();
+
+        for (String variant : variants) {
+            variantList.append(variant).append(",");
+        }
         StringBuilder params = new StringBuilder();
 
-        params.append("{\"model\":").append(jsonIds.toString()).append(",\"gene_symbol\":").append(jsonGenes.toString());
+        params.append("?gene_symbol=").append(gene);
         if (variants != null && variants.size() > 0) {
-            params.append(",\"amino_acid_change\":").append(jsonVariants.toString());
+            params.append("&amino_acid_change=").append(variantList.toString());
         }
 
-        String filter = "FALSE";
-        if (WIConstants.getInstance().getPublicDeployment()) {
-            filter = "TRUE";
-        }
-        params.append(",\"skip\": \"0\", \"limit\": \"-1\", \"sort_by\": \"consequence\", \"sort_dir\": \"DESC\", \"filter\": \"");
-        params.append(filter).append("\"}");
-
-        // need to turn the json in to a map key of model id
-        // values variants, consequences
         HashMap<String, ArrayList<StringBuilder>> data = new HashMap<>();
         try {
-            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allVariants, params.toString()) + "}");
+            JSONObject job = new JSONObject(getJSON(VARIANTS + params.toString()));
 
-            JSONArray jarray = ((JSONObject) job.get("data")).getJSONArray("data");
+            JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
 
-                String id = getField(jarray.getJSONObject(i), "model_id");
+                String id = getField(jarray.getJSONObject(i), "model_name");
                 String consequence = getField(jarray.getJSONObject(i), "consequence").replace("\"", "");
                 String aaChange = getField(jarray.getJSONObject(i), "amino_acid_change");
 
@@ -1223,10 +1264,10 @@ public class PDXMouseStore {
             // then add the appropriate conseqeunce and variant
             for (String id : data.keySet()) {
                 for (PDXMouse mouse : mice) {
-                    if (compareIDs(mouse.getModelID(),id)) {
+                    if (compareIDs(mouse.getModelID(), id)) {
                         mouse.setConsequence(data.get(id).get(0).toString());
                         mouse.setVariant(data.get(id).get(1).toString());
-                        mouse.setGene(genes.get(0));
+                        mouse.setGene(gene);
                         matchingMice.add(mouse);
                     }
                 }
@@ -1242,15 +1283,15 @@ public class PDXMouseStore {
 
     public ArrayList<String> getVariants(String gene) {
 
-        String query = variantsForGene.replace("?", gene);
+        String query = VARIANTS_FOR_GENE + gene;
         ArrayList<String> variants = new ArrayList<String>();
         try {
-            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + query) + "}");
+            JSONObject job = new JSONObject(getJSON(query));
 
             JSONArray array = (JSONArray) job.get("data");
 
             for (int i = 0; i < array.length(); i++) {
-                variants.add(array.getString(i));
+                variants.add(array.getJSONObject(i).getString("amino_acid_change"));
             }
             Collections.sort(variants);
 
@@ -1261,35 +1302,41 @@ public class PDXMouseStore {
         return variants;
 
     }
-
-    public String getVariationData(String model, String limit, String start, String sort, String dir, String filter) {
-
-        String params = "{\"model\":[\"" + model + "\"],\"skip\": \"" + start + "\", \"limit\": \"" + limit + "\", \"sort_by\": \"" + sort + "\", \"sort_dir\": \"" + dir + "\", \"filter\": \"" + filter + "\"}";
-
     
+    
+
+    public String getVariationData(String model, String limit, String start, String sort, String dir) {
+
         StringBuffer result = new StringBuffer("{'total':");
+        boolean ckbSort = sort.startsWith("ckb_");
+
+        String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
+        
+             
         try {
-            // for new APIs
-     //    params = "?model="+model+"&skip="+start+"&limit="+limit+"&sort_by="+sort+"&sort_dir="+dir+"&filter="+filter;
-     //       JSONObject job = new JSONObject("{\"data\":" + getJSON("http://pdxdata.jax.org/api/variants"+params) + "}");
-     
-         JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allVariants, params) + "}");
 
-            job = (JSONObject) job.get("data");
+            JSONObject job = new JSONObject(getJSON(VARIANTS + params));
 
-            String total = ((Integer) job.get("total_rows")).toString();
+            String total = "0";
+            try {
+                total = ((Integer) job.get("total_rows")).toString();
+            } catch (JSONException jse) {
+                // will happen if there are no results
+            }
             result.append(total);
 
             JSONArray array = (JSONArray) job.get("data");
 
             result.append(",'variation':[ ");
 
-            result.append(getVariantFields(array));
+            result.append(getVariantFields(array, ckbSort));
 
             result.replace(result.length() - 1, result.length(), "]}");
 
         } catch (Exception e) {
-            log.error("Error getting variants for " + model, e);
+            log.error("Error getting variants for " + model + " from " + VARIANTS + params, e);
+
+            result.append("0,'variation':[ ]}");
 
         }
 
@@ -1298,24 +1345,18 @@ public class PDXMouseStore {
         return resultStr;
     }
 
-    
     // need to paginate results in lots of 150000 so we dont crush the server.
     // only applies to a few models
     public String getCSVVariants(String model) {
 
-        String filter = "FALSE";
-
-        if (WIConstants.getInstance().getPublicDeployment()) {
-            filter = "TRUE";
-        }
-
         StringBuilder result = new StringBuilder("Model,Sample,Gene,Platform,Chromosome,Seq Position,Ref Allele,Alt Allele,");
-        result.append("Consequence,Amino Acid Change,RS Variants,Read Depth,Allele Frequency,Transcript ID,Filtered Rationale,");
-        result.append("Passage Num,Gene ID,CKB Evidence,Actionable Cancer Types,Drug Class,Count Human Reads,PCT Human Reads,");
-        result.append("Variant Num Trials,Variant NCT IDs\n");
+        result.append("Consequence,Amino Acid Change,RS Variants,Read Depth,Allele Frequency,Transcript ID,Filtered Rationale,Filter,");
+        result.append("Passage Num,CKB Molecular Profile Link, CKB Molecular Profile Name, CKB Gene Link,CKB Potential Treatment Appr,CKB Protein Effect,No. clinical annotations predicting sensitivity,");
+        result.append("No. preclinical annotations predicting sensitivity,No. clinical annotations predicting resistance,No. preclinical annotations predicting resistance,");
+        result.append("Count Human Reads,PCT Human Reads");
 
         int start = 0;
-        int limit = 150000;
+        int limit = 15000;
         JSONArray array;
         boolean done = false;
 
@@ -1323,11 +1364,8 @@ public class PDXMouseStore {
 
             do {
 
-                String params = "{\"model\":[\"" + model + "\"],\"skip\": \"" + start + "\", \"limit\": \"" + limit + "\", \"sort_by\": \"gene_symbol\", \"sort_dir\": \"ASC\", \"filter\": \"" + filter + "\"}";
-
-                JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allVariants, params) + "}");
-
-                job = (JSONObject) job.get("data");
+                String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit;
+                JSONObject job = new JSONObject(getJSON(VARIANTS + params));
 
                 int total = (Integer) job.get("total_rows");
 
@@ -1337,7 +1375,7 @@ public class PDXMouseStore {
 
                 result.append("\n ");
 
-                result.append(getVariantFields(array).replaceAll("'", "").replaceAll("null", " ").replaceAll("\\[", "").replaceAll("\\],", "\n"));
+                result.append(getVariantFields(array, false).replaceAll("'", "").replaceAll("null", " ").replaceAll("\\[", "").replaceAll("\\],", "\n"));
 
                 start += limit;
 
@@ -1352,11 +1390,18 @@ public class PDXMouseStore {
 
     }
 
-    private String getVariantFields(JSONArray array) throws JSONException {
+    private String getVariantFields(JSONArray array, boolean ckbSort) throws JSONException {
+
+        // some ckb annotations are private if a ckb field is used to sort we want the private ones at the end
+        // otherwise the sort has gaps where private values are hidden.
+        // so stash the private results and append them at the end.
+        // will have odd effect over pagination but better than nothing...
+        StringBuilder finalResult = new StringBuilder();
         StringBuilder result = new StringBuilder();
+        StringBuilder stashedResult = new StringBuilder();
 
         for (int i = 0; i < array.length(); i++) {
-
+            boolean stash = false;
             result.append("['").append(getField(array.getJSONObject(i), "model_id")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "sample_name")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "gene_symbol")).append("',");
@@ -1372,18 +1417,87 @@ public class PDXMouseStore {
             result.append("'").append(getField(array.getJSONObject(i), "allele_frequency")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "transcript_id")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "filtered_rationale")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "passage_num")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "gene_id")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "ckb_evidence_types")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "cancer_types_actionable")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "drug_class")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "count_human_reads")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "pct_human_reads")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "variant_num_trials")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "variant_nct_ids")).append("'],");
 
+            if (!WIConstants.getInstance().getPublicDeployment()) {
+                result.append("'").append(getField(array.getJSONObject(i), "filter")).append("',");
+            } else {
+                result.append("'',");
+            }
+
+            result.append("'").append(getField(array.getJSONObject(i), "passage_num")).append("',");
+            String ckbGeneID = getField(array.getJSONObject(i), "ckb_gene_id");
+            String ckbMolProID = getField(array.getJSONObject(i), "ckb_molpro_id");
+            String ckbMolProName = getField(array.getJSONObject(i), "ckb_molpro_name");
+            String ckbTreatment = getField(array.getJSONObject(i), "ckb_potential_treat_approach");
+            boolean ckbPublic = "public".equals(getField(array.getJSONObject(i), "ckb_public_status"));
+
+            if (WIConstants.getInstance().getPublicDeployment()) {
+
+                if (ckbMolProName.length() > 0 && !ckbMolProName.equals("null")) {
+                    if (ckbPublic) {
+                        result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
+                    } else {
+                        result.append("'").append(CKB_HOME).append("',");
+                    }
+                } else {
+                    result.append("'',");
+                }
+
+                result.append("'").append(ckbMolProName).append("',");
+
+                if (ckbTreatment.trim().length() > 0 && !ckbTreatment.equals("null")) {
+                    if (ckbPublic) {
+                        result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
+                    } else {
+                        result.append("'").append(CKB_HOME).append("',");
+                    }
+                } else {
+                    result.append("'',");
+                }
+
+                result.append("'").append(ckbTreatment).append("',");
+                result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
+
+            } else {
+                //link to internal site
+                if (ckbMolProName.length() > 0 && !ckbMolProName.equals("null")) {
+                    result.append("'").append(CKB_MOLPRO_INTERNAL).append(ckbMolProID).append("',");
+                    result.append("'").append(ckbMolProName).append("',");
+                } else {
+                    result.append("'',");
+                    result.append("'',");
+
+                }
+                if (ckbTreatment.length() > 0 && !ckbTreatment.equals("null")) {
+                    result.append("'").append(CKB_MOLPRO_INTERNAL).append(ckbMolProID).append("',");
+                } else {
+                    result.append("'',");
+                }
+
+                result.append("'").append(getField(array.getJSONObject(i), "ckb_potential_treat_approach")).append("',");
+                result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
+
+            }
+
+            result.append("'").append(getField(array.getJSONObject(i), "ckb_nclinical_resist")).append("',");
+            result.append("'").append(getField(array.getJSONObject(i), "ckb_nclinical_sens")).append("',");
+            result.append("'").append(getField(array.getJSONObject(i), "ckb_npreclinical_resist")).append("',");
+            result.append("'").append(getField(array.getJSONObject(i), "ckb_npreclinical_sens")).append("',");
+
+            result.append("'").append(getField(array.getJSONObject(i), "count_human_reads")).append("',");
+            result.append("'").append(getField(array.getJSONObject(i), "pct_human_reads")).append("'],");
+
+            if (stash) {
+                stashedResult.append(result);
+
+            } else {
+                finalResult.append(result);
+            }
+            result.delete(0, result.length());
         }
-        return result.toString();
+
+        finalResult.append(stashedResult);
+        return finalResult.toString();
     }
 
     private String getField(JSONObject job, String field) {
@@ -1402,89 +1516,113 @@ public class PDXMouseStore {
         return val;
     }
 
-    // example response
-    //{"genes":[{"gene":"ALK","models":[{"model":"206","samples":[{"sample":"LG0812PE1330P0_206","fusions":["EML4 - ALK"]},{"sample":"LG0812PE1332P0_206","fusions":["EML4 - ALK"]}]}]}]}
     private ArrayList<String> getFusionModels(String fusionGenes) {
         ArrayList<String> models = new ArrayList<String>();
+        HashMap<String, String> modelsMap = new HashMap();
         try {
-            String url = this.fusionModels.replace("?", fusionGenes);
+            String url = FUSION_MODELS_BY_GENE + fusionGenes;
             JSONObject job = new JSONObject(getJSON(url));
-            JSONArray jarray = (JSONArray) job.get("genes");
-            job = jarray.getJSONObject(0);
-            jarray = job.getJSONArray("models");
+            JSONArray jarray = (JSONArray) job.get("data");
             for (int i = 0; i < jarray.length(); i++) {
-                models.add(jarray.getJSONObject(i).getString("model"));
+                modelsMap.put(jarray.getJSONObject(i).getString("model_name"), jarray.getJSONObject(i).getString("model_name"));
             }
 
         } catch (Exception e) {
             log.error("Unable to load fusion modles for " + fusionGenes, e);
         }
-
+        models.addAll(modelsMap.keySet());
         return models;
     }
 
-    private void loadFusionModels() {
-
-        try {
-
-            JSONObject job = new JSONObject(getJSON(allFusionModels));
-            JSONArray jarray = (JSONArray) job.get("models");
-            for (int i = 0; i < jarray.length(); i++) {
-                String model = jarray.getJSONObject(i).getString("model");
-                StringBuilder value = new StringBuilder();
-                JSONArray samples = jarray.getJSONObject(i).getJSONArray("samples");
-                for (int j = 0; j < samples.length(); j++) {
-                    value.append("Sample ").append(samples.getJSONObject(j).getString("sample"));
-                    value.append(" has fusion gene");
-                    JSONArray fusions = samples.getJSONObject(j).getJSONArray("fusions");
-                    if (fusions.length() > 1) {
-                        value.append("s ");
-                    } else {
-                        value.append(" ");
-                    }
-                    for (int k = 0; k < fusions.length(); k++) {
-                        if (k > 0) {
-                            value.append(", ");
-                        }
-                        value.append(fusions.get(k));
-                    }
-                    // oh the horror HTML
-                    value.append("<br>");
-                }
-                
-                fusionModelsMap.put(model, value.toString());
-            }
-        } catch (Exception e) {
-            log.error("Unable to load fusion models", e);
-        }
-    }
-
     private void loadFusionGenes() {
+        StringBuilder fusionGeneList = new StringBuilder();
         try {
-            JSONObject job = new JSONObject(getJSON(this.fusionGenes));
-            JSONArray jarray = (JSONArray) job.get("fusion_genes");
+            JSONObject job = new JSONObject(getJSON(FUSION_GENES));
+            JSONArray jarray = (JSONArray) job.get("data");
             for (int i = 0; i < jarray.length(); i++) {
                 LabelValueBean bean = new LabelValueBean<String, String>();
                 bean.setLabel(jarray.getString(i).trim());
                 bean.setValue(jarray.getString(i).trim());
 
                 fusionGenesLVB.add(bean);
+                fusionGeneList.append(jarray.getString(i).trim()).append(",");
             }
 
         } catch (Exception e) {
             log.error("Unable to load fusion genes", e);
         }
+        loadFusionModels(fusionGeneList.toString());
     }
 
-    // this is slow and should be done once on load.
-    private void getAllGenes() {
+    private void loadFusionModels(String allFusionGenes) {
+
+        // models have samples, samples have variants 
+        HashMap<String, HashMap<String, HashMap<String, String>>> map = new HashMap();
+
+        try {
+
+            JSONObject job = new JSONObject(getJSON(FUSION_MODELS_BY_GENE + allFusionGenes));
+            JSONArray jarray = (JSONArray) job.get("data");
+            for (int i = 0; i < jarray.length(); i++) {
+                try {
+                    String model = jarray.getJSONObject(i).getString("model_name");
+                   
+                    String sample = jarray.getJSONObject(i).getString("sample_name");
+                    String variant = jarray.getJSONObject(i).getString("up_gene") + " - " + jarray.getJSONObject(i).getString("dw_gene");
+
+                    if (map.containsKey(model)) {
+                        if (map.get(model).containsKey(sample)) {
+                            map.get(model).get(sample).put(variant, variant);
+                        } else {
+                            HashMap<String, String> variants = new HashMap();
+                            variants.put(variant, variant);
+                            map.get(model).put(sample, variants);
+                        }
+                    } else {
+                        HashMap<String, HashMap<String, String>> sampleMap = new HashMap();
+                        HashMap<String, String> variants = new HashMap();
+                        variants.put(variant, variant);
+                        sampleMap.put(sample, variants);
+                        map.put(model, sampleMap);
+                    }
+                } catch (Exception e) {
+                    // some data objects don't have ckb_varaint
+                }
+            }
+            for (String model : map.keySet()) {
+                StringBuilder display = new StringBuilder();
+                for (String sample : map.get(model).keySet()) {
+                    display.append("Sample ").append(sample).append(" has fusion gene");
+
+                    if (map.get(model).get(sample).keySet().size() > 1) {
+                        display.append("s");
+                    }
+                    for (String variant : map.get(model).get(sample).keySet()) {
+
+                        display.append(" ").append(variant).append(",");
+                    }
+                    // remove trailing comma
+                    display.replace(display.length() - 1, display.length(), "");
+                    if (map.get(model).size() > 1) {
+                        display.append("<br>");
+                    }
+                }
+             
+                fusionModelsMap.put(model, display.toString());
+            }
+        } catch (Exception e) {
+            log.error("Unable to load fusion models from" + FUSION_MODELS_BY_GENE + allFusionGenes, e);
+        }
+    }
+
+    private void loadAllGenes() {
 
         ArrayList<String> genes = new ArrayList<String>();
 
         try {
-            JSONObject job = new JSONObject("{\"data\":" + getJSON(variationURL + allGenes) + "}");
+            JSONObject job = new JSONObject(getJSON(ALL_GENES));
 
-            JSONArray array = (JSONArray) job.get("data");
+            JSONArray array = job.getJSONArray("data");
 
             for (int i = 0; i < array.length(); i++) {
                 if (array.getString(i).trim().length() > 0) {
@@ -1500,8 +1638,221 @@ public class PDXMouseStore {
 
     }
 
-    public String getCNVExpression(ArrayList<PDXMouse> mice, String gene) {
-        return PDXDAO.getInstance().getCNVExpression(gene, mice);
+    private void loadCTPGenes() {
+
+        ArrayList<String> genes = new ArrayList<String>();
+
+        try {
+            JSONObject job = new JSONObject(getJSON(ALL_GENES + "?all_ctp_genes=yes"));
+
+            JSONArray array = job.getJSONArray("data");
+
+            for (int i = 0; i < array.length(); i++) {
+                if (array.getString(i).trim().length() > 0) {
+                    genes.add(array.getString(i));
+                }
+            }
+            Collections.sort(genes);
+
+        } catch (Exception e) {
+            log.error("Error getting all genes", e);
+        }
+        ctpGeneList = genes;
+
+    }
+
+    // need to get passage number using sample name and display it with each plot
+    private void loadCNVPlots() {
+
+        cnvPlots.clear();
+
+        String path = WIConstants.getInstance().getCNVPlotsPath();
+        File cnvFile = new File(path);
+        for (File file : cnvFile.listFiles()) {
+            try {
+                String name = file.getName();
+
+                String model = file.getName().split("_")[0];
+                String sample = file.getName().split("_")[1];
+                String passage = file.getName().split("_")[2];
+                // String passage = getSamplePassage(model,sample);
+
+                StringBuilder label = new StringBuilder();
+                label.append("Model:").append(model);
+                label.append(" Sample:").append(sample);
+                if (passage.length() > 1) {
+                    label.append(" Passage:").append(passage);
+                }
+                ArrayList<String> details = new ArrayList<>();
+                details.add(label.toString());
+                details.add(name);
+
+           
+                if (cnvPlots.containsKey(model)) {
+                    ArrayList<ArrayList<String>> files = cnvPlots.get(model);
+                    if ("PT".equals(passage)) {
+                        files.add(0, details);
+                    } else {
+                        String lastDetails = files.get(files.size() - 1).get(0);
+                        String lastPassage = lastDetails.substring(lastDetails.length() - 3);
+                        if (lastPassage.compareTo(passage) < 0) {
+                            files.add(files.size() - 1, details);
+                        } else {
+                            files.add(details);
+                        }
+
+                    }
+                } else {
+                    ArrayList<ArrayList<String>> files = new ArrayList<>();
+                    files.add(details);
+                    cnvPlots.put(model, files);
+
+                }
+            } catch (Exception e) {
+                log.error("unable to parse cnvPlot file" + file.getName());
+            }
+        }
+
+        // sort PT first then P0,P1,...
+        Compy compy = new Compy();
+        for (ArrayList<ArrayList<String>> s : cnvPlots.values()) {
+            Collections.sort(s, compy);
+           
+        }
+
+    }
+
+    // returns an array list of plot URLs
+    public ArrayList<ArrayList<String>> getCNVPlotsForModel(String modelID) {
+        return cnvPlots.get(modelID);
+    }
+
+    private String getSamplePassage(String model, String sample) {
+        String passage = "";
+        String query = PDXMouseStore.SAMPLE_PASSAGE;
+        query = query.replace("MODEL_ID", model).replace("SAMPLE_ID", sample);
+
+        try {
+            JSONObject job = new JSONObject(getJSON(query));
+            JSONArray jarray = job.getJSONArray("data");
+            passage = jarray.getJSONObject(0).getString("passage_num");
+
+        } catch (Exception e) {
+            log.error("unable to get passage for model:" + model + " and sample:" + sample);
+        }
+        return passage;
+
+    }
+
+    /**
+     *
+     * @param gene String gene name
+     * @param mice ArrayList<PDXMouse> all mice from query results
+     * @return String to graph expression of gene across all mice
+     */
+    public String getExpressionGraph(ArrayList<PDXMouse> mice, String gene, boolean cnv) {
+
+        HashMap<String, String> ampDel = new HashMap<>();
+        if (cnv) {
+            ampDel = getAmpDel(gene);
+        }
+
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        StringBuffer result = new StringBuffer();
+
+        StringBuffer mouseIDs = new StringBuffer();
+        //batch query at 100 mice
+        int i = 0;
+        String model, sample, passage, ampDelStr;
+        Double rankZ;
+        while (i < mice.size()) {
+
+            for (int j = 0; (j < 100) && (i < mice.size()); j++) {
+                if (!DANA_FARBER.equals(mice.get(i).getInstitution()) && !BAYLOR.equals(mice.get(i).getInstitution())) {
+                    mouseIDs.append(mice.get(i).getModelID()).append(",");
+                }
+                i++;
+            }
+
+            mouseIDs.deleteCharAt(mouseIDs.length() - 1);
+
+            StringBuffer query = new StringBuffer(GENE_EXPRESSION).append(gene);
+            query.append("&model=").append(mouseIDs);
+            try {
+
+                JSONObject job = new JSONObject(getJSON(query.toString()));
+
+                JSONArray jarray = job.getJSONArray("data");
+
+                for (int k = 0; k < jarray.length(); k++) {
+                    model = jarray.getJSONObject(k).getString("model_name");
+                    sample = jarray.getJSONObject(k).getString("sample_name");
+                    passage = getField(jarray.getJSONObject(k), "passage_num");
+                    rankZ = jarray.getJSONObject(k).getDouble("z_score_percentile_rank");
+
+                    if (cnv) {
+                        ampDelStr = "Normal";
+                        if (ampDel.containsKey(model)) {
+                            ampDelStr = ampDel.get(model);
+                        }
+                        result.append("['" + model + " : " + sample + "'," + df.format(rankZ) + ",'" + model + "','" + ampDelStr + "'],");
+                    } else {
+                        result.append("['").append(model).append(" : ").append(sample);
+                        result.append(" ").append(passage);
+                        result.append("',").append(df.format(rankZ)).append(",'").append(model).append("'],");
+                    }
+                }
+
+            } catch (JSONException e) {
+                log.error(e);
+            }
+        }
+        if (result.length() > 0) {
+            result.deleteCharAt(result.length() - 1);
+        }
+
+        return result.toString();
+
+    }
+
+    private HashMap<String, String> getAmpDel(String gene) {
+        //Amplification, Deletion, Normal
+
+        HashMap<String, String> ampDel = new HashMap<>();
+
+        try {
+
+            JSONObject job = new JSONObject(getJSON(CNV_AMP + gene));
+
+            JSONArray jarray = job.getJSONArray("data");
+
+            for (int i = 0; i < jarray.length(); i++) {
+
+                ampDel.put(jarray.getJSONObject(i).getString("model_name"), "Amplification");
+            }
+
+            job = new JSONObject(getJSON(CNV_DEL + gene));
+
+            jarray = job.getJSONArray("data");
+
+            for (int i = 0; i < jarray.length(); i++) {
+
+                ampDel.put(jarray.getJSONObject(i).getString("model_name"), "Deletion");
+            }
+
+        } catch (JSONException e) {
+            log.error(e);
+        }
+        return ampDel;
+    }
+
+    private String getFilterStr() {
+        String filterStr = "filter=no";
+        if (WIConstants.getInstance().getPublicDeployment()) {
+            filterStr = "filter=yes";
+        }
+        return filterStr;
     }
 
     private String getJSON(String uri) {
@@ -1509,6 +1860,12 @@ public class PDXMouseStore {
     }
 
     private String getJSON(String uri, String json) {
+
+        if (uri.contains("?")) {
+            uri = uri + "&" + getFilterStr();
+        } else {
+            uri = uri + "?" + getFilterStr();
+        }
 
         boolean post = true;
         if (json == null || json.length() == 0) {
@@ -1583,5 +1940,33 @@ public class PDXMouseStore {
 
         return response.toString();
 
+    }
+
+    private class Compy implements Comparator<ArrayList<String>> {
+
+        public int compare(ArrayList<String> a, ArrayList<String> b) {
+
+            String sampleA = a.get(1).split("_")[1];
+            String passageA = a.get(1).split("_")[2];
+
+            String sampleB = b.get(1).split("_")[1];
+            String passageB = b.get(1).split("_")[2];
+
+            if (sampleA.equals(sampleB)) {
+
+                if ("PT".equals(passageA)) {
+                    return 1;
+                } else {
+                    return passageA.compareTo(passageB);
+
+                }
+
+            } else if (sampleA.length() == sampleB.length()) {
+                return sampleA.compareTo(sampleB);
+            } else {
+                return (sampleA.length() > sampleB.length()) ? 1 : -1;
+            }
+
+        }
     }
 }

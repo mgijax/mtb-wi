@@ -21,7 +21,7 @@ import org.jax.mgi.mtb.wi.pdx.ParseGeneCases;
  *
  * @author sbn
  */
-public class PDXMultiSearchAction extends Action {
+public class PDXLikeMeAction extends Action {
 
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
@@ -31,15 +31,17 @@ public class PDXMultiSearchAction extends Action {
 
         boolean asHTML = !"asCSV".equals(request.getParameter("asCSV"));
         boolean actionable = "actionable".equals(request.getParameter("actionable"));
-        System.out.println("asHTML:" + asHTML + " /n actionable:" + actionable);
-
+        
+        boolean showEXP = "EXP".equals(request.getParameter("EXP"));
+        boolean showLRP = "LRP".equals(request.getParameter("LRP"));
+       
         String cases = request.getParameter("cases");
         if (cases != null && cases.trim().length() > 0) {
             Scanner s = new Scanner(cases);
             s.useDelimiter("\n");
             ParseGeneCases pgc = new ParseGeneCases();
             if (asHTML) {
-                request.setAttribute("table", pgc.parseCases(s, asHTML, actionable));
+                request.setAttribute("table", pgc.parseCases(s, asHTML, actionable, showLRP, showEXP));
                 request.setAttribute("cases", cases);
             } else {
                 Date d = new Date(System.currentTimeMillis());
@@ -47,9 +49,23 @@ public class PDXMultiSearchAction extends Action {
                 String date = sdf.format(d);
                 response.setContentType("text/csv");
                 response.setHeader("Content-disposition", "attachment; filename=PDXCaseReport-" + date + ".csv");
-                response.getWriter().write(pgc.parseCases(s, asHTML, actionable));
+                response.getWriter().write(pgc.parseCases(s, asHTML, actionable, showLRP, showEXP));
                 return null;
             }
+            
+            if(!asHTML){
+                request.setAttribute("csvChecked","checked");
+            }
+            if(actionable){
+                request.setAttribute("actionableChecked","checked");
+            }
+            if(showEXP){
+                request.setAttribute("expChecked","checked");
+            }
+            if(showLRP){
+                request.setAttribute("lrpChecked","checked");
+            }
+            
         }
 
         return mapping.findForward("success");

@@ -32,7 +32,17 @@ public class ElimsUtil {
     private static String userName;
     private static String password;
     
-    private static final String BCM = "BCM"; // to identify Bayolor MRN IDs for search by ID
+    private static final String BCM = "BCM"; // to identify Bayolor MRN IDs for search by ID and show as previous ID
+    
+    private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ  (aka NSG or NOD Scid gamma)";
+    private static final String NSG_HTML_NAME = "NOD.Cg-Prkdc<sup>scid</sup> Il2rg<sup>tm1Wjl</sup>/SzJ<br>(aka NSG or NOD Scid gamma)";
+    
+    // strains starting with this get turned into one of the above.
+    private static final String NSG = "NSG";
+    
+    // all TM models and all J models before J000111056 are considered legacy and should be shown on MTB if they are P1 available
+    // non legacy models are shown at P2 available
+    private static final int legacyCutOff=111056;
 
     public ElimsUtil() {
     }
@@ -255,12 +265,19 @@ public class ElimsUtil {
     }
 
     // Any changes here need to get relayed to Al Simons as he comsumes this as JSON and these are field keys
-    private static final String STATUS_COLUMNS = "Model ID,Project Type,Model Status,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,"
+    private static final String STATUS_COLUMNS = "Model ID,Project Type,Model Status,Location,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,"
             + "Specimen Site,Primary Site,Initial Diagnosis,Clinical Diagnosis,Other Diagnosis Info,"
             + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,"
             + "Engraftment Site,Collecting Site,Collection Date,Received Date,Accession Date,P0 Engraftment Date,P0 Success Date,"
             + "P1 Engraftment Date,P1 Success Date,P2 Engraftment Date,P2 Success Date,Comments";
 
+    private static final String STATUS_COLUMNS_2 = "Model ID,Project Type,Model Status,Location,Model,Model AKA,MRN,Gender,Age,Race,Ethnicity,"
+            + "Specimen Site,Primary Site,Clinical Diagnosis,"
+            + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type,Stock Num,Strain,Mouse Sex,"
+            + "Engraftment Site,Collecting Site,Collection Date,Received Date,Accession Date,P0 Engraftment Date,P0 Success Date,"
+            + "P1 Engraftment Date,P1 Success Date,P2 Engraftment Date,P2 Success Date,Comments";
+
+    
     public String getPDXStatusReport() {
         StringBuffer report = new StringBuffer();
         try {
@@ -277,7 +294,7 @@ public class ElimsUtil {
 
             if (result.length > 0) {
 
-                report.append(STATUS_COLUMNS).append("\n");
+                report.append(STATUS_COLUMNS_2).append("\n");
                 for (int i = 0; i < result.length; i++) {
 
                     String id = result[i].getIdentifier();
@@ -292,6 +309,7 @@ public class ElimsUtil {
                         report.append(id).append(",");
                         report.append(clean(result[i].getProjectType())).append(",");
                         report.append(clean(result[i].getModel_Status())).append(",");
+                        report.append(clean(result[i].getLocation())).append(",");
                         report.append(clean(result[i].getModel())).append(",");
                         report.append(clean(result[i].getModel_Aka())).append(",");
                         report.append(clean(result[i].getMedical_Record_Number())).append(",");
@@ -301,9 +319,9 @@ public class ElimsUtil {
                         report.append(clean(result[i].getEthnicity())).append(",");
                         report.append(clean(result[i].getSpecimen_Site())).append(",");
                         report.append(clean(result[i].getPrimary_Site())).append(",");
-                        report.append(clean(result[i].getInitial_Diagnosis())).append(",");
+                      //  report.append(clean(result[i].getInitial_Diagnosis())).append(",");
                         report.append(clean(result[i].getClinical_Diagnosis())).append(",");
-                        report.append(clean(result[i].getOther_Diagnosis_Info())).append(",");
+                     //   report.append(clean(result[i].getOther_Diagnosis_Info())).append(",");    // we can remove this (per margaret)
                         report.append(clean(result[i].getTumor_Type())).append(",");
                         report.append(clean(result[i].getGrades())).append(",");
                         report.append(clean(result[i].getMarkers())).append(",");
@@ -314,7 +332,7 @@ public class ElimsUtil {
                         report.append(clean(result[i].getTumor_T_Stage())).append(",");
                         report.append(clean(result[i].getSample_Type())).append(",");
                         report.append(clean(result[i].getStockNumber())).append(",");
-                        report.append(clean(result[i].getStrain())).append(",");
+                        report.append(fixStrain(result[i].getStrain())).append(",");
                         report.append(clean(result[i].getMouseSex())).append(",");
                         report.append(clean(fixEngraftment(result[i].getEngraftmentSite()))).append(",");
                         report.append(clean(result[i].getCollecting_Site())).append(",");  // organization
@@ -366,6 +384,7 @@ public class ElimsUtil {
                         report.append("\"").append(columns[j++]).append("\":").append(clean(id)).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getProjectType())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getModel_Status())).append(",\n");
+                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getLocation())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getModel())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getModel_Aka())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMedical_Record_Number())).append(",\n");
@@ -388,7 +407,7 @@ public class ElimsUtil {
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_T_Stage())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getSample_Type())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getStockNumber())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getStrain())).append(",\n");
+                        report.append("\"").append(columns[j++]).append("\":").append(clean(fixStrain(result[i].getStrain()))).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMouseSex())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(fixEngraftment(result[i].getEngraftmentSite()))).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getCollecting_Site())).append(",\n");  // organization
@@ -506,6 +525,9 @@ public class ElimsUtil {
 
             Pdx_model_status[] results = stub.getPDXStatusReport_sessionless(soapRequest).getGetPDXStatusReport_sessionlessResult().getPdx_model_status();
 
+            String status ="";
+            int numericID =111111;
+            
             if (results.length > 0) {
 
                 for (int i = 0; i < results.length; i++) {
@@ -513,9 +535,30 @@ public class ElimsUtil {
                     ArrayList<String> details;
 
                     // should also test for filterOnID()
-                    if ((results[i].getModel_Status().indexOf("Available") != -1)
-                            || (results[i].getModel_Status().indexOf("Blood") != -1)
-                            || (results[i].getModel_Status().indexOf("Data") != -1)) {
+                    
+//                    New MTB PDX Filter criteria
+//                    Active: Available
+//                    Or Active: Available - QC Complete
+//                    Or (Active: P1 Available + all TM models + all J models less than J000111056)
+//                    No change to Blood or Data filter
+
+                    
+                    status = results[i].getModel_Status();
+                 
+                    try{
+                        numericID = new Integer(results[i].getIdentifier().replaceAll("J",""));
+                    }catch(Exception e){
+                        numericID = 111111;
+                    }
+                    
+                    if (status.contains("Active Available") 
+                        || status.contains("Active: Available")    
+                        || status.contains("Blood")
+                        || status.contains("Data")
+                        || (status.contains("Active: P1 Available") && numericID < 111056 )) {
+                        
+                //        System.out.println(status+"\t"+numericID+"\tACCEPTED");
+                                
 
                         PDXMouse mouse = new PDXMouse();
 
@@ -525,9 +568,8 @@ public class ElimsUtil {
                             mouse.setFormerSmoker(details.get(1));
                             mouse.setTreatmentNaive(details.get(2));
 
-                        } else {
-                            log.error("no clinical details for " + results[i].getIdentifier());
-                        }
+                        } 
+                        
                         try {
 
                             mouse.setModelID("TM" + String.format("%05d", new Integer(results[i].getIdentifier())));
@@ -552,13 +594,12 @@ public class ElimsUtil {
                         mouse.setRace(results[i].getRace());
                         mouse.setEthnicity(results[i].getEthnicity());
                         mouse.setPrimarySite(results[i].getPrimary_Site());
-                        mouse.setStrain(results[i].getStrain());
+                        mouse.setStrain(fixWebStrain(results[i].getStrain()));
 
                         mouse.setTumorType(results[i].getTumor_Type());
                         mouse.setTumorMarkers(clean(results[i].getMarkers()));
                         mouse.setStage(results[i].getTumor_Stage());
                         mouse.setGrade(results[i].getGrades());
-                        mouse.setStrain(results[i].getStrain());
 
                         mouse.setTag(results[i].getModelTags());
 
@@ -589,6 +630,8 @@ public class ElimsUtil {
                             // we want to be able to search on previous IDs as well
                             String pid = mouse.getPreviousID();
                             
+                            
+                            // for Baylor models we want to use MRN as previous ID
                             String mrn = results[i].getMedical_Record_Number();
                             if(mrn != null && mrn.startsWith(BCM)){
                                 pid = mrn;
@@ -596,13 +639,15 @@ public class ElimsUtil {
                             }
                             
                             if(pid != null && pid.trim().length()>0){
-                                // oh the humanity, the ExtJS widget won't work if IDs are duplicated so we need to pad these id with a space right here ---V
+                                // oh the humanity, the ExtJS combobox widget won't work if IDs are duplicated so we need to pad these id with a space right here ---V
                                 idMap.put( pid+ " ("+mouse.getModelID()+") "+mouse.getPrimarySite() + " " + mouse.getInitialDiagnosis(),mouse.getModelID()+" ");
                             }
                         } else {
                             log.debug("skipping suspended model " + mouse.getModelID());
                         }
 
+                    }else{
+               //              System.out.println(status+"\t"+numericID+"\tREJECTED");
                     }
                 }
 
@@ -800,7 +845,7 @@ public class ElimsUtil {
                         report.append(noQuotesNoCommasClean(result[i].getMarkers()).replaceAll(",", ";")).append(",");
                         report.append(noQuotesNoCommasClean(result[i].getGender())).append(",");
                         report.append(noQuotesNoCommasClean(result[i].getPatient_Age())).append(",");
-                        report.append(noQuotesNoCommasClean(result[i].getStrain())).append(",");
+                        report.append(noQuotesNoCommasClean(fixStrain(result[i].getStrain()))).append(",");
                         if (mouseMap.containsKey(id) && mouseMap.get(id).getAssocData() != null) {
                             report.append(noQuotesNoCommasClean(mouseMap.get(id).getAssocData().replaceAll(",", ";"))).append("\n");
                         } else {
@@ -871,6 +916,23 @@ public class ElimsUtil {
         }
         return map;
     }
+    
+    private String fixStrain(String strain){
+      
+        if(strain != null && strain.startsWith(NSG)){
+            strain =NSG_OFFICIAL_NAME;
+        }
+        return strain;
+    }
+    
+    private String fixWebStrain(String strain){
+      
+        if(strain != null && strain.startsWith(NSG)){
+            strain =NSG_HTML_NAME;
+        }
+        return strain;
+    }
+    
 
     // right now there is a practice model that needs to be excluded
     // but in theory it could be anyting else at some point.
@@ -918,10 +980,11 @@ public class ElimsUtil {
         return in;
     }
 
-    // if engraftment site is not provided it is Sub Q 
+    
+    // if engraftment site is not provided it is (Not any more) Sub Q 
     private String fixEngraftment(String in) {
         if (in == null || in.trim().length() == 0) {
-            return "Subcutaneous";
+            return "";
         } else {
             return in;
         }

@@ -133,7 +133,8 @@
 					</c:if>
 				</td>
 				<td class="small-center">
-					<c:out value="${tumor.freqFemaleString}" escapeXml="false" default="&nbsp;"/> 
+					<c:out value="${tumor.freqFemaleString}" escapeXml="false" default="&nbsp;"/>
+					<p>maxFreq: ${tumor.maxFreqFemale}</p>
 					<c:forEach var="freq" items="${tumor.freqFemale}">
 						<p>${freq}</p>
 					</c:forEach>
@@ -142,10 +143,17 @@
 				
 				
 				
-				<td class="small-center"><c:out value="${tumor.freqMaleString}" escapeXml="false" default="&nbsp;"/></td>
-				<td class="small-center"><c:out value="${tumor.freqMixedString}" escapeXml="false" default="&nbsp;"/></td>
+				<td class="small-center">
+					<c:out value="${tumor.freqMaleString}" escapeXml="false" default="&nbsp;"/>
+					<p>maxFreq: ${tumor.maxFreqMale}</p>
+				</td>
+				<td class="small-center">
+					<c:out value="${tumor.freqMixedString}" escapeXml="false" default="&nbsp;"/>
+					<p>maxFreq: ${tumor.maxFreqMixed}</p>
+				</td>
 				<td class="small-center">
 					<c:out value="${tumor.freqUnknownString}" escapeXml="false" default="&nbsp;"/>
+					<p>maxFreq: ${tumor.maxFreqUnknown}</p>
 					<c:forEach var="freq" items="${tumor.freqUnknown}">
 						<p>${freq}</p>
 					</c:forEach>
