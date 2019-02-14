@@ -4,77 +4,136 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Patient Derived Xenograft Comparison Form" help="pdxcomparison">
 	<jsp:attribute name="head">
-	<script type="text/javascript">
-		function resetForm(){
-			document.forms[1].reset();
-			document.getElementById("genes").selectedIndex = -1;
-		}
-		window.onload = function() {
-			if (typeof(Storage) !== "undefined") {
-				var save = document.getElementById("saved-genes");
-				var genes = localStorage.getItem("savedMTBPDXComparisonGenes");
-				if (genes !== null && genes.length > 0) {
-					var gList = genes.split(",");
-					gList.sort();
-					for (var i = 0; i < gList.length; i++) {
-						if (gList[i].length > 0){
-							var opt = document.createElement("option");
-							opt.value = gList[i];
-							opt.text = gList[i];
-							save.add(opt);
-						}
-					}
-				}
-				document.getElementById("savedGenesList").value=genes;
-			}else{
-				var hide = document.getElementsByName("geneSave");
-				for (var i = 0; i < hide.length; i++) {
-					hide[i].style.display = "none";
-				}
-				document.getElementById("geneSaveTxt").innerText="";
-			}
-		}
-		function addGenes(){
-			var sel = document.getElementById("genes");
-			var save = document.getElementById("saved-genes");
-			for (var i = 0; i < sel.length; i++) {
-				if (sel.options[i].selected) {
-					var opt = document.createElement("option");
-					opt.value = sel.options[i].value;
-					opt.text = sel.options[i].text;
-					save.add(opt);
-				}
-			}
-			doStorage();
-		}
-		function removeGenes() {
-			var save = document.getElementById("saved-genes");
-			for (var i = save.length-1; i >= 0; i--) {
-				if (save.options[i].selected) {
-					save.remove(i);
-				}
-			}
-			doStorage();
-		}
-		function clearGenes() {
-			var save = document.getElementById("saved-genes");
-			for (var i = save.length-1; i >= 0; i--) {
-				save.remove(i);
-			}
-			doStorage();
-		}
-		function doStorage() {
-			var geneList ="";
-			var save = document.getElementById("saved-genes");
-			for(var i = 0; i < save.length; i++) {
-				geneList += save.options[i].text + ",";
-			}
-			if(typeof(Storage) !== "undefined") {
-				localStorage.setItem("savedMTBPDXComparisonGenes", geneList);
-			}
-			document.getElementById("savedGenesList").value=geneList;
-		}
-	</script>
+    <script type="text/javascript">
+         
+        function resetForm(){
+            document.forms[1].reset();
+            document.getElementById("genes").selectedIndex = -1;
+        }
+        
+        
+        window.onload = function() {
+            if (typeof(Storage) !== "undefined") {
+                var save = document.getElementById("savedGenes");
+                var genes = localStorage.getItem("savedMTBPDXComparisonGenes");
+                if (genes !== null && genes.length > 0) {
+                    var gList = genes.split(",");
+                    gList.sort();
+                    for (var i = 0; i < gList.length; i++) {
+                        if (gList[i].length > 0){
+                            var opt = document.createElement("option");
+                            opt.value = gList[i];
+                            opt.text = gList[i];
+                            save.add(opt);
+                        }
+                    }
+                }
+                document.getElementById("savedGenesList").value=genes;
+            }else{
+                var hide = document.getElementsByName("geneSave");
+                for (var i = 0; i < hide.length; i++) {
+                    hide[i].style.display = "none";
+                }
+                document.getElementById("geneSaveTxt").innerText="";
+            }
+        }
+
+        function addGenes(){
+            var sel = document.getElementById("genes");
+            var save = document.getElementById("savedGenes");
+            for (var i = 0; i < sel.length; i++) {
+                if (sel.options[i].selected) {
+                    var opt = document.createElement("option");
+                    opt.value = sel.options[i].value;
+                    opt.text = sel.options[i].text;
+                    save.add(opt);
+                }
+            }
+            doStorage();
+        }
+        
+        function addGenesNew(){
+            var sel = document.forms[1].gene.value;
+            var save = document.getElementById("savedGenes");
+            var opt = document.createElement("option");
+            opt.value = sel;
+            opt.text = sel;
+            save.add(opt);
+
+            
+            doStorage();
+        }
+        
+
+        function removeGenes() {
+            var save = document.getElementById("savedGenes");
+            for (var i = save.length-1; i >= 0; i--) {
+                if (save.options[i].selected) {
+                    save.remove(i);
+
+                }
+            }
+            doStorage();
+        }
+
+        function clearGenes() {
+            var save = document.getElementById("savedGenes");
+            for (var i = save.length-1; i >= 0; i--) {
+                save.remove(i);
+            }
+            doStorage();
+        }
+
+        function doStorage() {
+            var geneList ="";
+            var save = document.getElementById("savedGenes");
+            for(var i = 0; i < save.length; i++) {
+                geneList += save.options[i].text + ",";
+            }
+            if(typeof(Storage) !== "undefined") {
+                localStorage.setItem("savedMTBPDXComparisonGenes", geneList);
+            }
+            document.getElementById("savedGenesList").value=geneList;
+        }
+        
+          Ext.onReady(function(){
+        
+          var dataProxy = new Ext.data.HttpProxy({
+                url: '/mtbwi/pdxHumanGenes.do'
+            })
+        
+            var humanGenestore = new Ext.data.ArrayStore({
+                id:'thestore',
+     //           pageSize: 10, 
+                root:'data',
+                totalProperty: 'total',
+                fields: [{name:'symbol'}, {name:'display'}],
+                proxy: dataProxy,
+                autoLoad:false
+            });
+            
+            var combo = new Ext.form.ComboBox({
+                store: humanGenestore,
+                minChars:2,
+                valueField:'symbol',
+                displayField:'display',
+                typeAhead: true,
+                mode: 'remote',
+                forceSelection: false,
+                triggerAction: 'all',
+                selectOnFocus:true,
+                hideTrigger:true,
+                hiddenName:'gene',
+                width:260,
+                listEmptyText:'no matching gene',
+                renderTo: 'geneSelect'
+        //        ,pageSize:10
+            });
+	
+        });
+        
+         
+    </script>
 	</jsp:attribute>
 	<jsp:body>
 	
