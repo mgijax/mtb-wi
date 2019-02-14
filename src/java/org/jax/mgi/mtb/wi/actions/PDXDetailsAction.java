@@ -5,6 +5,8 @@
 package org.jax.mgi.mtb.wi.actions;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -318,6 +320,16 @@ public class PDXDetailsAction extends Action {
             
             if(RelatedModels.getProxeId(modelID)!= null){
                 request.setAttribute("proxeID",RelatedModels.getProxeId(modelID));
+            }
+            
+            HashMap<String,Double> tmb = mouse.getTMB();
+            if(tmb.size()>0){
+                ArrayList<String> tmbs = new ArrayList();
+                for(String key : tmb.keySet()){
+                    tmbs.add("Sample "+key+" has a TMB score of "+tmb.get(key));
+                }
+                Collections.sort(tmbs);
+                request.setAttribute("tmb",tmbs);
             }
 
         }//end of else for finding a model;

@@ -378,6 +378,26 @@
 </td>
 </tr>
 
+<tr class="stripe1">
+    <td class="cat1">
+        Search by tumor mutation burden (TMB) score range
+    </td>
+    <td class="data1">
+        <table>
+            <tr><td align="center">Minimum:${minTMB}</td>
+                <td></td>
+                <td align="center">Maximum:${maxTMB}</td>
+                <td>&nbsp;&nbsp; ( TMB > 22  is considered high.)</td>
+            </tr>
+            <tr><td align="center"><html:text size="4" property="TMBGT"/></td>
+                <td align="center"> <b>&lt;=</b>&nbsp;&nbsp;<b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('TMB is calculated for each sample associated with a PDX model.  Models will be returned if any of the samples meet the search criteria.', CAPTION, 'Tumor mutation burden');" onmouseout="return nd();">TMB</a></b>&nbsp;&nbsp;<b>&lt;=</b></td>
+                <td align="center"> <html:text size="4" property="TMBLT"/></td>
+                <td></td>
+            </tr>
+        </table>
+    </td>
+</tr>
+
 
 <tr class="stripe2">
     <td class="cat2">

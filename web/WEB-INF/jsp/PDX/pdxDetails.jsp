@@ -894,6 +894,38 @@
 
                                     </c:if>
 
+                                        
+                                    <c:if test="${not empty tmb}">
+                                      
+                                        <c:set var="a" value="2"/>
+                                        <c:set var="b" value="1"/>
+
+
+                                         <c:if test="${not empty referenceLinks or not empty sessionScope.pdxEditor}">
+
+                                            <c:set var="a" value="1"/>
+                                            <c:set var="b" value="2"/>
+                                         </c:if>
+
+
+                                         <tr class="stripe${a}">
+                                            <td class="cat${a}">
+                                                Tumor Mutation Burden
+                                            </td>
+                                            <td class="data${a}">
+                                                <c:forEach var="sample" items="${tmb}" varStatus="status">
+                                                    ${sample}<br>    
+                                                </c:forEach>
+                                            </td>
+                                        </tr>
+
+                                    </c:if>    
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                     <tr class="stripe${b}">
                                         <td class="cat${b}">
                                             Variant Summary <a class="help" href="userHelp.jsp#pdxVariant"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>

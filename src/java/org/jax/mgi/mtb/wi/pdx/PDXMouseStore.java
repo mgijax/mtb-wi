@@ -15,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -99,6 +100,8 @@ public class PDXMouseStore {
     private static final String ALL_GENES = baseURL + "all_genes";
 
     private static final String SAMPLE_PASSAGE = baseURL + "inventory?model=MODEL_ID&sample=SAMPLE_ID&reqitems=passage_num";
+    
+    private static final String TMB_URI = baseURL+"inventory?platform=CTP&reqitems=model_name,sample_name,tmb_score";
 
     private static HashMap<String, String> fusionModelsMap = new HashMap();
 
@@ -124,7 +127,11 @@ public class PDXMouseStore {
     public static double AMP = 0.5;
     public static double DEL = -0.5;
 
-    private static final HashMap<String, ArrayList<ArrayList<String>>> cnvPlots = new HashMap<>();
+    private static final HashMap<String, ArrayList<ArrayList<String>>> cnvPlots = new HashMap();
+    private static final HashMap<String, HashMap<String, Double>> tmbMap = new HashMap();
+    
+    private static Double minTMB =0.0;
+    private static Double maxTMB =0.0;
 
     public PDXMouseStore() {
 
@@ -200,6 +207,8 @@ public class PDXMouseStore {
         this.idList = sb.toString();
 
         loadFusionGenes();
+        
+        loadTMBData();
 
         if (allMice != null && allMice.size() > 0) {
 
@@ -228,6 +237,12 @@ public class PDXMouseStore {
                 if (fusionModelsMap.get(id) != null) {
                     mouse.setFusionGenes(fusionModelsMap.get(id));
 
+                }
+                
+                if(tmbMap.get(id) != null){
+                    System.out.println("set tmb for "+id);
+                    mouse.setTMB(tmbMap.get(id));
+                    
                 }
 
             }
@@ -385,7 +400,7 @@ public class PDXMouseStore {
             ArrayList<String> diagnoses, ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers,
             String gene, ArrayList<String> variants, boolean dosingStudy,
             boolean tumorGrowth, ArrayList<String> tags, String fusionGenes,
-            boolean treatmentNaive, String recistDrug, String recistResponse) {
+            boolean treatmentNaive, String recistDrug, String recistResponse, Double tmbGT, Double tmbLT) {
 
         // may need to do 3 searches
         // findStaticMice
@@ -395,7 +410,7 @@ public class PDXMouseStore {
 
         // get a list of mice based on search criteria that are in ELIMS
         mice = findStaticMice(modelID, tissues, diagnoses, tumorTypes, tumorMarkers,
-                tags, dosingStudy, tumorGrowth, treatmentNaive, recistDrug, recistResponse);
+                tags, dosingStudy, tumorGrowth, treatmentNaive, recistDrug, recistResponse, tmbGT, tmbLT);
 
         ArrayList<String> ids = new ArrayList<>();
 
@@ -499,7 +514,7 @@ public class PDXMouseStore {
     private ArrayList<PDXMouse> findStaticMice(String modelID, ArrayList<String> tissues,
             ArrayList<String> diagnoses, ArrayList<String> tumorTypes, ArrayList<String> tumorMarkers,
             ArrayList<String> tags, boolean dosingStudy, boolean tumorGrowth, boolean treatmentNaive,
-            String recistDrug, String recistResponse) {
+            String recistDrug, String recistResponse, Double tmbGT, Double tmbLT) {
 
         ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
         ArrayList<PDXMouse> mice2 = new ArrayList<PDXMouse>();
@@ -629,6 +644,43 @@ public class PDXMouseStore {
         }
 
         mice.clear();
+        
+        
+        if(tmbGT != null && tmbLT != null){
+            for(PDXMouse mouse : mice2){
+                if(mouse.tmbGreaterThan(tmbGT) && mouse.tmbLessThan(tmbLT)){
+                    mice.add(mouse);
+                }
+            }
+            mice2.clear();
+            mice2.addAll(mice);
+        }else{
+        
+
+            if(tmbGT != null){
+                for(PDXMouse mouse : mice2){
+                    if(mouse.tmbGreaterThan(tmbGT)){
+                        mice.add(mouse);
+                    }
+                }
+            }else{
+                mice.addAll(mice2);
+            }
+
+            mice2.clear();
+
+            if(tmbLT != null){
+                for(PDXMouse mouse : mice){
+                    if(mouse.tmbLessThan(tmbLT)){
+                        mice2.add(mouse);
+                    }
+                }
+            }else{
+                mice2.addAll(mice);
+            }
+
+            mice.clear();
+        }
 
         // deduplicate
         HashMap<String, PDXMouse> mouseMap = new HashMap();
@@ -1497,6 +1549,14 @@ public class PDXMouseStore {
         return finalResult.toString();
     }
 
+    public Double getMinTMB(){
+        return minTMB;
+    }
+    
+    public Double getMaxTMB(){
+        return maxTMB;
+    }
+    
     private String getField(JSONObject job, String field) {
         String val = "";
         try {
@@ -1739,6 +1799,47 @@ public class PDXMouseStore {
         }
         return passage;
 
+    }
+    
+    private void loadTMBData(){
+        
+        DecimalFormat df = new DecimalFormat("###.##");
+         
+         try {
+            JSONObject job = new JSONObject(getJSON(TMB_URI));
+        
+            JSONArray jarray = job.getJSONArray("data");
+            for(int i = 0 ; i < jarray.length(); i++){
+                try{
+                    job = jarray.getJSONObject(i);
+                    String model = job.getString("model_name");
+                    String sample = job.getString("sample_name");
+                    Double tmb = new Double(df.format(job.getDouble("tmb_score")));
+                    
+                    if(tmb > maxTMB){
+                        maxTMB = tmb;
+                    }
+                    if(tmb < minTMB){
+                        minTMB = tmb;
+                    }
+                    
+                    if(tmbMap.containsKey(model)){
+                        tmbMap.get(model).put(sample, tmb);
+                    }else{
+                        HashMap<String,Double> map = new HashMap();
+                        map.put(sample, tmb);
+                        tmbMap.put(model,map);
+                    }
+                     
+                }catch(Exception e){
+                    // may happen if tmb is null;
+                }
+            }
+
+        } catch (Exception e) {
+            log.error("Unable to load TMB data",e);
+        }
+        
     }
 
     /**

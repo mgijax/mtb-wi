@@ -91,6 +91,9 @@ public class PDXSearchAction extends Action {
         request.setAttribute("chrValuesCNV", mapChromosomes.values());
         
         request.setAttribute("modelIDs", pdxMouseStore.getIds());
+        
+        request.setAttribute("minTMB", pdxMouseStore.getMinTMB());
+        request.setAttribute("maxTMB", pdxMouseStore.getMaxTMB());
 
         return mapping.findForward(result);
     }
