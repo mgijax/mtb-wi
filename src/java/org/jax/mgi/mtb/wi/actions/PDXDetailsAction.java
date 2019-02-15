@@ -7,6 +7,7 @@ package org.jax.mgi.mtb.wi.actions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -325,7 +326,12 @@ public class PDXDetailsAction extends Action {
             HashMap<String,Double> tmb = mouse.getTMB();
             if(tmb.size()>0){
                 ArrayList<String> tmbs = new ArrayList();
-                for(String key : tmb.keySet()){
+                ArrayList<String> keys = new ArrayList();
+                
+                
+                keys.addAll(tmb.keySet());
+                Collections.sort(keys);
+                for(String key : keys){
                     tmbs.add("Sample "+key+" has a TMB score of "+tmb.get(key));
                 }
                 Collections.sort(tmbs);

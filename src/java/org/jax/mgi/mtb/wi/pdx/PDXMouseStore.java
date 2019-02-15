@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.SQLException;
@@ -240,7 +241,7 @@ public class PDXMouseStore {
                 }
                 
                 if(tmbMap.get(id) != null){
-                    System.out.println("set tmb for "+id);
+                 //   System.out.println("set tmb for "+id);
                     mouse.setTMB(tmbMap.get(id));
                     
                 }
@@ -1804,6 +1805,7 @@ public class PDXMouseStore {
     private void loadTMBData(){
         
         DecimalFormat df = new DecimalFormat("###.##");
+        df.setRoundingMode(RoundingMode.CEILING);
          
          try {
             JSONObject job = new JSONObject(getJSON(TMB_URI));
@@ -1814,6 +1816,11 @@ public class PDXMouseStore {
                     job = jarray.getJSONObject(i);
                     String model = job.getString("model_name");
                     String sample = job.getString("sample_name");
+                    String passage = getSamplePassage(model,sample);
+                    if(passage != null && !passage.equals("null")){
+                        sample = " from passage "+passage;
+                    }
+                            
                     Double tmb = new Double(df.format(job.getDouble("tmb_score")));
                     
                     if(tmb > maxTMB){
