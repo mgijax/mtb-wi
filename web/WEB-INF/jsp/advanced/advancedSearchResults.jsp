@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Advanced Search Results" help="tumorresults">
-	<table class="agro-source">
+	<table class="agro-source-1 result-table">
 		<caption>
 			<div class="result-summary">		
 				<h4>Search Summary</h4>
@@ -83,19 +84,18 @@
 		<c:when test="${not empty tumors}">
 		<thead>
 			<tr>
-				<th colspan="4"></th>
-				<th colspan="4">Tumor Frequency Range</th>
 				<th colspan="3"></th>
+				<th colspan="4">Tumor Frequency Range</th>
+				<th colspan="2"></th>
 			</tr>
 			<tr>
-				<th>Tumor Name</th>
-				<th class="category">Organ Affected</th>
+				<th>Tumor Name<em>&nbsp;</em></th>
 				<th class="category">Treatment Type <em>Agents</em></th>
 				<th class="category">Strain Name <em>Strain Types</em></th>				
-				<th data-unit="percent" data-legend="fr" data-aggregate="prob-or">F</th>
-				<th data-unit="percent" data-legend="fr" data-aggregate="prob-or">M</th>
-				<th data-unit="percent" data-legend="fr" data-aggregate="prob-or">Mixed</th>
-				<th data-unit="percent" data-legend="fr" data-aggregate="prob-or">Un.</th>
+				<th class="fr" data-unit="percent" data-legend="fr" data-aggregate="prob-or">F</th>
+				<th class="fr" data-unit="percent" data-legend="fr" data-aggregate="prob-or">M</th>
+				<th class="fr" data-unit="percent" data-legend="fr" data-aggregate="prob-or">Mixed</th>
+				<th class="fr" data-unit="percent" data-legend="fr" data-aggregate="prob-or">Un.</th>
 				<th>Additional Information</th>
 				<th>Tumor Details</th>				
 			</tr>
@@ -103,86 +103,65 @@
 		<tbody>
 			<c:forEach var="tumor" items="${tumors}" varStatus="status">
 			<tr>
-				<td><c:out value="${tumor.tumorName}" escapeXml="false"/><br>[key: <c:out value="${tumor.organOfOriginKey}" escapeXml="false"/>, name: <c:out value="${tumor.tumorOrganName}" escapeXml="false"/>]</td>
-				<td><c:out value="${tumor.organAffectedName}" escapeXml="false"/></td>
 				<td>
-					<c:out value="${tumor.treatmentType}" escapeXml="false"/>
-					<c:if test="${not empty tumor.agentsCollection}">
-					<!-- \n -->
-					<em>
-						<c:forEach var="agent" items="${tumor.agentsCollection}" varStatus="status">
-						<c:out value="${agent}" escapeXml="false"/>
-						<c:if test="${status.last != true}">
-						<!-- \n -->
+					<c:out value="${tumor.tumorName}" escapeXml="false"/>
+					<c:if test="${tumor.tumorOrganName != tumor.organAffectedName}">
+						<em>observed in <c:out value="${tumor.organAffectedName}" escapeXml="false"/></em>
+					</c:if>
+				</td>
+				<td>
+					<c:if test="${tumor.treatmentType != 'None (spontaneous)'}">
+						<c:out value="${tumor.treatmentType}" escapeXml="false"/>
+						<c:if test="${not empty tumor.agentsCollection}">
+							<c:forEach var="agent" items="${tumor.agentsCollection}" varStatus="status">
+								<em><c:out value="${agent}" escapeXml="false"/></em>
+							</c:forEach>
 						</c:if>
-						</c:forEach>
-					</em> 
 					</c:if>
 				</td>
 				<td><a href="strainDetails.do?key=${tumor.strainKey}"><c:out value="${tumor.strainName}" escapeXml="false"/></a>
 					<c:if test="${not empty tumor.strainTypesCollection}">
-					<!-- \n -->
-					<em>
 						<c:forEach var="strainType" items="${tumor.strainTypesCollection}" varStatus="status">
-						${strainType}
-						<c:if test="${status.last != true}">
-						<!-- \n -->
-						</c:if>
+							<em>${strainType}</em>
 						</c:forEach>
-					</em>
 					</c:if>
+				</td>				
+				<fmt:formatNumber var="femaleClass" value="${tumor.maxFreqFemale + (100 - tumor.maxFreqFemale) % 10}" maxFractionDigits="0" />
+				<fmt:formatNumber var="maleClass" value="${tumor.maxFreqMale + (100 - tumor.maxFreqMale) % 10}" maxFractionDigits="0" />
+				<fmt:formatNumber var="mixedClass" value="${tumor.maxFreqMixed + (100 - tumor.maxFreqMixed) % 10}" maxFractionDigits="0" />
+				<fmt:formatNumber var="unknownClass" value="${tumor.maxFreqUnknown + (100 - tumor.maxFreqUnknown) % 10}" maxFractionDigits="0" />				
+				<td class="fr r-${femaleClass}" data-val="${tumor.maxFreqFemale}">
+					<c:out value="${tumor.freqFemaleString}" escapeXml="false" default=""/>
 				</td>
-				<td class="small-center">
-					<c:out value="${tumor.freqFemaleString}" escapeXml="false" default="&nbsp;"/>
-					<p>maxFreq: ${tumor.maxFreqFemale}</p>
-					<c:forEach var="freq" items="${tumor.freqFemale}">
-						<p>${freq}</p>
-					</c:forEach>
+				<td class="fr r-${maleClass}" data-val="${tumor.maxFreqMale}">
+					<c:out value="${tumor.freqMaleString}" escapeXml="false" default=""/>
 				</td>
-				
-				
-				
-				
-				<td class="small-center">
-					<c:out value="${tumor.freqMaleString}" escapeXml="false" default="&nbsp;"/>
-					<p>maxFreq: ${tumor.maxFreqMale}</p>
+				<td class="fr r-${mixedClass}" data-val="${tumor.maxFreqMixed}">
+					<c:out value="${tumor.freqMixedString}" escapeXml="false" default=""/>
 				</td>
-				<td class="small-center">
-					<c:out value="${tumor.freqMixedString}" escapeXml="false" default="&nbsp;"/>
-					<p>maxFreq: ${tumor.maxFreqMixed}</p>
-				</td>
-				<td class="small-center">
-					<c:out value="${tumor.freqUnknownString}" escapeXml="false" default="&nbsp;"/>
-					<p>maxFreq: ${tumor.maxFreqUnknown}</p>
-					<c:forEach var="freq" items="${tumor.freqUnknown}">
-						<p>${freq}</p>
-					</c:forEach>
+				<td class="fr r-${unknownClass}" data-val="${tumor.maxFreqUnknown}">
+					<c:out value="${tumor.freqUnknownString}" escapeXml="false" default=""/>
 				</td>
 				<td>
-					<c:choose>
-					<c:when test="${not empty tumor.metastasizesToDisplay}">
-					
-					<c:forEach var="organ" items="${tumor.metastasizesToDisplay}" varStatus="status">
-					Metastasizes To ${organ}
-					<c:if test="${status.last != true}">
-					<!-- \n -->
+					<c:if test="${not empty tumor.metastasizesToDisplay}">
+						<c:forEach var="organ" items="${tumor.metastasizesToDisplay}" varStatus="status">
+							<c:if test="${!fn:startsWith(organ, '<i>not</i>')}">
+								<p class="does-metastasize">${organ}</p>
+							</c:if>
+						</c:forEach>
+						<c:forEach var="organ" items="${tumor.metastasizesToDisplay}" varStatus="status">
+							<c:if test="${fn:startsWith(organ, '<i>not</i>')}">
+								<p class="does-not-metastasize">${organ}</p>
+							</c:if>
+						</c:forEach>						
 					</c:if>
-					</c:forEach>
-					
-					</c:when>
-					<c:otherwise>
-					</c:otherwise>
-					</c:choose>
-					<c:choose>
-					<c:when test="${tumor.images==true}">
-					<div><img src="${applicationScope.urlImageDir}/pic.gif" alt="X"></div>
-					</c:when>
-					<c:otherwise>
-					</c:otherwise>
-					</c:choose>
+					<c:if test="${tumor.images==true}">
+						<div><img src="${applicationScope.urlImageDir}/pic.gif" alt="X">${tumor.imageCount} image<c:if test="${tumor.imageCount != 1}">s</c:if></div>
+					</c:if>
 				</td>
 				<td>
-					<a href="tumorSummary.do?strainKey=${tumor.strainKey}&amp;organOfOriginKey=${tumor.organOfOriginKey}&amp;tumorFrequencyKeys=${tumor.allTFKeysAsParams}">Summary</a>
+
+					<a href="tumorSummary.do?strainKey=${tumor.strainKey}&amp;organOfOriginKey=${tumor.organOfOriginKey}&amp;tumorFrequencyKeys=${tumor.allTFKeysAsParams}">View details<strong>${tumor.numberTFRecords} record<c:if test="${tumor.numberTFRecords != 1}">s</c:if></strong></a>
 				</td>
 			</tr>
 			</c:forEach>

@@ -44,7 +44,7 @@ div {
 }
 
 td {
-	padding:4px 6px 3px;
+	padding:5px 6px 4px;
 }
 
 th {
@@ -804,7 +804,7 @@ dd {
 
 section > table > tbody > tr:nth-child(odd) > td:not([rowspan]),
 section > table > tbody > tr:nth-child(odd) > td[rowspan='1'] {
-	background-color: #f0f3f8; /* rgba(144,157,163,0.12); */
+	background-color: #e5e9f0;
 }
 
 th[colspan] {
@@ -898,15 +898,32 @@ table {
 	width:100%;
 }
 
-tr:last-child > th:nth-child(5),
-tr:last-child > th:nth-child(6),
-tr:last-child > th:nth-child(7),
-tr:last-child > th:nth-child(8)
-{
-	text-align:center;	
+.result-table td {
+	border:1px solid white;
+}
+
+.result-table td > em,
+.result-table th > em {
+	display:block;
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	font-size:0.9em;
+	margin:0.1111em 0 0;
+} 
+
+.result-table td:last-child {
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	white-space: nowrap;
+	font-size:0.9em;
+}
+
+.result-table td:last-child strong {
+	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	display:block;
+	font-size:1.1111em;
 }
 
 
+.result-table .fr,
 .agro td.m0,
 .agro td.m1,
 .agro td.m2,
@@ -915,37 +932,70 @@ tr:last-child > th:nth-child(8)
 	padding-left:0;
 	padding-right:0;
 	width:55px;
+	
 }
 
+.r-10[data-val="0.1"],[data-val="0.1"],
 .l-observed {
-	background-color:#ddd !important;
+	background-color:#ced3db !important;
 }
 
+.r-0[data-val^="0"],.r-10,
 .l0 {
 	background-color:#d1ffff !important;
 }
 
+.r-20,
 .l1 {
 	background-color:#bcf380 !important;
 	
 }
 
+.r-30,.r-40,.r-50,
 .l2 {
 	background-color:#ffc400 !important;
-	border-color:#cb8e55 !important;
 }
 
+.r-60,.r-70,.r-80,
 .l3 {
 	background-color:#f45a02 !important;
 	color:white !important;
 }
 
+.r-90,.r-100,
 .l4 {
 	background-color:#ba0011 !important;
 	color:white !important;
 }
 
+p.does-metastasize,
+p.does-not-metastasize {
+	white-space: nowrap;
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	font-size:0.9em;
+}
+
+p.does-not-metastasize > i {
+	display:none;
+}
 
 
+p.does-metastasize:first-child:before {
+	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	font-size:1.1111em;
+	content: 'Metastasizes to:';
+	display:block;
+}
 
+p.does-not-metastasize:first-child:before,
+p.does-metastasize + p.does-not-metastasize:before {
+	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	font-size:1.1111em;
+	content: 'Does not metastasize to:';
+	display:block;
+}
+
+p.does-metastasize + p.does-not-metastasize:before {
+	margin:8px 0 0;
+}
 
