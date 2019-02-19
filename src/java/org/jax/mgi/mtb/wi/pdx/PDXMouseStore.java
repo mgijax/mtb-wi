@@ -102,7 +102,7 @@ public class PDXMouseStore {
 
     private static final String SAMPLE_PASSAGE = baseURL + "inventory?model=MODEL_ID&sample=SAMPLE_ID&reqitems=passage_num";
     
-    private static final String TMB_URI = baseURL+"inventory?platform=CTP&reqitems=model_name,sample_name,tmb_score";
+    private static final String TMB_URI = baseURL+"inventory?platform=CTP&reqitems=model_name,sample_name,passage_num,tmb_score";
 
     private static HashMap<String, String> fusionModelsMap = new HashMap();
 
@@ -131,7 +131,7 @@ public class PDXMouseStore {
     private static final HashMap<String, ArrayList<ArrayList<String>>> cnvPlots = new HashMap();
     private static final HashMap<String, HashMap<String, Double>> tmbMap = new HashMap();
     
-    private static Double minTMB =0.0;
+    private static Double minTMB =1000.0;
     private static Double maxTMB =0.0;
 
     public PDXMouseStore() {
@@ -1816,11 +1816,12 @@ public class PDXMouseStore {
                     job = jarray.getJSONObject(i);
                     String model = job.getString("model_name");
                     String sample = job.getString("sample_name");
-                    String passage = getSamplePassage(model,sample);
+                    String passage = job.getString("passage_num");
+                    
                     if(passage != null && !passage.equals("null")){
                         sample = " from passage "+passage;
                     }
-                            
+                
                     Double tmb = new Double(df.format(job.getDouble("tmb_score")));
                     
                     if(tmb > maxTMB){
