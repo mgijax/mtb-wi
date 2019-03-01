@@ -72,6 +72,10 @@ public class PDXDetailsAction extends Action {
         if ("null".equals(variant)) {
             variant = null;
         }
+        
+        if(request.getParameter("ctpOnly")!= null){
+            request.setAttribute("ctpOnly","&all_ctp_genes=yes");
+        }
 
         ArrayList<PDXMouse> mice = store.findStaticMouseByID(modelID);
 

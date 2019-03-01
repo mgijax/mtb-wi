@@ -162,7 +162,7 @@
             Ext.onReady(function () {
 
                 dataProxy = new Ext.data.HttpProxy({
-                    url: '/mtbwi/pdxVariationData.do?modelID=${modelID}',
+                    url: '/mtbwi/pdxVariationData.do?modelID=${modelID}${ctpOnly}',
                     timeout: 7000000
                 })
 
@@ -184,9 +184,10 @@
                     {name: 'filtered_rationale'},
                     {name: 'filter'},
                     {name: 'passage_num'},
+                    {name: 'gene_id'},
                     {name: 'ckb_molpro_link'},
                     {name: 'ckb_molpro_name'},
-                    {name: 'ckb_gene_id'},
+                    
                     {name: 'ckb_potential_treat_approach'},
                     {name: 'ckb_protein_effect'},
                     {name: 'ckb_nclinical_resist'},

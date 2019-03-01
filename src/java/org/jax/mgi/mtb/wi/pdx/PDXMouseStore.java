@@ -1011,10 +1011,7 @@ public class PDXMouseStore {
                 platformMap.put(platform, platform);
                 sampleMap.put(sample, sample);
                 samplePlatformMap.put(sample, platform);
-                if(gene.equals("KRAS")){
-                    System.out.println(platform+" "+sample+" "+value);
                 
-                }
                 if (genes.containsKey(gene)) {
                     genes.get(gene).put(sample, valueStr);
                 } else {
@@ -1355,13 +1352,16 @@ public class PDXMouseStore {
     
     
 
-    public String getVariationData(String model, String limit, String start, String sort, String dir) {
+    public String getVariationData(String model, String limit, String start, String sort, String dir, String ctp) {
 
         StringBuffer result = new StringBuffer("{'total':");
         boolean ckbSort = sort.startsWith("ckb_");
 
         String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
         
+        if(ctp != null){
+            params = params + "&all_ctp_genes=yes";
+        }
              
         try {
 
@@ -1475,7 +1475,14 @@ public class PDXMouseStore {
             }
 
             result.append("'").append(getField(array.getJSONObject(i), "passage_num")).append("',");
+            
+            
             String ckbGeneID = getField(array.getJSONObject(i), "ckb_gene_id");
+            String entrezGeneID = getField(array.getJSONObject(i), "entrez_gene_id");
+            
+            result.append("'").append(entrezGeneID).append("',");
+            
+            
             String ckbMolProID = getField(array.getJSONObject(i), "ckb_molpro_id");
             String ckbMolProName = getField(array.getJSONObject(i), "ckb_molpro_name");
             String ckbTreatment = getField(array.getJSONObject(i), "ckb_potential_treat_approach");
