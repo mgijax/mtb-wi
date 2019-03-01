@@ -2291,13 +2291,18 @@ and copy number of other genes not listed on the MTB site can be made available 
 <br>
 <a name="pdxTMB"></a><b>Tumor mutation burden (TMB) estimation:</b><br>
 
-TMB was calculated using variants that met (i) all quality criteria (coverage, mapping quality etc.), <br>
-(ii) were not present in an in-house curated false-positive blacklist that contains loci that are sequencing/bioinformatic-error prone<br>
-and/or part of highly polymorphic genes such as MUC4, MUC5B, MUC16, MUC17, and HLA-A, <br>
-(iii) are somatic, and (iv) have a high or moderate functional impact which includes non-synonymous changes, frame-shifts, stop losses/gains,<br>
-and splice-site acceptor/donor changes. TMB was estimated by dividing the number of variants that met these criteria by the length <br>
-(in Mb) of the CTP panel (excluding aforementioned polymorphic genes). We defined high TMB cutoff as 22 mutations/Mb, which was <br>
-calculated based on the TMB distribution of all PDX models analyzed as follows: Q3 (third quartile of TMB) + 1.5 x inter-quartile range of TMB.
+TMB was calculated using variants that
+<ul>
+    <li>(i) met all quality criteria (coverage, mapping quality etc.), </li>
+    <li>(ii) were not present in an in-house curated blacklist of false positive variants from loci that prone to sequencing and analysis errors and/or 
+        are associated with highly polymorphic genes (i.e., MUC4, MUC5B, MUC16, MUC17, and HLA-A </li>
+    <li>(iii) are likely somatic mutations, and  </li>
+    <li>(iv) have a high or moderate functional impact (i.e., non-synonymous changes, frame-shifts, stop losses/gains, and splice-site acceptor/donor changes).</li>
+</ul>
+   TMB was estimated by dividing the number of variants that met the criteria list above by the length (in Mb)
+   of The Jackson Laboratory <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4481190">Cancer Treatment Profile (CTP)</a> targeted gene panel.<br>
+   <br>
+   We defined high TMB as 22 mutations/Mb, which was calculated based on the TMB distribution of all PDX models analyzed as follows: Q3 (third quartile of TMB) + 1.5 x inter-quartile range of TMB.
 
   
 <p>

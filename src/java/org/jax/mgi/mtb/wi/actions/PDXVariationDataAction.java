@@ -47,6 +47,8 @@ public class PDXVariationDataAction extends Action {
         
        String sort = request.getParameter("sort");
        String dir = request.getParameter("dir");
+       
+       String ctp = request.getParameter("all_ctp_genes");
       
        
        if(dir != null){
@@ -60,7 +62,7 @@ public class PDXVariationDataAction extends Action {
         response.setContentType("application/json");
         
        
-        response.getWriter().write(store.getVariationData(modelID, limit, start, sort, dir));
+        response.getWriter().write(store.getVariationData(modelID, limit, start, sort, dir, ctp));
         
         response.flushBuffer();
 

@@ -192,7 +192,7 @@ public class ModelCounts {
 
         ArrayList<PDXMouse> mice = store.findMice(modelID, primarySites, diagnoses,
                 types, markers, gene, variants, drugResponse, tumorGrowth, tags,
-                fusionGenes,treatmentNaive,recist,recist);
+                fusionGenes,treatmentNaive,recist,recist,null,null);
 
         return mice.size() + "";
     }

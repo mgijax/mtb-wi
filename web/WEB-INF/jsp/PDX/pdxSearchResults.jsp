@@ -120,7 +120,8 @@
                 {name: 'gene'},
                 {name: 'variant'},
                 {name: 'consequence'},
-                {name: 'fusionGenes'}
+                {name: 'fusionGenes'},
+                {name: 'tmb'}
                 
             ],
             data: ${mice},
@@ -194,6 +195,14 @@
                     width    : 120, 
                     sortable : true, 
                     dataIndex: 'tumorType'
+                    
+                },
+                {
+                    header   : 'TMB',  
+                    width    : 120, 
+                    sortable : true, 
+                    dataIndex: 'tmb',
+                    hidden   : ${hideTMB}
                     
                 },
                 {
@@ -502,7 +511,9 @@
                         <font class="label">RECIST Response:</font> ${recistResponse}<br>
                     </c:if> 
                         
-                   
+                        <c:if test="${not empty tmb}">
+                            <font class="label">TMB:</font> ${tmb}<br>
+                        </c:if>            
                    
             </td>
         </tr>

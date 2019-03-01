@@ -138,6 +138,7 @@
                                                         <tr><td>CDK4:Amp</td><td></td></tr>
                                                         <tr><td>ETNK1:Amp</td><td></td></tr>
                                                         <tr><td>KRAS:Del</td></tr>
+                                                        <tr><td>KRAS:MUT</td></tr>
                                                     </table>
                                                 </td>
                                                 <td>
@@ -146,6 +147,7 @@
                                                         <tr><td>search for models with A159V variant of TP53</td></tr>
                                                         <tr><td>search for models with deleted ALB</td></tr>
                                                         <tr><td>search for models with expression of KIT > 1.50</td></tr>
+                                                        <tr><td>&nbsp;</td></tr>
                                                         <tr><td>&nbsp;</td></tr>
                                                         <tr><td>&nbsp;</td></tr>
                                                         <tr><td>&nbsp;</td></tr>
