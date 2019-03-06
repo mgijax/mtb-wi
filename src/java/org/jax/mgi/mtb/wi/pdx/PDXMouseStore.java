@@ -58,18 +58,18 @@ public class PDXMouseStore {
     private static ArrayList<String> tumorMarkersList;
     private static ArrayList<String> allGenesList;
     private static ArrayList<String> ctpGeneList;
-    private static ArrayList<LabelValueBean<String, String>> diagnosesLVB = new ArrayList<LabelValueBean<String, String>>();
-    private static ArrayList<LabelValueBean<String, String>> primarySitesLVB = new ArrayList<LabelValueBean<String, String>>();
-    private static ArrayList<LabelValueBean<String, String>> tagsLVB = new ArrayList<LabelValueBean<String, String>>();
-    private static ArrayList<LabelValueBean<String, String>> tumorMarkersLVB = new ArrayList<LabelValueBean<String, String>>();
-    private static ArrayList<LabelValueBean<String, String>> fusionGenesLVB = new ArrayList<LabelValueBean<String, String>>();
-    private static ArrayList<LabelValueBean<String, String>> recistDrugsLVB = new ArrayList<LabelValueBean<String, String>>();
-    private static ArrayList<LabelValueBean<String, String>> recistResponsesLVB = new ArrayList<LabelValueBean<String, String>>();
+    private static ArrayList<LabelValueBean<String, String>> diagnosesLVB = new ArrayList<>();
+    private static ArrayList<LabelValueBean<String, String>> primarySitesLVB = new ArrayList<>();
+    private static ArrayList<LabelValueBean<String, String>> tagsLVB = new ArrayList<>();
+    private static ArrayList<LabelValueBean<String, String>> tumorMarkersLVB = new ArrayList<>();
+    private static ArrayList<LabelValueBean<String, String>> fusionGenesLVB = new ArrayList<>();
+    private static ArrayList<LabelValueBean<String, String>> recistDrugsLVB = new ArrayList<>();
+    private static ArrayList<LabelValueBean<String, String>> recistResponsesLVB = new ArrayList<>();
     private static String allGenesWebFormat;
     private static String ctpGenesWebFormat;
     private static String idList;
-    private static HashMap<String, ArrayList<String>> assocData = new HashMap<String, ArrayList<String>>();
-    private static ArrayList<ArrayList<String>> status = new ArrayList<ArrayList<String>>();
+    private static HashMap<String, ArrayList<String>> assocData = new HashMap<>();
+    private static ArrayList<ArrayList<String>> status = new ArrayList<>();
     private static String pdxEngraftmentStatusSummary = "The PDX Customer report could not be loaded;";
     private static String pdxPatientHistory = "The PDX Patient History report could not be loaded";
     private static String pdxPTClinical = "The PDX Patient Clinical report could not be loaded";
@@ -104,7 +104,7 @@ public class PDXMouseStore {
     
     private static final String TMB_URI = baseURL+"inventory?platform=CTP&reqitems=model_name,sample_name,passage_num,tmb_score";
 
-    private static HashMap<String, String> fusionModelsMap = new HashMap();
+    private static HashMap<String, String> fusionModelsMap = new HashMap<>();
 
     private static final String[] BUILD_38_AFFECTED_GENES = {"AKT3", "APOBEC3A", "B2M",
         "DAXX", "EHMT2", "EPHB6", "HLA-A",
@@ -128,8 +128,8 @@ public class PDXMouseStore {
     public static double AMP = 0.5;
     public static double DEL = -0.5;
 
-    private static final HashMap<String, ArrayList<ArrayList<String>>> cnvPlots = new HashMap();
-    private static final HashMap<String, HashMap<String, Double>> tmbMap = new HashMap();
+    private static final HashMap<String, ArrayList<ArrayList<String>>> cnvPlots = new HashMap<>();
+    private static final HashMap<String, HashMap<String, Double>> tmbMap = new HashMap<>();
     
     private static Double minTMB =1000.0;
     private static Double maxTMB =0.0;
@@ -182,17 +182,17 @@ public class PDXMouseStore {
         tagsList = searchData.getTags();
 
         for (String tissue : primarySitesList) {
-            LabelValueBean<String, String> lvb = new LabelValueBean(tissue, tissue);
+            LabelValueBean<String, String> lvb = new LabelValueBean<>(tissue, tissue);
             primarySitesLVB.add(lvb);
         }
 
         for (String diagnosis : diagnosesList) {
-            LabelValueBean lvb = new LabelValueBean(diagnosis, diagnosis);
+            LabelValueBean<String,String> lvb = new LabelValueBean<>(diagnosis, diagnosis);
             diagnosesLVB.add(lvb);
         }
 
         for (String tag : tagsList) {
-            LabelValueBean lvb = new LabelValueBean(tag, tag);
+            LabelValueBean<String,String> lvb = new LabelValueBean<>(tag, tag);
             tagsLVB.add(lvb);
         }
 
@@ -219,11 +219,11 @@ public class PDXMouseStore {
             ArrayList<String> recistDrugs = SOCLoader.loadRECISTDrugs();
 
             for (String drug : recistDrugs) {
-                recistDrugsLVB.add(new LabelValueBean(drug, drug));
+                recistDrugsLVB.add(new LabelValueBean<String,String>(drug, drug));
             }
 
             for (String response : recistResponses) {
-                recistResponsesLVB.add(new LabelValueBean(response, response));
+                recistResponsesLVB.add(new LabelValueBean<String,String>(response, response));
             }
 
             assocData = PDXDAO.getInstance().getPDXAdditionalContent();
@@ -371,7 +371,7 @@ public class PDXMouseStore {
      * @return ArrayList<PDXMouse>
      */
     public ArrayList<PDXMouse> findStaticMouseByID(String ID) {
-        ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
+        ArrayList<PDXMouse> mice = new ArrayList<>();
         loop:
         for (PDXMouse mouse : this.allMice) {
             if (mouse.getModelID().equalsIgnoreCase(ID)) {
@@ -407,7 +407,7 @@ public class PDXMouseStore {
         // findStaticMice
         // find by fusion gene
         // find by gene variant --> populate variants and consequence if variant is used
-        ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
+        ArrayList<PDXMouse> mice = new ArrayList<>();
 
         // get a list of mice based on search criteria that are in ELIMS
         mice = findStaticMice(modelID, tissues, diagnoses, tumorTypes, tumorMarkers,
@@ -430,7 +430,7 @@ public class PDXMouseStore {
 
         Collections.sort(ids);
 
-        ArrayList<PDXMouse> mice2 = new ArrayList<PDXMouse>();
+        ArrayList<PDXMouse> mice2 = new ArrayList<>();
 
         if (ids.isEmpty()) {
             mice2.addAll(mice);
@@ -517,8 +517,8 @@ public class PDXMouseStore {
             ArrayList<String> tags, boolean dosingStudy, boolean tumorGrowth, boolean treatmentNaive,
             String recistDrug, String recistResponse, Double tmbGT, Double tmbLT) {
 
-        ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
-        ArrayList<PDXMouse> mice2 = new ArrayList<PDXMouse>();
+        ArrayList<PDXMouse> mice = new ArrayList<>();
+        ArrayList<PDXMouse> mice2 = new ArrayList<>();
 
         if (modelID != null && modelID.length() > 0) {
             mice = findStaticMouseByID(modelID);
@@ -684,7 +684,7 @@ public class PDXMouseStore {
         }
 
         // deduplicate
-        HashMap<String, PDXMouse> mouseMap = new HashMap();
+        HashMap<String, PDXMouse> mouseMap = new HashMap<>();
         for (PDXMouse mouse : mice2) {
             mouseMap.put(mouse.getModelID(), mouse);
         }
@@ -981,10 +981,10 @@ public class PDXMouseStore {
         DecimalFormat df = new DecimalFormat("#.##");
 
         StringBuffer result = new StringBuffer();
-        HashMap<String, String> sampleMap = new HashMap();
-        HashMap<String, HashMap<String, String>> genes = new HashMap();
-        HashMap<String, String> platformMap = new HashMap();
-        HashMap<String, String> samplePlatformMap = new HashMap();
+        HashMap<String, String> sampleMap = new HashMap<>();
+        HashMap<String, HashMap<String, String>> genes = new HashMap<>();
+        HashMap<String, String> platformMap = new HashMap<>();
+        HashMap<String, String> samplePlatformMap = new HashMap<>();
 
         String url = MODEL_EXPRESSION + modelID;
 
@@ -1015,18 +1015,18 @@ public class PDXMouseStore {
                 if (genes.containsKey(gene)) {
                     genes.get(gene).put(sample, valueStr);
                 } else {
-                    HashMap<String, String> map = new HashMap();
+                    HashMap<String, String> map = new HashMap<>();
                     map.put(sample, valueStr);
                     genes.put(gene, map);
                 }
 
             }
-            ArrayList<String> samples = new ArrayList<String>();
+            ArrayList<String> samples = new ArrayList<>();
             samples.addAll(sampleMap.keySet());
 
             Collections.sort(samples);
 
-            ArrayList<String> platforms = new ArrayList<String>();
+            ArrayList<String> platforms = new ArrayList<>();
             platforms.addAll(platformMap.keySet());
 
             Collections.sort(platforms);
@@ -1044,7 +1044,7 @@ public class PDXMouseStore {
             result.append("]");
 
             // group the expression values by gene across one or more samples
-            ArrayList<String> geneList = new ArrayList<String>();
+            ArrayList<String> geneList = new ArrayList<>();
             geneList.addAll(genes.keySet());
             Collections.sort(geneList);
             for (String g : geneList) {
@@ -1086,8 +1086,8 @@ public class PDXMouseStore {
 
         StringBuffer result = new StringBuffer();
 
-        HashMap<String, String> ploidyMap = new HashMap();
-        HashMap<String, HashMap<String, String>> genes = new HashMap();
+        HashMap<String, String> ploidyMap = new HashMap<>();
+        HashMap<String, HashMap<String, String>> genes = new HashMap<>();
         try {
 
             String url = MODEL_CNV + modelID;
@@ -1105,7 +1105,7 @@ public class PDXMouseStore {
                 if (genes.containsKey(gene)) {
                     genes.get(gene).put(sample, cn);
                 } else {
-                    HashMap map = new HashMap();
+                    HashMap<String,String> map = new HashMap<>();
                     map.put(sample, cn);
                     genes.put(gene, map);
                 }
@@ -1114,7 +1114,7 @@ public class PDXMouseStore {
 
             }
 
-            ArrayList<String> samples = new ArrayList<String>();
+            ArrayList<String> samples = new ArrayList<>();
             samples.addAll(ploidyMap.keySet());
 
             Collections.sort(samples);
@@ -1133,7 +1133,7 @@ public class PDXMouseStore {
             result.append("]");
 
             // group the expression values by gene across one or more samples
-            ArrayList<String> geneList = new ArrayList();
+            ArrayList<String> geneList = new ArrayList<>();
             geneList.addAll(genes.keySet());
             Collections.sort(geneList);
             for (String g : geneList) {
@@ -1226,7 +1226,7 @@ public class PDXMouseStore {
                 }
 
                 if (results.containsKey(gene)) {
-                    HashMap samples = results.get(gene);
+                    HashMap<String, ArrayList<String>> samples = results.get(gene);
                     ArrayList<String> list = new ArrayList<>();
                     list.add(rankZ);
                     list.add(ampDel);
@@ -1331,7 +1331,7 @@ public class PDXMouseStore {
     public ArrayList<String> getVariants(String gene) {
 
         String query = VARIANTS_FOR_GENE + gene;
-        ArrayList<String> variants = new ArrayList<String>();
+        ArrayList<String> variants = new ArrayList<>();
         try {
             JSONObject job = new JSONObject(getJSON(query));
 
@@ -1582,8 +1582,8 @@ public class PDXMouseStore {
     }
 
     private ArrayList<String> getFusionModels(String fusionGenes) {
-        ArrayList<String> models = new ArrayList<String>();
-        HashMap<String, String> modelsMap = new HashMap();
+        ArrayList<String> models = new ArrayList<>();
+        HashMap<String, String> modelsMap = new HashMap<>();
         try {
             String url = FUSION_MODELS_BY_GENE + fusionGenes;
             JSONObject job = new JSONObject(getJSON(url));
@@ -1605,7 +1605,7 @@ public class PDXMouseStore {
             JSONObject job = new JSONObject(getJSON(FUSION_GENES));
             JSONArray jarray = (JSONArray) job.get("data");
             for (int i = 0; i < jarray.length(); i++) {
-                LabelValueBean bean = new LabelValueBean<String, String>();
+                LabelValueBean<String, String> bean = new LabelValueBean<>();
                 bean.setLabel(jarray.getString(i).trim());
                 bean.setValue(jarray.getString(i).trim());
 
@@ -1622,7 +1622,7 @@ public class PDXMouseStore {
     private void loadFusionModels(String allFusionGenes) {
 
         // models have samples, samples have variants 
-        HashMap<String, HashMap<String, HashMap<String, String>>> map = new HashMap();
+        HashMap<String, HashMap<String, HashMap<String, String>>> map = new HashMap<>();
 
         try {
 
@@ -1639,13 +1639,13 @@ public class PDXMouseStore {
                         if (map.get(model).containsKey(sample)) {
                             map.get(model).get(sample).put(variant, variant);
                         } else {
-                            HashMap<String, String> variants = new HashMap();
+                            HashMap<String, String> variants = new HashMap<>();
                             variants.put(variant, variant);
                             map.get(model).put(sample, variants);
                         }
                     } else {
-                        HashMap<String, HashMap<String, String>> sampleMap = new HashMap();
-                        HashMap<String, String> variants = new HashMap();
+                        HashMap<String, HashMap<String, String>> sampleMap = new HashMap<>();
+                        HashMap<String, String> variants = new HashMap<>();
                         variants.put(variant, variant);
                         sampleMap.put(sample, variants);
                         map.put(model, sampleMap);
@@ -1682,7 +1682,7 @@ public class PDXMouseStore {
 
     private void loadAllGenes() {
 
-        ArrayList<String> genes = new ArrayList<String>();
+        ArrayList<String> genes = new ArrayList<>();
 
         try {
             JSONObject job = new JSONObject(getJSON(ALL_GENES));
@@ -1705,7 +1705,7 @@ public class PDXMouseStore {
 
     private void loadCTPGenes() {
 
-        ArrayList<String> genes = new ArrayList<String>();
+        ArrayList<String> genes = new ArrayList<>();
 
         try {
             JSONObject job = new JSONObject(getJSON(ALL_GENES + "?all_ctp_genes=yes"));
@@ -1841,7 +1841,7 @@ public class PDXMouseStore {
                     if(tmbMap.containsKey(model)){
                         tmbMap.get(model).put(sample, tmb);
                     }else{
-                        HashMap<String,Double> map = new HashMap();
+                        HashMap<String,Double> map = new HashMap<>();
                         map.put(sample, tmb);
                         tmbMap.put(model,map);
                     }

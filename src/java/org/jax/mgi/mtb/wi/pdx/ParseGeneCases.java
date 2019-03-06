@@ -51,11 +51,11 @@ public class ParseGeneCases {
 
     static PDXDAO pdxDAO = PDXDAO.getInstance();
 
-    HashMap<String, ArrayList<String>> allMice = new HashMap();
-    private static HashMap<String, String> detailsMap = new HashMap();
+    HashMap<String, ArrayList<String>> allMice = new HashMap<>();
+    private static HashMap<String, String> detailsMap = new HashMap<>();
     
-    private HashMap<String, String> expMap = new HashMap();
-    private HashMap<String, String> lrpMap = new HashMap();
+    private HashMap<String, String> expMap = new HashMap<>();
+    private HashMap<String, String> lrpMap = new HashMap<>();
 
     boolean html = true;
     boolean includeActionable = false;
@@ -86,8 +86,8 @@ public class ParseGeneCases {
 
         StringBuilder result = new StringBuilder();
 
-        HashMap<String, ArrayList<String>> caseGenes = new HashMap();
-        ArrayList<String> caseOrder = new ArrayList();
+        HashMap<String, ArrayList<String>> caseGenes = new HashMap<>();
+        ArrayList<String> caseOrder = new ArrayList<>();
         try {
             String line = s.next();
             String caseNo = "";
@@ -98,7 +98,7 @@ public class ParseGeneCases {
                         caseNo = line.trim();
                         caseOrder.add(caseNo);
                         line = s.next();
-                        ArrayList<String> list = new ArrayList();
+                        ArrayList<String> list = new ArrayList<>();
                         while (line.trim().length() > 0) {
                             list.add(line);
                             if (s.hasNext()) {
@@ -139,8 +139,8 @@ public class ParseGeneCases {
 
     private String buildTable(String caseNo, ArrayList<String> genes) {
 
-        ArrayList<String> k = new ArrayList();
-        ArrayList<String> u = new ArrayList();
+        ArrayList<String> k = new ArrayList<>();
+        ArrayList<String> u = new ArrayList<>();
         String[] vals = null;
 
         for (String gene : genes) {
@@ -166,10 +166,10 @@ public class ParseGeneCases {
     }
 
     private String mouseMagic(String caseNo, ArrayList<String> k, ArrayList<String> u) {
-        HashMap<String, ModelRow> modelsMap = new HashMap();
+        HashMap<String, ModelRow> modelsMap = new HashMap<>();
         StringBuilder table = new StringBuilder();
 
-        ArrayList<String> ku = new ArrayList();
+        ArrayList<String> ku = new ArrayList<>();
         ku.addAll(k);
         ku.addAll(u);
 
@@ -275,7 +275,7 @@ public class ParseGeneCases {
 
         
 
-        ArrayList<ModelRow> modelsList = new ArrayList();
+        ArrayList<ModelRow> modelsList = new ArrayList<>();
         for (ModelRow mr : modelsMap.values()) {
             modelsList.add(mr);
         }
@@ -457,7 +457,7 @@ public class ParseGeneCases {
 
     private HashMap<String, ArrayList<String>> getMiceByActionableVariants(String gene) {
 
-        HashMap<String, ArrayList<String>> actionable = new HashMap();
+        HashMap<String, ArrayList<String>> actionable = new HashMap<>();
         // look for any actionable variant
 
         StringBuilder params = new StringBuilder();
@@ -487,7 +487,7 @@ public class ParseGeneCases {
                 if (actionable.containsKey(id)) {
                     actionable.get(id).add(variant);
                 } else {
-                    ArrayList<String> variants = new ArrayList();
+                    ArrayList<String> variants = new ArrayList<>();
                     variants.add(variant);
                     actionable.put(id, variants);
                 }
@@ -501,7 +501,7 @@ public class ParseGeneCases {
 
     private ArrayList<String> getMiceByGeneVariant(String gene, String variant) {
 
-        HashMap<String, String> ids = new HashMap();
+        HashMap<String, String> ids = new HashMap<>();
         StringBuilder params = new StringBuilder();
 
         params.append("?&gene_symbol=").append(gene);
@@ -524,7 +524,7 @@ public class ParseGeneCases {
 
         }
 
-        ArrayList<String> idList = new ArrayList();
+        ArrayList<String> idList = new ArrayList<>();
         for (String key : ids.keySet()) {
             idList.add(key);
         }
@@ -781,9 +781,9 @@ public class ParseGeneCases {
     private class ModelRow {
         // "gene" is "gene" "criteria"
         String id;
-        ArrayList<String> genes = new ArrayList();
+        ArrayList<String> genes = new ArrayList<>();
         // gene -> list of actionable variants
-        private HashMap<String, HashMap<String, String>> actionable = new HashMap();
+        private HashMap<String, HashMap<String, String>> actionable = new HashMap<>();
 
         
         ModelRow(String id) {
@@ -796,7 +796,7 @@ public class ParseGeneCases {
                     actionable.get(gene).put(v, v);
                 }
             } else {
-                HashMap<String, String> vars = new HashMap();
+                HashMap<String, String> vars = new HashMap<>();
                 for (String v : variants) {
                     vars.put(v, v);
                 }

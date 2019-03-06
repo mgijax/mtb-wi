@@ -46,7 +46,7 @@ public class PDXSearchAction extends Action {
         String result = "success";
 
         // click on update variants button
-        ArrayList<LabelValueBean<String, String>> variantsLVB = new ArrayList<LabelValueBean<String, String>>();
+        ArrayList<LabelValueBean<String, String>> variantsLVB = new ArrayList<>();
 
         String geneStr = pdxForm.getGene();
 
@@ -57,7 +57,7 @@ public class PDXSearchAction extends Action {
             if (variants != null && variants.size() > 0) {
 
                 for (String variant : variants) {
-                    LabelValueBean lvb = new LabelValueBean(variant, variant);
+                    LabelValueBean<String,String> lvb = new LabelValueBean(variant, variant);
                     variantsLVB.add(lvb);
                 }
                 request.setAttribute("variantsValues", variantsLVB);

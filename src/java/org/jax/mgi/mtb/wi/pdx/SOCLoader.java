@@ -63,7 +63,7 @@ public class SOCLoader {
     public static ArrayList<String> getRECISTModels(String drug, String response) {
 
         String path = WIConstants.getInstance().getSOCDB();
-        ArrayList<String> models = new ArrayList();
+        ArrayList<String> models = new ArrayList<>();
 
         try {
 
@@ -105,7 +105,7 @@ public class SOCLoader {
     public static ArrayList<String> loadRECISTResponses() {
 
         String path = WIConstants.getInstance().getSOCDB();
-        ArrayList<String> response = new ArrayList();
+        ArrayList<String> response = new ArrayList<>();
 
         try {
             Connection liteCon = null;
@@ -128,7 +128,7 @@ public class SOCLoader {
     public static ArrayList<String> loadRECISTDrugs() {
 
         String path = WIConstants.getInstance().getSOCDB();
-        ArrayList<String> response = new ArrayList();
+        ArrayList<String> response = new ArrayList<>();
 
         try {
             Connection liteCon = null;
@@ -157,7 +157,7 @@ public class SOCLoader {
     public static HashMap<String, ArrayList<ArrayList<String>>> getRECISTMap() {
 
         String path = WIConstants.getInstance().getSOCDB();
-        HashMap<String, ArrayList<ArrayList<String>>> modelsMap = new HashMap();
+        HashMap<String, ArrayList<ArrayList<String>>> modelsMap = new HashMap<>();
         try {
 
             Connection liteCon = null;
@@ -171,13 +171,13 @@ public class SOCLoader {
             String id;
             while (rs.next()) {
                 id = rs.getString(1);
-                ArrayList<String> pair = new ArrayList();
+                ArrayList<String> pair = new ArrayList<>();
                 pair.add(rs.getString(2));
                 pair.add(rs.getString(3));
                 if (modelsMap.containsKey(id)) {
                     modelsMap.get(id).add(pair);
                 } else {
-                    ArrayList<ArrayList<String>> list = new ArrayList();
+                    ArrayList<ArrayList<String>> list = new ArrayList<>();
                     list.add(pair);
                     modelsMap.put(id, list);
                 }

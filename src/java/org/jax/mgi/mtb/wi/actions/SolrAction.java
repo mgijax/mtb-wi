@@ -61,8 +61,7 @@ public class SolrAction extends Action {
             url = new URL(solrURL+queryStr.toString().replaceAll(" ","%20"));
        
         }
-        
-       
+ 
         log.debug(url);
         HttpURLConnection connection =
                 (HttpURLConnection) url.openConnection();

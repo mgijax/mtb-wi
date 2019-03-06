@@ -114,8 +114,8 @@ public class TumorSummaryAction extends Action {
                         return null;
                     }
                     // strip the duplicate strain synonyms for display purposes
-                    List<StrainSynonymsDTO> arrSynonyms =
-                            new ArrayList<StrainSynonymsDTO>(dtoTumorSummary.getStrainSynonyms());
+                    ArrayList<StrainSynonymsDTO> arrSynonyms =
+                            new ArrayList<>(dtoTumorSummary.getStrainSynonyms());
 
                     List<StrainSynonymsDTO> filteredSynonyms =
                             WIUtils.filterStrainSynonyms(arrSynonyms,
