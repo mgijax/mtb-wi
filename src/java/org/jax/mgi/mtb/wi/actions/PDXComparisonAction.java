@@ -63,17 +63,17 @@ public class PDXComparisonAction extends Action {
             ArrayList<LabelValueBean<String, String>> genesLVB = new ArrayList<LabelValueBean<String, String>>();
 
             for (String tissue : primarySites) {
-                LabelValueBean<String, String> lvb = new LabelValueBean(tissue, tissue);
+                LabelValueBean<String, String> lvb = new LabelValueBean<>(tissue, tissue);
                 primarySitesLVB.add(lvb);
             }
 
             for (String diagnosis : diagnoses) {
-                LabelValueBean lvb = new LabelValueBean(diagnosis, diagnosis);
+                LabelValueBean<String,String> lvb = new LabelValueBean<>(diagnosis, diagnosis);
                 diagnosesLVB.add(lvb);
             }
 
             for (String gene : genes) {
-                LabelValueBean lvb = new LabelValueBean(gene, gene);
+                LabelValueBean<String,String> lvb = new LabelValueBean<>(gene, gene);
                 genesLVB.add(lvb);
             }
 

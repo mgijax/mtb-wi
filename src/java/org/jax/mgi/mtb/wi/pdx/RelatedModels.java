@@ -13,8 +13,8 @@ import java.util.HashMap;
  */
 public class RelatedModels {
 
-    private static HashMap<String, String> relations = new HashMap();
-    private static HashMap<String, String> proxeIds = new HashMap();
+    private static HashMap<String, String> relations = new HashMap<>();
+    private static HashMap<String, String> proxeIds = new HashMap<>();
 
     private static void load() {
         relations.put("TM00233", "PDX models TM00233 and <a href='pdxDetails.do?modelID=TM01357' target='_blank'>TM01357</a> originated from the same patient.");
