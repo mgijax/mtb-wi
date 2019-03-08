@@ -390,7 +390,7 @@
                 <td>&nbsp;&nbsp; ( TMB > 22  is considered high.)</td>
             </tr>
             <tr><td align="center"><html:text size="4" property="TMBGT"/></td>
-                <td align="center"> <b>&lt;=</b>&nbsp;&nbsp;<b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('TMB is calculated for each sample associated with a PDX model.  Models will be returned if any of the samples meet the search criteria.', CAPTION, 'Tumor mutation burden');" onmouseout="return nd();">TMB</a></b>&nbsp;&nbsp;<b>&lt;=</b></td>
+                <td align="center"> <b>&lt;=</b>&nbsp;&nbsp;<b><a href="userHelp.jsp#pdxTMB" style="text-decoration: none; cursor:help;" onmouseover="return overlib('TMB is calculated for each sample associated with a PDX model.  Models will be returned if any of the samples meet the search criteria. Click for details on how TMB is cacluated.', CAPTION, 'Tumor mutation burden');" onmouseout="return nd();">TMB</a></b>&nbsp;&nbsp;<b>&lt;=</b></td>
                 <td align="center"> <html:text size="4" property="TMBLT"/></td>
                 <td></td>
             </tr>
