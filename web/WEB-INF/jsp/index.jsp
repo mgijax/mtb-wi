@@ -86,17 +86,7 @@
                                 <li>links additional on-line cancer resources
                             </ul>
                             <p>
-                            <table class="miTable">
-                                <tr><td border="5px">
-                                        <p class="miTitle">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
-                                        <ul>
-                                            <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a><br>
-                                            <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a><br>
-                                            <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a><br>
-                                        </ul>
-                                        <br>
-                                    </td></tr>
-                            </table>
+                           
 
                             <hr width="100%">
                             <p>
