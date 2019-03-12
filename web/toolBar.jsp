@@ -83,16 +83,23 @@
         <td>
             <div class="toolBarTitle">Additional Resources</div>
             
+            
             <img src="${applicationScope.urlImageDir}/new.jpg" alt="new">
+            <a href="<c:url value='/pdxLikeMe.do'/>">PDX Like Me</a> 
+            <br>
+            
+            
+            
             <a href="http://www.pdxfinder.org">PDX Finder</a> 
+            <br>
+            
+              <a href="<c:url value='/pdxSearch.do'/>">PDX Model Search</a>
             <br>
             
             
             <a href="<c:url value='/facetedSearch.do'/>">Faceted Tumor Search</a> 
             <br>
             
-              <a href="<c:url value='/pdxSearch.do'/>">PDX Model Search</a>
-            <br>
              <c:if test="${applicationScope.publicDeployment == false}">
              <a href="<c:url value='/pdxComparison.do'/>">PDX Comparison</a>
               <br> 

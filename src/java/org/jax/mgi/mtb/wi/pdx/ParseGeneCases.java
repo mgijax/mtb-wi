@@ -14,6 +14,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -63,6 +64,9 @@ public class ParseGeneCases {
     boolean showLRP = false;
     boolean showEXP = false;
 
+    
+    private DecimalFormat df = new DecimalFormat("###.##");
+    
     public static void main(String[] args) {
 
         try {
@@ -543,12 +547,12 @@ public class ParseGeneCases {
             JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
                 job = jarray.getJSONObject(i);
-                Double lrp = job.getDouble("logratio_ploidy");
+                String lrp =  df.format(job.getDouble("logratio_ploidy"));
                 String id = job.getString("model_name");
 
                 mice.add(id);
                 String key = (id+geneAndThing).toUpperCase();
-                lrpMap.put(key,lrp+"");
+                lrpMap.put(key,lrp);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -568,12 +572,12 @@ public class ParseGeneCases {
             JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
                 job = jarray.getJSONObject(i);
-                Double lrp = job.getDouble("logratio_ploidy");
+                String lrp = df.format(job.getDouble("logratio_ploidy"));
                 String id = job.getString("model_name");
 
                 mice.add(id);
                 String key = (id+geneAndThing).toUpperCase();
-                lrpMap.put(key,lrp+"");
+                lrpMap.put(key,lrp);
 
             }
         } catch (Exception e) {
@@ -608,7 +612,7 @@ public class ParseGeneCases {
                     
                 }
                 String key = (id+gene+"NOCNV").toUpperCase();
-                lrpMap.put(key,lrp+"");
+                lrpMap.put(key,df.format(lrp));
                 
 
             }
@@ -632,13 +636,13 @@ public class ParseGeneCases {
             JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
                 job = jarray.getJSONObject(i);
-                Double zpr = job.getDouble("z_score_percentile_rank");
+                String zpr = df.format(job.getDouble("z_score_percentile_rank"));
                 String id = job.getString("model_name");
 
                 mice.add(id);
 
                 String key = (id+geneAndThing).toUpperCase();
-                expMap.put(key,zpr+"");
+                expMap.put(key,zpr);
             }
         } catch (Exception e) {
             e.printStackTrace();
