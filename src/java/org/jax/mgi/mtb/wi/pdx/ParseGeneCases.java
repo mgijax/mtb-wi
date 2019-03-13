@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Scanner;
+import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -31,6 +32,9 @@ import org.jax.mgi.mtb.wi.WIConstants;
  * @author sbn
  */
 public class ParseGeneCases {
+    
+    private static final Logger log
+            = Logger.getLogger(ParseGeneCases.class.getName());
 
     private static final  String baseURL = WIConstants.getInstance().getPDXWebservice();
     //static final String baseURL = "http://pdxdata.jax.org/api/";
@@ -80,6 +84,10 @@ public class ParseGeneCases {
             e.printStackTrace();
         }
 
+    }
+    
+    public ParseGeneCases(){
+        this.getModelDetails();
     }
 
     public String parseCases(Scanner s, boolean asHTML, boolean includeActionable, boolean showLRP, boolean showEXP) {
@@ -394,7 +402,7 @@ public class ParseGeneCases {
 
         // if we have done this for another case we are done
         if (allMice.containsKey(geneAndThing)) {
-            System.out.println("Pow " + gene + " " + thing);
+          
             return allMice.get(geneAndThing);
         }
 
@@ -471,7 +479,7 @@ public class ParseGeneCases {
         try {
 
             JSONObject job = new JSONObject(getJSON(VARIANTS + params.toString(), ""));
-            System.out.println(job.toString(1));
+        
             JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
                 job = jarray.getJSONObject(i);
@@ -483,10 +491,10 @@ public class ParseGeneCases {
                 }catch (Exception e){}
                 
                 try{
-                    variant = variant+"<br>Treatment Approach: "+job.getString("ckb_potential_treat_approach");
+                    variant = variant+"<br>Treatment Approach: "+job.getString("ckb_potential_treat_approach");//.replaceAll(",", ", "); this has funky layout effects
                 }catch (Exception e){}
                 
-                System.out.println(id+" "+variant);
+           
                 
                 if (actionable.containsKey(id)) {
                     actionable.get(id).add(variant);
@@ -498,7 +506,7 @@ public class ParseGeneCases {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return actionable;
     }
@@ -555,7 +563,7 @@ public class ParseGeneCases {
                 lrpMap.put(key,lrp);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+           log.error(e);
         }
         return mice;
     }
@@ -581,7 +589,7 @@ public class ParseGeneCases {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return mice;
 
@@ -617,7 +625,7 @@ public class ParseGeneCases {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
+           log.error(e);
         }
        
         
@@ -645,8 +653,7 @@ public class ParseGeneCases {
                 expMap.put(key,zpr);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(job);
+            log.error(job,e);
         }
         return mice;
 
@@ -677,8 +684,7 @@ public class ParseGeneCases {
                 
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(job);
+           log.error(job,e);
         }
         return mice;
         
@@ -701,7 +707,7 @@ public class ParseGeneCases {
 
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+               log.error("Error getting pdx like me model details",e);
             }
         }
     }
@@ -743,7 +749,7 @@ public class ParseGeneCases {
                     wr.flush();
                     wr.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    log.error(e);
 
                 } finally {
                     if (out != null) {
@@ -763,7 +769,7 @@ public class ParseGeneCases {
 
             } catch (IOException e) {
 
-                e.printStackTrace();
+                log.error(e);
 
             } finally {
                 if (in != null) {
@@ -771,7 +777,7 @@ public class ParseGeneCases {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e);
         } finally {
             if (connection != null) {
                 connection.disconnect();

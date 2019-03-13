@@ -278,6 +278,10 @@ public class PDXMouseStore {
 
             loadCNVPlots();
             log.info("Loaded cnv plots for " + cnvPlots.size() + " models.");
+            
+            // this preloads the PDXModlels for PDXLikeMe
+            ParseGeneCases pgc = new ParseGeneCases();
+            log.info("Preloaded data for PDX Like ME.");
         }
     }
 

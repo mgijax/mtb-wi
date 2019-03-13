@@ -95,7 +95,7 @@
                                             <a href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html" target="_blank">Learn how to use PDX Like Me </a>
                                             <br>
                                             <table>
-                                                <tr><td>Example:</td><td></td></tr>
+                                                <tr><td>Example search:</td><td></td></tr>
                                                 <tr><td>CASE 1</td>
                                                 <tr><td>KRAS:Amp</td></tr>
                                                 <tr><td>TP53:MUT=A159V</td></tr>
@@ -135,7 +135,7 @@
 
                                         </td>
 
-                                        <td class="data1" width="35%">
+                                        <td class="data1" width="45%">
                                             <input type="checkbox" name="asCSV" value="asCSV" ${csvChecked}/> Return results as a CSV file<br>
                                             <input type="checkbox" name="actionable" value="actionable" ${actionableChecked}/> Include models with clinically relevant variants for supplied genes
                                             <br>
