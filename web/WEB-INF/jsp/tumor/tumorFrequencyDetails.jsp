@@ -8,11 +8,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 
-{
-	title: "Tumor Details",
-	items: [
-
-<c:if test="${tumorFreq.parentFrequencyKey>0}">
+<div class="detail-group">
+	<h3>Tumor Details</h3>
+		<c:if test="${tumorFreq.parentFrequencyKey>0}">
 		{
 			label: "Metastatic Tumor",
 			values: ["${tumorFreq.organAffected}"]
