@@ -24,7 +24,7 @@
                                     <font class="toolBarSearchTitle">Search</font> for
                                 </td>
                                 <td valign="top" align="right">
-                                    <a class="help" href="<c:url value='/userHelp.jsp#searchbox'/>"><img src="${applicationScope.urlImageDir}/help_small.png" height=16 width=16 border=0 alt="help"></a>
+                                    <a class="help" href="<c:url value='/userHelp.jsp#searchbox'/>"><img src="${applicationScope.urlImageDir}/help_small.png" height=16 width=16 border=0 style="vertical-align:middle" alt="Help"></a>
                                 </td>
                             </tr>
                             <tr>

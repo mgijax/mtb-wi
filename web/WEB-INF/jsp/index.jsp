@@ -103,7 +103,7 @@
                                                             <h4>Quick <a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The specific organ (or tissue) in which tumor cells originate.<br><br>The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ / Tissue of Origin');" onmouseout="return nd();">Organ/Tissue</a> Search</i></h4>
                                                         </td>
                                                         <td valign="top" align="right">
-                                                            <a class="help" href="userHelp.jsp#quickorgan"><img src="${applicationScope.urlImageDir}/help_small.png" height=16 width=16 border=0 alt="help"></a>
+                                                            <a class="help" href="userHelp.jsp#quickorgan"><img src="${applicationScope.urlImageDir}/help_small.png" height=16 width=16 border=0 style="vertical-align:middle" alt="Help">Help and Documentation</a>
                                                         </td>
                                                     </tr>
                                                     <tr>

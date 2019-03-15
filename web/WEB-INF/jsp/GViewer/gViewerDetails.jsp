@@ -348,7 +348,7 @@
                       <tr>
                         <td width="20%" valign="middle" align="left">
                           <a class="help" href="userHelp.jsp#GViewerDetails">
-                          <img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
+                          <img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
                         </td>
                         <td width="60%" class="pageTitle">
                           Cancer &nbsp; QTL &nbsp; Selection &nbsp; Details

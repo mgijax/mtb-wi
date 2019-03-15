@@ -5,15 +5,46 @@
 <html>
     <head>
 
-
+        <style>
+            
+            .dataTables_scrollBody
+            {
+             overflow-x:hidden !important;
+             overflow-y:auto !important;
+            }
+            
+        </style>
 
         <c:import url="../../../meta.jsp">
             <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Search"/>
         </c:import>
 
-       
+        
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 
-        <script type="text/javascript">
+ 
+
+<script type="text/javascript" charset="utf8">
+
+       
+            $(document).ready( function () {
+                for(i =1; i< ${caseCount}; i++){
+                $('#results'+i).dataTable( {
+                    searching:      false,
+                    
+                    info:           false,
+                    scrollY:        '50vh',
+                    scrollCollapse: true,
+                    paging:         false,
+                    ordering:       false
+                } );
+                };
+            } );
+        
+
+
 
             function clearForm() {
                 document.forms[1].cases.value = "";
@@ -51,13 +82,13 @@
                                         <td colspan="3">
                                             <table width="100%" border="0" cellpadding="4" cellspacing="0">
                                                 <tr>
-                                                    <td width="20%" valign="middle" align="left">
-                                                        <a class="help" href="userHelp.jsp#pdxsearch"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
+                                                    <td width="25%" valign="middle" align="left">
+                                                        <a class="help" href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
                                                     </td>
-                                                    <td width="60%" class="pageTitle">
+                                                    <td width="50%" class="pageTitle">
                                                         Patient Derived Xenograft PDX Like Me Search
                                                     </td>
-                                                    <td width="20%" valign="middle" align="right">
+                                                    <td width="25%" valign="middle" align="right">
                                                         <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdxRequestButton" onclick="window.location = 'pdxRequest.do'">
                                                     </td>
                                                 </tr>
@@ -135,7 +166,7 @@
 
                                         </td>
 
-                                        <td class="data1" width="45%">
+                                        <td class="data1">
                                             <input type="checkbox" name="asCSV" value="asCSV" ${csvChecked}/> Return results as a CSV file<br>
                                             <input type="checkbox" name="actionable" value="actionable" ${actionableChecked}/> Include models with clinically relevant variants for supplied genes
                                             <br>
@@ -145,7 +176,9 @@
                                             <textarea rows="20" cols="50" name="cases">${cases}</textarea>
                                         </td>
                                         <td class="data1">
+                                            <div id="allResults">
                                             ${table}
+                                            </div>
                                         </td>
                                     </tr>
 
