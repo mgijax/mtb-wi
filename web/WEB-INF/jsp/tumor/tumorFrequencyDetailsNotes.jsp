@@ -4,7 +4,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Tumor Notes">
-	<c:when test="${not empty tumorFreq.additionalNotes}">
+	<c:if test="${not empty tumorFreq.additionalNotes}">
 	<table>
 		<thead>
 			<tr>
@@ -21,9 +21,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	</c:when>
-	<c:otherwise>
-	<!-- No notes for this frequency record //-->
-	</c:otherwise>
-	</c:choose>
+	</c:if>
 </jax:mmhcpage>

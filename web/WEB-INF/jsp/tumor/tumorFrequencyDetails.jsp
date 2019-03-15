@@ -1,70 +1,54 @@
-<%@ page language="java" contentType="text/html" %>
+<%@ page language="java" contentType="application/json" %>
+<%
+   response.setContentType("application/json");
+   response.setHeader("Content-Disposition", "inline");
+%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Tumor Details" help="tumordetails">
-	<!-- ////  Start Top Left (Tumor)  //// -->
-	<table id="tumor-info">
-		<c:choose>
-		<c:when test="${tumorFreq.parentFrequencyKey>0}">
-		<tr>
-			<td><h4>Metastatic Tumor</h4></td>
-			<td>
-				<h5>
-					<c:out value="${tumorFreq.organAffected}"/>
-				</h5>
-			</td>
-		</tr>
+
+{
+	title: "Tumor Details",
+	items: [
+
+<c:if test="${tumorFreq.parentFrequencyKey>0}">
+		{
+			label: "Metastatic Tumor",
+			values: ["${tumorFreq.organAffected}"]
+		},
+</c:if>
+
+<c:if test="${tumorFreq.parentFrequencyKey<=0}">
+		{
+			label: "Tumor Name",
+			values: ["${tumorFreq.organOfOrigin} ${tumorFreq.tumorClassification}"],
+		},
+</c:if>
+
+		{
+			label: "Treatment Type",
+			values: ["${tumorFreq.treatmentType}"]
+		},
+
+<c:if test="${not empty tumorFreq.tumorSynonyms}">
+		{
+	<c:choose>
+		<c:when test="${fn:length(tumor.agents)>1}">
+			label: "Tumor Synonyms",
 		</c:when>
 		<c:otherwise>
-		<!-- Not a metastatic tumor //-->
+			label: "Tumor Synonym",
 		</c:otherwise>
-		</c:choose>
-		<tr>
-			<td><h4>Tumor Name</h4></td>
-			<td>
-				<c:if test="${tumorFreq.parentFrequencyKey<=0}">
-				<h5>
-					</c:if>
-					<c:out value="${tumorFreq.organOfOrigin}" escapeXml="false"/>
-					<!-- \n -->
-					<c:out value="${tumorFreq.tumorClassification}" escapeXml="false"/>
-					<c:if test="${tumorFreq.parentFrequencyKey<=0}">
-				</h5>
-				</c:if>
-			</td>
-		</tr>
-		<tr>
-			<td><h4>Treatment Type</h4></td>
-			<td>
-				<c:out value="${tumorFreq.treatmentType}" escapeXml="false"/>
-			</td>
-		</tr>
-		<c:choose>
-		<c:when test="${not empty tumorFreq.tumorSynonyms}">
-		<tr>
-			<c:choose>
-			<c:when test="${fn:length(tumor.agents)>1}">
-			<td><h4>Tumor Synonyms</h4></td>
-			</c:when>
-			<c:otherwise>
-			<td><h4>Tumor Synonym</h4></td>
-			</c:otherwise>
-			</c:choose>
-			<td>
-				<c:forEach var="synonym" items="${tumorFreq.tumorSynonyms}" varStatus="status">
-				${synonym}
-				<c:if test="${status.last != true}">
-				&nbsp;&#8226;&nbsp;
-				</c:if>
-				</c:forEach>
-			</td>
-		</tr>
-		</c:when>
-		<c:otherwise>
-		<!--There are no synonyms associated with this tumorFreq. //-->
-		</c:otherwise>
+	</c:choose>
+			values: [
+			<c:forEach var="synonym" items="${tumorFreq.tumorSynonyms}" varStatus="status">
+				"${synonym}"<c:if test="${status.last != true}">,</c:if>
+			</c:forEach>
+			]
+		}
+</c:if>
+
 		</c:choose>
 		<c:choose>
 		<c:when test="${tumorFreq.parentFrequencyKey<=0}">

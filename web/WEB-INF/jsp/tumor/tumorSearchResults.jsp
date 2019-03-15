@@ -5,6 +5,11 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <c:catch var="exception">
 <jax:mmhcpage title="Tumor Search Results" help="tumorresults">
+	<jsp:attribute name="head">
+		<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
+		<script type="text/javascript" src="./live/www/js/results.js"></script>
+	</jsp:attribute>
+	<jsp:body>
 	<table>
 		<caption>
 			<div class="result-summary">
@@ -179,6 +184,7 @@
 		</c:choose>
 		<!-- ////  End Results  //// -->
 	</table>
+	</jsp:body>
 </jax:mmhcpage>
 </c:catch>
 <c:if test="${not empty exception}">

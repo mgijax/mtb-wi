@@ -1,0 +1,99 @@
+#home-summary {
+	width:33.3333%;	
+	float:left;
+	padding:25px;
+}
+
+#home-summary p {
+	font-size:1.16666em;
+	line-height:1.25;
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+	margin-top:2em;
+}
+
+#updates {
+	font-size:14px;
+	line-height:1.25;
+	width:33.3333%;
+	padding:25px;
+	float:left;
+}
+
+#updates h3,
+#updates > ul > li {
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+}
+
+#updates ul {
+	list-style: none;
+	padding:0;
+	margin:0 0 15px;
+}
+
+#updates li {
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	list-style: none;
+	padding:0;
+	margin:0 0 5px;
+}
+
+.container > div {
+	overflow:auto;
+	zoom:1;
+}
+
+#mc {
+	font-size:14px;
+	width:66.6666%;
+	float:left;
+	padding:25px;
+}
+
+#mc table {
+	margin-top:0;
+}
+
+#mc th {
+	font-size:12px;
+	padding:6px 6px 12px;
+	vertical-align: bottom;
+	text-align:left;
+}
+
+#mc th[colspan] {
+	font-family: "DIN Next W01 Bold", Helvetica, Arial, sans-serif;
+	font-size:21px;
+	padding:0 0 12px;
+	width:215px;
+}
+
+#mc tr:nth-child(odd) > td {
+	background-color:rgba(144, 157, 163, 0.25);
+}
+
+#mc tr > td:nth-child(4),
+#mc tr > td:nth-child(5),
+#mc tr > td:nth-child(6) {
+	width:62px;
+	background-color:rgba(66, 176, 42, 0.1);
+}
+
+#mc tr:nth-child(odd) > td:nth-child(4),
+#mc tr:nth-child(odd) > td:nth-child(5),
+#mc tr:nth-child(odd) > td:nth-child(6) {
+	background-color:rgba(66, 176, 42, 0.25);
+}
+
+#mc td {
+	padding:5px 6px;
+}
+
+#mc th + th,
+#mc td + td {
+	text-align:center;
+}
+
+#mc tbody td:first-child a {
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+	color:#05396b;
+}

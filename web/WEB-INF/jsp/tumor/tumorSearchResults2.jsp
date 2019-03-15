@@ -7,11 +7,14 @@
 <%-- !todo --%>
 <jax:mmhcpage title="Tumor Search Results" help="tumorresults">
 	<jsp:attribute name="head">
-	<!-- Combo-handled YUI CSS files: -->
-	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.7.0/build/reset-fonts-grids/reset-fonts-grids.css&2.7.0/build/base/base-min.css&2.7.0/build/assets/skins/sam/skin.css">
-	<!-- Combo-handled YUI JS files: -->
-	<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js&2.7.0/build/element/element-min.js&2.7.0/build/paginator/paginator-min.js&2.7.0/build/datasource/datasource-min.js&2.7.0/build/dragdrop/dragdrop-min.js&2.7.0/build/datatable/datatable-min.js&2.7.0/build/resize/resize-min.js"></script>
+		<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
+		<script type="text/javascript" src="./live/www/js/results.js"></script>
+		<!-- Combo-handled YUI CSS files: -->
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.7.0/build/reset-fonts-grids/reset-fonts-grids.css&2.7.0/build/base/base-min.css&2.7.0/build/assets/skins/sam/skin.css">
+		<!-- Combo-handled YUI JS files: -->
+		<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js&2.7.0/build/element/element-min.js&2.7.0/build/paginator/paginator-min.js&2.7.0/build/datasource/datasource-min.js&2.7.0/build/dragdrop/dragdrop-min.js&2.7.0/build/datatable/datatable-min.js&2.7.0/build/resize/resize-min.js"></script>
 	</jsp:attribute>
+	<jsp:body>
 	<table>
 		<caption>
 			<div class="result-summary">
@@ -222,5 +225,6 @@
 		</c:choose>
 		<!-- ////  End Results  //// -->
 	</table>
+	</jsp:body>
 </jax:mmhcpage>
 

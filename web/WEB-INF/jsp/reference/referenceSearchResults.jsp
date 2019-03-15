@@ -3,6 +3,11 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Reference Search Results" help="referenceresults">
+	<jsp:attribute name="head">
+		<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
+		<script type="text/javascript" src="./live/www/js/results.js"></script>
+	</jsp:attribute>
+	<jsp:body>
 	<table>
 		<caption>
 			<div class="result-summary">
@@ -47,4 +52,5 @@
 		</c:otherwise>
 		</c:choose>
 	</table>
+	</jsp:body>
 </jax:mmhcpage>

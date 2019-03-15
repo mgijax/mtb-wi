@@ -5,6 +5,11 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Quick Search Results" help="interpreting">
+	<jsp:attribute name="head">
+		<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
+		<script type="text/javascript" src="./live/www/js/results.js"></script>
+	</jsp:attribute>
+	<jsp:body>
 	<table>
 		<caption>
 			<div class="result-summary">				
@@ -63,5 +68,6 @@
 	<!-- No results found. //-->
 	</c:otherwise>
 	</c:choose>
+	</jsp:body>
 </jax:mmhcpage>
 

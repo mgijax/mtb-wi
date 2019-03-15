@@ -1,28 +1,60 @@
 $(function() {				
-	var o = {
-		legends: {
-			'fr': function(value) {	
-							
-				if (!value) { return ''; }
+	var $metastases = $('[data-parent]'),
+		$rows = $('[data-key]');
+	
+	root = root || '';
+
+	
+	$rows.each(function() {
+		
+		var $r = $(this),
+			$i = $r.find('td.info'),
+			k = $r.data('key'),
+			$details = $r.find('[data-detail]'),
+			$expressions = $r.find('[data-expression]');
+			
+		$details.each(function() {
+			var $d = $(this),
+				page = $d.data('detail');
 				
-				var n = parseFloat(value);
-				
-				if (!Number.isNaN(n)) {					
-					if (n <= 10) { return 'l0'; }
-					if (n <= 20) { return 'l1'; }
-					if (n <= 50) { return 'l2'; }
-					if (n <= 80) { return 'l3'; }
-					if (n <= 100) { return 'l4'; }
+			$.ajax({
+				url: root + 'tumorFrequencyDetails.do?key=' + k + '&page=' + page,
+				dataType: 'html',
+				success: function(h) {
+					var $tds = $(h).find('td:first-child');
+					$tds.each(function() {
+						$d.append('<p>' + $(this).html() + '</p>');
+					});
 				}
-				
-				if (value.indexOf('very high') !== -1) { return 'l4'; }
-				if (value.indexOf('high') !== -1) { return 'l3'; }
-				if (value.indexOf('very low') !== -1) { return 'l0'; }
-				if (value.indexOf('low') !== -1) { return 'l1'; }
-				
-				return 'l-' + value.replace(/[^a-z\-]/g, '-');
-			}
+			})
+		});
+	});
+	
+	$metastases.each(function() {
+		
+		var $m = $(this),
+			p = $m.data('parent'),
+			$p = $('[data-key="' + p + '"]'),
+			$td = $p.find('td.info'),
+			$tbody = $td.find('tbody'),
+			$table;
+			
+		if ($tbody.length == 0) {
+			$tbody = $('<tbody></tbody>');
+			$table = $('<table></table>');
+			$table.append($tbody);
+			$td.append($table);
 		}
-	};				
-	$('.agro-source').agro(o);
+			
+		$m.removeAttr('data-parent');
+		
+		$tbody.append($m);
+
+	});	
+	
+	
+	
 });
+
+
+

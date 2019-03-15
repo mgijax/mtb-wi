@@ -5,6 +5,11 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Advanced Search Results" help="tumorresults">
+	<jsp:attribute name="head">
+		<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
+		<script type="text/javascript" src="./live/www/js/results.js"></script>
+	</jsp:attribute>
+	<jsp:body>	
 	<table class="agro-source-1 result-table">
 		<caption>
 			<div class="result-summary">		
@@ -156,7 +161,7 @@
 						</c:forEach>						
 					</c:if>
 					<c:if test="${tumor.images==true}">
-						<div><img src="${applicationScope.urlImageDir}/pic.gif" alt="X">${tumor.imageCount} image<c:if test="${tumor.imageCount != 1}">s</c:if></div>
+						<div><img src="${applicationScope.urlImageDir}/pic.gif" alt="X">${tumor.imageCount} pathology image<c:if test="${tumor.imageCount != 1}">s</c:if></div>
 					</c:if>
 				</td>
 				<td>
@@ -173,7 +178,5 @@
 		</c:choose>
 		<!-- ////  End Results  //// -->
 	</table>
-	<script type="text/javascript">
-		mods.push('jquery-ui.min.js', '/_res/lib/agro', './live/www/js/results.js');
-	</script>
+	</jsp:body>
 </jax:mmhcpage>
