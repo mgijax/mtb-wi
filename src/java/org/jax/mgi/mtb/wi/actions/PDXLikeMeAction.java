@@ -41,8 +41,12 @@ public class PDXLikeMeAction extends Action {
             s.useDelimiter("\n");
             ParseGeneCases pgc = new ParseGeneCases();
             if (asHTML) {
-                request.setAttribute("table", pgc.parseCases(s, asHTML, actionable, showLRP, showEXP));
+                String table = pgc.parseCases(s, asHTML, actionable, showLRP, showEXP);
+                
+                request.setAttribute("table", table );
                 request.setAttribute("cases", cases);
+                int caseCount = cases.toLowerCase().split("case").length;
+                request.setAttribute("caseCount", caseCount);
             } else {
                 Date d = new Date(System.currentTimeMillis());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

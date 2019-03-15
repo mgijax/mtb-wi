@@ -68,6 +68,7 @@ public class ParseGeneCases {
     boolean showLRP = false;
     boolean showEXP = false;
 
+    private int caseCount =1;
     
     private DecimalFormat df = new DecimalFormat("###.##");
     
@@ -109,6 +110,7 @@ public class ParseGeneCases {
                     if (line.toUpperCase().contains("CASE")) {
                         caseNo = line.trim();
                         caseOrder.add(caseNo);
+                        
                         line = s.next();
                         ArrayList<String> list = new ArrayList<>();
                         while (line.trim().length() > 0) {
@@ -226,23 +228,21 @@ public class ParseGeneCases {
 
         }
         
-        
-        
         if (html) {
-            table.append("<b>").append(caseNo).append("</b><table border=\"1\" style=\"border-collapse:collapse\">");
+            table.append("<b>").append(caseNo).append("</b><table id=\"results").append(caseCount++).append("\" border=\"1\" style=\"border-collapse:collapse\"><thead>");
 
             if (u.size() > 0) {
                 table.append("<tr><th></th><th  style=\"text-align:center;padding:5px\"colspan=\"").append(k.size()).append("\">");
                 table.append("Known Significance</th><th  style=\"text-align:center;padding:5px\" colspan=\"").append(u.size()).append("\">Unknown Significance</th></tr>");
             }
-            table.append("<tr><td>Model ID</td>");
+            table.append("<tr><th>Model ID</th>");
             for (String kGenes : k) {
-                table.append("<td style=\"text-align:center;padding:5px\">").append(kGenes).append("</td>");
+                table.append("<th style=\"text-align:center;padding:5px\">").append(kGenes).append("</th>");
             }
             for (String uGenes : u) {
-                table.append("<td style=\"text-align:center;padding:5px\">").append(uGenes).append("</td>");
+                table.append("<th style=\"text-align:center;padding:5px\">").append(uGenes).append("</th>");
             }
-            
+            table.append("</thead><tbody>");
 
         } else {
 
@@ -338,7 +338,7 @@ public class ParseGeneCases {
                 table.append("</tr>\n");
 
             }
-            table.append("</table><br><br>");
+            table.append("</tbody></table><br><br>");
         } else {
             for (ModelRow mr : modelsList) {
                 if (detailsMap.containsKey(mr.id)) {
