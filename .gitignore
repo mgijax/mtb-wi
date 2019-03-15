@@ -11,4 +11,4 @@
 /doc
 build.number
 **/conf/
-build.properties
+**/build.properties

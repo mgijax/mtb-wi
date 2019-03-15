@@ -6,12 +6,17 @@
     <head>
 
         <style>
-            
+            /* force the horizontal scroll bars into hiding */
             .dataTables_scrollBody
             {
              overflow-x:hidden !important;
              overflow-y:auto !important;
             }
+            
+            .even{
+               background-color:#eff0f1 !important;
+            }
+            
             
         </style>
 
@@ -33,12 +38,12 @@
                 for(i =1; i< ${caseCount}; i++){
                 $('#results'+i).dataTable( {
                     searching:      false,
-                    
                     info:           false,
                     scrollY:        '50vh',
                     scrollCollapse: true,
                     paging:         false,
-                    ordering:       false
+                    ordering:       false,
+                    stripe:         true
                 } );
                 };
             } );
@@ -121,24 +126,21 @@
                                    
                                      <tr class="pageInfo">
                                         <td colspan="3">
-                                            <h4>Search for PDX models whose tumor samples meet multiple genomic criteria</h4>
+                                            <p style="font-size:17px">Use PDX Like Me to search for PDX models with tumor samples that meet multiple genomic criteria.<br> Molecular profiles can combine mutation, expression, and/or copy number aberration criteria.<br> Multiple profiles can be searched at one time.</p>
                                             
                                             <a href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html" target="_blank">Learn how to use PDX Like Me </a>
-                                            <br>
+                                            <br><br>
                                             <table>
                                                 <tr><td>Example search:</td><td></td></tr>
                                                 <tr><td>CASE 1</td>
-                                                <tr><td>KRAS:Amp</td></tr>
+                                                <tr><td>KRAS:AMP</td></tr>
                                                 <tr><td>TP53:MUT=A159V</td></tr>
-                                                <tr><td>ALB:Del</td></tr>
-                                                <tr><td>KIT:EXP>1.5</td></tr>
-
+                                                <tr><td>ALB:DEL</td></tr>
+                                                <tr><td>KIT:EXP&gt;2.5</td></tr>
                                             </table>
-
-
                                         </td>
                                                     
-                                                </tr>
+                                   </tr>
 
 
                                     <tr class="buttons">
@@ -205,11 +207,6 @@
             </td>
         </tr>
     </table>
-    <!-- If the page reloads to update variants don't go back to the top of the page -->
-    <c:if test="${not empty update}">
-        <script>
-            document.location = "#variantsLocation"
-        </script>
-    </c:if>
+    
 </body>
 </html> 

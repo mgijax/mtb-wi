@@ -4,10 +4,6 @@
 
 <style type="text/css">
 
-.survey{
- border: 1px solid blue;
- padding: 4px;}
-
 </style>
     
 <!--================= Start Include Navigation Menu ========================-->

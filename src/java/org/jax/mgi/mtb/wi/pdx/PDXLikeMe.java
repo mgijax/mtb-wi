@@ -31,10 +31,10 @@ import org.jax.mgi.mtb.wi.WIConstants;
  *
  * @author sbn
  */
-public class ParseGeneCases {
+public class PDXLikeMe {
     
     private static final Logger log
-            = Logger.getLogger(ParseGeneCases.class.getName());
+            = Logger.getLogger(PDXLikeMe.class.getName());
 
     private static final  String baseURL = WIConstants.getInstance().getPDXWebservice();
     //static final String baseURL = "http://pdxdata.jax.org/api/";
@@ -79,7 +79,7 @@ public class ParseGeneCases {
 
             Scanner s = new Scanner(buf);
             s.useDelimiter("\n");
-            ParseGeneCases pgc = new ParseGeneCases();
+            PDXLikeMe pgc = new PDXLikeMe();
             System.out.println(pgc.parseCases(s, true, false, true, true));
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,7 +87,7 @@ public class ParseGeneCases {
 
     }
     
-    public ParseGeneCases(){
+    public PDXLikeMe(){
         this.getModelDetails();
     }
 
@@ -312,12 +312,12 @@ public class ParseGeneCases {
                         String key = (mr.id+vals[0]+vals[1]).toUpperCase();
                         if(showLRP){
                             if(lrpMap.containsKey(key)){
-                                table.append("<br>Log ratio ploidy="+lrpMap.get(key));
+                                table.append("<br>Log ratio ploidy = "+lrpMap.get(key));
                             }
                         }
                         if(showEXP){
                             if(expMap.containsKey(key)){
-                                table.append("<br>Z score percentile rank="+expMap.get(key));
+                                table.append("<br>Z score percentile rank = "+expMap.get(key));
                             }
                         }
                         
