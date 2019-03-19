@@ -13,6 +13,7 @@
              overflow-y:auto !important;
             }
             
+            /* seems to be needed for striping of resutls */
             .even{
                background-color:#eff0f1 !important;
             }
@@ -35,8 +36,8 @@
 
        
             $(document).ready( function () {
-                for(i =1; i< ${caseCount}; i++){
-                $('#results'+i).dataTable( {
+                for(i = 1; i < ${caseCount}; i++){
+                 table = $('#results'+i).dataTable( {
                     searching:      false,
                     info:           false,
                     scrollY:        '50vh',
@@ -46,9 +47,16 @@
                     stripe:         true
                 } );
                 };
+                
+                 
             } );
         
 
+            $(window).on('resize', function () {
+                for(i = 1; i < ${caseCount}; i++){
+                 $('#results'+i).DataTable().columns.adjust();
+                }
+             } );
 
 
             function clearForm() {

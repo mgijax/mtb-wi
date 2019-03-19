@@ -28,7 +28,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
 import org.jax.mgi.mtb.wi.WIConstants;
 
 /**
- *
+ * Parse the PDX Like Me queries, get the results, and convert to HTML or CSV
  * @author sbn
  */
 public class PDXLikeMe {
@@ -229,7 +229,7 @@ public class PDXLikeMe {
         }
         
         if (html) {
-            table.append("<b>").append(caseNo).append("</b><table id=\"results").append(caseCount++).append("\" border=\"1\" style=\"border-collapse:collapse\"><thead>");
+            table.append("<b>").append(caseNo).append("</b><table width=\"100%\" id=\"results").append(caseCount++).append("\" border=\"1\" style=\"border-collapse:collapse\"><thead>");
 
             if (u.size() > 0) {
                 table.append("<tr><th></th><th  style=\"text-align:center;padding:5px\"colspan=\"").append(k.size()).append("\">");

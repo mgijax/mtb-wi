@@ -185,8 +185,11 @@
                     {name: 'filter'},
                     {name: 'passage_num'},
                     {name: 'gene_id'},
+                    
                     {name: 'ckb_molpro_link'},
                     {name: 'ckb_molpro_name'},
+                    
+                    {name: 'ckb_potential_treat_link'},
                     
                     {name: 'ckb_potential_treat_approach'},
                     {name: 'ckb_protein_effect'},
