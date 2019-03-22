@@ -5,7 +5,6 @@
 package org.jax.mgi.mtb.wi.actions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -63,7 +62,21 @@ public class PDXSearchResultsAction extends Action {
         
         String recistDrug = pdxForm.getRecistDrugs();
         String recistResponse = pdxForm.getRecistResponses();
-
+        
+        Double tmbGT = null;
+        Double tmbLT = null;
+        try{
+            tmbGT = new Double(pdxForm.getTMBGT());
+        }catch(Exception e){
+            //do nothing
+        }
+        
+        try{
+            tmbLT = new Double(pdxForm.getTMBLT());
+        }catch(Exception e){
+            //do nothing
+        }
+        
         // include gene variant consequence in cvs
         boolean showGVC = false;
 
@@ -91,7 +104,7 @@ public class PDXSearchResultsAction extends Action {
         } else {
             mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, types,
                     markers, gene, variants, dosingStudy, tumorGrowth, tags, 
-                    fusionGenes,treatmentNaive, recistDrug, recistResponse);
+                    fusionGenes,treatmentNaive, recistDrug, recistResponse, tmbGT, tmbLT);
         }
 
         request.setAttribute("modelID", modelID);
@@ -114,6 +127,20 @@ public class PDXSearchResultsAction extends Action {
         if (treatmentNaive) {
             request.setAttribute("treatmentNaive", "true");
         }
+        
+        String hideTMB = "true";
+        if(tmbLT != null && tmbGT != null){
+                request.setAttribute("tmb", tmbGT+" < TMB < "+tmbLT);
+                hideTMB = "false";
+        }else if(tmbLT != null){
+                request.setAttribute("tmb",  "TMB < " + tmbLT);
+                hideTMB = "false";
+        }else if(tmbGT != null){
+            request.setAttribute("tmb", tmbGT + " < TMB");
+            hideTMB = "false";
+        }
+        
+        request.setAttribute("hideTMB", hideTMB);
 
         // genes2 (right now always just 1 gene) is for expression results
         if (genes2 != null && genes2.trim().length() > 0) {
@@ -248,7 +275,8 @@ public class PDXSearchResultsAction extends Action {
             buffer.append("'" + mouse.getGene() + "',");
             buffer.append("'" + mouse.getVariant() + "',");
             buffer.append("'" + mouse.getConsequence() + "',");
-            buffer.append("'" + mouse.getFusionGenes()+ "'");
+            buffer.append("'" + mouse.getFusionGenes()+ "',");
+            buffer.append("'" + mouse.getTMBStr()+"'");
 
             buffer.append("]");
             if (mouse.getModelStatus() == null) {

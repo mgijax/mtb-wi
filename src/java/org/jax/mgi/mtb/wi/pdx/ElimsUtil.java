@@ -789,7 +789,7 @@ public class ElimsUtil {
     public String getPDXReportWithNoName(ArrayList<PDXMouse> allMice) {
 
         // this should only happen once a week so we will just eat the overhead
-        HashMap<String, PDXMouse> mouseMap = new HashMap();
+        HashMap<String, PDXMouse> mouseMap = new HashMap<>();
         for (PDXMouse mouse : allMice) {
             mouseMap.put(mouse.getModelID(), mouse);
         }
@@ -869,7 +869,7 @@ public class ElimsUtil {
 
         HashMap<String, HashMap<String,String>> map = new HashMap<>();
 
-        HashMap<String,String> list = new HashMap();
+        HashMap<String,String> list = new HashMap<>();
                     list.put("status","");
                     list.put("modelAKA","");
                     list.put("gender","");
@@ -895,7 +895,7 @@ public class ElimsUtil {
 
             if (result.length > 0) {
                 for (int i = 0; i < result.length; i++) {
-                    list = new HashMap();
+                    list = new HashMap<>();
                     list.put("status",result[i].getModel_Status());
                     list.put("modelAKA",result[i].getModel_Aka());
                     list.put("gender",result[i].getGender());

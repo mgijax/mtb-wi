@@ -194,8 +194,8 @@ public class WIConstants {
     private String pdxFileURL;
     private String pdxEmail;
     private String mtbDeployment;
-    private HashMap<String,String> pdxUserMap = new HashMap();
-    private ArrayList<String> pdxEditors = new ArrayList();
+    private HashMap<String,String> pdxUserMap = new HashMap<>();
+    private ArrayList<String> pdxEditors = new ArrayList<>();
     private String solrURL;
     private String socDB;
     private String socURL;

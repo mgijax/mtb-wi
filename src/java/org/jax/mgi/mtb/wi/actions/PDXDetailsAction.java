@@ -5,6 +5,9 @@
 package org.jax.mgi.mtb.wi.actions;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -69,6 +72,10 @@ public class PDXDetailsAction extends Action {
         if ("null".equals(variant)) {
             variant = null;
         }
+        
+        if(request.getParameter("ctpOnly")!= null){
+            request.setAttribute("ctpOnly","&all_ctp_genes=yes");
+        }
 
         ArrayList<PDXMouse> mice = store.findStaticMouseByID(modelID);
 
@@ -82,19 +89,19 @@ public class PDXDetailsAction extends Action {
             mouse.setVariant(variant);
 
             // collections of additional data
-            ArrayList<PDXGraphic> histology = new ArrayList<PDXGraphic>();
-            ArrayList<PDXComment> tumorMarkers = new ArrayList<PDXComment>();
-            ArrayList<PDXLink> geneExpressionLinks = new ArrayList<PDXLink>();
-            ArrayList<PDXGraphic> geneExpressionImages = new ArrayList<PDXGraphic>();
-            ArrayList<PDXLink> cnvLinks = new ArrayList<PDXLink>();
-            ArrayList<PDXGraphic> cnvImages = new ArrayList<PDXGraphic>();
-            ArrayList<PDXComment> mutationComments = new ArrayList<PDXComment>();
-            ArrayList<PDXLink> mutationLinks = new ArrayList<PDXLink>();
-            ArrayList<PDXGraphic> drugSensitivity = new ArrayList<PDXGraphic>();
-            ArrayList<PDXDocument> drugSDoc = new ArrayList<PDXDocument>();
-            ArrayList<PDXGraphic> additionalGraphic = new ArrayList<PDXGraphic>();
-            ArrayList<PDXGraphic> tumorGrowthRate = new ArrayList<PDXGraphic>();
-            ArrayList<PDXLink> referenceLinks = new ArrayList<PDXLink>();
+            ArrayList<PDXGraphic> histology = new ArrayList<>();
+            ArrayList<PDXComment> tumorMarkers = new ArrayList<>();
+            ArrayList<PDXLink> geneExpressionLinks = new ArrayList<>();
+            ArrayList<PDXGraphic> geneExpressionImages = new ArrayList<>();
+            ArrayList<PDXLink> cnvLinks = new ArrayList<>();
+            ArrayList<PDXGraphic> cnvImages = new ArrayList<>();
+            ArrayList<PDXComment> mutationComments = new ArrayList<>();
+            ArrayList<PDXLink> mutationLinks = new ArrayList<>();
+            ArrayList<PDXGraphic> drugSensitivity = new ArrayList<>();
+            ArrayList<PDXDocument> drugSDoc = new ArrayList<>();
+            ArrayList<PDXGraphic> additionalGraphic = new ArrayList<>();
+            ArrayList<PDXGraphic> tumorGrowthRate = new ArrayList<>();
+            ArrayList<PDXLink> referenceLinks = new ArrayList<>();
             PDXComment histologySummary = null;
             PDXComment pathologist = null;
 
@@ -318,6 +325,21 @@ public class PDXDetailsAction extends Action {
             
             if(RelatedModels.getProxeId(modelID)!= null){
                 request.setAttribute("proxeID",RelatedModels.getProxeId(modelID));
+            }
+            
+            HashMap<String,Double> tmb = mouse.getTMB();
+            if(tmb.size()>0){
+                ArrayList<String> tmbs = new ArrayList<>();
+                ArrayList<String> keys = new ArrayList<>();
+                
+                
+                keys.addAll(tmb.keySet());
+                Collections.sort(keys);
+                for(String key : keys){
+                    tmbs.add("Sample "+key+" has a TMB score of "+tmb.get(key));
+                }
+                Collections.sort(tmbs);
+                request.setAttribute("tmb",tmbs);
             }
 
         }//end of else for finding a model;

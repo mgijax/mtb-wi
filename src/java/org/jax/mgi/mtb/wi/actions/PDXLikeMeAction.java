@@ -13,7 +13,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.jax.mgi.mtb.wi.pdx.ParseGeneCases;
+import org.jax.mgi.mtb.wi.pdx.PDXLikeMe;
 
 /**
  * Validation indicate invalid genes, invalid syntax, better formatting of
@@ -39,10 +39,14 @@ public class PDXLikeMeAction extends Action {
         if (cases != null && cases.trim().length() > 0) {
             Scanner s = new Scanner(cases);
             s.useDelimiter("\n");
-            ParseGeneCases pgc = new ParseGeneCases();
+            PDXLikeMe pgc = new PDXLikeMe();
             if (asHTML) {
-                request.setAttribute("table", pgc.parseCases(s, asHTML, actionable, showLRP, showEXP));
+                String table = pgc.parseCases(s, asHTML, actionable, showLRP, showEXP);
+                
+                request.setAttribute("table", table );
                 request.setAttribute("cases", cases);
+                int caseCount = cases.toLowerCase().split("case").length;
+                request.setAttribute("caseCount", caseCount);
             } else {
                 Date d = new Date(System.currentTimeMillis());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
