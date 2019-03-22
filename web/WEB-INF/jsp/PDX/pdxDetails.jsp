@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -27,6 +28,15 @@
                 margin-bottom: 2px;
             }
 
+
+            a.ckb:link{
+            color:red;
+            }
+            a.ckb:visited{
+            color:red;
+            }
+            
+
         </style>
 
         <c:import url="../../../meta.jsp">
@@ -35,6 +45,7 @@
 
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+        <script type="text/javascript" src="${applicationScope.urlBase}/extjs/columnHeader.js"></script>
 
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
@@ -53,6 +64,8 @@
             var cnvRankSortDir = true;
 
             var cnvLog = true;
+            
+           
 
 
 
@@ -145,11 +158,11 @@
                 }
             }
 
-
+            
             Ext.onReady(function () {
 
-                var dataProxy = new Ext.data.HttpProxy({
-                    url: '/mtbwi/pdxVariationData.do?modelID=${modelID}',
+                dataProxy = new Ext.data.HttpProxy({
+                    url: '/mtbwi/pdxVariationData.do?modelID=${modelID}${ctpOnly}',
                     timeout: 7000000
                 })
 
@@ -169,25 +182,34 @@
                     {name: 'allele_frequency'},
                     {name: 'transcript_id'},
                     {name: 'filtered_rationale'},
+                    {name: 'filter'},
                     {name: 'passage_num'},
                     {name: 'gene_id'},
-                    {name: 'ckb_evidence_types'},
-                    {name: 'cancer_types_actionable'},
-                    {name: 'drug_class'},
+                    
+                    {name: 'ckb_molpro_link'},
+                    {name: 'ckb_molpro_name'},
+                    
+                    {name: 'ckb_potential_treat_link'},
+                    
+                    {name: 'ckb_potential_treat_approach'},
+                    {name: 'ckb_protein_effect'},
+                    {name: 'ckb_nclinical_resist'},
+                    {name: 'ckb_nclinical_sens'},
+                    {name: 'ckb_npreclinical_resist'},	
+                    {name: 'ckb_npreclinical_sens'},
                     {name: 'count_human_reads'},
-                    {name: 'pct_human_reads'},
-                    {name: 'variant_num_trials'},
-                    {name: 'variant_nct_ids'}
+                    {name: 'pct_human_reads'}
+                    
 
                 ];
 
 
 
-
+                
 
 
                 // create the Data Store
-                var store = new Ext.data.ArrayStore({
+               var store = new Ext.data.ArrayStore({
                     root: 'variation',
                     totalProperty: 'total',
                     //    idIndex: 0,
@@ -196,6 +218,15 @@
                     // these need to match the webservice field names for sorting to work
                     fields: fields,
                     proxy: dataProxy
+                    
+                });
+                
+                var ckb = [{header: '', colspan: 2, align: 'center'},
+                        {header: '<a href="https://ckbhome.jax.org" onclick="openCKB()">JAX Clinical Knowledgebase (CKB)</a> annotations<br><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to CKB Boost users with active subscriptions only."> Details available to CKB Boost users with active subscriptions only.', colspan: 6, align: 'center'},
+                        {header: '', colspan: 16, align: 'center'}]
+                
+                 var group = new Ext.ux.grid.ColumnHeaderGroup({
+                    rows: [ckb]
                 });
 
                 store.setDefaultSort('gene_symbol', 'ASC');
@@ -213,8 +244,55 @@
                             header: 'Gene',
                             width: 60,
                             sortable: true,
-                            dataIndex: 'gene_symbol'
+                            dataIndex: 'gene_symbol',
+                           
                         },
+                        
+                        {
+                            header: 'Variant',
+                            width: 110,
+                            sortable: true,
+                            dataIndex: 'ckb_molpro_name',
+                            renderer: ckbMolProRenderer
+                        },
+                        {
+                            header: 'Variant effect',
+                            width: 90,
+                            sortable: true,
+                            dataIndex: 'consequence'
+                        },
+                                      
+                        {
+                            header: 'CKB<br>protein<br>effect',
+                            width: 70,
+                            sortable: true,
+                            dataIndex: 'ckb_protein_effect'
+                        },
+                                    
+                        {
+                            header: '# Annotations<br>predicting<br><b>sensitivity<b>',
+                            width: 130,
+                            sortable: true,
+                            dataIndex: 'ckb_nclinical_sens',
+                            renderer: ckbSensitivityRenderer
+                        },
+               
+                        {
+                            header: '# Annotations<br>predicting<br><b>resistance</b>',
+                            width: 130,
+                            sortable: true,
+                            dataIndex: 'ckb_nclinical_resist',
+                            renderer: ckbResistanceRenderer
+                        }, 
+              
+                        {
+                            header: 'Potential<br>treatment<br>approaches',
+                            width: 100,
+                            sortable: true,
+                            dataIndex: 'ckb_potential_treat_approach',
+                            renderer: ckbPotTreatRenderer
+                        }, 
+                        
                         {
                             header: 'Platform',
                             width: 80,
@@ -247,12 +325,7 @@
                             dataIndex: 'alt_allele'
 
                         },
-                        {
-                            header: 'Consequence',
-                            width: 170,
-                            sortable: true,
-                            dataIndex: 'consequence'
-                        },
+                        
                         {
                             header: 'Amino Acid Change',
                             width: 110,
@@ -291,6 +364,13 @@
 
                         },
                         {
+                            header: 'Filter',
+                            width: 50,
+                            sortable: true,
+                            dataIndex: 'filter'
+
+                        },
+                        {
                             header: 'Passage Num',
                             width: 50,
                             sortable: true,
@@ -302,24 +382,6 @@
                             sortable: true,
                             dataIndex: 'gene_id'
                         },
-               //         {
-               //             header: 'CKB Evidence Type',
-               //             width: 70,
-               //             sortable: true,
-               //             dataIndex: 'ckb_evidence_types'
-               //         },
-               //        {
-               //             header: 'Actionable Cancer Types',
-               //             width: 120,
-               //             sortable: true,
-               //             dataIndex: 'cancer_types_actionable'
-               //         },
-               //         {
-               //             header: 'Drug Class',
-               //             width: 70,
-               //             sortable: true,
-               //             dataIndex: 'drug_class'
-               //         },
                         {
                             header: 'Count Human Reads',
                             width: 70,
@@ -331,38 +393,101 @@
                             width: 70,
                             sortable: true,
                             dataIndex: 'pct_human_reads'
-                        }//,
-                //        {
-                //            header: 'Variant Num Trials',
-                //            width: 100,
-                //            sortable: true,
-                //            dataIndex: 'variant_num_trials'
-                //        },
-                //        {
-                //            header: 'Variant NCT IDs',
-                //            width: 100,
-                //            sortable: true,
-                //            dataIndex: 'variant_nct_ids'
-                //        }
+                        }
 
                     ],
                     stripeRows: true,
                     height: 700,
                     width: 1000,
                     id: 'pdxGrid'
-
-
-                            // paging bar on the bottom  this was removed due to perfromace issues with the filterd (public) query
                     , bbar: new Ext.PagingToolbar({
                         pageSize: 30,
                         store: store,
                         displayInfo: true,
                         displayMsg: 'Displaying results {0} - {1} of {2}'
-                    })
+                    }),
+                    plugins:group
 
 
 
                 });
+                
+                // not used
+                 function ckbGeneRenderer(value, p, record){
+                    if(record.get("ckb_gene_id").length>0){
+                        return String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_gene_id"),record.get("gene_symbol"));
+                    }else{
+                        if(record.get("gene_symbol")){
+                            return record.get("gene_symbol");
+                        }else{
+                            return "";
+                        }
+                    }
+                   
+                }
+                
+                 function ckbMolProRenderer(value, p, record){
+                     val = record.get("ckb_molpro_name");
+                     
+                     if(record.get("ckb_molpro_name").length>0 && record.get("ckb_molpro_link").length>0){
+                        val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
+                        
+                        if(record.get("ckb_molpro_link").indexOf("ckbhome") != -1){
+                            val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
+                        }
+                    }
+                        
+                    return val;
+                    
+                }
+                
+                function ckbPotTreatRenderer(value, p, record){
+                     val = record.get("ckb_potential_treat_approach");
+                     
+                     if(record.get("ckb_potential_treat_approach").trim().length>0 && record.get("ckb_molpro_link").length>0){
+                        val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link")+"?tabType=TREATMENT_APPROACH_EVIDENCE", record.get("ckb_potential_treat_approach"));
+                        
+                        if(record.get("ckb_molpro_link").indexOf("ckbhome") != -1){
+                            val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_potential_treat_approach"));
+                        }
+                    }
+                        
+                    return val;
+                    
+                }
+                
+                function ckbResistanceRenderer(value, p, record){
+                    val = "";
+                    if(record.get("ckb_nclinical_resist").trim().length>0 || record.get("ckb_npreclinical_resist").trim().length>0){
+                        val = "0 clinical/";
+                        if(record.get("ckb_nclinical_resist").trim().length>0){
+                            val = record.get("ckb_nclinical_resist")+" clinical /"
+                        }            
+                        if(record.get("ckb_npreclinical_resist").trim().length>0){
+                            val = val+record.get("ckb_npreclinical_resist")+" preclinical";
+                        }else{
+                            val = val+"0 preclinical";
+                        }
+                    }
+                    return val;
+                }
+                
+                
+                function ckbSensitivityRenderer(value, p, record){
+                    val = "";
+                    if(record.get("ckb_nclinical_sens").trim().length>0 || record.get("ckb_npreclinical_sens").trim().length>0){
+                        val = "0 clinical/";
+                        if(record.get("ckb_nclinical_sens").trim().length>0){
+                            val = record.get("ckb_nclinical_sens")+" clinical /"
+                        }            
+                        if(record.get("ckb_npreclinical_sens").trim().length>0){
+                            val = val+record.get("ckb_npreclinical_sens")+" preclinical";
+                        }else{
+                            val = val+"0 preclinical";
+                        }
+                    }
+                    return val;
+                }
 
                 Ext.EventManager.onWindowResize(function (w, h) {
                     panel.doLayout();
@@ -370,31 +495,31 @@
 
                 // there must be a better way...
                 var colNames = [];
-                colNames.push('model_id');
-                colNames.push('sample_name');
-                colNames.push('gene_symbol');
-                colNames.push('platform');
-                colNames.push('chromosome');
-                colNames.push('seq_position');
-                colNames.push('ref_allele');
-                colNames.push('alt_allele');
-                colNames.push('consequence');
-                colNames.push('amino_acid_change');
-                colNames.push('rs_variants');
-                colNames.push('read_depth');
-                colNames.push('allele_frequency');
-                colNames.push('transcript_id');
-                colNames.push('filtered_rationale');
-                colNames.push('passage_num');
-                colNames.push('gene_id');
-      //          colNames.push('ckb_evidence_types');
-      //          colNames.push('cancer_types_actionable');
-      //          colNames.push('drug_class');
-                colNames.push('count_human_reads');
-                colNames.push('pct_human_reads');
-      //          colNames.push('variant_nct_ids');
-      //          colNames.push('variant_num_trials')
-
+                colNames.push( 'sample_name');
+                colNames.push( 'gene_symbol');
+                colNames.push( 'ckb_molpro_name');
+                colNames.push( 'consequence');
+                colNames.push( 'ckb_protein_effect');
+                colNames.push( 'ckb_nclinical_sens');
+                colNames.push( 'ckb_nclinical_resist');
+                colNames.push('ckb_potential_treat_approach');
+                colNames.push( 'platform');
+                colNames.push( 'chromosome');
+                colNames.push( 'seq_position');
+                colNames.push( 'ref_allele');
+                colNames.push( 'alt_allele');
+                colNames.push( 'amino_acid_change');
+                colNames.push( 'rs_variants');
+                colNames.push( 'read_depth');
+                colNames.push( 'allele_frequency');
+                colNames.push( 'transcript_id');
+                colNames.push( 'filtered_rationale');
+                colNames.push( 'filter');
+                colNames.push( 'passage_num');
+                colNames.push( 'gene_id');
+                colNames.push( 'count_human_reads');
+                colNames.push( 'pct_human_reads');
+     
 
 
                 // focus on sort column otherwise focus always jumps to first column
@@ -418,7 +543,7 @@
                     collapsible: true,
                     collapsed: true,
                     collapseFirst: true,
-                    title: '<b>User Alert</b> (3/14/2018): We are in the process of updating annotations associated with mutations observed in PDX model tumors. These data are not currently available but will be restored soon. Visit the <a href="https://ckb.jax.org" target="_blank">JAX Clinical Knowledgebase </a>for information on clinical relevance of specific mutations.<br><br>Click to expand/collapse',
+                    title: 'Click to expand/collapse',
                     layout: {
                         type: 'fit',
                         align: 'stretch',
@@ -432,6 +557,8 @@
                 panel.render();
 
                 panel.doLayout();
+                
+              //  grid.getView().renderHeaders();
 
                 checkVariants = function () {
                     if (store.getTotalCount() == 0) {
@@ -536,7 +663,45 @@
                        panel4.doLayout();
                 }
                 
+          
+            
+             if(document.getElementById("cnvPlots") != null){
+                panel5 = new Ext.Panel({
+                        applyTo: 'cnvPlots',
+                        collapsible: true,
+                        collapsed: true,
+                        collapseFirst: false,
+                        title: 'Click to expand/collapse',
+                        forceLayout: true,
+                        layout: {
+                            type: 'fit',
+                            align: 'stretch',
+                            pack: 'start'
+                        },
+                        titleCollapse: true,
+                        hideCollapseTool: true,
+                           items: [{html:'<c:forEach var="imageData" items="${cnvPlots}" varStatus="status">
+                                                <div style="text-align:center">\
+                                                ${imageData.get(0)}<br>\
+                                                <img src="${applicationScope.pdxFileURL}../cnvPlots/tumor_only/${imageData.get(1)}" height="450" width="975"/></div><br>\
+                                             </c:forEach>'
+                                   }]
+
+                       });
+
+                       panel5.render();
+                       panel5.doLayout();
+                }
+                
+                
             });
+            
+            function openCKB(){
+                window.open("https://ckbhome.jax.org","ckb");
+            }
+            
+           
+                
 
         </script>
 
@@ -568,7 +733,7 @@
                                             <table width="100%" border="0" cellpadding="4" cellspacing="4">
                                                 <tr>
                                                     <td width="20%" valign="middle" align="left">
-                                                        <a class="help" href="userHelp.jsp#pdxdetails"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
+                                                        <a class="help" href="userHelp.jsp#pdxdetails"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
                                                     </td>
                                                     <td width="60%" class="pageTitle">
                                                         PDX Model Details
@@ -587,6 +752,13 @@
                                             <tr class="stripe2">
                                                 <td class="cat2">Notices</td>
                                                 <td class="data2" >
+                                                    <c:if test="${not empty proxeID}">
+                                                        This model is being distributed by The Jackson Laboratory on behalf of the Lymphoma Xenograft core at Dana-Farber Cancer Institute (DFCI).<br>
+                                                        Additional information can be found by registering at DFCI's PRoXe (<a href="https://www.proxe.org/">https://www.proxe.org/</a>) web site.<br>
+                                                        PRoXe model id: ${proxeID}
+                                                        <br>    
+                                                    </c:if>
+                                                        
                                                     The use of this material by a company is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCICompany.pdf">notice</a>.
                                                     <br>
                                                     The use of this material by an academic institution is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCIAcademic.pdf">notice</a>.
@@ -642,6 +814,12 @@
                                                     <td class="label">Stage / Grade:</td><td class="normal" >${mouse.stage} / ${mouse.grade}<td></td>
 
                                                 </tr>
+                                                <c:if test="${not empty relatedModels}">
+                                                <tr>
+                                                    <td class="label">Related Models:</td>
+                                                    <td style="width:100%" class="normal" colspan="5">${relatedModels}</td>
+                                                </tr>
+                                                </c:if>
 
                                                 <c:if test="${not empty mouse.fusionGenes}">
                                                     <tr>
@@ -720,9 +898,41 @@
 
                                     </c:if>
 
+                                        
+                                    <c:if test="${not empty tmb}">
+                                      
+                                        <c:set var="a" value="2"/>
+                                        <c:set var="b" value="1"/>
+
+
+                                         <c:if test="${not empty referenceLinks or not empty sessionScope.pdxEditor}">
+
+                                            <c:set var="a" value="1"/>
+                                            <c:set var="b" value="2"/>
+                                         </c:if>
+
+
+                                         <tr class="stripe${a}">
+                                            <td class="cat${a}">
+                                                Tumor Mutation Burden
+                                            </td>
+                                            <td class="data${a}">
+                                                <c:forEach var="sample" items="${tmb}" varStatus="status">
+                                                    ${sample}<br>    
+                                                </c:forEach>
+                                            </td>
+                                        </tr>
+
+                                    </c:if>    
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                     <tr class="stripe${b}">
                                         <td class="cat${b}">
-                                            Variant Summary
+                                            Variant Summary <a class="help" href="userHelp.jsp#pdxVariant"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                         </td>
                                         <td class="data${b}">
 
@@ -736,6 +946,7 @@
 
                                             <div id="variantSummary"></div>
                                             <br>
+                                       
                                             <c:choose>
                                                 <c:when test="${applicationScope.publicDeployment == false}">
                                                 <input id="variantData" type="button" value="Download summary data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">
@@ -749,7 +960,7 @@
 
                                     <tr class="stripe${a}">
                                         <td class="cat${a}">
-                                            Gene Expression
+                                            Gene Expression <a class="help" href="userHelp.jsp#pdxExpression"><img src="${applicationScope.urlImageDir}/help_small2.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                         </td>
                                         <td class="data${a}">
                                             <c:choose>
@@ -783,7 +994,7 @@
 
                                     <tr class="stripe${b}">
                                         <td class="cat${b}">
-                                            Gene CNV
+                                            Gene CNV <a class="help" href="userHelp.jsp#pdxCNV"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                         </td>
                                         <td class="data${b}">
                                             <c:choose>
@@ -803,11 +1014,36 @@
 
                                         </td>
                                     </tr>
-                                    <tr class="stripe${a}">
-                                        <td class="cat${a}">
+                                    
+                                     <tr class="stripe${a}">
+                                            <td class="cat${a}">
+                                                CNV Plots <a class="help" href="userHelp.jsp#pdxCNV"><img src="${applicationScope.urlImageDir}/help_small2.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
+                                            </td>
+                                            <td class="data${a}">
+                                            <c:choose>
+                                                <c:when test="${not empty cnvPlots}">
+                                                    <div id ="cnvPlots"></div>
+                                                </c:when>
+
+                                                 <c:otherwise>
+                                                    <table  border=0 cellpadding=5 cellspacing=0 width="100%">
+                                                        <tr>
+                                                            <td class="normal">
+                                                                No gene CNV plots currently available.
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                 </c:otherwise>
+
+                                            </c:choose>
+                                    </tr>
+                                        
+                                    
+                                <tr class="stripe${b}">
+                                        <td class="cat${b}">
                                             Model Characterization
                                         </td>
-                                        <td class="data${a}">
+                                        <td class="data${b}">
                                             <table  border=0 cellpadding=5 cellspacing=0 width="100%">
 
                                                 <!-- Histology -->                
@@ -833,11 +1069,44 @@
 
 
                                                                 </c:if>
+                                                               
+                                                            </td>
+
+
+
                                                             </td>
                                                             <td style="padding:5px; vertical-align:top;">
 
+
+                                                                <c:choose>
+                                                                    <c:when test="${not empty tumorMarkers  ||  not empty sessionScope.pdxEditor}">
+                                                                        Tumor Markers:<br>
+                                                                        <c:if test="${not empty sessionScope.pdxEditor}" > 
+                                                                            <input type="submit" name="tumorMarkers" value="add"><br>
+                                                                        </c:if>
+
+                                                                        <table>
+                                                                            <c:forEach var="comment" items="${tumorMarkers}" varStatus="status">
+                                                                                <tr>
+                                                                                    <td style="border:none;  padding:1px; width:500px;">
+                                                                                        ${comment.comment}
+                                                                                        <c:if test="${not empty sessionScope.pdxEditor}">
+                                                                                            <a href="pdxEditContent.do?contentType=comment&contentKey=${comment.contentKey}&modelID=${modelID}" class="linkedButton">
+                                                                                                <input type="button" value="Edit"/></a>
+                                                                                            </c:if>
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                            </c:forEach>
+                                                                        </table>
+                                                                    </c:when>
+                                                                </c:choose> 
+
+
                                                                 <c:if test="${not empty histologySummary}">
-                                                                    ${histologySummary.comment}<br>
+                                                                    Summary:<br>
+                                                                    <table><tr><td style="border:none;  padding:1px; width:500px;">${histologySummary.comment}</td></tr></table>
+                                                                    
                                                                     <c:if test="${not empty sessionScope.pdxEditor}">
                                                                         <a href="pdxEditContent.do?contentType=comment&contentKey=${histologySummary.contentKey}&modelID=${modelID}" class="linkedButton">  
                                                                             <input type="button" value="Edit"/>
@@ -847,7 +1116,8 @@
                                                                 </c:if>
 
                                                                 <c:if test="${not empty pathologist}">
-                                                                    ${pathologist.comment}<br>
+                                                                    Pathologist:<br>
+                                                                    <table><tr><td style="border:none;  padding:1px; width:500px;">${pathologist.comment}</td></tr></table>
                                                                     <c:if test="${not empty sessionScope.pdxEditor}">
                                                                         <a href="pdxEditContent.do?contentType=comment&contentKey=${pathologist.contentKey}&modelID=${modelID}" class="linkedButton"> 
                                                                             <input type="button" value="Edit"/>
@@ -869,7 +1139,7 @@
 
                                                                             <td style=" padding:5px; border:none; vertical-align:top; width:250px">
                                                                                 <a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-                                                                                        return false;">
+                                                                                    return false;">
                                                                                     <img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
                                                                                 </a>
                                                                                 <c:if test="${not empty sessionScope.pdxEditor}">
@@ -887,45 +1157,6 @@
                                                                 </table>
                                                             </td>
                                                         </tr>                    
-                                                    </c:when>
-
-                                                </c:choose>        
-
-
-                                                <!--  Tumor Markers -->
-
-                                                <c:choose>
-                                                    <c:when test="${not empty tumorMarkers  ||  not empty sessionScope.pdxEditor}">
-                                                        <tr>
-                                                            <td class="label" style="  padding:5px; width:10%; vertical-align:top;">
-                                                                Tumor Markers:
-
-
-                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-
-                                                                    <br>
-                                                                    <input type="submit" name="tumorMarkers" value="add">
-
-
-                                                                </c:if>
-                                                            </td>
-                                                            <td>
-                                                                <table>
-                                                                    <c:forEach var="comment" items="${tumorMarkers}" varStatus="status">
-                                                                        <tr>
-                                                                            <td style="border:none;  padding:5px; ">
-                                                                                ${comment.comment}
-                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                    <a href="pdxEditContent.do?contentType=comment&contentKey=${comment.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                        <input type="button" value="Edit"/></a>
-                                                                                    </c:if>
-                                                                            </td>
-                                                                        </tr>
-
-                                                                    </c:forEach>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
                                                     </c:when>
 
                                                 </c:choose>        
@@ -959,7 +1190,7 @@
 
                                                                             <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
                                                                                 <a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-                                                                                        return false;">
+                                                                                    return false;">
                                                                                     <img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
                                                                                 </a>
                                                                                 <c:if test="${not empty sessionScope.pdxEditor}">
@@ -1020,7 +1251,7 @@
                                                                             </c:choose>
                                                                             <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
                                                                                 <a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-                                                                                        return false;">
+                                                                                    return false;">
                                                                                     <img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
                                                                                 </a>
                                                                                 <c:if test="${not empty sessionScope.pdxEditor}">
@@ -1130,7 +1361,7 @@
 
                                                                             <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
                                                                                 <a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-                                                                                        return false;"><img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}"></a>
+                                                                                    return false;"><img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}"></a>
                                                                                     <c:if test="${not empty sessionScope.pdxEditor}">
                                                                                     <a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton">
                                                                                         <input type="button" value="Edit"/>
@@ -1199,7 +1430,7 @@
                                                                             </c:choose>
                                                                             <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
                                                                                 <a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-                                                                                        return false;">
+                                                                                    return false;">
                                                                                     <img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
                                                                                 </a>
                                                                                 <c:if test="${not empty sessionScope.pdxEditor}">
@@ -1246,7 +1477,7 @@
                                                                             </c:choose>
                                                                             <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
                                                                                 <a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-                                                                                        return false;"><img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}"></a>
+                                                                                    return false;"><img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}"></a>
                                                                                     <c:if test="${not empty sessionScope.pdxEditor}">
                                                                                     <a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton">  <input type="button" value="Edit"/></a>
                                                                                     </c:if>
@@ -1265,7 +1496,10 @@
                                                 </c:choose>        
                                             </table>
                                         </td>
-                                    </tr>
+                                    </tr> 
+                                             
+                                        
+                                   
                                     <c:choose>
                                         <c:when test="${mouse.socGraph > 0}">
                                             <c:forEach var="socGraph" begin="1" end="${mouse.socGraph}" >
@@ -1290,8 +1524,6 @@
 
                                         </c:when>
                                     </c:choose>
-                                                
-
 
                                     <!--======================= End Results ====================================-->
                                 </table>

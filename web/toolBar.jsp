@@ -24,7 +24,7 @@
                                     <font class="toolBarSearchTitle">Search</font> for
                                 </td>
                                 <td valign="top" align="right">
-                                    <a class="help" href="<c:url value='/userHelp.jsp#searchbox'/>"><img src="${applicationScope.urlImageDir}/help_small.png" height=16 width=16 border=0 alt="help"></a>
+                                    <a class="help" href="<c:url value='/userHelp.jsp#searchbox'/>"><img src="${applicationScope.urlImageDir}/help_small.png" height=16 width=16 border=0 style="vertical-align:middle" alt="Help"></a>
                                 </td>
                             </tr>
                             <tr>
@@ -83,16 +83,23 @@
         <td>
             <div class="toolBarTitle">Additional Resources</div>
             
+            
             <img src="${applicationScope.urlImageDir}/new.jpg" alt="new">
+            <a href="<c:url value='/pdxLikeMe.do'/>">PDX Like Me</a> 
+            <br>
+            
+            
+            
             <a href="http://www.pdxfinder.org">PDX Finder</a> 
+            <br>
+            
+              <a href="<c:url value='/pdxSearch.do'/>">PDX Model Search</a>
             <br>
             
             
             <a href="<c:url value='/facetedSearch.do'/>">Faceted Tumor Search</a> 
             <br>
             
-              <a href="<c:url value='/pdxSearch.do'/>">PDX Model Search</a>
-            <br>
              <c:if test="${applicationScope.publicDeployment == false}">
              <a href="<c:url value='/pdxComparison.do'/>">PDX Comparison</a>
               <br> 
@@ -100,15 +107,8 @@
              <a href="<c:url value='/pdxLogin.do'/>">PDX Login</a>
             <br>
             </c:if>      
-             <a href="<c:url value='/viewer.do'/>">Cancer QTL Viewer</a>
-            <br>
-            <c:if test="${not empty applicationScope.urlMTBPathWI}">
-                <span style="white-space:nowrap"><a href="${applicationScope.urlMTBPathWI}">Submit Pathology Images</a></span>
-                <br>
-            </c:if>
-            <span style="white-space:nowrap"><a href="<c:url value='/tumorFrequencyGrid.do'/>">Tumor Frequency Grid</a></span>
            
-            <br>
+            
              <span style="white-space:nowrap"><a href="<c:url value='/dynamicGrid.do'/>">Dynamic Tumor Frequency Grid</a></span> 
          
            
@@ -142,7 +142,12 @@
             <hr width=90%>
             <div class="toolBarSmall">
             Last Database Update<br>
+             <c:if test="${applicationScope.publicDeployment == true}">
             ${applicationScope.dbLastUpdateDate}<br>
+             </c:if>
+             <c:if test="${applicationScope.publicDeployment == false}">
+                 Daily<br>
+             </c:if>
             MTB ${applicationScope.wiVersion}
             </div>
             </center>

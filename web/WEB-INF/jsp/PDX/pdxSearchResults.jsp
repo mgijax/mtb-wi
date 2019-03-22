@@ -120,7 +120,8 @@
                 {name: 'gene'},
                 {name: 'variant'},
                 {name: 'consequence'},
-                {name: 'fusionGenes'}
+                {name: 'fusionGenes'},
+                {name: 'tmb'}
                 
             ],
             data: ${mice},
@@ -194,6 +195,14 @@
                     width    : 120, 
                     sortable : true, 
                     dataIndex: 'tumorType'
+                    
+                },
+                {
+                    header   : 'TMB',  
+                    width    : 120, 
+                    sortable : true, 
+                    dataIndex: 'tmb',
+                    hidden   : ${hideTMB}
                     
                 },
                 {
@@ -310,7 +319,7 @@
                             <table width="100%" cellpadding="4" cellspacing="4" >
                                 <tr>
                                     <td width="20%" valign="middle" align="left">
-                                        <a class="help" href="userHelp.jsp#pdxresults"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
+                                        <a class="help" href="userHelp.jsp#pdxresults"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
                                     </td>
                                     <td width="60%" class="pageTitle">
                                         Patient Derived Xenograft Search Results
@@ -502,7 +511,9 @@
                         <font class="label">RECIST Response:</font> ${recistResponse}<br>
                     </c:if> 
                         
-                   
+                        <c:if test="${not empty tmb}">
+                            <font class="label">TMB:</font> ${tmb}<br>
+                        </c:if>            
                    
             </td>
         </tr>

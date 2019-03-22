@@ -4,8 +4,10 @@
  */
 package org.jax.mgi.mtb.wi.actions;
 
-import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -20,6 +22,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXLink;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
+import org.jax.mgi.mtb.wi.pdx.RelatedModels;
 
 /**
  * Collects data for PDX details page and sends it along
@@ -28,8 +31,7 @@ import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
  */
 public class PDXDetailsAction extends Action {
     
-    private static final String BAYLOR = "Baylor College of Medicine";
-    private static final String DANA_FARBER = "Dana-Farber Cancer Institute";
+    
 
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
@@ -70,6 +72,10 @@ public class PDXDetailsAction extends Action {
         if ("null".equals(variant)) {
             variant = null;
         }
+        
+        if(request.getParameter("ctpOnly")!= null){
+            request.setAttribute("ctpOnly","&all_ctp_genes=yes");
+        }
 
         ArrayList<PDXMouse> mice = store.findStaticMouseByID(modelID);
 
@@ -83,19 +89,19 @@ public class PDXDetailsAction extends Action {
             mouse.setVariant(variant);
 
             // collections of additional data
-            ArrayList<PDXGraphic> histology = new ArrayList<PDXGraphic>();
-            ArrayList<PDXComment> tumorMarkers = new ArrayList<PDXComment>();
-            ArrayList<PDXLink> geneExpressionLinks = new ArrayList<PDXLink>();
-            ArrayList<PDXGraphic> geneExpressionImages = new ArrayList<PDXGraphic>();
-            ArrayList<PDXLink> cnvLinks = new ArrayList<PDXLink>();
-            ArrayList<PDXGraphic> cnvImages = new ArrayList<PDXGraphic>();
-            ArrayList<PDXComment> mutationComments = new ArrayList<PDXComment>();
-            ArrayList<PDXLink> mutationLinks = new ArrayList<PDXLink>();
-            ArrayList<PDXGraphic> drugSensitivity = new ArrayList<PDXGraphic>();
-            ArrayList<PDXDocument> drugSDoc = new ArrayList<PDXDocument>();
-            ArrayList<PDXGraphic> additionalGraphic = new ArrayList<PDXGraphic>();
-            ArrayList<PDXGraphic> tumorGrowthRate = new ArrayList<PDXGraphic>();
-            ArrayList<PDXLink> referenceLinks = new ArrayList<PDXLink>();
+            ArrayList<PDXGraphic> histology = new ArrayList<>();
+            ArrayList<PDXComment> tumorMarkers = new ArrayList<>();
+            ArrayList<PDXLink> geneExpressionLinks = new ArrayList<>();
+            ArrayList<PDXGraphic> geneExpressionImages = new ArrayList<>();
+            ArrayList<PDXLink> cnvLinks = new ArrayList<>();
+            ArrayList<PDXGraphic> cnvImages = new ArrayList<>();
+            ArrayList<PDXComment> mutationComments = new ArrayList<>();
+            ArrayList<PDXLink> mutationLinks = new ArrayList<>();
+            ArrayList<PDXGraphic> drugSensitivity = new ArrayList<>();
+            ArrayList<PDXDocument> drugSDoc = new ArrayList<>();
+            ArrayList<PDXGraphic> additionalGraphic = new ArrayList<>();
+            ArrayList<PDXGraphic> tumorGrowthRate = new ArrayList<>();
+            ArrayList<PDXLink> referenceLinks = new ArrayList<>();
             PDXComment histologySummary = null;
             PDXComment pathologist = null;
 
@@ -240,12 +246,14 @@ public class PDXDetailsAction extends Action {
             request.setAttribute("collapseReferences", collapseReferences);
             request.setAttribute("referenceLinks", referenceLinks);
 
-            String expData ="";
-            if(DANA_FARBER.equals(mouse.getInstitution()) || BAYLOR.equals(mouse.getInstitution())){
-                expData = store.getModelTPM(modelID);
-            }else{
-                expData = store.getModelExpression(modelID);
+            
+            boolean useTPM = false;
+            if(store.DANA_FARBER.equals(mouse.getInstitution()) || store.BAYLOR.equals(mouse.getInstitution())){
+                useTPM = true;
             }
+            
+            String expData = store.getModelExpression(modelID,useTPM);
+            
             int split = expData.indexOf("[");
             if (split > 0) {
                 String platforms = expData.substring(0, split);
@@ -256,7 +264,7 @@ public class PDXDetailsAction extends Action {
 
             request.setAttribute("geneExpressionData", expData);
 
-            // 3500px is about right for the 350 or so genes in the exome panel
+            // 3500px is about right for the 350 or so genes in the CTP panel
             // some models will have multiple samples 
             // adjust the 3500px as necessary 
             int pxPerBar = 15;
@@ -284,10 +292,7 @@ public class PDXDetailsAction extends Action {
                 request.setAttribute("samplePloidy", ploidy);
                 cnvData = parts[1];
 
-                //cnvData = cnvData.replaceAll("Amplification", "orange");
-                //cnvData = cnvData.replaceAll("Deletion", "blue");
-                //cnvData = cnvData.replaceAll("Normal", "grey");
-                // cnvData = cnvData.replaceAll("Sample Ploidy", "Sample Ploidy");
+                
                 request.setAttribute("geneCNVData", cnvData);
 
                 int cnvChartSize = 250;
@@ -302,14 +307,39 @@ public class PDXDetailsAction extends Action {
                 request.setAttribute("cnvChartSize", cnvChartSize + "");
                 // will need to set cnv data here
             }
+            
+            request.setAttribute("cnvPlots", store.getCNVPlotsForModel(modelID));
 
             request.setAttribute("modelID", modelID);
 
             request.setAttribute("mouse", mouse);
 
             // check if no inventory remaining
-            if (mouse.getModelStatus().indexOf("Inventory") != -1 || mouse.getModelStatus().indexOf("Data") != -1) {
+            if (mouse.getModelStatus().indexOf("Inventory") != -1) {
                 request.setAttribute("unavailable", "unavailable");
+            }
+            
+            if(RelatedModels.getReleationLabel(modelID)!= null){
+                request.setAttribute("relatedModels",RelatedModels.getReleationLabel(modelID));
+            }
+            
+            if(RelatedModels.getProxeId(modelID)!= null){
+                request.setAttribute("proxeID",RelatedModels.getProxeId(modelID));
+            }
+            
+            HashMap<String,Double> tmb = mouse.getTMB();
+            if(tmb.size()>0){
+                ArrayList<String> tmbs = new ArrayList<>();
+                ArrayList<String> keys = new ArrayList<>();
+                
+                
+                keys.addAll(tmb.keySet());
+                Collections.sort(keys);
+                for(String key : keys){
+                    tmbs.add("Sample "+key+" has a TMB score of "+tmb.get(key));
+                }
+                Collections.sort(tmbs);
+                request.setAttribute("tmb",tmbs);
             }
 
         }//end of else for finding a model;

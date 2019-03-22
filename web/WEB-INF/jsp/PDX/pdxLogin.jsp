@@ -40,7 +40,7 @@
                             <table width="100%" border=0 cellpadding=0 cellspacing=0>
                                 <tr>
                                     <td width="20%" valign="middle" align="left">
-                                        <a class="help" href="userHelp.jsp#pdxdetails"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
+                                        <a class="help" href="userHelp.jsp#pdxdetails"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
                                     </td>
                                     <td width="60%" class="pageTitle">
                                         PDX Login
@@ -61,23 +61,10 @@
             <td align="center" colspan="11">
                 <table>
                     <tr>
-                        <td align="center">
-                            <input type="button" value="Open PDX Genomics Dashboard" onClick="window.open('http://pdx-dashboard.jax.org/v4/')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center">
+                    <td align="center">
                             <input type="button" value="Open PDX Sample Name Checker" onClick="window.open('http://pdx-dashboard/elims/submission-lookup/')">
                         </td>
                     </tr>
-                    
-                      <tr>
-                     <td align="center">
-                            <input type="button" value="Open PDX Sample Sheet Generator" onClick="window.open('http://pdx-dashboard/elims/generate-sheet/')">
-                        </td>
-                    </tr>
-                    <tr>
-
                     
                     <tr>
                         <td align="center">

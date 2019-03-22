@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
@@ -33,6 +34,7 @@
             if(document.getElementById("variantSelect") != null){
                 document.getElementById("variantSelect").style.visibility="hidden";
             }
+            document.forms[1].modelID.value="";
             document.forms[1].gene.value="";
             document.forms[1].genes2.value="";
             document.forms[1].genesCNV.value="";
@@ -194,7 +196,7 @@
                             <table width="100%" border="0" cellpadding="4" cellspacing="0">
                                 <tr>
                                     <td width="20%" valign="middle" align="left">
-                                        <a class="help" href="userHelp.jsp#pdxsearch"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
+                                        <a class="help" href="userHelp.jsp#pdxsearch"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
                                     </td>
                                     <td width="60%" class="pageTitle">
                                         Patient Derived Xenograft Search Form
@@ -216,19 +218,7 @@
                                         <br>
                                         &nbsp;
                                         <br>
-                                        <br>
-                                        <br>
-                                        <table class="miTable">
-                                            <tr><td border="5px">
-                                                    <p class="miTitle">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
-                                                <ul>
-                                                    <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a><br>
-                                                    <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a><br>
-                                                    <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a><br>
-                                                </ul>
-                                                <br>
-                                            </td></tr>
-                                        </table>
+                                       
                                     </td>
 
                                     <td>
@@ -306,7 +296,7 @@
                     <td>
                         <b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Only return models with selected additional information.', CAPTION, 'Limit results');" onmouseout="return nd();">Limit results to models</a></b>     
                         <br>
-                <html:checkbox property="dosingStudy"/> with dosing study data, <html:checkbox property="tumorGrowth"/> with tumor growth graphs, <html:checkbox property="treatmentNaive"/> 
+                <html:checkbox property="dosingStudy"/> with dosing study data, <html:checkbox property="treatmentNaive"/> 
                 <a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('PDX models are considered treatment naive if the patient did not receive chemotherapy, immunotherapy, hormone therapy or radiation therapy for this primary cancer within 5 years prior to sample collection and/or within 1 year for a different cancer.', CAPTION, 'Treatment Naive');" onmouseout="return nd();">
                 from treatment naive patients.
                 <br></a>
@@ -374,6 +364,26 @@
 
 </table>
 </td>
+</tr>
+
+<tr class="stripe1">
+    <td class="cat1">
+        Search by tumor mutation burden (TMB) score range
+    </td>
+    <td class="data1">
+        <table>
+            <tr><td align="center">Minimum:${minTMB}</td>
+                <td></td>
+                <td align="center">Maximum:${maxTMB}</td>
+                <td>&nbsp;&nbsp; ( TMB > 22  is considered high.)</td>
+            </tr>
+            <tr><td align="center"><html:text size="4" property="TMBGT"/></td>
+                <td align="center"> <b>&lt;=</b>&nbsp;&nbsp;<b><a href="userHelp.jsp#pdxTMB" style="text-decoration: none; cursor:help;" onmouseover="return overlib('TMB is calculated for each sample associated with a PDX model.  Models will be returned if any of the samples meet the search criteria. Click for details on how TMB is cacluated.', CAPTION, 'Tumor mutation burden');" onmouseout="return nd();">TMB</a></b>&nbsp;&nbsp;<b>&lt;=</b></td>
+                <td align="center"> <html:text size="4" property="TMBLT"/></td>
+                <td></td>
+            </tr>
+        </table>
+    </td>
 </tr>
 
 

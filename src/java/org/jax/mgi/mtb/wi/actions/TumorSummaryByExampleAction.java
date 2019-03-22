@@ -51,7 +51,7 @@ public class TumorSummaryByExampleAction extends Action {
 
 
       List<StrainSynonymsDTO> arrSynonyms =
-              new ArrayList<StrainSynonymsDTO>(dtoTumorSummary.getStrainSynonyms());
+              new ArrayList<>(dtoTumorSummary.getStrainSynonyms());
 
       List<StrainSynonymsDTO> filteredSynonyms =
               WIUtils.filterStrainSynonyms(arrSynonyms,dtoTumorSummary.getStrainName());

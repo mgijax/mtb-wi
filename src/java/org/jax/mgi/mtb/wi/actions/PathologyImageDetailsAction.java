@@ -117,7 +117,7 @@ public class PathologyImageDetailsAction extends Action {
             
             // put the detail record in the request
             List<StrainSynonymsDTO> arrSynonyms =
-                    new ArrayList<StrainSynonymsDTO>(dtoPathologyDetail.getStrainSynonyms());
+                    new ArrayList<>(dtoPathologyDetail.getStrainSynonyms());
 
             List<StrainSynonymsDTO> filteredSynonyms =
                     WIUtils.filterStrainSynonyms(arrSynonyms,

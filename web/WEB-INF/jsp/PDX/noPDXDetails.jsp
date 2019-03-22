@@ -34,7 +34,7 @@
                                 <table width="100%" border="0" cellpadding="4" cellspacing="0">
                                     <tr>
                                         <td width="20%" valign="middle" align="left">
-                                            <a class="help" href="userHelp.jsp#pdxsearch"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
+                                            <a class="help" href="userHelp.jsp#pdxsearch"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
                                         </td>
                                         <td width="60%" class="pageTitle">
                                             There is no available PDX model with ID <b>${modelID}</b>

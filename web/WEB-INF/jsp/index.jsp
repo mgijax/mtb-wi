@@ -86,17 +86,7 @@
                                 <li>links additional on-line cancer resources
                             </ul>
                             <p>
-                            <table class="miTable">
-                                <tr><td border="5px">
-                                        <p class="miTitle">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
-                                        <ul>
-                                            <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a><br>
-                                            <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a><br>
-                                            <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a><br>
-                                        </ul>
-                                        <br>
-                                    </td></tr>
-                            </table>
+                           
 
                             <hr width="100%">
                             <p>
@@ -113,7 +103,7 @@
                                                             <h4>Quick <a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('The specific organ (or tissue) in which tumor cells originate.<br><br>The value for this field is selected from a list of controlled vocabulary terms.', CAPTION, 'Organ / Tissue of Origin');" onmouseout="return nd();">Organ/Tissue</a> Search</i></h4>
                                                         </td>
                                                         <td valign="top" align="right">
-                                                            <a class="help" href="userHelp.jsp#quickorgan"><img src="${applicationScope.urlImageDir}/help_small.png" height=16 width=16 border=0 alt="help"></a>
+                                                            <a class="help" href="userHelp.jsp#quickorgan"><img src="${applicationScope.urlImageDir}/help_small.png" height=16 width=16 border=0 style="vertical-align:middle" alt="Help">Help and Documentation</a>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -161,7 +151,7 @@
                             <hr width="100%">
                             <p>
                                 <!--======================== End Main Section ==============================-->
-                                </font>
+                               
 
                         </td>
                     </tr>

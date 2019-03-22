@@ -17,7 +17,6 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBTumorFrequencyDetailDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBTumorUtilDAO;
 import org.jax.mgi.mtb.dao.gen.mtb.StrainSynonymsDTO;
 import org.jax.mgi.mtb.utils.StringUtils;
-import org.jax.mgi.mtb.utils.Timer;
 import org.jax.mgi.mtb.wi.utils.WIUtils;
 
 /**
@@ -120,7 +119,7 @@ public class TumorFrequencyDetailsAction extends Action {
             } else {
                 // put the tumor in the request
                 List<StrainSynonymsDTO> synonyms = 
-                        new ArrayList<StrainSynonymsDTO>(dtoTFDetail.getStrainSynonyms());
+                        new ArrayList<>(dtoTFDetail.getStrainSynonyms());
 
                 List<StrainSynonymsDTO> filteredSynonyms = 
                         WIUtils.filterStrainSynonyms(synonyms, dtoTFDetail.getStrainName());

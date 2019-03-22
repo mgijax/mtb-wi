@@ -5,18 +5,59 @@
 <html>
     <head>
 
-        <link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
-
-
+        <style>
+            /* force the horizontal scroll bars into hiding */
+            .dataTables_scrollBody
+            {
+             overflow-x:hidden !important;
+             overflow-y:auto !important;
+            }
+            
+            /* seems to be needed for striping of resutls */
+            .even{
+               background-color:#eff0f1 !important;
+            }
+            
+            
+        </style>
 
         <c:import url="../../../meta.jsp">
-            <c:param name="pageTitle" value="Patient Derived Xenograft Multi Search Form"/>
+            <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Search"/>
         </c:import>
 
-        <script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
-        <script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+        
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 
-        <script type="text/javascript">
+ 
+
+<script type="text/javascript" charset="utf8">
+
+       
+            $(document).ready( function () {
+                for(i = 1; i < ${caseCount}; i++){
+                 table = $('#results'+i).dataTable( {
+                    searching:      false,
+                    info:           false,
+                    scrollY:        '50vh',
+                    scrollCollapse: true,
+                    paging:         false,
+                    ordering:       false,
+                    stripe:         true
+                } );
+                };
+                
+                 
+            } );
+        
+
+            $(window).on('resize', function () {
+                for(i = 1; i < ${caseCount}; i++){
+                 $('#results'+i).DataTable().columns.adjust();
+                }
+             } );
+
 
             function clearForm() {
                 document.forms[1].cases.value = "";
@@ -28,7 +69,7 @@
 
 
         <c:import url="../../../body.jsp">
-            <c:param name="pageTitle" value="Patient Derived Xenograft Search Form"/>
+            <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Search"/>
         </c:import>
     </head>
 
@@ -47,20 +88,20 @@
                             <!--======================= Start Main Section =============================-->
 
                             <!--======================= Start Form Header ==============================-->
-                            <html:form action="pdxMultiSearch" method="GET">
+                            <html:form action="pdxLikeMe" method="POST">
 
                                 <table border="0" cellpadding="5" cellspacing="1" width="100%" class="results">
                                     <tr class="pageTitle">
                                         <td colspan="3">
                                             <table width="100%" border="0" cellpadding="4" cellspacing="0">
                                                 <tr>
-                                                    <td width="20%" valign="middle" align="left">
-                                                        <a class="help" href="userHelp.jsp#pdxsearch"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 alt="Help"></a>
+                                                    <td width="25%" valign="middle" align="left">
+                                                        <a class="help" href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
                                                     </td>
-                                                    <td width="60%" class="pageTitle">
-                                                        Patient Derived Xenograft Search Form
+                                                    <td width="50%" class="pageTitle">
+                                                        Patient Derived Xenograft PDX Like Me Search
                                                     </td>
-                                                    <td width="20%" valign="middle" align="right">
+                                                    <td width="25%" valign="middle" align="right">
                                                         <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdxRequestButton" onclick="window.location = 'pdxRequest.do'">
                                                     </td>
                                                 </tr>
@@ -77,52 +118,37 @@
                                                         <br>
                                                         &nbsp;
                                                         <br>
-                                                        <br>
-                                                        <br>
-                                                        <table class="miTable">
-                                                            <tr><td border="5px">
-                                                                    <p class="miTitle">PDX minimal information data standards are now public. Read about it in Cancer Research, <a href="https://www.ncbi.nlm.nih.gov/pubmed/29092942">Meehan et al., 2017</a></p>
-                                                                    <ul>
-                                                                        <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMI_README.docx">PDX Minimal Information Read Me (doc)</a><br>
-                                                                        <li class="realList"><a href="${applicationScope.urlBase}/html/PDXMIPublication.xlsx">PDX Minimal Information Specification (xls)</a><br>
-                                                                        <li class="realList"><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">PDX Minimal Information Feedback (web form)</a><br>
-                                                                    </ul>
-                                                                    <br>
-                                                                </td></tr>
-                                                        </table>
+                                                        
                                                     </td>
 
                                                     <td>
                                                         <img src="${applicationScope.urlImageDir}/NSG_lg.jpg" height="225" width="450" border=0 alt="NSG Mouse">
                                                     <td>
                                                 </tr>
+                                               
 
                                             </table>
                                         </td>
 
                                     </tr>
-                                    <tr class="buttons">
-                                        <td colspan="3" style="padding: 20px">
-                                            The format for the input should be one or more cases as follows<br>
-                                            CASE &lt;unique case identifier&gt;<br>
-                                            Followed by one or more gene descriptions with an optional U or K to indicate known or unknown significance  (U and K are used for formatting and have no bearing on search results)
-                                            Gene descriptions can be of three types, one per line<br>
-                                            &lt;Gene&gt;,&lt;Variant&gt;,&lt;K|U&gt;<br>
-                                            &lt;Gene&gt;,<b>Amplified</b>,&lt;K|U&gt;<br>
-                                            &lt;Gene&gt;,<b>Deleted</b>,&lt;K|U&gt;<br>
-
-                                            Example:<br><br>
-                                            CASE 1<br>
-                                            KRAS,Amplified,K (search for models with amplified KRAS, classified as known significance)<br>
-                                            TP53,A159V,K     (search for models with A159V variant of TP53, classified as known significance)<br>
-                                            ALB,Deleted,U    (search for models with deleted ALB, classified as unknown)<br>
-                                            <br>
-                                            CASE 2<br>
-                                            CDK4,Amplified<br>
-                                            ETNK1,Amplified<br>
-                                            KRAS,Deleted<br>
+                                   
+                                     <tr class="pageInfo">
+                                        <td colspan="3">
+                                            <p style="font-size:17px">Use PDX Like Me to search for PDX models with tumor samples that meet multiple genomic criteria.<br> Molecular profiles can combine mutation, expression, and/or copy number aberration criteria.<br> Multiple profiles can be searched at one time.</p>
+                                            
+                                            <a href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html" target="_blank">Learn how to use PDX Like Me </a>
+                                            <br><br>
+                                            <table>
+                                                <tr><td>Example search:</td><td></td></tr>
+                                                <tr><td>CASE 1</td>
+                                                <tr><td>KRAS:AMP</td></tr>
+                                                <tr><td>TP53:MUT=A159V</td></tr>
+                                                <tr><td>ALB:DEL</td></tr>
+                                                <tr><td>KIT:EXP&gt;2.5</td></tr>
+                                            </table>
                                         </td>
-                                    </tr>
+                                                    
+                                   </tr>
 
 
                                     <tr class="buttons">
@@ -144,22 +170,27 @@
                                     <tr class="stripe1">
 
                                         <td class="cat1">
+                                            Output options:
+                                            <br><br><br><br>
                                             Enter Case information here:
 
                                         </td>
 
                                         <td class="data1">
-                                            <input type="checkbox" name="asCSV" value="asCSV"/> Return results as a CSV file &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="actionable" value="actionable"/> Include models with actionable variants for supplied genes
+                                            <input type="checkbox" name="asCSV" value="asCSV" ${csvChecked}/> Return results as a CSV file<br>
+                                            <input type="checkbox" name="actionable" value="actionable" ${actionableChecked}/> Include models with clinically relevant variants for supplied genes
+                                            <br>
+                                            <input type="checkbox" name="LRP" value="LRP" ${lrpChecked}> If searching by CNV display log ratio ploidy values <br>
+                                            <input type="checkbox" name="EXP" value="EXP" ${expChecked}> If searching by expression level display Z score percentile rank values
                                             <br>
                                             <textarea rows="20" cols="50" name="cases">${cases}</textarea>
                                         </td>
                                         <td class="data1">
+                                            <div id="allResults">
                                             ${table}
+                                            </div>
                                         </td>
                                     </tr>
-
-
-
 
                                     <tr class="buttons">
                                         <td colspan="3">
@@ -184,11 +215,6 @@
             </td>
         </tr>
     </table>
-    <!-- If the page reloads to update variants don't go back to the top of the page -->
-    <c:if test="${not empty update}">
-        <script>
-            document.location = "#variantsLocation"
-        </script>
-    </c:if>
+    
 </body>
 </html> 

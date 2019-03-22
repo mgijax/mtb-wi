@@ -24,7 +24,7 @@ import org.jax.mgi.mtb.wi.utils.WIUtils;
  * @author sbn
  */
 public class PDXSearchResultsAction extends Action {
-
+    
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
             HttpServletRequest request,
@@ -45,6 +45,7 @@ public class PDXSearchResultsAction extends Action {
         ArrayList<String> types = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getTumorTypes());
         ArrayList<String> markers = new ArrayList<String>();
 
+        
         String gene = pdxForm.getGene();
         String genes2 = pdxForm.getGenes2();
         ArrayList<String> variants = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getVariants());
@@ -54,16 +55,32 @@ public class PDXSearchResultsAction extends Action {
         String fusionGenes = pdxForm.getFusionGenes();
         
         boolean dosingStudy = pdxForm.getDosingStudy();
-        boolean tumorGrowth = pdxForm.getTumorGrowth();
+        
+        // removed checkbox on 01-25-18, need to remove logic as well
+        boolean tumorGrowth = false;
         boolean treatmentNaive = pdxForm.getTreatmentNaive();
         
         String recistDrug = pdxForm.getRecistDrugs();
         String recistResponse = pdxForm.getRecistResponses();
-
+        
+        Double tmbGT = null;
+        Double tmbLT = null;
+        try{
+            tmbGT = new Double(pdxForm.getTMBGT());
+        }catch(Exception e){
+            //do nothing
+        }
+        
+        try{
+            tmbLT = new Double(pdxForm.getTMBLT());
+        }catch(Exception e){
+            //do nothing
+        }
+        
         // include gene variant consequence in cvs
         boolean showGVC = false;
 
-        ArrayList<String> genes = new ArrayList<>();
+       
 
         String hideGene = "false";
         
@@ -71,7 +88,6 @@ public class PDXSearchResultsAction extends Action {
         String hideFusionGenes = "true";
 
         if (gene != null && gene.trim().length() > 0) {
-            genes.add(gene);
             showGVC = true;
         } else {
             hideGene = "true";
@@ -87,8 +103,8 @@ public class PDXSearchResultsAction extends Action {
             request.setAttribute("tissuseOfOrigin", toa);
         } else {
             mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, types,
-                    markers, genes, variants, dosingStudy, tumorGrowth, tags, 
-                    fusionGenes,treatmentNaive, recistDrug, recistResponse);
+                    markers, gene, variants, dosingStudy, tumorGrowth, tags, 
+                    fusionGenes,treatmentNaive, recistDrug, recistResponse, tmbGT, tmbLT);
         }
 
         request.setAttribute("modelID", modelID);
@@ -111,12 +127,26 @@ public class PDXSearchResultsAction extends Action {
         if (treatmentNaive) {
             request.setAttribute("treatmentNaive", "true");
         }
+        
+        String hideTMB = "true";
+        if(tmbLT != null && tmbGT != null){
+                request.setAttribute("tmb", tmbGT+" < TMB < "+tmbLT);
+                hideTMB = "false";
+        }else if(tmbLT != null){
+                request.setAttribute("tmb",  "TMB < " + tmbLT);
+                hideTMB = "false";
+        }else if(tmbGT != null){
+            request.setAttribute("tmb", tmbGT + " < TMB");
+            hideTMB = "false";
+        }
+        
+        request.setAttribute("hideTMB", hideTMB);
 
         // genes2 (right now always just 1 gene) is for expression results
         if (genes2 != null && genes2.trim().length() > 0) {
 
             if (mice.size() > 0) {
-                String expr = pdxMouseStore.getExpression(genes2, mice);
+                String expr = pdxMouseStore.getExpressionGraph(mice,genes2,false);
                 if (expr != null && expr.length() > 1) {
                     String data = "['Expression','Expression Level', 'Model Name']," + expr;
                     request.setAttribute("rank", data);
@@ -144,20 +174,22 @@ public class PDXSearchResultsAction extends Action {
         } else if (genesCNV != null && genesCNV.trim().length() > 0) {
             if (mice.size() > 0) {
 
-                String expr = pdxMouseStore.getCNVExpression(mice, genesCNV);
+                
+                String expr = pdxMouseStore.getExpressionGraph(mice, genesCNV, true);
                 if (expr != null && expr.length() > 1) {
                     String data = "['Expression','Expression Level', 'Model Name',{ role: 'style' }]," + expr;
                     data = data.replaceAll("Amplification", "orange");
                     data = data.replaceAll("Deletion", "blue");
                     data = data.replaceAll("Normal", "grey");
                     request.setAttribute("rank", data);
+                    
                     String[] lines = data.split("\\[");
                     int size = 50 + lines.length * 15;
                     request.setAttribute("chartSize", size + "");
                     size = size + 200;
                     request.setAttribute("gene2", genesCNV);
                     request.setAttribute("divSize", size + "");
-                    request.setAttribute("message", "Orange bars indicate gene amplification (copy number > 2.5).<br>Blue bars indicate gene deletion (copy number < 1.5).<br>Grey bars indicate no significant copy number change.");
+                    request.setAttribute("message", "Orange bars indicate gene amplification (log2(cn raw/sample ploidy) > 0.5).<br>Blue bars indicate gene deletion (log2(cn raw/sample ploidy)< -0.5).<br>Grey bars indicate no significant copy number change.");
                 } else {
                     // no expression
                     request.setAttribute("noResults", "There are no matching models.");
@@ -243,14 +275,17 @@ public class PDXSearchResultsAction extends Action {
             buffer.append("'" + mouse.getGene() + "',");
             buffer.append("'" + mouse.getVariant() + "',");
             buffer.append("'" + mouse.getConsequence() + "',");
-            buffer.append("'" + mouse.getFusionGenes()+ "'");
+            buffer.append("'" + mouse.getFusionGenes()+ "',");
+            buffer.append("'" + mouse.getTMBStr()+"'");
 
             buffer.append("]");
             if (mouse.getModelStatus() == null) {
                 mouse.setModelStatus("");
             }
-            if (mouse.getModelStatus().indexOf("Inventory") != -1 || mouse.getModelStatus().indexOf("Data") != -1) {
-                unavailable.append(mouse.getModelID()).append(" ");
+            if (mouse.getModelStatus().indexOf("Inventory") != -1 ) {
+               
+                    unavailable.append(mouse.getModelID()).append(" ");
+              
             }
 
         }
@@ -305,6 +340,7 @@ public class PDXSearchResultsAction extends Action {
             buffer.append(deComma(mouse.getTumorMarkers())).append(",");
             buffer.append(mouse.getSex()).append(",");
             buffer.append(mouse.getAge()).append(",");
+            // this will be htmlified with <sup> and <br>
             buffer.append(mouse.getStrain()).append(",");
             buffer.append(deComma(mouse.getAssocData()));
             if (showGVC) {

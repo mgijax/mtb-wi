@@ -63,7 +63,7 @@
 
 <h2>See Also:</h2>
 <ul>
-  <li><a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=glossaryIndex&print=no" target="_blank">MGI Glossary</a></li>
+  <li><a href="http://www.informatics.jax.org/glossary" target="_blank">MGI Glossary</a></li>
 </ul>
 
 <center><a href="/">MTB Home Page</a></center>
@@ -2048,32 +2048,7 @@ The following table describes the fields displayed on the Reference Detail page.
 
 <hr>
 
-<a name="QTL"></a><h2>Cancer QTL Viewer</h2>
 
-Cancer QTL data are grouped by organ. One or more organ groups can be selected to view associated QTLs.<br>
-Selected QTLs can be viewed as HTML, tab delimited text or graphically on the mouse genome.<br>
-When using the graphical view, click on a chromosome to see a higher resolution view, mouse over a feature to see a label,
-shift+click on a feature to open the details and search page (pop-ups must be enabled). QTLs are color coded by organ group.<br>
-A legend will be displayed to the right of the genome or chromosome with each selected organ and the color of the associated QTLs.<br>
-
-
-
-<p>
-<a href="#top">Back to Top</a>
-
-<hr>
-  
-  
-  
-
-<a name="GViewerDetails"></a><h2>Cancer QTL Selection Details</h2>
-
-This page provides additional information about the selected QTL and the ability to search for genes within the region.<br>
-Search results can be submitted as a gene batch query to MGI.
-
-
-
-<p>
 <a href="#top">Back to Top</a>
 
 <hr>
@@ -2133,7 +2108,7 @@ Search results can be submitted as a gene batch query to MGI.
   
   Variant, expression and copy number data may not be available for all models.<br>
   
-  <b>Variant data</b>
+  <a name="pdxVariant"></a><b>Variant data</b>
   <br>
 
 The variant data (point mutations and indels) are analyzed from next-generation sequencing using various capture panels:
@@ -2257,7 +2232,7 @@ or cancer-related evidences are retained regardless of the filters.
 </table>
 <br>
 
-<b>Expression data</b><br>
+<a name="pdxExpression"></a><b>Expression data</b><br>
 
 The expression data are analyzed from microarray or RNAseq platforms.<br><br>
 
@@ -2301,7 +2276,7 @@ and only those with associated drug efficacy or cancer-related evidences are rep
 Other detected fusions and additional information (e.g. breakpoint coordinates) can be made available upon request.<br>
 <br>
 <br>
-<b>Copy number</b>
+<a name="pdxCNV"></a><b>Copy number</b>
 <br>
 The copy number variation is analyzed from the Affymetrix Human SNP 6.0 array.<br>
 PennCNV-Affy and ASCAT 2.2 is used to predict allele-specific copy number and ploidy. <br>
@@ -2312,13 +2287,30 @@ The copy number of the CTP panel genes is displayed as a chart of log2(cn raw / 
 Other forms of copy number values (e.g. gain and loss relative to ploidy, loss of heterozygosity)<br>
 and copy number of other genes not listed on the MTB site can be made available upon request.
 
+<br>
+<br>
+<a name="pdxTMB"></a><b>Tumor mutation burden (TMB) estimation:</b><br>
+
+TMB was calculated using variants that
+<ul>
+    <li>(i) met all quality criteria (coverage, mapping quality etc.), </li>
+    <li>(ii) were not present in an in-house curated blacklist of false positive variants from loci that prone to sequencing and analysis errors and/or 
+        are associated with highly polymorphic genes (i.e., MUC4, MUC5B, MUC16, MUC17, and HLA-A </li>
+    <li>(iii) are likely somatic mutations, and  </li>
+    <li>(iv) have a high or moderate functional impact (i.e., non-synonymous changes, frame-shifts, stop losses/gains, and splice-site acceptor/donor changes).</li>
+</ul>
+   TMB was estimated by dividing the number of variants that met the criteria list above by the length (in Mb)
+   of The Jackson Laboratory <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4481190">Cancer Treatment Profile (CTP)</a> targeted gene panel.<br>
+   <br>
+   We defined high TMB as 22 mutations/Mb, which was calculated based on the TMB distribution of all PDX models analyzed as follows: Q3 (third quartile of TMB) + 1.5 x inter-quartile range of TMB.
+
   
 <p>
 <a href="#top">Back to Top</a>
 
 
 <hr>
-  
+  <!--
   <a name="pdxcomparison"></a><h2>PDX Comparison Results</h2>
   <table>
     <tr><td>Rank Z based expression scale</td>
@@ -2387,7 +2379,7 @@ and copy number of other genes not listed on the MTB site can be made available 
 
 <p>
 <a href="#top">Back to Top</a>
-
+-->
 <hr>
 <hr>
 

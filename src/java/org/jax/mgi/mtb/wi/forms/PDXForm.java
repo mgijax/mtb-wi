@@ -41,9 +41,10 @@ public class PDXForm extends ActionForm {
     private boolean amplification = false;
     private boolean deletion = false;
     private boolean loh = false;
-    private boolean tumorGrowth = false;
     private boolean dosingStudy = false;
     private boolean treatmentNaive = false;
+    private String TMBLT = null;
+    private String TMBGT = null;
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -325,19 +326,7 @@ public class PDXForm extends ActionForm {
         this.cnvChange = cnvChange;
     }
 
-    /**
-     * @return the tumorGrowth
-     */
-    public boolean getTumorGrowth() {
-        return tumorGrowth;
-    }
-
-    /**
-     * @param tumorGrowth the tumorGrowth to set
-     */
-    public void setTumorGrowth(boolean tumorGrowth) {
-        this.tumorGrowth = tumorGrowth;
-    }
+   
 
     /**
      * @return the dosingStudy
@@ -494,5 +483,33 @@ public class PDXForm extends ActionForm {
      */
     public void setVariantGene(String variantGene) {
         this.variantGene = variantGene;
+    }
+
+    /**
+     * @return the TMBLT
+     */
+    public String getTMBLT() {
+        return TMBLT;
+    }
+
+    /**
+     * @param TMBLT the TMBLT to set
+     */
+    public void setTMBLT(String TMBLT) {
+        this.TMBLT = TMBLT;
+    }
+
+    /**
+     * @return the TMBGT
+     */
+    public String getTMBGT() {
+        return TMBGT;
+    }
+
+    /**
+     * @param TMBGT the TMBGT to set
+     */
+    public void setTMBGT(String TMBGT) {
+        this.TMBGT = TMBGT;
     }
 }
