@@ -4,17 +4,21 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 
 <c:if test="${not empty tumorFreq.additionalNotes}">
-<table>
-	<caption>Additional Notes</caption>
+<table class="expanded">
+	<caption>Notes</caption>
+	<!--
 	<tr>
 		<th>Note</th>
 		<th>Reference</th>
 	</tr>
+	-->
+	<tbody>
 	<c:forEach var="rec" items="${tumorFreq.additionalNotes}" varStatus="status">
 	<tr>
 		<td><c:out value="${rec.label}" escapeXml="false"/></td>
-		<td><a href="nojavascript.jsp" onclick="focusBackToOpener('referenceDetails.do?key=${rec.data}');return false;">${rec.value}</a></td>
+		<!--<td><a href="nojavascript.jsp" onclick="focusBackToOpener('referenceDetails.do?key=${rec.data}');return false;">${rec.value}</a></td>-->
 	</tr>
 	</c:forEach>
+	</tbody>
 </table>
 </c:if>

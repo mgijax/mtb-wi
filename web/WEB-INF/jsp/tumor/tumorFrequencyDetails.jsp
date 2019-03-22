@@ -8,6 +8,7 @@
 
 <table>
 	<caption>Tumor</caption>
+	<tbody>
 
 	<c:if test="${tumorFreq.parentFrequencyKey > 0}">
 	<tr>
@@ -73,10 +74,12 @@
 		</c:if>
 	</c:forEach>
 	</c:if>
+	</tbody>
 </table>
 
 <table>
 	<caption>Strain</caption>	
+	<tbody>
 	<tr>
 		<th>Strain Name</th>
 		<td class="enhance" colspan="2"><a href="strainDetails.do?key=${tumorFreq.strainKey}"><c:out value="${tumorFreq.strainName}" escapeXml="false"/></a></td>
@@ -113,10 +116,12 @@
 		</td>
 	</tr>
 	</c:if>
-
+	</tbody>
 </table>
 
 <table>
+	<caption>Details</caption>
+	<tbody>
 	<tr>
 		<th>MTB ID</th>
 		<th>Organ Affected</th>
@@ -126,7 +131,7 @@
 		<th>Frequency</th>
 		<th>Age Of Onset</th>
 		<th>Age Of Detection</th>
-		<th>Reference</th>
+		<!--<th>Reference</th>-->
 	</tr>
 	<tr>
 		<td>MTB:${tumorFreq.tumorFrequencyKey}</td>
@@ -174,17 +179,19 @@
 			</h6>
 		</td>
 		--%>
-		<td>
+		<!--<td>
 			<c:if test="${not empty tumorFreq.reference}">
 				<a href="referenceDetails.do?accId=${tumorFreq.reference}">${tumorFreq.reference}</a>
 			</c:if>
-		</td>
+		</td>-->
 	</tr>
+	</tbody>
 </table>	
 
 <c:if test="${not empty tumorFreq.tumorGenetics}">
 <table>
 	<caption>Tumor Genetics</caption>
+	<tbody>
 	<tr>
 		<th>MarkerSymbol</th>
 		<th>MarkerName</th>
@@ -216,29 +223,32 @@
 		</td>
 	</tr>
 	</c:forEach>
+	</tbody>
 </table>
 </c:if>
 
 <c:if test="${(not empty tumorFreq.additionalNotes) || (not empty tumorFreq.note)}">
 <table>
 	<caption>Additional Notes</caption>
-	<tr>
+	<!--<tr>
 		<th>Note</th>
 		<th>Reference</th>
-	</tr>
+	</tr>-->
+	<tbody>
 	<c:if test="${not empty tumorFreq.note}">
 	<tr>
 		<td><c:out value="${tumorFreq.note}"/></td>
-		<td><a href="referenceDetails.do?accId=${tumorFreq.reference}">${tumorFreq.reference}</a></td>
+		<!--<td><a href="referenceDetails.do?accId=${tumorFreq.reference}">${tumorFreq.reference}</a></td>-->
 	</tr>
 	</c:if>
 	
 	<c:forEach var="rec" items="${tumorFreq.additionalNotes}" varStatus="status">
 	<tr>
 		<td><c:out value="${rec.label}" escapeXml="false"/></td>
-		<td><a href="referenceDetails.do?key=${rec.data}">${rec.value}</a></td>
+		<!--<td><a href="referenceDetails.do?key=${rec.data}">${rec.value}</a></td>-->
 	</tr>
 	</c:forEach>
+	</tbody>
 </table>
 </c:if>
 
@@ -246,10 +256,9 @@
 <a name="pathology"></a>
 <table class="results">
 	<caption>
-			Pathology
-			<p>${tumorFreq.numPathologyRecs} entr${tumorFreq.numPathologyRecs != 1 ? 'ies' : 'y'}</p>
-			<p>${tumorFreq.numImages} image<c:if test="${tumorFreq.numImages != 1}">s</c:if></p>
+			Pathology <span>&mdash; ${tumorFreq.numPathologyRecs} entr${tumorFreq.numPathologyRecs != 1 ? 'ies' : 'y'}, ${tumorFreq.numImages} image<c:if test="${tumorFreq.numImages != 1}">s</c:if></span>
 	</caption>
+	<tbody>
 	<tr>
 		<th>Age at Necropsy</th>
 		<th>Description</th>
@@ -327,6 +336,7 @@
 		</c:otherwise>
 		</c:choose>
 	</c:forEach>
+	</tbody>
 </table>
 </c:if>
 

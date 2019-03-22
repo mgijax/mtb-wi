@@ -1,9 +1,14 @@
 $(function() {				
 	var $metastases = $('[data-parent]'),
-		$rows = $('[data-key]');
+		$rows = $('[data-key]'),
+		$thead = $rows.closest('table').find('thead').clone();
 	
-	root = root || '';
-
+	$thead.find('th:first-child').html('Metastasis');
+	$thead.find('th:last-child').remove();
+	
+	if (typeof(root) === 'undefined') {
+		root = '';
+	}
 	
 	$rows.each(function() {
 		
@@ -21,9 +26,11 @@ $(function() {
 				url: root + 'tumorFrequencyDetails.do?key=' + k + '&page=' + page,
 				dataType: 'html',
 				success: function(h) {
-					var $tds = $(h).find('td:first-child');
-					$tds.each(function() {
-						$d.append('<p>' + $(this).html() + '</p>');
+					console.log('%s (%s):', k, page);
+					console.log(h);
+					$d.html(h);
+					$d.find('caption').on('click', function() {
+						$(this).parent().toggleClass('expanded');
 					});
 				}
 			})
@@ -41,19 +48,19 @@ $(function() {
 			
 		if ($tbody.length == 0) {
 			$tbody = $('<tbody></tbody>');
-			$table = $('<table></table>');
+			$table = $('<table class="metastases"></table>');
+			$table.append($thead.clone());
 			$table.append($tbody);
 			$td.append($table);
 		}
 			
 		$m.removeAttr('data-parent');
+		$m.find('td:last-child').remove();
 		
 		$tbody.append($m);
 
 	});	
-	
-	
-	
+
 });
 
 

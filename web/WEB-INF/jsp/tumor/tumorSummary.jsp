@@ -129,8 +129,8 @@
 				</c:if>
 				<c:set var="currentParent" value="${rec.sortOrder}"/>
 				<c:set var="parentAttr" value="data-parent=\"${rec.parentFrequencyKey}\""/>
-				<c:set var="keyAttr" value="data-key=\"${rec.parentFrequencyKey}\""/>
-			<tr ${rec.tumorFrequencyKey != rec.parentFrequencyKey ? parentAttr : keyAttr }>
+				<c:set var="keyAttr" value="data-key=\"${rec.tumorFrequencyKey}\""/>
+			<tr ${keyAttr} ${rec.tumorFrequencyKey != rec.parentFrequencyKey ? parentAttr : '' }>
 
 				<td class="organ">
 					<c:out value="${rec.organAffected}" escapeXml="false" default="&nbsp;"/>

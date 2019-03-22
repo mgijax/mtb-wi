@@ -6,35 +6,17 @@
 <c:if test="${not empty tumorFreq.pathologyRecs}">
 <table>
 	<caption>
-		Pathology
-		<div class="result-count">
-			<c:choose>
-			<c:when test="${tumorFreq.numPathologyRecs!=1}">
-			${tumorFreq.numPathologyRecs} entries
-			</c:when>
-			<c:otherwise>
-			${tumorFreq.numPathologyRecs} entry
-			</c:otherwise>
-			</c:choose>
-			<c:choose>
-			<c:when test="${tumorFreq.numImages!=1}">
-			${tumorFreq.numImages} images
-			</c:when>
-			<c:otherwise>
-			${tumorFreq.numImages} image
-			</c:otherwise>
-			</c:choose>
-		</div>
+		Pathology <span>&mdash; ${tumorFreq.numPathologyRecs} entr${tumorFreq.numPathologyRecs != 1 ? 'ies' : 'y'}, ${tumorFreq.numImages} image<c:if test="${tumorFreq.numImages != 1}">s</c:if></span>
 	</caption>
-
+	<thead>
 	<tr>
 		<th>Age at Necropsy</th>
 		<th>Description</th>
 		<th>Notes</th>
 		<th>Images</th>
 	</tr>
-
-
+	</thead>
+	<tbody>
 	<c:forEach var="rec" items="${tumorFreq.pathologyRecs}" varStatus="status">
 	<c:set var="rowSpan" value="${fn:length(rec.images)}"/>
 	<c:if test="${rowSpan < 1}">
@@ -77,5 +59,6 @@
 		</td>
 	</tr>
 	</c:forEach>
+	</tbody>
 </table>
 </c:if>

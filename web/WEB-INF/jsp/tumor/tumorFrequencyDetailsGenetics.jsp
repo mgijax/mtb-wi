@@ -6,6 +6,7 @@
 <c:if test="${not empty tumorFreq.tumorGenetics}">
 <table>
 	<caption>Tumor Genetics</caption>
+	<thead>
 	<tr>
 		<th>Marker Symbol</th>
 		<th>Marker Name</th>
@@ -13,6 +14,8 @@
 		<th>Mutation Types</th>
 		<th>Genetic Change</th>
 	</tr>
+	</thead>
+	<tbody>
 	<c:forEach var="genetics" items="${tumorFreq.tumorGenetics}" varStatus="status">
 	<tr>
 		<td>
@@ -55,12 +58,14 @@
 		</td>
 	</tr>
 	</c:forEach>
+	</tbody>
 </table>
 </c:if>
 
 <c:if test="${not empty tumorFreq.tumorCytogenetics}">
 <table>
 	<caption>Tumor Cytogenetics</caption>
+	<thead>
 	<tr>
 		<th>Name</th>
 		<th>Mouse Chromosome</th>
@@ -69,6 +74,8 @@
 		<th>Notes</th>
 		<th>Images</th>
 	</tr>
+	</thead>
+	<tbody>
 	<c:forEach var="genetics" items="${tumorFreq.tumorCytogenetics}" varStatus="status">
 	<tr>
 		<td>
@@ -129,6 +136,7 @@
 		</td>
 	</tr>
 	</c:forEach>
+	</tbody>
 </table>
 </c:if>
 

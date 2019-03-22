@@ -6,13 +6,17 @@
 <c:if test="${not empty tumorFreq.note}">
 <table>
 	<caption>Treatment Note</caption>
+	<!--
 	<tr>
 		<th>Note</th>
 		<th>Reference</th>
 	</tr>
+	-->
+	<tbody>
 	<tr>
 		<td>${tumorFreq.note}</td>
-		<td><a href="nojavascript.jsp" onclick="focusBackToOpener('referenceDetails.do?accId=${tumorFreq.reference}');return false;">${tumorFreq.reference}</a></td>
+		<!--<td><a href="nojavascript.jsp" onclick="focusBackToOpener('referenceDetails.do?accId=${tumorFreq.reference}');return false;">${tumorFreq.reference}</a></td>-->
 	</tr>
+	</tbody>
 </table>
 </c:if>

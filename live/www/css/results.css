@@ -17,6 +17,116 @@ td.organ {
 
 
 
+td.info ul,
+td.info li {
+	list-style: none;
+}
+
+td.info ul {
+	padding:0;
+	margin:0;
+}
+
+td.info [data-detail] {
+	display:block;
+	margin:0;
+}
+
+td.info table {
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	margin:5px 0 10px;
+	border-left:3px solid rgba(0, 160, 209, 0.5);
+}
+
+td.info li table {	
+	margin:5px 0;
+}
+
+td.info li table thead,
+td.info li table tbody {
+	font-size:0.88em;
+	display:none;
+}
+
+td.info li table.expanded {	
+	margin:10px 0 15px;
+}
+
+td.info li table.expanded thead {
+	display:table-header-group;
+}
+
+td.info li table.expanded tbody {
+	display:table-row-group;
+}
+
+
+td.info table th,
+td.info table td {
+	padding:1px 2px 1px 6px;
+}
+
+td.info .metastases th:first-child,
+td.info caption {
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+	font-weight:normal;
+	padding:1px 2px 1px 6px;
+	color:#009ed0;
+}
+
+td.info caption {
+	font-size:1.16666em;
+	position:relative;
+	margin:0;
+	padding:1px 2px 1px 6px;
+	border-left:3px solid transparent;
+	cursor:pointer;
+}
+
+td.info caption > span {
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;	
+}
+
+td.info caption:hover {
+	color:#04c3ff;
+}
+
+td.info caption:before {
+	position:absolute;
+	right:100%;
+	display:block;
+	text-align: right;
+	font-family:FontAwesome;
+	content:'\f055';
+	color:inherit;
+	margin:2px -3px 0 0;
+	font-size:11px;
+}
+
+td.info .expanded caption:before {
+	content:'\f056';
+}
+
+td.info table th {
+	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+}
+
+td.info tr:last-child > th {
+	border-bottom:0;
+}
+
+td.info th.organ,
+td.info td.organ {
+	display:table-cell;
+}
+
+td.info table.metastases {
+	border-left-color:transparent;
+	margin-left:-9px;
+}
+
+
+
 
 /* Search results */
 
