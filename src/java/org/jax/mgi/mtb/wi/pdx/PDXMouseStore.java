@@ -1752,6 +1752,10 @@ public class PDXMouseStore {
                 if (passage.length() > 1) {
                     label.append(" Passage:").append(passage);
                 }
+                
+                // no patient plots for public
+                if (WIConstants.getInstance().getPublicDeployment() && "PT".equals(passage.toUpperCase())) continue;
+                
                 ArrayList<String> details = new ArrayList<>();
                 details.add(label.toString());
                 details.add(name);
@@ -1828,6 +1832,11 @@ public class PDXMouseStore {
                     String model = job.getString("model_name");
                     String sample = job.getString("sample_name");
                     String passage = job.getString("passage_num");
+                    
+                    // no patient data for public
+                     if (WIConstants.getInstance().getPublicDeployment() && "PT".equals(passage.toUpperCase())) continue;
+                         
+                     
                     
                     if(passage != null && !passage.equals("null")){
                         sample = " from passage "+passage;
