@@ -29,6 +29,8 @@ public class PDXVariationDataAction extends Action {
 
         String modelID = request.getParameter("modelID");
         
+      
+        
         //TM##### to int to string
         modelID = new Integer(modelID.substring(2)).toString();
 
@@ -45,18 +47,22 @@ public class PDXVariationDataAction extends Action {
         
        String sort = request.getParameter("sort");
        String dir = request.getParameter("dir");
-    
-       String filter = "FALSE";
-       // need to turn on filtering for public deployment.
-       if(WIConstants.getInstance().getPublicDeployment()){
-           filter = "TRUE";
-       }
        
+       String ctp = request.getParameter("all_ctp_genes");
+      
+       
+       if(dir != null){
+           dir = dir.toLowerCase();
+       }
+    
+       
+       
+        
         
         response.setContentType("application/json");
         
        
-        response.getWriter().write(store.getVariationData(modelID, limit, start, sort, dir,filter));
+        response.getWriter().write(store.getVariationData(modelID, limit, start, sort, dir, ctp));
         
         response.flushBuffer();
 

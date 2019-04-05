@@ -1,17 +1,13 @@
 <%@ page language="java" contentType="text/html" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
-    <head>
-        <title>Mouse Tumor Database Project</title>
-        <meta content="0; URL=/mtbwi2/index.do" http-equiv="refresh">
-    </head>
-    <body bgcolor="#ffffff">
-        <center>
-            If your browser doesn't automatically redirect, please use the link below to
-            enter the MTB database.
-            <br><br><br>
-            <a href="/mtbwi2/index.do">Enter the MTB Database.</a>
-        </center>
-    </body>
+<head>
+	<title>Mouse Tumor Database Project</title>
+	<meta content="0; URL=${pageContext.request.contextPath}/index.do" http-equiv="refresh">
+</head>
+<body>
+	<p>If your browser doesn't automatically redirect, please use the link below to enter the MTB database.</p>
+	<p><a href="${pageContext.request.contextPath}/index.do">Enter the MTB Database.</a></p>
+</body>
 </html>
+

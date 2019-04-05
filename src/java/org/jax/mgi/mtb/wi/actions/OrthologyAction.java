@@ -147,11 +147,11 @@ public class OrthologyAction extends Action {
   
   // get the details to display the associated marker symbols as a list (symbol entregene id, name)
   private ArrayList<LabelValueDataBean<String,String,String>> getSymbolDetailsForRef(String ref){
-    ArrayList<LabelValueDataBean<String,String,String>> list = new ArrayList<LabelValueDataBean<String,String,String>>();
+    ArrayList<LabelValueDataBean<String,String,String>> list = new ArrayList<>();
     try{
         ArrayList<MarkerDTO> dtos = MTBReferenceUtilDAO.getInstance().getHumanMarkers(new Long(ref).longValue());
         for(MarkerDTO dto : dtos){
-          list.add(new LabelValueDataBean(dto.getSymbol(),(String)dto.getDataBean().get(MTBReferenceUtilDAO.EGID),dto.getName()));
+          list.add(new LabelValueDataBean<>(dto.getSymbol(),(String)dto.getDataBean().get(MTBReferenceUtilDAO.EGID),dto.getName()));
         }
     }catch(Exception e){}
     return list;

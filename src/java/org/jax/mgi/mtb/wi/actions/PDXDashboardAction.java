@@ -146,7 +146,7 @@ public class PDXDashboardAction extends Action {
 
                 for (String s : allSites.keySet()) {
                     if (s != null && s.length() > 0) {
-                        LabelValueBean<String, String> lvb = new LabelValueBean(s, s);
+                        LabelValueBean<String, String> lvb = new LabelValueBean<>(s, s);
                         lvbSites.add(lvb);
                     }
                 }
@@ -395,14 +395,14 @@ public class PDXDashboardAction extends Action {
         lvbTissues.clear();
         if (!site.equalsIgnoreCase("any")) {
             for (String t : tissues.keySet()) {
-                LabelValueBean<String, String> lvb = new LabelValueBean(t, t);
+                LabelValueBean<String, String> lvb = new LabelValueBean<>(t, t);
                 lvbTissues.add(lvb);
             }
 
 
         } else {
             for (String t : allTissues.keySet()) {
-                LabelValueBean<String, String> lvb = new LabelValueBean(t, t);
+                LabelValueBean<String, String> lvb = new LabelValueBean<>(t, t);
                 lvbTissues.add(lvb);
             }
         }
@@ -412,13 +412,13 @@ public class PDXDashboardAction extends Action {
         // consolidate by status to 
        // Available models (Active:Available, Active: Available (blood cancer))
       // Models in progress (P0 in progress, P1 in progress)
-      // Discontinued (and reason except “no inventory remaining”)
+      // Discontinued (and reason except 'no inventory remaining')
       // Other
         String a = "Available";
         String ip = "In Progress";
         String d = "Discontinued";
         String o = "Other";
-         HashMap<String, Integer> consolidatedMap = new HashMap<String, Integer>();
+         HashMap<String, Integer> consolidatedMap = new HashMap<>();
          Integer zero = new Integer(0);
          consolidatedMap.put(a,zero );
          consolidatedMap.put(ip,zero );

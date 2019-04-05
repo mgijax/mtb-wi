@@ -71,7 +71,7 @@ public class ModelCounts {
         "Uterus, Cervix",
         "Kidney, Renal pelvis",
         "Ovary",
-        "Skin, Sking gland",
+        "Skin, Skin gland",
         "Stomach, Forestomach (mouse-specific)",
         "Oral cavity, Pharynx, Gingiva, Mouth, Salivary gland, Tongue, Tooth",
         "Abdominal cavity, Abdominal wall, Adipose tissue, Connective tissue, Mediastinum, Mesodermal cell/mesoblast, Mesothelium, Muscle, Myoepithelial cell, Notochord, Pericardium, Pericyte, Periosteum, Perirenal tissue, Peritoneal cavity, Peritoneum, Pleura, Pleural cavity, Retroperitoneum, Thoracic cavity, Blood vessel, Heart",
@@ -81,31 +81,31 @@ public class ModelCounts {
 
     // display tissue, rank, fatalaties, solr term
     String[] tissues = {
-        "Lung and other respiratory", "1", "162,420", "Lung",
-        "Lymphohematopoietic", "2", "58,300", "Lymphohematopoietic",
-        "Colon and other intestine", "3", "52,750", "Colon and other intestine",
-        "Pancreas", "4", "43,090", "Pancreas",
-        "Breast", "5", "41,070", "Breast",
-        "Liver and bile duct", "6", "28,920", "Liver and bile duct",
-        "Prostate", "7", "26,730", "Prostate",
-        "Urinary bladder", "8", "16,870", "Urinary bladder",
-        "Brain and other nervous system", "9", "16,700", "Brain and other nervous system",
-        "Esophagus", "10", "15,690", "Esophagus",
-        "Uterus and cervix", "11", "15,130", "Uterus and cervix",
-        "Kidney and renal pelvis", "12", "14,400", "Kidney and renal pelvis",
-        "Ovary", "13", "14,080", "Ovary",
-        "Skin", "14", "13,590", "Skin",
-        "Stomach", "15", "10,960", "Stomach",
-        "Oral cavity and pharynx", "16", "9,700", "Oral cavity",
-        "Soft tissue including heart", "17", "4,990", "Soft tissue including heart",
-        "Gallbladder", "18", "3,830", "Gallbladder",
-        "Endocrine system", "19", "3,100", "Endocrine system",
-        "Bone and joint", "20", "1,550", "Bone and joint"};
+        "Lung and other respiratory", "1", "158,770", "Lung",
+        "Lymphohematopoietic", "2", "58,100", "Lymphohematopoietic",
+        "Colon and other intestine", "3", "53,240", "Colon and other intestine",
+        "Pancreas", "4", "44,330", "Pancreas",
+        "Breast", "5", "41,400", "Breast",
+        "Liver and bile duct", "6", "30,200", "Liver and bile duct",
+        "Prostate", "7", "29,430", "Prostate",
+        "Urinary bladder", "8", "17,240", "Urinary bladder",
+        "Brain and other nervous system", "9", "16,830", "Brain and other nervous system",
+        "Esophagus", "10", "15,850", "Esophagus",
+        "Uterus and cervix", "11", "15,520", "Uterus and cervix",
+        "Kidney and renal pelvis", "12", "14,970", "Kidney and renal pelvis",
+        "Ovary", "13", "14,070", "Ovary",
+        "Skin", "14", "13,460", "Skin",
+        "Stomach", "15", "10,800", "Stomach",
+        "Oral cavity and pharynx", "16", "10,030", "Oral cavity",
+        "Soft tissue including heart", "17", "5,150", "Soft tissue including heart",
+        "Gallbladder", "18", "3,790", "Gallbladder",
+        "Endocrine system", "19", "3,080", "Endocrine system",
+        "Bone and joint", "20", "1,590", "Bone and joint"};
 
     ArrayList<ArrayList<String>> tissuesListList = new ArrayList<ArrayList<String>>();
 
-    private static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2017/cancer-facts-and-figures-2017.pdf";
-    private static final String YEAR = "2017";
+    private static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2018/cancer-facts-and-figures-2018.pdf";
+    private static final String YEAR = "2018";
     private String solrURL;
     private String minFC = "&fq=minFC:[1%20TO%201]";
     private static String HTML = "";
@@ -181,7 +181,7 @@ public class ModelCounts {
         ArrayList<String> types = new ArrayList<String>();
         ArrayList<String> markers = new ArrayList<String>();
 
-        ArrayList<String> genes = new ArrayList<String>();
+        String gene = "";
         ArrayList<String> variants = null;
 
         String fusionGenes = "";
@@ -191,8 +191,8 @@ public class ModelCounts {
         boolean treatmentNaive = false;
 
         ArrayList<PDXMouse> mice = store.findMice(modelID, primarySites, diagnoses,
-                types, markers, genes, variants, drugResponse, tumorGrowth, tags,
-                fusionGenes,treatmentNaive,recist,recist);
+                types, markers, gene, variants, drugResponse, tumorGrowth, tags,
+                fusionGenes,treatmentNaive,recist,recist,null,null);
 
         return mice.size() + "";
     }
@@ -205,7 +205,7 @@ public class ModelCounts {
         }
 
         String[] tissues = tissue.split(",");
-        StringBuilder link = new StringBuilder("/mtbwi2/pdxSearchResults.do?");
+        StringBuilder link = new StringBuilder("/mtbwi/pdxSearchResults.do?");
 
         for (String t : tissues) {
             link.append("primarySites=").append(t.replaceAll(" ", "+"));
@@ -348,9 +348,9 @@ public class ModelCounts {
 
             String solrTissue = vals.get(4).replaceAll(" ", "+");
             String[] links = {
-                "\"/mtbwi2/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:true&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
-                "\"/mtbwi2/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:false&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
-                "\"/mtbwi2/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\""
+                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:true&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
+                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:false&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
+                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\""
             };
 
             if ("0".equals(vals.get(5))) {

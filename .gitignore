@@ -10,4 +10,8 @@
 **/nbproject/private/
 /doc
 .DS_Store
-build.number
+/.idea
+/src/mtb-wi.iml
+/build.number
+build.xml
+

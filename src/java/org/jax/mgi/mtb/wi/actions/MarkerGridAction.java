@@ -377,7 +377,7 @@ public class MarkerGridAction extends Action {
                         }
                         html.append("</tr>\n");
                     } else {
-                        System.out.println(s + " not found in mapMap");
+                        log.error(s + " not found in mapMap");
                     }
                 }
             }

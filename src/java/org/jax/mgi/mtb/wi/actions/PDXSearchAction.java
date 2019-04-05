@@ -15,7 +15,6 @@ import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.wi.forms.PDXForm;
-import org.jax.mgi.mtb.wi.pdx.ElimsUtil;
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
 
 /**
@@ -33,7 +32,7 @@ public class PDXSearchAction extends Action {
 
            PDXMouseStore pdxMouseStore = new PDXMouseStore();
 
-           // who uses this????
+         // steve grub uses this to populate data on the pdx dashboard
         if (request.getParameter("pdxStatusJSON") != null && !WIConstants.getInstance().getPublicDeployment()) {
            
             response.setContentType("application/json");
@@ -47,18 +46,18 @@ public class PDXSearchAction extends Action {
         String result = "success";
 
         // click on update variants button
-        ArrayList<LabelValueBean<String, String>> variantsLVB = new ArrayList<LabelValueBean<String, String>>();
+        ArrayList<LabelValueBean<String, String>> variantsLVB = new ArrayList<>();
 
         String geneStr = pdxForm.getGene();
 
         if (geneStr != null) {
 
-            // this is very slow
+            
             ArrayList<String> variants = pdxMouseStore.getVariants(geneStr);
             if (variants != null && variants.size() > 0) {
 
                 for (String variant : variants) {
-                    LabelValueBean lvb = new LabelValueBean(variant, variant);
+                    LabelValueBean<String,String> lvb = new LabelValueBean(variant, variant);
                     variantsLVB.add(lvb);
                 }
                 request.setAttribute("variantsValues", variantsLVB);
@@ -84,7 +83,7 @@ public class PDXSearchAction extends Action {
 
         // request.setAttribute("genesValuesCNV",pdxMouseStore.getExomePanelGenesLVB());
 
-        request.setAttribute("exomePanelGenes", pdxMouseStore.getExomePanelGenesWebFormat());
+        request.setAttribute("exomePanelGenes", pdxMouseStore.getCTPGenesWebFormat());
 
         Map mapChromosomes = WIConstants.getInstance().getChromosomes();
 
@@ -92,6 +91,9 @@ public class PDXSearchAction extends Action {
         request.setAttribute("chrValuesCNV", mapChromosomes.values());
         
         request.setAttribute("modelIDs", pdxMouseStore.getIds());
+        
+        request.setAttribute("minTMB", pdxMouseStore.getMinTMB());
+        request.setAttribute("maxTMB", pdxMouseStore.getMaxTMB());
 
         return mapping.findForward(result);
     }

@@ -147,6 +147,7 @@ public class WIConstants {
     private final static String SOLR_URL = "solr.url";
     private final static String SOC_DB = "soc.db";
     private final static String SOC_URL = "soc.url";
+    private final static String CNV_PLOTS_PATH = "cnv.plots.path";
 
     /* ----------------------------------------------------- Instance Variables */
     private static WIConstants instance = new WIConstants();
@@ -193,12 +194,13 @@ public class WIConstants {
     private String pdxFileURL;
     private String pdxEmail;
     private String mtbDeployment;
-    private HashMap<String,String> pdxUserMap = new HashMap();
-    private ArrayList<String> pdxEditors = new ArrayList();
+    private HashMap<String,String> pdxUserMap = new HashMap<>();
+    private ArrayList<String> pdxEditors = new ArrayList<>();
     private String solrURL;
     private String socDB;
     private String socURL;
     private String pdxWebservice;
+    private String cnvPlotsPath;
 
     // ----------------------------------------------------------- Constructors
     /**
@@ -864,6 +866,8 @@ public class WIConstants {
             this.socDB = props.getProperty(SOC_DB);
 
             this.socURL = props.getProperty(SOC_URL);
+            
+            this.cnvPlotsPath = props.getProperty(CNV_PLOTS_PATH);
 
         } catch (Exception e) {
             log.error("Failed to initialize WIConstants", e);
@@ -1161,5 +1165,9 @@ public class WIConstants {
     
     public String getPDXWebservice(){
         return this.pdxWebservice;
+    }
+    
+    public String getCNVPlotsPath(){
+        return this.cnvPlotsPath;
     }
 }

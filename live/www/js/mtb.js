@@ -1,32 +1,24 @@
-
-// FileName: mtb.js
-
-
-
-
-function popPathWin(url, winId) {
-    var mtbDefWindow=window.open(url,winId,'toolbar=yes,status=no,scrollbars=yes,resizable=yes,menubar=yes,width=700,height=500');
-	mtbDefWindow.focus();
-}
-
-function popSizedPathWin(url,winId,height,width) {
-    var mtbDefWindow=window.open(url,winId,'toolbar=yes,status=no,scrollbars=yes,resizable=yes,menubar=yes,width='+width+',height='+height+"'");
-	mtbDefWindow.focus();
-    //    return mtbDefWindow;
-   
-}
-
-function focusBackToOpener(url) {
-
-    if(window.opener && !window.opener.closed)
-	{
-      opener.location.href = url;
-      opener.focus();
-	}else{
+$(function() {
 	
-	 var newWin = window.open(url);
-	 newWin.focus();
-	}
-}
+	// Tooltips
+	
+	$('[data-tip]').each(function(i) {
+		var $e = $(this),
+			tip = $e.data('tip'),
+			tipId = 'tip-' + i;
 
+		$e.removeAttr('data-tip').addClass('tip');
 
+		if ($e.is('a')) {
+			$e.attr('href', '#' + tipId);
+		}
+
+		$e.wrapInner('<div aria-describedby="' + tipId + '"></div>');
+		$e.append('<div role="tooltip" id="' + tipId + '">' + tip + '</div>');		
+		
+		$e.on('click', function() {
+			$(this).toggleClass('show-tip');
+		});		
+	});
+	
+});
