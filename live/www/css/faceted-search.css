@@ -1,0 +1,120 @@
+
+.facet{
+	margin-left: 5px;
+	white-space: nowrap;
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;}
+.facetBox{
+	width: 300px;}
+.facetList{
+	height: 150px; 
+	width: 300px; 
+	overflow:auto; 
+	border: 1px solid black;
+	margin: 0px;
+	padding: 0px;}
+.facetLabel{
+	font-weight: bold;
+	float:left;}
+.moreFacets{
+	float: right;
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;}
+.fakeLink{
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;}
+.removeFilter{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;}
+.clear{
+	clear:both;}
+.type{
+	font-size: 0.8em;
+	font-style: italic;}
+th{
+	font-size: 12px;
+	font-family: Arial,Helvetica;
+	vertical-align: middle;
+	color: #000001;
+	background-color: #D0E0F0;
+	font-weight: bold;
+	text-align: center; }
+table{
+	border:0;
+	padding:0;
+	border-collapse:collapse}
+td{
+	border:0;
+	padding:1px;
+	font-family: Verdana,Arial,Helvetica;
+	font-size: 12px; }
+td.cell{
+	border:1px solid black;
+	padding:1px;
+	font-family: Verdana,Arial,Helvetica;
+	font-size: 12px;
+	text-align: center;}
+td.cellNW{
+	border:1px solid black;
+	padding:1px;
+	font-family: Verdana,Arial,Helvetica;
+	font-size: 12px; 
+	white-space: nowrap; }
+td.freq{
+	text-align:center;
+	border:1px solid black;
+	padding:0;
+	font-family: Verdana,Arial,Helvetica;
+	font-size: 12px; }
+td.high{
+	padding: 0px;
+	color: white;
+	background-image: url(${applicationScope.urlImageDir}/high.png);}
+td.veryhigh{
+	padding: 0px;
+	color: white;
+	background-image: url(${applicationScope.urlImageDir}/veryhigh.png);}
+td.moderate{
+	padding: 0px;
+	background-image: url(${applicationScope.urlImageDir}/moderate.png);}
+td.low{
+	padding: 0px;
+	background-image: url(${applicationScope.urlImageDir}/low.png);}
+td.verylow{
+	padding: 0px;
+	background-image: url(${applicationScope.urlImageDir}/verylow.png);}
+td.observed{
+	padding: 0px;
+	background-image: url(${applicationScope.urlImageDir}/observed.png);}
+.high{
+	width: 100%;
+	padding: 0px;
+	color: white;
+	background-image: url(${applicationScope.urlImageDir}/high.png);}
+.veryhigh{
+	width: 100%;
+	padding: 0px;
+	color: white;
+	background-image: url(${applicationScope.urlImageDir}/veryhigh.png);}
+.moderate{
+	width: 100%;
+	padding: 0px;
+	background-image: url(${applicationScope.urlImageDir}/moderate.png);}
+.low{
+	width: 100%;
+	padding: 0px;
+	background-image: url(${applicationScope.urlImageDir}/low.png);}
+.verylow{
+	width: 100%;
+	padding: 0px;
+	background-image: url(${applicationScope.urlImageDir}/verylow.png);}
+.observed{
+	width: 100%;
+	padding: 0px;
+	background-image: url(${applicationScope.urlImageDir}/observed.png);}
+img{
+	vertical-align: middle; }

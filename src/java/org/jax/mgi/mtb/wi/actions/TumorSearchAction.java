@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBTumorUtilDAO;
+import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.utils.Timer;
 import org.jax.mgi.mtb.wi.WIConstants;
 
@@ -76,23 +77,21 @@ public class TumorSearchAction extends Action {
             log.error("Error getOrgansOfOriginWithTFRecord");
         }
         
-        Map mapTumorClass = 
-                WIConstants.getInstance().getTumorClassifications();
+        Map mapTumorClass = WIConstants.getInstance().getTumorClassifications();
         Map mapAgentTypes = WIConstants.getInstance().getAgentTypes();
-        Collection colOrgansMetastasize = getOrgansThatMetastasize();
+        Collection colOrgansMetastasize = getOrgansThatMetastasize();        
+        Map<Long,LabelValueBean<String,Long>> mapStrainTypes = WIConstants.getInstance().getStrainTypes();
 
         // set the target to failure if we could not retrieve the strain types
-        if ((colOrgOrig == null) || (mapTumorClass == null) || 
-            (colOrgansMetastasize == null)) {
+        if ((colOrgOrig == null) || (mapTumorClass == null) || (colOrgansMetastasize == null) || (mapStrainTypes == null)) {
             strTarget = "error";
         } else {
             // put all the variables in the request
             request.setAttribute("agentTypes", mapAgentTypes.values());
             request.setAttribute("organTissueValues", colOrgOrig);
-            request.setAttribute("organTissueValuesMets", 
-                                 colOrgansMetastasize);
-            request.setAttribute("tumorClassificationValues", 
-                                 mapTumorClass.values());
+            request.setAttribute("organTissueValuesMets", colOrgansMetastasize);
+            request.setAttribute("tumorClassificationValues", mapTumorClass.values());
+			request.setAttribute("strainTypeValues", mapStrainTypes.values());
         }
       
         timer.stop();

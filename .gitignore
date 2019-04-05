@@ -9,7 +9,9 @@
 **/.cvsignore
 **/nbproject/private/
 /doc
-build.number
-**/conf/
-build.properties
-**/conf/build.properties
+.DS_Store
+/.idea
+/src/mtb-wi.iml
+/build.number
+build.xml
+

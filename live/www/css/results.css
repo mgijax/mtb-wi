@@ -1,0 +1,284 @@
+
+tr[data-parent] {
+	display:none;
+}
+
+th.organ,
+td.organ {
+	display:none;
+}
+
+
+
+#tumor-info td:first-child,
+#tumor-strain-info td:first-child {
+	width:25%;
+}
+
+
+
+td.info ul,
+td.info li {
+	list-style: none;
+}
+
+td.info ul {
+	padding:0;
+	margin:0;
+}
+
+td.info [data-detail] {
+	display:block;
+	margin:0;
+}
+
+td.info table {
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	margin:5px 0 10px;
+	border-left:3px solid rgba(0, 160, 209, 0.5);
+}
+
+td.info li table {	
+	margin:5px 0;
+}
+
+td.info li table thead,
+td.info li table tbody {
+	font-size:0.88em;
+	display:none;
+}
+
+td.info li table.expanded {	
+	margin:10px 0 15px;
+}
+
+td.info li table.expanded thead {
+	display:table-header-group;
+}
+
+td.info li table.expanded tbody {
+	display:table-row-group;
+}
+
+
+td.info table th,
+td.info table td {
+	padding:1px 2px 1px 6px;
+}
+
+td.info .metastases th:first-child,
+td.info caption {
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+	font-weight:normal;
+	padding:1px 2px 1px 6px;
+	color:#009ed0;
+}
+
+td.info caption {
+	font-size:1.16666em;
+	position:relative;
+	margin:0;
+	padding:1px 2px 1px 6px;
+	border-left:3px solid transparent;
+	cursor:pointer;
+}
+
+td.info caption > span {
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;	
+}
+
+td.info caption:hover {
+	color:#04c3ff;
+}
+
+td.info caption:before {
+	position:absolute;
+	right:100%;
+	display:block;
+	text-align: right;
+	font-family:FontAwesome;
+	content:'\f055';
+	color:inherit;
+	margin:2px -3px 0 0;
+	font-size:11px;
+}
+
+td.info .expanded caption:before {
+	content:'\f056';
+}
+
+td.info table th {
+	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+}
+
+td.info tr:last-child > th {
+	border-bottom:0;
+}
+
+td.info th.organ,
+td.info td.organ {
+	display:table-cell;
+}
+
+td.info table.metastases {
+	border-left-color:transparent;
+	margin-left:-9px;
+}
+
+
+
+
+/* Search results */
+
+caption {
+	text-align:left;
+}
+
+.result-summary {
+	overflow:auto;
+	zoom:1;
+}
+
+dl {
+	margin:0;
+	display:block;
+	float:left;
+	width:16.6666%;
+}
+
+dt {
+	margin:0.5em 0 0;
+	font-weight:normal;
+	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+	color:black;
+}
+
+dd {
+	margin:0;
+	min-height:1em;
+}
+
+.result-count {
+	clear:both;
+	margin-top:15px;
+	padding-top:10px;
+	border-top:1px solid #05396b;
+}
+
+.result-count p {
+	margin:0 0 0.25em;
+}
+
+section > table > tbody > tr:nth-child(odd) > td:not([rowspan]),
+section > table > tbody > tr:nth-child(odd) > td[rowspan='1'] {
+	background-color: #e5e9f0;
+}
+
+th[colspan] {
+	text-align:center;
+}
+
+
+
+
+.result-table td {
+	border:1px solid white;
+}
+
+.result-table td > em,
+.result-table th > em {
+	display:block;
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	font-size:0.9em;
+	margin:0.1111em 0 0;
+} 
+
+.result-table td:last-child {
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	white-space: nowrap;
+	font-size:0.9em;
+}
+
+.result-table td:last-child strong {
+	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	display:block;
+	font-size:1.1111em;
+}
+
+
+.result-table .fr,
+.agro td.m0,
+.agro td.m1,
+.agro td.m2,
+.agro td.m3 {
+	text-align:center;
+	padding-left:0;
+	padding-right:0;
+	width:55px;
+	
+}
+
+.r-10[data-val="0.1"],[data-val="0.1"],
+.l-observed {
+	background-color:#ced3db !important;
+}
+
+.r-0[data-val^="0"],.r-10,
+.l0 {
+	background-color:#d1ffff !important;
+}
+
+.r-20,
+.l1 {
+	background-color:#bcf380 !important;
+	
+}
+
+.r-30,.r-40,.r-50,
+.l2 {
+	background-color:#ffc400 !important;
+}
+
+.r-60,.r-70,.r-80,
+.l3 {
+	background-color:#f45a02 !important;
+	color:white !important;
+}
+
+.r-90,.r-100,
+.l4 {
+	background-color:#ba0011 !important;
+	color:white !important;
+}
+
+p.does-metastasize,
+p.does-not-metastasize {
+	white-space: nowrap;
+	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	font-size:0.9em;
+}
+
+p.does-not-metastasize > i {
+	display:none;
+}
+
+
+p.does-metastasize:first-child:before {
+	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	font-size:1.1111em;
+	content: 'Metastasizes to:';
+	display:block;
+}
+
+p.does-not-metastasize:first-child:before,
+p.does-metastasize + p.does-not-metastasize:before {
+	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	font-size:1.1111em;
+	content: 'Does not metastasize to:';
+	display:block;
+}
+
+p.does-metastasize + p.does-not-metastasize:before {
+	margin:8px 0 0;
+}
+
