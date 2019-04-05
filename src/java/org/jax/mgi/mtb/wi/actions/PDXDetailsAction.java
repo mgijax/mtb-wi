@@ -340,6 +340,9 @@ public class PDXDetailsAction extends Action {
                 }
                 Collections.sort(tmbs);
                 request.setAttribute("tmb",tmbs);
+                
+                 request.setAttribute("minTMB", store.getMinTMB());
+                 request.setAttribute("maxTMB", store.getMaxTMB());
             }
 
         }//end of else for finding a model;

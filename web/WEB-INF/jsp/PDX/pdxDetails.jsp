@@ -917,9 +917,22 @@
                                                 Tumor Mutation Burden
                                             </td>
                                             <td class="data${a}">
-                                                <c:forEach var="sample" items="${tmb}" varStatus="status">
-                                                    ${sample}<br>    
-                                                </c:forEach>
+                                                <table width="100%"><tr>
+                                                        <td width="50%">
+                                                            <c:forEach var="sample" items="${tmb}" varStatus="status">
+                                                                ${sample}<br>    
+                                                            </c:forEach>
+                                                        </td>
+                                                   
+                                                        <td>
+                                                            TMB Range:${minTMB}-${maxTMB} &nbsp;(across all JAX PDX models)
+                                                            <br>
+                                                            TMB > 22  is considered high.
+                                                            
+                                                        </td>
+                                                    <tr>
+                                                </table>
+                                                       
                                             </td>
                                         </tr>
 
