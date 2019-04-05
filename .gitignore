@@ -12,3 +12,4 @@
 build.number
 **/conf/
 build.properties
+**/conf/build.properties
