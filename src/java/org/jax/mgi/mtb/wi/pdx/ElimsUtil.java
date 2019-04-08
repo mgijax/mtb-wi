@@ -538,8 +538,8 @@ public class ElimsUtil {
                     
 //                    New MTB PDX Filter criteria
 //                    Active: Available
-//                    Or Active: Available - QC Complete
-//                    Or (Active: P1 Available + all TM models + all J models less than J000111056)
+//                    Or Active: Available – QC Complete
+//                    Or (Active: P1 Available” + all TM models + all J models less than J000111056)
 //                    No change to Blood or Data filter
 
                     
