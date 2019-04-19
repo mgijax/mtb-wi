@@ -84,7 +84,7 @@
                                         <td colspan="2">
                                              <c:choose>
                                                 <c:when test="${not empty mice}">
-                                                     You are requesting details on PDX Mouse ID <b> ${mice} </b>.
+                                                     You are requesting details on PDX model ID <b> ${mice} </b>.
                                                 </c:when>
                                                 <c:otherwise>
                                                     You are requesting general information on the PDX program.

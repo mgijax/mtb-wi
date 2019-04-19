@@ -2137,10 +2137,6 @@ or cancer-related evidences are retained regardless of the filters.
     <td BGCOLOR="#DDDDDD"><b>Description</b></td>
   </tr>
   <tr>
-    <td valign="top"><b>Model</b></td>
-    <td>'T' or 'J' number ID of model</td>
-  </tr>
-  <tr>
     <td valign="top" NOWRAP><b>Sample</b></td>
     <td>Alpha-numeric designation (followed by _model id number)</td>
   </tr>
@@ -2148,6 +2144,38 @@ or cancer-related evidences are retained regardless of the filters.
     <td valign="top"><b>Gene</b></td>
     <td>HGNC nomenclature</td>
   </tr>
+  
+   
+  <tr>
+    <td valign="top"><b>CKB Variant</b></td>
+    <td>Variant annotated in CKB. Link in blue if publicly available, in red if CKB Boost subscription is required.</td>
+  </tr>
+
+  <tr>
+    <td valign="top"><b>CKB Variant effect</b></td>
+    <td>Variant effect as annotated in CKB.</td>
+  </tr>  
+  
+  <tr>
+    <td valign="top"><b>CKB Protein effect</b></td>
+    <td>Protein effect as annotated in CKB.</td>
+  </tr>
+
+  <tr>
+    <td valign="top"><b>CKB # Annotations predicting sensitivity</b></td>
+    <td>The number of annotations in CKB predicting sensitivity for the variant. Shown as preclinical / clinical.</td>
+  </tr>  
+  <tr>
+    <td valign="top"><b>CKB # Annotations predicting resistance</b></td>
+    <td>The number of annotations in CKB predicting resistance for the variant. Shown as preclinical / clinical.</td>
+  </tr>
+
+  <tr>
+    <td valign="top"><b>CKB Potential treatment approaches</b></td>
+    <td>Potential treatment approaches identified in CKB.</td>
+  </tr>  
+  
+  
   <tr>
     <td valign="top"><b>Platform</b></td>
     <td>Capture panel used (Truseq-JAX, CTP or Whole Exome)</td>
@@ -2168,10 +2196,7 @@ or cancer-related evidences are retained regardless of the filters.
     <td valign="top"><b>Alt Allele</b></td>
     <td>Nucleotide(s) present in sample</td>
   </tr>
-  <tr>
-    <td valign="top"><b>Consequence</b></td>
-    <td>Functional annotation of the variant</td>
-  </tr>
+ 
   <tr>
     <td valign="top"><b>Amino Acid Change</b></td>
     <td>Protein sequence change from reference</td>
@@ -2205,30 +2230,17 @@ or cancer-related evidences are retained regardless of the filters.
     <td valign="top"><b>Gene ID</b></td>
     <td>Accession number of gene in Entrez or Ensembl</td>
   </tr>
+  
   <tr>
-    <td valign="top"><b>CKB Evidence</b></td>
-    <td>Types of evidence in JAX CKB associated with the variant.<br>
-        Actionable: Actionable evidence is clinical or preclinical data supporting a connection between a gene variant and a drug response.<br>
-        The related response type may be sensitive or resistant.<br>
-        Emerging: Emerging provides evidence for potential development of a gene variant as a future cancer therapy target.
-</td>
+    <td valign="top"><b>Count Human Reads</b></td>
+    <td></td>
   </tr>
-  <tr>
-    <td valign="top"><b>Actionable Cancer Types</b></td>
-    <td>Tumor type directly associated with the variant in JAX CKB</td>
-  </tr>
+ 
    <tr>
-    <td valign="top"><b>Drug Class</b></td>
-    <td>Drug classes of treatment approach associated with the variant in JAX CKB</td>
+    <td valign="top"><b>PCT Human Reads</b></td>
+    <td></td>
   </tr>
-   <tr>
-    <td valign="top"><b>Variant Num Trials</b></td>
-    <td>Number of clinical trials directly associated with the variant (The clinical trials associated with the gene can be made available upon request.)</td>
-  </tr>
-   <tr>
-    <td valign="top"><b>Variant NCT IDs</b></td>
-    <td>NCT IDs of clinical trials directly associated with the variant </td>
-  </tr>
+   
 </table>
 <br>
 
@@ -2271,8 +2283,7 @@ We are flagging the genes where the alternate loci are sufficiently different fr
 
 <br>
 For gene fusion, the gene symbols upstream and downstream of the fusion are reported and whether the downstream fusion partner is frame-shift or in-frame-shift.<br> 
-Detected fusion genes are annotated with the clinical information from the JAX CKB database (similar to variant annotation described above),
-and only those with associated drug efficacy or cancer-related evidences are reported to minimize false-positives.<br>
+Only those with associated drug efficacy or cancer-related evidences are reported to minimize false-positives.<br>
 Other detected fusions and additional information (e.g. breakpoint coordinates) can be made available upon request.<br>
 <br>
 <br>
