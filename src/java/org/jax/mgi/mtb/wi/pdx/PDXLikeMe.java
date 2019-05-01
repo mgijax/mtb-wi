@@ -711,8 +711,30 @@ public class PDXLikeMe {
             }
         }
     }
+    
+    
+    // it is possible we want unfiltered results internally
+    // but would still need to excluded PT samples. so we would use this
+    // but then have to exclude PT samples sample by sample in the internal results
+     private String getFilterStr() {
+        String filterStr = "filter=no";
+        if (WIConstants.getInstance().getPublicDeployment()) {
+            filterStr = "filter=yes";
+        }
+        return filterStr;
+    }
 
     private String getJSON(String uri, String json) {
+        
+        // use filtering to exclude PT samples
+        String filterStr = "filter=yes";
+        
+         if (uri.contains("?")) {
+            uri = uri + "&" + filterStr;
+        } else {
+            uri = uri + "?" + filterStr;
+        }
+        
 
         boolean post = true;
         if (json == null || json.length() == 0) {
