@@ -16,7 +16,6 @@
 	<li><a href="#text">How do I effectively use text string search boxes?</a></li>
 	<li><a href="#pick">How do I effectively use pick list searching?</a></li>
 	<li><a href="#path">How do I access Pathology Images in the database?</a></li>
-	<li><a href="#QTL">How do I use the Cancer QTL Viewer</a></li>
 	<li><a href="#dynamicgrid">How do I use the Tumor Frequency Grid</a></li>
 </ul>
 
@@ -180,7 +179,7 @@ World Wide Web (URL:http://www.informatics.jax.org/). (October, 1998 i.e., the d
 
 <h3>Getting Started, General Search Tips</h3>
 <ul>
-	<li>You can search the database using the Search Box, the Quick Organ Search, one of the search forms labeled Tumor, Strain, Genetics, Pathology Images, References and Advanced, the Cancer QTL Viewer, or the Tumor Frequency Grid.</li>
+	<li>You can search the database using the Search Box, the Quick Organ Search, one of the search forms labeled Tumor, Strain, Genetics, Pathology Images, References and Advanced or the Tumor Frequency Grid.</li>
 	<li>Searching the database is made simple by using a combination of text string and pick list searches for specific terms.</li>
 	<li>The following provides general information for MTB queries. Specific information and examples for individual search forms is given below.</li>
 </ul>
@@ -1989,33 +1988,6 @@ Users may refine the search by going back to the form and adding more selections
 
 <a href="#top">Back to Top</a>
 
-<hr>
-
-<a name="QTL"></a><h2>Cancer QTL Viewer</h2>
-<p>Cancer QTL data are grouped by organ. One or more organ groups can be selected to view associated QTLs.</p>
-
-<p>Selected QTLs can be viewed as HTML, tab delimited text or graphically on the mouse genome.</p>
-
-<p>When using the graphical view, click on a chromosome to see a higher resolution view, mouse over a feature to see a label,
-shift+click on a feature to open the details and search page (pop-ups must be enabled). QTLs are color coded by organ group.</p>
-
-<p>A legend will be displayed to the right of the genome or chromosome with each selected organ and the color of the associated QTLs.</p>
-
-<p>
-
-<a href="#top">Back to Top</a>
-
-<hr>
-	
-	
-	
-
-<a name="GViewerDetails"></a><h2>Cancer QTL Selection Details</h2>
-<p>This page provides additional information about the selected QTL and the ability to search for genes within the region.</p>
-
-<p>Search results can be submitted as a gene batch query to MGI.</p>
-
-<a href="#top">Back to Top</a>
 
 <hr>
 	
@@ -2106,10 +2078,7 @@ shift+click on a feature to open the details and search page (pop-ups must be en
 		<th>Field</th>
 		<th>Description</th>
 	</tr>
-	<tr>
-		<td><h4>Model</h4></td>
-		<td><p>'T' or 'J' number ID of model</p></td>
-	</tr>
+	
 	<tr>
 		<td><h4>Sample</h4></td>
 		<td><p>Alpha-numeric designation (followed by _model id number)</p></td>
@@ -2118,6 +2087,39 @@ shift+click on a feature to open the details and search page (pop-ups must be en
 		<td><h4>Gene</h4></td>
 		<td><p>HGNC nomenclature</p></td>
 	</tr>
+        
+ 
+        <tr>
+                <td><h4>CKB Variant</h4></td>
+                <td><p>Variant annotated in CKB. Link in blue if publicly available, in red if CKB Boost subscription is required.</p></td>
+        </tr>
+
+        <tr>
+                <td><h4>CKB Variant effect</h4></td>
+                <td><p>Variant effect as annotated in CKB.</p></td>
+        </tr>  
+
+        <tr>
+                <td><h4>CKB Protein effect</h4></td>
+                <td><p>Protein effect as annotated in CKB.</p></td>
+        </tr>
+
+        <tr>
+                <td><h4>CKB # Annotations predicting sensitivity</h4></td>
+                <td><p>The number of annotations in CKB predicting sensitivity for the variant. Shown as preclinical / clinical.</p></td>
+        </tr>  
+      
+        <tr>
+                <td><h4>CKB # Annotations predicting resistance</h4></td>
+                <td><p>The number of annotations in CKB predicting resistance for the variant. Shown as preclinical / clinical.</p></td>
+        </tr>
+
+        <tr>
+                <td><h4>CKB Potential treatment approaches</b></td>
+                <td><p>Potential treatment approaches identified in CKB.</p></td>
+        </tr>  
+        
+      
 	<tr>
 		<td><h4>Platform</h4></td>
 		<td><p>Capture panel used (Truseq-JAX, CTP or Whole Exome)</p></td>
@@ -2138,10 +2140,7 @@ shift+click on a feature to open the details and search page (pop-ups must be en
 		<td><h4>Alt Allele</h4></td>
 		<td><p>Nucleotide(s) present in sample</p></td>
 	</tr>
-	<tr>
-		<td><h4>Consequence</h4></td>
-		<td><p>Functional annotation of the variant</p></td>
-	</tr>
+	
 	<tr>
 		<td><h4>Amino Acid Change</h4></td>
 		<td><p>Protein sequence change from reference</p></td>
@@ -2165,9 +2164,8 @@ shift+click on a feature to open the details and search page (pop-ups must be en
 	<tr>
 		<td><h4>Filtered Rationale</h4></td>
 		<td><p>Indication of filters which the variant failed.</p>
-
-<p>Germline-Alt_AF_{percent} or PutativeGermline: A variant is predicted to be germline based on public databases and its alternate allele percentage frequency</p>
-</td>
+                    <p>Germline-Alt_AF_{percent} or PutativeGermline: A variant is predicted to be germline based on public databases and its alternate allele percentage frequency</p>
+                </td>
 	</tr>
 	<tr>
 		<td><h4>Passage Num</h4></td>
@@ -2177,33 +2175,16 @@ shift+click on a feature to open the details and search page (pop-ups must be en
 		<td><h4>Gene ID</h4></td>
 		<td><p>Accession number of gene in Entrez or Ensembl</p></td>
 	</tr>
-	<tr>
-		<td><h4>CKB Evidence</h4></td>
-		<td><p>Types of evidence in JAX CKB associated with the variant.</p>
-
-<p>Actionable: Actionable evidence is clinical or preclinical data supporting a connection between a gene variant and a drug response.</p>
-
-<p>The related response type may be sensitive or resistant.</p>
-
-<p>Emerging: Emerging provides evidence for potential development of a gene variant as a future cancer therapy target.</p>
-</td>
+        <tr>
+		<td><h4>Count Human Reads</h4></td>
+		<td><p>The number of human reads.</p></td>
 	</tr>
 	<tr>
-		<td><h4>Actionable Cancer Types</h4></td>
-		<td><p>Tumor type directly associated with the variant in JAX CKB</p></td>
+		<td><h4>PCT Human Reads</h4></td>
+		<td><p>The percentage of human reads.</p></td>
 	</tr>
-	 <tr>
-		<td><h4>Drug Class</h4></td>
-		<td><p>Drug classes of treatment approach associated with the variant in JAX CKB</p></td>
-	</tr>
-	 <tr>
-		<td><h4>Variant Num Trials</h4></td>
-		<td><p>Number of clinical trials directly associated with the variant (The clinical trials associated with the gene can be made available upon request.)</p></td>
-	</tr>
-	 <tr>
-		<td><h4>Variant NCT IDs</h4></td>
-		<td><p>NCT IDs of clinical trials directly associated with the variant </p></td>
-	</tr>
+	
+
 </table>
 
 <strong>Expression data</strong>
@@ -2273,83 +2254,31 @@ and only those with associated drug efficacy or cancer-related evidences are rep
 
 <p>and copy number of other genes not listed on the MTB site can be made available upon request.</p>
 
-<a href="#top">Back to Top</a>
 
-<hr>
-	
-	<a name="pdxcomparison"></a><h2>PDX Comparison Results</h2>
-	<table>
-		<tr><td><p>Rank Z based expression scale</p></td>
-		<tr>
-				<td>
-						<table class="pdx-result-expression">
-								<tr>
-								<td style="background-color:#006900">-15</td>
-								<td style="background-color:#007300">-14</td>
-								<td style="background-color:#007d00">-13</td>
-								<td style="background-color:#008700">-12</td>
-								<td style="background-color:#009100">-11</td>
-								<td style="background-color:#009b00">-10</td>
-								<td style="background-color:#00a500">-9</td>
-								<td style="background-color:#00af00">-8</td>
-								<td style="background-color:#00b900">-7</td>
-								<td style="background-color:#00c300">-6</td>
-								<td style="background-color:#00cd00">-5</td>
-								<td style="background-color:#00d700">-4</td>
-								<td style="background-color:#00e100">-3</td>
-								<td style="background-color:#00eb00">-2</td>
-								<td style="background-color:#00f500">-1</td>
-								<td style="background-color:#808080"> 0 </td>
-								<td style="background-color:#f50000">+1</td>
-								<td style="background-color:#eb0000">+2</td>
-								<td style="background-color:#e10000">+3</td>
-								<td style="background-color:#d70000">+4</td>
-								<td style="background-color:#cd0000">+5</td>
-								<td style="background-color:#c30000">+6</td>
-								<td style="background-color:#b90000">+7</td>
-								<td style="background-color:#af0000">+8</td>
-								<td style="background-color:#a50000">+9</td>
-								<td style="background-color:#9b0000">+10</td>
-								<td style="background-color:#910000">+11</td>
-								<td style="background-color:#870000">+12</td>
-								<td style="background-color:#7d0000">+13</td>
-								<td style="background-color:#730000">+14</td>
-								<td style="background-color:#690000">+15</td>
-								<td style="text-align:center;background-color:#FFFFFF">No Value</td>
-								</tr>
-						</table>
-						
-				</td>
-		</tr>
-		<tr><td>
-						<table class="pdx-result-cnv">
-								<tr><td><p>CNV color coding</p></td></tr>
-								<tr>
-										<td style="background-color:#FFA500">Amplification</td>
-										<td style="background-color:#0000FF">Deletion</td>
-										<td style="background-color:#808080">Normal</td>
-										<td style="background-color:#FFFFFF">No Value</td>
-								</tr>
-						</table>
-				</td>
-		</tr>
-	</table>
-<p>Click a sample name along the top of the table to go to the PDX details page for that sample.</p>
+<a name="pdxTMB"></a><h4>Tumor mutation burden (TMB) estimation:</h4>
 
-<p>Click on a row (gene) in the mutation section to display the descriptions of the mutations.</p>
+<p>TMB was calculated using variants that</p>
+<ul>
+    <li>(i) met all quality criteria (coverage, mapping quality etc.), </li>
+    <li>(ii) were not present in an in-house curated blacklist of false positive variants from loci that prone to sequencing and analysis errors and/or 
+        are associated with highly polymorphic genes (i.e., MUC4, MUC5B, MUC16, MUC17, and HLA-A </li>
+    <li>(iii) are likely somatic mutations, and  </li>
+    <li>(iv) have a high or moderate functional impact (i.e., non-synonymous changes, frame-shifts, stop losses/gains, and splice-site acceptor/donor changes).</li>
+</ul>
+<p>  TMB was estimated by dividing the number of variants that met the criteria list above by the length (in Mb)</p>
+<p>of The Jackson Laboratory <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4481190">Cancer Treatment Profile (CTP)</a> targeted gene panel.</p>
+   
+<p>   We defined high TMB as 22 mutations/Mb, which was calculated based on the TMB distribution of all PDX models analyzed as follows: Q3 (third quartile of TMB) + 1.5 x inter-quartile range of TMB.</p>
 
-<p>Click on the "+" at the top of the mutation section to display all the mutation descriptions.</p>
-
-<p>Click on the "-" to hide all the mutation descriptions.</p>
 
 <a href="#top">Back to Top</a>
+
 
 <hr>
 
 <p><a href="citation.jsp">Citing MTB</a></p>
 
-<p><a href="#top">MTB</a> is supported by grant <a href="http://commons.cit.nih.gov/crisp3/CRISP_LIB.getdoc?textkey=6434346&p_grant_num=1R01CA089713-01A1&p_query=&ticket=524183&p_audit_session_id=3455344&p_keywords=">CA89713</a> from the National Cancer Institute (<A HREF="http://www.nci.nih.gov/">NCI</a>
-<p>).</p>
+<p><a href="#top">MTB</a> is supported by grant <a href="http://commons.cit.nih.gov/crisp3/CRISP_LIB.getdoc?textkey=6434346&p_grant_num=1R01CA089713-01A1&p_query=&ticket=524183&p_audit_session_id=3455344&p_keywords=">CA89713</a> from the National Cancer Institute (<A HREF="http://www.nci.nih.gov/">NCI</a>).</p>
 
 <p><a href="copyright.jsp">Warranty Disclaimer &amp; Copyright Notice</a>
 

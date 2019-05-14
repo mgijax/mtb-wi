@@ -460,7 +460,7 @@ public class PDXMouseStore {
 
     private boolean compareIDs(String display, String numeric) {
 
-        log.error("Comparing " + display + " to " + numeric);
+       
         if (true) {
             return display.equals(numeric);
         }

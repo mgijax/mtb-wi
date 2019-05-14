@@ -345,7 +345,7 @@ public class PDXLikeMe {
                     table.append(caseNo).append(",");
                     table.append("\"=HYPERLINK(\"\"http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID=");
                     table.append(mr.id).append("\"\",\"\"").append(mr.id).append("\"\")\",");
-                    table.append(detailsMap.get(mr.id)).append(",");
+                    table.append("\""+detailsMap.get(mr.id)).append("\",");
                     for (String gene : ku) {
                         vals = gene.split(" ");
                         if (mr.genes.contains(vals[0] + vals[1])) {
@@ -366,20 +366,20 @@ public class PDXLikeMe {
                         // figure out how to put these in their own columns for sorting etc.
                         
                         String key = (mr.id+vals[0]+vals[1]).toUpperCase();
-                        if(showLRP &&  vals[1].toUpperCase().contains("AMP") ||  
+                        if(showLRP &&  (vals[1].toUpperCase().contains("AMP") ||  
                             vals[1].toUpperCase().contains("DEL") || 
-                            vals[1].toUpperCase().contains("NOCNV")){
+                            vals[1].toUpperCase().contains("NOCNV"))){
                             table.append(",");
                             if(lrpMap.containsKey(key)){
-                                table.append(lrpMap.get(key));
+                                 table.append(lrpMap.get(key));
                             }
                                 
                         }
-                        if(showEXP  && vals[1].contains(">") ||  
-                            vals[1].contains(">")){
+                        if(showEXP  && (vals[1].contains(">") ||  
+                            vals[1].contains("<"))){
                             table.append(",");
                             if(expMap.containsKey(key)){
-                                table.append(expMap.get(key));
+                                 table.append(expMap.get(key));
                             }
                             
                         }
@@ -711,8 +711,30 @@ public class PDXLikeMe {
             }
         }
     }
+    
+    
+    // it is possible we want unfiltered results internally
+    // but would still need to excluded PT samples. so we would use this
+    // but then have to exclude PT samples sample by sample in the internal results
+     private String getFilterStr() {
+        String filterStr = "filter=no";
+        if (WIConstants.getInstance().getPublicDeployment()) {
+            filterStr = "filter=yes";
+        }
+        return filterStr;
+    }
 
     private String getJSON(String uri, String json) {
+        
+        // use filtering to exclude PT samples
+        String filterStr = "filter=yes";
+        
+         if (uri.contains("?")) {
+            uri = uri + "&" + filterStr;
+        } else {
+            uri = uri + "?" + filterStr;
+        }
+        
 
         boolean post = true;
         if (json == null || json.length() == 0) {

@@ -63,7 +63,7 @@ public class PDXRequestAction extends Action {
             body.append("A request for information from the MTB PDX search form.\n");
             body.append(mr).append(" ").append(name).append("\n");
             body.append("A ").append(title).append(" at ").append(org).append(".\n");
-            body.append("Has requested information on PDX mice: ").append(mice).append(".\n");
+            body.append("Has requested information on PDX model(s): ").append(mice).append(".\n");
             body.append("Comments: ").append(comments);
 
             Properties props = new Properties();
