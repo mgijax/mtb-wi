@@ -104,8 +104,8 @@ public class ModelCounts {
 
     ArrayList<ArrayList<String>> tissuesListList = new ArrayList<ArrayList<String>>();
 
-    private static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2018/cancer-facts-and-figures-2018.pdf";
-    private static final String YEAR = "2018";
+    private static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2019/cancer-facts-and-figures-2019.pdf";
+    private static final String YEAR = "2019";
     private String solrURL;
     private String minFC = "&fq=minFC:[1%20TO%201]";
     private static String HTML = "";
