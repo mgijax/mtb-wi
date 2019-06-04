@@ -14,8 +14,8 @@
 <!-- META Tags -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="description" content="MTB has been designed to aid researchers in such areas as choosing experimental models, reviewing patterns of mutations in specific cancers, and identifying genes that are commonly mutated across a spectrum of cancers.">
-<meta name="keywords" CONTENT="mtb, mouse, tumor, biology, jax, lab, laboratory, jackson, mgi, genome, informatics">
-<meta name="revised" content="2016/10/30">
+<meta name="keywords" CONTENT="mtb, mouse, tumor, biology, jax, lab, laboratory, jackson, mgi, genome, informatics, mouse models of human cancer database, MMHCdb, mouse models, pdx, patient derived xenograft">
+<meta name="revised" content="2019/05/30">
 <meta name="robots" content="all">
 
 <!-- CSS -->
