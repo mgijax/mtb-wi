@@ -1359,7 +1359,12 @@ public class PDXMouseStore {
     public String getVariationData(String model, String limit, String start, String sort, String dir, String ctp) {
 
         StringBuffer result = new StringBuffer("{'total':");
-        boolean ckbSort = sort.startsWith("ckb_");
+        boolean ckbSort = false;
+          try{
+              ckbSort = sort.startsWith("ckb_");
+          }catch(Exception e){
+              log.debug("'"+sort+"' cant be parsed as sort field");
+          }
 
         String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
         
