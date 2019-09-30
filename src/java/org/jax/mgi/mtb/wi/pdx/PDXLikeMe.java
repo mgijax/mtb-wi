@@ -58,7 +58,7 @@ public class PDXLikeMe {
 
     HashMap<String, ArrayList<String>> allMice = new HashMap<>();
     private static HashMap<String, String> detailsMap = new HashMap<>();
-    
+    private static ArrayList<String> ctpGenes = new ArrayList<>();
     private HashMap<String, String> expMap = new HashMap<>();
     private HashMap<String, String> lrpMap = new HashMap<>();
 
@@ -89,6 +89,8 @@ public class PDXLikeMe {
     
     public PDXLikeMe(){
         this.getModelDetails();
+        this.ctpGenes = new PDXMouseStore().getCTPGenes();
+        
     }
 
     public String parseCases(Scanner s, boolean asHTML, boolean includeActionable, boolean showLRP, boolean showEXP) {
@@ -236,11 +238,21 @@ public class PDXLikeMe {
                 table.append("Known Significance</th><th  style=\"text-align:center;padding:5px\" colspan=\"").append(u.size()).append("\">Unknown Significance</th></tr>");
             }
             table.append("<tr><th>Model ID</th>");
-            for (String kGenes : k) {
-                table.append("<th style=\"text-align:center;padding:5px\">").append(kGenes).append("</th>");
+            for (String kGene : k) {
+                table.append("<th style=\"text-align:center;padding:5px\">").append(kGene);
+                if(!ctpGenes.contains(kGene.toUpperCase().split(" ")[0])){
+                    table.append("<br>Not in CTP");
+                }
+                table.append("</th>");
+                
+                
             }
-            for (String uGenes : u) {
-                table.append("<th style=\"text-align:center;padding:5px\">").append(uGenes).append("</th>");
+            for (String uGene : u) {
+                table.append("<th style=\"text-align:center;padding:5px\">").append(uGene);
+                if(!ctpGenes.contains(uGene.toUpperCase().split(" ")[0])){
+                    table.append("<br>Not in CTP");
+                }
+                table.append("</th>");
             }
             table.append("</thead><tbody>");
 
