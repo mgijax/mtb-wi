@@ -23,34 +23,33 @@
 		<!-- To do: include tag manager -->
 		<a href="${pageContext.request.contextPath}/index.do">
 			<img src="${applicationScope.urlImageDir}/mmhc-logo.png" alt="Mouse Models of Human Cancer Database">
-			<h3>Mouse&nbsp;Models<br>of&nbsp;Human&nbsp;Cancer<br>Database</h3>
 		</a>
 		<c:import url="/search/quick.jsp" />
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/advancedSearch.do">Advanced Search</a></li>			
 			<li class="dropdown"><span>Other Resources</span>
-				<ul>	
-					<li><a href="${pageContext.request.contextPath}/dynamicGrid.do">Tumor Frequency Grid</a></li>		
-					<li><a href="${pageContext.request.contextPath}/immunohistochemistry.jsp">Immunohistochemistry</a></li>
-					<li><a href="${pageContext.request.contextPath}/lymphomaPathology.jsp">Lymphoma Pathology</a></li>
+				<ul>		
+					<li><a href="${pageContext.request.contextPath}/live/www/html/antibodies.html">Antibody Staining Report</a></li><!-- immunohistochemistry.jsp -->
+					<li><a href="${pageContext.request.contextPath}/live/www/html/lymphoma.html">Lymphoma Pathology Tutorial</a></li>
 				</ul>
 			</li>	
 			<li class="dropdown"><span>Searches/Tools</span>
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/facetedSearch.do">Browse Data (Faceted)</a></li>
-					<li><a href="${pageContext.request.contextPath}/advancedSearch.do">Advanced Search</a></li>
-					<li><a href="${pageContext.request.contextPath}/tumorFrequencyGrid.do">Tumor Frequency Grid</a></li>
-					<li><a href="${pageContext.request.contextPath}/pdxSearch.do">PDX Search (JAX)</a></li>	
-					<li><a href="http://www.pdxfinder.org">PDX Finder (Global Search)</a></li>	
+					<li><a href="${pageContext.request.contextPath}/facetedSearch.do">Browse Data (Faceted Search)</a></li>
+					<li><a class="link-disable" href="${pageContext.request.contextPath}/advancedSearch.do">Advanced Search</a></li>
+					<li><a href="${pageContext.request.contextPath}/dynamicGrid.do">Tumor Frequency Grid</a></li>
+					<li><a href="${pageContext.request.contextPath}/pdxSearch.do">Patient Derived Xenograft (PDX) Search</a></li>
+					<li><a href="${pageContext.request.contextPath}/pdxLikeMe.do">PDX Like Me</a></li>
+					<li><a class="link-external" href="http://www.pdxfinder.org">PDX Finder</a></li>	
 				</ul>
 			</li>				
 			
 			<li class="dropdown"><span>About</span>
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/">Database</a></li>
-					<li><a href="${pageContext.request.contextPath}/">Publications</a></li>
-					<li><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">Help</a></li>					
-					<li><a href="${pageContext.request.contextPath}/whatsNew.jsp">What's New</a></li>
+					<li><a class="link-disable" href="${pageContext.request.contextPath}/">About Us</a></li>
+					<li><a class="link-disable" href="${pageContext.request.contextPath}/">Publications</a></li>
+					<li><a class="link-disable" href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">Help</a></li>					
+					<li><a href="${pageContext.request.contextPath}/whatsNew.jsp">News &amp; Events</a></li>
 				</ul>
 			</li>				
 			
@@ -66,13 +65,13 @@
 		<ul>
 			<li>
 				<p>Part of</p>
-				<a href="http://www.informatics.jax.org"><img src="/_res/img/mgi-logo.png" alt="Mouse Genome Informatics"></a>
+				<a href="http://www.informatics.jax.org"><img src="http://www.informatics.jax.org/webshare/images/mgi_logo.gif" alt="Mouse Genome Informatics"></a>
 			</li>
 			<li>
-				<p><a href="${applicationScope.urlBase}/citation.jsp">Citing These Resources</a></p>
-				<p><a href="${applicationScope.urlBase}/funding.jsp">Funding Information</a></p>
+				<p><a class="link-disable" href="${applicationScope.urlBase}/citation.jsp">Citing This Resources</a></p>
+				<p><a class="link-disable" href="${applicationScope.urlBase}/funding.jsp">Funding Information</a></p>
 				<p><a href="${applicationScope.urlBase}/copyright.jsp">Warranty Disclaimer &amp; Copyright Notice</a></p>
-				<p>Send questions and comments to <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support</a>.</p>
+				<p>Send questions and comments to <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">MGI User Support</a>.</p>
 			</li>
 			<li>
 				<h6>Last Software Update</h6>

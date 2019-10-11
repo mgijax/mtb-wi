@@ -1,53 +1,54 @@
 <%@ page language="java" pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Faceted Search" help="#">
+<jax:mmhcpage title="Advanced Search" help="#">
 	<jsp:attribute name="head">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/live/www/css/faceted-search.css"/>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/live/www/js/faceted-search.js"></script>
+		<link rel="stylesheet" type="text/css" href="./live/www/css/facet.css"/>		
+		<script>
+			const contextPath = '${pageContext.request.contextPath}';
+		</script>
+		<script type="text/javascript" src="/_res/js/jquery-ui-sortable.min.js"></script>	
+		<script type="text/javascript" src="./live/www/js/facet.js"></script>
 	</jsp:attribute>
 	<jsp:body>
-	<form id="facets">
-		<fieldset>
-			<legend>Require in results</legend>
-			<label><input type="checkbox" id="pathology-images" onClick="pathologyImagesCB()">Pathology Images</label>
-			<label><input type="checkbox" id="cyto-images" onClick="cytoImagesCB()">Cytogenetic Images</label>
-			<label><input type="checkbox" id="untreated" onClick="untreatedCB()">Spontaneous</label>
-			<label><input type="checkbox" id="metastatic" onClick="metastaticCB()">Metastatic</label>
-			<label><input type="checkbox" id="gene-expression" onClick="geneExpressionCB()">Gene Expression Data</label>
-			<label><input type="checkbox" id="min-fc" onClick="minFCCB()">Freq. >= 80% C. size >= 20</label>
-			<label><input type="checkbox" id="all-strains" onclick="mutantCheck('a',true)" checked >All Strains</label>
-			<label><input type="checkbox" id="mutant-strains" onclick="mutantCheck('m',true)">Mutant Strains</label>
-			<label><input type="checkbox" id="non-mutant-strains" onclick="mutantCheck('n',true)">Non-Mutant Strains</label>
-			<label><input type="checkbox" id="as-csv" onClick="asCSVCB()">Results as CSV</label>
-		</fieldset>
-		<fieldset>
-			<legend>Active Filters</legend>
-			<div id="filters"></div>				
-			<div id="facet-count"></div>
-			<label for="organ-parent">Organ of Origin</label>
-			<div class="facet-list" id="organ-parent"></div>
-			<div onclick='moreFacets()' class="more-facets"></div>
-			<label for="tc-parent">Tumor Classification</label>
-			<div class="facet-list" id="tc-parent"></div>
-			<div onclick='moreFacets()' class="more-facets"></div>
-			<label for="agent-type">Agent Type</label>
-			<div class="facet-list" id="agent-type"></div>
-			<div onclick='moreFacets()' class="more-facets"></div>
-			<label for="strain-type">Strain Type</label>
-			<div class="facet-list" id="strain-type"></div>
-			<div onclick='moreFacets()' class="more-facets"></div>
-			<label for="mets-to">Metastasizes To</label>
-			<div class="facet-list" id="mets-to"></div>
-			<div onclick='moreFacets()' class="more-facets"></div>
-			<label for="strain-marker">Germline Mutant Alleles</label>
-			<div class="facet-list" id="strain-marker"></div>
-			<div onclick='moreFacets()' class="more-facets"></div>
-			<label for="human-tissue">Human Tissue Model</label>
-			<div class="facet-list" id="human-tissue"></div>
-			<div onclick='moreFacets()' class="more-facets"></div>		
-		</fieldset>		
-	</form>
-	<div id="results"></div>
+		<div id="facet-ui">
+			<div id="facet-controls">
+				<div><a id="collapse-all" href="#"><i class="fa fa-minus"></i>Collapse All</a></div>
+				<div><a id="clear-all" href="#"><i class="fa fa-times"></i>Clear All</a></div>
+			</div>				
+			<div id="facets"></div>
+		</div>
+		<div id="facet-results" class="result-table">
+			<table>
+				<caption>
+					<div id="result-count">
+						<a id="result-prev" href="#"><i class="fa fa-arrow-left"></i></a>
+						Displaying <span id="result-first"></span> to <span id="result-last"></span> of <span id="result-total"></span>
+						<a id="result-next" href="#"><i class="fa fa-arrow-right"></i></a></p>
+					</div>
+				</caption>
+				<thead>
+					<tr>
+						<th colspan="4">Tumor Model</th>
+						<th colspan="4" class="fqc">Reported Frequency Range (sex)</th>
+						<th colspan="2"></th>
+					</tr>
+					<tr>
+						<th data-sort="yes">Model Name</th>
+						<th data-sort="yes">Organ Affected</th>
+						<th>Tumor Inducing Agent(s)</th>
+						<th data-sort="yes">Strain</th>
+						<th data-sort="yes" class="fqc">Female</th>
+						<th data-sort="yes" class="fqc">Male</th>
+						<th data-sort="yes" class="fqc">Mixed</th>
+						<th data-sort="yes" class="fqc">Unknown</th>
+						<th>Additional Information</th>
+						<th>Model Details</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>			
 	</jsp:body>				
 </jax:mmhcpage>
 

@@ -33,7 +33,8 @@ td.info [data-detail] {
 }
 
 td.info table {
-	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:300;
 	margin:5px 0 10px;
 	border-left:3px solid rgba(0, 160, 209, 0.5);
 }
@@ -68,8 +69,8 @@ td.info table td {
 
 td.info .metastases th:first-child,
 td.info caption {
-	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
-	font-weight:normal;
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:600;
 	padding:1px 2px 1px 6px;
 	color:#009ed0;
 }
@@ -84,7 +85,8 @@ td.info caption {
 }
 
 td.info caption > span {
-	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;	
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:300;
 }
 
 td.info caption:hover {
@@ -108,7 +110,8 @@ td.info .expanded caption:before {
 }
 
 td.info table th {
-	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:400;
 }
 
 td.info tr:last-child > th {
@@ -123,6 +126,27 @@ td.info td.organ {
 td.info table.metastases {
 	border-left-color:transparent;
 	margin-left:-9px;
+}
+
+#expand-all,
+#collapse-all {
+	margin-left:12px;
+	cursor:pointer;
+}
+
+#expand-all:hover,
+#collapse-all:hover {
+	color:#04c3ff;
+}
+
+#expand-all:before {
+	font-family:FontAwesome;
+	content:'\f055\a0';
+}
+
+#collapse-all:before {
+	font-family:FontAwesome;
+	content:'\f056\a0';
 }
 
 
@@ -148,8 +172,8 @@ dl {
 
 dt {
 	margin:0.5em 0 0;
-	font-weight:normal;
-	font-family: "DIN Next W01 Medium", Helvetica, Arial, sans-serif;
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:600;
 	color:black;
 }
 
@@ -188,19 +212,22 @@ th[colspan] {
 .result-table td > em,
 .result-table th > em {
 	display:block;
-	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:300;
 	font-size:0.9em;
 	margin:0.1111em 0 0;
 } 
 
 .result-table td:last-child {
-	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:300;
 	white-space: nowrap;
 	font-size:0.9em;
 }
 
 .result-table td:last-child strong {
-	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:400;
 	display:block;
 	font-size:1.1111em;
 }
@@ -216,6 +243,30 @@ th[colspan] {
 	padding-right:0;
 	width:55px;
 	
+}
+
+td.freq {
+	text-align:center;
+}
+
+p.fr {
+	box-sizing:border-box;
+	border-radius:9px;
+	height:18px;
+	line-height:16px;
+	padding:2px 7px 0;
+	margin:0 0 2px;
+}
+
+#tumor-frequency td.fr {
+	background-clip: padding-box;
+	border-bottom:1px solid transparent;
+}
+
+.summary-sex {
+	background-color:#8494af;
+	color:white;
+	padding:2px 0;
 }
 
 .r-10[data-val="0.1"],[data-val="0.1"],
@@ -254,7 +305,8 @@ th[colspan] {
 p.does-metastasize,
 p.does-not-metastasize {
 	white-space: nowrap;
-	font-family: "DIN Next W01 Light", Helvetica, Arial, sans-serif;
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:300;
 	font-size:0.9em;
 }
 
@@ -264,7 +316,8 @@ p.does-not-metastasize > i {
 
 
 p.does-metastasize:first-child:before {
-	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:400;
 	font-size:1.1111em;
 	content: 'Metastasizes to:';
 	display:block;
@@ -272,7 +325,8 @@ p.does-metastasize:first-child:before {
 
 p.does-not-metastasize:first-child:before,
 p.does-metastasize + p.does-not-metastasize:before {
-	font-family: "DIN Next W01 Regular", Helvetica, Arial, sans-serif;
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:400;
 	font-size:1.1111em;
 	content: 'Does not metastasize to:';
 	display:block;
@@ -281,4 +335,88 @@ p.does-metastasize + p.does-not-metastasize:before {
 p.does-metastasize + p.does-not-metastasize:before {
 	margin:8px 0 0;
 }
+
+.tumor-images > figure > a {
+	display:block;
+	float:left;
+	margin:0 15px 0 0;
+}
+
+.tumor-images img {
+	width:190px;
+}
+
+.tumor-images > figure {
+	display:inline-block;
+	width:50%;
+	vertical-align:top;
+	margin:15px -4px 5px 0;
+	padding:0;
+}
+
+.tumor-images figcaption {
+	box-sizing:border-box;
+	margin:0 0 0 205px;
+	padding:0 15px 0 0;
+}
+
+
+
+.tumor-images h5 {
+	font-family: "DIN Next", Helvetica, Arial, sans-serif;
+	font-weight:400;
+	color:#05396b;
+	font-size:1em;
+	margin:0;
+	padding:0 10px 0 0;
+	
+}
+
+
+.tumor-images p {
+	margin:0 0 5px;
+	padding:0 10px 0 0;
+}
+
+@media(min-width:1100px) {
+	.tumor-images figcaption > div {
+		width:33.3333%;
+		float:left;
+	}	
+}
+
+@media(max-width:992px) {
+
+	.tumor-images > figure > a {
+		
+		float:none;
+		margin-bottom:10px;
+	}	
+	.tumor-images figcaption {
+		margin-left:0;
+	}
+	.tumor-images figcaption > h5 {
+		clear:both;
+	}
+}
+
+table table caption {
+	width:auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
