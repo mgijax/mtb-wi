@@ -103,24 +103,33 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://bhm
 		wt: 'json',
 		indent: 'on',
 		facet: 'true',
-		'facet.sort': 'index', // count, index
+		'facet.sort': 'index', 		// count, index
 		'facet.mincount': 1,
 		'facet.limit': -1,
-		sort: 'freqMin desc', // organOrigin asc
+		sort: 'freqMin desc', 		// organOrigin asc
 		q: '*:*'
 	},
 	
 	savedUiKey = 'mmhc-facets',
 		
-	indices = configs.reduce((a, o, i) => { a[o.name] = i; return a; }, {}),
-	
-	composites = configs.reduce((a, o) => {
+	indices = configs.reduce((a, o, i) => { 
+		
+		a[o.name] = i;
 		if (o.fields) {
 			o.fields.forEach(f => {
-				a[f] = o.name;
+				a[f] = i;
+			});			
+		}
+		if (o.terms) {
+			o.hasPredefinedTerms = true;
+			o.terms.forEach(t => {
+				if (t.queryKey) {
+					a[t.queryKey] = i;
+				}
 			});
 		}
 		return a; 
+		
 	}, {}),
 	
 	displayFields = ['freqM', 'freqF', 'freqX', 'freqU', 'referenceID', 'strainKey', 'tumorFrequencyKey', 'metsTo'],
@@ -161,13 +170,44 @@ let facet,
 	},
 
 	getQueryParams = function(useHash) {
-		let facetQuery = [],
-			pageParams = '&' + $.param(pageQuery)
-			facetQueryParams = false;
+		let pageParams = '&' + $.param(pageQuery),
+			facetQueryParams = false,
+			facetQuery;
 		
 		if (useHash) {
 			facetQueryParams = window.location.hash.substr(1);
+			if (facetQueryParams) {
+				
+				configs.forEach(c => {
+					c.initSelectedTerms = [];
+				});
+						
+				facetQuery = facetQueryParams.split('&').map(p => decodeURIComponent(p).split('=')[1].split(':'));
+				facetQuery.forEach(q => {
+					
+					let config = getConfig(q[0]);
+					
+					if (config && q[1]) {
+						
+						let queryValue = q[1].replace(/\+/g, ' ').replace(/"/g, ''),
+							selectedTerm = {
+								'label': config.format ? config.format(queryValue) : queryValue
+							};
+							
+						if (config.fields) {
+							selectedTerm.queryKey = q[0];
+						}
+						
+						if (config.format) {
+							selectedTerm.queryValue = queryValue;
+							selectedTerm.label = config.format(selectedTerm.label);
+						}										
+						config.initSelectedTerms.push(selectedTerm);
+					}
+				});
+			}
 		} else {
+			facetQuery = [];
 			$.each(facets, function(k, f) {			
 				if (f.query && f.query.length > 0) {
 					facetQuery.push(f.query);
@@ -184,50 +224,37 @@ let facet,
 		}
 
 	},
-	
-	sw = function(n) {
-		
-		let startTime = (new Date()).getTime();
-		
-		return {
-			
-			stop: function() {
-				
-				let elapsedTime = ((new Date()).getTime() - startTime) / 1000;
-				console.log(n + ': ' + elapsedTime + 's');
-				
-			}
-			
-		};
-		
-	},
+
 
 	getOrderedConfigs = function(responseFields) {
 		
 		let savedFacetsRaw = localStorage.getItem(savedUiKey),
-			hasTerms = {},
 			orderedConfigs = [];
 			
-		// console.log(savedFacetsRaw);
+		configs.forEach(c => {
+			if (!c.hasPredefinedTerms) {
+				c.terms = [];
+			}
+		});
 			
 		$.each(responseFields, function(fieldName, termsRaw) {
 			
-			let isComposite = (fieldName in composites),
-				facetName = isComposite ? composites[fieldName] : fieldName,
-				config = getConfig(facetName);
+			let config = getConfig(fieldName);
 				
-			if (config) {
+			if (config && !config.hasPredefinedTerms) {
 				
-				//let _sw = sw('config ' + facetName);
-				
-				let queryKey = isComposite ? fieldName : null,				
-					terms = [];
-		
+				let terms = [];
+
 				for (let i = 0; i < termsRaw.length; i += 2) {					
 					terms.push({
 						'label': termsRaw[i],
-						'resultCount': termsRaw[i + 1],
-						'queryKey' : queryKey
+						'resultCount': termsRaw[i + 1]
+					});
+				}
+				
+				if (config.fields) {
+					terms.forEach(t => {
+						t.queryKey = fieldName;
 					});
 				}
 				
@@ -238,16 +265,8 @@ let facet,
 					});
 				}
 				
-				if (!(facetName in hasTerms)) {
-					hasTerms[facetName] = true;
-					config.terms = [];
-				}
-	
 				config.terms = config.terms.concat(terms);
-				
-				//_sw.stop();
 			}			
-
 		});
 			
 		if (savedFacetsRaw) {
@@ -316,12 +335,14 @@ let facet,
 		return s.replace(/[^A-Za-z0-9\s\/,]/g, '').replace(/([a-z])([A-Z])/g, '$1-$2').replace(/[\s\/,]+/g, '-').toLowerCase();
 	},
 	
+	getTermKey = function(l, k) {
+		return kebab(l) + (k ? ('-' + kebab(k)) : '');
+	},
+	
 	updateFacet = function(config, index) {
 		
 		if (!(config.name in facets)) {
-			let _sw = sw('create facet ' + config.name);
 			facets[config.name] = facet(config);
-			_sw.stop();
 		}
 		
 		facets[config.name].update(config.terms);
@@ -365,7 +386,8 @@ facet = function(config) {
 		$search = $('<input placeholder="Search" type="text">'),
 		$terms = $('<ul class="terms">'),
 		$lis = $terms.children(),
-		updateSelectedTerms, getTermKey, appendTerms,
+		updateQueryAndListeners,
+		updateSelectedTerms, appendTerms,
 		termsBottom = 0,
 		termIndex = 0;
 
@@ -399,8 +421,7 @@ facet = function(config) {
 	});
 	
 	$facets.append($ui);
-	
-	
+		
 	appendTerms = function(isAll) {
 		
 		let chunkSize = isAll ? (o.terms.length - termIndex + 1) : termChunkSize;
@@ -428,19 +449,14 @@ facet = function(config) {
 		});
 		
 		termIndex += chunkSize;
-		
-		
-		
-		$lis = $terms.children();
-		
-		let $lastLi = $lis.last();
-		
+		$lis = $terms.children();		
+		let $lastLi = $lis.last();		
 		termsBottom = ($lastLi.length > 0) ? ($lastLi.position().top + $lastLi.height()) : 0;
-	};
-	
+	};	
 
 	o.update = function(terms) {		
-		o.terms = terms;		
+		o.terms = terms;
+
 		$ui.toggleClass('all-selected', o.terms.length <= $selected.children().length);		
 		termIndex = 0;		
 		$terms.empty();		
@@ -450,6 +466,7 @@ facet = function(config) {
 	o.clear = function() {
 		$selected.empty();
 		$selected.removeClass('has-selected');
+		queryTerms = [];
 		o.query = '';
 	};
 	
@@ -468,17 +485,8 @@ facet = function(config) {
 		
 	});
 	
-	updateSelectedTerms = function() {
-		$selected.empty();
+	updateQueryAndListeners = function() {
 		queryTerms = [];
-		let $s = $lis.filter('.term-selected');
-		$selected.toggleClass('has-selected', $s.length > 0);
-		$s.each(function() {
-			let $li = $(this).clone(),
-				$span = $li.find('span');
-			$li.empty().append($span);
-			$selected.append($li);
-		});
 		$selectedLis = $selected.children();
 		
 		$selectedLis.each(function() {
@@ -499,17 +507,42 @@ facet = function(config) {
 			updateSelectedTerms();
 			
 		});
+	};
+	
+	updateSelectedTerms = function() {
+		$selected.empty();
+		
+		let $s = $lis.filter('.term-selected');
+		$selected.toggleClass('has-selected', $s.length > 0);
+		$s.each(function() {
+			let $li = $(this).clone(),
+				$span = $li.find('span');
+			$li.empty().append($span);
+			$selected.append($li);
+		});
+	
+		updateQueryAndListeners();
 		
 		pageQuery.start = 0;
 		totalRows = 0;
-		
+
 		doQuery();
 	};
 	
-	getTermKey = function(l, k) {
-		return kebab(l) + (k ? ('-' + kebab(k)) : '');
-	};
-	
+	if (o.initSelectedTerms && o.initSelectedTerms.length > 0) {
+		o.initSelectedTerms.forEach(t => {
+			let termKey = getTermKey(t.label, t.queryKey),
+				$selectedTermLi = $(
+					'<li class="term-selected" data-term-key="' + termKey + '"' + 
+					(t.queryKey ? (' data-query-key="' + t.queryKey + '"') : '') +
+					(t.queryValue ? (' data-query-value="' + t.queryValue + '"') : '') +
+					'><span>' + t.label + '</span></li>');
+			$selected.append($selectedTermLi);			
+		});
+		$selected.addClass('has-selected');	
+		updateQueryAndListeners();
+	}		
+
 	return o;
 	
 };
@@ -626,12 +659,7 @@ addRow = function(i, r) {
 	$rows.append($r);
 
 };
-	
-	
-	
-	
-	
-	
+
 $(function() {
 	
 	let $w = $(window),
@@ -680,11 +708,3 @@ $(function() {
 	doQuery(true);
 	
 });
-	
-	
-
-
-
-
-
-
