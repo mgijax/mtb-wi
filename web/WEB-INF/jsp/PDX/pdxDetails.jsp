@@ -960,14 +960,8 @@
                                             <div id="variantSummary"></div>
                                             <br>
                                        
-                                            <c:choose>
-                                                <c:when test="${applicationScope.publicDeployment == false}">
-                                                <input id="variantData" type="button" value="Download summary data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <input id="variantData" type ="hidden"/>
-                                                </c:otherwise>
-                                            </c:choose>
+                                             <input id="variantData" type="button" value="Download summary data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">
+                                               
                                         </td>
                                     </tr>
 
