@@ -207,7 +207,7 @@ public class PDXSearchResultsAction extends Action {
 
                 response.setContentType("text/csv");
                 response.setHeader("Content-disposition", "attachment; filename=PDXMice.csv");
-                response.getWriter().write(miceToCSV(mice, showGVC));
+                response.getWriter().write(miceToCSV(mice, showGVC, hideTMB.equals("false"), hideFusionGenes.equals("false")));
 
                 response.flushBuffer();
                 return null;
@@ -299,56 +299,58 @@ public class PDXSearchResultsAction extends Action {
         return new String[]{array, unavailable.toString()};
     }
 
-    private String miceToCSV(ArrayList<PDXMouse> mice, boolean showGVC) {
+    
+    // this should match the search results exactly need to include the other hide/show booleans
+    // TMB and whatnots
+    private String miceToCSV(ArrayList<PDXMouse> mice, boolean showGVC, boolean tmb, boolean fusionGenes) {
         StringBuilder buffer = new StringBuilder();
 
-        buffer.append("Model Status,");
+       
         buffer.append("Model ID,");
         buffer.append("Previous ID,");
         buffer.append("Tissue,");
-        buffer.append("Initial Diagnosis,");
-        buffer.append("Final Diagnosis,");
-        buffer.append("Location,");
-        buffer.append("Sample Type,");
+        buffer.append("Initial Diagnosis:Final Diagnosis,");
+        buffer.append("Tumor Site,");
         buffer.append("Tumor Type,");
-        buffer.append("Primary Site,");
-        buffer.append("Tumor Markers,");
-        buffer.append("Sex,");
-        buffer.append("Age,");
-        buffer.append("Strain,");
-        buffer.append("Associated Data");
-
-        // search included a gene or gene+variant so show these 3 fields
-        if (showGVC) {
+        if(tmb){
+            buffer.append("TMB,");
+        }
+        if(fusionGenes){
+            buffer.append("Fusion Genes,");
+        }
+         if (showGVC) {
             buffer.append(",Gene,");
             buffer.append("Variant,");
-            buffer.append("Consequence");
+           
         }
+        buffer.append("Sex,");
+        buffer.append("Age,");
+        buffer.append("Associated Data");
         buffer.append("\n");
+        
         for (PDXMouse mouse : mice) {
-
-            buffer.append(mouse.getModelStatus()).append(",");
             buffer.append(mouse.getModelID()).append(",");
             buffer.append(mouse.getPreviousID()).append(",");
             buffer.append(deComma(mouse.getTissue())).append(",");
-            buffer.append(deComma(mouse.getInitialDiagnosis())).append(",");
+            buffer.append(deComma(mouse.getInitialDiagnosis())).append(":");
             buffer.append(deComma(mouse.getClinicalDiagnosis())).append(",");
-            buffer.append(deComma(mouse.getLocation())).append(",");
-            buffer.append(deComma(mouse.getSampleType())).append(",");
-            buffer.append(deComma(mouse.getTumorType())).append(",");
             buffer.append(deComma(mouse.getPrimarySite())).append(",");
-            buffer.append(deComma(mouse.getTumorMarkers())).append(",");
-            buffer.append(mouse.getSex()).append(",");
-            buffer.append(mouse.getAge()).append(",");
-            // this will be htmlified with <sup> and <br>
-            buffer.append(mouse.getStrain()).append(",");
-            buffer.append(deComma(mouse.getAssocData()));
+            buffer.append(deComma(mouse.getTumorType())).append(",");
+            if(tmb){
+                buffer.append(deComma(mouse.getTMBStr())).append(",");
+            }
+            if(fusionGenes){
+                buffer.append(deComma(mouse.getFusionGenes())).append(",");
+            }
             if (showGVC) {
                 buffer.append(",");
                 buffer.append(deComma(mouse.getGene())).append(",");
                 buffer.append(deComma(mouse.getVariant())).append(",");
-                buffer.append(deComma(mouse.getConsequence()));
+               
             }
+            buffer.append(mouse.getSex()).append(",");
+            buffer.append(mouse.getAge()).append(",");
+            buffer.append(deComma(mouse.getAssocData()));
             buffer.append("\n");
         }
 
