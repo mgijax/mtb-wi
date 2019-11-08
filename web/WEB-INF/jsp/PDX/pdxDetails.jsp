@@ -48,12 +48,15 @@
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/columnHeader.js"></script>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="https://www.googleaintgonnafindit.com/jsapi"></script>
 
         <script language="javascript">
 
+        try{
             google.load("visualization", "1", {packages: ["corechart"]});
-
+        }catch(error){
+           //no google api in China
+        }
             Ext.ns('org.jax.mgi.mtb');
 
             var expressionData, expressionBarChart, cnvData, cnvBarChart;
@@ -141,22 +144,30 @@
 
             function doExpressionBarChart() {
 
-                expressionData = google.visualization.arrayToDataTable([${geneExpressionData}]);
+            try{
+                    expressionData = google.visualization.arrayToDataTable([${geneExpressionData}]);
 
-                if (expressionData.getNumberOfRows() > 0) {
-                    expressionData.sort(0);
-                    expressionBarChart = new google.visualization.BarChart(document.getElementById('geneExpressionChart'));
-                    expressionBarChart.draw(expressionData, expressionOptions);
+                    if (expressionData.getNumberOfRows() > 0) {
+                        expressionData.sort(0);
+                        expressionBarChart = new google.visualization.BarChart(document.getElementById('geneExpressionChart'));
+                        expressionBarChart.draw(expressionData, expressionOptions);
+                    }
+                }catch(err){
+                    //no google api in China
                 }
             }
 
             function doCnvBarChart() {
-                cnvData = google.visualization.arrayToDataTable([${geneCNVData}]);
+            try{
+                    cnvData = google.visualization.arrayToDataTable([${geneCNVData}]);
 
-                if (cnvData.getNumberOfRows() > 0) {
-                    cnvData.sort(0);
-                    cnvBarChart = new google.visualization.BarChart(document.getElementById('geneCNVChart'));
-                    cnvBarChart.draw(cnvData, cnvOptionsLinear);
+                    if (cnvData.getNumberOfRows() > 0) {
+                        cnvData.sort(0);
+                        cnvBarChart = new google.visualization.BarChart(document.getElementById('geneCNVChart'));
+                        cnvBarChart.draw(cnvData, cnvOptionsLinear);
+                    }
+                }catch(err){
+                    //no google api in China
                 }
             }
 
