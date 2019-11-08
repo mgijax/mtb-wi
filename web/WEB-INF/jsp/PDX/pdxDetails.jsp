@@ -47,7 +47,7 @@
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/columnHeader.js"></script>
 
-        <script type="text/javascript" src="https://www.googleaintgonnafindit.com/jsapi"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
         <script language="javascript">
 
