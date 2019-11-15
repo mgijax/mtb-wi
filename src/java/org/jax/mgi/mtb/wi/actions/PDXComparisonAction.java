@@ -91,7 +91,8 @@ public class PDXComparisonAction extends Action {
                 // this, right here, is a real peice of work...
                 mice = pdxMouseStore.findMice("", primarySites, diagnoses, no, no, "", no, false, false, no, "",false, null,null, null,null);
 
-                StringBuffer table = new StringBuffer("<table><tr><td></td>");
+               StringBuffer table = new StringBuffer("<table id=\"comparisonTable\" style=\"width:100%\" class=\"cell-border compact\"><thead><tr><th>&nbsp;</th>");
+                
 
                 if (mice.size() > 0) {
                     ArrayList<String> modelIDs = new ArrayList<String>();
@@ -110,6 +111,8 @@ public class PDXComparisonAction extends Action {
                         vals.add(mouse.getCurrentSmoker());
                         vals.add(mouse.getFormerSmoker());
                         vals.add(mouse.getTreatmentNaive());
+                        vals.add(mouse.getClinicalDiagnosis());
+                        vals.add(mouse.getPrimarySite());
                         clinicalPresenting.put(mouse.getModelID(), vals);
                     }
 
@@ -140,9 +143,19 @@ public class PDXComparisonAction extends Action {
 
                     for (String sample : samplesList) {
                         String[] modSamp = sample.split("-");
-                        table.append("<td style=\"vertical-align:bottom; text-align:center;\">").append("<a href=\"pdxDetails.do?modelID=").append(modSamp[0]);
-                        table.append("\"><img src=\"dynamicText?text=").append(sample).append("&amp;size=11\" alt=\"X\"></a></td>");
                         ArrayList<String> cp = clinicalPresenting.get(modSamp[0]);
+                        
+                        if(cp == null ){
+                            System.out.println(sample);
+                           
+                        }
+                        
+                        table.append("<th style=\"vertical-align:bottom; text-align:center; height:250px\">").append("<a href=\"pdxDetails.do?modelID=").append(modSamp[0]);
+                        table.append("\"><img src=\"dynamicText?text=").append(sample).append("&amp;size=11\" alt=\"X\" ");
+                        table.append(" onmouseover=\"return overlib('").append(cp.get(9)).append(" ").append(cp.get(10)).append("',CAPTION,'").append(sample).append("')\"");
+                        table.append(" onmouseout=\"return nd()\"");
+                        table.append("></a></th>");
+                        
 
                         if ("unspecified".equals(cp.get(1))) {
                             cp.set(1, "?");
@@ -163,8 +176,8 @@ public class PDXComparisonAction extends Action {
                         smoking.append("<td style=\"text-align:center;\">").append(cp.get(6).charAt(0)).append("/").append(cp.get(7).charAt(0)).append("</td>");
                         treatment.append("<td style=\"text-align:center;\">").append(cp.get(8).charAt(0)).append("</td>");
                     }
-                    table.append("</tr><tr><td></td><td style=\"text-align:center\" colspan=\"");
-                    table.append(samplesList.size()).append("\">Gene Expression</td></tr><td></td>");
+                    table.append("</tr></thead><tbody>");//.append("<td></td><td style=\"text-align:center\" colspan=\"");
+                    //table.append(samplesList.size()).append("\">Gene Expression</td></tr><td></td>");
 
                     for (String gene : genesList) {
                         expr.append("\n<tr><td>").append(gene).append("</td>");
@@ -182,13 +195,13 @@ public class PDXComparisonAction extends Action {
                                 vals.add(" ");
                             }
                             expr.append("<td style=\"background-color:").append(expLevelToColor(vals.get(0))).append("\">").append(formatExpressionValue(vals.get(0))).append("</td>");
-                            cnv.append("<td style=\"background-color:").append(ampDelToColor(vals.get(1))).append("\">&nbsp</td>");
+                            cnv.append("<td style=\"background-color:").append(ampDelToColor(vals.get(1))).append("\">&nbsp;</td>");
                             if (vals.get(2) != null && vals.get(2).trim().length() > 0) {
                                 mutation.append("<td style=\"background-color:#000000; text-decoration:none;\" onmouseover=\"return overlib('");
                                 mutation.append(vals.get(2)).append("', CAPTION, '" + gene + " mutation');\" onmouseout=\"return nd();\" name=\"" + gene + "\" mutation=\"" + vals.get(2) + "\">&nbsp;</td>");
                                 mutationCursor = "pointer";
                             } else {
-                                mutation.append("<td>&nbsp</td>");
+                                mutation.append("<td>&nbsp;</td>");
                             }
                         }
 
@@ -199,28 +212,28 @@ public class PDXComparisonAction extends Action {
                     }
 
                     table.append(expr);
-                    table.append("<tr><td></td><td style=\"text-align:center\" colspan=\"");
-                    table.append(samplesList.size()).append("\">Copy Number Variation</td></tr>");
+                   // table.append("<tr><td></td><td style=\"text-align:center\" colspan=\"");
+                   // table.append(samplesList.size()).append("\">Copy Number Variation</td></tr>");
                     table.append(cnv);
 
                     // don't include thie hide show feature if there are no mutations
                     if (mutation.indexOf("mutation") != -1) {
-                        table.append("<tr><td onmouseover=\"return overlib('Click to show / hide all mutation details.',CAPTION, 'Show mutation details');\" onmouseout=\"return nd();\" style=\"font-size:25px; cursor:pointer;\" id=\"showAll\" onclick=\"showAllMutations();\" >+</td>");
+                //        table.append("<tr><td onmouseover=\"return overlib('Click to show / hide all mutation details.',CAPTION, 'Show mutation details');\" onmouseout=\"return nd();\" style=\"font-size:25px; cursor:pointer;\" id=\"showAll\" onclick=\"showAllMutations();\" >+</td>");
                     } else {
                         table.append("<tr><td>&nbsp;</td>");
                     }
-                    table.append("<td style=\"text-align:center\" colspan=\"");
-                    table.append(samplesList.size()).append("\">Mutations</td></tr>");
-                    table.append(mutation);
+                    //table.append("<td style=\"text-align:center\" colspan=\"");
+                    //table.append(samplesList.size()).append("\">Mutations</td></tr>");
+             //       table.append(mutation);
 
-                    table.append("<tr><td></td><td style=\"text-align:center\" colspan=\"");
-                    table.append(samplesList.size()).append("\">Patient Data</td></tr>");
+                   // table.append("<tr><td></td><td style=\"text-align:center\" colspan=\"");
+                   // table.append(samplesList.size()).append("\">Patient Data</td></tr>");
 
                     table.append(age).append("</tr>");
                     //           table.append(race).append("</tr>");
                     table.append(sex).append("</tr>");
                     //            table.append(variant).append("</tr>");
-                    table.append(smoking).append("<td>Current/Former</td></tr>");
+                    //table.append(smoking).append("<td>Current/Former</td></tr>");
                     table.append(treatment).append("</tr>");
 
                 } else {
@@ -228,7 +241,7 @@ public class PDXComparisonAction extends Action {
                     table.append("<td>No PDX models match the search criteria</td></tr>");
                 }
 
-                table.append("</table>");
+                table.append("</tbody></table>");
 
                 request.setAttribute("table", table.toString());
                 request.setAttribute("gradient", this.htmlGradient(MIN_RANK_Z, MAX_RANK_Z));
@@ -242,8 +255,10 @@ public class PDXComparisonAction extends Action {
     }
 
     // hard coded min and max expected values for the rankZ expression
+    // original plan was to have these be dynamic thus some extranious code
     private static final int MIN_RANK_Z = -5;
     private static final int MAX_RANK_Z = 5;
+    
     private static final int HUE_LIMIT = 150; // 255 is max but beyond 150 it gets hard to tell them apart
     private static final String DELETION = "#0000FF";
     private static final String AMPLIFICATION = "#FFA500";
@@ -295,7 +310,7 @@ public class PDXComparisonAction extends Action {
             }
 
         }
-        buf.append("<td style=\"text-align:center;background-color:#FFFFFF\">No Value</td>\n");
+        buf.append("<td style=\"text-align:center;background-color:#FFFFFF; border: 1px solid black\">No Value</td>\n");
         buf.append("</tr>\n</table>");
 
         return buf.toString();
@@ -336,6 +351,11 @@ public class PDXComparisonAction extends Action {
             if (adjValue > 0) {
                 color = "#" + Integer.toHexString(255 - adjValue) + "0000";
             }
+            
+            if (adjValue == 0 && level != 0){
+                color = NORMAL;
+            }
+            
         } catch (NumberFormatException nfe) {
             // color will be white #FFFFFF
         }

@@ -1176,10 +1176,9 @@ public class PDXMouseStore {
 
         query.append(DAOUtils.collectionToString(genes, ",", ""));
 
-        // maybe do it for all models then only pick the selected ones
-        if (!models.isEmpty() && models.size() < 100) {
-            query.append("&model=").append(DAOUtils.collectionToString(models, ",", ""));
-        }
+       // this seems ok with 400 or so models but may be problematic if that grows a lot?
+        query.append("&model=").append(DAOUtils.collectionToString(models, ",", ""));
+        
         DecimalFormat df = new DecimalFormat("###.##");
         try {
 
@@ -1215,35 +1214,42 @@ public class PDXMouseStore {
                 String gene = data.getString("gene_symbol");
                 String sample = data.getString("sample_name");
                 String passage = getField(data, "passage_num");
+                String platform = getField(data,"platform");
 
                 // this will fail for baylor and dfci models wich should be used
                 // to exclude them from the results.
-                String rankZ = df.format(data.getDouble("z_score_percentile_rank"));
-                String ampDel = null;
-                try {
-                    ampDel = ampDelMap.get(gene).get(sample);
-                } catch (NullPointerException npe) {
-                    // its normal or ?unknown?
-                }
-                if (ampDel == null) {
-                    ampDel = "Unknown";
-                }
+                try{
+                    String rankZ = df.format(data.getDouble("z_score_percentile_rank"));
+                    
+                    String ampDel = null;
+                    try {
+                        ampDel = ampDelMap.get(gene).get(sample);
+                    } catch (NullPointerException npe) {
+                        // its normal or ?unknown?
+                    }
+                    if (ampDel == null) {
+                        ampDel = "Unknown";
+                    }
 
-                if (results.containsKey(gene)) {
-                    HashMap<String, ArrayList<String>> samples = results.get(gene);
-                    ArrayList<String> list = new ArrayList<>();
-                    list.add(rankZ);
-                    list.add(ampDel);
-                    list.add("mutation");
-                    samples.put(model + "-" + sample + " " + passage, list);
-                } else {
-                    HashMap<String, ArrayList<String>> samples = new HashMap<>();
-                    ArrayList<String> list = new ArrayList<>();
-                    list.add(rankZ);
-                    list.add(ampDel);
-                    list.add("mutation");
-                    samples.put(model + "-" + sample + " " + passage, list);
-                    results.put(gene, samples);
+                    if (results.containsKey(gene)) {
+                        HashMap<String, ArrayList<String>> samples = results.get(gene);
+                        ArrayList<String> list = new ArrayList<>();
+                        list.add(rankZ);
+                        list.add(ampDel);
+                        list.add("mutation");
+                        samples.put(model + "-" + sample + " " + passage, list);
+                    } else {
+                        HashMap<String, ArrayList<String>> samples = new HashMap<>();
+                        ArrayList<String> list = new ArrayList<>();
+                        list.add(rankZ);
+                        list.add(ampDel);
+                        list.add("mutation");
+                        samples.put(model + "-" + sample + " " + passage, list);
+                        results.put(gene, samples);
+                    }
+                }catch(Exception e){
+                    // ok skipping Baylor or DFCI model
+                   System.out.println("skipping model "+model+" with platform "+platform);
                 }
 
             }
@@ -1740,62 +1746,66 @@ public class PDXMouseStore {
 
         cnvPlots.clear();
 
-        String path = WIConstants.getInstance().getCNVPlotsPath();
-        File cnvFile = new File(path);
-        for (File file : cnvFile.listFiles()) {
-            try {
-                String name = file.getName();
+        try{
+            String path = WIConstants.getInstance().getCNVPlotsPath();
+            File cnvFile = new File(path);
+            for (File file : cnvFile.listFiles()) {
+                try {
+                    String name = file.getName();
 
-                String model = file.getName().split("_")[0];
-                String sample = file.getName().split("_")[1];
-                String passage = file.getName().split("_")[2];
-                // String passage = getSamplePassage(model,sample);
+                    String model = file.getName().split("_")[0];
+                    String sample = file.getName().split("_")[1];
+                    String passage = file.getName().split("_")[2];
+                    // String passage = getSamplePassage(model,sample);
 
-                StringBuilder label = new StringBuilder();
-                label.append("Model:").append(model);
-                label.append(" Sample:").append(sample);
-                if (passage.length() > 1) {
-                    label.append(" Passage:").append(passage);
-                }
-                
-                // no patient plots for public
-                if (WIConstants.getInstance().getPublicDeployment() && "PT".equals(passage.toUpperCase())) continue;
-                
-                ArrayList<String> details = new ArrayList<>();
-                details.add(label.toString());
-                details.add(name);
+                    StringBuilder label = new StringBuilder();
+                    label.append("Model:").append(model);
+                    label.append(" Sample:").append(sample);
+                    if (passage.length() > 1) {
+                        label.append(" Passage:").append(passage);
+                    }
 
-           
-                if (cnvPlots.containsKey(model)) {
-                    ArrayList<ArrayList<String>> files = cnvPlots.get(model);
-                    if ("PT".equals(passage)) {
-                        files.add(0, details);
-                    } else {
-                        String lastDetails = files.get(files.size() - 1).get(0);
-                        String lastPassage = lastDetails.substring(lastDetails.length() - 3);
-                        if (lastPassage.compareTo(passage) < 0) {
-                            files.add(files.size() - 1, details);
+                    // no patient plots for public
+                    if (WIConstants.getInstance().getPublicDeployment() && "PT".equals(passage.toUpperCase())) continue;
+
+                    ArrayList<String> details = new ArrayList<>();
+                    details.add(label.toString());
+                    details.add(name);
+
+
+                    if (cnvPlots.containsKey(model)) {
+                        ArrayList<ArrayList<String>> files = cnvPlots.get(model);
+                        if ("PT".equals(passage)) {
+                            files.add(0, details);
                         } else {
-                            files.add(details);
+                            String lastDetails = files.get(files.size() - 1).get(0);
+                            String lastPassage = lastDetails.substring(lastDetails.length() - 3);
+                            if (lastPassage.compareTo(passage) < 0) {
+                                files.add(files.size() - 1, details);
+                            } else {
+                                files.add(details);
+                            }
+
                         }
+                    } else {
+                        ArrayList<ArrayList<String>> files = new ArrayList<>();
+                        files.add(details);
+                        cnvPlots.put(model, files);
 
                     }
-                } else {
-                    ArrayList<ArrayList<String>> files = new ArrayList<>();
-                    files.add(details);
-                    cnvPlots.put(model, files);
-
+                } catch (Exception e) {
+                    log.error("unable to parse cnvPlot file" + file.getName());
                 }
-            } catch (Exception e) {
-                log.error("unable to parse cnvPlot file" + file.getName());
             }
-        }
 
-        // sort PT first then P0,P1,...
-        Compy compy = new Compy();
-        for (ArrayList<ArrayList<String>> s : cnvPlots.values()) {
-            Collections.sort(s, compy);
-           
+            // sort PT first then P0,P1,...
+            Compy compy = new Compy();
+            for (ArrayList<ArrayList<String>> s : cnvPlots.values()) {
+                Collections.sort(s, compy);
+
+            }
+        }catch(Exception e){
+            log.error("Unable to load cnv plots",e);
         }
 
     }

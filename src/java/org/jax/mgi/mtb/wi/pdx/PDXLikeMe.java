@@ -29,30 +29,34 @@ import org.jax.mgi.mtb.wi.WIConstants;
 
 /**
  * Parse the PDX Like Me queries, get the results, and convert to HTML or CSV
+ *
  * @author sbn
  */
 public class PDXLikeMe {
-    
+
     private static final Logger log
             = Logger.getLogger(PDXLikeMe.class.getName());
 
-    private static final  String baseURL = WIConstants.getInstance().getPDXWebservice();
+    private static final String baseURL = WIConstants.getInstance().getPDXWebservice();
     //static final String baseURL = "http://pdxdata.jax.org/api/";
     private static final String VARIANTS = baseURL + "variants";
 
     private static final String CNV = baseURL + "cnv_gene";
-    
-    private static final String EXP_MIN = baseURL+"expression?keepnulls=yes&gene_symbol=@&min_rankz=";
-    private static final String EXP_MAX = baseURL+"expression?keepnulls=yes&gene_symbol=@&max_rankz=";
-    
-    
+
+    private static final String EXP_MIN = baseURL + "expression?keepnulls=yes&gene_symbol=@&min_rankz=";
+    private static final String EXP_MAX = baseURL + "expression?keepnulls=yes&gene_symbol=@&max_rankz=";
+
     //ckb_protein_effect for LOF/GOF/UNK/NONE
-    private static final String CKB_EFFECT = VARIANTS+"?ckb_class=b&gene_symbol=";
-    
+    private static final String CKB_EFFECT = VARIANTS + "?ckb_class=b&gene_symbol=";
+
     private static final String PDX_DETAILS_LINK = "pdxDetails.do?modelID=";
 
     private static double AMP = 0.5;
     private static double DEL = -0.5;
+
+    public static final String FORMAT_HTML = "HTML";
+    public static final String FORMAT_CSV = "CSV";
+    public static final String FORMAT_VIS = "VIS";
 
     static PDXDAO pdxDAO = PDXDAO.getInstance();
 
@@ -62,16 +66,16 @@ public class PDXLikeMe {
     private HashMap<String, String> expMap = new HashMap<>();
     private HashMap<String, String> lrpMap = new HashMap<>();
 
-    boolean html = true;
+    String format;
     boolean includeActionable = false;
-    
+
     boolean showLRP = false;
     boolean showEXP = false;
 
-    private int caseCount =1;
-    
+    private int caseCount = 1;
+
     private DecimalFormat df = new DecimalFormat("###.##");
-    
+
     public static void main(String[] args) {
 
         try {
@@ -80,24 +84,26 @@ public class PDXLikeMe {
             Scanner s = new Scanner(buf);
             s.useDelimiter("\n");
             PDXLikeMe pgc = new PDXLikeMe();
-            System.out.println(pgc.parseCases(s, true, false, true, true));
+            System.out.println(pgc.parseCases(s, FORMAT_HTML, false, true, true));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-    
-    public PDXLikeMe(){
+
+    public PDXLikeMe() {
         this.getModelDetails();
         this.ctpGenes = new PDXMouseStore().getCTPGenes();
-        
+
     }
 
-    public String parseCases(Scanner s, boolean asHTML, boolean includeActionable, boolean showLRP, boolean showEXP) {
-        this.html = asHTML;
+    public String parseCases(Scanner s, String format, boolean includeActionable, boolean showLRP, boolean showEXP) {
+        
         this.includeActionable = includeActionable;
         this.showLRP = showLRP;
         this.showEXP = showEXP;
+        
+        this.format = format;
 
         StringBuilder result = new StringBuilder();
 
@@ -112,7 +118,7 @@ public class PDXLikeMe {
                     if (line.toUpperCase().contains("CASE")) {
                         caseNo = line.trim();
                         caseOrder.add(caseNo);
-                        
+
                         line = s.next();
                         ArrayList<String> list = new ArrayList<>();
                         while (line.trim().length() > 0) {
@@ -174,12 +180,17 @@ public class PDXLikeMe {
                 return caseNo + "\n" + gene + " is in the wrong format";
             }
         }
-     //   Collections.sort(u);
-     //   Collections.sort(k);
+        //   Collections.sort(u);
+        //   Collections.sort(k);
 
         return mouseMagic(caseNo, k, u);
 
     }
+    
+    /*
+    Should? create 1 data object and then have 2 front end ways of displaying
+    and one function (here) that converts the object to CSV/Excell format
+    */
 
     private String mouseMagic(String caseNo, ArrayList<String> k, ArrayList<String> u) {
         HashMap<String, ModelRow> modelsMap = new HashMap<>();
@@ -192,7 +203,6 @@ public class PDXLikeMe {
         ArrayList<String> mice = null;
         String[] vals = null;
 
-        
         for (String gene : ku) {
 
             vals = gene.split(" ");
@@ -205,7 +215,7 @@ public class PDXLikeMe {
             }
             for (String id : mice) {
                 if (modelsMap.containsKey(id)) {
-                    if(!modelsMap.get(id).genes.contains(vals[0] + vals[1])){
+                    if (!modelsMap.get(id).genes.contains(vals[0] + vals[1])) {
                         modelsMap.get(id).genes.add(vals[0] + vals[1]);
                     }
                 } else {
@@ -229,8 +239,8 @@ public class PDXLikeMe {
             }
 
         }
-        
-        if (html) {
+
+        if (format.equals(FORMAT_HTML)) {
             table.append("<b>").append(caseNo).append("</b><table width=\"100%\" id=\"results").append(caseCount++).append("\" border=\"1\" style=\"border-collapse:collapse\"><thead>");
 
             if (u.size() > 0) {
@@ -240,16 +250,15 @@ public class PDXLikeMe {
             table.append("<tr><th>Model ID</th>");
             for (String kGene : k) {
                 table.append("<th style=\"text-align:center;padding:5px\">").append(kGene);
-                if(!ctpGenes.contains(kGene.toUpperCase().split(" ")[0])){
+                if (!ctpGenes.contains(kGene.toUpperCase().split(" ")[0])) {
                     table.append("<br>Not in CTP");
                 }
                 table.append("</th>");
-                
-                
+
             }
             for (String uGene : u) {
                 table.append("<th style=\"text-align:center;padding:5px\">").append(uGene);
-                if(!ctpGenes.contains(uGene.toUpperCase().split(" ")[0])){
+                if (!ctpGenes.contains(uGene.toUpperCase().split(" ")[0])) {
                     table.append("<br>Not in CTP");
                 }
                 table.append("</th>");
@@ -257,22 +266,28 @@ public class PDXLikeMe {
             table.append("</thead><tbody>");
 
         } else {
-
+            // for both csv and vis formatting
             table.append("Case,Model, PDX Diagnosis:Tissue,");
-            String thing = "",  gene="";
+            String thing = "", gene = "";
             for (String kGene : k) {
-                
+
                 gene = kGene.split(" ")[0].toUpperCase();
                 thing = kGene.split(" ")[1].toUpperCase();
+
+                table.append(kGene);
                 
-                table.append(kGene).append(",");
+                if (!ctpGenes.contains(kGene.toUpperCase().split(" ")[0])) {
+                    table.append("\nNot in CTP");
+                }
                 
-                if(showLRP && ( thing.contains("AMP") ||  
-                            thing.contains("DEL") || 
-                            thing.contains("NOCNV"))){
+                table.append(",");
+
+                if (showLRP && (thing.contains("AMP")
+                        || thing.contains("DEL")
+                        || thing.contains("NOCNV"))) {
                     table.append(gene + " Log ratio ploidy,");
                 }
-                if(showEXP && (thing.contains(">") || thing.contains("<"))){
+                if (showEXP && (thing.contains(">") || thing.contains("<"))) {
                     table.append(gene + " Z score percentile rank,");
                 }
 
@@ -280,24 +295,28 @@ public class PDXLikeMe {
             for (String uGene : u) {
                 gene = uGene.split(" ")[0].toUpperCase();
                 thing = uGene.split(" ")[1].toUpperCase();
+
+                table.append(uGene);
                 
-                table.append(uGene).append(",");
-                
-                if(showLRP && ( thing.contains("AMP") ||  
-                            thing.contains("DEL") || 
-                            thing.contains("NOCNV"))){
+                if (!ctpGenes.contains(uGene.toUpperCase().split(" ")[0])) {
+                    table.append("\nNot in CTP");
+                }        
+                        
+                table.append(",");
+
+                if (showLRP && (thing.contains("AMP")
+                        || thing.contains("DEL")
+                        || thing.contains("NOCNV"))) {
                     table.append(gene + " Log ratio ploidy,");
                 }
-                if(showEXP && (thing.contains(">") || thing.contains("<"))){
+                if (showEXP && (thing.contains(">") || thing.contains("<"))) {
                     table.append(gene + " Z score percentile rank,");
                 }
-                
+
             }
             table.append("\n");
 
         }
-
-        
 
         ArrayList<ModelRow> modelsList = new ArrayList<>();
         for (ModelRow mr : modelsMap.values()) {
@@ -305,11 +324,11 @@ public class PDXLikeMe {
         }
         Collections.sort(modelsList, new MRSort());
 
-        if (html) {
+        if (format.equals(FORMAT_HTML)) {
             table.append("\n<tr>");
             for (ModelRow mr : modelsList) {
                 if (detailsMap.containsKey(mr.id)) {
-                    table.append("<td><a href=\""+PDX_DETAILS_LINK);
+                    table.append("<td><a href=\"" + PDX_DETAILS_LINK);
                     table.append(mr.id).append("\">").append(mr.id);
                     table.append("</a><br>").append(detailsMap.get(mr.id)).append("</td>");
                     for (String gene : ku) {
@@ -320,19 +339,19 @@ public class PDXLikeMe {
                         if (mr.genes.contains(vals[0] + vals[1])) {
                             table.append("<b>X</b>");
                         }
-                        
-                        String key = (mr.id+vals[0]+vals[1]).toUpperCase();
-                        if(showLRP){
-                            if(lrpMap.containsKey(key)){
-                                table.append("<br>Log ratio ploidy = "+lrpMap.get(key));
+
+                        String key = (mr.id + vals[0] + vals[1]).toUpperCase();
+                        if (showLRP) {
+                            if (lrpMap.containsKey(key)) {
+                                table.append("<br>Log ratio ploidy = " + lrpMap.get(key));
                             }
                         }
-                        if(showEXP){
-                            if(expMap.containsKey(key)){
-                                table.append("<br>Z score percentile rank = "+expMap.get(key));
+                        if (showEXP) {
+                            if (expMap.containsKey(key)) {
+                                table.append("<br>Z score percentile rank = " + expMap.get(key));
                             }
                         }
-                        
+
                         if (mr.actionable.containsKey(vals[0])) {
                             String s = "";
                             if (mr.actionable.get(vals[0]).size() > 1) {
@@ -345,76 +364,181 @@ public class PDXLikeMe {
                         }
                         table.append("</td>");
                     }
-                   
+
                 }
                 table.append("</tr>\n");
 
             }
             table.append("</tbody></table><br><br>");
-        } else {
+
+        } else if (format.equals(FORMAT_CSV)) {
             for (ModelRow mr : modelsList) {
                 if (detailsMap.containsKey(mr.id)) {
                     table.append(caseNo).append(",");
                     table.append("\"=HYPERLINK(\"\"http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID=");
                     table.append(mr.id).append("\"\",\"\"").append(mr.id).append("\"\")\",");
-                    table.append("\""+detailsMap.get(mr.id)).append("\",");
+                    table.append("\"" + detailsMap.get(mr.id)).append("\",");
                     for (String gene : ku) {
                         vals = gene.split(" ");
                         if (mr.genes.contains(vals[0] + vals[1])) {
                             table.append("X ");
                         }
-                        
+
                         if (mr.actionable.containsKey(vals[0])) {
                             String s = " ";
                             if (mr.actionable.get(vals[0]).size() > 1) {
                                 s = "s ";
                             }
-                            table.append(" Clinically relevant " + vals[0] + " variant"+s);
+                            table.append(" Clinically relevant " + vals[0] + " variant" + s);
                             for (String variant : mr.actionable.get(vals[0]).keySet()) {
-                                table.append(variant.replace("<br>", " ").replace(",","") + " ");
+                                table.append(variant.replace("<br>", " ").replace(",", "") + " ");
                             }
                         }
-                        
+
                         // figure out how to put these in their own columns for sorting etc.
-                        
-                        String key = (mr.id+vals[0]+vals[1]).toUpperCase();
-                        if(showLRP &&  (vals[1].toUpperCase().contains("AMP") ||  
-                            vals[1].toUpperCase().contains("DEL") || 
-                            vals[1].toUpperCase().contains("NOCNV"))){
+                        String key = (mr.id + vals[0] + vals[1]).toUpperCase();
+                        if (showLRP && (vals[1].toUpperCase().contains("AMP")
+                                || vals[1].toUpperCase().contains("DEL")
+                                || vals[1].toUpperCase().contains("NOCNV"))) {
                             table.append(",");
-                            if(lrpMap.containsKey(key)){
-                                 table.append(lrpMap.get(key));
+                            if (lrpMap.containsKey(key)) {
+                                table.append(lrpMap.get(key));
                             }
-                                
+
                         }
-                        if(showEXP  && (vals[1].contains(">") ||  
-                            vals[1].contains("<"))){
+                        if (showEXP && (vals[1].contains(">")
+                                || vals[1].contains("<"))) {
                             table.append(",");
-                            if(expMap.containsKey(key)){
-                                 table.append(expMap.get(key));
+                            if (expMap.containsKey(key)) {
+                                table.append(expMap.get(key));
                             }
-                            
+
                         }
-                        
+
                         table.append(",");
                     }
-                    
+
                     table.append("\n");
                 }
 
             }
+        } else if (format.equals(FORMAT_VIS)) {
+          
+           // need to switch axis and show models as columns
+           // then convert to HTML ???? really???
+           //    y x 
+           String[][] box = new String[modelsList.size()+1][ku.size()+2];
+           
+           // create the headers
+           box[0][0] = "model";
+           box[0][1] = "diagnosis";
+           int geneIndex = 2;
+           for(String gene : ku){
+            box[0][geneIndex++]=gene;
+           }
+           
+           int y = 1;
+            
+            //put the values into a 2d array
+            for (ModelRow mr : modelsList) {
+                int x = 0;
+                if (detailsMap.containsKey(mr.id)) {
+                    
+                    box[y][x++] = mr.id;
+                    box[y][x++] = detailsMap.get(mr.id);
+                    for (String gene : ku) {
+                        vals = gene.split(" ");
+                        if (mr.genes.contains(vals[0] + vals[1])) {
+                            box[y][x]=("X ");
+                        }
+
+                        if (mr.actionable.containsKey(vals[0])) {
+                            String s = " ";
+                            if (mr.actionable.get(vals[0]).size() > 1) {
+                                s = "s ";
+                            }
+                            box[y][x]+=(" Clinically relevant " + vals[0] + " variant" + s);
+                            for (String variant : mr.actionable.get(vals[0]).keySet()) {
+                                box[y][x] += " "+ (variant);
+                            }
+                        }
+
+                        
+                        String key = (mr.id + vals[0] + vals[1]).toUpperCase();
+                        if (showLRP && (vals[1].toUpperCase().contains("AMP")
+                                || vals[1].toUpperCase().contains("DEL")
+                                || vals[1].toUpperCase().contains("NOCNV"))) {
+                            
+                            if (lrpMap.containsKey(key)) {
+                                box[y][x] += " " +lrpMap.get(key);
+                            }
+
+                        }
+                        if (showEXP && (vals[1].contains(">")
+                                || vals[1].contains("<"))) {
+                            
+                            if (expMap.containsKey(key)) {
+                                box[y][x]+=" " + expMap.get(key);
+                            }
+
+                        }
+
+                        x++;
+                    }
+
+                    y++;
+                }
+
+            }
+            
+
+            StringBuilder html = new StringBuilder();
+           
+             html.append("<b>").append(caseNo).append("</b><table id=\"comparisonTable\" style=\"width:100%\" class=\"cell-border compact\" ><thead>");
+
+           
+            for( y =1; y < modelsList.size()+1;y++){
+                //    html.append("<th>").append(box[y][0]).append("</th>");
+                
+                   String model = box[y][0];
+                   String diagnosis = box[y][1];
+                    
+                   html.append("<th style=\"vertical-align:bottom; text-align:center; height:250px\">").append("<a href=\"pdxDetails.do?modelID=").append(model);
+                        html.append("\"><img src=\"dynamicText?text=").append(model).append("&amp;size=11\" alt=\"X\" ");
+                        html.append(" onmouseover=\"return overlib('").append(diagnosis).append("',CAPTION,'").append(model).append("')\"");
+                        html.append(" onmouseout=\"return nd()\"");
+                        html.append("></a></th>");
+                    
+                }
+            html.append("</thead><tbody>");
+            for(int x =2; x < ku.size()+2; x++){
+                html.append("<tr>");
+                for( y =0; y < modelsList.size()+1;y++){
+                    if(box[y][x] == null) box[y][x] = "";
+                    if(box[y][x].contains("X") && y>0){
+                           html.append("<td style=\"background-color:green\">").append(box[y][x]).append("</td>");
+                    }else{
+                        html.append("<td>").append(box[y][x]).append("</td>");
+                    }
+                }
+                html.append("</tr>\n");
+            }
+            html.append("</tbody></table>");
+            System.out.println(html.toString());
+            table = html;
         }
+            
         return table.toString();
     }
 
     private ArrayList<String> getMice(String gene, String thing) {
         thing = thing.toLowerCase();
-        
-        String geneAndThing = gene+thing;
+
+        String geneAndThing = gene + thing;
 
         // if we have done this for another case we are done
         if (allMice.containsKey(geneAndThing)) {
-          
+
             return allMice.get(geneAndThing);
         }
 
@@ -426,56 +550,55 @@ public class PDXLikeMe {
             ArrayList<String> mice = getDeletedModels(gene, geneAndThing);
             allMice.put(geneAndThing, mice);
             return mice;
-            
-        }else if (thing.startsWith("nocnv")) {
+
+        } else if (thing.startsWith("nocnv")) {
             ArrayList<String> mice = getNoCNVModels(gene);
             allMice.put(geneAndThing, mice);
             return mice;
-           
-        } else if(thing.startsWith("lof")){
-            ArrayList<String> mice = getByProteinEffect(gene,"loss");
+
+        } else if (thing.startsWith("lof")) {
+            ArrayList<String> mice = getByProteinEffect(gene, "loss");
             allMice.put(geneAndThing, mice);
             return mice;
-            
-         } else if(thing.startsWith("gof")){
-            ArrayList<String> mice = getByProteinEffect(gene,"gain");
+
+        } else if (thing.startsWith("gof")) {
+            ArrayList<String> mice = getByProteinEffect(gene, "gain");
             allMice.put(geneAndThing, mice);
             return mice;
-            
-          } else if(thing.startsWith("unk")){
-            ArrayList<String> mice = getByProteinEffect(gene,"unknown");
+
+        } else if (thing.startsWith("unk")) {
+            ArrayList<String> mice = getByProteinEffect(gene, "unknown");
             allMice.put(geneAndThing, mice);
             return mice;
-            
-          } else if(thing.startsWith("none")){
-            ArrayList<String> mice = getByProteinEffect(gene,"no effect");
+
+        } else if (thing.startsWith("none")) {
+            ArrayList<String> mice = getByProteinEffect(gene, "no effect");
             allMice.put(geneAndThing, mice);
             return mice;
-            
+
         } else if (thing.trim().startsWith("mut")) {
             thing = thing.replace("mut", "").replace("=", "");
             ArrayList<String> mice = getMiceByGeneVariant(gene, thing);
             allMice.put(geneAndThing, mice);
             return mice;
-        } else if (thing.trim().startsWith("exp")){
-            if(thing.contains("<")){
+        } else if (thing.trim().startsWith("exp")) {
+            if (thing.contains("<")) {
                 thing = thing.substring(4);
-                String url = EXP_MAX.replace("@", gene)+thing;
-                ArrayList<String> mice = getExpressionModels(url,geneAndThing);
-                allMice.put(geneAndThing,mice);
+                String url = EXP_MAX.replace("@", gene) + thing;
+                ArrayList<String> mice = getExpressionModels(url, geneAndThing);
+                allMice.put(geneAndThing, mice);
                 return mice;
-            }else if(thing.contains(">")){
+            } else if (thing.contains(">")) {
                 thing = thing.substring(4);
-                String url = EXP_MIN.replace("@", gene)+thing;
-                ArrayList<String> mice = getExpressionModels(url,geneAndThing);
-                allMice.put(geneAndThing,mice);
+                String url = EXP_MIN.replace("@", gene) + thing;
+                ArrayList<String> mice = getExpressionModels(url, geneAndThing);
+                allMice.put(geneAndThing, mice);
                 return mice;
             }
-        
+
         }
         // there is a syntax problem
         return null;
-        
 
     }
 
@@ -491,23 +614,23 @@ public class PDXLikeMe {
         try {
 
             JSONObject job = new JSONObject(getJSON(VARIANTS + params.toString(), ""));
-        
+
             JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
                 job = jarray.getJSONObject(i);
 
                 String id = job.getString("model_name");
                 String variant = job.getString("amino_acid_change");
-                try{
-                    variant = variant+"<br>Effect: "+job.getString("ckb_protein_effect");
-                }catch (Exception e){}
-                
-                try{
-                    variant = variant+"<br>Treatment Approach: "+job.getString("ckb_potential_treat_approach");//.replaceAll(",", ", "); this has funky layout effects
-                }catch (Exception e){}
-                
-           
-                
+                try {
+                    variant = variant + "<br>Effect: " + job.getString("ckb_protein_effect");
+                } catch (Exception e) {
+                }
+
+                try {
+                    variant = variant + "<br>Treatment Approach: " + job.getString("ckb_potential_treat_approach");//.replaceAll(",", ", "); this has funky layout effects
+                } catch (Exception e) {
+                }
+
                 if (actionable.containsKey(id)) {
                     actionable.get(id).add(variant);
                 } else {
@@ -567,15 +690,15 @@ public class PDXLikeMe {
             JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
                 job = jarray.getJSONObject(i);
-                String lrp =  df.format(job.getDouble("logratio_ploidy"));
+                String lrp = df.format(job.getDouble("logratio_ploidy"));
                 String id = job.getString("model_name");
 
                 mice.add(id);
-                String key = (id+geneAndThing).toUpperCase();
-                lrpMap.put(key,lrp);
+                String key = (id + geneAndThing).toUpperCase();
+                lrpMap.put(key, lrp);
             }
         } catch (Exception e) {
-           log.error(e);
+            log.error(e);
         }
         return mice;
     }
@@ -596,8 +719,8 @@ public class PDXLikeMe {
                 String id = job.getString("model_name");
 
                 mice.add(id);
-                String key = (id+geneAndThing).toUpperCase();
-                lrpMap.put(key,lrp);
+                String key = (id + geneAndThing).toUpperCase();
+                lrpMap.put(key, lrp);
 
             }
         } catch (Exception e) {
@@ -606,46 +729,40 @@ public class PDXLikeMe {
         return mice;
 
     }
-    
-    
-    
-     // models where LRP is "normal" less than AMP and more that DEL
-     private ArrayList<String> getNoCNVModels(String gene) {
+
+    // models where LRP is "normal" less than AMP and more that DEL
+    private ArrayList<String> getNoCNVModels(String gene) {
 
         ArrayList<String> mice = new ArrayList<>();
-        
+
         StringBuilder params = new StringBuilder();
         params.append("?max_lr_ploidy=" + AMP + "&gene_symbol=").append(gene);
 
-        
         try {
 
             JSONObject job = new JSONObject(getJSON(CNV + params.toString(), ""));
             JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
-                
+
                 job = jarray.getJSONObject(i);
                 Double lrp = job.getDouble("logratio_ploidy");
                 String id = job.getString("model_name");
-                if(lrp > DEL){
+                if (lrp > DEL) {
                     mice.add(id);
-                    
+
                 }
-                String key = (id+gene+"NOCNV").toUpperCase();
-                lrpMap.put(key,df.format(lrp));
-                
+                String key = (id + gene + "NOCNV").toUpperCase();
+                lrpMap.put(key, df.format(lrp));
 
             }
         } catch (Exception e) {
-           log.error(e);
+            log.error(e);
         }
-       
-        
+
         return mice;
 
     }
-    
-    
+
     private ArrayList<String> getExpressionModels(String url, String geneAndThing) {
 
         ArrayList<String> mice = new ArrayList<>();
@@ -661,45 +778,43 @@ public class PDXLikeMe {
 
                 mice.add(id);
 
-                String key = (id+geneAndThing).toUpperCase();
-                expMap.put(key,zpr);
+                String key = (id + geneAndThing).toUpperCase();
+                expMap.put(key, zpr);
             }
         } catch (Exception e) {
-            log.error(job,e);
+            log.error(job, e);
         }
         return mice;
 
     }
-    
-    private ArrayList<String> getByProteinEffect(String gene, String effectWord){
-        
+
+    private ArrayList<String> getByProteinEffect(String gene, String effectWord) {
+
         ArrayList<String> mice = new ArrayList<>();
         JSONObject job = null;
         String effect = null;
         try {
 
-            job = new JSONObject(getJSON(CKB_EFFECT+gene, ""));
+            job = new JSONObject(getJSON(CKB_EFFECT + gene, ""));
             JSONArray jarray = job.getJSONArray("data");
             for (int i = 0; i < jarray.length(); i++) {
                 job = jarray.getJSONObject(i);
                 effect = null;
-                if(job.has("ckb_protein_effect")){
+                if (job.has("ckb_protein_effect")) {
                     effect = job.getString("ckb_protein_effect");
                     String id = job.getString("model_name");
 
-                    if(effect != null && effect.toLowerCase().contains(effectWord)){
+                    if (effect != null && effect.toLowerCase().contains(effectWord)) {
                         mice.add(id);
                     }
                 }
-                
 
-                
             }
         } catch (Exception e) {
-           log.error(job,e);
+            log.error(job, e);
         }
         return mice;
-        
+
     }
 
     private void getModelDetails() {
@@ -719,16 +834,15 @@ public class PDXLikeMe {
 
                 }
             } catch (Exception e) {
-               log.error("Error getting pdx like me model details",e);
+                log.error("Error getting pdx like me model details", e);
             }
         }
     }
-    
-    
+
     // it is possible we want unfiltered results internally
     // but would still need to excluded PT samples. so we would use this
     // but then have to exclude PT samples sample by sample in the internal results
-     private String getFilterStr() {
+    private String getFilterStr() {
         String filterStr = "filter=no";
         if (WIConstants.getInstance().getPublicDeployment()) {
             filterStr = "filter=yes";
@@ -737,16 +851,15 @@ public class PDXLikeMe {
     }
 
     private String getJSON(String uri, String json) {
-        
+
         // use filtering to exclude PT samples
         String filterStr = "filter=yes";
-        
-         if (uri.contains("?")) {
+
+        if (uri.contains("?")) {
             uri = uri + "&" + filterStr;
         } else {
             uri = uri + "?" + filterStr;
         }
-        
 
         boolean post = true;
         if (json == null || json.length() == 0) {
@@ -820,50 +933,52 @@ public class PDXLikeMe {
 
         return response.toString();
 
-    }
+    
+
+}
 
     private class ModelRow {
-        // "gene" is "gene" "criteria"
-        String id;
-        ArrayList<String> genes = new ArrayList<>();
-        // gene -> list of actionable variants
-        private HashMap<String, HashMap<String, String>> actionable = new HashMap<>();
 
-        
-        ModelRow(String id) {
-            this.id = id;
-        }
+    // "gene" is "gene" "criteria"
+    String id;
+    ArrayList<String> genes = new ArrayList<>();
+    // gene -> list of actionable variants
+    private HashMap<String, HashMap<String, String>> actionable = new HashMap<>();
 
-        public void addActionable(String gene, ArrayList<String> variants) {
-            if (actionable.containsKey(gene)) {
-                for (String v : variants) {
-                    actionable.get(gene).put(v, v);
-                }
-            } else {
-                HashMap<String, String> vars = new HashMap<>();
-                for (String v : variants) {
-                    vars.put(v, v);
-                }
-                actionable.put(gene, vars);
+    ModelRow(String id) {
+        this.id = id;
+    }
+
+    public void addActionable(String gene, ArrayList<String> variants) {
+        if (actionable.containsKey(gene)) {
+            for (String v : variants) {
+                actionable.get(gene).put(v, v);
             }
-        }
-
-        public int getSize() {
-            return (2 * this.genes.size()) + this.actionable.size();
+        } else {
+            HashMap<String, String> vars = new HashMap<>();
+            for (String v : variants) {
+                vars.put(v, v);
+            }
+            actionable.put(gene, vars);
         }
     }
 
-    class MRSort implements Comparator<ModelRow> {
-
-        public int compare(ModelRow a, ModelRow b) {
-
-            if (a.getSize() > b.getSize()) {
-                return -1;
-            }
-            if (a.getSize() < b.getSize()) {
-                return 1;
-            }
-            return a.id.compareTo(b.id);
-        }
+    public int getSize() {
+        return (2 * this.genes.size()) + this.actionable.size();
     }
+}
+
+class MRSort implements Comparator<ModelRow> {
+
+    public int compare(ModelRow a, ModelRow b) {
+
+        if (a.getSize() > b.getSize()) {
+            return -1;
+        }
+        if (a.getSize() < b.getSize()) {
+            return 1;
+        }
+        return a.id.compareTo(b.id);
+    }
+}
 }
