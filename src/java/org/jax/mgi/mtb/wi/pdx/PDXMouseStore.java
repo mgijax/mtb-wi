@@ -1887,13 +1887,13 @@ public class PDXMouseStore {
 
         StringBuffer result = new StringBuffer();
 
-        StringBuffer mouseIDs = new StringBuffer();
         //batch query at 100 mice
         int i = 0;
         String model, sample, passage, ampDelStr;
         Double rankZ;
         while (i < mice.size()) {
 
+            StringBuffer mouseIDs = new StringBuffer();
             for (int j = 0; (j < 100) && (i < mice.size()); j++) {
                 if (!DANA_FARBER.equals(mice.get(i).getInstitution()) && !BAYLOR.equals(mice.get(i).getInstitution())) {
                     mouseIDs.append(mice.get(i).getModelID()).append(",");
@@ -1902,9 +1902,12 @@ public class PDXMouseStore {
             }
 
             mouseIDs.deleteCharAt(mouseIDs.length() - 1);
+            
+            System.out.println(mouseIDs.toString());
 
             StringBuffer query = new StringBuffer(GENE_EXPRESSION).append(gene);
             query.append("&model=").append(mouseIDs);
+            
             try {
 
                 JSONObject job = new JSONObject(getJSON(query.toString()));

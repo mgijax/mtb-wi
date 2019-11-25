@@ -110,7 +110,7 @@
                 hideTrigger:true,
                 hiddenName:'gene',
                 width:260,
-                listEmptyText:'no matching gene',
+                listEmptyText:'',
                 renderTo: 'geneSelectOMatic'
         //        ,pageSize:10
             });
