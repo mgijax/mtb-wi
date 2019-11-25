@@ -142,7 +142,7 @@
                 hideTrigger:true,
                 hiddenName:'genes2',
                 width:260,
-                listEmptyText:'no matching gene',
+                listEmptyText:'',
                 renderTo: 'geneSelectOMatic2'
             });
             
@@ -160,7 +160,7 @@
                 hideTrigger:true,
                 hiddenName:'genesCNV',
                 width:260,
-                listEmptyText:'no matching gene',
+                listEmptyText:'',
                 renderTo: 'geneSelectOMatic3'
             });
          

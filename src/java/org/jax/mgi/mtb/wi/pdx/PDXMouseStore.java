@@ -1903,7 +1903,7 @@ public class PDXMouseStore {
 
             mouseIDs.deleteCharAt(mouseIDs.length() - 1);
             
-            System.out.println(mouseIDs.toString());
+         
 
             StringBuffer query = new StringBuffer(GENE_EXPRESSION).append(gene);
             query.append("&model=").append(mouseIDs);
