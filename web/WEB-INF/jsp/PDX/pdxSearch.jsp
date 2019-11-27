@@ -76,7 +76,7 @@
                 hideTrigger:false,
                 hiddenName:'modelID',
                 width:360,
-                listEmptyText:'no matching model',
+                listEmptyText:'',
                 renderTo: 'modelIDCombo'
         //        ,pageSize:10
             });

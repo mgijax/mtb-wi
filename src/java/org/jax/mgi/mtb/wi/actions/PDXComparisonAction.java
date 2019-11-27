@@ -265,7 +265,7 @@ public class PDXComparisonAction extends Action {
     private static final String NORMAL = "#808080";
     private static final String NOVALUE = "#FFFFFF";
 
-    private String ampDelToColor(String ampDel) {
+    public static String ampDelToColor(String ampDel) {
         String color = NOVALUE;
         if ("Amplification".equals(ampDel)) {
             color = AMPLIFICATION;
@@ -326,7 +326,7 @@ public class PDXComparisonAction extends Action {
      * @param levelStr the level to convert
      * @return Hex color string
      */
-    private static String expLevelToColor(String levelStr) {
+    public static String expLevelToColor(String levelStr) {
 
         String color = NOVALUE;
         try {

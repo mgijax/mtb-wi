@@ -34,15 +34,23 @@ public class PDXLikeMeAction extends Action {
             format = PDXLikeMe.FORMAT_CSV;
         }
         
-        format = PDXLikeMe.FORMAT_VIS;
         
         
         boolean actionable = "actionable".equals(request.getParameter("actionable"));
         
         boolean showEXP = "EXP".equals(request.getParameter("EXP"));
         boolean showLRP = "LRP".equals(request.getParameter("LRP"));
+        
+        if("Visualize".equals(request.getParameter("viz"))){
+            format = PDXLikeMe.FORMAT_VIS;
+            showEXP = true;
+            showLRP = true;
+        }
        
         String cases = request.getParameter("cases");
+        
+        request.setAttribute("caseCount", 0);
+        
         if (cases != null && cases.trim().length() > 0) {
             Scanner s = new Scanner(cases);
             s.useDelimiter("\n");

@@ -28,7 +28,11 @@
                     }
                 });
             });
-
+            
+            // redraw the table once all the images for model names have loaded
+            $(window).on("load", function() {
+                $('#comparisonTable').DataTable().draw();
+            });
 
 
         </script>
@@ -146,12 +150,16 @@
                         <td style="text-align:center;color:#000000;background-color:#FFFFFF; border: 1px solid black">No Value</td>
                     </tr>
                 </table>
+                <br>
+                <br>
+                This visualization tool is still under development and results are for demonstration only.
             </td>
         </tr>
         <tr>
-            <td>This is something<br>
+        <%--    <td>This is something<br>
                 ${gradient}
             </td>
+        --%>
         </tr>
         
 

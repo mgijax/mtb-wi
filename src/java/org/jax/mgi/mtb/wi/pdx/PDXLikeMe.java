@@ -26,6 +26,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
 import org.jax.mgi.mtb.wi.WIConstants;
+import org.jax.mgi.mtb.wi.actions.PDXComparisonAction;
 
 /**
  * Parse the PDX Like Me queries, get the results, and convert to HTML or CSV
@@ -57,6 +58,11 @@ public class PDXLikeMe {
     public static final String FORMAT_HTML = "HTML";
     public static final String FORMAT_CSV = "CSV";
     public static final String FORMAT_VIS = "VIS";
+    
+    private static final String DELETION = "#0000FF";
+    private static final String AMPLIFICATION = "#FFA500";
+    private static final String NORMAL = "#808080";
+    private static final String NOVALUE = "#FFFFFF";
 
     static PDXDAO pdxDAO = PDXDAO.getInstance();
 
@@ -319,11 +325,18 @@ public class PDXLikeMe {
         }
 
         ArrayList<ModelRow> modelsList = new ArrayList<>();
+       
         for (ModelRow mr : modelsMap.values()) {
-            modelsList.add(mr);
+            
+            // this will kick out dana farber models with no genomcis
+            if(detailsMap.containsKey(mr.id)){    
+                modelsList.add(mr);
+            }
+                
         }
         Collections.sort(modelsList, new MRSort());
-
+       
+        
         if (format.equals(FORMAT_HTML)) {
             table.append("\n<tr>");
             for (ModelRow mr : modelsList) {
@@ -437,94 +450,117 @@ public class PDXLikeMe {
             box[0][geneIndex++]=gene;
            }
            
-           int y = 1;
+            int y = 1;
             
             //put the values into a 2d array
             for (ModelRow mr : modelsList) {
-                int x = 0;
                 if (detailsMap.containsKey(mr.id)) {
-                    
+                    int x = 0;
+                   
                     box[y][x++] = mr.id;
                     box[y][x++] = detailsMap.get(mr.id);
                     for (String gene : ku) {
                         vals = gene.split(" ");
-                        if (mr.genes.contains(vals[0] + vals[1])) {
-                            box[y][x]=("X ");
-                        }
-
-                        if (mr.actionable.containsKey(vals[0])) {
-                            String s = " ";
-                            if (mr.actionable.get(vals[0]).size() > 1) {
-                                s = "s ";
-                            }
-                            box[y][x]+=(" Clinically relevant " + vals[0] + " variant" + s);
-                            for (String variant : mr.actionable.get(vals[0]).keySet()) {
-                                box[y][x] += " "+ (variant);
-                            }
-                        }
-
-                        
                         String key = (mr.id + vals[0] + vals[1]).toUpperCase();
-                        if (showLRP && (vals[1].toUpperCase().contains("AMP")
-                                || vals[1].toUpperCase().contains("DEL")
-                                || vals[1].toUpperCase().contains("NOCNV"))) {
-                            
-                            if (lrpMap.containsKey(key)) {
-                                box[y][x] += " " +lrpMap.get(key);
-                            }
+                        if (mr.genes.contains(vals[0] + vals[1])) {
+                           
+                           String color = NOVALUE;
+                           
+                           if (vals[1].toUpperCase().contains("AMP")) color = AMPLIFICATION;
+                           if (vals[1].toUpperCase().contains("DEL")) color = DELETION;
+                           if (vals[1].toUpperCase().contains("NOCNV")) color = NORMAL;
 
-                        }
-                        if (showEXP && (vals[1].contains(">")
-                                || vals[1].contains("<"))) {
-                            
-                            if (expMap.containsKey(key)) {
-                                box[y][x]+=" " + expMap.get(key);
-                            }
+                           if (lrpMap.containsKey(key)) {
+                            box[y][x] += "color:"+color+";";
+                           }
+                        
 
+                           
+                           if ((vals[1].contains(">") || vals[1].contains("<"))) {
+                               if (expMap.containsKey(key)) {
+                                   box[y][x]+="color:" + PDXComparisonAction.expLevelToColor(expMap.get(key))+";";
+                               }
+
+                           }
+                        
+                            if (mr.actionable.containsKey(vals[0])) {
+                                String s = " ";
+                                if (mr.actionable.get(vals[0]).size() > 1) {
+                                    s = "s ";
+                                }
+                                box[y][x]+=(";Clinically relevant " + vals[0] + " variant" + s);
+                                for (String variant : mr.actionable.get(vals[0]).keySet()) {
+                                    box[y][x] += " "+ (variant);
+                                }
+                                // for debuging cells in context of model ids
+                                //box[y][x]+="</br>"+mr.id;
+                            }
+                            
+                            // brown for all matches that don't correspond to some other color
+                            if(box[y][x]==null || box[y][x].trim().length()==0)box[y][x]="color:brown;";
                         }
 
                         x++;
+                        
                     }
 
                     y++;
+                }else{
+                    System.out.println(mr.id +" not in details map");
                 }
-
+              
             }
             
 
             StringBuilder html = new StringBuilder();
            
-             html.append("<b>").append(caseNo).append("</b><table id=\"comparisonTable\" style=\"width:100%\" class=\"cell-border compact\" ><thead>");
+             html.append("<b></b><table id=\"comparisonTable\" style=\"width:100%\" class=\"cell-border compact\" >");
+             html.append("<thead><th style=\"vertical-align:bottom; text-align:center; height:250px; width:15px\">").append(caseNo).append("</th>");
 
-           
+         
             for( y =1; y < modelsList.size()+1;y++){
-                //    html.append("<th>").append(box[y][0]).append("</th>");
-                
+               
                    String model = box[y][0];
                    String diagnosis = box[y][1];
+                   
+                   
                     
-                   html.append("<th style=\"vertical-align:bottom; text-align:center; height:250px\">").append("<a href=\"pdxDetails.do?modelID=").append(model);
+                   html.append("<th style=\"vertical-align:bottom; text-align:center; height:250px; width:15px \">").append("<a href=\"pdxDetails.do?modelID=").append(model);
                         html.append("\"><img src=\"dynamicText?text=").append(model).append("&amp;size=11\" alt=\"X\" ");
                         html.append(" onmouseover=\"return overlib('").append(diagnosis).append("',CAPTION,'").append(model).append("')\"");
                         html.append(" onmouseout=\"return nd()\"");
                         html.append("></a></th>");
                     
-                }
+            }
+            
             html.append("</thead><tbody>");
             for(int x =2; x < ku.size()+2; x++){
                 html.append("<tr>");
                 for( y =0; y < modelsList.size()+1;y++){
+                    StringBuilder  style = new StringBuilder();
+                    StringBuilder mouseOver = new StringBuilder();
+                    
                     if(box[y][x] == null) box[y][x] = "";
-                    if(box[y][x].contains("X") && y>0){
-                           html.append("<td style=\"background-color:green\">").append(box[y][x]).append("</td>");
-                    }else{
-                        html.append("<td>").append(box[y][x]).append("</td>");
+                    String cellText = box[y][x];
+                    if(box[y][x].contains("color:") && y>0){
+                           
+                           style.append(" background-color:").append(box[y][x].substring(box[y][x].indexOf(":")+1,box[y][x].indexOf(";")+1));
+                           cellText = "";
                     }
+                          
+                    if(box[y][x].contains("Clinically relevant")){
+                        style.append(" font-size:12px");
+                        String muts = box[y][x].substring(box[y][x].indexOf("Clinically"));
+                        mouseOver.append(" onmouseover=\"return overlib('").append(muts).append("',CAPTION,'").append("Clinically relevant mutation(s)").append("')\"");
+                        mouseOver.append(" onmouseout=\"return nd()\"");
+                        cellText ="CRM";
+                    }
+                    html.append("<td style=\" ").append(style).append("\"").append(mouseOver).append(">").append(cellText).append("</td>");
                 }
                 html.append("</tr>\n");
             }
-            html.append("</tbody></table>");
-            System.out.println(html.toString());
+            html.append("</tbody></table><br><br>");
+           
             table = html;
         }
             
