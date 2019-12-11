@@ -73,6 +73,9 @@ public class PDXLikeMeAction extends Action {
             } else if(format.equals(PDXLikeMe.FORMAT_VIS)){
                 
                 request.setAttribute("table",(pdxLM.parseCases(s, format, actionable, showLRP, showEXP)));
+                
+                int caseCount = cases.toLowerCase().split("case").length;
+                request.setAttribute("caseCount", caseCount);
                 return mapping.findForward("vis");
                 
                 

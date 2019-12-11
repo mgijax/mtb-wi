@@ -447,7 +447,7 @@ public class PDXLikeMe {
            box[0][1] = "diagnosis";
            int geneIndex = 2;
            for(String gene : ku){
-            box[0][geneIndex++]=gene;
+            box[0][geneIndex++]=gene.replace(" ", "<br>");
            }
            
             int y = 1;
@@ -478,12 +478,20 @@ public class PDXLikeMe {
                            
                            if ((vals[1].contains(">") || vals[1].contains("<"))) {
                                if (expMap.containsKey(key)) {
-                                   box[y][x]+="color:" + PDXComparisonAction.expLevelToColor(expMap.get(key))+";";
+                                   box[y][x]+="color:" + expToColor(expMap.get(key))+";";
                                }
 
                            }
                         
-                            if (mr.actionable.containsKey(vals[0])) {
+                            
+                            
+                            // brown for all matches that don't correspond to some other color
+                            // should have colors for GOF,LOF,UNK,NONE
+                            if(box[y][x]==null || box[y][x].trim().length()==0)box[y][x]="color:black;";
+                        }
+                        
+                        
+                        if (mr.actionable.containsKey(vals[0])) {
                                 String s = " ";
                                 if (mr.actionable.get(vals[0]).size() > 1) {
                                     s = "s ";
@@ -495,10 +503,6 @@ public class PDXLikeMe {
                                 // for debuging cells in context of model ids
                                 //box[y][x]+="</br>"+mr.id;
                             }
-                            
-                            // brown for all matches that don't correspond to some other color
-                            if(box[y][x]==null || box[y][x].trim().length()==0)box[y][x]="color:brown;";
-                        }
 
                         x++;
                         
@@ -525,10 +529,8 @@ public class PDXLikeMe {
                    
                    
                     
-                   html.append("<th style=\"vertical-align:bottom; text-align:center; height:250px; width:15px \">").append("<a href=\"pdxDetails.do?modelID=").append(model);
-                        html.append("\"><img src=\"dynamicText?text=").append(model).append("&amp;size=11\" alt=\"X\" ");
-                        html.append(" onmouseover=\"return overlib('").append(diagnosis).append("',CAPTION,'").append(model).append("')\"");
-                        html.append(" onmouseout=\"return nd()\"");
+                   html.append("<th style=\"vertical-align:bottom; text-align:center; height:250px; width:15px; padding: 2px 2px 5px 0px; \">").append("<a href=\"pdxDetails.do?modelID=").append(model);
+                        html.append("\"><img src=\"dynamicText?text=").append(diagnosis).append(" (").append(model).append(")&amp;size=12\" alt=\"X\" ");
                         html.append("></a></th>");
                     
             }
@@ -537,7 +539,7 @@ public class PDXLikeMe {
             for(int x =2; x < ku.size()+2; x++){
                 html.append("<tr>");
                 for( y =0; y < modelsList.size()+1;y++){
-                    StringBuilder  style = new StringBuilder();
+                    StringBuilder  style = new StringBuilder(" text-align:center; ");
                     StringBuilder mouseOver = new StringBuilder();
                     
                     if(box[y][x] == null) box[y][x] = "";
@@ -546,16 +548,21 @@ public class PDXLikeMe {
                            
                            style.append(" background-color:").append(box[y][x].substring(box[y][x].indexOf(":")+1,box[y][x].indexOf(";")+1));
                            cellText = "";
+                           if(box[y][x].contains("black")){
+                                style.append(" color:white;");
+                            }
                     }
                           
                     if(box[y][x].contains("Clinically relevant")){
-                        style.append(" font-size:12px");
+                        style.append(" font-size:8px");
                         String muts = box[y][x].substring(box[y][x].indexOf("Clinically"));
                         mouseOver.append(" onmouseover=\"return overlib('").append(muts).append("',CAPTION,'").append("Clinically relevant mutation(s)").append("')\"");
                         mouseOver.append(" onmouseout=\"return nd()\"");
-                        cellText ="CRM";
+                        cellText ="X";
+                    }else{
+                        style.append(" font-size:12px");
                     }
-                    html.append("<td style=\" ").append(style).append("\"").append(mouseOver).append(">").append(cellText).append("</td>");
+                    html.append("<td style=\" padding: 0px 0px 5px 0px; ").append(style).append("\"").append(mouseOver).append(">").append(cellText).append("</td>");
                 }
                 html.append("</tr>\n");
             }
@@ -874,17 +881,41 @@ public class PDXLikeMe {
             }
         }
     }
-
-    // it is possible we want unfiltered results internally
-    // but would still need to excluded PT samples. so we would use this
-    // but then have to exclude PT samples sample by sample in the internal results
-    private String getFilterStr() {
-        String filterStr = "filter=no";
-        if (WIConstants.getInstance().getPublicDeployment()) {
-            filterStr = "filter=yes";
+    
+    private String expToColor(String exp){
+        String color = "purple";
+        try{
+            Float ex = new Float(exp);
+            
+            
+             color = "#007300";
+            if(ex > - 2)        
+             color = "#009b00";
+            if(ex > - .5)           
+             color = "#00d700";
+            if(ex > - .01)           
+             color = "#00f500";     
+            if(ex > -.01 && ex < .01)				
+		color = "#808080";
+            
+            if(ex > .01)           
+		color = "#f50000";
+            if(ex > .5)				   
+                color = "#d70000";
+            if(ex > 2)           
+                color =  "#9b0000";
+            if(ex > 10)          
+                color = "#730000";
+        }catch(Exception e){
+            e.printStackTrace();
         }
-        return filterStr;
+        
+        System.out.println(exp+" "+color);
+             return color;   
+            
     }
+
+   
 
     private String getJSON(String uri, String json) {
 
@@ -1002,7 +1033,16 @@ public class PDXLikeMe {
     public int getSize() {
         return (2 * this.genes.size()) + this.actionable.size();
     }
+    
+    
+    
+    
+    
+    
+    
 }
+    
+    
 
 class MRSort implements Comparator<ModelRow> {
 
@@ -1017,4 +1057,6 @@ class MRSort implements Comparator<ModelRow> {
         return a.id.compareTo(b.id);
     }
 }
+
+
 }

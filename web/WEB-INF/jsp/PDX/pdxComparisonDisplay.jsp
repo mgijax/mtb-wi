@@ -28,149 +28,96 @@
                     }
                 });
             });
-            
+
             // redraw the table once all the images for model names have loaded
-            $(window).on("load", function() {
+            $(window).on("load", function () {
                 $('#comparisonTable').DataTable().draw();
             });
 
 
         </script>
 
+        <c:import url="../../../body.jsp">
+            <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Visualization"/>
+        </c:import>
+        
+           <c:import url="../../../meta.jsp">
+            <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Visualization"/>
+        </c:import>
+
     </head>
     <body>
 
-    <font class="label">Search Summary</font><br>
+        <div style="position:fixed;left:5;top:5;width:225px;height:100%; border-right:4px solid grey;font-size:12px;font-family:verdana">
 
-    <c:choose>
-        <c:when test="${not empty primarySites}">
-            <c:choose>
-                <c:when test="${fn:length(primarySites)>1}">
-                    <font class="label">Primary Sites:</font>
-                    </c:when>
-                    <c:otherwise>
-                    <font class="label">Primary Site:</font>
-                    </c:otherwise>
-                </c:choose>
+            <c:import url="../../../pdxToolBar.jsp" />
+        </div>
 
-            <c:forEach var="site" items="${primarySites}" varStatus="status">
-                <c:choose>
-                    <c:when test="${status.last != true}">
-                        ${site},
-                    </c:when>
-                    <c:otherwise>
-                        ${site}
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-            <br>
-        </c:when>
-        <c:otherwise>
-            <font class="label">Primary Sites:</font> Any<br>
-            </c:otherwise>
-        </c:choose>
 
-    <c:choose>
-        <c:when test="${not empty diagnoses}">
-            <c:choose>
-                <c:when test="${fn:length(diagnoses)>1}">
-                    <font class="label">Diagnoses:</font>
-                    </c:when>
-                    <c:otherwise>
-                    <font class="label">Diagnosis:</font>
-                    </c:otherwise>
-                </c:choose>
 
-            <c:forEach var="diagnosis" items="${diagnoses}" varStatus="status">
-                <c:choose>
-                    <c:when test="${status.last != true}">
-                        ${diagnosis},
-                    </c:when>
-                    <c:otherwise>
-                        ${diagnosis}
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-            <br>
-        </c:when>
-        <c:otherwise>
-            <font class="label">Diagnosis:</font> Any<br>
-            </c:otherwise>
-        </c:choose>
-    <table>
-        <tr><td>Rank Z based expression scale</td>
-        <tr>
-            <td>
-                <table>
+        <div style="width:auto;padding-left:300px;height:100%;top:5px;padding-right:40px">
+            <div style="border:1px solid black; padding:5px">
+
+                 <table width="100%" border="1" cellpadding="4" cellspacing="0" style="background:#D0E0F0">
                     <tr>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#006900">-15</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#007300">-14</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#007d00">-13</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#008700">-12</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#009100">-11</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#009b00">-10</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#00a500">-9</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#00af00">-8</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#00b900">-7</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#00c300">-6</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#00cd00">-5</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#00d700">-4</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#00e100">-3</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#00eb00">-2</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#00f500">-1</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#808080"> 0 </td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#f50000">+1</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#eb0000">+2</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#e10000">+3</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#d70000">+4</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#cd0000">+5</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#c30000">+6</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#b90000">+7</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#af0000">+8</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#a50000">+9</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#9b0000">+10</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#910000">+11</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#870000">+12</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#7d0000">+13</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#730000">+14</td>
-                        <td style="text-align:center;color:#FFFFFF;background-color:#690000">+15</td>
-                        <td style="text-align:center;background-color:#FFFFFF; border:1px solid black">No Value</td>
+                        <td width="25%" valign="middle" align="left" style="border:none">
+                            <a class="help" href="${applicationScope.urlBase}/html/PDXLikeMeVisHelp.html"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
+                        </td>
+                        <td width="50%" class="pageTitle" style="border:none;font-family:Arial; font-weight:bold; font-size:18px; text-align:center">
+                            Patient Derived Xenograft PDX Like Me Visualization
+                        </td>
+                        <td width="25%" valign="middle" align="right" style="border:none">
+                            <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdxRequestButton" onclick="window.location = 'pdxRequest.do'">
+                        </td>
                     </tr>
                 </table>
 
-            </td>
-        </tr>
-        <tr><td>
                 <table>
-                    <tr><td>CNV color coding</td></tr>
+                    <tr><td>Rank Z based expression scale</td>
                     <tr>
-                        <td style="text-align:center;color:#000000;background-color:#FFA500">Amplification</td>
-                        <td style="text-align:center;color:#000000;background-color:#0000FF">Deletion</td>
-                        <td style="text-align:center;color:#000000;background-color:#808080">Normal</td>
-                        <td style="text-align:center;color:#000000;background-color:#FFFFFF; border: 1px solid black">No Value</td>
+                        <td>
+
+
+                            <table>			
+                                <tr>				
+                                    <td style="text-align:center;background-color:#007300"><-10</td>
+                                    <td style="text-align:center;background-color:#009b00">-10 <b>-</b> -2</td>
+                                    <td style="text-align:center;background-color:#00d700">-2 <b>-</b> -0.5</td>
+                                    <td style="text-align:center;background-color:#00f500">-.05 <b>-</b> -.01</td>
+                                    <td style="text-align:center;background-color:#808080">-.01 <b>-</b> +.01</td>
+                                    <td style="text-align:center;background-color:#f50000">+.01 <b>-</b> +0.5</td>
+                                    <td style="text-align:center;background-color:#d70000">+0.5 <b>-</b> +2</td>
+                                    <td style="text-align:center;background-color:#9b0000">+2 <b>-</b> +10</td>
+                                    <td style="text-align:center;background-color:#730000">>10</td>
+                                    <td style="text-align:center;background-color:#FFFFFF; border:1px solid black">No Value</td>
+                                </tr>
+                            </table>
+
+
+                        </td>
+                    </tr>
+                    <tr><td>
+                            <table>
+                                <tr><td>CNV color coding</td></tr>
+                                <tr>
+                                    <td style="text-align:center;color:#000000;background-color:#FFA500">Amplification</td>
+                                    <td style="text-align:center;color:#000000;background-color:#0000FF">Deletion</td>
+                                    <td style="text-align:center;color:#000000;background-color:#808080">Normal</td>
+                                    <td style="text-align:center;color:#000000;background-color:#FFFFFF; border: 1px solid black">No Value</td>
+                                </tr>
+                            </table>
+                            <br>
+                            <br>
+                            This visualization tool is still under development and results are for demonstration only.
+                        </td>
+                    </tr>
+                    <tr>
                     </tr>
                 </table>
-                <br>
-                <br>
-                This visualization tool is still under development and results are for demonstration only.
-            </td>
-        </tr>
-        <tr>
-        <%--    <td>This is something<br>
-                ${gradient}
-            </td>
-        --%>
-        </tr>
-        
 
+                ${table}
 
-
-    </table>
-
-
-  
-        ${table}
-    
-
-</body>
+            </div>
+        </div>
+    </body>
 </html> 
