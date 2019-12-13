@@ -394,7 +394,7 @@
             scope="request">
             <forward name="success" path="/WEB-INF/jsp/PDX/pdxLikeMe.jsp"/>  
             <forward name="noData" path="/WEB-INF/jsp/PDX/pdxNoData.jsp"/>
-            <forward name="vis" path="/WEB-INF/jsp/PDX/pdxComparisonDisplay.jsp"/>
+            <forward name="vis" path="/WEB-INF/jsp/PDX/pdxLikeMeVis.jsp"/>
             <forward name="failure" path="appError.jsp"/>
         </action>
     

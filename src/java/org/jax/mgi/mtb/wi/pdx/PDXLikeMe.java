@@ -159,6 +159,9 @@ public class PDXLikeMe {
 
         for (String key : caseOrder) {
             result.append(buildTable(key, caseGenes.get(key)));
+            
+            // only one case for visualization
+            if(this.format.equals(FORMAT_VIS))break;
 
         }
 
@@ -528,8 +531,9 @@ public class PDXLikeMe {
                    String diagnosis = box[y][1];
                    
                    
+                   
                     
-                   html.append("<th style=\"vertical-align:bottom; text-align:center; height:250px; width:15px; padding: 2px 2px 5px 0px; \">").append("<a href=\"pdxDetails.do?modelID=").append(model);
+                   html.append("<th style=\"vertical-align:bottom; text-align:center; height:250px; width:15px; padding: 2px 2px 5px 0px;\">").append("<a href=\"pdxDetails.do?modelID=").append(model);
                         html.append("\"><img src=\"dynamicText?text=").append(diagnosis).append(" (").append(model).append(")&amp;size=12\" alt=\"X\" ");
                         html.append("></a></th>");
                     
@@ -873,6 +877,10 @@ public class PDXLikeMe {
                     if (cDiag.trim().length() == 0) {
                         cDiag = iDiag;
                     }
+                    String firstLetter = cDiag.charAt(0)+"";
+                    firstLetter = firstLetter.toUpperCase();
+                    cDiag = firstLetter+cDiag.substring(1);
+                    
                     detailsMap.put(id, cDiag + ":" + site);
 
                 }
