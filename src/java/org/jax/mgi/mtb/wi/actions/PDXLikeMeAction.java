@@ -5,6 +5,7 @@
 package org.jax.mgi.mtb.wi.actions;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import javax.servlet.http.HttpServletRequest;
@@ -71,11 +72,17 @@ public class PDXLikeMeAction extends Action {
                 response.getWriter().write(pdxLM.parseCases(s, format, actionable, showLRP, showEXP));
                 return null;
             } else if(format.equals(PDXLikeMe.FORMAT_VIS)){
-                
-                request.setAttribute("table",(pdxLM.parseCases(s, format, actionable, showLRP, showEXP)));
+                String[] parts = pdxLM.parseCases(s, format, actionable, showLRP, showEXP).split(PDXLikeMe.CASE_DELIMITER);
+                String[] casesArray = parts[0].split(",");
+                ArrayList<String> caseList = new ArrayList();
+                for(int i = 0; i < casesArray.length; i++){
+                    caseList.add(casesArray[i]);
+                }
+                request.setAttribute("table",parts[1]);
                 
                 int caseCount = cases.toLowerCase().split("case").length;
                 request.setAttribute("caseCount", caseCount);
+                request.setAttribute("caseList", caseList);
                 return mapping.findForward("vis");
                 
                 

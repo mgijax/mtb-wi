@@ -2,21 +2,29 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
     <head>
 
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/cr-1.5.2/fc-3.3.0/datatables.min.css"/>
+       <meta charset="utf-8">
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/cr-1.5.2/fc-3.3.0/datatables.min.css"/>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/cr-1.5.2/fc-3.3.0/datatables.min.js"></script>
-        <script type="text/javascript" src="${applicationScope.urlBase}/js/jquery-ui.min.js"></script>
+        
+          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+            
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+       
         <script type="text/javascript" src="${applicationScope.urlBase}/js/overlib.js"></script>
 
 
         <script language="javascript">
+            
+              
 
             $(document).ready(function () {
-                table = $('#comparisonTable').DataTable({
+                
+                configs = {
                     "colReorder": true,
                     "info": false,
                     "scrollX": true,
@@ -25,8 +33,15 @@
                     "ordering": false,
                     "fixedColumns": {
                         "leftColumns": 1
-                    }
-                });
+                    },
+                    "retrieve": true
+                }
+                
+                 for(i = 1; i < ${caseCount}; i++){
+                    table = $('#comparisonTable'+i).DataTable( configs);
+                }
+                
+                
 
                 $('#comparisonTable tbody').on('mouseenter', 'td', function () {
                     var colIdx = table.cell(this).index().column;
@@ -51,21 +66,36 @@
             });
 
             // redraw the table once all the images for model names have loaded
+             
             $(window).on("load", function () {
-                $('#comparisonTable').DataTable().draw();
+                for(i = 1; i < ${caseCount}; i++){
+                    $('#comparisonTable'+i).DataTable().draw();
+                }
             });
+            
+            
+            
+            
+            
 
             $(window).on("load", function(){
                 $('#loading').hide();
+                
+                $( function() {
+                  $( "#tabs" ).tabs({heightStyle:"auto"});
+                } );
             });
+            
+               
+                          
+              
+  </script>
 
 
 
         </script>
 
-        <c:import url="../../../body.jsp">
-            <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Visualization"/>
-        </c:import>
+      
 
         <c:import url="../../../meta.jsp">
             <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Visualization"/>
@@ -123,7 +153,7 @@
 
                             <table>			
                                 <tr>				
-                                    <td style="text-align:center;background-color:#007300"><-10</td>
+                                    <td style="text-align:center;background-color:#007300">&lt;-10</td>
                                     <td style="text-align:center;background-color:#009b00">-10 <b>-</b> -2</td>
                                     <td style="text-align:center;background-color:#00d700">-2 <b>-</b> -0.5</td>
                                     <td style="text-align:center;background-color:#00f500">-.05 <b>-</b> -.01</td>
@@ -131,7 +161,7 @@
                                     <td style="text-align:center;background-color:#f50000">+.01 <b>-</b> +0.5</td>
                                     <td style="text-align:center;background-color:#d70000">+0.5 <b>-</b> +2</td>
                                     <td style="text-align:center;background-color:#9b0000">+2 <b>-</b> +10</td>
-                                    <td style="text-align:center;background-color:#730000">>10</td>
+                                    <td style="text-align:center;background-color:#730000">&gt;10</td>
                                     <td style="text-align:center;background-color:#FFFFFF; border:1px solid black">No Value</td>
                                 </tr>
                             </table>
@@ -157,8 +187,20 @@
                     <tr>
                     </tr>
                 </table>
+                     
 
-                ${table}
+ 
+                <div id="tabs">
+                  <ul>
+                        <c:forEach var="cases" items="${caseList}" varStatus="status">
+                            <li><a href="#tabs-${status.count}">${cases}</a></li>
+                        </c:forEach>
+                    
+                  </ul>
+                  ${table}
+                </div>
+
+               
 
             </div>
         </div>

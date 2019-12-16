@@ -58,6 +58,7 @@ public class PDXLikeMe {
     public static final String FORMAT_HTML = "HTML";
     public static final String FORMAT_CSV = "CSV";
     public static final String FORMAT_VIS = "VIS";
+    public static final String CASE_DELIMITER = "~";
     
     private static final String DELETION = "#0000FF";
     private static final String AMPLIFICATION = "#FFA500";
@@ -157,15 +158,19 @@ public class PDXLikeMe {
 
         getModelDetails();
 
+        StringBuilder caseList = new StringBuilder();
         for (String key : caseOrder) {
             result.append(buildTable(key, caseGenes.get(key)));
+            caseList.append(key+",");
             
-            // only one case for visualization
-            if(this.format.equals(FORMAT_VIS))break;
 
         }
+        if(this.format.equals(FORMAT_VIS)){
 
-        return result.toString();
+            return caseList.toString()+CASE_DELIMITER+result.toString();
+        }
+        else return result.toString();
+                
     }
 
     private String buildTable(String caseNo, ArrayList<String> genes) {
@@ -521,8 +526,8 @@ public class PDXLikeMe {
 
             StringBuilder html = new StringBuilder();
            
-             html.append("<b></b><table id=\"comparisonTable\" style=\"width:100%\" class=\"cell-border compact\" >");
-             html.append("<thead><th style=\"vertical-align:bottom; text-align:center; height:250px; width:15px\">").append(caseNo).append("</th>");
+             html.append(" <div id=\"tabs-").append(caseCount).append("\"><table id=\"comparisonTable").append(caseCount++).append("\" style=\"width:100%\" class=\"cell-border compact\" >");
+             html.append("<thead><tr><th style=\"vertical-align:bottom; text-align:center; height:250px; width:15px\">").append(caseNo).append("</th>");
 
          
             for( y =1; y < modelsList.size()+1;y++){
@@ -539,7 +544,7 @@ public class PDXLikeMe {
                     
             }
             
-            html.append("</thead><tbody>");
+            html.append("</tr></thead><tbody>");
             for(int x =2; x < ku.size()+2; x++){
                 html.append("<tr>");
                 for( y =0; y < modelsList.size()+1;y++){
@@ -564,13 +569,13 @@ public class PDXLikeMe {
                         mouseOver.append(" onmouseout=\"return nd()\"");
                         cellText ="X";
                     }else{
-                        style.append(" font-size:12px");
+                        style.append(" overflow:hidden; font-size:12px");
                     }
                     html.append("<td style=\" padding: 0px 0px 5px 0px; ").append(style).append("\"").append(mouseOver).append(">").append(cellText).append("</td>");
                 }
                 html.append("</tr>\n");
             }
-            html.append("</tbody></table><br><br>");
+            html.append("</tbody></table><br><br></div>\n");
            
             table = html;
         }
