@@ -1024,7 +1024,7 @@
 
                                          <tr class="stripe${a}">
                                             <td class="cat${a}">
-                                                Microsatellite instability<a class="help" href="userHelp.jsp#pdxMSI"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
+                                                Microsatellite Instability <a class="help" href="userHelp.jsp#pdxMSI"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
                                             </td>
                                             <td class="data${a}">
                                                 <table width="100%"><tr>
