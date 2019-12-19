@@ -1009,6 +1009,43 @@
                                         
                                         
                                         
+                                    <c:if test="${not empty msiData}">
+                                      
+                                        <c:set var="a" value="1"/>
+                                        <c:set var="b" value="2"/>
+
+
+                                         <c:if test="${not empty referenceLinks or not empty sessionScope.pdxEditor}">
+
+                                            <c:set var="a" value="2"/>
+                                            <c:set var="b" value="1"/>
+                                         </c:if>
+
+
+                                         <tr class="stripe${a}">
+                                            <td class="cat${a}">
+                                                Microsatellite instability<a class="help" href="userHelp.jsp#pdxMSI"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
+                                            </td>
+                                            <td class="data${a}">
+                                                <table width="100%"><tr>
+                                                        <td width="100$%">
+                                                            <c:forEach var="sample" items="${msiData}" varStatus="status">
+                                                                ${sample}<br>    
+                                                            </c:forEach>
+                                                        </td>
+                                                   
+                                                    <tr>
+                                                </table>
+                                                       
+                                            </td>
+                                        </tr>
+
+                                    </c:if>         
+                                        
+                                        
+                                        
+                                        
+                                        
                                         
                                     <tr class="stripe${b}">
                                         <td class="cat${b}">

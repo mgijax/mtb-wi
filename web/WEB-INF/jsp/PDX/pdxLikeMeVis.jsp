@@ -24,7 +24,7 @@
 
             $(document).ready(function () {
                 
-                configs = {
+               var configs = {
                     "colReorder": true,
                     "info": false,
                     "scrollX": true,
@@ -38,30 +38,33 @@
                 }
                 
                  for(i = 1; i < ${caseCount}; i++){
-                    table = $('#comparisonTable'+i).DataTable( configs);
+                   $('#comparisonTable'+i).DataTable( configs);
                 }
                 
-                
+                <c:forEach var="cases" items="${caseList}" varStatus="status">
+                          
+                          
+                    $('#comparisonTable${status.count} tbody').on('mouseenter', 'td', function () {
+                        var  table = $('#comparisonTable${status.count}').DataTable();
+                        var colIdx = table.cell(this).index().column;
+                     
+                        $(table.cells().nodes()).removeClass('highlight');
+                        $(table.columns().header()).removeClass('highlight');
+                        if(colIdx>0){
+                            $(table.column(colIdx).nodes()).addClass('highlight');
+                            $(table.column(colIdx).header()).addClass('highlight');
+                        }
+                    });
 
-                $('#comparisonTable tbody').on('mouseenter', 'td', function () {
-                    var colIdx = table.cell(this).index().column;
+                     $('#comparisonTable${status.count} tbody').on('mouseout', 'td', function () {
+                         var  table = $('#comparisonTable${status.count}').DataTable();
+                        $(table.cells().nodes()).removeClass('highlight');
+                        $(table.columns().header()).removeClass('highlight');
+
+                    });
                     
-
-                    $(table.cells().nodes()).removeClass('highlight');
-                    $(table.columns().header()).removeClass('highlight');
-                    if(colIdx>0){
-                        $(table.column(colIdx).nodes()).addClass('highlight');
-                        $(table.column(colIdx).header()).addClass('highlight');
-                    }
-                });
+              </c:forEach>
                 
-                 $('#comparisonTable tbody').on('mouseout', 'td', function () {
-                   
-                    $(table.cells().nodes()).removeClass('highlight');
-                    $(table.columns().header()).removeClass('highlight');
-                    
-                });
-
 
             });
 
@@ -73,8 +76,10 @@
                 }
             });
             
-            
-            
+            $(window).on("load", function(){
+                   
+                
+            });
             
             
 
@@ -84,6 +89,8 @@
                 $( function() {
                   $( "#tabs" ).tabs({heightStyle:"auto"});
                 } );
+                
+              
             });
             
                
@@ -104,8 +111,8 @@
 
         <style>
 
-            td.highlight, th.highlight {
-                padding:0px 5px 5px 8px !important;
+            th.highlight {
+                padding:0px 2px 8px 0px !important;
             }
 
         </style>
@@ -181,14 +188,17 @@
                             </table>
                             <br>
                             <br>
-                            This visualization tool is still under development and results are for demonstration only.
+                            The visualization functions for PDX Like Me are still under development. Send feedback and error reports to <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml" target="_blank">MGI User Support</a>.
+                                
                         </td>
                     </tr>
                     <tr>
                     </tr>
                 </table>
-                     
-
+                        <br> 
+                <form>
+                    <input type="button" value="Modify Query" onclick="history.back();">
+                </form>
  
                 <div id="tabs">
                   <ul>

@@ -64,6 +64,8 @@ public class PDXLikeMe {
     private static final String AMPLIFICATION = "#FFA500";
     private static final String NORMAL = "#808080";
     private static final String NOVALUE = "#FFFFFF";
+    
+    private static final int MAX_MODELS_FOR_VIS = 150;
 
     static PDXDAO pdxDAO = PDXDAO.getInstance();
 
@@ -526,18 +528,21 @@ public class PDXLikeMe {
 
             StringBuilder html = new StringBuilder();
            
-             html.append(" <div id=\"tabs-").append(caseCount).append("\"><table id=\"comparisonTable").append(caseCount++).append("\" style=\"width:100%\" class=\"cell-border compact\" >");
+             html.append(" <div id=\"tabs-").append(caseCount).append("\"><br>&nbsp;<br>&nbsp;<br><table id=\"comparisonTable").append(caseCount++).append("\" style=\"width:100%\" class=\"cell-border compact\" >");
              html.append("<thead><tr><th style=\"vertical-align:bottom; text-align:center; height:250px; width:15px\">").append(caseNo).append("</th>");
 
+             // limit the resutls so page loads in reasonable time
+             
+             int columnsToShow = modelsList.size()+1;
+             if(columnsToShow > MAX_MODELS_FOR_VIS){
+                 columnsToShow = MAX_MODELS_FOR_VIS;
+             }
          
-            for( y =1; y < modelsList.size()+1;y++){
+            for( y =1; y < columnsToShow;y++){
                
                    String model = box[y][0];
                    String diagnosis = box[y][1];
                    
-                   
-                   
-                    
                    html.append("<th style=\"vertical-align:bottom; text-align:center; height:250px; width:15px; padding: 2px 2px 5px 0px;\">").append("<a href=\"pdxDetails.do?modelID=").append(model);
                         html.append("\"><img src=\"dynamicText?text=").append(diagnosis).append(" (").append(model).append(")&amp;size=12\" alt=\"X\" ");
                         html.append("></a></th>");
@@ -547,7 +552,7 @@ public class PDXLikeMe {
             html.append("</tr></thead><tbody>");
             for(int x =2; x < ku.size()+2; x++){
                 html.append("<tr>");
-                for( y =0; y < modelsList.size()+1;y++){
+                for( y =0; y < columnsToShow;y++){
                     StringBuilder  style = new StringBuilder(" text-align:center; ");
                     StringBuilder mouseOver = new StringBuilder();
                     
