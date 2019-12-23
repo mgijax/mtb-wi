@@ -72,8 +72,6 @@
             var civicLinks = {};
             var civicGenes = {};
 
-
-
             var expressionOptions = {
                 fontSize: 10,
                 title: 'Gene Expression by Percentile Rank Z Score',
@@ -1004,10 +1002,6 @@
                                         </tr>
 
                                     </c:if>    
-                                        
-                                        
-                                        
-                                        
                                         
                                     <c:if test="${not empty msiData}">
                                       

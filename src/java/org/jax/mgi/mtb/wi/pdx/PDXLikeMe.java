@@ -915,7 +915,6 @@ public class PDXLikeMe {
              color = "#00f500";     
             if(ex > -.01 && ex < .01)				
 		color = "#808080";
-            
             if(ex > .01)           
 		color = "#f50000";
             if(ex > .5)				   
@@ -1018,7 +1017,6 @@ public class PDXLikeMe {
 
         return response.toString();
 
-    
 
 }
 
@@ -1051,12 +1049,6 @@ public class PDXLikeMe {
     public int getSize() {
         return (2 * this.genes.size()) + this.actionable.size();
     }
-    
-    
-    
-    
-    
-    
     
 }
     
