@@ -46,6 +46,7 @@
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
         <script type="text/javascript" src="${applicationScope.urlBase}/extjs/columnHeader.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
@@ -68,9 +69,8 @@
 
             var cnvLog = true;
             
-           
-
-
+            var civicLinks = {};
+            var civicGenes = {};
 
             var expressionOptions = {
                 fontSize: 10,
@@ -195,13 +195,10 @@
                     {name: 'filtered_rationale'},
                     {name: 'filter'},
                     {name: 'passage_num'},
-                    {name: 'gene_id'},
-                    
+                    {name: 'entrez_gene_id'},
                     {name: 'ckb_molpro_link'},
                     {name: 'ckb_molpro_name'},
-                    
                     {name: 'ckb_potential_treat_link'},
-                    
                     {name: 'ckb_potential_treat_approach'},
                     {name: 'ckb_protein_effect'},
                     {name: 'ckb_nclinical_resist'},
@@ -214,9 +211,6 @@
 
                 ];
 
-
-
-                
 
 
                 // create the Data Store
@@ -341,7 +335,8 @@
                             header: 'Amino Acid Change',
                             width: 110,
                             sortable: true,
-                            dataIndex: 'amino_acid_change'
+                            dataIndex: 'amino_acid_change',
+                            renderer: civicLinkRenderer
                         },
                         {
                             header: 'RS Variants',
@@ -391,7 +386,7 @@
                             header: 'Gene ID',
                             width: 60,
                             sortable: true,
-                            dataIndex: 'gene_id'
+                            dataIndex: 'entrez_gene_id'
                         },
                         {
                             header: 'Count Human Reads',
@@ -408,11 +403,12 @@
 
                     ],
                     stripeRows: true,
-                    height: 700,
+                    height: 670,
                     width: 1000,
                     id: 'pdxGrid'
+                    , viewConfig:{markDirty:false}
                     , bbar: new Ext.PagingToolbar({
-                        pageSize: 30,
+                        pageSize: 25,
                         store: store,
                         displayInfo: true,
                         displayMsg: 'Displaying results {0} - {1} of {2}'
@@ -499,6 +495,64 @@
                     }
                     return val;
                 }
+                
+                
+                function civicLinkRenderer(value, p, record, row, col, store){
+                    
+                    // key to civicLinks should be gene+variant since variant isn't unique
+                   
+                    if(civicGenes.hasOwnProperty(record.get("gene_symbol"))){
+                        record.set("entrez_gene_id",civicGenes[record.get("gene_symbol")]);
+                    }
+                   
+                    if(value.indexOf("https") != -1) return value;
+                   
+                    if(value){
+                        if(civicLinks.hasOwnProperty(record.get("gene_symbol")+"-"+value)) return civicLinks[record.get("gene_symbol")+"-"+value];
+                    
+                        
+                         $.ajax({
+                                   dataType: "json",
+                                   url: "https://civicdb.org/api/genes/" + record.get("gene_symbol") +"?identifier_type=entrez_symbol",
+                                   success: function (result,status,xhr) {
+                                       var linkKey = record.get("gene_symbol")+"-"+value;
+                                       record.set("entrez_gene_id",result.entrez_id)
+                                       civicGenes[record.get("gene_symbol")] = result.entrez_id;
+                                       if (result.variants.length > 0) {
+                                        var gene_id = result.id;
+                                            for(i = 0; i < result.variants.length; i++){
+                                               
+                                                if(value == result.variants[i].name){
+                                                     var variant_id = result.variants[i].id;
+                                                     civic_url = "https://civicdb.org/events/genes/" + gene_id + "/summary/variants/" + variant_id + "/summary#variant";
+                                                     
+                                                     civicLinks[linkKey] = String.format('<a href="{0}" target="_blank">{1}</a>',civic_url,value);
+
+                                                     
+                                                     record.set('amino_acid_change',civicLinks[linkKey]);
+                                                     console.log("created link "+civic_url + " for "+linkKey);
+                                                     return;
+                                                 }
+                                             }
+                                    }
+                                    if (!(civicLinks.hasOwnProperty(linkKey))){
+                                            civicLinks[linkKey] = value;
+                                    }
+                                   },
+                                   error: function (result,status,xhr) {
+                                       
+                                       civicLinks[record.get("gene_symbol")+"-"+value] = value
+                                   },
+                                   
+                                  
+                           });
+                        
+                       
+                  return value;      
+                }
+                 
+                 
+                }
 
                 Ext.EventManager.onWindowResize(function (w, h) {
                     panel.doLayout();
@@ -527,7 +581,7 @@
                 colNames.push( 'filtered_rationale');
                 colNames.push( 'filter');
                 colNames.push( 'passage_num');
-                colNames.push( 'gene_id');
+                colNames.push( 'entrez_gene_id');
                 colNames.push( 'count_human_reads');
                 colNames.push( 'pct_human_reads');
      
@@ -580,7 +634,7 @@
                 }
 
                 store.on("load", checkVariants);
-                store.load({params: {start: 0, limit: 30}});
+                store.load({params: {start: 0, limit: 25}});
 
                 if (document.getElementById("geneExpressionDiv") != null) {
 
@@ -948,6 +1002,39 @@
                                         </tr>
 
                                     </c:if>    
+                                        
+                                    <c:if test="${not empty msiData}">
+                                      
+                                        <c:set var="a" value="1"/>
+                                        <c:set var="b" value="2"/>
+
+
+                                         <c:if test="${not empty referenceLinks or not empty sessionScope.pdxEditor}">
+
+                                            <c:set var="a" value="2"/>
+                                            <c:set var="b" value="1"/>
+                                         </c:if>
+
+
+                                         <tr class="stripe${a}">
+                                            <td class="cat${a}">
+                                                Microsatellite Instability <a class="help" href="userHelp.jsp#pdxMSI"><img src="${applicationScope.urlImageDir}/help_small.jpg" border=0 width=15 height=15 alt="Help" style="vertical-align:middle"></a>
+                                            </td>
+                                            <td class="data${a}">
+                                                <table width="100%"><tr>
+                                                        <td width="100$%">
+                                                            <c:forEach var="sample" items="${msiData}" varStatus="status">
+                                                                ${sample}<br>    
+                                                            </c:forEach>
+                                                        </td>
+                                                   
+                                                    <tr>
+                                                </table>
+                                                       
+                                            </td>
+                                        </tr>
+
+                                    </c:if>         
                                         
                                         
                                         

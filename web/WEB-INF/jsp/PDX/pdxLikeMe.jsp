@@ -160,7 +160,7 @@
                                                     <td>
                                                         <input type="submit" VALUE="Search">
                                                         <input type="button" VALUE="Reset" onclick="clearForm();">
-
+                                                        <input name="viz" type="submit" VALUE="Visualize">
 
                                                     </td>
 
@@ -201,6 +201,7 @@
                                                     <td>
                                                         <input type="submit" VALUE="Search">
                                                         <input type="button" VALUE="Reset" onclick="clearForm();">
+                                                        <input name="viz" type="submit" VALUE="Visualize">
                                                     </td>
                                                 </tr>
                                             </table>

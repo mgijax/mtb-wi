@@ -139,7 +139,7 @@
                         <td colspan="2">
                             <table border=0 cellspacing=2 width="100%">
                                 <tr>
-                                    <td align="center" colspan="6">
+                                    <td align="center" colspan="7">
                                         <b>Download PDX Reports</b>
                                     </td>
                                 </tr>
@@ -149,28 +149,35 @@
                                 <html:form action="pdxDashboard" method="POST">
                                     <input type="submit" name="statusReport" VALUE="PDX Status Report">
                                 </html:form>
-                        </td>
-                        <td>
-                    <html:form action="pdxDashboard" method="POST">
-                        <input type="submit" name="engraftmentSummary" VALUE="PDX Engraftment Status Summary">
-                    </html:form>
-            </td> 
-            <td>
-        <html:form action="pdxDashboard" method="POST">
-            <input type="submit" name="familyHistory" VALUE="PDX Patient History">
-        </html:form>
-            </td>
-            <td>
-            <html:form action="pdxDashboard" method="POST">
-                <input type="submit" name="patientClinical" VALUE="PDX Patient Clinical">
-            </html:form>
-            </td>
+                                    </td>
+                                    
+                                    <td>
+                                <html:form action="pdxDashboard" method="POST">
+                                    <input type="submit" name="houseSpecial" VALUE="PDX House Special Report">
+                                </html:form>
+                                    </td>    
+                                    
+                                    <td>
+                                <html:form action="pdxDashboard" method="POST">
+                                    <input type="submit" name="engraftmentSummary" VALUE="PDX Engraftment Status Summary">
+                                </html:form>
+                                    </td> 
+                                    <td>
+                                <html:form action="pdxDashboard" method="POST">
+                                    <input type="submit" name="familyHistory" VALUE="PDX Patient History">
+                                </html:form>
+                                    </td>
+                                    <td>
+                                    <html:form action="pdxDashboard" method="POST">
+                                        <input type="submit" name="patientClinical" VALUE="PDX Patient Clinical">
+                                    </html:form>
+                                    </td>
 
-            <td>
-            <html:form action="pdxDashboard" method="POST">
-                <input type="submit" name="consortium" VALUE="PDX Consortium Report"> 
-            </html:form>
-            </td>
+                                    <td>
+                                    <html:form action="pdxDashboard" method="POST">
+                                        <input type="submit" name="consortium" VALUE="PDX Consortium Report"> 
+                                    </html:form>
+                                    </td>
             
              <td>
             
@@ -179,12 +186,12 @@
             </td>
             </tr>
             <tr>
-                <td colspan=5>
+                <td colspan="6">
                     Reports loaded ${freshnessDate} E.S.T. 
 
                 </td>
             <tr>
-                <td colspan=5>
+                <td colspan="6">
             <html:form action="pdxDashboard" method="POST">
                 <input type="submit" name="refresh" VALUE="Refresh Reports">
             </html:form>
