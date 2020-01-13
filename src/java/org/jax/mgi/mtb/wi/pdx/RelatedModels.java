@@ -75,6 +75,9 @@ public class RelatedModels {
         
         relations.put("TM00916", "PDX models TM00916, <a href='pdxDetails.do?modelID=TM00913' target='_blank'>TM00913</a> and <a href='pdxDetails.do?modelID=TM00914' target='_blank'>TM00914</a> originated from the same patient.");
         
+        relations.put("TM01096", "PDX models TM01096 and <a href='pdxDetails.do?modelID=TM01098' target='_blank'>TM01098</a> originated from the same patient.");
+        
+        relations.put("TM01098", "PDX models <a href='pdxDetails.do?modelID=TM01096' target='_blank'>TM01096</a> and TM01098 originated from the same patient.");
         
         
 
