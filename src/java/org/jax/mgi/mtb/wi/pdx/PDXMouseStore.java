@@ -1364,7 +1364,10 @@ public class PDXMouseStore {
             JSONArray array = (JSONArray) job.get("data");
 
             for (int i = 0; i < array.length(); i++) {
-                variants.add(array.getJSONObject(i).getString("amino_acid_change"));
+                String variant = array.getJSONObject(i).getString("amino_acid_change");
+                if(variant != null && !variant.equals("null")){
+                    variants.add(variant);
+                }
             }
             Collections.sort(variants);
 
