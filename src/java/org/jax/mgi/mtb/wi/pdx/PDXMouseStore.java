@@ -1292,6 +1292,8 @@ public class PDXMouseStore {
         if (variants != null && variants.size() > 0) {
             params.append("&amino_acid_change=").append(variantList.toString());
         }
+        
+        
 
         HashMap<String, ArrayList<StringBuilder>> data = new HashMap<>();
         try {
@@ -2023,10 +2025,14 @@ public class PDXMouseStore {
         } else {
             uri = uri + "?" + getFilterStr();
         }
+        
+        uri = uri.replaceAll(" ","+");
 
         boolean post = true;
         if (json == null || json.length() == 0) {
             post = false;
+        }else{
+            json = json.replaceAll(" ","+");
         }
 
         String responseSingle = "";
