@@ -185,13 +185,13 @@ public class PDXLikeMe {
             vals = gene.split(":");
             if (vals.length > 2) {
                 if (vals[2].trim().equals("K")) {
-                    k.add(vals[0].trim() + " " + vals[1].trim());
+                    k.add(vals[0].trim() + ":" + vals[1].trim());
                 } else if (vals[2].trim().equals("U")) {
-                    u.add(vals[0] + " " + vals[1]);
+                    u.add(vals[0] + ":" + vals[1]);
                 }
             } else if (vals.length == 2) {
                 // no explicit K or U so default to Known
-                k.add(vals[0].trim() + " " + vals[1].trim());
+                k.add(vals[0].trim() + ":" + vals[1].trim());
             } else {
                 return caseNo + "\n" + gene + " is in the wrong format";
             }
@@ -221,7 +221,7 @@ public class PDXLikeMe {
 
         for (String gene : ku) {
 
-            vals = gene.split(" ");
+            vals = gene.split(":");
             if (vals.length != 2) {
                 return "Error\n" + gene + " is not in the correct format.";
             }
@@ -265,16 +265,16 @@ public class PDXLikeMe {
             }
             table.append("<tr><th>Model ID</th>");
             for (String kGene : k) {
-                table.append("<th style=\"text-align:center;padding:5px\">").append(kGene);
-                if (!ctpGenes.contains(kGene.toUpperCase().split(" ")[0])) {
+                table.append("<th style=\"text-align:center;padding:5px\">").append(kGene.replace(":", " "));
+                if (!ctpGenes.contains(kGene.toUpperCase().split(":")[0])) {
                     table.append("<br>Not in CTP");
                 }
                 table.append("</th>");
 
             }
             for (String uGene : u) {
-                table.append("<th style=\"text-align:center;padding:5px\">").append(uGene);
-                if (!ctpGenes.contains(uGene.toUpperCase().split(" ")[0])) {
+                table.append("<th style=\"text-align:center;padding:5px\">").append(uGene.replace(":", " "));
+                if (!ctpGenes.contains(uGene.toUpperCase().split(":")[0])) {
                     table.append("<br>Not in CTP");
                 }
                 table.append("</th>");
@@ -282,18 +282,18 @@ public class PDXLikeMe {
             table.append("</thead><tbody>");
 
         } else {
-            // for both csv and vis formatting
+            // for  csv 
             table.append("Case,Model, PDX Diagnosis:Tissue,");
             String thing = "", gene = "";
             for (String kGene : k) {
 
-                gene = kGene.split(" ")[0].toUpperCase();
-                thing = kGene.split(" ")[1].toUpperCase();
+                gene = kGene.split(":")[0].toUpperCase();
+                thing = kGene.split(":")[1].toUpperCase();
 
-                table.append(kGene);
+                table.append(kGene.replace(":", " "));
                 
-                if (!ctpGenes.contains(kGene.toUpperCase().split(" ")[0])) {
-                    table.append("\nNot in CTP");
+                if (!ctpGenes.contains(kGene.toUpperCase().split(":")[0])) {
+                    table.append(" (Not in CTP)");
                 }
                 
                 table.append(",");
@@ -309,13 +309,13 @@ public class PDXLikeMe {
 
             }
             for (String uGene : u) {
-                gene = uGene.split(" ")[0].toUpperCase();
-                thing = uGene.split(" ")[1].toUpperCase();
+                gene = uGene.split(":")[0].toUpperCase();
+                thing = uGene.split(":")[1].toUpperCase();
 
-                table.append(uGene);
+                table.append(uGene.replace(":", " "));
                 
-                if (!ctpGenes.contains(uGene.toUpperCase().split(" ")[0])) {
-                    table.append("\nNot in CTP");
+                if (!ctpGenes.contains(uGene.toUpperCase().split(":")[0])) {
+                    table.append(" (Not in CTP)");
                 }        
                         
                 table.append(",");
@@ -356,7 +356,7 @@ public class PDXLikeMe {
                     table.append("</a><br>").append(detailsMap.get(mr.id)).append("</td>");
                     for (String gene : ku) {
 
-                        vals = gene.split(" ");
+                        vals = gene.split(":");
 
                         table.append("<td style=\"text-align:center\">");
                         if (mr.genes.contains(vals[0] + vals[1])) {
@@ -402,7 +402,7 @@ public class PDXLikeMe {
                     table.append(mr.id).append("\"\",\"\"").append(mr.id).append("\"\")\",");
                     table.append("\"" + detailsMap.get(mr.id)).append("\",");
                     for (String gene : ku) {
-                        vals = gene.split(" ");
+                        vals = gene.split(":");
                         if (mr.genes.contains(vals[0] + vals[1])) {
                             table.append("X ");
                         }
@@ -457,7 +457,7 @@ public class PDXLikeMe {
            box[0][1] = "diagnosis";
            int geneIndex = 2;
            for(String gene : ku){
-            box[0][geneIndex++]=gene.replace(" ", "<br>");
+            box[0][geneIndex++]=gene.replace(":", "<br>");
            }
            
             int y = 1;
@@ -470,7 +470,7 @@ public class PDXLikeMe {
                     box[y][x++] = mr.id;
                     box[y][x++] = detailsMap.get(mr.id);
                     for (String gene : ku) {
-                        vals = gene.split(" ");
+                        vals = gene.split(":");
                         String key = (mr.id + vals[0] + vals[1]).toUpperCase();
                         if (mr.genes.contains(vals[0] + vals[1])) {
                            
@@ -568,7 +568,7 @@ public class PDXLikeMe {
                     }
                           
                     if(box[y][x].contains("Clinically relevant")){
-                        style.append(" font-size:8px");
+                        style.append(" font-size:8px; ");
                         String muts = box[y][x].substring(box[y][x].indexOf("Clinically"));
                         mouseOver.append(" onmouseover=\"return overlib('").append(muts).append("',CAPTION,'").append("Clinically relevant mutation(s)").append("')\"");
                         mouseOver.append(" onmouseout=\"return nd()\"");
@@ -576,7 +576,7 @@ public class PDXLikeMe {
                     }else{
                         style.append(" overflow:hidden; font-size:12px");
                     }
-                    html.append("<td style=\" padding: 0px 0px 5px 0px; ").append(style).append("\"").append(mouseOver).append(">").append(cellText).append("</td>");
+                    html.append("<td style=\" padding: 0px 0px 5px 0px; white-space: nowrap; ").append(style).append("\"").append(mouseOver).append(">").append(cellText).append("</td>");
                 }
                 html.append("</tr>\n");
             }
@@ -944,10 +944,14 @@ public class PDXLikeMe {
         } else {
             uri = uri + "?" + filterStr;
         }
+        
+        uri = uri.replaceAll(" ","+");
 
         boolean post = true;
         if (json == null || json.length() == 0) {
             post = false;
+        }else{
+            json = json.replaceAll(" ","+");
         }
 
         String responseSingle = "";
