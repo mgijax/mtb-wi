@@ -14,6 +14,10 @@
 	<meta http-equiv="refresh" content="0; URL=<bean:write name="action_path_key" property="actionPath"/>">
 	</jsp:attribute>
 	<jsp:body>
-	<h3>Please wait&hellip;</h3>
+
+		<section class="container">
+			<h3>Please wait&hellip;</h3>			
+		</section>
+		
 	</jsp:body>
 </jax:mmhcpage>

@@ -35,6 +35,20 @@ var legend = '&lt;table border=&quot;0&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;img src=
 '&lt;tr&gt;&lt;td&gt;&lt;img src=&quot;${applicationScope.urlImageDir}/observed.png&quot; alt=&quot;OB&quot;&gt;&lt;/td&gt;&lt;td&gt;Observed (&gt;0%)&lt;/td&gt;&lt;/tr&gt;'+
 '&lt;tr&gt;&lt;td bgcolor=&quot;#ffffff&quot; width=&quot;20&quot;&gt;&nbsp;&lt;/td&gt;&lt;td &quot;&gt;Zero&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;';
 // derived from http://www.degraeve.com/reference/simple-ajax-example.php
+
+
+/*
+$(function() {
+	
+	
+});
+*/
+
+
+
+
+
+
 function onLoad(){	
 	if(window.location.search){
 		updatePage(document.location.search.substring(1));
@@ -69,7 +83,15 @@ function updatePage(qStr){
 function updatePageNoScroll(qStr){
 	doXMLReq(qStr)
 }
+
+
+
+
+
+
+
 function doXMLReq(qStr) {
+	
 	var xmlHttpReq = false;
 	var self = this;
 	if (window.XMLHttpRequest) { // Mozilla/Safari
@@ -82,6 +104,7 @@ function doXMLReq(qStr) {
 	self.xmlHttpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	self.xmlHttpReq.onreadystatechange = function() {
 		if (self.xmlHttpReq.readyState == 4) {
+			window.alert(url);
 			parseResponse(self.xmlHttpReq.responseText);
 		}
 	}
@@ -186,7 +209,7 @@ function queryToUI(queryStr){
 	}else{
 		metastatic = document.getElementById("metastatic").checked = false;
 	}
-	if(queryStr.indexOf("min-fc") != -1){
+	if(queryStr.indexOf("minFC") != -1){
 		minFC = document.getElementById("min-fc").checked = true;
 	}else{
 		minFC = document.getElementById("min-fc").checked = false;
@@ -332,7 +355,15 @@ function parseResponse(str){
 	showFilters();
 	showFacetCount();
 	//				document.getElementById("raw").innerHTML = str;
-	rsp = eval("("+str+")"); // use eval to parse Solr's JSON response
+	
+	
+	
+	window.alert(str);
+	rsp = eval("("+str+")"); 
+	
+	
+	
+	// use eval to parse Solr's JSON response
 	//var html= "numFound=" + rsp.response.numFound;
 	
 	for(var f = 0; f < f_field.length; f++){
@@ -755,3 +786,17 @@ function mutantCheck(name,search){
 		updatePageFromZero();
 	}
 }
+
+
+
+
+
+
+
+
+$(onLoad);
+
+
+
+
+

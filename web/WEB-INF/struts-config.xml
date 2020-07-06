@@ -359,7 +359,8 @@
             type="org.jax.mgi.mtb.wi.actions.GeneExpressionSearchResultsAction"
             name="GeneExpressionForm"
             scope="request">
-            <forward name="success" path="/WEB-INF/jsp/expression/geneExpressionSearchResults.jsp"/>      
+            <forward name="success" path="/WEB-INF/jsp/expression/geneExpressionSearchResultsSubtable.jsp"/>     
+            <forward name="subtable" path="/WEB-INF/jsp/expression/geneExpressionSearchResultsSubtable.jsp"/>     
             <forward name="failure" path="appError.jsp"/>
         </action>
     

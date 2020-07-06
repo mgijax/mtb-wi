@@ -139,6 +139,7 @@ object files in the appropriate location in the build directory.
            target="1.7" 
 memoryInitialSize="256m"
 memoryMaximumSize="1024m"
+	verbose="true"
              fork="true">
         <classpath refid="defaultClasspath"/>
         <classpath refid="project.classpath"/>

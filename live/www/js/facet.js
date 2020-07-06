@@ -17,7 +17,7 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://bhm
 			isExpanded: true
 		},
 		{
-			name: 'organAffected',
+			name: 'metsTo',
 			title: 'Site of Metastasis'
 		},
 		{
@@ -103,10 +103,10 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://bhm
 		wt: 'json',
 		indent: 'on',
 		facet: 'true',
-		'facet.sort': 'index', 		// count, index
+		'facet.sort': 'count', 		// count, index
 		'facet.mincount': 1,
 		'facet.limit': -1,
-		sort: 'freqMin desc', 		// organOrigin asc
+		sort: 'freqMax desc', 		// organOrigin asc
 		q: '*:*'
 	},
 	
@@ -132,7 +132,7 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://bhm
 		
 	}, {}),
 	
-	displayFields = ['freqM', 'freqF', 'freqX', 'freqU', 'referenceID', 'strainKey', 'tumorFrequencyKey', 'metsTo'],
+	displayFields = ['freqAll', 'freqM', 'freqF', 'freqX', 'freqU', 'referenceID', 'strainKey', 'tumorFrequencyKey', 'metsTo'],
 	
 	solrFields = configs.reduce((a, o) => {
 		if (o.terms) {
@@ -153,8 +153,13 @@ let facet,
 	cell,
 	freq,
 	modelUrl,
+	$facetUi,
 	$facets,	
 	$rows,
+	
+	recentExpanded = [],
+	recentForcedCollapse = [],
+	hasAllCollapsed = false,
 	
 	totalRows = 0,
 	
@@ -176,6 +181,7 @@ let facet,
 		
 		if (useHash) {
 			facetQueryParams = window.location.hash.substr(1);
+			
 			if (facetQueryParams) {
 				
 				configs.forEach(c => {
@@ -183,6 +189,7 @@ let facet,
 				});
 						
 				facetQuery = facetQueryParams.split('&').map(p => decodeURIComponent(p).split('=')[1].split(':'));
+				console.log('facetQuery from hash: %o', facetQuery);
 				facetQuery.forEach(q => {
 					
 					let config = getConfig(q[0]);
@@ -190,19 +197,30 @@ let facet,
 					if (config && q[1]) {
 						
 						let queryValue = q[1].replace(/\+/g, ' ').replace(/"/g, ''),
+							selectedTerm;
+							
+						if (config.terms) {
+							
+							selectedTerm = config.terms.find(t => t.queryValue == queryValue);
+							
+						} else {
+							
 							selectedTerm = {
 								'label': config.format ? config.format(queryValue) : queryValue
 							};
+
+							if (config.fields) {
+								selectedTerm.queryKey = q[0];
+							}
 							
-						if (config.fields) {
-							selectedTerm.queryKey = q[0];
-						}
+							if (config.format) {
+								selectedTerm.queryValue = queryValue;
+								selectedTerm.label = config.format(selectedTerm.label);
+							}
 						
-						if (config.format) {
-							selectedTerm.queryValue = queryValue;
-							selectedTerm.label = config.format(selectedTerm.label);
-						}										
+						}									
 						config.initSelectedTerms.push(selectedTerm);
+						// console.log('%s: config.initSelectedTerms: %o', config.name, config.initSelectedTerms);
 					}
 				});
 			}
@@ -213,6 +231,7 @@ let facet,
 					facetQuery.push(f.query);
 				}
 			});
+			console.log('facetQuery from ui: %o', facetQuery);
 			facetQueryParams = facetQuery.join('&');
 		}
 		if (facetQueryParams) {
@@ -293,11 +312,17 @@ let facet,
 
 	},
 	
-	saveFieldOrder = function() {
+	updateFacetUiState = function() {
 		
-		let savedFacets = [];
+		let savedFacets = [],
+			$fi = $facets.children();
 		
-		$facets.children().each(function() {
+		resizeFacetUi(false);
+
+		// console.log('recentExpanded: %o', recentExpanded);		
+		// console.log('updateFacetUiState: wh: %i, h: %i, f: %s', wh, uh, fn);
+
+		$fi.each(function() {
 			let $f = $(this);
 			savedFacets.push($f.data('facet-name') + ':' + ($f.hasClass('show-detail') ? '1' : '0'));
 		});
@@ -305,17 +330,44 @@ let facet,
 		localStorage.setItem(savedUiKey, savedFacets.join('|'));
 		
 	},
+	
+	resizeFacetUi = function(shouldFill) {
+		
+		let wh = $(window).height(),
+			uh = $facets.outerHeight() + $('#facet-controls').outerHeight() + 124,
+			i = 0;
+			
+		console.log('resizeFacetUi: recentForcedCollapse: %o', recentForcedCollapse);
+		console.log('resizeFacetUi: recentExpanded: %o', recentExpanded);
+
+		if (shouldFill && !hasAllCollapsed) {
+			// Expand the most recent force-collapsed facets, while there is room
+			while (uh < wh && recentForcedCollapse.length > 0) {
+				let n = recentForcedCollapse.pop();
+				facets[n].unForceCollapse();	
+				uh = $facets.outerHeight() + $('#facet-controls').outerHeight() + 124;
+			}
+		}	
+
+		// Force the least recently expanded facets to collapse
+		while (uh > wh && i < recentExpanded.length) {
+			facets[recentExpanded[i]].forceCollapse();
+			uh = $facets.outerHeight() + $('#facet-controls').outerHeight() + 124;
+			i += 1;
+		}				
+	},
 
 	updateWithResponse = function(o) {
 
 		
 		let orderedConfigs = getOrderedConfigs(o.facet_counts.facet_fields);
 
-		orderedConfigs.forEach(updateFacet);
+		orderedConfigs.forEach(updateFacet); 
+		console.log('recentExpanded: %o', recentExpanded);
 
 		if ($facets.sortable('instance') === undefined) {
 			$facets.sortable();
-			$facets.on('sortupdate', saveFieldOrder);
+			$facets.on('sortupdate', updateFacetUiState);
 		} else {
 			$facets.sortable('refresh');
 		}
@@ -343,11 +395,15 @@ let facet,
 		
 		if (!(config.name in facets)) {
 			facets[config.name] = facet(config);
+			if (config.isExpanded) {
+				recentExpanded.unshift(config.name);
+			}
 		}
 		
 		facets[config.name].update(config.terms);
 		
 	},
+
 	
 	updatePageSummary = function() {
 		$first.html(pageQuery.start + 1);
@@ -386,67 +442,100 @@ facet = function(config) {
 		$search = $('<input placeholder="Search" type="text">'),
 		$terms = $('<ul class="terms">'),
 		$lis = $terms.children(),
+		$clearSearch, $searchWrap, clearSearch,
 		updateQueryAndListeners,
 		updateSelectedTerms, appendTerms,
 		termsBottom = 0,
 		termIndex = 0;
 
 	$ui.attr('id', kebab(o.name));
-	$ui.data('facet-name', o.name);	
+	$ui.data('facet-name', o.name);
+	
+	clearSearch = function() {};
 	
 	$head.append($plus).append($title).append($sort);
 	if (o.hasSearch !== false) {
-		$detail.append($search)
+		$clearSearch = $('<i class="fa fa-times-circle"></i>');
+		$searchWrap = $('<div class="search-wrap"></div>');
+		$searchWrap.append($search).append($clearSearch);
+		$detail.append($searchWrap);
+		clearSearch = function() {
+			$search.val('');
+			$searchWrap.removeClass('show-clear');
+			$lis.removeClass('hide-term');
+		};		
+		$clearSearch.on('click', clearSearch);
 	}
 	$detail.append($selected).append($terms);
 	$ui.append($head).append($detail);
 	
 	$ui.toggleClass('show-detail', o.isExpanded === true);
 	
+	o.unForceCollapse = function() {
+		o.isExpanded = true;
+		$ui.addClass('show-detail');
+	}
+	
+	o.forceCollapse = function() {		
+		o.isExpanded = false;
+		$ui.removeClass('show-detail');
+		recentForcedCollapse.push(o.name);
+		console.log('recentForcedCollapse: %o', recentForcedCollapse);
+	}
+	
 	$plus.on('click', function() {
 		o.isExpanded = !o.isExpanded;
-		$ui.toggleClass('show-detail');
-		saveFieldOrder();
+		$ui.toggleClass('show-detail', o.isExpanded);
+		let removeIndex = recentExpanded.indexOf(o.name);
+		if (removeIndex !== -1) {
+			recentExpanded.splice(removeIndex, 1);
+		}		
+		if (o.isExpanded) {
+			recentExpanded.push(o.name);
+			if (recentExpanded.length > $facets.children().length) {
+				recentExpanded.shift();
+			}
+		}
+		updateFacetUiState();
 	});
 	
-	$terms.on('scroll', function() {
-		
+	$terms.on('scroll', function() {		
 		let $e = $(this),
 			scrollBottom = $e.scrollTop() + $terms.height();
 
 		if (scrollBottom >= termsBottom) {
 			appendTerms();
-		}
-		
+		}		
 	});
-	
+
 	$facets.append($ui);
 		
 	appendTerms = function(isAll) {
 		
-		let chunkSize = isAll ? (o.terms.length - termIndex + 1) : termChunkSize;
+		let chunkSize = isAll ? (o.terms.length - termIndex + 1) : termChunkSize,
+			chunk = document.createDocumentFragment();
 		
 		o.terms.slice(termIndex, termIndex + chunkSize).forEach(t => {
 			let termKey = getTermKey(t.label, t.queryKey),
 				$selectedLi = $selected.find('[data-term-key="' + termKey + '"]'),
-				selectedAttr = ($selectedLi.length > 0) ? ' class="term-selected"' : '',
-				$termLi;
-				
-			$termLi = $(
-				'<li' + selectedAttr + ' data-term-key="' + termKey + '"' + 
-				(t.queryKey ? (' data-query-key="' + t.queryKey + '"') : '') +
-				(t.queryValue ? (' data-query-value="' + t.queryValue + '"') : '') +
-				'><span>' + t.label + '</span>' +
-				(t.resultCount ? ('&nbsp;&#x22ef;&nbsp;' + t.resultCount) : '') +
-				'</li>');
+				termLi;
 			
-			$termLi.on('click', function() {
-				$(this).toggleClass('term-selected');
-				updateSelectedTerms();			
-			});
-				
-			$terms.append($termLi);
+			termLi = document.createElement('li');
+			if ($selectedLi.length > 0) {
+				termLi.className = 'term-selected';
+			}
+			termLi.setAttribute('data-term-key', termKey);
+			if (t.queryKey) {
+				termLi.setAttribute('data-query-key', t.queryKey);
+			}
+			if (t.queryValue) {
+				termLi.setAttribute('data-query-value', t.queryValue);
+			}
+			termLi.innerHTML = '<span>' + t.label + '</span>' + (t.resultCount ? ('&nbsp;&#x22ef;&nbsp;' + t.resultCount) : '');
+			chunk.appendChild(termLi);						
 		});
+		
+		$terms.append(chunk);
 		
 		termIndex += chunkSize;
 		$lis = $terms.children();		
@@ -465,22 +554,19 @@ facet = function(config) {
 	
 	o.clear = function() {
 		$selected.empty();
-		$selected.removeClass('has-selected');
+		$ui.removeClass('has-selected');
 		queryTerms = [];
 		o.query = '';
+		clearSearch();
 	};
 	
-	$search.on('focus keydown', function() {
-		appendTerms(true);
-	});
-	
 	$search.on('keyup', function() {
-		
-		let v = $(this).val().toLowerCase();
-		
+		appendTerms(true);
+		let v = kebab($(this).val());
+		$searchWrap.toggleClass('show-clear', v.length > 0);
 		$lis.each(function() {		
 			let $li = $(this);			
-			$li.toggleClass('hide-term', $li.html().toLowerCase().indexOf(v) === -1);		
+			$li.toggleClass('hide-term', $li.data('term-key').indexOf(v) === -1);		
 		});
 		
 	});
@@ -491,11 +577,14 @@ facet = function(config) {
 		
 		$selectedLis.each(function() {
 			let $li = $(this);
-			queryTerms.push(
+			queryTerms.push(encodeURIComponent(
 				($li.data('query-key') || o.name) + ':' + 
-				($li.data('query-value') || ('"' + $li.find('span').html() + '"')));
+				($li.data('query-value') || ('"' + $li.find('span').html() + '"'))));
 		});
-		o.query = $.param({ 'fq': queryTerms }, true);
+		o.query = $.param({ 'fq': queryTerms }, true).replace('%2B', '');
+		
+		//console.log('queryTerms: %o', queryTerms);
+		//console.log('query: ' + o.query);
 
 		$selectedLis.on('click', function() {
 			
@@ -513,7 +602,7 @@ facet = function(config) {
 		$selected.empty();
 		
 		let $s = $lis.filter('.term-selected');
-		$selected.toggleClass('has-selected', $s.length > 0);
+		$ui.toggleClass('has-selected', $s.length > 0);
 		$s.each(function() {
 			let $li = $(this).clone(),
 				$span = $li.find('span');
@@ -529,7 +618,13 @@ facet = function(config) {
 		doQuery();
 	};
 	
+	$terms.on('click', function(e) {
+		$(e.target).closest('li').toggleClass('term-selected');
+		updateSelectedTerms();
+	});
+	
 	if (o.initSelectedTerms && o.initSelectedTerms.length > 0) {
+		console.log('%s: initSelectedTerms: %o', o.name, o.initSelectedTerms);
 		o.initSelectedTerms.forEach(t => {
 			let termKey = getTermKey(t.label, t.queryKey),
 				$selectedTermLi = $(
@@ -539,7 +634,7 @@ facet = function(config) {
 					'><span>' + t.label + '</span></li>');
 			$selected.append($selectedTermLi);			
 		});
-		$selected.addClass('has-selected');	
+		$ui.addClass('has-selected');	
 		updateQueryAndListeners();
 	}		
 
@@ -556,32 +651,24 @@ cell = function(o, c) {
 	return $('<td>' + c(o) + '</td>');	
 };
 
-freq = function(fs) {
-	let fc;
-	
-	if (fs.indexOf('observed') !== -1) {
-		fc = 'fr-observed';
-	} else if (fs == '0') {
-		fc = 'fr-0';
+freq = function(r) {
+	let f = r.freqMax;
+
+	if (f >= 80) {
+		fc = 'fr-80';
+	} else if (f >= 50) {
+		fc = 'fr-50';
+	} else if (f >= 20) {
+		fc = 'fr-20';
+	} else if (f >= 10) {
+		fc = 'fr-10';
+	} else if (f >= 1) {
+		fc = 'fr-01';
 	} else {
-		
-		let f = fs.split('-')[0].trim();
-		
-		if (f >= 80) {
-			fc = 'fr-80';
-		} else if (f >= 50) {
-			fc = 'fr-50';
-		} else if (f >= 20) {
-			fc = 'fr-20';
-		} else if (f >= 10) {
-			fc = 'fr-10';
-		} else {
-			fc = 'fr-01';
-		}	
-		
+		fc = 'fr-0';
 	}
 
-	return '<p class="fr ' + fc + '">' + fs + '</p>';
+	return '<p class="fr ' + fc + '">' + r.freqAll + '</p>';
 };
 
 modelUrl = function(r) {
@@ -597,9 +684,10 @@ info = function(r) {
 		fk = r.tumorFrequencyKey.join(',');
 	
 	if (r.referenceID) {
+		console.log('ref: %o', r);
 		h += '<p>' + r.referenceID.length + '&nbsp;Reference' + (r.referenceID.length == 1 ? '' : 's');
-		h += ': ' + r.referenceID.map(a => '<a href="' + baseUrl +
-			'/referenceDetails.do?accId=' + a + '" target="_blank">' + a + '</a>').join(', ') + '</p>';		
+		h += ': ' + r.referenceID.map((a, i) => '<a href="' + baseUrl +
+			'/referenceDetails.do?accId=' + a + '" target="_blank">' + r.citation[i] + '</a>').join('&nbsp;&nbsp;&sdot;&nbsp;&nbsp;') + '</p>';		
 	}
 	
 	if (r.metsTo) {
@@ -607,23 +695,31 @@ info = function(r) {
 	}
 	
 	if (r.pathologyImages) {
+/*
 		h += '<p><a href="' + baseUrl +
 			'/pathologyImageSearchResults.do?tfKeys=' + fk +'" target="_blank">' +
 			r.pathologyImages + ' Pathology Image' + (r.pathologyImages == 1 ? '' : 's') + '</a></p>';
+*/
+		h += '<p>' + r.pathologyImages + ' Pathology Image' + (r.pathologyImages == 1 ? '' : 's') + '</p>';
 	}
 
 	if (r.cytoImages) {		
+/*
 		h += '<p><a href="' + baseUrl +
 			'/tumorFrequencyDetails.do?page=cytogenetics&key=' + r.cytoImages +'" target="_blank">' +
-			r.cytoCount + ' Cytogenetic Image' + (r.cytoCount == 1 ? '' : 's') + '</a></p>';		
+			r.cytoCount + ' Cytogenetic Image' + (r.cytoCount == 1 ? '' : 's') + '</a></p>';	
+*/
+		h += '<p>' + r.cytoCount + ' Cytogenetic Image' + (r.cytoCount == 1 ? '' : 's') + '</p>';		
 	}
 	
+/*
 	if (r.geneExpression) {
 		h += '<p><a href="' + baseUrl +
 			'/geneExpressionSearchResults.do?tfKeys=' + fk +'" target="_blank">' +
 			'Gene Expression Data</a></p>';
 	}
-	
+*/
+
 	return h;	
 };
 
@@ -632,9 +728,7 @@ addRow = function(i, r) {
 	let $r = $('<tr>'),
 		mu = modelUrl(r),
 		$name = cell(r, r => {
-			return '<a href="' + mu + '">' +
-				r.organOrigin + '<br>' + r.tumorClassification +
-				'</a>';
+			return r.organOrigin + ' ' + r.tumorClassification;
 		}),
 		$organ = cell(r.organAffected, a => {
 			if (a !== r.organOrigin) {
@@ -644,16 +738,13 @@ addRow = function(i, r) {
 			return '';
 		}),
 		$agent = cell(r.agent, a => a.join(', ')),
-		$strain = cell(r, r => r.strain + r.strainType.map(t => '<em>' + t + '</em>').join('')),
-		$freqF = cell(r.freqF, freq),
-		$freqM = cell(r.freqM, freq),
-		$freqX = cell(r.freqX, freq),
-		$freqU = cell(r.freqU, freq),
+		$strain = cell(r, r => '<a href="strainDetails.do?key=' + r.strainKey + '" target="_blank">' + r.strain + '</a>' + r.strainType.map(t => '<em>' + t + '</em>').join('')),
+		$freqA = cell(r, freq),
 		$info = cell(r, info),
-		$details = cell(r, r => '<a href="' + mu + '"><i class="mo"></i></a>');
+		$details = cell(r, r => '<a href="' + mu + '" target="_blank"><i class="mo"></i></a>');
 
 		$r.append($name).append($organ).append($agent).append($strain)
-			.append($freqF).append($freqM).append($freqX).append($freqU)
+			.append($freqA)
 			.append($info).append($details);
 
 	$rows.append($r);
@@ -664,18 +755,20 @@ $(function() {
 	
 	let $w = $(window),
 		$body = $('body'),
-		$facetUi = $('#facet-ui'),
 		$bodyHeader = $('body > header'),
-		headerHeight = 102;
+		headerHeight = 102,
+		$collapseAll = $('#collapse-all');
 	
     $w.on('scroll', function () {
         $body.toggleClass('scrolled', $w.scrollTop() > headerHeight);
     });
     
     $w.on('resize', function() {
-	    headerHeight = $bodyHeader.height();	    
+	    headerHeight = $bodyHeader.height();
+	    resizeFacetUi(true);    
     });	
-	
+    
+    $facetUi = $('#facet-ui');	
 	$facets = $('#facets');
 	$table = $('#facet-results');
 	$rows = $('#facet-results tbody');
@@ -683,8 +776,21 @@ $(function() {
 	$last = $('#result-last');
 	$total = $('#result-total');
 	
-	$('#collapse-all').on('click', function() {		
-		$('#facets').children().removeClass('show-detail');
+	$collapseAll.on('click', function() {
+		hasAllCollapsed = !hasAllCollapsed;
+		
+		if (!hasAllCollapsed) {
+			resizeFacetUi(true);
+			$collapseAll.html('<i class="fa fa-minus"></i>Collapse All');
+		} else {
+			// console.log('recentForcedCollapse: %o', recentForcedCollapse);
+			recentExpanded.forEach(n => {
+				facets[n].forceCollapse();
+			});
+			$collapseAll.html('<i class="fa fa-plus"></i>Expand');
+		}
+		
+		
 	});
 	
 	$('#clear-all').on('click', function() {

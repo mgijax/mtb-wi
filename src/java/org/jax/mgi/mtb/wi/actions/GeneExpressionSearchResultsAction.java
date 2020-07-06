@@ -19,6 +19,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBSeriesSampleUtilDAO;
 import org.jax.mgi.mtb.dao.gen.mtb.SampleDTO;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.wi.forms.GeneExpressionForm;
+import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.wi.utils.WIUtils;
 
 /**
@@ -37,6 +38,13 @@ public class GeneExpressionSearchResultsAction extends Action{
                                  HttpServletRequest request,
                                  HttpServletResponse response)
         throws Exception {
+	        
+        String strTarget = "success";
+        String strPage = request.getParameter("page");
+        
+        if (StringUtils.hasValue(strPage)) {
+            strTarget = strPage;
+        }
       
       GeneExpressionForm geForm = (GeneExpressionForm) form;
       
@@ -117,10 +125,8 @@ public class GeneExpressionSearchResultsAction extends Action{
         request.setAttribute("strainName",strainLikeClause+" "+ strainName);
       }
       
-      String forward = "success";
       
-      
-      return mapping.findForward(forward);
+      return mapping.findForward(strTarget);
 
       
     }

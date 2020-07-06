@@ -17,7 +17,7 @@
 			</div>				
 			<div id="facets"></div>
 		</div>
-		<div id="facet-results" class="result-table">
+		<div id="facet-results">
 			<table>
 				<caption>
 					<div id="result-count">
@@ -27,20 +27,23 @@
 					</div>
 				</caption>
 				<thead>
-					<tr>
+					<!--<tr>
 						<th colspan="4">Tumor Model</th>
-						<th colspan="4" class="fqc">Reported Frequency Range (sex)</th>
+						<th colspan="4" class="fqc"></th>
 						<th colspan="2"></th>
-					</tr>
+					</tr>-->
 					<tr>
 						<th data-sort="yes">Model Name</th>
 						<th data-sort="yes">Organ Affected</th>
 						<th>Tumor Inducing Agent(s)</th>
 						<th data-sort="yes">Strain</th>
+						<th data-sort="yes" class="fqc">Frequency Range</th>
+<!--
 						<th data-sort="yes" class="fqc">Female</th>
 						<th data-sort="yes" class="fqc">Male</th>
 						<th data-sort="yes" class="fqc">Mixed</th>
 						<th data-sort="yes" class="fqc">Unknown</th>
+-->
 						<th>Additional Information</th>
 						<th>Model Details</th>
 					</tr>

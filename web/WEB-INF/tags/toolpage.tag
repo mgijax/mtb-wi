@@ -6,6 +6,7 @@
 <%@ attribute name="defaultKeywords" required="true" %>
 <%@ attribute name="defaultDescription" required="true" %>
 <%@ attribute name="title" required="false" %>
+<%@ attribute name="subtitle" required="false" %>
 <%@ attribute name="keywords" required="false" %>
 <%@ attribute name="description" required="false" %>
 <%@ attribute name="defaultHead" fragment="true" %>
@@ -54,24 +55,28 @@
 
 <body>
 	<header>
-		<nav>
+		<nav class="container">
 			<jsp:invoke fragment="header" />
 		</nav>
 	</header>
-	<section>
-		<header>
-			<h1>${title}</h1>
+	<main>
+		<header class="container">
+			<h1>${title}<c:if test="${not empty subtitle}"><span>${subtitle}</span></c:if></h1>
 			<jsp:invoke fragment="defaultSubnav" />
 		</header>
 		<jsp:doBody/>
-	</section>
+	</main>
 	<footer>
-		<div>
-			<a href="https://www.jax.org">
-				<p>Hosted by</p>
-				<img src="/_res/img/logo-mono.png" alt="The Jackson Laboratory">
-			</a>
-			<jsp:invoke fragment="footer" />
+		<div class="container">
+			<div>
+				<div class="footer-logo">
+					<p>Hosted by</p>
+					<a href="https://www.jax.org">
+						<img src="/_res/img/logo-mono.png" alt="The Jackson Laboratory">
+					</a>
+				</div>
+				<jsp:invoke fragment="footer" />
+			</div>
 		</div>
 	</footer>
 	<script type="text/javascript" id="mod-loader">

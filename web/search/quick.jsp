@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html" %>
-<form action="quickSearchResults.do" method="GET">
-	<input id="search-term" name="quickSearchTerm" type="text" placeholder="Tumor, organ, strain, gene, allele, author">
-	<input type="submit" value="&#xf002;">
+<form>
+	<input id="search-term" type="text" placeholder="Quick search">
+	<input id="submit-search" type="submit" value="&#xf002;">
 </form>

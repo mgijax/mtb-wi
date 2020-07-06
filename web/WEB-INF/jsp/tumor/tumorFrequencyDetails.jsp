@@ -260,9 +260,9 @@
 	</caption>
 	<tbody>
 	<tr>
-		<th>Age at Necropsy</th>
 		<th>Description</th>
 		<th>Notes</th>
+		<th>Age at Necropsy</th>
 		<th>Images</th>
 	</tr>
 
@@ -273,9 +273,10 @@
 		
 		<tr>
 	
-			<td rowspan="${rowSpan}"><c:out value="${rec.ageAtNecropsy}" escapeXml="false" default=""/></td>
+			
 			<td rowspan="${rowSpan}"><c:out value="${rec.description}" escapeXml="false" default=""/></td>
 			<td rowspan="${rowSpan}"><c:out value="${rec.note}" escapeXml="false" default=""/></td>
+			<td rowspan="${rowSpan}"><c:out value="${rec.ageAtNecropsy}" escapeXml="false" default=""/></td>
 			
 		<c:choose>
 		<c:when test="${not empty rec.images}">

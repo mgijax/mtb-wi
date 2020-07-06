@@ -21,4 +21,9 @@ $(function() {
 		});		
 	});
 	
+	$('#submit-search').on('click', function() {
+		var st = encodeURIComponent($('#search-term').val());
+		window.location = 'facetedSearch.do#fq=quickSearch%3A%22' + st + '%22';
+	});
+	
 });

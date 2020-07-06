@@ -10,34 +10,36 @@
 	</caption>
 	<thead>
 	<tr>
-		<th>Age at Necropsy</th>
+		
 		<th>Description</th>
 		<th>Notes</th>
-		<th>Images</th>
+		<th>Age at Necropsy</th>
 	</tr>
 	</thead>
-	<tbody>
-	<c:forEach var="rec" items="${tumorFreq.pathologyRecs}" varStatus="status">
-	<c:set var="rowSpan" value="${fn:length(rec.images)}"/>
-	<c:if test="${rowSpan < 1}">
-	<c:set var="rowSpan" value="1"/>
-	</c:if>
 	
+	<c:forEach var="rec" items="${tumorFreq.pathologyRecs}" varStatus="status">
+
+	<tbody>
 	<tr>
-		<td><c:out value="${rec.ageAtNecropsy}" escapeXml="false" default="&nbsp;"/></td>
+		
 		<td><c:out value="${rec.description}" escapeXml="false" default="&nbsp;"/></td>
-		<td><c:out value="${rec.note}" escapeXml="false" default="&nbsp;"/></td>
-		<td class="tumor-images">
-			<c:if test="${not empty rec.images}">
+		<td><c:out value="${rec.note}" escapeXml="false" default="&nbsp;"/></td>	
+		<td><c:out value="${rec.ageAtNecropsy}" escapeXml="false" default="&nbsp;"/></td>	
+	</tr>
+	<c:if test="${not empty rec.images}">
+	<tr>
+		<td class="tumor-images" colspan="3">
+			
 			<c:forEach var="image" items="${rec.images}" varStatus="status2">																
 			<figure>
 				<a href="pathologyImageDetails.do?key=${image.imageId}">
-					<img width="150" src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${image.imageThumbName}">
+					<img src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${image.imageThumbName}">
 				</a>
 				<figcaption>
-					<h4>Image ID</h4>:
-					<p>${image.imageId}</p>
-					<h4>Source of Image</h4>:
+				
+					<div><h5>Image ID</h5>
+					<p>${image.imageId}</p></div>
+					<div><h5>Source of Image</h5>
 					<p>
 						<c:choose>
 						<c:when test="${fn:length(image.institution) > 0}">
@@ -47,18 +49,20 @@
 						${image.sourceOfImage}
 						</c:otherwise>
 						</c:choose>
-					</p>
-					<h4>Method / Stain</h4>:
-					<p>${image.stainMethod}</p>
-					<h4>Image Caption</h4>:
-					${image.imageCaption}
+					</p></div>
+					<div><h5>Method / Stain</h5>
+					<p>${image.stainMethod}</p></div>
+					<h5>Image Caption</h5>
+					<p>${image.imageCaption}</p>
 				</figcaption>
 			</figure>
 			</c:forEach>
-			</c:if>
+			
 		</td>
 	</tr>
-	</c:forEach>
+	</c:if>
 	</tbody>
+	</c:forEach>
+	
 </table>
 </c:if>
