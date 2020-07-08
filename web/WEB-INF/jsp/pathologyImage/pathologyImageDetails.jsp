@@ -10,57 +10,12 @@
 <c:import url="../../../meta.jsp">
     <c:param name="pageTitle" value="Pathology Image Detail"/>
 </c:import>
-<script LANGUAGE="Javascript">
-<!--
-var flashinstalled = 0;
-var flashversion = 0;
-MSDetect = "false";
-if (navigator.plugins && navigator.plugins.length) {
-    x = navigator.plugins["Shockwave Flash"];
-    if (x) {
-        flashinstalled = 2;
-        if (x.description) {
-            y = x.description;
-            flashversion = y.charAt(y.indexOf('.')-1);
-        }
-    } else {
-        flashinstalled = 1;
-    }
-
-    if (navigator.plugins["Shockwave Flash 2.0"]) {
-        flashinstalled = 2;
-        flashversion = 2;
-    }
-} else if (navigator.mimeTypes && navigator.mimeTypes.length) {
-    x = navigator.mimeTypes['application/x-shockwave-flash'];
-    if (x && x.enabledPlugin)
-        flashinstalled = 2;
-    else
-        flashinstalled = 1;
-} else {
-  MSDetect = "true";
-}
-// -->
-</script>
-
-<script language="VBScript">
-on error resume next
-
-If MSDetect = "true" Then
-    For i = 2 to 6
-        If Not(IsObject(CreateObject("ShockwaveFlash.ShockwaveFlash." & i))) Then
-
-        Else
-            flashinstalled = 2
-            flashversion = i
-        End If
-    Next
-End If
-
-If flashinstalled = 0 Then
-    flashinstalled = 1
-End If
-</script>
+<c:choose>
+     <c:when test="${not empty pathology.zoomifyDir}">     
+        <script type="text/javascript" src="${applicationScope.urlBase}/zoomify/ZoomifyImageViewerFree-min.js"></script>
+        <script type="text/javascript"> Z.showImage("myContainer", "${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${pathology.zoomifyDir}"); </script>
+    </c:when>
+</c:choose>
 </head>
 
 <c:import url="../../../body.jsp">
@@ -99,23 +54,7 @@ End If
             <center>
             <c:choose>
                 <c:when test="${not empty pathology.zoomifyDir}">
-                <!-- ZOOMIFY CHECK -->
-<script language="javascript" type="text/javascript">
-<!--
-if (flashinstalled == 2) {
-    document.write("<DIV ALIGN=\"center\">");
-    document.write("<OBJECT CLASSID=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" CODEBASE=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0\" WIDTH=\"900\" HEIGHT=\"550\" ID=\"theMovie\">");
-    document.write("    <PARAM NAME=\"FlashVars\" VALUE=\"zoomifyImagePath=${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${pathology.zoomifyDir}\">");
-    document.write("    <PARAM NAME=\"src\" VALUE=\"${applicationScope.urlZoomify}\">");
-    document.write("    <EMBED FlashVars=\"zoomifyImagePath=${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${pathology.zoomifyDir}\" SRC=\"${applicationScope.urlZoomify}\" PLUGINSPAGE=\"http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash\"  WIDTH=\"900\" HEIGHT=\"550\" NAME=\"theMovie\">");
-    document.write("    </EMBED>");
-    document.write("</OBJECT>");
-    document.write("</DIV>");
-} else {
-    document.write("<img src=\"${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${pathology.imageName}\">");
-}
-// -->
-</script>
+                    <div id="myContainer" style="width:900px; height:500px; margin:auto; border:1px; border-style:solid; border-color:#696969; background-color:#000000;" ></div>
                 </c:when>
                 <c:otherwise>
                     <!-- IMAGE HAS NOT BEEN ZOOMIFIED -->

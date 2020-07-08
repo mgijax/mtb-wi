@@ -357,6 +357,86 @@ public class ElimsUtil {
 
         return report.toString();
     }
+    
+     private static final String STATUS_COLUMNS_HOUSE_SPECIAL_REPORT = "Model ID,Model AKA,Gender,Age,Race,Ethnicity,"
+            + "Specimen Site,Primary Site,Clinical Diagnosis,"
+            + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type";
+    
+    
+    
+    public String getPDXHouseSpecialReport() {
+        StringBuffer report = new StringBuffer();
+        try {
+
+            MTB_wsStub stub = getStub();
+
+            GetPDXStatusReport_sessionless soapRequest
+                    = GetPDXStatusReport_sessionless.class.newInstance();
+
+            soapRequest.setPwd(password);
+            soapRequest.setUser(userName);
+
+            Pdx_model_status[] result = stub.getPDXStatusReport_sessionless(soapRequest).getGetPDXStatusReport_sessionlessResult().getPdx_model_status();
+
+            if (result.length > 0) {
+
+                report.append(STATUS_COLUMNS_HOUSE_SPECIAL_REPORT).append("\n");
+                for (int i = 0; i < result.length; i++) {
+
+                    String id = result[i].getIdentifier();
+                    try {
+                        int intID = new Integer(id);
+                        id = ("TM" + String.format("%05d", intID));
+                    } catch (NumberFormatException e) {
+                        // this will happen for J##### ids which is ok
+                    }
+
+                     String status = result[i].getModel_Status();
+                     Integer numericID;
+                    try{
+                        numericID = new Integer(result[i].getIdentifier().replaceAll("J",""));
+                    }catch(Exception e){
+                        numericID = 111111;
+                    }
+                    
+                    if (status.contains("Active Available") 
+                        || status.contains("Active: Available")    
+                        || status.contains("Blood")
+                        || status.contains("Data")
+                        || (status.contains("Active: P1 Available") && numericID < 111056 )) {
+                        report.append(id).append(",");
+                        
+                        report.append(clean(result[i].getModel_Aka())).append(",");
+                        report.append(clean(result[i].getGender())).append(",");
+                        report.append(clean(result[i].getPatient_Age())).append(",");
+                        report.append(clean(result[i].getRace())).append(",");
+                        report.append(clean(result[i].getEthnicity())).append(",");
+                        report.append(clean(result[i].getSpecimen_Site())).append(",");
+                        report.append(clean(result[i].getPrimary_Site())).append(","); 
+                        report.append(clean(result[i].getClinical_Diagnosis())).append(",");
+                        report.append(clean(result[i].getTumor_Type())).append(",");
+                        report.append(clean(result[i].getGrades())).append(",");
+                        report.append(clean(result[i].getMarkers())).append(",");
+                        report.append(clean(result[i].getModelTags())).append(",");
+                        report.append(clean(result[i].getTumor_Stage())).append(",");
+                        report.append(clean(result[i].getTumor_M_Stage())).append(",");
+                        report.append(clean(result[i].getTumor_N_Stage())).append(",");
+                        report.append(clean(result[i].getTumor_T_Stage())).append(",");
+                        report.append(clean(result[i].getSample_Type())).append("\n");
+                    }
+                }
+
+            }
+
+        } catch (Exception e) {
+            log.error("Error gettting PDX House Special Report", e);
+        }
+
+        return report.toString();
+    }
+    
+    
+   
 
     public String getJSONPDXStatusReport() {
         StringBuilder report = new StringBuilder();

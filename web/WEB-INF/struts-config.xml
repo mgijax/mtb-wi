@@ -376,6 +376,9 @@
             <forward name="failure" path="appError.jsp"/>
         </action>
        
+       <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+       <!-- The pdxSearch.do url is mapped to from jax.org/findpdx       -->
+       <!-- DONT change this with out contacting jax.org mgmt to re mapp -->
         <action path="/pdxSearch"
             type="org.jax.mgi.mtb.wi.actions.PDXSearchAction"
             name="PDXForm"
@@ -391,6 +394,7 @@
             scope="request">
             <forward name="success" path="/WEB-INF/jsp/PDX/pdxLikeMe.jsp"/>  
             <forward name="noData" path="/WEB-INF/jsp/PDX/pdxNoData.jsp"/>
+            <forward name="vis" path="/WEB-INF/jsp/PDX/pdxLikeMeVis.jsp"/>
             <forward name="failure" path="appError.jsp"/>
         </action>
     

@@ -58,6 +58,7 @@
   <li><a href="#referencedetail">Reference Detail</a></li>
   <li><a href="#pdxsearch">PDX Search</a></li>
   <li><a href="#pdxdetails">PDX Details</a></li>
+  <li><a href="#pdxvis">PDX Visualization Results</a></li>
   <li><a href="#pdxcomparison">PDX Comparison Results</a></li>
 </ul>
 
@@ -121,7 +122,7 @@ and identifying genes that are commonly mutated across a spectrum of cancers.
 <h3>How can I contribute my data to MTB?</h3>
 
 Data in the Mouse Tumor Biology Database come both from the published scientific literature and from unpublished, routine animal health screenings of mouse colonies. Data
-submissions from the scientific community are welcome via the <a href="http://tumor.informatics.jax.org/mtbpathwi">Mouse Pathology Submission Form</a> or by contacting
+submissions from the scientific community are welcome by contacting
 <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support</a> for information on the data submission process.
 
 <p><a href="#top">Back to Top</a>
@@ -129,13 +130,13 @@ submissions from the scientific community are welcome via the <a href="http://tu
 
 <a NAME="citing"></a>
 <h3>How do I cite MTB?</h3>
+
 MTB is supported by grant CA89713, entitled "Electronic Access to Mouse Tumor Data", awarded to Janan T. Eppig from the National Cancer Institute (NCI) of the National Institutes
 of Health (NIH).
 <p>Please use the following citation when referring to the Mouse Tumor Biology Database.
-<ul><li><b>Krupke DM, Begley DA, Sundberg JP, Bult CJ, Eppig JT. 2008. The Mouse Tumor Biology database. Nat Rev Cancer 8(6):459-65.</b></li></ul>
-<p>If you wish to cite a specific area of MTB we suggest a format similar to the following example:
-<ul><li><b>Some tumor data for this paper were retrieved from the Mouse Tumor Biology Database (MTB), Mouse Genome Informatics, The Jackson Laboratory, Bar Harbor, Maine. 
-World Wide Web (URL:http://www.informatics.jax.org/). (October, 1998 i.e., the date you retrieved the data cited).</b></li></ul>
+<ul><li><b>Debra M. Krupke, Dale A. Begley, John P. Sundberg, Joel E. Richardson, Steven B. Neuhauser and Carol J. Bult, The Mouse Tumor Biology Database: A Comprehensive Resource for Mouse Models of Human Cancer., Cancer Res October 31 2017 77 (21) e67-e70.</b></li></ul>
+<p>If you wish to cite a specific area of  MMHC we suggest a format similar to the following example:
+<ul><li><b>Some tumor data for this paper were retrieved from the Mouse Models of Human Cancer Database (MMHC, formerly MTB), Mouse Genome Informatics, The Jackson Laboratory, Bar Harbor, Maine. World Wide Web (URL: http://tumor.informatics.jax.org/). (February, 2019 i.e., the date you retrieved the data cited).</b></li></ul>
 
 <p><a href="#top">Back to Top</a>
 <center><hr width=80%></center>
@@ -2137,10 +2138,6 @@ or cancer-related evidences are retained regardless of the filters.
     <td BGCOLOR="#DDDDDD"><b>Description</b></td>
   </tr>
   <tr>
-    <td valign="top"><b>Model</b></td>
-    <td>'T' or 'J' number ID of model</td>
-  </tr>
-  <tr>
     <td valign="top" NOWRAP><b>Sample</b></td>
     <td>Alpha-numeric designation (followed by _model id number)</td>
   </tr>
@@ -2148,6 +2145,38 @@ or cancer-related evidences are retained regardless of the filters.
     <td valign="top"><b>Gene</b></td>
     <td>HGNC nomenclature</td>
   </tr>
+  
+   
+  <tr>
+    <td valign="top"><b>CKB Variant</b></td>
+    <td>Variant annotated in CKB. Link in blue if publicly available, in red if CKB Boost subscription is required.</td>
+  </tr>
+
+  <tr>
+    <td valign="top"><b>CKB Variant effect</b></td>
+    <td>Variant effect as annotated in CKB.</td>
+  </tr>  
+  
+  <tr>
+    <td valign="top"><b>CKB Protein effect</b></td>
+    <td>Protein effect as annotated in CKB.</td>
+  </tr>
+
+  <tr>
+    <td valign="top"><b>CKB # Annotations predicting sensitivity</b></td>
+    <td>The number of annotations in CKB predicting sensitivity for the variant. Shown as preclinical / clinical.</td>
+  </tr>  
+  <tr>
+    <td valign="top"><b>CKB # Annotations predicting resistance</b></td>
+    <td>The number of annotations in CKB predicting resistance for the variant. Shown as preclinical / clinical.</td>
+  </tr>
+
+  <tr>
+    <td valign="top"><b>CKB Potential treatment approaches</b></td>
+    <td>Potential treatment approaches identified in CKB.</td>
+  </tr>  
+  
+  
   <tr>
     <td valign="top"><b>Platform</b></td>
     <td>Capture panel used (Truseq-JAX, CTP or Whole Exome)</td>
@@ -2168,10 +2197,7 @@ or cancer-related evidences are retained regardless of the filters.
     <td valign="top"><b>Alt Allele</b></td>
     <td>Nucleotide(s) present in sample</td>
   </tr>
-  <tr>
-    <td valign="top"><b>Consequence</b></td>
-    <td>Functional annotation of the variant</td>
-  </tr>
+ 
   <tr>
     <td valign="top"><b>Amino Acid Change</b></td>
     <td>Protein sequence change from reference</td>
@@ -2205,30 +2231,17 @@ or cancer-related evidences are retained regardless of the filters.
     <td valign="top"><b>Gene ID</b></td>
     <td>Accession number of gene in Entrez or Ensembl</td>
   </tr>
+  
   <tr>
-    <td valign="top"><b>CKB Evidence</b></td>
-    <td>Types of evidence in JAX CKB associated with the variant.<br>
-        Actionable: Actionable evidence is clinical or preclinical data supporting a connection between a gene variant and a drug response.<br>
-        The related response type may be sensitive or resistant.<br>
-        Emerging: Emerging provides evidence for potential development of a gene variant as a future cancer therapy target.
-</td>
+    <td valign="top"><b>Count Human Reads</b></td>
+    <td>Total number of human reads.</td>
   </tr>
-  <tr>
-    <td valign="top"><b>Actionable Cancer Types</b></td>
-    <td>Tumor type directly associated with the variant in JAX CKB</td>
-  </tr>
+ 
    <tr>
-    <td valign="top"><b>Drug Class</b></td>
-    <td>Drug classes of treatment approach associated with the variant in JAX CKB</td>
+    <td valign="top"><b>PCT Human Reads</b></td>
+    <td>The percentage of human reads.</td>
   </tr>
-   <tr>
-    <td valign="top"><b>Variant Num Trials</b></td>
-    <td>Number of clinical trials directly associated with the variant (The clinical trials associated with the gene can be made available upon request.)</td>
-  </tr>
-   <tr>
-    <td valign="top"><b>Variant NCT IDs</b></td>
-    <td>NCT IDs of clinical trials directly associated with the variant </td>
-  </tr>
+   
 </table>
 <br>
 
@@ -2271,8 +2284,7 @@ We are flagging the genes where the alternate loci are sufficiently different fr
 
 <br>
 For gene fusion, the gene symbols upstream and downstream of the fusion are reported and whether the downstream fusion partner is frame-shift or in-frame-shift.<br> 
-Detected fusion genes are annotated with the clinical information from the JAX CKB database (similar to variant annotation described above),
-and only those with associated drug efficacy or cancer-related evidences are reported to minimize false-positives.<br>
+Only those with associated drug efficacy or cancer-related evidences are reported to minimize false-positives.<br>
 Other detected fusions and additional information (e.g. breakpoint coordinates) can be made available upon request.<br>
 <br>
 <br>
@@ -2283,9 +2295,11 @@ PennCNV-Affy and ASCAT 2.2 is used to predict allele-specific copy number and pl
 Gene-level copy number is obtained by intersecting copy number segments with genome coordinates of Ensembl genes.  <br>
 In cases where a segment boundary is contained within a gene's coordinates, the most conservative estimate of copy number is used. <br>
 <br>
-The copy number of the CTP panel genes is displayed as a chart of log2(cn raw / sample ploidy).<br>
-Other forms of copy number values (e.g. gain and loss relative to ploidy, loss of heterozygosity)<br>
-and copy number of other genes not listed on the MTB site can be made available upon request.
+In Gene CNV, the copy number of the CTP panel genes is displayed as a chart of log2(cn raw / sample ploidy).<br>
+The CNV Plots present the difference from sample ploidy along the chromosomes (orange) and indicate where loss of heterozygosity occurs (blue).
+<br><br>
+Values for specific genes not listed on the MTB site can be made available upon request.
+
 
 <br>
 <br>
@@ -2303,8 +2317,11 @@ TMB was calculated using variants that
    of The Jackson Laboratory <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4481190">Cancer Treatment Profile (CTP)</a> targeted gene panel.<br>
    <br>
    We defined high TMB as 22 mutations/Mb, which was calculated based on the TMB distribution of all PDX models analyzed as follows: Q3 (third quartile of TMB) + 1.5 x inter-quartile range of TMB.
-
-  
+<br>
+<br>
+<a name="pdxMSI"></a><b>Microsatellite Instability (MSI)</b><br>
+The <a href="http://tumor.informatics.jax.org/mtbwi/live/www/html/MSIDocumentation.pdf" target="_blank">MSIsensor2</a> algorithm was used to determine MSI status of JAX samples. The samples with MSI Score (MSI-Percentage > 20%)  are considered at MSI-H.<br>
+This threshold demonstrates good differentiation between MSI-High (MSI-H) and MSI-Stable (MSI-S) samples during MSIsensor2 algorithm development and our internal benchmarking. 
 <p>
 <a href="#top">Back to Top</a>
 

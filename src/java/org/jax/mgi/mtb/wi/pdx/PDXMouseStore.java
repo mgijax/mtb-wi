@@ -74,6 +74,7 @@ public class PDXMouseStore {
     private static String pdxPatientHistory = "The PDX Patient History report could not be loaded";
     private static String pdxPTClinical = "The PDX Patient Clinical report could not be loaded";
     private static String pdxStatusReport = "The PDX Status report could not be loaded";
+    private static String pdxHouseSpecialReport = "The PDX House Special report could not be loaded";
     private static String pdxConsortiumReport = "The PDX Consortium report could not be loaded";
     private static Date reportFreshnessDate = null;
     private static String JSON_PDX_STATUS = "Unable to load data from eLIMS";
@@ -332,6 +333,15 @@ public class PDXMouseStore {
         } else {
             log.error("PDX Status Report not loaded!");
         }
+        
+        d = new Date();
+        log.info(d + " Loading House Special Report");
+        temp = eu.getPDXHouseSpecialReport();
+        if (temp.length() > 0) {
+            pdxHouseSpecialReport = temp;
+        } else {
+            log.error("PDX House Special Report not loaded!");
+        }
 
         d = new Date();
         log.info(d + " Loading Consortium Report");
@@ -460,7 +470,7 @@ public class PDXMouseStore {
 
     private boolean compareIDs(String display, String numeric) {
 
-        log.error("Comparing " + display + " to " + numeric);
+       
         if (true) {
             return display.equals(numeric);
         }
@@ -715,6 +725,10 @@ public class PDXMouseStore {
 
     public String getPDXStatusReport(String delim) {
         return pdxStatusReport;
+    }
+    
+    public String getPDXHouseSpecialReport(String delim) {
+        return pdxHouseSpecialReport;
     }
 
     public String getPDXEngraftmentStatusSummary(String delimiter) {
@@ -1176,10 +1190,9 @@ public class PDXMouseStore {
 
         query.append(DAOUtils.collectionToString(genes, ",", ""));
 
-        // maybe do it for all models then only pick the selected ones
-        if (!models.isEmpty() && models.size() < 100) {
-            query.append("&model=").append(DAOUtils.collectionToString(models, ",", ""));
-        }
+       // this seems ok with 400 or so models but may be problematic if that grows a lot?
+        query.append("&model=").append(DAOUtils.collectionToString(models, ",", ""));
+        
         DecimalFormat df = new DecimalFormat("###.##");
         try {
 
@@ -1215,35 +1228,42 @@ public class PDXMouseStore {
                 String gene = data.getString("gene_symbol");
                 String sample = data.getString("sample_name");
                 String passage = getField(data, "passage_num");
+                String platform = getField(data,"platform");
 
                 // this will fail for baylor and dfci models wich should be used
                 // to exclude them from the results.
-                String rankZ = df.format(data.getDouble("z_score_percentile_rank"));
-                String ampDel = null;
-                try {
-                    ampDel = ampDelMap.get(gene).get(sample);
-                } catch (NullPointerException npe) {
-                    // its normal or ?unknown?
-                }
-                if (ampDel == null) {
-                    ampDel = "Unknown";
-                }
+                try{
+                    String rankZ = df.format(data.getDouble("z_score_percentile_rank"));
+                    
+                    String ampDel = null;
+                    try {
+                        ampDel = ampDelMap.get(gene).get(sample);
+                    } catch (NullPointerException npe) {
+                        // its normal or ?unknown?
+                    }
+                    if (ampDel == null) {
+                        ampDel = "Unknown";
+                    }
 
-                if (results.containsKey(gene)) {
-                    HashMap<String, ArrayList<String>> samples = results.get(gene);
-                    ArrayList<String> list = new ArrayList<>();
-                    list.add(rankZ);
-                    list.add(ampDel);
-                    list.add("mutation");
-                    samples.put(model + "-" + sample + " " + passage, list);
-                } else {
-                    HashMap<String, ArrayList<String>> samples = new HashMap<>();
-                    ArrayList<String> list = new ArrayList<>();
-                    list.add(rankZ);
-                    list.add(ampDel);
-                    list.add("mutation");
-                    samples.put(model + "-" + sample + " " + passage, list);
-                    results.put(gene, samples);
+                    if (results.containsKey(gene)) {
+                        HashMap<String, ArrayList<String>> samples = results.get(gene);
+                        ArrayList<String> list = new ArrayList<>();
+                        list.add(rankZ);
+                        list.add(ampDel);
+                        list.add("mutation");
+                        samples.put(model + "-" + sample + " " + passage, list);
+                    } else {
+                        HashMap<String, ArrayList<String>> samples = new HashMap<>();
+                        ArrayList<String> list = new ArrayList<>();
+                        list.add(rankZ);
+                        list.add(ampDel);
+                        list.add("mutation");
+                        samples.put(model + "-" + sample + " " + passage, list);
+                        results.put(gene, samples);
+                    }
+                }catch(Exception e){
+                    // ok skipping Baylor or DFCI model
+                   System.out.println("skipping model "+model+" with platform "+platform);
                 }
 
             }
@@ -1272,6 +1292,8 @@ public class PDXMouseStore {
         if (variants != null && variants.size() > 0) {
             params.append("&amino_acid_change=").append(variantList.toString());
         }
+        
+        
 
         HashMap<String, ArrayList<StringBuilder>> data = new HashMap<>();
         try {
@@ -1342,7 +1364,10 @@ public class PDXMouseStore {
             JSONArray array = (JSONArray) job.get("data");
 
             for (int i = 0; i < array.length(); i++) {
-                variants.add(array.getJSONObject(i).getString("amino_acid_change"));
+                String variant = array.getJSONObject(i).getString("amino_acid_change");
+                if(variant != null && !variant.equals("null")){
+                    variants.add(variant);
+                }
             }
             Collections.sort(variants);
 
@@ -1359,7 +1384,12 @@ public class PDXMouseStore {
     public String getVariationData(String model, String limit, String start, String sort, String dir, String ctp) {
 
         StringBuffer result = new StringBuffer("{'total':");
-        boolean ckbSort = sort.startsWith("ckb_");
+        boolean ckbSort = false;
+          try{
+              ckbSort = sort.startsWith("ckb_");
+          }catch(Exception e){
+              log.debug("'"+sort+"' cant be parsed as sort field");
+          }
 
         String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
         
@@ -1735,58 +1765,66 @@ public class PDXMouseStore {
 
         cnvPlots.clear();
 
-        String path = WIConstants.getInstance().getCNVPlotsPath();
-        File cnvFile = new File(path);
-        for (File file : cnvFile.listFiles()) {
-            try {
-                String name = file.getName();
+        try{
+            String path = WIConstants.getInstance().getCNVPlotsPath();
+            File cnvFile = new File(path);
+            for (File file : cnvFile.listFiles()) {
+                try {
+                    String name = file.getName();
 
-                String model = file.getName().split("_")[0];
-                String sample = file.getName().split("_")[1];
-                String passage = file.getName().split("_")[2];
-                // String passage = getSamplePassage(model,sample);
+                    String model = file.getName().split("_")[0];
+                    String sample = file.getName().split("_")[1];
+                    String passage = file.getName().split("_")[2];
+                    // String passage = getSamplePassage(model,sample);
 
-                StringBuilder label = new StringBuilder();
-                label.append("Model:").append(model);
-                label.append(" Sample:").append(sample);
-                if (passage.length() > 1) {
-                    label.append(" Passage:").append(passage);
-                }
-                ArrayList<String> details = new ArrayList<>();
-                details.add(label.toString());
-                details.add(name);
+                    StringBuilder label = new StringBuilder();
+                    label.append("Model:").append(model);
+                    label.append(" Sample:").append(sample);
+                    if (passage.length() > 1) {
+                        label.append(" Passage:").append(passage);
+                    }
 
-           
-                if (cnvPlots.containsKey(model)) {
-                    ArrayList<ArrayList<String>> files = cnvPlots.get(model);
-                    if ("PT".equals(passage)) {
-                        files.add(0, details);
-                    } else {
-                        String lastDetails = files.get(files.size() - 1).get(0);
-                        String lastPassage = lastDetails.substring(lastDetails.length() - 3);
-                        if (lastPassage.compareTo(passage) < 0) {
-                            files.add(files.size() - 1, details);
+                    // no patient plots for public
+                    if (WIConstants.getInstance().getPublicDeployment() && "PT".equals(passage.toUpperCase())) continue;
+
+                    ArrayList<String> details = new ArrayList<>();
+                    details.add(label.toString());
+                    details.add(name);
+
+
+                    if (cnvPlots.containsKey(model)) {
+                        ArrayList<ArrayList<String>> files = cnvPlots.get(model);
+                        if ("PT".equals(passage)) {
+                            files.add(0, details);
                         } else {
-                            files.add(details);
+                            String lastDetails = files.get(files.size() - 1).get(0);
+                            String lastPassage = lastDetails.substring(lastDetails.length() - 3);
+                            if (lastPassage.compareTo(passage) < 0) {
+                                files.add(files.size() - 1, details);
+                            } else {
+                                files.add(details);
+                            }
+
                         }
+                    } else {
+                        ArrayList<ArrayList<String>> files = new ArrayList<>();
+                        files.add(details);
+                        cnvPlots.put(model, files);
 
                     }
-                } else {
-                    ArrayList<ArrayList<String>> files = new ArrayList<>();
-                    files.add(details);
-                    cnvPlots.put(model, files);
-
+                } catch (Exception e) {
+                    log.error("unable to parse cnvPlot file" + file.getName());
                 }
-            } catch (Exception e) {
-                log.error("unable to parse cnvPlot file" + file.getName());
             }
-        }
 
-        // sort PT first then P0,P1,...
-        Compy compy = new Compy();
-        for (ArrayList<ArrayList<String>> s : cnvPlots.values()) {
-            Collections.sort(s, compy);
-           
+            // sort PT first then P0,P1,...
+            Compy compy = new Compy();
+            for (ArrayList<ArrayList<String>> s : cnvPlots.values()) {
+                Collections.sort(s, compy);
+
+            }
+        }catch(Exception e){
+            log.error("Unable to load cnv plots",e);
         }
 
     }
@@ -1828,6 +1866,11 @@ public class PDXMouseStore {
                     String model = job.getString("model_name");
                     String sample = job.getString("sample_name");
                     String passage = job.getString("passage_num");
+                    
+                    // no patient data for public
+                     if (WIConstants.getInstance().getPublicDeployment() && "PT".equals(passage.toUpperCase())) continue;
+                         
+                     
                     
                     if(passage != null && !passage.equals("null")){
                         sample = " from passage "+passage;
@@ -1878,13 +1921,13 @@ public class PDXMouseStore {
 
         StringBuffer result = new StringBuffer();
 
-        StringBuffer mouseIDs = new StringBuffer();
         //batch query at 100 mice
         int i = 0;
         String model, sample, passage, ampDelStr;
         Double rankZ;
         while (i < mice.size()) {
 
+            StringBuffer mouseIDs = new StringBuffer();
             for (int j = 0; (j < 100) && (i < mice.size()); j++) {
                 if (!DANA_FARBER.equals(mice.get(i).getInstitution()) && !BAYLOR.equals(mice.get(i).getInstitution())) {
                     mouseIDs.append(mice.get(i).getModelID()).append(",");
@@ -1893,9 +1936,11 @@ public class PDXMouseStore {
             }
 
             mouseIDs.deleteCharAt(mouseIDs.length() - 1);
-
+            
+        
             StringBuffer query = new StringBuffer(GENE_EXPRESSION).append(gene);
             query.append("&model=").append(mouseIDs);
+            
             try {
 
                 JSONObject job = new JSONObject(getJSON(query.toString()));
@@ -1983,10 +2028,14 @@ public class PDXMouseStore {
         } else {
             uri = uri + "?" + getFilterStr();
         }
+        
+        uri = uri.replaceAll(" ","+");
 
         boolean post = true;
         if (json == null || json.length() == 0) {
             post = false;
+        }else{
+            json = json.replaceAll(" ","+");
         }
 
         String responseSingle = "";

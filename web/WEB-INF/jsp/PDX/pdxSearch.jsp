@@ -76,7 +76,7 @@
                 hideTrigger:false,
                 hiddenName:'modelID',
                 width:360,
-                listEmptyText:'no matching model',
+                listEmptyText:'',
                 renderTo: 'modelIDCombo'
         //        ,pageSize:10
             });
@@ -110,7 +110,7 @@
                 hideTrigger:true,
                 hiddenName:'gene',
                 width:260,
-                listEmptyText:'no matching gene',
+                listEmptyText:'',
                 renderTo: 'geneSelectOMatic'
         //        ,pageSize:10
             });
@@ -142,7 +142,7 @@
                 hideTrigger:true,
                 hiddenName:'genes2',
                 width:260,
-                listEmptyText:'no matching gene',
+                listEmptyText:'',
                 renderTo: 'geneSelectOMatic2'
             });
             
@@ -160,7 +160,7 @@
                 hideTrigger:true,
                 hiddenName:'genesCNV',
                 width:260,
-                listEmptyText:'no matching gene',
+                listEmptyText:'',
                 renderTo: 'geneSelectOMatic3'
             });
          

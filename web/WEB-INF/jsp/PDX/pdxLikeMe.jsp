@@ -13,7 +13,7 @@
              overflow-y:auto !important;
             }
             
-            /* seems to be needed for striping of resutls */
+            /* seems to be needed for striping of results */
             .even{
                background-color:#eff0f1 !important;
             }
@@ -37,7 +37,7 @@
        
             $(document).ready( function () {
                 for(i = 1; i < ${caseCount}; i++){
-                 table = $('#results'+i).dataTable( {
+                 table = $('#results'+i).DataTable( {
                     searching:      false,
                     info:           false,
                     scrollY:        '50vh',
@@ -46,17 +46,19 @@
                     ordering:       false,
                     stripe:         true
                 } );
-                };
                 
-                 
+                }
+                
+                // three times is the charm
+                // anything less fails for "Case 1 \n KRAS:AMP"
+                $('.dataTable').DataTable().columns.adjust();
+                $('.dataTable').DataTable().columns.adjust();
+                $('.dataTable').DataTable().columns.adjust();
+                   
+                
             } );
         
 
-            $(window).on('resize', function () {
-                for(i = 1; i < ${caseCount}; i++){
-                 $('#results'+i).DataTable().columns.adjust();
-                }
-             } );
 
 
             function clearForm() {
@@ -158,7 +160,7 @@
                                                     <td>
                                                         <input type="submit" VALUE="Search">
                                                         <input type="button" VALUE="Reset" onclick="clearForm();">
-
+                                                        <input name="viz" type="submit" VALUE="Visualize">
 
                                                     </td>
 
@@ -199,6 +201,7 @@
                                                     <td>
                                                         <input type="submit" VALUE="Search">
                                                         <input type="button" VALUE="Reset" onclick="clearForm();">
+                                                        <input name="viz" type="submit" VALUE="Visualize">
                                                     </td>
                                                 </tr>
                                             </table>

@@ -54,19 +54,15 @@ Please use the following citation when referring to the Mouse Tumor Biology Data
 
 <br><br>
 
-<b>Krupke DM; Begley DA; Sundberg JP; Bult CJ; Eppig JT, The Mouse Tumor Biology database., Nat Rev Cancer 2008 Jun;8(6):459-65.</b>
+<b>Debra M. Krupke, Dale A. Begley, John P. Sundberg, Joel E. Richardson, Steven B. Neuhauser and Carol J. Bult, The Mouse Tumor Biology Database: A Comprehensive Resource for Mouse Models of Human Cancer., Cancer Res October 31 2017 77 (21) e67-e70. </b>
+<br><br>
+If you wish to cite a specific area of MMHC we suggest a format similar to the following example: 
 
 <br><br>
 
-If you wish to cite a specific area of MTB we suggest a format similar to the following example: 
+<b>Some tumor data for this paper were retrieved from the Mouse Models of Human Cancer Database (MMHC, formerly MTB), Mouse Genome Informatics, The Jackson Laboratory, Bar Harbor, Maine. World Wide Web (URL: http://tumor.informatics.jax.org/). (February, 2019 i.e., the date you retrieved the data cited).</b>
 
-<br><br>
 
-<b> Some tumor data for this paper were retrieved from the
-Mouse Tumor Biology Database (MTB), Mouse Genome Informatics, The
-Jackson Laboratory, Bar Harbor, Maine. World Wide Web (URL:
-http://www.informatics.jax.org/). (October, 1998 i.e., the date you
-retrieved the data cited). </b>
 
 <!--======================== End Citation ==================================-->
     
