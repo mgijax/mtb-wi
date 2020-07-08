@@ -21,6 +21,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXGraphic;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXLink;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
+import org.jax.mgi.mtb.wi.pdx.MSIModels;
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
 import org.jax.mgi.mtb.wi.pdx.RelatedModels;
 
@@ -340,6 +341,13 @@ public class PDXDetailsAction extends Action {
                 }
                 Collections.sort(tmbs);
                 request.setAttribute("tmb",tmbs);
+                
+                 request.setAttribute("minTMB", store.getMinTMB());
+                 request.setAttribute("maxTMB", store.getMaxTMB());
+            }
+            ArrayList<String> msi = MSIModels.getMSIData(modelID);
+            if(msi != null){
+                request.setAttribute("msiData", msi);
             }
 
         }//end of else for finding a model;

@@ -48,6 +48,38 @@ public class RelatedModels {
         relations.put("J000101328", "PDX models J000101328 and <a href='pdxDetails.do?modelID=J000101329' target='_blank'>J000101329</a> originated from the same patient.");
 
         relations.put("J000101329", "PDX models <a href='pdxDetails.do?modelID=J000101328' target='_blank'>J000101328</a> and J000101329 originated from the same patient.");
+        
+        relations.put("TM01044", "PDX models TM01044 and <a href='pdxDetails.do?modelID=TM01045' target='_blank'>TM01045</a> originated from the same patient.");
+        
+        relations.put("TM01045", "PDX models <a href='pdxDetails.do?modelID=TM01044' target='_blank'>TM01044</a> and TM01045 originated from the same patient.");
+        
+        relations.put("TM00914", "PDX models TM00914 and <a href='pdxDetails.do?modelID=TM00916' target='_blank'>TM00916</a> originated from the same patient.");
+        
+        relations.put("TM00916", "PDX models <a href='pdxDetails.do?modelID=TM00914' target='_blank'>TM00914</a> and TM00916 originated from the same patient.");
+        
+        relations.put("TM01168", "PDX models TM01168 and <a href='pdxDetails.do?modelID=TM01171' target='_blank'>TM01171</a> originated from the same patient.");
+        
+        relations.put("TM01171", "PDX models <a href='pdxDetails.do?modelID=TM01168' target='_blank'>TM01168</a> and TM01171 originated from the same patient.");
+        
+        relations.put("TM00222", "PDX models TM00222 and <a href='pdxDetails.do?modelID=TM00302' target='_blank'>TM00302</a> originated from the same patient.");
+        
+        relations.put("TM00302", "PDX models <a href='pdxDetails.do?modelID=TM00222' target='_blank'>TM00222</a> and TM00302 originated from the same patient.");
+        
+        relations.put("TM01075", "PDX models TM01075 and <a href='pdxDetails.do?modelID=TM01076' target='_blank'>TM01076</a> originated from the same patient.");
+        
+        relations.put("TM01076", "PDX models <a href='pdxDetails.do?modelID=TM01075' target='_blank'>TM01075</a> and TM01076 originated from the same patient.");
+        
+        relations.put("TM00913", "PDX models TM00913, <a href='pdxDetails.do?modelID=TM00914' target='_blank'>TM00914</a> and <a href='pdxDetails.do?modelID=TM00916' target='_blank'>TM00916</a> originated from the same patient.");
+        
+        relations.put("TM00914", "PDX models TM00914, <a href='pdxDetails.do?modelID=TM00913' target='_blank'>TM00913</a> and <a href='pdxDetails.do?modelID=TM00916' target='_blank'>TM00916</a> originated from the same patient.");
+        
+        relations.put("TM00916", "PDX models TM00916, <a href='pdxDetails.do?modelID=TM00913' target='_blank'>TM00913</a> and <a href='pdxDetails.do?modelID=TM00914' target='_blank'>TM00914</a> originated from the same patient.");
+        
+        relations.put("TM01096", "PDX models TM01096 and <a href='pdxDetails.do?modelID=TM01098' target='_blank'>TM01098</a> originated from the same patient.");
+        
+        relations.put("TM01098", "PDX models <a href='pdxDetails.do?modelID=TM01096' target='_blank'>TM01096</a> and TM01098 originated from the same patient.");
+        
+        
 
         proxeIds.put("J000106568", "DFBL-75549-R2");
         proxeIds.put("J000106569", "DFAM-61345-V1");
@@ -74,6 +106,14 @@ public class RelatedModels {
         proxeIds.put("J000106142", "DFAM-80115-V1");
         proxeIds.put("J000106143", "DFAM-84910-V1");
         proxeIds.put("J000106141", "DFAM-72078-V2");
+        
+        proxeIds.put("J000106574","DFAL-48392-V1");
+        proxeIds.put("J000106567","DFAL-49600-V2");
+        proxeIds.put("J000106570","DFAM-62736-V1");
+        
+
+
+        
     }
 
     public static String getReleationLabel(String modelID) {

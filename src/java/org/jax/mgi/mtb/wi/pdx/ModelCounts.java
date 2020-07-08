@@ -36,17 +36,17 @@ public class ModelCounts {
 
     public static final String NUMFOUND = "numFound\":";
 
-    String[] pdxTerms = {"Lung",
+     String[] pdxTerms = {"Lung",
         "Blood,Bone marrow,Lymph node",
         "Anal,Appendix,Cecum,Colon,Duodenum,Rectum,ampulla of Vater",
         "Pancreas",
         "Breast",
         "Liver,Bile duct",
         "Prostate gland",
-        "Bladder",
         "Brain",
-        "Esophagus",
+        "Bladder",
         "Uterus,Endometrium",
+        "Esophagus",
         "Kidney",
         "Ovary",
         "Skin",
@@ -65,10 +65,10 @@ public class ModelCounts {
         "Mammary gland",
         "Liver, Bile duct",
         "Prostate gland",
-        "Urinary bladder",
         "Brain, Meninges, Spinal cord, Nerve, Neuroblast, Neuroectoderm, Ganglion, Nerve sheath, Schwann cell",
-        "Esophagus",
+        "Urinary bladder",
         "Uterus, Cervix",
+        "Esophagus",
         "Kidney, Renal pelvis",
         "Ovary",
         "Skin, Skin gland",
@@ -81,41 +81,44 @@ public class ModelCounts {
 
     // display tissue, rank, fatalaties, solr term
     String[] tissues = {
-        "Lung and other respiratory", "1", "158,770", "Lung",
-        "Lymphohematopoietic", "2", "58,100", "Lymphohematopoietic",
-        "Colon and other intestine", "3", "53,240", "Colon and other intestine",
-        "Pancreas", "4", "44,330", "Pancreas",
-        "Breast", "5", "41,400", "Breast",
-        "Liver and bile duct", "6", "30,200", "Liver and bile duct",
-        "Prostate", "7", "29,430", "Prostate",
-        "Urinary bladder", "8", "17,240", "Urinary bladder",
-        "Brain and other nervous system", "9", "16,830", "Brain and other nervous system",
-        "Esophagus", "10", "15,850", "Esophagus",
-        "Uterus and cervix", "11", "15,520", "Uterus and cervix",
-        "Kidney and renal pelvis", "12", "14,970", "Kidney and renal pelvis",
-        "Ovary", "13", "14,070", "Ovary",
-        "Skin", "14", "13,460", "Skin",
-        "Stomach", "15", "10,800", "Stomach",
-        "Oral cavity and pharynx", "16", "10,030", "Oral cavity",
-        "Soft tissue including heart", "17", "5,150", "Soft tissue including heart",
-        "Gallbladder", "18", "3,790", "Gallbladder",
-        "Endocrine system", "19", "3,080", "Endocrine system",
-        "Bone and joint", "20", "1,590", "Bone and joint"};
+        "Lung & other respiratory", "1", "147,510", "Lung",
+        "Lymphohematopoietic", "2", "56,770", "Lymphohematopoietic",
+        "Colon & other intestine", "3", "53,890", "Colon and other intestine",
+        "Pancreas", "4", "45,750", "Pancreas",
+        "Breast", "5", "42,260", "Breast",
+        "Liver & bile duct", "6", "31,780", "Liver and bile duct",
+        "Prostate", "7", "31,620", "Prostate",
+        "Brain & other nervous system", "8", "17,760", "Brain and other nervous system",
+        "Urinary bladder", "9", "17,670", "Urinary bladder",
+        "Uterus & cervix", "10", "16,410", "Uterus and cervix",
+        "Esophagus", "11", "16,080", "Esophagus",
+        "Kidney & renal pelvis", "12", "14,770", "Kidney and renal pelvis",
+        "Ovary", "13", "13,980", "Ovary",
+        "Skin", "14", "11,650", "Skin",
+        "Stomach", "15", "11,140", "Stomach",
+        "Oral cavity & pharynx", "16", "10,860", "Oral cavity",
+        "Soft tissue including heart", "17", "5,270", "Soft tissue including heart",
+        "Gallbladder & other biliary", "18", "3,960", "Gallbladder",
+        "Endocrine system", "19", "3,210", "Endocrine system",
+        "Bones & joints", "20", "1,660", "Bone and joint"};
 
     ArrayList<ArrayList<String>> tissuesListList = new ArrayList<ArrayList<String>>();
 
-    private static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2018/cancer-facts-and-figures-2018.pdf";
-    private static final String YEAR = "2018";
+    public static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2019/cancer-facts-and-figures-2019.pdf";
+    public static final String YEAR = "2019";
     private String solrURL;
     private String minFC = "&fq=minFC:[1%20TO%201]";
     private static String HTML = "";
     private static String HTMLALL = "";
+    private static ArrayList<ArrayList<String>> dataObject = new ArrayList<>();
 
     public ModelCounts() {
         if (HTML.length() == 0) {
             solrURL = WIConstants.getInstance().getSolrURL() + "?q=*%3A*&&fq=minFC:[1%20TO%201]&wt=json";
             buildListList();
             HTML = buildHTML();
+            // assume we will only use limited results in new WI for now
+            dataObject = buildDataObject();
 
             tissuesListList = new ArrayList<>();
             solrURL = WIConstants.getInstance().getSolrURL() + "?q=*%3A*&&wt=json";
@@ -123,6 +126,8 @@ public class ModelCounts {
             buildListList();
             HTMLALL = buildHTML();
         }
+        
+       
     }
 
     public static void main(String[] args) {
@@ -143,6 +148,10 @@ public class ModelCounts {
 
     public String getHTMLAll() {
         return HTMLALL;
+    }
+    
+    public ArrayList<ArrayList<String>> getDataObject(){
+        return dataObject;
     }
 
     private void buildListList() {
@@ -325,6 +334,65 @@ public class ModelCounts {
         html.append("</tbody>");
 
         return html.toString();
+    }
+    
+    
+     private ArrayList<ArrayList<String>> buildDataObject() {
+
+        ArrayList<ArrayList<String>> data = new ArrayList<>();
+        // will need to incldue year and pdxLink as  
+
+      
+        for (ArrayList<String> vals : tissuesListList) {
+            ArrayList<String> row = new ArrayList<>();
+            
+            row.add(vals.get(0));
+            row.add(vals.get(1));
+            row.add(vals.get(2));
+            row.add(vals.get(3));
+            
+            String solrTissue = vals.get(4).replaceAll(" ", "+");
+            String[] links = {
+                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:true&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
+                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:false&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
+                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\""
+            };
+
+            if ("0".equals(vals.get(5))) {
+                row.add("");
+            } else {
+                row.add(links[0]);
+            }
+            
+            row.add(vals.get(5));
+            
+            
+            if ("0".equals(vals.get(6))) {
+               row.add("");
+            } else {
+                row.add(links[1]);
+            }
+            
+            row.add(vals.get(6));
+
+            
+            if ("0".equals(vals.get(7))) {
+                row.add("");
+            } else {
+                row.add(links[2]);
+            }
+            row.add(vals.get(7));
+            
+            if ("0".equals(vals.get(9))) {
+               row.add("");
+            } else {
+                row.add(vals.get(8));
+            }
+            
+            row.add(vals.get(9));
+            data.add(row);
+        }
+        return data;
     }
 
 }
