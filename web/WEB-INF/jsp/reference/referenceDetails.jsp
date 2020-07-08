@@ -81,7 +81,7 @@
 	
 				<table id="detail-table" style="width:100%;">
 					<caption>
-						<h2>Tumors</h2>
+						<h2>Models</h2>
 						<!--<c:set var="statsBean" value="${strain.tumorStats}"/>
 						${statsBean.label} unique tumor types displayed.
 						<em>A tumor group is a set of tumors that share the same tumor name, organ(s) affected, and treatment type.</em>-->
