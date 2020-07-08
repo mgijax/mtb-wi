@@ -1,4 +1,8 @@
-
+main > header.container {
+	max-width:unset;
+	margin-left:261px;
+	padding-left:0;
+}
 
 
 
