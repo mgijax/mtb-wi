@@ -297,7 +297,8 @@
 					{ "orderable": false },
 					{ "orderable": false },
 					{ "orderable": true }
-				]
+				],
+				'order': [[1, 'asc']]
 			});			
 		});
 	</script>

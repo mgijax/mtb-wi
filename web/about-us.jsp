@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Database Summary" help="#">
+<jax:mmhcpage title="About Us" help="#">
 
 	<jsp:body>	
-		<section class="container">
+		<section class="container content">
 			
-
 
 <p>			The Mouse Models of Human Cancer database (MMHCdb) is a unique on-line compendium of mouse models for human cancer. MMHCdb provides electronic access to expertly curated information on diverse mouse models for human cancer along with tools for accessing and visualizing associated data from these models. MMHCdb integrates data from peer-reviewed literature, direct submissions from researchers, and other bioinformatics resources. The database project began in 1997 and was previously referred to as the Mouse Tumor Biology (MTB) Database.</p>
 			<h3>Current Goals</h3>

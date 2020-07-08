@@ -196,7 +196,6 @@
 									</c:forEach>
 								</p>
 								</c:if>
-								<!--
 								<c:if test="${not empty tumor.metastasizesToDisplay}">
 								<p>Sites of Metastasis: 
 									<c:forEach var="met" items="${tumor.metastasizesTo}" varStatus="status">
@@ -207,7 +206,6 @@
 									</c:forEach>
 								</p>								
 								</c:if>
-							-->
 							</td>
 							<td><a href="tumorSummary.do?strainKey=${tumor.strainKey}&amp;organOfOriginKey=${tumor.organOfOriginKey}&amp;tumorFrequencyKeys=${tumor.allTFKeysAsParams}"><i class="mo"></i></a></td>
 						</tr>
