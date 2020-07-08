@@ -187,13 +187,27 @@
 							
 							<td>
 								<c:if test="${not empty tumor.citations}">
-								<h5>References</h5>
-								<ul>
-									<c:forEach var="cite" items="${tumor.citations}">
-									   <li><a href="referenceDetails.do?accId=${cite.accID}">${cite.shortCitation}</a></li>
+								<p>References: 
+									<c:forEach var="cite" items="${tumor.citations}" varStatus="status">
+										<c:if test="${status.first != true}">
+											&nbsp;&nbsp;&sdot;&nbsp;&nbsp;
+										</c:if>
+									   <a href="referenceDetails.do?accId=${cite.accID}">${cite.shortCitation}</a>
 									</c:forEach>
-								</ul>
+								</p>
 								</c:if>
+								<!--
+								<c:if test="${not empty tumor.metastasizesToDisplay}">
+								<p>Sites of Metastasis: 
+									<c:forEach var="met" items="${tumor.metastasizesTo}" varStatus="status">
+										<c:if test="${status.first != true}">
+											, 
+										</c:if>
+										${met}
+									</c:forEach>
+								</p>								
+								</c:if>
+							-->
 							</td>
 							<td><a href="tumorSummary.do?strainKey=${tumor.strainKey}&amp;organOfOriginKey=${tumor.organOfOriginKey}&amp;tumorFrequencyKeys=${tumor.allTFKeysAsParams}"><i class="mo"></i></a></td>
 						</tr>

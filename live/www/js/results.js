@@ -99,11 +99,11 @@ $(function() {
 	});	
 	
 	$('#expand-all').on('click', function() {
-		$('[data-detail] > table').addClass('expanded');
+		$('td.info .is-collapsible > table').addClass('expanded');
 	});
 	
 	$('#collapse-all').on('click', function() {
-		$('[data-detail] > table').removeClass('expanded');
+		$('td.info .is-collapsible > table').removeClass('expanded');
 	});	
 
 });
