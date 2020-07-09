@@ -67,7 +67,7 @@
 
 				<div class="footer-logo">				
 					<p>Part of Mouse&nbsp;Genome&nbsp;Informatics</p>
-					<a href="http://www.informatics.jax.org" style="top:-10px;"><img src="${applicationScope.urlImageDir}/mgi-logo-2.png" alt="Mouse Genome Informatics" style="max-width:170px;"></a>
+					<a href="http://www.informatics.jax.org" style="top:-10px;"><img src="/_res/img/mgi-logo-2.png" alt="Mouse Genome Informatics" style="max-width:170px;"></a>
 				</div>
 		
 				<div>
