@@ -183,7 +183,7 @@
 					</td>
 					
 					<c:catch var="error">
-						<fmt:parseNumber var="freq" type="number" value="${rec.frequency}" />
+						<fmt:parseNumber var="freq" type="number" value="${rec.incidence}" />
 					</c:catch>
 					<c:if test="${not empty error}">
 						<fmt:parseNumber var="freq" type="number" value="0" />
