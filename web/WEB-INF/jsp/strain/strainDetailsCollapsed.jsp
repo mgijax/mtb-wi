@@ -92,7 +92,7 @@
 								
 								
 								
-								<c:forEach var="genetics" items="${strain.genetics}" varStatus="status">
+								<c:forEach var="genetics" items="${strain.consolidatedGenetics}" varStatus="status">
 								
 								<c:if test="${status.first != true}">
 								<tr>
