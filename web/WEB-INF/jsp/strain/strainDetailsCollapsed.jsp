@@ -206,6 +206,12 @@
 									</c:forEach>
 								</p>								
 								</c:if>
+								<c:if test="${tumor.imageCount > 0}">
+								<p>${tumor.imageCount} pathology image(s)</p>
+								</c:if>
+
+							
+							
 							</td>
 							<td><a href="tumorSummary.do?strainKey=${tumor.strainKey}&amp;organOfOriginKey=${tumor.organOfOriginKey}&amp;tumorFrequencyKeys=${tumor.allTFKeysAsParams}"><i class="mo"></i></a></td>
 						</tr>
