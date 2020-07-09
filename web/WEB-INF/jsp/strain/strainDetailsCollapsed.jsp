@@ -198,7 +198,7 @@
 								</c:if>
 								<c:if test="${not empty tumor.metastasizesToDisplay}">
 								<p>Sites of Metastasis: 
-									<c:forEach var="met" items="${tumor.metastasizesTo}" varStatus="status">
+									<c:forEach var="met" items="${tumor.metastasizesToDisplay}" varStatus="status">
 										<c:if test="${status.first != true}">
 											, 
 										</c:if>
@@ -227,65 +227,9 @@
 		<!-- There is no tumor information associated with this strain. -->
 		</c:otherwise>
 		</c:choose>
-	
-		<c:choose>
-		<c:when test="${not empty strain.links || not empty strain.linksGeneral}">
-		<h2>Other Database Links</h2>
-		<c:choose>
-		<c:when test="${not empty strain.links}">
-		<table id="strain-links">
-			<caption>
-				<h3>Additional information about these mice:</h3>
-			</caption>
-			<tbody>
-				<c:forEach var="link" items="${strain.links}" varStatus="status">
-				<tr>
-					<%--
-					<td><a href="${link.siteUrl}" target="${link.siteName}"><c:out value="${link.siteName}" escapeXml="false"/></a></td>
-					--%>
-					<td><c:out value="${link.siteName}" escapeXml="false"/></td>
-					<td><a href="${link.accessionUrl}" target="${link.siteName}"><c:out value="${link.accessionUrl}" escapeXml="false"/></a></td>
-				</tr>
-			</tbody>
-		</table>
-		</c:forEach>
-		</c:when>
-		<c:otherwise>
-		<!-- There are is no additional information associated with this strain. (strain.links) -->
-		</c:otherwise>
-		</c:choose>
-					
-		<c:choose>
-		<c:when test="${not empty strain.linksGeneral}">
-		<table id="strain-links-general">
-			<caption>
-				<h3>Information about mice carrying the same mutant allele(s):</h3>
-			</caption>
-			<tbody>
-				<c:forEach var="linkGeneral" items="${strain.linksGeneral}" varStatus="status">
-				<tr>
-					<td><a href="${linkGeneral.siteUrl}" target="${linkGeneral.siteName}"><c:out value="${linkGeneral.siteName}" escapeXml="false"/></a></td>
-					<td><a href="${linkGeneral.accessionUrl}" target="${linkGeneral.siteName}"><c:out value="${linkGeneral.accessionUrl}" escapeXml="false"/></a></td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		</c:when>
-		<c:otherwise>
-		<!-- There are no other database links associated with this strain. (strain.linksGeneral) //-->
-		</c:otherwise>
-		</c:choose>
-		</c:when>
-		<c:otherwise>
-		<!-- There are no other database links associated with this strain. -->
-		</c:otherwise>
-		</c:choose>
+
 	</section>
-	
-	
-	
-	
-	
+
 	<script type="text/javascript">
 		$(function() {
 			$('#detail-table').DataTable({

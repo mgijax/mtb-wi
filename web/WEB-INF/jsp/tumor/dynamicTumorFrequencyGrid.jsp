@@ -871,12 +871,7 @@
 	<c:out value="${exception}"/>
 	An error occurred <c:out value="${exception.message}"/>
 	<!-- \n -->
-	Stacktrace: 
-	<!-- \n -->
-	<%
-	Throwable t = (Throwable) pageContext.getAttribute("exception");
-	t.printStackTrace(new java.io.PrintWriter(out));
-	%>
+
 </pre>
 </c:if>
 <hr><a NAME="legend"></a><strong>Legend</strong>
