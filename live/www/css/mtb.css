@@ -217,6 +217,14 @@ nav img {
 	margin-left:-6px;
 }
 
+@media (max-width:992px) {
+	nav img {
+		height:80px;
+		margin-top:4px;
+		margin-left:-16px;
+	}
+}
+
 
 /* Menu */
 
@@ -333,8 +341,8 @@ nav > div {
 	margin:15px 0;
 	border:1px solid #05396b;
 	background-color:white;
-
 }
+
 
 nav input {
 	height:38px;
@@ -353,7 +361,7 @@ nav input {
 
 
 nav input[type="text"] {
-	width:244px;
+	width:120px;
 	padding:8px 9px 6px;
 	font-size:14px;
 	line-height:18px;
@@ -361,11 +369,13 @@ nav input[type="text"] {
 	height:32px;
 }
 
+@media (min-width:640px) {
+	nav input[type="text"] {
+		width:244px;
+	}		
+}
+
 @media (min-width:992px) {
-	nav > div:after {
-		right:356px;
-	}
-		
 	nav input[type="text"] {
 		width:300px;
 	}	
@@ -405,6 +415,45 @@ body > main {
 body > main > div {
 	padding:0;
 	margin-bottom:50px;
+}
+
+main > header {
+	position:relative;
+}
+
+main > header h1 {
+	margin-right:200px;
+}
+
+
+
+#subnav {
+	position:absolute;
+	font-size:1.25em;
+	line-height:1.2;
+	font-weight:300;
+	top:0;
+	right:30px;
+	width:200px;
+	text-align:right;
+}
+
+@media (max-width:768px) {
+	main > header h1 {
+		margin-right:0;
+	}
+	#subnav {
+		position:static;
+		display:block;
+		text-align:right;
+		margin-top:-1.53em;
+		width:50vw;
+	}
+}
+
+main > header a.help:after {	
+	content: '\a0\f059';
+	font-family: FontAwesome;
 }
 
 
@@ -574,6 +623,10 @@ label.tip {
 
 /* Forms */
 
+form {
+	font-size:1.25em;
+}
+
 fieldset {
 	padding:15px;
 	box-sizing:border-box;
@@ -586,7 +639,7 @@ fieldset legend {
 }
 
 fieldset label {
-	padding-left:15px;
+	padding-left:5px;
 }
 
 fieldset select[multiple] {
@@ -780,6 +833,13 @@ i.mo:before {
 
 i.mo:hover:before {
 	background-image:url(ellipses-arrow-hl.svg);
+}
+
+
+#summary p {
+	font-size:18px;
+	line-height:1.25;
+	margin-bottom:1em;
 }
 
 

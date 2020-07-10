@@ -5,7 +5,6 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Add PDX Content" help="pdxAddContent">
 	<jsp:attribute name="head">
-	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/GViewer/javascript/fileUpload.css"/>
 	<style type="text/css">
 		.upload-icon {
@@ -373,16 +372,19 @@
 	</script>		
 	</jsp:attribute>
 	<jsp:body>
-	<h1>Additional ${characterization} content for ${modelID}</h1>
-	<h1></h1>
-	<div id="pi-form"></div>
-	<h1></h1>
-	<div id="link-form"></div>
-	<h1></h1>
-	<div id="document-form"></div>
-	<h1></h1>
-	<div id="graphic-form"></div>
-	<h1></h1>
-	<div id="comment-form"></div>
+	<section id="pdx-add">
+		<h2>Additional ${characterization} content for ${modelID}</h2>
+
+		<div id="pi-form"></div>
+
+		<div id="link-form"></div>
+
+		<div id="document-form"></div>
+
+		<div id="graphic-form"></div>
+
+		<div id="comment-form"></div>
+		
+	</section>
 	</jsp:body>
 </jax:mmhcpage>

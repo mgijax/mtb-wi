@@ -32,20 +32,43 @@
 			}
 		}
 	</script>
+	<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
+	
+	
+	
 	</jsp:attribute>
 	<jsp:attribute name="subnav">
 	<a href="pdxRequest.do">Request more information on the JAX PDX program</a>
 	</jsp:attribute>
 	<jsp:body>
+	
+	
+	<section id="summary">
+		<div class="container">
+			<table>
+				<tbody>
+					<tr>
+						<td><h4>Primary Site</h4></td>	
+						<td>${primarySites}</td>
+					</tr>
+					<tr>
+						<td><h4>Diagnosis</h4></td>	
+						<td>${diagnoses}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>		
+	
+	<section id="detail">		
+	
 	<html:form action="pdxComparison" method="GET">
-	<table>
+	<table id="detail-table" style="width:100%;">
+
+		
+		
 		<caption>
-			<div class="result-summary">
-				<h4>Search Summary</h4>
-				
-				<jax:dl dt="Primary Site" dds="${primarySites}" dd="Any"/>
-				<jax:dl dt="Diagnosis" dts="Diagnoses" dds="${diagnoses}" dd="Any"/>
-			</div>
+
 			<div class="result-legend">
 				<table>
 					<caption>Rank Z based expression scale</caption>
@@ -132,5 +155,6 @@
 		</tbody>
 	</table>
 	</html:form>
+	</section>
 	</jsp:body>
 </jax:mmhcpage>

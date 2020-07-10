@@ -23,59 +23,16 @@
        =====================================================================
    -->
     <form-beans>
-        <form-bean name="QuickSearchForm"
-                 type="org.jax.mgi.mtb.wi.forms.QuickSearchForm"/>
-        <form-bean name="StrainSearchForm"
-                 type="org.jax.mgi.mtb.wi.forms.StrainSearchForm"/>
-        <form-bean name="ReferenceSearchForm"
-                 type="org.jax.mgi.mtb.wi.forms.ReferenceSearchForm"/>
-        <form-bean name="PathologyImageSearchForm"
-                 type="org.jax.mgi.mtb.wi.forms.PathologyImageSearchForm"/>
-        <form-bean name="TumorSearchForm"
-                 type="org.jax.mgi.mtb.wi.forms.TumorSearchForm"/>
-        <form-bean name="GeneticsSearchForm"
-                 type="org.jax.mgi.mtb.wi.forms.GeneticsSearchForm"/>
-        <form-bean name="AdvancedSearchForm"
-                 type="org.jax.mgi.mtb.wi.forms.AdvancedSearchForm"/>
-        <form-bean name="QTLForm"
-                 type="org.jax.mgi.mtb.wi.forms.QTLForm"/>
-        <form-bean name="OrthologyForm"
-                 type="org.jax.mgi.mtb.wi.forms.OrthologyForm"/>
         <form-bean name="DynamicGridForm"
-                  type="org.jax.mgi.mtb.wi.forms.DynamicGridForm"/>
-        <form-bean name="GeneExpressionForm"
-                  type="org.jax.mgi.mtb.wi.forms.GeneExpressionForm"/>
-                  
+                  type="org.jax.mgi.mtb.wi.forms.DynamicGridForm"/>   
         <form-bean name="PDXForm"
-                  type="org.jax.mgi.mtb.wi.forms.PDXForm"/>
-                  
+                  type="org.jax.mgi.mtb.wi.forms.PDXForm"/>                 
         <form-bean name="PDXLoginForm"
-                  type="org.jax.mgi.mtb.wi.forms.PDXLoginForm"/>
-                  
+                  type="org.jax.mgi.mtb.wi.forms.PDXLoginForm"/>                 
         <form-bean name="PDXDashboardForm"
-                  type="org.jax.mgi.mtb.wi.forms.PDXDashboardForm"/>
-                  
+                  type="org.jax.mgi.mtb.wi.forms.PDXDashboardForm"/>                  
         <form-bean name="AddPDXContentForm"
                   type="org.jax.mgi.mtb.wi.forms.PDXAddContentForm"/>
-                  
-                  
-                  
-      <!-- sample form bean descriptor for an ActionForm
-      <form-bean name="inputForm"
-                 type="app.InputForm"/>
-      end sample -->
-
-      <!-- sample form bean descriptor for a DynaActionForm
-      <form-bean name="logonForm"
-                 type="org.apache.struts.action.DynaActionForm">
-                 
-         <form-property name="username"
-                        type="java.lang.String"/>
-                        
-         <form-property name="password"
-                        type="java.lang.String"/>
-      </form-bean>                        
-      end sample -->
     </form-beans>
 
 
@@ -123,31 +80,7 @@
             <forward name="success" path="/WEB-INF/jsp/pleaseWait.jsp"/>
             <forward name="failure" path="appError.jsp"/>
         </action>
-        <action path = "/quickSearchResults"
-              type = "org.jax.mgi.mtb.wi.actions.QuickSearchResultsAction"
-              name = "QuickSearchForm"
-              validate = "true"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/quickSearchResults.jsp"/>
-            <forward name="failure" path="/WEB-INF/jsp/quickSearchResults.jsp"/>
-            <forward name="error" path="appError.jsp"/>
-        </action>
-        <action path="/strainSearch"
-              type="org.jax.mgi.mtb.wi.actions.StrainSearchAction"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/strain/strainSearch.jsp"/>
-            <forward name="failure" path="appError.jsp"/>
-        </action>
-        <action path = "/strainSearchResults"
-              type = "org.jax.mgi.mtb.wi.actions.StrainSearchResultsAction"
-              name = "StrainSearchForm"
-              validate = "true"
-              input = "/strainSearch.do"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/strain/strainSearchResults.jsp"/>
-            <forward name="failure" path="/strainSearch.do"/>
-            <forward name="error" path="appError.jsp"/>
-        </action>
+        
         <action path = "/strainDetails"
               type = "org.jax.mgi.mtb.wi.actions.StrainDetailsAction"
               scope="request">
@@ -157,22 +90,7 @@
             <forward name="failure" path="/WEB-INF/jsp/strain/strainDetailsFailure.jsp"/>
             <forward name="error" path="appError.jsp"/>
         </action>
-        <action path="/referenceSearch"
-              type="org.jax.mgi.mtb.wi.actions.ReferenceSearchAction"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/reference/referenceSearch.jsp"/>
-            <forward name="failure" path="appError.jsp"/>
-        </action>
-        <action path = "/referenceSearchResults"
-              type = "org.jax.mgi.mtb.wi.actions.ReferenceSearchResultsAction"
-              name = "ReferenceSearchForm"
-              validate = "true"
-              input = "/referenceSearch.do"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/reference/referenceSearchResults.jsp"/>
-            <forward name="failure" path="/referenceSearch.do"/>
-            <forward name="error" path="appError.jsp"/>
-        </action>
+        
         <action path = "/referenceDetails"
               type = "org.jax.mgi.mtb.wi.actions.ReferenceDetailsAction"
               scope="request">
@@ -180,22 +98,7 @@
             <forward name="failure" path="/WEB-INF/jsp/reference/referenceDetailsFailure.jsp"/>
             <forward name="error"   path="/WEB-INF/jsp/reference/referenceDetailsError.jsp"/>
         </action>
-        <action path="/pathologyImageSearch"
-              type="org.jax.mgi.mtb.wi.actions.PathologyImageSearchAction"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/pathologyImage/pathologyImageSearch.jsp"/>
-            <forward name="failure" path="appError.jsp"/>
-        </action>
-        <action path = "/pathologyImageSearchResults"
-              type = "org.jax.mgi.mtb.wi.actions.PathologyImageSearchResultsAction"
-              name = "PathologyImageSearchForm"
-              validate = "true"
-              input = "/pathologyImageSearch.do"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/pathologyImage/pathologyImageSearchResults.jsp"/>
-            <forward name="failure" path="/pathologyImageSearch.do"/>
-            <forward name="error" path="appError.jsp"/>
-        </action>
+        
         <action path = "/pathologyImageDetails"
               type = "org.jax.mgi.mtb.wi.actions.PathologyImageDetailsAction"
               scope="request">
@@ -208,42 +111,6 @@
               scope="request">
             <forward name="success" path="/WEB-INF/jsp/genetics/assayImageDetails.jsp"/>
             <forward name="failure" path="/WEB-INF/jsp/genetics/assayImageDetailsFailure.jsp"/>
-            <forward name="error" path="appError.jsp"/>
-        </action>
-        <action path="/tumorSearch"
-              type="org.jax.mgi.mtb.wi.actions.TumorSearchAction"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/tumor/tumorSearch.jsp"/>
-            <forward name="failure" path="appError.jsp"/>
-        </action>
-        <action path = "/tumorSearchResults"
-              type = "org.jax.mgi.mtb.wi.actions.TumorSearchResultsAction"
-              name = "TumorSearchForm"
-              validate = "true"
-              input = "/tumorSearch.do"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/tumor/tumorSearchResults.jsp"/>
-            <forward name="failure" path="/tumorSearch.do"/>
-            <forward name="error" path="appError.jsp"/>
-        </action>
-        <action path = "/tumorSearchResults2"
-              type = "org.jax.mgi.mtb.wi.actions.TumorSearchResultsAction"
-              name = "TumorSearchForm"
-              validate = "true"
-              input = "/tumorSearch.do"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/tumor/tumorSearchResults2.jsp"/>
-            <forward name="failure" path="/tumorSearch.do"/>
-            <forward name="error" path="appError.jsp"/>
-        </action>
-        <action path = "/tumorSearchResults"
-              type = "org.jax.mgi.mtb.wi.actions.TumorSearchResultsAction"
-              name = "TumorSearchForm"
-              validate = "true"
-              input = "/index.do"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/tumor/tumorSearchResults.jsp"/>
-            <forward name="failure" path="/tumorSearch.do"/>
             <forward name="error" path="appError.jsp"/>
         </action>
         <action path = "/tumorDetails"
@@ -280,22 +147,7 @@
             <forward name="failure" path="/WEB-INF/jsp/tumor/tumorFrequencyGridFailure.jsp"/>
             <forward name="error" path="appError.jsp"/>
         </action>
-        <action path="/geneticsSearch"
-              type="org.jax.mgi.mtb.wi.actions.GeneticsSearchAction"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/genetics/geneticsSearch.jsp"/>
-            <forward name="failure" path="appError.jsp"/>
-        </action>
-        <action path = "/geneticsSearchResults"
-              type = "org.jax.mgi.mtb.wi.actions.GeneticsSearchResultsAction"
-              name = "GeneticsSearchForm"
-              validate = "true"
-              input = "/geneticsSearch.do"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/genetics/geneticsSearchResults.jsp"/>
-            <forward name="failure" path="geneticsSearch.do"/>
-            <forward name="error" path="appError.jsp"/>
-        </action>
+        
         <action path = "/geneticsSummary"
               type = "org.jax.mgi.mtb.wi.actions.GeneticsSummaryAction"
               scope="request">
@@ -328,15 +180,7 @@
     
        
     
-        <action path="/orthologySearch"
-            type="org.jax.mgi.mtb.wi.actions.OrthologyAction"
-            name="OrthologyForm"
-            scope="request">
-            <forward name="success" path="/WEB-INF/jsp/orthology/orthologySearchResults.jsp"/>
-            <forward name="orthologySearch" path="/WEB-INF/jsp/orthology/orthologySearch.jsp"/>
-            <forward name="list" path="/WEB-INF/jsp/orthology/humanGeneList.jsp"/>
-            <forward name="failure" path="appError.jsp"/>
-        </action>
+
     
         <action path="/dynamicGrid"
             type="org.jax.mgi.mtb.wi.actions.DynamicGridAction"
@@ -348,34 +192,7 @@
         </action>
     
     
-        <action path="/geneExpressionSearch"
-            type="org.jax.mgi.mtb.wi.actions.GeneExpressionSearchAction"
-            scope="request">
-            <forward name="success" path="/WEB-INF/jsp/expression/geneExpressionSearch.jsp"/>        
-            <forward name="failure" path="appError.jsp"/>
-        </action>
-    
-        <action path="/geneExpressionSearchResults"
-            type="org.jax.mgi.mtb.wi.actions.GeneExpressionSearchResultsAction"
-            name="GeneExpressionForm"
-            scope="request">
-            <forward name="success" path="/WEB-INF/jsp/expression/geneExpressionSearchResultsSubtable.jsp"/>     
-            <forward name="subtable" path="/WEB-INF/jsp/expression/geneExpressionSearchResultsSubtable.jsp"/>     
-            <forward name="failure" path="appError.jsp"/>
-        </action>
-    
-        <action path="/geoWS"
-            type="org.jax.mgi.mtb.wi.actions.GEOWebServiceAction"
-            scope="request">
-            <forward name="failure" path="appError.jsp"/>
-        </action>
-    
-        <action path = "/summaryByExample"
-              type = "org.jax.mgi.mtb.wi.actions.TumorSummaryByExampleAction"
-              scope="request">
-            <forward name="success" path="/WEB-INF/jsp/tumor/tumorSummary.jsp"/>
-            <forward name="failure" path="appError.jsp"/>
-        </action>
+        
        
        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
        <!-- The pdxSearch.do url is mapped to from jax.org/findpdx       -->
@@ -385,9 +202,11 @@
             name="PDXForm"
             scope="request">
             <forward name="success" path="/WEB-INF/jsp/PDX/pdxSearch.jsp"/>  
-            <forward name="noData" path="/WEB-INF/jsp/PDX/pdxNoData.jsp"/>
+            <forward name="noData" path="/WEB-INF/jsp/PDX/pdxNoData.jsp"/> <!-- Unused -->
             <forward name="failure" path="appError.jsp"/>
         </action>
+        
+        
         
          <action path="/pdxLikeMe"
             type="org.jax.mgi.mtb.wi.actions.PDXLikeMeAction"

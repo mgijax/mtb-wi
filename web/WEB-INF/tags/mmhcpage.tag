@@ -58,10 +58,12 @@
 		</ul>
 	</jsp:attribute>
 	<jsp:attribute name="defaultSubnav">
-		<c:if test="${not empty help}">
-			<a class="help" href="${help}"></a>
-		</c:if>
-		<jsp:invoke fragment="subnav" />
+		<div id="subnav">
+			<c:if test="${not empty help}">
+				<a class="help" href="${help}">Help</a>
+			</c:if>
+			<jsp:invoke fragment="subnav" />
+		</div>
 	</jsp:attribute>
 	<jsp:attribute name="footer">
 

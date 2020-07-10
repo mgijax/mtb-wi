@@ -218,7 +218,7 @@ section > table > tbody > tr:nth-child(odd) > td[rowspan='1'] {
 
 #facet-ui {	
 	position:fixed;
-	top:104px;
+	top:106px;
 	left:0;
 	transition:transform 250ms ease;
 	margin:0;

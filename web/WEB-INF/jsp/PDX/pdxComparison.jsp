@@ -139,6 +139,9 @@
 	
 	<a href="pdxRequest.do" target="_blank">Request more information on the JAX PDX program.</a>
 	
+    <section>
+        <div class="container">
+            
 	<jax:searchform action="pdxComparison">
 	<fieldset>
 		<legend>Limit models by primary cancer site</legend>
@@ -179,6 +182,9 @@
 		</fieldset>
 	</fieldset>
 	</jax:searchform>
+        </div>
+    </section>
+        
 	</jsp:body>
 </jax:mmhcpage>
 

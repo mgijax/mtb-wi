@@ -1,223 +1,126 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-    <head>
-
-        <style>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
+<jax:mmhcpage title="Patient Derived Xenograft" subtitle="PDX Like Me Search" help="${pageContext.request.contextPath}/pdxlikemehelp.jsp">
+    <jsp:attribute name="head">
+        <style type="text/css">
             /* force the horizontal scroll bars into hiding */
             .dataTables_scrollBody
             {
              overflow-x:hidden !important;
              overflow-y:auto !important;
-            }
-            
+            }          
             /* seems to be needed for striping of results */
             .even{
                background-color:#eff0f1 !important;
             }
-            
-            
-        </style>
-
-        <c:import url="../../../meta.jsp">
-            <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Search"/>
-        </c:import>
-
-        
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-
- 
-
-<script type="text/javascript" charset="utf8">
-
-       
-            $(document).ready( function () {
-                for(i = 1; i < ${caseCount}; i++){
-                 table = $('#results'+i).DataTable( {
-                    searching:      false,
-                    info:           false,
-                    scrollY:        '50vh',
-                    scrollCollapse: true,
-                    paging:         false,
-                    ordering:       false,
-                    stripe:         true
-                } );
-                
-                }
-                
-                // three times is the charm
-                // anything less fails for "Case 1 \n KRAS:AMP"
-                $('.dataTable').DataTable().columns.adjust();
-                $('.dataTable').DataTable().columns.adjust();
-                $('.dataTable').DataTable().columns.adjust();
-                   
-                
-            } );
-        
-
-
-
-            function clearForm() {
-                document.forms[1].cases.value = "";
-                document.forms[1].submit();
+            #pdx {
+                padding:25px 0 100px;
+            }
+            #pdx form {
+                display:flex;
+                justify-content: space-between;
+                margin-bottom:25px;
+            }
+            #pdx form > div {
+                width:calc(50% - 15px);
+                box-sizing:border-box;
+                margin:0;
+                padding:0;
+            }
+            #pdx fieldset {
+                margin-bottom:25px;
+                border:1px solid #c7c7c7;
             }
 
-        </script>
+            #pdx textarea {
+                display:block;
+                width:100%;
+                padding:10px;
+            }
 
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" charset="utf8">
 
+            $(document).ready( function () {
+            for(i = 1; i < ${caseCount}; i++){
+            table = $('#results'+i).DataTable( {
+            searching:      false,
+            info:           false,
+            scrollY:        '50vh',
+            scrollCollapse: true,
+            paging:         false,
+            ordering:       false,
+            stripe:         true
+            } );
+            
+            }
+            
+            // three times is the charm
+            // anything less fails for "Case 1 \n KRAS:AMP"
+            $('.dataTable').DataTable().columns.adjust();
+            $('.dataTable').DataTable().columns.adjust();
+            $('.dataTable').DataTable().columns.adjust();
 
-        <c:import url="../../../body.jsp">
-            <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Search"/>
-        </c:import>
-    </head>
+            } );
 
-    <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-            <td width="200" valign="top">
-                <c:import url="../../../pdxToolBar.jsp" />
-            </td>
-            <td class="separator">
-                &nbsp;
-            </td>
-            <td valign="top">
-                <table width="95%" align="center" border="0" cellspacing="1" cellpadding="4">
-                    <tr>
-                        <td>
-                            <!--======================= Start Main Section =============================-->
-
-                            <!--======================= Start Form Header ==============================-->
-                            <html:form action="pdxLikeMe" method="POST">
-
-                                <table border="0" cellpadding="5" cellspacing="1" width="100%" class="results">
-                                    <tr class="pageTitle">
-                                        <td colspan="3">
-                                            <table width="100%" border="0" cellpadding="4" cellspacing="0">
-                                                <tr>
-                                                    <td width="25%" valign="middle" align="left">
-                                                        <a class="help" href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
-                                                    </td>
-                                                    <td width="50%" class="pageTitle">
-                                                        Patient Derived Xenograft PDX Like Me Search
-                                                    </td>
-                                                    <td width="25%" valign="middle" align="right">
-                                                        <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdxRequestButton" onclick="window.location = 'pdxRequest.do'">
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <!--======================= End Form Header ================================-->
-                                    <tr class="pageInfo">
-                                        <td colspan="3">
-                                            <table border=0 cellspacing=2 width="100%">
-                                                <tr>
-                                                    <td>
-                                                        &nbsp;Patient Derived Xenograft (PDX) models for cancer research are created by the implantation of human cells and tumor tissue into immune compromised mouse hosts.  PDX models provide a platform for in vivo cancer biology studies and pre-clinical cancer drug efficacy testing.  The current state of the art mouse host is the "NOD-SCID-Gamma2" (NSG) mouse. NSG mice lack mature T and B cells, have no functional natural killer cells, and are deficient in both innate immunity and cytokine signaling.   
-                                                        <br>
-                                                        &nbsp;
-                                                        <br>
-                                                        
-                                                    </td>
-
-                                                    <td>
-                                                        <img src="${applicationScope.urlImageDir}/NSG_lg.jpg" height="225" width="450" border=0 alt="NSG Mouse">
-                                                    <td>
-                                                </tr>
-                                               
-
-                                            </table>
-                                        </td>
-
-                                    </tr>
-                                   
-                                     <tr class="pageInfo">
-                                        <td colspan="3">
-                                            <p style="font-size:17px">Use PDX Like Me to search for PDX models with tumor samples that meet multiple genomic criteria.<br> Molecular profiles can combine mutation, expression, and/or copy number aberration criteria.<br> Multiple profiles can be searched at one time.</p>
-                                            
-                                            <a href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html" target="_blank">Learn how to use PDX Like Me </a>
-                                            <br><br>
-                                            <table>
-                                                <tr><td>Example search:</td><td></td></tr>
-                                                <tr><td>CASE 1</td>
-                                                <tr><td>KRAS:AMP</td></tr>
-                                                <tr><td>TP53:MUT=A159V</td></tr>
-                                                <tr><td>ALB:DEL</td></tr>
-                                                <tr><td>KIT:EXP&gt;2.5</td></tr>
-                                            </table>
-                                        </td>
-                                                    
-                                   </tr>
-
-
-                                    <tr class="buttons">
-                                        <td colspan="3">
-                                            <table border=0 cellspacing=2 width="100%">
-                                                <tr>
-                                                    <td>
-                                                        <input type="submit" VALUE="Search">
-                                                        <input type="button" VALUE="Reset" onclick="clearForm();">
-                                                        <input name="viz" type="submit" VALUE="Visualize">
-
-                                                    </td>
-
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="stripe1">
-
-                                        <td class="cat1">
-                                            Output options:
-                                            <br><br><br><br>
-                                            Enter Case information here:
-
-                                        </td>
-
-                                        <td class="data1">
-                                            <input type="checkbox" name="asCSV" value="asCSV" ${csvChecked}/> Return results as a CSV file<br>
-                                            <input type="checkbox" name="actionable" value="actionable" ${actionableChecked}/> Include models with clinically relevant variants for supplied genes
-                                            <br>
-                                            <input type="checkbox" name="LRP" value="LRP" ${lrpChecked}> If searching by CNV display log ratio ploidy values <br>
-                                            <input type="checkbox" name="EXP" value="EXP" ${expChecked}> If searching by expression level display Z score percentile rank values
-                                            <br>
-                                            <textarea rows="20" cols="50" name="cases">${cases}</textarea>
-                                        </td>
-                                        <td class="data1">
-                                            <div id="allResults">
-                                            ${table}
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr class="buttons">
-                                        <td colspan="3">
-                                            <table border=0 cellspacing=5 width="100%">
-                                                <tr>
-                                                    <td>
-                                                        <input type="submit" VALUE="Search">
-                                                        <input type="button" VALUE="Reset" onclick="clearForm();">
-                                                        <input name="viz" type="submit" VALUE="Visualize">
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </html:form>
-
-                            </table>
-                            <!--======================== End Main Section ==============================-->
-
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+            function clearForm() {
+            document.forms[0].cases.value = "";
+            document.forms[0].submit();
+            }         
+        </script>        
+    </jsp:attribute> 
+    <jsp:body>    
     
-</body>
-</html> 
+    <section id="summary">
+        <div class="container">
+            <p>Patient Derived Xenograft (PDX) models for cancer research are created by the implantation of human cells and tumor tissue into immune compromised mouse hosts.  PDX models provide a platform for in vivo cancer biology studies and pre-clinical cancer drug efficacy testing.  The current state of the art mouse host is the "NOD-SCID-Gamma2" (NSG) mouse. NSG mice lack mature T and B cells, have no functional natural killer cells, and are deficient in both innate immunity and cytokine signaling.</p>
+            <p><a href="pdxRequest.do">Request more information on the JAX PDX program</a></p>
+            <!-- <img src="${applicationScope.urlImageDir}/NSG_lg.jpg" height="225" width="450" border=0 alt="NSG Mouse"> 
+        -->
+            <p>Use PDX Like Me to search for PDX models with tumor samples that meet multiple genomic criteria. Molecular profiles can combine mutation, expression, and/or copy number aberration criteria. Multiple profiles can be searched at one time.</p>
+            
+            <p><a href="${pageContext.request.contextPath}/pdxlikemehelp.jsp" target="_blank">Learn how to use PDX Like Me </a></p>
+        
+        </div>
+    </section>
+    
+    
+    <section id="pdx">
+        <div class="container">
+
+            <html:form action="pdxLikeMe" method="POST">
+
+                <div>
+                    <fieldset>
+                        <legend>Enter case information here<c:if test="${empty cases}"> (example shown)</c:if></legend>               
+                        <textarea rows="10" cols="45" name="cases" placeholder="Example search:&#10;CASE 1&#10;KRAS:AMP&#10;TP53:MUT=A159V&#10;ALB:DEL&#10;KIT:EXP&gt;2.5"><c:if test="${empty cases}">CASE 1&#10;KRAS:AMP&#10;TP53:MUT=A159V&#10;ALB:DEL&#10;KIT:EXP&gt;2.5</c:if>${cases}</textarea>
+                    </fieldset>
+                </div>
+                
+                <div>
+                    <fieldset>
+                        <legend>Output options</legend>
+                        <div><input type="checkbox" name="asCSV" value="asCSV" ${csvChecked}/> <label>Return results as a CSV file</label></div>
+                        <div><input type="checkbox" name="actionable" value="actionable" ${actionableChecked}/> <label>Include models with clinically relevant variants for supplied genes</label></div>
+                        <div><input type="checkbox" name="LRP" value="LRP" ${lrpChecked}> <label>If searching by CNV display log ratio ploidy values</label></div>
+                        <div><input type="checkbox" name="EXP" value="EXP" ${expChecked}> <label>If searching by expression level display Z score percentile rank values</label></div>
+                    </fieldset>                  
+                    
+                    <input type="submit" VALUE="Search">
+                    <input type="button" VALUE="Reset" onclick="clearForm();">
+                    <input name="viz" type="submit" VALUE="Visualize">
+                </div>
+
+            </html:form>
+            
+            ${table}
+            
+    </section>
+</jsp:body>
+</jax:mmhcpage>
+

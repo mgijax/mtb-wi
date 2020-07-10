@@ -2,11 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<!DOCTYPE html>
-<html>
-    <head>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
+<jax:mmhcpage title="Patient Derived Xenograft" subtitle="PDX Like Me Visualization" help="PDXLikeMeHelp">
+<jsp:attribute name="head">
 
-       <meta charset="utf-8">
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/cr-1.5.2/fc-3.3.0/datatables.min.css"/>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/cr-1.5.2/fc-3.3.0/datatables.min.js"></script>
@@ -18,7 +17,7 @@
         <script type="text/javascript" src="${applicationScope.urlBase}/js/overlib.js"></script>
 
 
-        <script language="javascript">
+        <script type="text/javascript">
             
               
 
@@ -99,27 +98,31 @@
   </script>
 
 
-
-        </script>
-
-      
-
-        <c:import url="../../../meta.jsp">
-            <c:param name="pageTitle" value="Patient Derived Xenograft PDX Like Me Visualization"/>
-        </c:import>
-
-
         <style>
 
             th.highlight {
                 padding:0px 2px 8px 0px !important;
             }
+            
+            #pdx-vis {
+              padding-bottom:50px;
+            }
 
         </style>
 
-    </head>
-    <body>
-        
+</jsp:attribute>
+<jsp:body>
+
+<section id="summary">
+  <div class="container">
+    <p><a href="pdxRequest.do">Request more information on the JAX PDX program</a></p>
+    <p><a class="help" href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html#vis">Help and Documentation</a></p>
+  
+</div>
+</section>
+    
+    <section id="pdx-vis">
+
         
         <div id="loading" style="top:0px;left:0px;background-color:grey; z-index:99; width:100%;height:100%;position: fixed;
    display: block;
@@ -128,29 +131,10 @@
    line-height:500px;
    font-size:40px;">Loading please wait....<br></div>
 
-        <div style="position:fixed;left:5px;top:5px;width:225px;height:100%; border-right:4px solid grey;font-size:12px;font-family:verdana">
 
-            <c:import url="../../../pdxToolBar.jsp" />
-        </div>
-
-
-
-        <div style="width:auto;padding-left:300px;height:100%;top:5px;padding-right:40px">
+        <div style="width:auto;padding-left:40px;height:100%;top:5px;padding-right:40px">
             <div style="border:1px solid black; padding:5px">
 
-                <table width="100%" border="1" cellpadding="4" cellspacing="0" style="background:#D0E0F0">
-                    <tr>
-                        <td width="25%" valign="middle" align="left" style="border:none">
-                            <a class="help" href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html#vis"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
-                        </td>
-                        <td width="50%" class="pageTitle" style="border:none;font-family:Arial; font-weight:bold; font-size:18px; text-align:center">
-                            Patient Derived Xenograft PDX Like Me Visualization
-                        </td>
-                        <td width="25%" valign="middle" align="right" style="border:none">
-                            <input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdxRequestButton" onclick="window.location = 'pdxRequest.do'">
-                        </td>
-                    </tr>
-                </table>
 
                 <table>
                     <tr><td>Rank Z based expression scale</td>
@@ -214,5 +198,6 @@
 
             </div>
         </div>
-    </body>
-</html> 
+    </section>
+  </jsp:body>
+</jax:mmhcpage>
