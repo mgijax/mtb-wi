@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Publications &amp; Posters" help="#">
+<jax:mmhcpage title="Publications &amp; Presentations" subtitle="Publications about MMHCdb">
 
 	<jsp:body>	
 
 
 
-<section class="container" id="publications">
+<section class="container content" id="publications">
 <h2>Publications</h2>
 
 <ul>
@@ -54,9 +54,6 @@
 </ul>
 
 
-</section>
-
-<section class="container" id="posters">
 <h2>Posters</h2>
 
 
