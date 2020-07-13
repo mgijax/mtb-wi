@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Patient Derived Xenograft Comparison Form" help="pdxcomparison">
+<jax:mmhcpage title="Patient Derived Xenograft Comparison Form">
 	<jsp:attribute name="head">
     <script type="text/javascript">
          

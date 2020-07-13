@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Add PDX Content" help="pdxAddContent">
+<jax:mmhcpage title="Additional ${characterization} content for ${modelID}">
 	<jsp:attribute name="head">
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/GViewer/javascript/fileUpload.css"/>
 	<style type="text/css">
@@ -372,19 +372,14 @@
 	</script>		
 	</jsp:attribute>
 	<jsp:body>
-	<section id="pdx-add">
-		<h2>Additional ${characterization} content for ${modelID}</h2>
-
-		<div id="pi-form"></div>
-
-		<div id="link-form"></div>
-
-		<div id="document-form"></div>
-
-		<div id="graphic-form"></div>
-
-		<div id="comment-form"></div>
-		
-	</section>
+		<section id="pdx-add">
+			<div class="container">
+				<div id="pi-form"></div>
+				<div id="link-form"></div>	
+				<div id="document-form"></div>	
+				<div id="graphic-form"></div>	
+				<div id="comment-form"></div>
+			</div>	
+		</section>
 	</jsp:body>
 </jax:mmhcpage>

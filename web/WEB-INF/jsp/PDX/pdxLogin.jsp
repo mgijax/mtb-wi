@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="PDX Login" help="pdxdetails">
+<jax:mmhcpage title="PDX Login">
 	<ul>
 		<li><a target="_blank" href="http://pdx-dashboard.jax.org/v4/">Open PDX Genomics Dashboard</a></li>
 		<li><a target="_blank" href="http://pdx-dashboard/elims/submission-lookup/')">Open PDX Sample Name Checker</a></li>

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Patient Derived Xenograft" subtitle="PDX Like Me Visualization" help="PDXLikeMeHelp">
+<jax:mmhcpage title="Patient Derived Xenograft" subtitle="PDX Like Me Visualization">
 <jsp:attribute name="head">
 
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

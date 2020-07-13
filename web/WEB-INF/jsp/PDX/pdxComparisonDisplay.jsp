@@ -3,7 +3,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Patient Derived Xenograft Comparison" help="pdxcomparison">
+<jax:mmhcpage title="Patient Derived Xenograft Comparison">
 	<jsp:attribute name="head">
 	<script type="text/javascript">
 		function showAllMutations(){

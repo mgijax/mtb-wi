@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Patient Derived Xenograft Variant Summary" help="pdxresults">
+<jax:mmhcpage title="Patient Derived Xenograft Variant Summary">
 	<jsp:attribute name="head">
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base-debug.js"></script>
@@ -190,13 +190,17 @@
 	</script>
 	</jsp:attribute>
 	<jsp:body>
-	<c:choose>
-	<c:when test="${not empty variants}">
-	<div id="data-div"></div>
-	</c:when>
-	<c:otherwise>
-	<p>No Results Found</p>
-	</c:otherwise>
-	</c:choose>
+		<section id="summary">
+	        <div class="container">	
+				<c:choose>
+				<c:when test="${not empty variants}">
+				<div id="data-div"></div>
+				</c:when>
+				<c:otherwise>
+				<p>No Results Found</p>
+				</c:otherwise>
+				</c:choose>
+			</div>
+	    </section>	
 	</jsp:body>
 </jax:mmhcpage>

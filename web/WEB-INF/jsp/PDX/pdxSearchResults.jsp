@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Patient Derived Xenograft Search Results" help="pdxresults">
+<jax:mmhcpage title="Patient Derived Xenograft Search Results">
 	<jsp:attribute name="head">
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
@@ -235,76 +235,85 @@
 	</script>
 	</jsp:attribute>
 	<jsp:body>
-	<input type="button" value="Request more &#x00A; information on the &#x00A; JAX PDX program." class="pdx-request-button" onclick="window.location='pdxRequest.do'">
-	<table>
-		<caption>
-			<div class="result-summary">
-				<h4>Search Summary</h4>
-				<jax:dl dt="Model ID" dd="${modelID}"/>
-				<jax:dl dt="Primary Site" dds="${primarySites}" dd="Any"/>
-				<jax:dl dt="Diagnosis" dts="Diagnoses" dds="${diagnoses}" dd="Any"/>
-				<jax:dl dt="Tag" dds="${tags}" dd="Any"/>
-				<jax:dl dt="Gene" dds="${genes}" dd="Any"/>
-				<jax:dl dt="Variant" dds="${variants}" dd="Any"/>
-				<jax:dl dt="Fusion Gene" dd="${fusionGenes}"/>
-				<jax:dl dt="Tumor Growth Data" test="${not empty tumorGrowth}" dd="Required"/>
-				<jax:dl dt="Dosing Studies" test="${not empty dosingStudy}" dd="Required"/>
-				<jax:dl dt="Treatment Naive Patient" test="${not empty treatmentNaive}" dd="Required"/>
-				<jax:dl dt="RECIST Drug" dd="${recistDrug}"/>
-				<jax:dl dt="RECIST Response" dd="${recistResponse}"/>
-			</div>
-		</caption>
-		<tr class="buttons">
-			<td>
-				<table>
-					<c:choose>
-					<c:when test="${not empty mice}">
-					<tr>
-						<td>
-							<div id="data-div"></div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div id="bucket-div" style="display:none">
-								<form method="get" action="pdxRequest.do">
-									<label>Selected Models: </label>
-									<input type="text" id="bucket"	name="mice">
-									<input type="submit" value="Request Details" >
-								</form>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Check boxes can be used to select models to request details on availability.
-							<!-- \n -->
-							Models without check boxes (<strong>NA</strong>) are no longer available (no inventory remaining).
-						</td>
-					</tr>
-					</c:when>
-					<c:otherwise>
-					<!-- No results found. //-->
-					</c:otherwise>
-					</c:choose>
-					<tr>
-						<td>
-							<form method="GET" action ="pdxSearch.do"><input type="submit" value="Search Again"></form>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<c:if test="${applicationScope.publicDeployment == false}">
-							<!-- This should not be available on public until there is a go-ahead from Ed L. -->
-							<input type="button" value="Download results as spreadsheet" onclick="window.location=document.URL+'&asCSV=true'" />
-							</c:if>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<!-- ////  End Results  //// -->
-	</table>
+	
+	<section id="summary">
+		<div class="container">
+			
+			
+			<jax:dl dt="Model ID" dd="${modelID}"/>
+			<jax:dl dt="Primary Site" dds="${primarySites}" dd="Any"/>
+			<jax:dl dt="Diagnosis" dts="Diagnoses" dds="${diagnoses}" dd="Any"/>
+			<jax:dl dt="Tag" dds="${tags}" dd="Any"/>
+			<jax:dl dt="Gene" dds="${genes}" dd="Any"/>
+			<jax:dl dt="Variant" dds="${variants}" dd="Any"/>
+			<jax:dl dt="Fusion Gene" dd="${fusionGenes}"/>
+			<jax:dl dt="Tumor Growth Data" test="${not empty tumorGrowth}" dd="Required"/>
+			<jax:dl dt="Dosing Studies" test="${not empty dosingStudy}" dd="Required"/>
+			<jax:dl dt="Treatment Naive Patient" test="${not empty treatmentNaive}" dd="Required"/>
+			<jax:dl dt="RECIST Drug" dd="${recistDrug}"/>
+			<jax:dl dt="RECIST Response" dd="${recistResponse}"/>
+			
+			<p><a href="pdxRequest.do">Request more information on the JAX PDX program</a></p>
+
+	</div>
+    </section>
+	
+	<section id="detail">
+		
+
+		<table id="detail-table">
+			
+			<tr class="buttons">
+				<td>
+					<table>
+						<c:choose>
+						<c:when test="${not empty mice}">
+						<tr>
+							<td>
+								<div id="data-div"></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="bucket-div" style="display:none">
+									<form method="get" action="pdxRequest.do">
+										<label>Selected Models: </label>
+										<input type="text" id="bucket"	name="mice">
+										<input type="submit" value="Request Details" >
+									</form>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Check boxes can be used to select models to request details on availability.
+								<!-- \n -->
+								Models without check boxes (<strong>NA</strong>) are no longer available (no inventory remaining).
+							</td>
+						</tr>
+						</c:when>
+						<c:otherwise>
+						<!-- No results found. //-->
+						</c:otherwise>
+						</c:choose>
+						<tr>
+							<td>
+								<form method="GET" action ="pdxSearch.do"><input type="submit" value="Search Again"></form>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<c:if test="${applicationScope.publicDeployment == false}">
+								<!-- This should not be available on public until there is a go-ahead from Ed L. -->
+								<input type="button" value="Download results as spreadsheet" onclick="window.location=document.URL+'&asCSV=true'" />
+								</c:if>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!-- ////  End Results  //// -->
+		</table>
 	</jsp:body>
 </jax:mmhcpage>
 

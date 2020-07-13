@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html" pageEncoding="windows-1252" %>
+<%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Edit PDX Content" help="pdxAddContent">
+<jax:mmhcpage title="Edit PDX Content">
 	<jsp:attribute name="head">
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 	<style type="text/css">
@@ -416,19 +416,23 @@
 	});
 </script>		
 </jsp:attribute>
-<jsp:body>
-<h2>Additional Content for ${modelID}</h2>
-<h3></h3>
-<div id="pi-form"></div>
-<h3></h3>
-<div id="link-form"></div>
-<h3></h3>
-<div id="document-form"></div>
-<h3></h3>
-<div id="graphic-form"></div>
-<h3></h3>
-<div id="comment-form"></div>
-</jsp:body>
+	<jsp:body>
+	
+		<section id="pdx">
+			<div class="container">	
+				<h2>Additional Content for ${modelID}</h2>
+				<h3></h3>
+				<div id="pi-form"></div>
+				<h3></h3>
+				<div id="link-form"></div>
+				<h3></h3>
+				<div id="document-form"></div>
+				<h3></h3>
+				<div id="graphic-form"></div>
+				<h3></h3>
+				<div id="comment-form"></div>
+			</div>
+		</section>
+	
+	</jsp:body>
 </jax:mmhcpage>
-
-
