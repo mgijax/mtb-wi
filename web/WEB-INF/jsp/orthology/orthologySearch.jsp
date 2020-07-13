@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Human Gene Search Form" help="humangene">
+<jax:mmhcpage title="Human Gene Search Form">
 	<jax:searchform action="orthologySearch" sortby="Human Gene Symbol[HumanGS],Mouse Gene Symbol[MouseGS]">
 	<fieldset>
 		<legend>Human Genes</legend>

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Pathology Image Search Form" help="pathology">
+<jax:mmhcpage title="Pathology Image Search Form">
 	<jax:searchform action="pathologyImageSearchResults" sortby="Organ of origin[organ],Strain of origin[strain],Method[method],Antibody[antibody]" maxitems="5,10,100">
 	<fieldset>
 		<legend>Tumors</legend>

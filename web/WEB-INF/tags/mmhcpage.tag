@@ -15,7 +15,9 @@
 	defaultKeywords="mtb, mmhc, mouse, tumor, biology, jax, lab, laboratory, jackson, mgi, genome, informatics"
 	defaultDescription="MMHCdb has been designed to aid researchers in such areas as choosing experimental models, reviewing patterns of mutations in specific cancers, and identifying genes that are commonly mutated across a spectrum of cancers.">
 	<jsp:attribute name="defaultHead">
-		<link rel="icon" href="${applicationScope.urlImageDir}/favicon.ico" type="image/ico">
+		<link rel="shortcut icon" href="${applicationScope.urlImageDir}/favicon.ico" type="image/ico">
+		<link rel="icon" type="image/png" sizes="32x32" href="${applicationScope.urlImageDir}/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="${applicationScope.urlImageDir}/favicon-16x16.png">
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlStyleSheet}"/>
 		<script type="text/javascript" src="${applicationScope.urlJavaScript}"></script>
 		<jsp:invoke fragment="head" />
@@ -39,7 +41,7 @@
 			</li>	
 			<li class="dropdown"><span>Searches/Tools</span>
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/dynamicGrid.do">Tumor Frequency Grid</a></li>
+					<li><a href="${pageContext.request.contextPath}/dynamicGrid.do">Tumor Frequency Grid (inbred strains)</a></li>
 					<li><a href="${pageContext.request.contextPath}/pdxSearch.do">Patient Derived Xenograft (PDX) Search</a></li>
 					<li><a href="${pageContext.request.contextPath}/pdxLikeMe.do">PDX Like Me</a></li>
 					<li><a class="link-external" href="http://www.pdxfinder.org" target="_new">PDX Finder</a></li>	

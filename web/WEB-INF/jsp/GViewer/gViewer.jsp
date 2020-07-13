@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Cancer QTL Viewer" help="QTL">
+<jax:mmhcpage title="Cancer QTL Viewer">
 	<jsp:attribute name="head">
 	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/JavaScriptFlashGateway.js"></script>
 	<script type="text/javascript">

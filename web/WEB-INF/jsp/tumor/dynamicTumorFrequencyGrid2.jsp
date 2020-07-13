@@ -5,7 +5,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %> 
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Dynamic Tumor Frequency Grid" help="dynamicgrid">
+<jax:mmhcpage title="Dynamic Tumor Frequency Grid 2">
 	<script type="text/javascript">
 		function checkChecks(){
 			var checked = false;

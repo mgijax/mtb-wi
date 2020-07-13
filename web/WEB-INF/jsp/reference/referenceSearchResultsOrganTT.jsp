@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Reference Search Results" help="referenceresults">
+<jax:mmhcpage title="Reference Search Results">
 	<table>
 		<caption>
 			<div class="result-summary">

@@ -12,7 +12,7 @@
 	<c:set var="subtitle" value="${tumor.organOfOrigin} ${tumor.tumorClassification}" />
 </c:otherwise>
 </c:choose>
-<jax:mmhcpage title="Model Details" subtitle="${subtitle}" help="tumorsummary">
+<jax:mmhcpage title="Model Details" subtitle="${subtitle}">
 	<jsp:attribute name="head">
 		<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
 		<script type="text/javascript" src="/_res/js/datatables.min.js"></script>	

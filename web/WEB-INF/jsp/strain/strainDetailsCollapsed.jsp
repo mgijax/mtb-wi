@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Strain Summary" subtitle="${strain.name}" help="straindetail">
+<jax:mmhcpage title="Strain Summary" subtitle="${strain.name}">
 	<jsp:attribute name="head">
 		<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
 		<script type="text/javascript" src="/_res/js/datatables.min.js"></script>	
@@ -145,8 +145,8 @@
 					<caption>
 						<h2>Models</h2>
 						<c:set var="statsBean" value="${strain.tumorStats}"/>
-						${statsBean.label} unique model types displayed.
-						<em>A model group is a set of tumors that share the same tumor name, organ(s) affected, and treatment type for a specific strain.</em>
+						${statsBean.label} unique models displayed.
+						<em>A model is a set of tumors that share the same tumor name, organ(s) affected, and treatment type for a specific strain.</em>
 					</caption>
 					<thead>
 						<tr>

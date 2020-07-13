@@ -5,121 +5,128 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %> 
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Dynamic Tumor Frequency Grid" help="dynamicgrid">
-	<script type="text/javascript">
-		function checkChecks(){
-			var checked = false;
-			try{
-				if(document.DynamicGridForm.organGrpChk.checked){
-					checked = true;
+<jax:mmhcpage title="Tumor Frequency Grid" subtitle="Inbred Strain Family &times; Organ">
+	<jsp:attribute name="head">
+
+		<script type="text/javascript">
+			function checkChecks(){
+				var checked = false;
+				try{
+					if(document.DynamicGridForm.organGrpChk.checked){
+						checked = true;
+					}
+				}catch(err){}
+				try{
+					for(i=0; i < document.DynamicGridForm.organGrpChk.length; i++){
+						if(document.DynamicGridForm.organGrpChk[i].checked){
+							checked = true;	 
+						}
+					}
+				}catch(err){}
+				if(!checked){
+					toggleOrgans();
 				}
-			}catch(err){}
-			try{
+				checked = false;
+				try{
+					if(document.DynamicGridForm.strainChk !== null){
+						for(i=0; i < document.DynamicGridForm.strainChk.length; i++){
+							if(document.DynamicGridForm.strainChk[i].checked){
+								checked = true;
+							}
+						}
+					}
+				}catch(err){}
+				try{
+					if(document.DynamicGridForm.strainChk.length === null){
+						if(document.DynamicGridForm.strainChk.checked){
+							checked = true;
+						}
+					}
+				}catch(err){}
+				try{
+					if(document.DynamicGridForm.strainFamilyChk !== null){
+						for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
+							if(document.DynamicGridForm.strainFamilyChk[i].checked){
+								checked = true;
+							}
+						}
+					}
+				}catch(err){}
+				try{		
+					if(document.DynamicGridForm.strainFamilyChk.length == null){
+						if(document.DynamicGridForm.strainFamilyChk.checked){
+							checked = true;
+						}
+					}
+				}catch(err){} 
+				if(!checked){
+					toggleStrains();
+				}
+				document.DynamicGridForm.submit();	
+			}
+			function submitFormOrgan(organKey){
+				document.DynamicGridForm.currentStrainFamilyKey.value = '';
+				document.DynamicGridForm.currentOrganKey.value=organKey;
+				document.DynamicGridForm.expandColapse.value = "true";
+				document.DynamicGridForm.submit();
+			}
+			function submitFormStrain(strainFamilyKey){
+				document.DynamicGridForm.currentStrainFamilyKey.value = strainFamilyKey;
+				document.DynamicGridForm.currentOrganKey.value = '';
+				document.DynamicGridForm.expandColapse.value = "true";
+				document.DynamicGridForm.submit();
+			}
+			function toggleOrgans(){
 				for(i=0; i < document.DynamicGridForm.organGrpChk.length; i++){
-					if(document.DynamicGridForm.organGrpChk[i].checked){
-						checked = true;	 
+					document.DynamicGridForm.organGrpChk[i].checked= !document.DynamicGridForm.organGrpChk[i].checked;
+				}
+			}
+			function toggleStrains(){
+				for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
+					document.DynamicGridForm.strainFamilyChk[i].checked= !document.DynamicGridForm.strainFamilyChk[i].checked;
+				}
+			}
+			function hideChecks(){
+				for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
+					if(document.DynamicGridForm.strainFamilyChk[i].style.display!="none"){
+						document.DynamicGridForm.strainFamilyChk[i].style.display="none";
+					}else{
+						document.DynamicGridForm.strainFamilyChk[i].style.display="inline";
 					}
 				}
-			}catch(err){}
-			if(!checked){
-				toggleOrgans();
-			}
-			checked = false;
-			try{
-				if(document.DynamicGridForm.strainChk !== null){
-					for(i=0; i < document.DynamicGridForm.strainChk.length; i++){
-						if(document.DynamicGridForm.strainChk[i].checked){
-							checked = true;
-						}
+				for(i=0; i < document.DynamicGridForm.organGrpChk.length; i++){
+					if(document.DynamicGridForm.organGrpChk[i].style.display!="none"){
+						document.DynamicGridForm.organGrpChk[i].style.display="none";
+					}else{
+						document.DynamicGridForm.organGrpChk[i].style.display="inline";
 					}
 				}
-			}catch(err){}
-			try{
-				if(document.DynamicGridForm.strainChk.length === null){
-					if(document.DynamicGridForm.strainChk.checked){
-						checked = true;
-					}
-				}
-			}catch(err){}
-			try{
-				if(document.DynamicGridForm.strainFamilyChk !== null){
-					for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
-						if(document.DynamicGridForm.strainFamilyChk[i].checked){
-							checked = true;
-						}
-					}
-				}
-			}catch(err){}
-			try{		
-				if(document.DynamicGridForm.strainFamilyChk.length == null){
-					if(document.DynamicGridForm.strainFamilyChk.checked){
-						checked = true;
-					}
-				}
-			}catch(err){} 
-			if(!checked){
-				toggleStrains();
 			}
-			document.DynamicGridForm.submit();	
-		}
-		function submitFormOrgan(organKey){
-			document.DynamicGridForm.currentStrainFamilyKey.value = '';
-			document.DynamicGridForm.currentOrganKey.value=organKey;
-			document.DynamicGridForm.expandColapse.value = "true";
-			document.DynamicGridForm.submit();
-		}
-		function submitFormStrain(strainFamilyKey){
-			document.DynamicGridForm.currentStrainFamilyKey.value = strainFamilyKey;
-			document.DynamicGridForm.currentOrganKey.value = '';
-			document.DynamicGridForm.expandColapse.value = "true";
-			document.DynamicGridForm.submit();
-		}
-		function toggleOrgans(){
-			for(i=0; i < document.DynamicGridForm.organGrpChk.length; i++){
-				document.DynamicGridForm.organGrpChk[i].checked= !document.DynamicGridForm.organGrpChk[i].checked;
-			}
-		}
-		function toggleStrains(){
-			for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
-				document.DynamicGridForm.strainFamilyChk[i].checked= !document.DynamicGridForm.strainFamilyChk[i].checked;
-			}
-		}
-		function hideChecks(){
-			for(i=0; i < document.DynamicGridForm.strainFamilyChk.length; i++){
-				if(document.DynamicGridForm.strainFamilyChk[i].style.display!="none"){
-					document.DynamicGridForm.strainFamilyChk[i].style.display="none";
-				}else{
-					document.DynamicGridForm.strainFamilyChk[i].style.display="inline";
-				}
-			}
-			for(i=0; i < document.DynamicGridForm.organGrpChk.length; i++){
-				if(document.DynamicGridForm.organGrpChk[i].style.display!="none"){
-					document.DynamicGridForm.organGrpChk[i].style.display="none";
-				}else{
-					document.DynamicGridForm.organGrpChk[i].style.display="inline";
-				}
-			}
-		}
-	</script>
+		</script>
+	</jsp:attribute>
+	<jsp:body>
+	
+	<section id="summary">
+		<div class="container">	
+	
+	
+			<p>Clicking in a colored box will take you to a summary of the records for spontaneous tumors of that organ or organ system observed in inbred mice of the corresponding strain family and reported in the literature. <strong>The data represented in the grid is dynamically generated and reflects the most recent data available in the MMHCdb system.</strong> The records will be sorted based on the highest reported frequency. This summary, in turn, is linked to more detailed information about each of the reported tumors.</p>
+		
+			<p>Additional information associated with a colored cell will be displayed in a popup window of your web browser when you hold your mouse over the cell. <em>(Requires JavaScript support.)</em></p>
+		</div>
+	</section>
+	
+	<section id="detail">
+
+
+
 	<table>
 	</table>
-	<!-- ////  Start Detail Section  //// -->
-	<h3>Tumor Frequency Grid (Inbred Strain Family x Organ)</h3>
-	<!-- \n -->
-	<!-- \n -->
-	Clicking in a colored box will take you to a summary of the records for
-	spontaneous tumors of that organ or organ system observed in inbred mice
-	of the corresponding strain family and reported in the literature.	<strong>The data
-		represented in the grid is dynamically generated and reflects the most recent 
-	data available in the MTB system.</strong>
-	The records will be sorted based on the highest reported frequency. This
-	summary, in turn, is linked to more detailed information about each of
-	the reported tumors.
-	<p>Additional information associated with a colored cell will be displayed
-		in a popup window of your web browser when you hold your mouse over the
-		cell. <em>(Requires JavaScript support.)</em></p>
-	<!-- \n -->
-	<hr>
+
+
+
+
+
 	<c:set var="rowSpan" value="0"/>
 	<c:set var="totalColumns" value="2"/>
 	<c:set var="strainName" value=""/>
@@ -917,5 +924,8 @@
 	NZO, and RIII.</li>
 </ul>
 <!-- ////  End Detail Section  //// -->
+
+</section>
+	</jsp:body>
 </jax:mmhcpage>
 

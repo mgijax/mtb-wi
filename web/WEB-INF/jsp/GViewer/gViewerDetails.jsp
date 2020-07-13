@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Cancer QTL Selection Details" help="GViewerDetails">
+<jax:mmhcpage title="Cancer QTL Selection Details">
 	<jsp:attribute name="head">
 	<style type="text/css">
 		.no-icon {

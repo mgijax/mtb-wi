@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Strain Tumor Overview (Expanded View)" help="straindetail">
+<jax:mmhcpage title="Strain Tumor Overview (Expanded View)">
 	<jsp:attribute name="subnav">
 	<a href="strainDetails.do?page=collapsed&amp;key=${strain.strainKey}">Strain Tumor Overview Collapsed View</a>
 	</jsp:attribute>

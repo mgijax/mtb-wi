@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Genetic Change Summary" help="geneticchange">
+<jax:mmhcpage title="Genetic Change Summary">
 	<table>
 		<!-- ////  Start Genetics Summary Header  //// -->
 		<tr>
