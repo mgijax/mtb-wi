@@ -103,13 +103,14 @@
 	
 	
 	<h3>Visualization Results</h3>
-	The same results are displayed as a regular search but formatted differently.<br>
+	<img src="${applicationScope.urlImageDir}/pdx-vis.png" style="margin-bottom:25px;">
+	<p>The same results are displayed as a regular search but formatted differently.
 	Rows display search criteria, columns correspond to matching models.<br>
 	If multiple cases are used each is displayed in its own tab. Select the tab to see the case results.<br>
 	Columns can be reordered. Click and hold on the model name, drag to move, click to drop.<br>
 	Clicking on model names will link to PDX details page for selected model.<br>
 	If displaying actionable variants, results with an "x" have actionable variants and details will be displayed on mouse-over.<br>
-	In some cases the tables may render such that the column headers don't align with the rest of the table, usually resizing the browser window width by a small amount will resolve this.
+	In some cases the tables may render such that the column headers don't align with the rest of the table, usually resizing the browser window width by a small amount will resolve this.</p>
 	<a id="vis"></a>
 		</section>
 		</jsp:body>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="About Us" help="#">
+<jax:mmhcpage title="About Us">
 
 	<jsp:body>	
 		<section class="container content">

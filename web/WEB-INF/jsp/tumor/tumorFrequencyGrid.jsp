@@ -5,7 +5,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %> 
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Tumor Frequency Grid" help="#">
+<jax:mmhcpage title="Tumor Frequency Grid">
 	<!-- ////  Start Detail Section  //// -->
 	<h3>Tumor Frequency Grid (Inbred Strain Family x Organ)</h3>
 	<p>Clicking in a colored box will take you to a summary of the records for

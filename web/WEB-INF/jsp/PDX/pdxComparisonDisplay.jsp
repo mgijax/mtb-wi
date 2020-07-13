@@ -65,10 +65,7 @@
 	<html:form action="pdxComparison" method="GET">
 	<table id="detail-table" style="width:100%;">
 
-		
-		
 		<caption>
-
 			<div class="result-legend">
 				<table>
 					<caption>Rank Z based expression scale</caption>
@@ -129,29 +126,6 @@
 					${table}
 				</td>
 			</tr>
-			<!--				
-			<tr>
-				<td>Rank Z based expression scale</td>
-			</tr>
-			<tr>
-				<td>
-					${gradient}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table>
-						<tr><td>CNV color coding</td></tr>
-						<tr>
-							<td style="text-align:center;color:#000000;background-color:#FFA500">Amplification</td>
-							<td style="text-align:center;color:#000000;background-color:#0000FF">Deletion</td>
-							<td style="text-align:center;color:#000000;background-color:#808080">Normal</td>
-							<td style="text-align:center;color:#000000;background-color:#FFFFFF">No Value</td>
-						</tr>
-					</table>
-				</td>
-			</tr>		
-			-->
 		</tbody>
 	</table>
 	</html:form>

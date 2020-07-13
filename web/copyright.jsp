@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Warranty Disclaimer &amp; Copyright Notice" help="#">
+<jax:mmhcpage title="Warranty Disclaimer &amp; Copyright Notice">
 	<jsp:body>	
 		<section class="container">
 			<pre>

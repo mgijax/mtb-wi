@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Faceted Search" help="#">
+<jax:mmhcpage title="Faceted Search">
 	<jsp:attribute name="head">
 	<style type="text/css">
 		.facet{

@@ -1,7 +1,7 @@
 <%@ page language="java" isErrorPage="true" contentType="text/html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Invalid URL" help="#">
+<jax:mmhcpage title="Invalid URL">
 
 	<jsp:body>	
 		<section class="container">

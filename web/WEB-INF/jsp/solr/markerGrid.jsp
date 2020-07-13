@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Marker Grid" help="#">
+<jax:mmhcpage title="Marker Grid">
 	<jsp:attribute name="head">
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all_noGlobals.css" /> 
 	<link href="${applicationScope.urlStyleSheet}" rel="stylesheet" type="text/css"/>

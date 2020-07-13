@@ -190,17 +190,25 @@
 	</script>
 	</jsp:attribute>
 	<jsp:body>
+
+	<!--
 		<section id="summary">
 	        <div class="container">	
-				<c:choose>
-				<c:when test="${not empty variants}">
-				<div id="data-div"></div>
-				</c:when>
-				<c:otherwise>
-				<p>No Results Found</p>
-				</c:otherwise>
-				</c:choose>
+
 			</div>
 	    </section>	
+	-->
+
+		<section id="detail">
+			<c:choose>
+				<c:when test="${not empty variants}">					
+					<div id="data-div"></div>					
+				</c:when>
+				<c:otherwise>
+					<p>No Results Found</p>
+				</c:otherwise>
+			</c:choose>			
+		</section>
+
 	</jsp:body>
 </jax:mmhcpage>

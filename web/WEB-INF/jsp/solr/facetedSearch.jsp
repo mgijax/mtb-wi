@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" session="false"%>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Advanced Search" help="#">
+<jax:mmhcpage title="Advanced Search">
 	<jsp:attribute name="head">
 		<link rel="stylesheet" type="text/css" href="./live/www/css/facet.css"/>		
 		<script>
