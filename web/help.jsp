@@ -6,22 +6,27 @@
 	<jsp:body>	
 		<section class="container content">
 			
-			<p>MMHCdb offers on-line help and staffs a help desk to answer your questions and comments. Please feel free to <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">Contact User Support</a> for any of the following:</p>
 			<ul>
-			<li>You can't find the data you're looking for
-			<li>You've found an error on one of our web pages
-			<li>You have a paper you'd like us to curate
-			<li>You need us to create a special report
-			<li>You have data you'd like to submit
-			<li>You have a complaint about or a suggestion for our website
+                        <li>Have data on mouse models of human cancer you'd like to submit?
+			<li>Can't find the mouse model you're looking for?
+			<li>Found an error in our database?
+			<li>Are we missing your publication on a mouse model of cancer?
+			<li>Need a special database report?
+			<li>Have a complaint or suggestion?
 			</ul>
 
-			<p>You can reach us by <a href="mailto:mgi-help@jax.org">email</a>, by submitting our <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">Contact User Support</a> form, or at (207) 288-6445.</p>
+                        <p>Contact Us!
+                        <p>MMHCdb On-line <a href ="${pageContext.request.contextPath}/userHelp.jsp"> User Documentation </a></p>
+                        <p>User Support email:<a href="mailto:mgi-help@jax.org">mgi-help@jax.org</a></p>
+                        <p><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support contact web form</a></p>
+                        <p><b>Other helpful information</b></p>
+			<p>Join mgi-list, the mouse genetics community forum. Learn more <a href="http://www.informatics.jax.org/mgihome/lists/lists.shtml">here</a>.</p>
 			
-			<p>To direct questions to the mouse genetics community, join <a href="http://www.informatics.jax.org/mgihome/lists/lists.shtml">mgi-list</a>.</p>
-			
-			<hr>
-			<p><a href="publications.jsp"><h3>Publications & Presentations</h3></a></p>
+                        <p><a href="${pageContext.request.contextPath}/citation.jsp">How to cite MMHCdb</a></p>
+                        
+                        <p>MMHCdb Web Interface:<a href="https://www.github.com/mgijax/mtb-wi">https://www.github.com/mgijax/mtb-wi</a></p>
+                        <p>MMHCdb Data Layer:<a href="https://www.github.com/mgijax/mtb-dao">https://www.github.com/mgijax/mtb-dao</a></p>
+                        <p>MMHCdb Web interface:<a href="https://www.github.com/PDXFinder/pdxfinder">https://www.github.com/PDXFinder/pdxfinder</a></p>
 
 		</section>
 	</jsp:body>
