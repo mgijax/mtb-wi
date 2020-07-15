@@ -228,7 +228,9 @@
 								<c:if test="${tumor.imageCount > 0}">
 								<p>${tumor.imageCount} pathology image(s)</p>
 								</c:if>
-
+								<c:if test="${tumor.cytoImages > 0}">
+								<p>${tumor.cytoImages} cytogenetic image(s)</p>
+							</c:if>
 							
 							
 							</td>
