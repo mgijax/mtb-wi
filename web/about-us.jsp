@@ -7,46 +7,51 @@
 		<section class="container content">
 			
 
-<p>			The Mouse Models of Human Cancer database (MMHCdb) is a unique on-line compendium of mouse models for human cancer. MMHCdb provides electronic access to expertly curated information on diverse mouse models for human cancer along with tools for accessing and visualizing associated data from these models. MMHCdb integrates data from peer-reviewed literature, direct submissions from researchers, and other bioinformatics resources. The database project began in 1997 and was previously referred to as the Mouse Tumor Biology (MTB) Database.</p>
-			<h3>Current Goals</h3>
-			<ul>
-			<li> continue to populate MMHCdb with data on strain-specific patterns of tumorigenesis in inbred, mutant, and genetically engineered mice
-			<li> incorporate new data types and develop new user interfaces for accessing information and data related to Patient Derived Xenograft (PDX) models of human cancer
-			<li> develop new interfaces to support mouse-human comparative cancer genomics
-			<li> support the infrastructure of MMHCdb and our user community through ongoing database maintenance, development of new software components, user support services, and community outreach activities
-			</ul>
-			
-			<hr><h3>Database Statistics</h3>
-			<table border=0 cellpadding=3>
-			<tr><td>Tumor Models</td><td align="right">54,269</td></tr>
-			<tr><td>Tumor Frequency Records</td><td align="right">97,552</td></tr>
-			<tr><td>Strains/Cohorts</td><td align="right">7,559</td></tr>
-			<!-- <tr><td>Pathology Images</td><td align="right">6,442</td></tr>
-			<tr><td>Cytogenetic Images</td><td align="right">434</td></tr>
-			<tr><td>PDX Images</td><td align="right">2,211</td></tr> -->
-			<tr><td>Images (Pathology, Cytogenetics, & PDX)</td><td align="right">9,087</td></tr>
-			
-			</table>
-			<br>
-			<font size=1>Last updated 1 May 2019</font>
-			
-			<hr><h3>Current Staff</h3>
-			<ul>
-			<li>Carol J. Bult
-			<li>Debra M. Krupke
-			<li>Dale A. Begley
-			<li>Steven B. Neuhauser
-			<li>Joel E. Richardson
-			<li>John P. Sundberg
-			</ul>
-			
-			<hr><h3>Funding</h3>
-			<p>MMHCdb is supported by NCI grant <a href="https://projectreporter.nih.gov/project_info_description.cfm?aid=9264508&icde=37130427" target=blank>CA089713</a>.</p>
-			
-			<hr><a href="publications.jsp"><h3>Publications & Posters</h3></a>
-			
-			<a href="news-events.jsp"><h3>News & Events</h3></a></font>
+                    <p>
+                        The Mouse Models of Human Cancer database (MMHCdb) is an expertly curated compendium of in vivo mouse models of human cancer. 
+                        To ensure maximum data accessibility and compatibility we follow strict adherence to community nomenclature standards, ontologies, and minimal information standards. 
+                        This work benefits cancer researchers by making it easier to aggregate information from the same or related mouse models. 
+                        It is fundamental to making mouse models of human cancer and their associated data Findable, Accessible, Interoperable, and Reusable (FAIR). 
+                        We also facilitate the informed selection and use of mouse models by highlighting the impact that genetic background has on key cancer characteristics, 
+                        including cancer susceptibility, the spectrum of tumor types and frequencies observed in a model, age of tumor onset/detection, and metastatic potential.
 
+                    </p>
+                    <br>
+                    <p>
+                        MMHCdb has partnered with the European Bioinformatics Institute to develop <a href="https://www.pdxfinder.org">PDX Finder</a>, a global catalog of Patient Derived Xenograft models
+                    </p>
+			
+                    <table>
+			<h3>Content (Updated July 2020) </h3>
+                        <tr>
+                            <td>
+
+                                <table border=0 cellpadding=3>
+                                    <tr><td data-tip="Mouse model: Defined as a group of tumor frequency records that share a unique combination of Tumor, Strain, and Treatment(s). ">MMHCdb: Mouse Models</td><td style="text-align:left">57,692</td></tr>
+                                    <tr><td data-tip="Tumor frequency records: Defined as a unique observation of a Tumor,  Strain, and Treatment(s) with attributes (when available) for age of detection, age of onset, strain sex, colony size, number of affected mice, and treatment details.">MMHCdb: Tumor Frequency Records</td><td style="text-align:left">106,500</td></tr>
+                                    <tr><td data-tip="References: Data in MMHCdb are associated with information about the source of the data. The majority of sources are peer-reviewed publications.">MMHCdb: References</td><td style="text-align:left">19,242</td></tr>
+                                    <tr><td data-tip="Histopathology images: Histology (H&E) an/or immunohistochemistry (IHC) images associated with specific tumor frequency records. Images are displayed with permission of published and/or submitting author.">MMHCdb: Histopathology Images</td><td style="text-align:left">6594</td></tr>
+                                    <tr><td data-tip="PDX models: Patient Derived Xenograft models are generated by engrafting fragments from human tumors in immunodeficient or humanized mouse hosts. ">PDX Finder: PDX models</td><td style="text-align:left">4031</td></tr>
+                                </table>
+                            </td>
+                            <td></td>
+                        <tr>
+                                <td>
+                                    <h3>The MMHCdb team:</h3>
+                                    <br>Debra M. Krupke, MS, Senior Biocuration Scientist
+                                    <br>Dale A. Begley, PhD, Senior Biocuration Scientist
+                                    <br>Steven B. Neuhauser, BA, Scientific Software Engineer
+                                    <br>John P. Sundberg, DVM, PhD, Professor, co-Investigator
+                                    <br>Carol J. Bult, PhD, Professor and Knowlton Family Chair, Principal Investigator
+                                </td>
+                                <td>
+                                    <h3>Funding</h3>
+                                    <p>MMHCdb is supported by NCI grant <a href="https://projectreporter.nih.gov/project_info_description.cfm?aid=9264508&icde=37130427" target=blank>CA089713</a>.</p>
+                                    <h3>Citing the Resource</h3>
+                                    <p>Learn how to cite this resource <a href="${pageContext.request.contextPath}/citation.jsp">here</a>
+                                </td>
+                        </tr>
+			</table>
 
 		</section>
 	</jsp:body>
