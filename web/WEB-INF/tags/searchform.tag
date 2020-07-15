@@ -28,6 +28,7 @@
 	</c:forTokens>
 </fieldset>
 </c:if>
+<!--
 <fieldset class="form-max-items">
 	<legend>Max number of items returned</legend>
 	<html:radio property="maxItems" value="25">25</html:radio>  
@@ -35,6 +36,7 @@
 	<html:radio property="maxItems" value="500">500</html:radio>  
 	<html:radio property="maxItems" value="No Limit">No Limit</html:radio>
 </fieldset>
+-->
 <jsp:doBody/>
 <fieldset class="form-buttons">
 	<input type="submit" value="Search">

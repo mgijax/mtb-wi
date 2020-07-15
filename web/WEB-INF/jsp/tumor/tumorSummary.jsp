@@ -152,7 +152,7 @@
 		<!-- ////  Frequency Records  //// -->
 		<c:choose>
 		<c:when test="${not empty tumor.frequencyRecs}">
-		<table id="detail-table" style="width:100%;">
+		<table class="detail-table" id="detail-table-tumor" style="width:100%;">
 			<thead>
 				<tr>
 					<th class="organ">Organ Affected</th>
@@ -286,7 +286,7 @@
 	<script type="text/javascript">
 		// mods.push('./live/www/js/results.js');
 		$(function() {
-			$('#detail-table').DataTable({
+			$('#detail-table-tumor').DataTable({
 		        'paging': false,
 		        'searching': false,
 				'info': false,

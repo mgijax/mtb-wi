@@ -107,18 +107,18 @@ public class ModelCounts {
     public static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2019/cancer-facts-and-figures-2019.pdf";
     public static final String YEAR = "2019";
     private String solrURL;
-    private String minFC = "&fq=minFC:[1%20TO%201]";
+    private String minFC = "fq=minFC:1";
     private static String HTML = "";
     private static String HTMLALL = "";
-    private static ArrayList<ArrayList<String>> dataObject = new ArrayList<>();
+   
 
     public ModelCounts() {
         if (HTML.length() == 0) {
-            solrURL = WIConstants.getInstance().getSolrURL() + "?q=*%3A*&&fq=minFC:[1%20TO%201]&wt=json";
+            solrURL = WIConstants.getInstance().getSolrURL() + "?q=*%3A*&&fq=minFC:1&wt=json";
             buildListList();
             HTML = buildHTML();
             // assume we will only use limited results in new WI for now
-            dataObject = buildDataObject();
+          
 
             tissuesListList = new ArrayList<>();
             solrURL = WIConstants.getInstance().getSolrURL() + "?q=*%3A*&&wt=json";
@@ -150,9 +150,11 @@ public class ModelCounts {
         return HTMLALL;
     }
     
-    public ArrayList<ArrayList<String>> getDataObject(){
-        return dataObject;
+    // does nothing, unused need to refactor IndexAction
+    public String getDataObject(){
+        return "empty";
     }
+   
 
     private void buildListList() {
 
@@ -218,7 +220,7 @@ public class ModelCounts {
         }
 
         String[] tissues = tissue.split(",");
-        StringBuilder link = new StringBuilder("/mtbwi/pdxSearchResults.do?");
+        StringBuilder link = new StringBuilder("/mtbwi2/pdxSearchResults.do?");
 
         for (String t : tissues) {
             link.append("primarySites=").append(t.replaceAll(" ", "+"));
@@ -301,7 +303,7 @@ public class ModelCounts {
             html.append("<td>[" + vals.get(2) + "]</td>\n");
             html.append("<td>" + vals.get(3) + "</td>\n");
 
-			String anchor = "<a target=\"_blank\" href=\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=";
+			String anchor = "<a target=\"_blank\" href=\"/mtbwi2/facetedSearch.do#" + minFC + "&fq=";
             String solrTissue = vals.get(4).replaceAll(" ", "+");
 
             if ("0".equals(vals.get(5))) {
@@ -337,62 +339,6 @@ public class ModelCounts {
     }
     
     
-     private ArrayList<ArrayList<String>> buildDataObject() {
-
-        ArrayList<ArrayList<String>> data = new ArrayList<>();
-        // will need to incldue year and pdxLink as  
-
-      
-        for (ArrayList<String> vals : tissuesListList) {
-            ArrayList<String> row = new ArrayList<>();
-            
-            row.add(vals.get(0));
-            row.add(vals.get(1));
-            row.add(vals.get(2));
-            row.add(vals.get(3));
-            
-            String solrTissue = vals.get(4).replaceAll(" ", "+");
-            String[] links = {
-                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:true&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
-                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=mutant:false&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\"",
-                "\"/mtbwi/facetedSearch.do?sort=hm&start=0" + minFC + "&fq=humanTissue%3A&quot;" + solrTissue + "&quot;\""
-            };
-
-            if ("0".equals(vals.get(5))) {
-                row.add("");
-            } else {
-                row.add(links[0]);
-            }
-            
-            row.add(vals.get(5));
-            
-            
-            if ("0".equals(vals.get(6))) {
-               row.add("");
-            } else {
-                row.add(links[1]);
-            }
-            
-            row.add(vals.get(6));
-
-            
-            if ("0".equals(vals.get(7))) {
-                row.add("");
-            } else {
-                row.add(links[2]);
-            }
-            row.add(vals.get(7));
-            
-            if ("0".equals(vals.get(9))) {
-               row.add("");
-            } else {
-                row.add(vals.get(8));
-            }
-            
-            row.add(vals.get(9));
-            data.add(row);
-        }
-        return data;
-    }
+   
 
 }

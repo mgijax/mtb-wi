@@ -6,6 +6,7 @@
 <jax:mmhcpage title="Patient Derived Xenograft Search Results">
 	<jsp:attribute name="head">
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
+	<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 	<script type="text/javascript">
@@ -222,7 +223,7 @@
 				id:'pdxGrid'
 			});
 			panel = new Ext.Panel({
-				applyTo:'dataDiv',
+				applyTo:'data-div',
 				items:[grid],
 				layout:{type:'fit'}
 			});
@@ -239,29 +240,31 @@
 	<section id="summary">
 		<div class="container">
 			
-			
-			<jax:dl dt="Model ID" dd="${modelID}"/>
-			<jax:dl dt="Primary Site" dds="${primarySites}" dd="Any"/>
-			<jax:dl dt="Diagnosis" dts="Diagnoses" dds="${diagnoses}" dd="Any"/>
-			<jax:dl dt="Tag" dds="${tags}" dd="Any"/>
-			<jax:dl dt="Gene" dds="${genes}" dd="Any"/>
-			<jax:dl dt="Variant" dds="${variants}" dd="Any"/>
-			<jax:dl dt="Fusion Gene" dd="${fusionGenes}"/>
-			<jax:dl dt="Tumor Growth Data" test="${not empty tumorGrowth}" dd="Required"/>
-			<jax:dl dt="Dosing Studies" test="${not empty dosingStudy}" dd="Required"/>
-			<jax:dl dt="Treatment Naive Patient" test="${not empty treatmentNaive}" dd="Required"/>
-			<jax:dl dt="RECIST Drug" dd="${recistDrug}"/>
-			<jax:dl dt="RECIST Response" dd="${recistResponse}"/>
-			
-			<p><a href="pdxRequest.do">Request more information on the JAX PDX program</a></p>
+			<table>
+				<tbody>			
+					<jax:sumrow dt="Model ID" dd="${modelID}"/>
+					<jax:sumrow dt="Primary Site" dds="${primarySites}" dd="Any"/>
+					<jax:sumrow dt="Diagnosis" dts="Diagnoses" dds="${diagnoses}" dd="Any"/>
+					<jax:sumrow dt="Tag" dds="${tags}" dd="Any"/>
+					<jax:sumrow dt="Gene" dds="${genes}" dd="Any"/>
+					<jax:sumrow dt="Variant" dds="${variants}" dd="Any"/>
+					<jax:sumrow dt="Fusion Gene" dd="${fusionGenes}"/>
+					<jax:sumrow dt="Tumor Growth Data" test="${not empty tumorGrowth}" dd="Required"/>
+					<jax:sumrow dt="Dosing Studies" test="${not empty dosingStudy}" dd="Required"/>
+					<jax:sumrow dt="Treatment Naive Patient" test="${not empty treatmentNaive}" dd="Required"/>
+					<jax:sumrow dt="RECIST Drug" dd="${recistDrug}"/>
+					<jax:sumrow dt="RECIST Response" dd="${recistResponse}"/>
+				</tbody>
+			</table>
 
-	</div>
+			<p><a href="pdxRequest.do">Request more information on the JAX PDX program</a></p>
+		</div>
     </section>
 	
 	<section id="detail">
 		
 
-		<table id="detail-table">
+		<table class="detail-table">
 			
 			<tr class="buttons">
 				<td>

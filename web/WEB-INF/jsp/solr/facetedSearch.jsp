@@ -25,25 +25,17 @@
 						Displaying <span id="result-first"></span> to <span id="result-last"></span> of <span id="result-total"></span>
 						<a id="result-next" href="#"><i class="fa fa-arrow-right"></i></a></p>
 					</div>
+					<div id="no-results">
+						No results found
+					</div>
 				</caption>
 				<thead>
-					<!--<tr>
-						<th colspan="4">Tumor Model</th>
-						<th colspan="4" class="fqc"></th>
-						<th colspan="2"></th>
-					</tr>-->
 					<tr>
 						<th data-sort="yes">Model Name</th>
 						<th data-sort="yes">Organ Affected</th>
 						<th>Tumor Inducing Agent(s)</th>
 						<th data-sort="yes">Strain</th>
 						<th data-sort="yes" class="fqc">Frequency Range</th>
-<!--
-						<th data-sort="yes" class="fqc">Female</th>
-						<th data-sort="yes" class="fqc">Male</th>
-						<th data-sort="yes" class="fqc">Mixed</th>
-						<th data-sort="yes" class="fqc">Unknown</th>
--->
 						<th>Additional Information</th>
 						<th>Model Details</th>
 					</tr>

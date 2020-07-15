@@ -2,34 +2,37 @@
 
 
 
-
-table#detail-table > caption,
-table#detail-table > tbody > tr > td:first-child,
-table#detail-table > tbody > tr > td.left-pad,
-table#detail-table > thead > tr > th:first-child,
-table#detail-table > thead > tr > th.left-pad {
+#detail > section > .cap,
+table.detail-table > caption,
+table.detail-table > tbody > tr > td:first-child,
+table.detail-table > tbody > tr > td.left-pad,
+table.detail-table > thead > tr > th:first-child,
+table.detail-table > thead > tr > th.left-pad {
 	padding-left:30px;
 }
 
-table#detail-table > caption,
-table#detail-table > tbody > tr > td:last-child,
-table#detail-table > thead > tr > th:last-child {
+#detail > section > .cap,
+table.detail-table > caption,
+table.detail-table > tbody > tr > td:last-child,
+table.detail-table > thead > tr > th:last-child {
 	padding-right:30px;
 }
 
 @media (max-width:768px) {
 
-	table#detail-table > caption,	
-	table#detail-table > tbody > tr > td:first-child,
-	table#detail-table > tbody > tr > td.left-pad,
-	table#detail-table > thead > tr > th:first-child,
-	table#detail-table > thead > tr > th.left-pad {
+	#detail > section > .cap,
+	table.detail-table > caption,	
+	table.detail-table > tbody > tr > td:first-child,
+	table.detail-table > tbody > tr > td.left-pad,
+	table.detail-table > thead > tr > th:first-child,
+	table.detail-table > thead > tr > th.left-pad {
 		padding-left:15px;
 	}
 
-	table#detail-table > caption,	
-	table#detail-table > tbody > tr > td:last-child,
-	table#detail-table > thead > tr > th:last-child {
+	#detail > section > .cap,
+	table.detail-table > caption,	
+	table.detail-table > tbody > tr > td:last-child,
+	table.detail-table > thead > tr > th:last-child {
 		padding-right:15px;
 	}
 	
@@ -37,17 +40,19 @@ table#detail-table > thead > tr > th:last-child {
 
 @media (min-width:1260px) {
 	
-	table#detail-table > caption,
-	table#detail-table > tbody > tr > td:first-child,
-	table#detail-table > tbody > tr > td.left-pad,
-	table#detail-table > thead > tr > th:first-child,
-	table#detail-table > thead > tr > th.left-pad {
+	#detail > section > .cap,
+	table.detail-table > caption,
+	table.detail-table > tbody > tr > td:first-child,
+	table.detail-table > tbody > tr > td.left-pad,
+	table.detail-table > thead > tr > th:first-child,
+	table.detail-table > thead > tr > th.left-pad {
 		padding-left:2.381vw;
 	}
 	
-	table#detail-table > caption,
-	table#detail-table > tbody > tr > td:last-child,
-	table#detail-table > thead > tr > th:last-child {
+	#detail > section > .cap,
+	table.detail-table > caption,
+	table.detail-table > tbody > tr > td:last-child,
+	table.detail-table > thead > tr > th:last-child {
 		padding-right:2.381vw;
 	}
 		
@@ -60,25 +65,33 @@ table#detail-table > thead > tr > th:last-child {
 	padding-top:15px;	
 }
 
-table#detail-table {
+table.detail-table {
 	margin-top:0;
 }
 
-table#detail-table > caption {
+#detail > section {
+	margin:0 0 30px;
+	overflow:auto;
+	zoom:1;
+}
+
+#detail > section > .cap,
+table.detail-table > caption {
 	padding-top:5px;
 	font-size:1rem;
 	margin:0;
 	padding-bottom:20px;
 }
 
-table#detail-table > caption h2 {
+#detail > section > .cap h2,
+table.detail-table > caption h2 {
 	color:#05396b;
 	margin-bottom:0.25em;
 	font-weight:700;
 	font-size:1.4rem;
 }
 
-table#detail-table > tbody > tr > td {
+table.detail-table > tbody > tr > td {
 	padding:8px 6px 6px;
 	border-bottom:1px solid white;
 }
@@ -94,7 +107,7 @@ th[colspan='1'] {
 
 
 
-table#detail-table td,
+table.detail-table td,
 td {
 	vertical-align:top;
 } 
@@ -191,6 +204,7 @@ th.sorting_disabled {
 
 #summary td:first-child {
 	min-width:150px;
+	width:200px;
 	padding-left:0;
 }
 
@@ -200,6 +214,12 @@ th.sorting_disabled {
 
 #summary td > h5 {
 	font-size:inherit;
+}
+
+#summary caption {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #05396b;
 }
 
 
