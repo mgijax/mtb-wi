@@ -14,29 +14,29 @@
 <dl>
 	<c:choose>
 	<c:when test="${fn:length(items)>1}">
-	<dt>${dts}</dt>
+	<dt><c:out value="${dts}" escapeXml="false" /></dt>
 	</c:when>
 	<c:otherwise>
-	<dt>${dt}</dt>
+	<dt><c:out value="${dt}" escapeXml="false" /></dt>
 	</c:otherwise>
 	</c:choose>
 	<c:forEach var="item" items="${dds}">
-	<dd>${item}</dd>
+	<dd><c:out value="${item}" escapeXml="false" /></dd>
 	</c:forEach>
 </dl>
 </c:when>
 <c:when test="${test}">
 <dl>
-	<dt>${dt}</dt>
+	<dt><c:out value="${dt}" escapeXml="false" /></dt>
 	<c:if test="${not empty dd}">
-	<dd>${dd}</dd>
+	<dd><c:out value="${dd}" escapeXml="false" /></dd>
 	</c:if>
 </dl>
 </c:when>
 <c:when test="${not empty dd && test != false}">
 <dl>
-	<dt>${dt}</dt>
-	<dd>${dd}</dd>
+	<dt><c:out value="${dt}" escapeXml="false" /></dt>
+	<dd><c:out value="${dd}" escapeXml="false" /></dd>
 </dl>
 </c:when>
 </c:choose>

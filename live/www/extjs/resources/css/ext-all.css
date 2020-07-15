@@ -168,7 +168,7 @@
     cursor: pointer;
     display: block;
     height: 10px;
-    line-height: 10px;
+    line-height:0.9rem;
     width: 10px;
 }
 
@@ -272,7 +272,7 @@
 .loading-indicator {
     background: no-repeat left;
     padding-left: 20px;
-    line-height: 16px;
+    line-height:1.5rem;
     margin: 3px;
 }
 
@@ -3115,7 +3115,10 @@ table.x-date-inner {
 
 .x-date-mp td {
     padding:2px;
-	font:normal 11px arial, helvetica,tahoma,sans-serif;
+	/* font:normal 11px arial, helvetica,tahoma,sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 td.x-date-mp-month,td.x-date-mp-year,td.x-date-mp-ybtn {
@@ -3428,7 +3431,7 @@ td.x-date-mp-sep {
 a.x-menu-item {
     cursor: pointer;
     display: block;
-    line-height: 16px;
+    line-height:1.5rem;
     outline-color: -moz-use-text-color;
     outline-style: none;
     outline-width: 0;
@@ -3695,7 +3698,7 @@ a.x-menu-item {
     zoom:1;
     padding:5px 3px 4px 5px;
     border:1px solid;
-    line-height: 15px;
+    line-height:1.4rem;
     background: transparent repeat-x 0 -1px;
 }
 
@@ -5168,7 +5171,10 @@ body.ext-ie6.x-body-masked .x-window select {
     background-color: #eee;
     border-color:#a3bad9;
     color:#222;
-    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    /* font:normal 11px tahoma, arial, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-mask-loading div {
@@ -5222,7 +5228,7 @@ body.ext-ie6.x-body-masked .x-window select {
 }
 
 .loading-indicator {
-    font-size: 11px;
+    font-size:1.0rem;
     background-image: url(../images/default/grid/loading.gif);
 }
 
@@ -5259,7 +5265,10 @@ ul.x-tab-strip-bottom{
 }
 
 .x-tab-strip span.x-tab-strip-text {
-	font:normal 11px tahoma,arial,helvetica;
+	/* font:normal 11px tahoma,arial,helvetica; */
+font-weight:normal;
+font-size:1.0rem;
+
 	color:#416aa3;
 }
 
@@ -5350,7 +5359,10 @@ ul.x-tab-strip-bottom{
 .x-tab-panel-bbar .x-toolbar, .x-tab-panel-tbar .x-toolbar {
     border-color:#99bbe8;
 }.x-form-field {
-    font:normal 12px tahoma, arial, helvetica, sans-serif;
+    /* font:normal 12px tahoma, arial, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.1rem;
+
 }
 
 .x-form-text, textarea.x-form-field {
@@ -5429,16 +5441,25 @@ ul.x-tab-strip-bottom{
 }
 
 .x-form-grow-sizer {
-	font:normal 12px tahoma, arial, helvetica, sans-serif;
+	/* font:normal 12px tahoma, arial, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.1rem;
+
 }
 
 .x-form-item {
-    font:normal 12px tahoma, arial, helvetica, sans-serif;
+    /* font:normal 12px tahoma, arial, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.1rem;
+
 }
 
 .x-form-invalid-msg {
     color:#c0272b;
-    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    /* font:normal 11px tahoma, arial, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
     background-image:url(../images/default/shared/warning.gif);
 }
 
@@ -5447,11 +5468,17 @@ ul.x-tab-strip-bottom{
 }
 
 .x-small-editor .x-form-field {
-    font:normal 11px arial, tahoma, helvetica, sans-serif;
+    /* font:normal 11px arial, tahoma, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .ext-webkit .x-small-editor .x-form-field {
-    font:normal 11px arial, tahoma, helvetica, sans-serif;
+    /* font:normal 11px arial, tahoma, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-form-invalid-icon {
@@ -5463,15 +5490,24 @@ ul.x-tab-strip-bottom{
 }
 
 .x-fieldset legend {
-    font:bold 11px tahoma, arial, helvetica, sans-serif;
+    /* font:bold 11px tahoma, arial, helvetica, sans-serif; */
+font-weight:bold;
+font-size:1.0rem;
+
     color:#15428b;
 }
 .x-btn{
-	font:normal 11px tahoma, verdana, helvetica;
+	/* font:normal 11px tahoma, verdana, helvetica; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-btn button{
-    font:normal 11px arial,tahoma,verdana,helvetica;
+    /* font:normal 11px arial,tahoma,verdana,helvetica; */
+font-weight:normal;
+font-size:1.0rem;
+
     color:#333;
 }
 
@@ -5560,7 +5596,10 @@ ul.x-tab-strip-bottom{
 }
 
 .x-toolbar td,.x-toolbar span,.x-toolbar input,.x-toolbar div,.x-toolbar select,.x-toolbar label{
-    font:normal 11px arial,tahoma, helvetica, sans-serif;
+    /* font:normal 11px arial,tahoma, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-toolbar .x-item-disabled {
@@ -5687,11 +5726,17 @@ ul.x-tab-strip-bottom{
 }
 
 .x-grid3-row td, .x-grid3-summary-row td{
-	font:normal 11px/13px arial, tahoma, helvetica, sans-serif;
+	/* font:normal 1.0rem/1.2rem arial, tahoma, helvetica, sans-serif; */
+  font-weight:normal;
+  font-size:1.0rem;
+  line-height:1.2rem;
 }
 
 .x-grid3-hd-row td {
-	font:normal 11px/15px arial, tahoma, helvetica, sans-serif;
+	/* font:normal 1.0rem/1.4rem arial, tahoma, helvetica, sans-serif; */
+  font-weight:normal;
+  font-size:1.0rem;
+  line-height:1.4rem;
 }
 
 
@@ -5823,7 +5868,10 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-grid3-topbar, .x-grid3-bottombar{
-	font:normal 11px arial, tahoma, helvetica, sans-serif;
+	/* font:normal 11px arial, tahoma, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-grid3-bottombar .x-toolbar{
@@ -5914,7 +5962,10 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-grid-group-hd div.x-grid-group-title {
     background-image:url(../images/default/grid/group-collapse.gif);
     color:#3764a0;
-    font:bold 11px tahoma, arial, helvetica, sans-serif;
+    /* font:bold 11px tahoma, arial, helvetica, sans-serif; */
+font-weight:bold;
+font-size:1.0rem;
+
 }
 
 .x-grid-group-collapsed .x-grid-group-hd div.x-grid-group-title {
@@ -5935,7 +5986,10 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-grid-empty {
     color:gray;
-    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    /* font:normal 11px tahoma, arial, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-grid-with-col-lines .x-grid3-row td.x-grid3-cell {
@@ -5946,7 +6000,9 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 	border-top-color:#a3bae9;
 }.x-dd-drag-ghost{
 	color:#000;
-	font: normal 11px arial, helvetica, sans-serif;
+	/* font: normal 11px arial, helvetica, sans-serif; */
+  font-weight:normal;
+  font-size:1.0rem;
     border-color: #ddd #bbb #bbb #ddd;
 	background-color:#fff;
 }
@@ -6053,7 +6109,9 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-tree-node{
 	color:#000;
-	font: normal 11px arial, tahoma, helvetica, sans-serif;
+	/* font: normal 11px arial, tahoma, helvetica, sans-serif; */
+  font-weight:normal;
+  font-size:1.0rem;
 }
 
 .x-tree-node a, .x-dd-drag-ghost a{
@@ -6119,7 +6177,10 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-date-middle,.x-date-left,.x-date-right {
 	background-image: url(../images/default/shared/hd-sprite.gif);
 	color:#fff;
-	font:bold 11px "sans serif", tahoma, verdana, helvetica;
+	/* font:bold 11px "sans serif", tahoma, verdana, helvetica; */
+font-weight:bold;
+font-size:1.0rem;
+
 }
 
 .x-date-middle .x-btn .x-btn-text {
@@ -6142,7 +6203,10 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
     background-color:#dfecfb;
     background-image:url(../images/default/shared/glass-bg.gif);
 	border-bottom-color:#a3bad9;
-    font:normal 10px arial, helvetica,tahoma,sans-serif;
+    /* font:normal 10px arial, helvetica,tahoma,sans-serif; */
+font-weight:normal;
+font-size:0.9rem;
+
 	color:#233d6d;
 }
 
@@ -6151,7 +6215,10 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-date-inner a {
-    font:normal 11px arial, helvetica,tahoma,sans-serif;
+    /* font:normal 11px arial, helvetica,tahoma,sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
     color:#000;
 }
 
@@ -6198,7 +6265,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-date-mmenu .x-menu-item {
-	font-size:10px;
+	font-size:0.9rem;
 	color:#000;
 }
 
@@ -6207,14 +6274,20 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-date-mp td {
-	font:normal 11px arial, helvetica,tahoma,sans-serif;
+	/* font:normal 11px arial, helvetica,tahoma,sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-date-mp-btns button {
 	background-color:#083772;
 	color:#fff;
 	border-color: #3366cc #000055 #000055 #3366cc;
-	font:normal 11px arial, helvetica,tahoma,sans-serif;
+	/* font:normal 11px arial, helvetica,tahoma,sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-date-mp-btns {
@@ -6256,19 +6329,25 @@ td.x-date-mp-sep {
 }
 
 .x-tip .x-tip-mc {
-    font: normal 11px tahoma,arial,helvetica,sans-serif;
+    /* font: normal 11px tahoma,arial,helvetica,sans-serif; */
+    font-weight:normal;
+    font-size:1.0rem;
 }
 .x-tip .x-tip-ml {
 	background-color: #fff;
 }
 
 .x-tip .x-tip-header-text {
-    font: bold 11px tahoma,arial,helvetica,sans-serif;
+    /* font: bold 11px tahoma,arial,helvetica,sans-serif; */
+    font-weight:bold;
+    font-size:1.0rem;    
     color:#444;
 }
 
 .x-tip .x-tip-body {
-    font: normal 11px tahoma,arial,helvetica,sans-serif;
+    /* font: normal 11px tahoma,arial,helvetica,sans-serif; */
+    font-weight:normal;
+    font-size:1.0rem;   
     color:#444;
 }
 
@@ -6298,7 +6377,13 @@ td.x-date-mp-sep {
 }
 
 .x-menu-list-item{
-	font:normal 11px arial,tahoma,sans-serif;
+	/* /* font:normal 11px arial,tahoma,sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+ */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-menu-item-arrow{
@@ -6384,13 +6469,13 @@ a.x-menu-item {
 .x-box-mc {
 	background-color: #eee;
     background-image: url(../images/default/box/tb.gif);
-	font-family: "Myriad Pro","Myriad Web","Tahoma","Helvetica","Arial",sans-serif;
+	/* font-family: "Myriad Pro","Myriad Web","Tahoma","Helvetica","Arial",sans-serif; */
 	color: #393939;
-	font-size: 12px;
+	font-size:1.1rem;
 }
 
 .x-box-mc h3 {
-	font-size: 14px;
+	font-size:1.3rem;
 	font-weight: bold;
 }
 
@@ -6435,7 +6520,9 @@ a.x-menu-item {
 }.x-combo-list {
     border-color:#98c0f4;
     background-color:#ddecfe;
-    font:normal 12px tahoma, arial, helvetica, sans-serif;
+    font-size:1.1rem;
+    font-weight:normal;
+    /* font:normal 12px tahoma, arial, helvetica, sans-serif; */
 }
 
 .x-combo-list-inner {
@@ -6443,7 +6530,10 @@ a.x-menu-item {
 }
 
 .x-combo-list-hd {
-    font:bold 11px tahoma, arial, helvetica, sans-serif;
+    /* font:bold 11px tahoma, arial, helvetica, sans-serif; */
+font-weight:bold;
+font-size:1.0rem;
+
     color:#15428b;
     background-image: url(../images/default/layout/panel-title-light-bg.gif);
     border-bottom-color:#98c0f4;
@@ -6467,7 +6557,10 @@ a.x-menu-item {
 }
 
 .x-combo-list-small {
-    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    /* font:normal 11px tahoma, arial, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }.x-panel {
     border-color: #99bbe8;
 }
@@ -6475,8 +6568,8 @@ a.x-menu-item {
 .x-panel-header {
     color:#15428b;
 	font-weight:bold; 
-    font-size: 11px;
-    font-family: tahoma,arial,verdana,sans-serif;
+    font-size:1.0rem;
+    /* font-family: tahoma,arial,verdana,sans-serif; */
     border-color:#99bbe8;
     background-image: url(../images/default/panel/white-top-bottom.gif);
 }
@@ -6500,7 +6593,10 @@ a.x-menu-item {
 
 .x-panel-tl .x-panel-header {
     color:#15428b;
-	font:bold 11px tahoma,arial,verdana,sans-serif;
+	/* font:bold 11px tahoma,arial,verdana,sans-serif; */
+font-weight:bold;
+font-size:1.0rem;
+
 }
 
 .x-panel-tc {
@@ -6517,7 +6613,9 @@ a.x-menu-item {
 }
 
 .x-panel-mc {
-    font: normal 11px tahoma,arial,helvetica,sans-serif;
+    /* font: normal 11px tahoma,arial,helvetica,sans-serif; */
+    font-weight:normal;
+    font-size:1.0rem;
     background-color:#dfe8f6;
 }
 
@@ -6547,7 +6645,10 @@ a.x-menu-item {
 }
 
 .x-panel-fbar td,.x-panel-fbar span,.x-panel-fbar input,.x-panel-fbar div,.x-panel-fbar select,.x-panel-fbar label{
-    font:normal 11px arial,tahoma, helvetica, sans-serif;
+    /* font:normal 11px arial,tahoma, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 .x-window-proxy {
     background-color:#c7dffc;
@@ -6556,7 +6657,10 @@ a.x-menu-item {
 
 .x-window-tl .x-window-header {
     color:#15428b;
-	font:bold 11px tahoma,arial,verdana,sans-serif;
+	/* font:bold 11px tahoma,arial,verdana,sans-serif; */
+font-weight:bold;
+font-size:1.0rem;
+
 }
 
 .x-window-tc {
@@ -6585,7 +6689,9 @@ a.x-menu-item {
 
 .x-window-mc {
     border-color:#99bbe8;
-    font: normal 11px tahoma,arial,helvetica,sans-serif;
+    /* font: normal 11px tahoma,arial,helvetica,sans-serif; */
+    font-weight:normal;
+    font-size:1.0rem;
     background-color:#dfe8f6;
 }
 
@@ -6716,7 +6822,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 
 .x-progress-text {
-    font-size:11px;
+    font-size:1.0rem;
     font-weight:bold;
     color:#fff;
 }
@@ -6730,11 +6836,17 @@ body.x-body-masked .x-window-plain .x-window-mc {
 
 .x-list-header-inner div em {
     border-left-color:#ddd;
-    font:normal 11px arial, tahoma, helvetica, sans-serif;
+    /* font:normal 11px arial, tahoma, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-list-body dt em {
-    font:normal 11px arial, tahoma, helvetica, sans-serif;
+    /* font:normal 11px arial, tahoma, helvetica, sans-serif; */
+font-weight:normal;
+font-size:1.0rem;
+
 }
 
 .x-list-over {
@@ -6769,11 +6881,14 @@ body.x-body-masked .x-window-plain .x-window-mc {
     background-image:url(../images/default/slider/slider-v-thumb.png);
 }.x-window-dlg .ext-mb-text,
 .x-window-dlg .x-window-header-text {
-    font-size:12px;
+    font-size:1.1rem;
 }
 
 .x-window-dlg .ext-mb-textarea {
-    font:normal 12px tahoma,arial,helvetica,sans-serif;
+    /* font:normal 12px tahoma,arial,helvetica,sans-serif; */
+font-weight:normal;
+font-size:1.1rem;
+
 }
 
 .x-window-dlg .x-msg-box-wait {

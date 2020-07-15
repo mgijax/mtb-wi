@@ -73,6 +73,7 @@ table.detail-table {
 	margin:0 0 30px;
 	overflow:auto;
 	zoom:1;
+	font-size:1.25em;
 }
 
 #detail > section > .cap,
@@ -222,7 +223,20 @@ th.sorting_disabled {
     color: #05396b;
 }
 
+#summary h4 {
+	font-size:1.25em;
+}
 
+#summary dl {
+	width:25%;
+	margin:0;
+	padding:0 15px 15px 0;
+	box-sizing:border-box;
+}
+
+#summary dt {
+	margin-top:0;
+}
 
 
 
@@ -650,6 +664,9 @@ p.fr {
 	}
 }
 
+.x-panel table {
+	margin:0;
+}
 
 
 

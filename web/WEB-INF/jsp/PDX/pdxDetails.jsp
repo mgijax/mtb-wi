@@ -787,66 +787,78 @@
 			</c:if> 			
 			<table>
 				<tbody>			
-					<jax:sumrow dt="Model ID (Previous ID)" dd="${mouse.modelID}"/>
-					<jax:sumrow dt="Previous ID" dd="${mouse.previousID}"/>
-					<jax:sumrow dt="Model Status" dd="${mouse.modelStatus}" test="${applicationScope.publicDeployment == false}" />
-					<jax:sumrow dt="Primary Site" dd="${mouse.primarySite}" />
-					<jax:sumrow dt="Tumor Site" dd="${mouse.tissue}" />
-					<jax:sumrow dt="Tumor Type" dd="${mouse.tumorType}" />   				
-					<jax:sumrow dt="Initial Diagnosis" dd="${mouse.initialDiagnosis}" />
-					<jax:sumrow dt="Final Diagnosis" dd="${mouse.clinicalDiagnosis}" />
-					<jax:sumrow dt="Stage/Grade" dd="${mouse.stage} / ${mouse.grade}" />
-					<jax:sumrow dt="Related Models" dd="${relatedModels}" />
-					<jax:sumrow dt="Fusion Genes" dd="${mouse.fusionGenes}" />
+					
+					<tr>
+						<td><h4>Model Details</h4></td>
+						<td>
+							<jax:dl dt="Model ID (Previous ID)" dd="${mouse.modelID}"/>
+							<jax:dl dt="Previous ID" dd="${mouse.previousID}"/>
+							<jax:dl dt="Model Status" dd="${mouse.modelStatus}" test="${applicationScope.publicDeployment == false}" />
+							<jax:dl dt="Primary Site" dd="${mouse.primarySite}" />
+							<jax:dl dt="Tumor Site" dd="${mouse.tissue}" />
+							<jax:dl dt="Tumor Type" dd="${mouse.tumorType}" />   				
+							<jax:dl dt="Initial Diagnosis" dd="${mouse.initialDiagnosis}" />
+							<jax:dl dt="Final Diagnosis" dd="${mouse.clinicalDiagnosis}" />
+							<jax:dl dt="Stage/Grade" dd="${mouse.stage} / ${mouse.grade}" />
+							<jax:dl dt="Related Models" dd="${relatedModels}" />
+							<jax:dl dt="Fusion Genes" dd="${mouse.fusionGenes}" />
+						</td>
+					</tr>
+					
 					<c:if test="${not empty sessionScope.pdxEditor}" > 
-					<tr><td><h4>Publications citing this model</h4></td><td>
-						<form name="AddPDXContentForm" method="GET" action="pdxAddContent.do">
-							<input type="submit" name="reference" value="add">
-						</form>
-					</td></tr>
+					<tr>
+						<td><h4>Publications citing this model</h4></td>
+						<td>
+							<form name="AddPDXContentForm" method="GET" action="pdxAddContent.do">
+								<input type="submit" name="reference" value="add">
+							</form>
+						</td>
+					</tr>
 					</c:if>
 					
-				</tbody>
-			</table>
-			
-			<table>
-				<caption>Patient</caption>
-				<tbody>			
-					<jax:sumrow dt="Sex" dd="${mouse.sex}"/>
-					<jax:sumrow dt="Age" dd="${mouse.age}"/>
-					<jax:sumrow dt="Race/Ethnicity" dd="${mouse.race} / ${mouse.ethnicity}" />
-					<jax:sumrow dt="Treatment Na&‌iuml;ve" dd="${mouse.treatmentNaive}" />
-				</tbody>
-			</table>			
-			
-			<table>
-				<caption>Engraftment Host</caption>
-				<tbody>			
-					<jax:sumrow dt="Strain" dd="${mouse.strain}" />
-					<jax:sumrow dt="Implantation Site" dd="${mouse.location}" />
-					<jax:sumrow dt="Sample Type" dd="${mouse.sampleType}" />
-				</tbody>
-			</table>   	
-			
-			<c:if test="${not empty tmb}">
-			<table>
-				<caption>Tumor Mutation Burden</caption>
-				<tbody>			
-					<jax:sumrow dt="Sample" dts="Samples" dds="${tmb}" />
-					<jax:sumrow dt="TMB Range" dd="${minTMB}-${maxTMB} (across all JAX PDX models; TMB &gt; 22 is considered high)"/>
-				</tbody>
-			</table>
-			</c:if>
-			
-			<c:if test="${not empty msiData}">
-			<table>
-				<caption>Microsatellite Instability</caption>
-				<tbody>			
-					<jax:sumrow dt="Sample" dts="Samples" dds="${msiData}" />
-				</tbody>
-			</table>
-			</c:if>			
+					
+					
 
+					<tr>
+						<td><h4>Patient</h4></td>
+						<td>			
+							<jax:dl dt="Sex" dd="${mouse.sex}"/>
+							<jax:dl dt="Age" dd="${mouse.age}"/>
+							<jax:dl dt="Race/Ethnicity" dd="${mouse.race} / ${mouse.ethnicity}" />
+							<jax:dl dt="Treatment Na&iuml;ve" dd="${mouse.treatmentNaive}" />
+						</td>
+					</tr>			
+					
+					<tr>
+						<td><h4>Engraftment Host</h4></td>
+						<td>			
+							<jax:dl dt="Strain" dd="${mouse.strain}" />
+							<jax:dl dt="Implantation Site" dd="${mouse.location}" />
+							<jax:dl dt="Sample Type" dd="${mouse.sampleType}" />
+						</td>
+					</tr>   	
+					
+					<c:if test="${not empty tmb}">
+					<tr>
+						<td><h4>Tumor Mutation Burden</h4></td>
+						<td>			
+							<jax:dl dt="Sample" dts="Samples" dds="${tmb}" />
+							<jax:dl dt="TMB Range" dd="${minTMB}-${maxTMB} (across all JAX PDX models; TMB &gt; 22 is considered high)"/>
+						</td>
+					</tr>
+					</c:if>
+					
+					<c:if test="${not empty msiData}">
+					<tr>
+						<td><h4>Microsatellite Instability</h4></td>
+						<td>			
+							<jax:dl dt="Sample" dts="Samples" dds="${msiData}" />
+						</td>
+					</tr>
+					</c:if>			
+				</tbody>
+			</table>
+	
 		</div>
 	</section>
 	

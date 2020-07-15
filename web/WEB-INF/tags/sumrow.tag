@@ -14,15 +14,15 @@
 		<tr>
 			<c:choose>
 				<c:when test="${fn:length(dds)>1}">
-					<td><h4>${dts}</h4></td>
+					<td><h4><c:out value="${dts}" escapeXml="false" /></h4></td>
 				</c:when>
 				<c:otherwise>
-					<td><h4>${dt}</h4></td>
+					<td><h4><c:out value="${dt}" escapeXml="false" /></h4></td>
 				</c:otherwise>
 			</c:choose>
 			<td>
 				<c:forEach var="item" items="${dds}" varStatus="status">
-					${item}
+					<c:out value="${item}" escapeXml="false" />
 					<c:if test="${status.last != true}">
 						&nbsp;&#8226;&nbsp;
 					</c:if>	
@@ -32,16 +32,16 @@
 	</c:when>
 	<c:when test="${test}">
 		<tr>
-			<td><h4>${dt}</h4></td>
+			<td><h4><c:out value="${dt}" escapeXml="false" /></h4></td>
 			<c:if test="${not empty dd}">
-				<td>${dd}</td>
+				<td><c:out value="${dd}" escapeXml="false" /></td>
 			</c:if>
 		</tr>
 	</c:when>
 	<c:when test="${not empty dd && test != false}">
 		<tr>
-			<td><h4>${dt}</h4></td>
-			<td>${dd}</td>
+			<td><h4><c:out value="${dt}" escapeXml="false" /></h4></td>
+			<td><c:out value="${dd}" escapeXml="false" /></td>
 		</tr>
 	</c:when>
 </c:choose>
