@@ -84,47 +84,49 @@
 					
 					
 					<c:if test="${not empty strain.genetics}">
-					<tr>
-						<td><h4>Strain Genetics</h4></td>
-						
+						<c:set var="firstGenetics" value="true" />
 
-										
-								
-								
-								
-								<c:forEach var="genetics" items="${strain.consolidatedGenetics}" varStatus="status">
-								
-								<c:if test="${status.first != true}">
+						<c:forEach var="genetics" items="${strain.consolidatedGenetics}">
+
+							<c:set var="a1" value="${empty genetics.allele1Symbol ? 'none' : genetics.allele1Symbol}" />
+							<c:set var="a2" value="${empty genetics.allele2Symbol ? 'none' : genetics.allele2Symbol}" />
+
+							
+							<c:if test="${a1 != a2}">
+							
 								<tr>
-									<td style="border-top-color:transparent;"></td>
-								</c:if>
-								
-								<!--
 									
-									http://bhmtbdb01:8080/mtbwi2/facetedSearch.do#fq=strainMarker%3A%22Brca1%3Csup%3Etm1Cxd%3C%2Fsup%3E%22
-									-->
-								
-								<td>
-										<div style="float:right;">
-										<a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele1Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele1Symbol} allele</a>
-										<c:if test="${not empty genetics.allele2Url}">
-											<br><a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele2Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele2Symbol} allele</a>
-										</c:if>
-										</div>
-										
-										<a href="${genetics.allele1Url}" target="_blank">${genetics.allele1Symbol}</a>
-										
-										<c:if test="${not empty genetics.allele2Url}">
-										 / <a href="${genetics.allele2Url}" target="_blank">${genetics.allele2Symbol}</a>
-										</c:if>
-								</td>
+									<c:choose>
+									<c:when test="${firstGenetics != true}">
+										<td style="border-top-color:transparent;"></td>
+									</c:when>
+									<c:otherwise>
+										<td><h4>Strain Genetics</h4></td>
+									</c:otherwise>
+									</c:choose>
+
+									<td>
+											<div style="float:right;">
+											<a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele1Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele1Symbol} allele</a>
+											<c:if test="${not empty genetics.allele2Symbol}">
+												<br><a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele2Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele2Symbol} allele</a>
+											</c:if>
+											</div>
+											
+											<a href="${genetics.allele1Url}" target="_blank">${genetics.allele1Symbol}</a>
+											
+											<c:if test="${not empty genetics.allele2Symbol}">
+											 / <a href="${genetics.allele2Url}" target="_blank">${genetics.allele2Symbol}</a>
+											</c:if>
+									</td>
 								</tr>
 								
-								</c:forEach>
-	
+								<c:set var="firstGenetics" value="false" />
+								
+							</c:if>
+						
+						</c:forEach>
 
-						</td>
-					</tr>
 					</c:if>
 					
 					
@@ -141,7 +143,7 @@
 		<c:choose>
 		<c:when test="${not empty strain.tumors}">
 	
-				<table id="detail-table" style="width:100%;">
+				<table class="detail-table" id="detail-table-strain" style="width:100%;">
 					<caption>
 						<h2>Models</h2>
 						<c:set var="statsBean" value="${strain.tumorStats}"/>
@@ -150,13 +152,14 @@
 					</caption>
 					<thead>
 						<tr>
-							<th colspan="2"></th>
+							<th colspan="3"></th>
 							<th colspan="4">Frequency</th>
 							<th colspan="2"></th>
 						</tr>
 						<tr>
 							<th>Model Name</th>
 							<th>Organ Affected</th>
+							<th>Treatment Agent(s)</th>
 							<th class="freq">Female</th>
 							<th class="freq">Male</th>
 							<th class="freq">Mixed&nbsp;Pop.</th>
@@ -170,6 +173,22 @@
 						<tr>
 							<td><c:out value="${tumor.tumorName}" escapeXml="false"/></td>
 							<td><c:out value="${tumor.organAffectedName}" escapeXml="false"/></td>
+							<td>
+
+								<c:if test="${not empty tumor.agents}">
+
+								<c:forEach var="agent" items="${tumor.agents}" varStatus="status">
+									
+									<c:if test="${status.first != true}">
+										&nbsp;&nbsp;&sdot;&nbsp;&nbsp;
+									</c:if>
+									<c:out value="${agent}" escapeXml="false"/>
+								</c:forEach>
+
+								</c:if>
+							</td>							
+							
+							
 											
 							<td class="freq" data-order="${1000 + tumor.maxFreqFemale}" data-freq="${tumor.maxFreqFemale}">
 								<p class="fr"><c:out value="${tumor.freqFemaleString}" escapeXml="false"/></p>
@@ -238,11 +257,12 @@
 
 	<script type="text/javascript">
 		$(function() {
-			$('#detail-table').DataTable({
+			$('#detail-table-strain').DataTable({
 		        'paging': false,
 		        'searching': false,
 				'info': false,
 				'columns': [
+					{ "orderable": true },
 					{ "orderable": true },
 					{ "orderable": true },
 					{ "orderable": true },

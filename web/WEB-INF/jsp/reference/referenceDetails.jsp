@@ -74,17 +74,13 @@
 		</section>
 		
 	<section id="detail">
-	
-		<!-- ////  Start Strain Tumors  //// -->
+
 		<c:choose>
 		<c:when test="${not empty reference.tumors}">
 	
-				<table id="detail-table" style="width:100%;">
+				<table class="detail-table" id="detail-table-reference" style="width:100%;">
 					<caption>
 						<h2>Models</h2>
-						<!--<c:set var="statsBean" value="${strain.tumorStats}"/>
-						${statsBean.label} unique tumor types displayed.
-						<em>A tumor group is a set of tumors that share the same tumor name, organ(s) affected, and treatment type.</em>-->
 					</caption>
 					<thead>
 						<tr>
@@ -140,14 +136,10 @@
 		<!-- There is no tumor information associated with this strain. -->
 		</c:otherwise>
 		</c:choose>	
-		
-		
-		
-		
-		
+
 			<script type="text/javascript">
 		$(function() {
-			$('#detail-table').DataTable({
+			$('#detail-table-reference').DataTable({
 		        'paging': false,
 		        'searching': false,
 				'info': false,
@@ -187,72 +179,7 @@
 		});
 	</script>
 		
-	<!--	
 	
-		<section id="detail">	
-	
-			<c:choose>
-			<c:when test="${not empty reference.additionalInfo}">
-			<c:if test="${reference.hasAdditionalInfo}">
-			<table id="additional-info">
-				<caption>
-					<h2>Additional Information</h2>
-				</caption>
-				<tbody>
-					<c:forEach var="info" items="${reference.additionalInfo}" varStatus="status">
-					<c:choose>
-					<c:when test="${info.label=='Tumor Records'}">
-					<c:if test="${info.value!=0}">
-					<tr><td>${info.label} (<a href="tumorSearchResults.do?referenceKey=${reference.key}&maxItems=No+Limit">${info.value}</a>)</td></tr>
-					</c:if>
-					</c:when>
-					<c:when test="${info.label=='Strains'}">
-					<c:if test="${info.value!=0}">
-					<tr><td>${info.label} (<a href="strainSearchResults.do?referenceKey=${reference.key}&maxItems=No+Limit">${info.value}</a>)</td></tr>
-					</c:if>
-					</c:when>
-					<c:when test="${info.label=='Pathology Images'}">
-					<c:if test="${info.value!=0}">
-					<tr><td>${info.label} (<a href="pathologyImageSearchResults.do?referenceKey=${reference.key}&maxItems=No+Limit">${info.value}</a>)</td></tr>
-					</c:if>
-					</c:when>
-					<c:otherwise>
-
-					</c:otherwise>
-					</c:choose>
-					</c:forEach>
-				</tbody>
-			</table>
-			</c:if>
-			</c:when>
-			<c:otherwise>
-
-			</c:otherwise>
-			</c:choose>
-
-			<c:choose>
-			<c:when test="${not empty reference.otherAccessionIds}">
-			<table id="other-accession-ids">
-				<caption>
-					<h2>Other Accession IDs</h2>
-				</caption>
-				<tbody>
-					<c:forEach var="info" items="${reference.otherAccessionIds}" varStatus="status">
-					<tr>
-						<td>
-							${info.data}&nbsp; <a target="_new" href="${info.value}">${info.label}</a>
-						</td>
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			</c:when>
-			<c:otherwise>
-
-			</c:otherwise>
-			</c:choose>
-		</section>
-	-->	
 		
 	</jsp:body>
 </jax:mmhcpage>

@@ -7,7 +7,8 @@ main > header.container {
 
 
 #facet-results td {
-	border:1px solid white;
+	border:1px solid transparent;
+	border-bottom:1px solid	rgba(229, 233, 240, 0.75);
 }
 
 #facet-results td > em,
@@ -45,7 +46,11 @@ main > header.container {
 	
 }
 
-
+#facet-results tr:nth-child(odd) td {
+	
+	background-color: rgba(229, 233, 240, 0.5); 
+	/* border-bottom:1px solid	rgba(229, 233, 240, 0.75); */
+}
 
 
 
@@ -61,7 +66,9 @@ main > header.container {
 	margin:0 0 0.25em;
 }
 
-
+#no-result {
+	display:none;
+}
 
 
 

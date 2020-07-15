@@ -94,8 +94,28 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://bhm
 					label: 'Has Gene Expression Data Link(s)',
 					queryKey: 'geneExpression',
 					queryValue: 'true'
+				},
+				{
+					label: 'Frequency &ge; 80% &amp; Colony Size &ge; 20',
+					queryKey: 'minFC',
+					queryValue: '1'					
+				},
+				{
+					label: 'Is Mutant',
+					queryKey: 'mutant',
+					queryValue: 'true'
+				},
+				{
+					label: 'Is Not Mutant',
+					queryKey: 'mutant',
+					queryValue: 'false'
 				}
 			]
+		},
+		{
+			name: 'humanTissue',
+			title: 'Human Tissue',
+			isExpanded: false
 		}	
 	],
 
@@ -188,7 +208,7 @@ let facet,
 					c.initSelectedTerms = [];
 				});
 						
-				facetQuery = facetQueryParams.split('&').map(p => decodeURIComponent(p).split('=')[1].split(':'));
+				facetQuery = facetQueryParams.replace(/%25/g, '%').split('&').map(p => decodeURIComponent(p).split('=')[1].split(':'));
 				console.log('facetQuery from hash: %o', facetQuery);
 				facetQuery.forEach(q => {
 					
@@ -201,7 +221,10 @@ let facet,
 							
 						if (config.terms) {
 							
-							selectedTerm = config.terms.find(t => t.queryValue == queryValue);
+							// selectedTerm = config.terms.find(t => t.queryValue == queryValue);
+							selectedTerm = config.terms.find(t => t.queryKey == q[0]);
+							
+							
 							
 						} else {
 							
@@ -376,9 +399,9 @@ let facet,
 		$rows.empty();
 		
 		totalRows = o.response.numFound;
-		updatePageSummary();
+		
 		$.each(o.response.docs, addRow);
-
+		updatePageSummary();
 
 	},
 	
@@ -408,16 +431,20 @@ let facet,
 	updatePageSummary = function() {
 		$first.html(pageQuery.start + 1);
 		if (totalRows) {
+			$('#result-count').show();
+			$('#no-results').hide();
 			$last.html(Math.min(totalRows, pageQuery.start + pageQuery.rows));
 			$total.html(totalRows);
 		} else {
+			$('#result-count').hide();
+			$('#no-results').show();
 			$last.empty();
 			$total.empty();
 		}		
 	},
 	
 	doQuery = function(useHash) {
-		updatePageSummary();
+		// updatePageSummary();
 		$.ajax({
 			type: 'POST',
 			url: solrUrl,
@@ -759,16 +786,16 @@ $(function() {
 		headerHeight = 102,
 		$collapseAll = $('#collapse-all');
 	
-    $w.on('scroll', function () {
-        $body.toggleClass('scrolled', $w.scrollTop() > headerHeight);
-    });
-    
-    $w.on('resize', function() {
-	    headerHeight = $bodyHeader.height();
-	    resizeFacetUi(true);    
-    });	
-    
-    $facetUi = $('#facet-ui');	
+	$w.on('scroll', function () {
+		$body.toggleClass('scrolled', $w.scrollTop() > headerHeight);
+	});
+	
+	$w.on('resize', function() {
+		headerHeight = $bodyHeader.height();
+		resizeFacetUi(true);	
+	});	
+	
+	$facetUi = $('#facet-ui');	
 	$facets = $('#facets');
 	$table = $('#facet-results');
 	$rows = $('#facet-results tbody');

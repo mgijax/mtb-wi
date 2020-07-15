@@ -413,8 +413,8 @@ body > main {
 }
 
 body > main > div {
-	padding:0;
-	margin-bottom:50px;
+	padding:0 0 50px;
+	/* margin-bottom:50px; */
 }
 
 main > header {
@@ -554,23 +554,23 @@ footer > div > div > div {
 
 .tip {
 	position:relative;
-	padding-left:1.4em !important;
+	padding-right:1.4em !important;
 	cursor:help;
 }
 
 .tip:after {
 	content:'\a0\f059';
 	font-family: FontAwesome;
-	opacity:0.5;
+	opacity:0.25;
 	position:absolute;
-	top:50%;
-	left:0.25em;
+	top:0;
+	right:0.25em;
 	padding:0;
-	margin:-0.55em 0 0 0;
-	font-size:0.9em;
+	margin:0;
+	font-size:0.8em;
 	display:inline-block;
 	float:left;
-	line-height:1;
+	line-height:1.375;
 }
 
 a.tip,
@@ -636,6 +636,7 @@ fieldset legend {
 	color:#05396b;
 	font-family: "DIN Next", Helvetica, Arial, sans-serif;
 	font-weight:600;
+	line-height:1.1;
 }
 
 fieldset label {
@@ -725,7 +726,7 @@ input[type="reset"]:hover {
 
 input[type="radio"],
 input[type="checkbox"] {
-	margin-left:15px;
+	margin-left:0;
 	margin-right:4px;
 }
 
@@ -734,42 +735,59 @@ input[type="checkbox"]:first-of-type {
 	margin-left:0;
 }
 
+input[type="text"]:focus,
+input[type="button"]:focus,
+textarea:focus {
+	border-color:rgba(5, 197, 255, 0.9);
+	border-radius:1px;
+	outline: none;
+	box-shadow:0px 0px 0px 4px rgba(5, 197, 255, 0.25);
+}
+
 
 /* Search forms */
 
 
 .search-form {
-	background-color: rgba(144,157,163,0.15);
+	
 	padding:0;
 	margin-top:0;
 	margin-bottom:50px;
-	border-top:4px dashed rgba(5,57,107,0.05);
-	border-bottom:4px dashed rgba(5,57,107,0.05);
+	/* border-top:4px dashed rgba(5,57,107,0.05);
+	border-bottom:4px dashed rgba(5,57,107,0.05); */
+	border-top:1px solid #05396b;
 }
 
 .search-form > fieldset {
+	background-color: rgba(229, 233, 240, 0.5); 
+	/* #e5e9f0; */
 	margin:20px 0;
-	padding:0 15px 10px;
+	padding:10px 15px 25px;
 	border:0;
-	border-top:2px dashed white;
-	clear:both;	
-	
+	border-top:1px solid #cfd4dc;
+	/* border-right:1px solid #cfd4dc;
+	border-bottom:1px solid #cfd4dc;
+	border-left:1px solid #cfd4dc; */
 }
 
 .search-form > fieldset:nth-child(even) {
-/* 	background-color: rgba(5,57,107,0.05); */
+	/* background-color: rgba(255,255,255,0.5); */
 }
 
 .search-form > fieldset > legend {
-	font-size:1.5em;
-	padding:0;
-	color:#009ed0;
+	font-size:1.4em;
+	padding:0 4px;
+	color:#05396b; /* #009ed0; */
+	font-weight:400;
+
+	margin-left:15px;
 }
 
 .search-form > fieldset > fieldset {
 	float:left;
-	width:25%;
+	/* width:25%; */
 	padding:0 15px;
+	max-width:33.3333%;
 }
 
 .search-form > fieldset > fieldset > fieldset {
@@ -781,6 +799,8 @@ input[type="checkbox"]:first-of-type {
 	margin:0;
 	padding:25px 15px;
 	border-top:0;
+	background-color:transparent;
+	border:0;
 }
 
 .search-form > fieldset.form-sort,
