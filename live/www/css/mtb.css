@@ -96,6 +96,11 @@ h6 {
 	font-size:1em;	
 }
 
+.content p + h2,
+.content p + h3 {
+	margin-top:30px;
+}
+
 
 
 
@@ -165,6 +170,23 @@ td > h5 {
 	font-size:1em;	
 	line-height:1.1;
 }
+
+table.fig {
+	width:auto;	
+}
+
+table.fig td {
+	border-top:1px solid #cfd4dc;
+}
+
+table.fig tr:last-child td {
+	border-bottom:1px solid #cfd4dc;
+}
+
+table.fig tr:first-child td {
+	border-top:1px solid #05396b;
+}	
+
 
 
 /* Header */
@@ -558,18 +580,14 @@ footer > div > div > div {
 	cursor:help;
 }
 
-.tip:after {
-	content:'\a0\f059';
+.tip > div[aria-describedby]:after {
+	content:'\a0\a0\f059';
 	font-family: FontAwesome;
 	opacity:0.25;
-	position:absolute;
-	top:0;
-	right:0.25em;
 	padding:0;
 	margin:0;
 	font-size:0.8em;
 	display:inline-block;
-	float:left;
 	line-height:1.375;
 }
 
@@ -588,14 +606,16 @@ label.tip {
 	display:none;
 	position:absolute;
 	z-index:8888;
-	top:100%;
-	left:-1em;
-	right:-1em;
+	bottom:100%;
+	left:-30px;
+	right:-30px;
 	min-width:25em;
-	margin:0;
-	padding:1.1em 1em 0.75em;
+	margin:0 0 6px;
+	padding:4px 8px;
+	border-radius:8px;
+	border:1px solid #cfd4dc;
 	background-color:white;
-	box-shadow:0 8px 8px rgba(0,0,0,0.25);
+	box-shadow:0 0 12px rgba(0,0,0,0.25);
 	font-family: "DIN Next", Helvetica, Arial, sans-serif;
 	font-weight:400;
 	font-size:12px;
@@ -608,9 +628,9 @@ label.tip {
 	display:block;
 }
 
-.tip:hover:after,
-.tip:focus:after,
-.tip.show-tip:after {
+.tip:hover > div[aria-describedby]:after,
+.tip:focus > div[aria-describedby]:after,
+.tip.show-tip > div[aria-describedby]:after {
 	opacity:1;
 }
 
@@ -907,6 +927,91 @@ i.mo:hover:before {
 	font-size:18px;
 	line-height:1.25;
 	margin-bottom:1em;
+}
+
+
+
+
+
+
+table.grid {
+    border-width: 0px 0px 0px 0px;
+    border-spacing: 0px;
+    border-style: none none none none;
+    border-color: black black black black;
+    border-collapse: collapse;
+    background-color: black;
+}
+
+tr.grid {	
+    background-color: #FFFFFF;
+}
+
+table.grid th {
+    border-width: 1px 1px 1px 1px;
+    border-style: none groove groove none;
+    border-color: black black black black;
+    background-color: #FFFFFF;
+    font-size:9px;
+    vertical-align:bottom;
+	padding:0;
+}
+
+table.grid td
+{
+    border-width: 1px 1px 1px 1px;
+    border-style: none groove groove none;
+    border-color: black black black black;
+    background-color: #FFFFFF;
+    font-size:9px;
+    vertical-align:middle;
+    height: 20px;
+	padding:0;
+}
+
+table.grid td > a {
+	display:block;
+	margin:0;
+	width:100%;
+	height:100%;
+	text-align:center;
+	vertical-align:middle;
+}
+
+table.grid td > span {
+	display:none;
+}
+
+table.grid img {
+	display:inline;
+}
+
+table.grid td img[alt="H"] {
+	display:block;
+	width:100%;
+	height:23px;
+	margin:0;
+	padding:0;
+}
+
+a.grid:visited {
+    color: #2222FF;
+}
+a.grid:link {
+    color: #2222FF;
+}
+a.grid:hover {
+    text-decoration: none;
+    color: #FF2222;
+}
+a.grid:active {
+    color: #2222FF;
+}
+table.gridDetails {
+    font-size:9px;
+}
+td.gridDetails {
+    font-size:9px;
 }
 
 

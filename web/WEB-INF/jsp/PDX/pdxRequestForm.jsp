@@ -37,7 +37,7 @@
 					<p>You are requesting general information on the PDX program.</p>
 				</c:otherwise>
 			</c:choose>	
-			<p>Fill out our brief web form and we will contact you in 1-2 business days.</p>
+			<p>Fill out the web form below and a Jackson Laboratory Technical Information Specialist will contact you in 1-2 business days.</p>
 			<p class="required">Designates required information</p>
 			
 		</div>

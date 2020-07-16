@@ -60,7 +60,7 @@
 }
 
 #model-counts tr:nth-child(odd) > td {
-	background-color:rgba(144, 157, 163, 0.25);
+	background-color:rgba(229, 233, 240, 0.75);
 }
 
 #model-counts tr > td:nth-child(4),

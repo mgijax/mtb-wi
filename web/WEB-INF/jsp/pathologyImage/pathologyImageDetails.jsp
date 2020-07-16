@@ -2,520 +2,127 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
-<%@ taglib uri="http://tumor.informatics.jax.org/mtbwi/MTBWebUtils" prefix="wu" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<c:import url="../../../meta.jsp">
-    <c:param name="pageTitle" value="Pathology Image Detail"/>
-</c:import>
-<c:choose>
-     <c:when test="${not empty pathology.zoomifyDir}">     
-        <script type="text/javascript" src="${applicationScope.urlBase}/zoomify/ZoomifyImageViewerFree-min.js"></script>
-        <script type="text/javascript"> Z.showImage("myContainer", "${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${pathology.zoomifyDir}"); </script>
-    </c:when>
-</c:choose>
-</head>
+<%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
+<jax:mmhcpage title="Pathology Image Detail">
 
-<c:import url="../../../body.jsp">
-     <c:param name="pageTitle" value="Pathology Image Detail"/>
-</c:import>
+<jsp:attribute name="head">
+<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
+	<c:choose>
+  		<c:when test="${not empty pathology.zoomifyDir}">  	
+  			<script type="text/javascript" src="${applicationScope.urlBase}/zoomify/ZoomifyImageViewerFree-min.js"></script>
+  			<script type="text/javascript"> Z.showImage("myContainer", "${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${pathology.zoomifyDir}"); </script>
+ 		</c:when>
+	</c:choose>
 
-<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
-    <tr>
-        <td valign="top">
-            <table width="95%" align="center" border="0" cellspacing="1" cellpadding="4">
-                <tr>
-                    <td>
-<!--======================= Start Main Section =============================-->
-<!--======================= Start Form Header ==============================-->
-<table border="0" cellpadding=5 cellspacing=1 width="100%" class="results">
-   <tr class="pageTitle">
-       <td colspan="2">
-           <table width="100%" border=0 cellpadding=0 cellspacing=0>
-               <tr>
-                   <td width="20%" valign="middle" align="left">
-                       <a class="help" href="userHelp.jsp#pathdetail"><img src="${applicationScope.urlImageDir}/help_large.png" border=0 width=32 height=32 style="vertical-align:middle" alt="Help">Help and Documentation</a>
-                   </td>
-                   <td width="60%" class="pageTitle">
-                       Pathology Image Detail
-                   </td>
-                   <td width="20%" valign="middle" align="center">&nbsp;</td>
-               </tr>
-           </table>
-       </td>
-   </tr>
-<!--======================= End Form Header ================================-->
-<!--======================= Start Detail Section ===========================-->
-<!--======================= Start Pathology Image ==========================-->    
-    <tr class="stripe1">
-        <td colspan="2">
-            <center>
-            <c:choose>
-                <c:when test="${not empty pathology.zoomifyDir}">
-                    <div id="myContainer" style="width:900px; height:500px; margin:auto; border:1px; border-style:solid; border-color:#696969; background-color:#000000;" ></div>
-                </c:when>
-                <c:otherwise>
-                    <!-- IMAGE HAS NOT BEEN ZOOMIFIED -->
-                    <img src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${pathology.imageName}">
-                </c:otherwise>
-            </c:choose>
-            </center>
-        </td>
-    </tr>
-<!--======================= End Pathology Image ============================-->    
-<!--======================= Start Pathology ================================-->    
-    <c:set var="num" value="1"/>
-    
-    <c:choose>
-        <c:when test="${not empty pathology.caption}">
-            <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-            <tr class="stripe${num}">
-                <td class="cat${num}">Caption</td>
-                <td>${pathology.caption}</td>
-            </tr>
-        </c:when>
-        <c:otherwise>
-            <!-- Image caption is null. //-->
-        </c:otherwise>
-    </c:choose>
+</jsp:attribute>
+<jsp:body>
 
-    <c:choose>
-        <c:when test="${not empty pathology.pathologyDescription}">
-            <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-            <tr class="stripe${num}">
-                <td class="cat${num}">Description</td>
-                <td>${pathology.pathologyDescription}</td>
-            </tr>
-        </c:when>
-        <c:otherwise>
-            <!-- Pathology description is null. //-->
-        </c:otherwise>
-    </c:choose>
+<section id="image-detail">
 
-    <c:choose>
-        <c:when test="${not empty pathology.ageAtNecropsy}">
-            <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-            <tr class="stripe${num}">
-                <td class="cat${num}">Age at Necropsy</td>
-                <td>${pathology.ageAtNecropsy}</td>
-            </tr>
-        </c:when>
-        <c:otherwise>
-            <!-- Age at necropsy is null. //-->
-        </c:otherwise>
-    </c:choose>
-    
-    <c:choose>
-        <c:when test="${not empty pathology.pathologyNote}">
-            <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-            <tr class="stripe${num}">
-                <td class="cat${num}">Notes</td>
-                <td>${pathology.pathologyNote}</td>
-            </tr>
-        </c:when>
-        <c:otherwise>
-            <!-- Pathology note is null. //-->
-        </c:otherwise>
-    </c:choose>
-
-    <c:choose>
-        <c:when test="${not empty pathology.sourceOfImage}">
-            <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-            <tr class="stripe${num}">
-                <td class="cat${num}">Contributor</td>
-                <td>
-                    ${pathology.sourceOfImage}&nbsp;
-                     (<a href="nojavascript.jsp" onClick="focusBackToOpener('referenceDetails.do?key=${pathology.imgRefKey}');return false;">${pathology.imgRefAccId}</a>)
-                   
-                </td>
-            </tr>
-        </c:when>
-        <c:otherwise>
-            <!-- Source of image is null. //-->
-        </c:otherwise>
-    </c:choose>
-    
-     <c:choose>
-        <c:when test="${not empty pathology.pathologist}">
-            <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-            <tr class="stripe${num}">
-                <td class="cat${num}">Pathologist</td>
-                <td>
-                    ${pathology.pathologist}&nbsp;
-                     (<a href="nojavascript.jsp" onClick="focusBackToOpener('referenceDetails.do?key=${pathology.pathologistRefKey}');return false;">${pathology.pathologistAccId}</a>)
-                   
-                </td>
-            </tr>
-        </c:when>
-        <c:otherwise>
-            <!-- Source of image is null. //-->
-        </c:otherwise>
-    </c:choose>
-    
-    <c:choose>
-        <c:when test="${not empty pathology.copyright}">
-            <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-            <tr class="stripe${num}">
-                <td class="cat${num}">Copyright</td>
-                <td>
-                    ${pathology.copyright}
-                </td>
-            </tr>
-        </c:when>
-        <c:otherwise>
-            <!--copyright is null. //-->
-        </c:otherwise>
-    </c:choose>
-
-    <c:choose>
-        <c:when test="${not empty pathology.method}">
-            <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-            <tr class="stripe${num}">
-                <td class="cat${num}">Method</td>
-                <td>${pathology.method}</td>
-            </tr>
-        </c:when>
-        <c:otherwise>
-            <!-- method is null. //-->
-        </c:otherwise>
-    </c:choose>
-    
-<!--======================= End Pathology ==================================-->    
-</table>
-<c:choose>
-	<c:when test="${not empty pathology.probes}">
+				<c:choose>
+ 					<c:when test="${not empty pathology.zoomifyDir}">
+  						<div id="myContainer" style="width:900px; height:500px; margin:auto; border:1px; border-style:solid; border-color:#696969; background-color:#000000;" ></div>
+ 					</c:when>
+ 					<c:otherwise>
+  						<!-- IMAGE HAS NOT BEEN ZOOMIFIED -->
+  						<img src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${pathology.imageName}">
+ 					</c:otherwise>
+				</c:choose>
+</section>
+<section id="summary">
+	<div class="container">
 		
-		<br>
-			<table border="0" cellpadding=5 cellspacing=1 width="100%" class="results">
-				<tr class="stripe1">
-					<td colspan="4" class="catTitle">Image Probes</td>
-				</tr>
-				
+		<table>
+			<tbody>
+				<jax:sumrow dt="Caption" dd="${pathology.caption}" />
+				<jax:sumrow dt="Description" dd="${pathology.pathologyDescription}" />
+				<jax:sumrow dt="Age at Necropsy" dd="${pathology.ageAtNecropsy}" />
+				<jax:sumrow dt="Notes" dd="${pathology.pathologyNote}" />
+				<jax:sumrow dt="Contributor" dd="${pathology.sourceOfImage} (<a href='referenceDetails.do?key=${pathology.imgRefKey}'>${pathology.imgRefAccId}</a>)" />
+				<jax:sumrow dt="Pathologist" dd="${pathology.pathologist} (<a href='referenceDetails.do?key=${pathology.pathologistRefKey}'>{pathology.pathologistAccId}</a>)" />
+				<jax:sumrow dt="Copyright" dd="${pathology.copyright}" />
+				<jax:sumrow dt="Method" dd="${pathology.method}" />  			
+			</tbody>
+		</table>
+		
+
+
+	<c:if test="${not empty pathology.probes}">	
+		<table>
+			<caption>Image Probes</caption>
+			<tbody>
 				<c:forEach var="probe" items="${pathology.probes}" varStatus="status">
-				<tr class="stripe2">
-					<td class="cat2">Type</td><td>${probe.type}</td>
-                                        <c:choose>
-						<c:when test="${not empty probe.url}">
-							<td class="cat2" >Name</td><td><a href="${probe.url}">${probe.name}</a></td>
-						</c:when>
-						<c:otherwise>
-							<td class="cat2">Name</td><td>${probe.name}</td>
-						</c:otherwise>
-					</c:choose>
-                                      <tr class="stripe1">
-                                        <td class="cat1">Target</td><td>${probe.target}</td> 
-                                      
-                                        <c:choose>
-						<c:when test="${not empty probe.supplierUrl}">
-							<td class="cat1">Supplier</td><td><a href="${probe.supplierUrl}">${probe.supplierName}</a></td>
-						</c:when>
-						<c:otherwise>
-							<td class="cat1">Supplier</td><td>${probe.supplierName}</td>
-						</c:otherwise>
-					</c:choose>
-                                      <tr class="stripe2"">  
-					<td class="cat2">Notes</td><td colspan="3">${probe.notes}</td>
-					
-
-                                      </tr>
-				
-				
-				
-				<c:if test="${status.last != true}">
-                                  <tr class="tablebreak"><td colspan="4"></tr>
-                                </c:if>
-
-				
+				<tr>
+					<td><h4>Type: ${probe.type}</h4></td>
+					<td>
+						<jax:dl dt="Name" dd="<a href='${probe.url}'>${probe.name}</a>" test="${not empty probe.url}" />
+						<jax:dl dt="Name" dd="${probe.name}" test="${empty probe.url}" />
+						<jax:dl dt="Target" dd="${probe.target}" />
+						<jax:dl dt="Supplier" dd="<a href=''${probe.supplierUrl}'>${probe.supplierName}</a>" test="${not empty probe.supplierUrl}" />
+						<jax:dl dt="Supplier" dd="${probe.supplierName}" test="${empty probe.supplierUrl}" />
+						<jax:dl dt="Notes" dd="${probe.notes}" />  					
+					</td>
+				</tr>
 				</c:forEach>
+			</tbody>
+		</table>		
+	</c:if>
+	
+		<table>
+			<tbody>
+				<tr>
+					<td><h4>Model</h4></td>
+					<td>
+						<jax:dl dt="MMHC ID" dd="<a href='tumorSummary.do?tumorFrequencyKeys=${pathology.tumorFrequencyKey}'>MTB:${pathology.tumorFrequencyKey}</a>" />
+						<jax:dl dt="Tumor Name" dd="${pathology.organOrigin}&nbsp;&#8226;&nbsp;${pathology.tumorClassName}" />
+						<jax:dl dt="Treatment Type" dd="${pathology.treatmentType}" />
+						<jax:dl dt="Agent" dts="Agents" dds="${pathology.agents}" />
+						<dl>
+							<dt>Tumor Synonyms</dt>
+							<c:forEach var="tumorSynonym" items="${pathology.tumorSynonyms}">
+							<dd><c:out value="${tumorSynonym.name}" escapeXml="false"/></dd>
+							</c:forEach>
+						</dl>
+						<jax:dl dt="Organ Affected" dd="${pathology.organAffected}" />
+						<jax:dl dt="Frequency" dd="${pathology.frequencyString}" />
+						<jax:dl dt="Frequency Note" dd="${pathology.frequencyNote}" />
+						<jax:dl dt="Reference" dd="<a href='referenceDetails.do?key=${pathology.referenceKey}'>${pathology.accessionId}</a>" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<table>
+			<tbody>
+				<tr>
+					<td><h4>Strain</h4></td>
+					<td>
+						<jax:dl dt="Strain" dd="<a href='strainDetails.do?key=${pathology.strainKey}'>${pathology.strainName}</a>" />
+						<dl>
+							<dt>Strain Types</dt>
+							<c:forEach var="st" items="${pathology.strainTypes}">
+							<dd><c:out value="${st.type}" escapeXml="false"/></dd>
+							</c:forEach>
+						</dl>			
+						<jax:dl dt="General Note" dd="${pathology.strainNote}"/>
+						<dl>
+							<dt>Strain Synonyms</dt>
+							<c:forEach var="synonym" items="${pathology.strainSynonyms}">
+							<dd><c:out value="${synonym.name}" escapeXml="false"/></dd>
+							</c:forEach>
+						</dl>
+						<jax:dl dt="Strain Sex" dd="${pathology.sex}" />
+						<jax:dl dt="Reproductive Status" dd="${pathology.reproductiveStatus}" />
+						<jax:dl dt="Age of Onset" dd="${pathology.ageOfOnset}" />
+						<jax:dl dt="Age of Detection" dd="${pathology.ageOfDetection}" />
+						
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
 
-			</table>
-	</c:when>
-</c:choose>
-<br>
-<!--======================= Start Tumor & Strain ===========================-->    
-<table border=0 cellpadding="1" cellspacing="0" width="100%">
-    <tr>
-<!--======================= Start Bottom Left ==============================-->    
-        <c:set var="num" value="1"/>
-
-        <td width="49%" valign="top" >
-            <table border="0" cellpadding=5 cellspacing=1 width="100%" class="results">
-                <c:choose>
-                    <c:when test="${not empty pathology.tumorFrequencyKey}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">MTB ID</td>
-                            <td class="enhance">
-                              <a href="tumorSummary.do?tumorFrequencyKeys=${pathology.tumorFrequencyKey}">MTB:${pathology.tumorFrequencyKey}</a>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Tumor Frequency ID is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-
-                <c:choose>
-                    <c:when test="${not empty pathology.tumorClassName}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Tumor Name</td>
-                            <td>
-                                <font class="enhance">
-                                    ${pathology.organOrigin} <br>
-                                    ${pathology.tumorClassName}
-                                </font>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Tumor Name is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${not empty pathology.treatmentType}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Treatment Type</td>
-                            <td>${pathology.treatmentType}</td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Treatment type is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${not empty pathology.agents}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Agents</td>
-                            <td>
-                                <c:forEach var="agent" items="${pathology.agents}" varStatus="status">
-                                    <c:out value="${agent.name}" escapeXml="false"/>
-                                    <c:if test="${status.last != true}">
-                                        ,
-                                    </c:if>
-                                </c:forEach>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Agents is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${not empty pathology.tumorSynonyms}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Tumor Synonyms</td>
-                            <td>
-                                <c:forEach var="tumorSynonym" items="${pathology.tumorSynonyms}" varStatus="status">
-                                    <c:out value="${tumorSynonym.name}" escapeXml="false"/>
-                                    <c:if test="${status.last != true}">
-                                        &nbsp;&#8226;&nbsp;
-                                    </c:if>
-                                </c:forEach>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Tumor synonyms is null. //-->
-                    </c:otherwise>
-                </c:choose>
-                
-                <c:choose>
-                    <c:when test="${not empty pathology.organAffected}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Organ Affected</td>
-                            <td>${pathology.organAffected}</td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Organ affected is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${not empty pathology.frequency}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Frequency</td>
-                            <td>${pathology.frequencyString}</td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Frequency is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${not empty pathology.frequencyNote}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Frequency Note</td>
-                            <td>${pathology.frequencyNote}</td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Frequency note is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${(not empty pathology.referenceKey) && (not empty pathology.accessionId)}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Reference</td>
-                            <td>
-                                <a href="nojavascript.jsp" onClick="focusBackToOpener('referenceDetails.do?key=${pathology.referenceKey}');return false;">${pathology.accessionId}</a>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Reference is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-            </table>
-        </td>
-<!--======================= End Bottom Left ================================-->    
-        <td width="20">
-        </td>
-<!--======================= Start Bottom Right =============================-->    
-        <c:set var="num" value="1"/>
-
-        <td width="49%" valign="top">
-            <table border="0" cellpadding=5 cellspacing=1 width="100%" class="results">
-                <c:choose>
-                    <c:when test="${not empty pathology.strainName}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Strain</td>
-                            <td>
-                                <table border="0" cellspacing="2">
-                                    <tr>
-                                        <td class="enhance" colspan="2"><a href="nojavascript.jsp" onclick="focusBackToOpener('strainDetails.do?key=${pathology.strainKey}');return false;"><c:out value="${pathology.strainName}" escapeXml="false"/></a></td>
-                                    </tr>
-
-                                <c:if test="${not empty pathology.strainTypes}">
-                                    <tr>
-                                        <td class="label">Strain Types: </td>
-                                        <td>
-                                            <c:forEach var="type" items="${pathology.strainTypes}" varStatus="status">
-                                                ${type.type}
-                                                <c:if test="${status.last != true}">
-                                                    &amp;
-                                                </c:if>
-                                            </c:forEach>
-                                        </td>
-                                    </tr>
-                                </c:if>
-                                <c:if test="${not empty pathology.strainNote}">
-                                    <tr>
-                                        <td class="label" valign="top">General Note: </td>
-                                        <td valign="top">${pathology.strainNote}</td>
-                                    </tr>
-                                </c:if>
-                                </table>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Strain name is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${not empty pathology.strainSynonyms}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Strain Synonyms</td>
-                            <td>
-                                <c:forEach var="synonym" items="${pathology.strainSynonyms}" varStatus="status">
-                                    <span class="synDiv2"><c:out value="${synonym.name}" escapeXml="false"/></span>
-                                    <c:if test="${status.last != true}">
-                                        &nbsp;&#8226;&nbsp;
-                                    </c:if>
-                                </c:forEach>
-                            </td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Strain synonyms is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${not empty pathology.sex}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Strain Sex</td>
-                            <td>${pathology.sex}</td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Strain sex is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${not empty pathology.reproductiveStatus}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Reproductive Status</td>
-                            <td>${pathology.reproductiveStatus}</td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Reproductive status is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${not empty pathology.ageOfOnset}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Age of Onset</td>
-                            <td>${pathology.ageOfOnset}</td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Age of onset is null. //-->
-                    </c:otherwise>
-                </c:choose>
-
-                <c:choose>
-                    <c:when test="${not empty pathology.ageOfDetection}">
-                        <c:set var="num" value="${num == 1 ? 2 : 1}"/>
-                        <tr class="stripe${num}">
-                            <td class="cat${num}">Age of Detection</td>
-                            <td>${pathology.ageOfDetection}</td>
-                        </tr>
-                    </c:when>
-                    <c:otherwise>
-                        <!-- Age of detection status is null. //-->
-                    </c:otherwise>
-                </c:choose>
-            </table>
-        </td>
-<!--======================= End Bottom Right ===============================-->    
-    </tr>
-</table>
-<!--======================= End Tumor & Strain =============================-->    
-<!--======================= End Detail Section =============================-->
-<!--======================= End Main Section ===============================-->
-        </td>
-    </tr>
-</table>
-</body>
-</html> 
-
-
+</jsp:body>
+</jax:mmhcpage>
 
