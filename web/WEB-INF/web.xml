@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-  <description>Mouse Tumor Biology Web Interface</description>
-  <display-name>MTBWI2</display-name>
+  <description>Mouse Models of Human Cancer Web Interface</description>
+  <display-name>MTBWI</display-name>
  <!--===========================================================================
          Standard Action Servlet Configuration (with debugging)
 ============================================================================-->

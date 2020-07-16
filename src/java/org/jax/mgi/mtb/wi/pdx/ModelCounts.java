@@ -220,7 +220,7 @@ public class ModelCounts {
         }
 
         String[] tissues = tissue.split(",");
-        StringBuilder link = new StringBuilder("/mtbwi2/pdxSearchResults.do?");
+        StringBuilder link = new StringBuilder("/mtbwi/pdxSearchResults.do?");
 
         for (String t : tissues) {
             link.append("primarySites=").append(t.replaceAll(" ", "+"));
@@ -303,7 +303,7 @@ public class ModelCounts {
             html.append("<td>[" + vals.get(2) + "]</td>\n");
             html.append("<td>" + vals.get(3) + "</td>\n");
 
-			String anchor = "<a target=\"_blank\" href=\"/mtbwi2/facetedSearch.do#" + minFC + "&fq=";
+			String anchor = "<a target=\"_blank\" href=\"/mtbwi/facetedSearch.do#" + minFC + "&fq=";
             String solrTissue = vals.get(4).replaceAll(" ", "+");
 
             if ("0".equals(vals.get(5))) {

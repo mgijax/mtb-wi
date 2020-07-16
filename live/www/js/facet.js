@@ -1,5 +1,5 @@
 
-const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://bhmtbdb01:8080/mtbwi2',
+const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://tumor.informatics.jax.org/mtbwi',
 
 	solrUrl = baseUrl + '/solrQuery.do',
 

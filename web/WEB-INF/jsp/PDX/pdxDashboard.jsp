@@ -297,5 +297,5 @@
 		document.location="#sites"
 	</script>
 </c:if>
-</body>
-</html> 
+</jsp:body>
+        </jax:mmhcpage>
