@@ -105,7 +105,8 @@
             }
             
             #pdx-vis {
-              padding-bottom:50px;
+              margin-top:50px;
+              padding-bottom:150px;
             }
 
         </style>
@@ -115,9 +116,38 @@
 
 <section id="summary">
   <div class="container">
-    <p><a href="pdxRequest.do">Request more information on the JAX PDX program</a></p>
-    <p><a class="help" href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html#vis">Help and Documentation</a></p>
-  
+    <!-- <p><a href="pdxRequest.do">Request more information on the JAX PDX program</a></p>
+    <p><a class="help" href="${applicationScope.urlBase}/html/PDXLikeMeHelp.html#vis">Help and Documentation</a></p> -->
+    <p>    The visualization functions for PDX Like Me are still under development. Send feedback and error reports to <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml" target="_blank">MGI User Support</a>.</p>
+    <table class="scale">  
+      <caption>Rank Z based expression scale</caption>
+      <tbody>
+        <tr>        
+          <td style="text-align:center;background-color:#007300">&lt;-10</td>
+          <td style="text-align:center;background-color:#009b00">-10 <b>-</b> -2</td>
+          <td style="text-align:center;background-color:#00d700">-2 <b>-</b> -0.5</td>
+          <td style="text-align:center;background-color:#00f500">-.05 <b>-</b> -.01</td>
+          <td style="text-align:center;background-color:#808080">-.01 <b>-</b> +.01</td>
+          <td style="text-align:center;background-color:#f50000">+.01 <b>-</b> +0.5</td>
+          <td style="text-align:center;background-color:#d70000">+0.5 <b>-</b> +2</td>
+          <td style="text-align:center;background-color:#9b0000">+2 <b>-</b> +10</td>
+          <td style="text-align:center;background-color:#730000">&gt;10</td>
+          <td style="text-align:center;background-color:#FFFFFF; border:1px solid black">No Value</td>
+        </tr>
+      </tbody>
+                            </table>    
+                            <table class="scale">
+                              <caption>CNV color coding</caption>
+                              <tbody>
+                                <tr>
+                                  <td style="text-align:center;color:#000000;background-color:#FFA500">Amplification</td>
+                                  <td style="text-align:center;color:#000000;background-color:#0000FF">Deletion</td>
+                                  <td style="text-align:center;color:#000000;background-color:#808080">Normal</td>
+                                  <td style="text-align:center;color:#000000;background-color:#FFFFFF; border: 1px solid black">No Value</td>
+                                </tr>
+                              </tbody>
+                            </table> 
+                            <input type="button" value="Modify Query" onclick="history.back();">
 </div>
 </section>
     
@@ -132,72 +162,17 @@
    font-size:40px;">Loading please wait....<br></div>
 
 
-        <div style="width:auto;padding-left:40px;height:100%;top:5px;padding-right:40px">
-            <div style="border:1px solid black; padding:5px">
-
-
-                <table>
-                    <tr><td>Rank Z based expression scale</td>
-                    <tr>
-                        <td>
-
-
-                            <table>			
-                                <tr>				
-                                    <td style="text-align:center;background-color:#007300">&lt;-10</td>
-                                    <td style="text-align:center;background-color:#009b00">-10 <b>-</b> -2</td>
-                                    <td style="text-align:center;background-color:#00d700">-2 <b>-</b> -0.5</td>
-                                    <td style="text-align:center;background-color:#00f500">-.05 <b>-</b> -.01</td>
-                                    <td style="text-align:center;background-color:#808080">-.01 <b>-</b> +.01</td>
-                                    <td style="text-align:center;background-color:#f50000">+.01 <b>-</b> +0.5</td>
-                                    <td style="text-align:center;background-color:#d70000">+0.5 <b>-</b> +2</td>
-                                    <td style="text-align:center;background-color:#9b0000">+2 <b>-</b> +10</td>
-                                    <td style="text-align:center;background-color:#730000">&gt;10</td>
-                                    <td style="text-align:center;background-color:#FFFFFF; border:1px solid black">No Value</td>
-                                </tr>
-                            </table>
-
-
-                        </td>
-                    </tr>
-                    <tr><td>
-                            <table>
-                                <tr><td>CNV color coding</td></tr>
-                                <tr>
-                                    <td style="text-align:center;color:#000000;background-color:#FFA500">Amplification</td>
-                                    <td style="text-align:center;color:#000000;background-color:#0000FF">Deletion</td>
-                                    <td style="text-align:center;color:#000000;background-color:#808080">Normal</td>
-                                    <td style="text-align:center;color:#000000;background-color:#FFFFFF; border: 1px solid black">No Value</td>
-                                </tr>
-                            </table>
-                            <br>
-                            <br>
-                            The visualization functions for PDX Like Me are still under development. Send feedback and error reports to <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml" target="_blank">MGI User Support</a>.
-                                
-                        </td>
-                    </tr>
-                    <tr>
-                    </tr>
-                </table>
-                        <br> 
-                <form>
-                    <input type="button" value="Modify Query" onclick="history.back();">
-                </form>
  
-                <div id="tabs">
-                  <ul>
-                        <c:forEach var="cases" items="${caseList}" varStatus="status">
-                            <li><a href="#tabs-${status.count}">${cases}</a></li>
-                        </c:forEach>
-                    
-                  </ul>
-                  ${table}
-                </div>
-
-               
-
-            </div>
+        <div id="tabs">
+          <ul>
+                <c:forEach var="cases" items="${caseList}" varStatus="status">
+                    <li><a href="#tabs-${status.count}">${cases}</a></li>
+                </c:forEach>
+            
+          </ul>
+          ${table}
         </div>
+
     </section>
   </jsp:body>
 </jax:mmhcpage>

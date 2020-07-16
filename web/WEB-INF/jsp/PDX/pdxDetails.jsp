@@ -238,13 +238,13 @@
 					columns: [
 						{
 							header: 'Sample',
-							width: 85,
+							width: 110,
 							sortable: true,
 							dataIndex: 'sample_name'
 						},
 						{
 							header: 'Gene',
-							width: 60,
+							width: 100,
 							sortable: true,
 							dataIndex: 'gene_symbol',
    						
@@ -252,28 +252,28 @@
 						
 						{
 							header: 'Variant',
-							width: 110,
+							width: 120,
 							sortable: true,
 							dataIndex: 'ckb_molpro_name',
 							renderer: ckbMolProRenderer
 						},
 						{
 							header: 'Variant effect',
-							width: 90,
+							width: 100,
 							sortable: true,
 							dataIndex: 'consequence'
 						},
   									
 						{
 							header: 'CKB<br>protein<br>effect',
-							width: 70,
+							width: 80,
 							sortable: true,
 							dataIndex: 'ckb_protein_effect'
 						},
 									
 						{
 							header: '# Annotations<br>predicting<br><b>sensitivity<b>',
-							width: 130,
+							width: 140,
 							sortable: true,
 							dataIndex: 'ckb_nclinical_sens',
 							renderer: ckbSensitivityRenderer
@@ -281,7 +281,7 @@
    			
 						{
 							header: '# Annotations<br>predicting<br><b>resistance</b>',
-							width: 130,
+							width: 140,
 							sortable: true,
 							dataIndex: 'ckb_nclinical_resist',
 							renderer: ckbResistanceRenderer
@@ -289,7 +289,7 @@
   			
 						{
 							header: 'Potential<br>treatment<br>approaches',
-							width: 100,
+							width: 110,
 							sortable: true,
 							dataIndex: 'ckb_potential_treat_approach',
 							renderer: ckbPotTreatRenderer
@@ -297,32 +297,32 @@
 						
 						{
 							header: 'Platform',
-							width: 80,
+							width: 90,
 							sortable: true,
 							dataIndex: 'platform'
 						},
 						{
 							header: 'Chromosome',
-							width: 70,
+							width: 80,
 							sortable: true,
 							dataIndex: 'chromosome'
 						},
 						{
 							header: 'Seq Position',
-							width: 80,
+							width: 90,
 							sortable: true,
 							dataIndex: 'seq_position'
 						},
 						{
 							header: 'Ref Allele',
-							width: 65,
+							width: 75,
 							sortable: true,
 							dataIndex: 'ref_allele'
 
 						},
 						{
 							header: 'Alt Allele',
-							width: 65,
+							width: 75,
 							sortable: true,
 							dataIndex: 'alt_allele'
 
@@ -330,70 +330,70 @@
 						
 						{
 							header: 'Amino Acid Change',
-							width: 110,
+							width: 120,
 							sortable: true,
 							dataIndex: 'amino_acid_change',
 							renderer: civicLinkRenderer
 						},
 						{
 							header: 'RS Variants',
-							width: 80,
+							width: 90,
 							sortable: true,
 							dataIndex: 'rs_variants'
 						},
 						{
 							header: 'Read Depth',
-							width: 70,
+							width: 80,
 							sortable: true,
 							dataIndex: 'read_depth'
 						},
 						{
 							header: 'Allele Frequency',
-							width: 100,
+							width: 110,
 							sortable: true,
 							dataIndex: 'allele_frequency'
 						},
 						{
 							header: 'Transcript ID',
-							width: 100,
+							width: 110,
 							sortable: true,
 							dataIndex: 'transcript_id'
 						},
 						{
 							header: 'Filtered Rationale',
-							width: 100,
+							width: 110,
 							sortable: true,
 							dataIndex: 'filtered_rationale'
 
 						},
 						{
 							header: 'Filter',
-							width: 50,
+							width: 60,
 							sortable: true,
 							dataIndex: 'filter'
 
 						},
 						{
 							header: 'Passage Num',
-							width: 50,
+							width: 60,
 							sortable: true,
 							dataIndex: 'passage_num'
 						},
 						{
 							header: 'Gene ID',
-							width: 60,
+							width: 70,
 							sortable: true,
 							dataIndex: 'entrez_gene_id'
 						},
 						{
 							header: 'Count Human Reads',
-							width: 70,
+							width: 80,
 							sortable: true,
 							dataIndex: 'count_human_reads'
 						},
 						{
 							header: 'PCT Human Reads',
-							width: 70,
+							width: 80,
 							sortable: true,
 							dataIndex: 'pct_human_reads'
 						}

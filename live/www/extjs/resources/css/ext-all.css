@@ -168,7 +168,7 @@
     cursor: pointer;
     display: block;
     height: 10px;
-    line-height:0.9rem;
+    line-height:0.7rem;
     width: 10px;
 }
 
@@ -272,7 +272,7 @@
 .loading-indicator {
     background: no-repeat left;
     padding-left: 20px;
-    line-height:1.5rem;
+    line-height:1.3rem;
     margin: 3px;
 }
 
@@ -596,7 +596,7 @@ ul.x-tab-strip li.x-tab-edge {
 
 .x-tab-strip-inner {
     overflow:hidden;
-	text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
 .x-tab-strip span.x-tab-strip-text {
@@ -2160,6 +2160,7 @@ div.x-toolbar-no-items {
 	text-overflow: ellipsis;
     padding:3px 3px 3px 5px;
     white-space: nowrap;
+
 }
 
 .x-grid3-hd-inner {
@@ -3117,7 +3118,7 @@ table.x-date-inner {
     padding:2px;
 	/* font:normal 11px arial, helvetica,tahoma,sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -3431,7 +3432,7 @@ td.x-date-mp-sep {
 a.x-menu-item {
     cursor: pointer;
     display: block;
-    line-height:1.5rem;
+    line-height:1.3rem;
     outline-color: -moz-use-text-color;
     outline-style: none;
     outline-width: 0;
@@ -3698,7 +3699,7 @@ a.x-menu-item {
     zoom:1;
     padding:5px 3px 4px 5px;
     border:1px solid;
-    line-height:1.4rem;
+    line-height:1.2rem;
     background: transparent repeat-x 0 -1px;
 }
 
@@ -5173,7 +5174,7 @@ body.ext-ie6.x-body-masked .x-window select {
     color:#222;
     /* font:normal 11px tahoma, arial, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -5228,7 +5229,7 @@ font-size:1.0rem;
 }
 
 .loading-indicator {
-    font-size:1.0rem;
+    font-size:0.8rem;
     background-image: url(../images/default/grid/loading.gif);
 }
 
@@ -5267,7 +5268,7 @@ ul.x-tab-strip-bottom{
 .x-tab-strip span.x-tab-strip-text {
 	/* font:normal 11px tahoma,arial,helvetica; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 	color:#416aa3;
 }
@@ -5361,7 +5362,7 @@ font-size:1.0rem;
 }.x-form-field {
     /* font:normal 12px tahoma, arial, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.1rem;
+font-size:0.9rem;
 
 }
 
@@ -5443,14 +5444,14 @@ font-size:1.1rem;
 .x-form-grow-sizer {
 	/* font:normal 12px tahoma, arial, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.1rem;
+font-size:0.9rem;
 
 }
 
 .x-form-item {
     /* font:normal 12px tahoma, arial, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.1rem;
+font-size:0.9rem;
 
 }
 
@@ -5458,7 +5459,7 @@ font-size:1.1rem;
     color:#c0272b;
     /* font:normal 11px tahoma, arial, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
     background-image:url(../images/default/shared/warning.gif);
 }
@@ -5470,14 +5471,14 @@ font-size:1.0rem;
 .x-small-editor .x-form-field {
     /* font:normal 11px arial, tahoma, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
 .ext-webkit .x-small-editor .x-form-field {
     /* font:normal 11px arial, tahoma, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -5492,21 +5493,21 @@ font-size:1.0rem;
 .x-fieldset legend {
     /* font:bold 11px tahoma, arial, helvetica, sans-serif; */
 font-weight:bold;
-font-size:1.0rem;
+font-size:0.8rem;
 
     color:#15428b;
 }
 .x-btn{
 	/* font:normal 11px tahoma, verdana, helvetica; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
 .x-btn button{
     /* font:normal 11px arial,tahoma,verdana,helvetica; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
     color:#333;
 }
@@ -5598,7 +5599,7 @@ font-size:1.0rem;
 .x-toolbar td,.x-toolbar span,.x-toolbar input,.x-toolbar div,.x-toolbar select,.x-toolbar label{
     /* font:normal 11px arial,tahoma, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -5726,17 +5727,17 @@ font-size:1.0rem;
 }
 
 .x-grid3-row td, .x-grid3-summary-row td{
-	/* font:normal 1.0rem/1.2rem arial, tahoma, helvetica, sans-serif; */
+	/* font:normal 0.8rem/1.0rem arial, tahoma, helvetica, sans-serif; */
   font-weight:normal;
-  font-size:1.0rem;
-  line-height:1.2rem;
+  font-size:0.8rem;
+  line-height:1.0rem;
 }
 
 .x-grid3-hd-row td {
-	/* font:normal 1.0rem/1.4rem arial, tahoma, helvetica, sans-serif; */
+	/* font:normal 0.8rem/1.2rem arial, tahoma, helvetica, sans-serif; */
   font-weight:normal;
-  font-size:1.0rem;
-  line-height:1.4rem;
+  font-size:0.8rem;
+  line-height:1.2rem;
 }
 
 
@@ -5870,7 +5871,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-grid3-topbar, .x-grid3-bottombar{
 	/* font:normal 11px arial, tahoma, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -5964,7 +5965,7 @@ font-size:1.0rem;
     color:#3764a0;
     /* font:bold 11px tahoma, arial, helvetica, sans-serif; */
 font-weight:bold;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -5988,7 +5989,7 @@ font-size:1.0rem;
     color:gray;
     /* font:normal 11px tahoma, arial, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -6002,7 +6003,7 @@ font-size:1.0rem;
 	color:#000;
 	/* font: normal 11px arial, helvetica, sans-serif; */
   font-weight:normal;
-  font-size:1.0rem;
+  font-size:0.8rem;
     border-color: #ddd #bbb #bbb #ddd;
 	background-color:#fff;
 }
@@ -6111,7 +6112,7 @@ font-size:1.0rem;
 	color:#000;
 	/* font: normal 11px arial, tahoma, helvetica, sans-serif; */
   font-weight:normal;
-  font-size:1.0rem;
+  font-size:0.8rem;
 }
 
 .x-tree-node a, .x-dd-drag-ghost a{
@@ -6179,7 +6180,7 @@ font-size:1.0rem;
 	color:#fff;
 	/* font:bold 11px "sans serif", tahoma, verdana, helvetica; */
 font-weight:bold;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -6205,7 +6206,7 @@ font-size:1.0rem;
 	border-bottom-color:#a3bad9;
     /* font:normal 10px arial, helvetica,tahoma,sans-serif; */
 font-weight:normal;
-font-size:0.9rem;
+font-size:0.7rem;
 
 	color:#233d6d;
 }
@@ -6217,7 +6218,7 @@ font-size:0.9rem;
 .x-date-inner a {
     /* font:normal 11px arial, helvetica,tahoma,sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
     color:#000;
 }
@@ -6265,7 +6266,7 @@ font-size:1.0rem;
 }
 
 .x-date-mmenu .x-menu-item {
-	font-size:0.9rem;
+	font-size:0.7rem;
 	color:#000;
 }
 
@@ -6276,7 +6277,7 @@ font-size:1.0rem;
 .x-date-mp td {
 	/* font:normal 11px arial, helvetica,tahoma,sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -6286,7 +6287,7 @@ font-size:1.0rem;
 	border-color: #3366cc #000055 #000055 #3366cc;
 	/* font:normal 11px arial, helvetica,tahoma,sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -6331,7 +6332,7 @@ td.x-date-mp-sep {
 .x-tip .x-tip-mc {
     /* font: normal 11px tahoma,arial,helvetica,sans-serif; */
     font-weight:normal;
-    font-size:1.0rem;
+    font-size:0.8rem;
 }
 .x-tip .x-tip-ml {
 	background-color: #fff;
@@ -6340,14 +6341,14 @@ td.x-date-mp-sep {
 .x-tip .x-tip-header-text {
     /* font: bold 11px tahoma,arial,helvetica,sans-serif; */
     font-weight:bold;
-    font-size:1.0rem;    
+    font-size:0.8rem;    
     color:#444;
 }
 
 .x-tip .x-tip-body {
     /* font: normal 11px tahoma,arial,helvetica,sans-serif; */
     font-weight:normal;
-    font-size:1.0rem;   
+    font-size:0.8rem;   
     color:#444;
 }
 
@@ -6379,10 +6380,10 @@ td.x-date-mp-sep {
 .x-menu-list-item{
 	/* /* font:normal 11px arial,tahoma,sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
  */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -6471,11 +6472,11 @@ a.x-menu-item {
     background-image: url(../images/default/box/tb.gif);
 	/* font-family: "Myriad Pro","Myriad Web","Tahoma","Helvetica","Arial",sans-serif; */
 	color: #393939;
-	font-size:1.1rem;
+	font-size:0.9rem;
 }
 
 .x-box-mc h3 {
-	font-size:1.3rem;
+	font-size:1.1rem;
 	font-weight: bold;
 }
 
@@ -6520,7 +6521,7 @@ a.x-menu-item {
 }.x-combo-list {
     border-color:#98c0f4;
     background-color:#ddecfe;
-    font-size:1.1rem;
+    font-size:0.9rem;
     font-weight:normal;
     /* font:normal 12px tahoma, arial, helvetica, sans-serif; */
 }
@@ -6532,7 +6533,7 @@ a.x-menu-item {
 .x-combo-list-hd {
     /* font:bold 11px tahoma, arial, helvetica, sans-serif; */
 font-weight:bold;
-font-size:1.0rem;
+font-size:0.8rem;
 
     color:#15428b;
     background-image: url(../images/default/layout/panel-title-light-bg.gif);
@@ -6559,7 +6560,7 @@ font-size:1.0rem;
 .x-combo-list-small {
     /* font:normal 11px tahoma, arial, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }.x-panel {
     border-color: #99bbe8;
@@ -6568,7 +6569,7 @@ font-size:1.0rem;
 .x-panel-header {
     color:#15428b;
 	font-weight:bold; 
-    font-size:1.0rem;
+    font-size:0.8rem;
     /* font-family: tahoma,arial,verdana,sans-serif; */
     border-color:#99bbe8;
     background-image: url(../images/default/panel/white-top-bottom.gif);
@@ -6595,7 +6596,7 @@ font-size:1.0rem;
     color:#15428b;
 	/* font:bold 11px tahoma,arial,verdana,sans-serif; */
 font-weight:bold;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -6615,7 +6616,7 @@ font-size:1.0rem;
 .x-panel-mc {
     /* font: normal 11px tahoma,arial,helvetica,sans-serif; */
     font-weight:normal;
-    font-size:1.0rem;
+    font-size:0.8rem;
     background-color:#dfe8f6;
 }
 
@@ -6647,7 +6648,7 @@ font-size:1.0rem;
 .x-panel-fbar td,.x-panel-fbar span,.x-panel-fbar input,.x-panel-fbar div,.x-panel-fbar select,.x-panel-fbar label{
     /* font:normal 11px arial,tahoma, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 .x-window-proxy {
@@ -6659,7 +6660,7 @@ font-size:1.0rem;
     color:#15428b;
 	/* font:bold 11px tahoma,arial,verdana,sans-serif; */
 font-weight:bold;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -6691,7 +6692,7 @@ font-size:1.0rem;
     border-color:#99bbe8;
     /* font: normal 11px tahoma,arial,helvetica,sans-serif; */
     font-weight:normal;
-    font-size:1.0rem;
+    font-size:0.8rem;
     background-color:#dfe8f6;
 }
 
@@ -6822,7 +6823,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 
 .x-progress-text {
-    font-size:1.0rem;
+    font-size:0.8rem;
     font-weight:bold;
     color:#fff;
 }
@@ -6838,14 +6839,14 @@ body.x-body-masked .x-window-plain .x-window-mc {
     border-left-color:#ddd;
     /* font:normal 11px arial, tahoma, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
 .x-list-body dt em {
     /* font:normal 11px arial, tahoma, helvetica, sans-serif; */
 font-weight:normal;
-font-size:1.0rem;
+font-size:0.8rem;
 
 }
 
@@ -6881,13 +6882,13 @@ font-size:1.0rem;
     background-image:url(../images/default/slider/slider-v-thumb.png);
 }.x-window-dlg .ext-mb-text,
 .x-window-dlg .x-window-header-text {
-    font-size:1.1rem;
+    font-size:0.9rem;
 }
 
 .x-window-dlg .ext-mb-textarea {
     /* font:normal 12px tahoma,arial,helvetica,sans-serif; */
 font-weight:normal;
-font-size:1.1rem;
+font-size:0.9rem;
 
 }
 

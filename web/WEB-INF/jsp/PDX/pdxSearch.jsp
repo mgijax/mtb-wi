@@ -213,11 +213,14 @@
 </fieldset>
 
 <fieldset>
-	<legend data-tip="Select a diagnosis or diagnoses as search criteria.">Search by diagnosis</legend>
-	<html:select property="diagnoses" size="8" multiple="true">
-	<html:option value="">ANY</html:option>
-	<html:options collection="diagnosesValues" property="value" labelProperty="label"/>
-	</html:select>
+	<legend>Search by diagnosis</legend>
+	<fieldset>	
+		<legend data-tip="Select a diagnosis or diagnoses as search criteria.">Diagnosis</legend>
+		<html:select property="diagnoses" size="8" multiple="true">
+			<html:option value="">ANY</html:option>
+			<html:options collection="diagnosesValues" property="value" labelProperty="label"/>
+		</html:select>
+	</fieldset>
 </fieldset>
 
 <fieldset>
@@ -242,99 +245,88 @@
 
 <fieldset>
 	<legend>Search by tumor mutation burden (TMB) score range</legend>
-	
-    
-<div>    <label>Minimum:${minTMB}</label>
-    <html:text size="4" property="TMBGT"/></div>
-    
-    
-    <label data-tip="TMB is calculated for each sample associated with a PDX model.  Models will be returned if any of the samples meet the search criteria. Click for details on how TMB is cacluated.">TMB</label>
-    
-    
-<div>    <label>Maximum:${maxTMB} (TMB > 22  is considered high.)</label>
-    <html:text size="4" property="TMBLT"/></div>
-    
 
+	<div>    
+		<label>Minimum:${minTMB}</label>
+	    <html:text size="4" property="TMBGT"/>
+	</div>
+
+    <label data-tip="TMB is calculated for each sample associated with a PDX model.  Models will be returned if any of the samples meet the search criteria. Click for details on how TMB is cacluated.">TMB</label>
+
+	<div>    
+		<label>Maximum:${maxTMB} (TMB > 22  is considered high.)</label>
+	    <html:text size="4" property="TMBLT"/>
+	</div>
 </fieldset>
 
 
 
 <fieldset>
 	<legend>Search by fusion gene</legend>
-	
-	<b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a fusion gene as search criteria.', CAPTION, 'Fusion Gene');" onmouseout="return nd();">Fusion Gene</a>
-data-tip="Select a fusion gene as search criteria."</b>
-	<br>
-	<html:select property="fusionGenes" size="4" >
-	<html:option value="Any">ANY</html:option><!-- this has a value because it is a constraint ie only some models have fusion genes  -->
-	<html:options collection="fusionGenes" property="value" labelProperty="label"/>
-	</html:select>
+	<fieldset>
+		<legend ata-tip="Select a fusion gene as search criteria.">Fusion Gene</legend>
+		<html:select property="fusionGenes" size="4" >
+			<html:option value="Any">ANY</html:option><!-- this has a value because it is a constraint ie only some models have fusion genes  -->
+			<html:options collection="fusionGenes" property="value" labelProperty="label"/>
+		</html:select>
+	</fieldset>
 </fieldset>
 
 
 <fieldset>
 	<legend>Search by gene variants (in engrafted tumors)</legend>
+	<fieldset>
+		<legend data-tip="Select one or more genes as search criteria">Gene</legend>
+		<div id="geneSelectOMatic"></div>
+	</fieldset>
+
+	<fieldset>
+		<input type="button" value="Show Variants" onclick="updateVariants()">
+		<a id="variantsLocation"></a>
+	</fieldset>
 	
-	<b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select one or more genes as search criteria', CAPTION, 'Genes');" onmouseout="return nd();">Gene</a>
-data-tip="Select one or more genes as search criteria"</b>
-	
-	<div id="geneSelectOMatic"></div>
-	
-	
-	<input type="button" value="Show Variants" onclick="updateVariants()">
-	<a id="variantsLocation"></a>
-	
-	
-	
-	<c:choose>
-	<c:when test="${not empty variantsValues}">
-	
-			<b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select one or more variants as search criteria', CAPTION, 'Variants');" onmouseout="return nd();">Variants</a>
-data-tip="Select one or more variants as search criteria"</b>
-	
-		<html:select property="variants" size="8" multiple="false" styleId="variantSelect">
-			<html:option value="">ANY</html:option>
-			<html:options collection="variantsValues" property="value" labelProperty="label"/>
-		</html:select>
-	
-		<div id="variantResult"></div>
-	</c:when>
-	<c:otherwise>
-		<div id="variantResult">No variants for selected gene.</div>
-	</c:otherwise>
-	
-	</c:choose>
+	<fieldset>
+
+		<c:choose>
+			<c:when test="${not empty variantsValues}">
+			<legend data-tip="Select one or more variants as search criteria">Variants</legend>	
+
+				<html:select property="variants" size="8" multiple="false" styleId="variantSelect">
+					<html:option value="">ANY</html:option>
+					<html:options collection="variantsValues" property="value" labelProperty="label"/>
+				</html:select>
+			
+				<div id="variantResult"></div>
+			</c:when>
+			<c:otherwise>
+			<legend>Variants</legend>	
+				<div id="variantResult">No variants for selected gene.</div>
+			</c:otherwise>
+		
+		</c:choose>
+	</fieldset>
 </fieldset>   		
 
 
 
 <fieldset>
 	<legend>Display a chart of gene expression across PDX models for a gene</legend>
-	
-	<b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a gene to view expression values', CAPTION, 'Gene');" onmouseout="return nd();">Gene</a>
-data-tip="Select a gene to view expression values"</b>
-	
-	
-	<div id="geneSelectOMatic2"></div>
+	<fieldset>
+		<legend data-tip="Select a gene to view expression values">Gene</legend>	
+		<div id="geneSelectOMatic2"></div>
+	</fieldset>
 </fieldset>
-
-
 
 <fieldset>
 	<legend>Search by gene amplification and deletion</legend>
-	
-	<b><a href="javascript:void(0);" style="text-decoration: none; cursor:help;" onmouseover="return overlib('Select a gene', CAPTION, 'Gene');" onmouseout="return nd();">Gene</a>
-data-tip="Select a gene"</b>
-	
-	<div id="geneSelectOMatic3"></div>
+	<fieldset>
+		<legend data-tip="Select a gene">Gene</legend>
+		<div id="geneSelectOMatic3"></div>
+	</fieldset>
 </fieldset>
-
-
 
 <!-- <input type="submit" VALUE="Search">
 <input type="button" VALUE="Reset" onclick="resetForm()"> -->
-
-
 
 </jax:searchform>
 	</div>

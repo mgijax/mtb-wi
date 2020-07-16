@@ -159,7 +159,7 @@
 						<tr>
 							<th>Model Name</th>
 							<th>Organ Affected</th>
-							<th>Treatment Agent(s)</th>
+							<th>Tumor Inducing Agent(s)</th>
 							<th class="freq">Female</th>
 							<th class="freq">Male</th>
 							<th class="freq">Mixed&nbsp;Pop.</th>
@@ -174,11 +174,11 @@
 							<td><c:out value="${tumor.tumorName}" escapeXml="false"/></td>
 							<td><c:out value="${tumor.organAffectedName}" escapeXml="false"/></td>
 							<td>
-
+								
+								<c:out value="${tumor.treatmentType}" escapeXml="false"/>
 								<c:if test="${not empty tumor.agents}">
 
 								<c:forEach var="agent" items="${tumor.agents}" varStatus="status">
-									
 									<c:if test="${status.first != true}">
 										&nbsp;&nbsp;&sdot;&nbsp;&nbsp;
 									</c:if>
