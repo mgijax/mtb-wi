@@ -39,7 +39,7 @@
 				<jax:sumrow dt="Age at Necropsy" dd="${pathology.ageAtNecropsy}" />
 				<jax:sumrow dt="Notes" dd="${pathology.pathologyNote}" />
 				<jax:sumrow dt="Contributor" dd="${pathology.sourceOfImage} (<a href='referenceDetails.do?key=${pathology.imgRefKey}'>${pathology.imgRefAccId}</a>)" />
-				<jax:sumrow dt="Pathologist" dd="${pathology.pathologist} (<a href='referenceDetails.do?key=${pathology.pathologistRefKey}'>{pathology.pathologistAccId}</a>)" />
+				<jax:sumrow dt="Pathologist" dd="${pathology.pathologist} (<a href='referenceDetails.do?key=${pathology.pathologistRefKey}'>${pathology.pathologistAccId}</a>)" />
 				<jax:sumrow dt="Copyright" dd="${pathology.copyright}" />
 				<jax:sumrow dt="Method" dd="${pathology.method}" />  			
 			</tbody>

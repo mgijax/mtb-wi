@@ -49,19 +49,19 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://bhm
 			title: 'Tumor Frequency',
 			terms: [
 				{
-					label: '0',
+					label: 'Max = 0',
 					queryKey: 'freqMax',
 					queryValue: '0'
 				},
 				{
-					label: '&le;&nbsp;50%',
-					queryKey: 'freqMin',
+					label: 'Max &le;&nbsp;50%',
+					queryKey: 'freqMax',
 					queryValue: '[0 TO 50]'
 				},
 				{
-					label: '&gt;&nbsp;50%',
+					label: 'Min &ge;&nbsp;50%',
 					queryKey: 'freqMin',
-					queryValue: '{50 TO 100]'
+					queryValue: '[50 TO 100]'
 				}
 			]
 		},

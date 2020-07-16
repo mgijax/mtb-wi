@@ -175,12 +175,12 @@
 							<td><c:out value="${tumor.organAffectedName}" escapeXml="false"/></td>
 							<td>
 								
-								<c:out value="${tumor.treatmentType}" escapeXml="false"/>
+								<!-- <c:out value="${tumor.treatmentType}" escapeXml="false"/> -->
 								<c:if test="${not empty tumor.agents}">
 
 								<c:forEach var="agent" items="${tumor.agents}" varStatus="status">
 									<c:if test="${status.first != true}">
-										&nbsp;&nbsp;&sdot;&nbsp;&nbsp;
+										 &nbsp;&nbsp;&sdot;&nbsp;&nbsp; 
 									</c:if>
 									<c:out value="${agent}" escapeXml="false"/>
 								</c:forEach>

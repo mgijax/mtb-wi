@@ -4,18 +4,23 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="PDX Image Detail">
-	<table>
-		<tr>
-			<td colspan="2">
-				<div>
-					<img height=800 width=800 src="${applicationScope.pdxFileURL}${fileName}">
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td><h4>Description</h4></td>
-			<td>${description}</td>
-		</tr>
-	</table>
+<jsp:attribute name="head">
+<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
+</jsp:attribute>
+
+<jsp:body>
+<section id="image-detail">
+	<img height=800 width=800 src="${applicationScope.pdxFileURL}${fileName}">
+</section>
+<section id="summary">
+	<div class="container">
+		<table>
+			<tbody>
+				<jax:sumrow dt="Description" dd="${description}" />
+			</tbody>
+		</table>
+	</div>
+</section>
+</jsp:body>
 </jax:mmhcpage>
 

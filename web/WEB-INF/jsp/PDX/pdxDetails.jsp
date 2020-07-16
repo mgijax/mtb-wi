@@ -1018,9 +1018,8 @@
 
 
 																			<td style=" padding:5px; border:none; vertical-align:top; width:250px">
-																				<a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-																					return false;">
-																					<img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
+																				<a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
+																					<img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
 																				</a>
 																				<c:if test="${not empty sessionScope.pdxEditor}">
 																					<a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton"> 
@@ -1069,9 +1068,8 @@
 																			</c:choose>
 
 																			<td style=" padding:5px;  border:none; vertical-align:top; width:250px">
-																				<a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-																					return false;">
-																					<img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
+																				<a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
+																					<img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
 																				</a>
 																				<c:if test="${not empty sessionScope.pdxEditor}">
 																					<a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton"> 
@@ -1130,9 +1128,8 @@
 																				</c:when>
 																			</c:choose>
 																			<td style=" padding:5px;  border:none; vertical-align:top; width:250px">
-																				<a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-																					return false;">
-																					<img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
+																				<a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
+																					<img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
 																				</a>
 																				<c:if test="${not empty sessionScope.pdxEditor}">
 																					<a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton"> 
@@ -1240,8 +1237,8 @@
 																			</c:choose>
 
 																			<td style=" padding:5px;  border:none; vertical-align:top; width:250px">
-																				<a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-																					return false;"><img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}"></a>
+																				<a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
+																					<img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}"></a>
 																					<c:if test="${not empty sessionScope.pdxEditor}">
 																					<a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton">
 																						<input type="button" value="Edit"/>
@@ -1309,9 +1306,8 @@
 																				</c:when>
 																			</c:choose>
 																			<td style=" padding:5px;  border:none; vertical-align:top; width:250px">
-																				<a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-																					return false;">
-																					<img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
+																				<a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
+																					<img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
 																				</a>
 																				<c:if test="${not empty sessionScope.pdxEditor}">
 																					<a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton">
@@ -1356,8 +1352,8 @@
 																				</c:when>
 																			</c:choose>
 																			<td style=" padding:5px;  border:none; vertical-align:top; width:250px">
-																				<a href="nojavascript.jsp" onClick="popSizedPathWin('pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}', '', 1200, 1200);
-																					return false;"><img  height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}"></a>
+																				<a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
+																					<img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}"></a>
 																					<c:if test="${not empty sessionScope.pdxEditor}">
 																					<a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton">  <input type="button" value="Edit"/></a>
 																					</c:if>

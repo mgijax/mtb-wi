@@ -179,7 +179,8 @@
 
 
 <!-- method="GET" -->
-<jax:searchform action="pdxSearchResults">
+<!-- jax:searchform action="pdxSearchResults" -->
+<html:form action="pdxSearchResults" method="GET" styleClass="search-form">
 
 <fieldset>
 	<legend data-tip="Enter a Model ID (eg TM:00001) as search criteria.">Search by PDX model identifier</legend>
@@ -325,10 +326,14 @@
 	</fieldset>
 </fieldset>
 
-<!-- <input type="submit" VALUE="Search">
-<input type="button" VALUE="Reset" onclick="resetForm()"> -->
+<input type="submit" VALUE="Search">
+<input type="button" VALUE="Reset" onclick="resetForm()">
 
-</jax:searchform>
+<!-- /jax:searchform -->
+
+
+					
+</html:form>
 	</div>
 </section>
 
