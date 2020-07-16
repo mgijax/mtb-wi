@@ -99,7 +99,8 @@
 				{name: 'gene'},
 				{name: 'variant'},
 				{name: 'consequence'},
-				{name: 'fusionGenes'}
+				{name: 'fusionGenes'},
+                                {name: 'tmb'}
 				],
 				data: ${mice},
 				sortInfo: {
@@ -163,6 +164,14 @@
 					sortable : true, 
 					dataIndex: 'tumorType'
 				},
+                                {
+                                        header   : 'TMB',  
+                                        width    : 120, 
+                                        sortable : true, 
+                                        dataIndex: 'tmb',
+                                        hidden   : ${hideTMB}
+
+                                },
 				{
 					header	 : 'Fusion genes',
 					width		: 330,
@@ -251,7 +260,7 @@
 					<jax:dl dt="Primary Site" dts="Primary Sites" dds="${primarySites}" dd="Any"/>
 					<jax:dl dt="Diagnosis" dts="Diagnoses" dds="${diagnoses}" dd="Any"/>
 					<jax:dl dt="Tag" dts="Tags" dds="${tags}" dd="Any"/>
-					<jax:dl dt="Gene" dts="Genes" dds="${genes}" dd="Any"/>
+					<jax:dl dt="Gene" dd="${gene}"/>
 					<jax:dl dt="Variant" dts="Variants" dds="${variants}" dd="Any"/>
 					<jax:dl dt="Fusion Gene" dts="Fusion Genes" dd="${fusionGenes}"/>
 					<jax:dl dt="Tumor Growth Data" test="${not empty tumorGrowth}" dd="Required"/>
@@ -327,4 +336,3 @@
 		</table>
 	</jsp:body>
 </jax:mmhcpage>
-
