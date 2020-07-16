@@ -365,7 +365,7 @@
 				<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='-' ' height='100%'>"/>
 				</c:otherwise>
 				</c:choose>
-				<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+				<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip" id="tip-${familyGrid.strainFamilyKey}-${organ.organKey}"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -394,7 +394,7 @@
 <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='-' height='100%'> "/>
 </c:otherwise>
 </c:choose>
-<td><a href="tumorSearchResults.do?grid=1&strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+<td><a href="tumorSearchResults.do?grid=1&strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -423,7 +423,7 @@
 <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='-' height='100%'>" />
 </c:otherwise>
 </c:choose>
-<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -486,7 +486,7 @@
 	<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
 	</c:otherwise>
 	</c:choose>
-	<td><a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain:</td><td class="gridDetails">${theStrain.strainName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+	<td><a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain:</td><td class="gridDetails">${theStrain.strainName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -516,7 +516,7 @@
 <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
 </c:otherwise>
 </c:choose>
-<td><a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organParentKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain:</td><td class="gridDetails">${theStrain.strainName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+<td><a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organParentKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain:</td><td class="gridDetails">${theStrain.strainName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -545,7 +545,7 @@
 <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
 </c:otherwise>
 </c:choose>
-<td><a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organParentKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain:</td><td class="gridDetails">${theStrain.strainName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+<td><a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organParentKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain:</td><td class="gridDetails">${theStrain.strainName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -614,7 +614,7 @@
 <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
 </c:otherwise>
 </c:choose>
-<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -643,7 +643,7 @@
 <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
 </c:otherwise>
 </c:choose>
-<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -671,7 +671,7 @@
 <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
 </c:otherwise>
 </c:choose>
-<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -730,7 +730,7 @@
 <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
 </c:otherwise>
 </c:choose>
-<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -759,7 +759,7 @@
 <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
 </c:otherwise>
 </c:choose>
-<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -788,7 +788,7 @@
 <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
 </c:otherwise>
 </c:choose>
-<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organParentKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -865,12 +865,15 @@
 	</tr>
 </table>
 </html:form>
+
+
 </c:when>
 <c:otherwise>
 <h2> <strong>${message}</strong> </h2>
 </c:otherwise>
 </c:choose>
 </c:catch>
+
 <c:if test="${not empty exception}">
 </tr>
 </table>
@@ -881,6 +884,8 @@
 
 </pre>
 </c:if>
+
+<div class="container">
 <hr><a NAME="legend"></a><strong>Legend</strong>
 <ul>
 	<li>
@@ -924,7 +929,7 @@
 	NZO, and RIII.</li>
 </ul>
 <!-- ////  End Detail Section  //// -->
-
+</div>
 </section>
 	</jsp:body>
 </jax:mmhcpage>

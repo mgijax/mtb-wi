@@ -254,7 +254,7 @@
 			<table>
 				<tbody>		
 					<tr>
-						<td><h4>Details</h4></td>
+						<td><h4>You searched for&hellip;</h4></td>
 						<td>	
 					<jax:dl dt="Model ID" dd="${modelID}"/>
 					<jax:dl dt="Primary Site" dts="Primary Sites" dds="${primarySites}" dd="Any"/>
@@ -281,7 +281,7 @@
 	<section id="detail">
 		
 
-		<table class="detail-table">
+		<table class="detail-table" id="pdx-results">
 			
 			<tr class="buttons">
 				<td>

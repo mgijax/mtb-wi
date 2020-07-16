@@ -954,7 +954,7 @@ table.grid th {
     background-color: #FFFFFF;
     font-size:9px;
     vertical-align:bottom;
-	padding:0;
+	padding:0 0 4px;
 }
 
 table.grid td
@@ -978,15 +978,48 @@ table.grid td > a {
 	vertical-align:middle;
 }
 
+table.grid td > a {
+	padding-right:0 !important;
+	line-height:22px;
+}
+
 table.grid td > span {
-	display:none;
+	/* display:none; */
+	display:block;
+	text-align:right;	
+	padding-right:4px;
+}
+
+table.grid td > span > a {
+
+	text-align:right;
+}
+
+tr.grid > th {
+	text-align:center;
+}
+
+tr.grid > th > a,
+tr.grid > th > img {
+	display:block;
+	margin:0 auto;
+	text-align:center;
+}
+
+tr.grid > th > input {
+	margin:0;
+}
+
+table.grid td > span > input[type="checkbox"] {
+	margin-left:4px;
 }
 
 table.grid img {
 	display:inline;
 }
 
-table.grid td img[alt="H"] {
+table.grid td img[alt="H"],
+table.grid td img[alt="-"] {
 	display:block;
 	width:100%;
 	height:23px;
@@ -1007,11 +1040,33 @@ a.grid:hover {
 a.grid:active {
     color: #2222FF;
 }
-table.gridDetails {
-    font-size:9px;
+
+table.grid td > a table.gridDetails {
+    font-size:10px;
+	font-weight:400;
+	text-align:left;
+	color:#222;
+	margin:4px 0;
 }
-td.gridDetails {
-    font-size:9px;
+
+table.grid td > a td.gridDetails {
+	font-size:10px;
+	font-weight:400;
+	padding:2px 4px;
+	border:1px solid gray;
+}
+
+#detail > form[name="DynamicGridForm"] {
+	padding:0 30px;
+}
+
+#detail > form[name="DynamicGridForm"] + .container {
+	padding-top:30px;
+	padding-bottom:50px;
+}
+
+#detail .container {
+	clear:both;
 }
 
 

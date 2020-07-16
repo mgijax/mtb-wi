@@ -10,10 +10,14 @@
 		<script type="text/javascript" src="./live/www/js/results.js"></script>
 	</jsp:attribute>
 	<jsp:body>
+	<section id="summary">
+		<div class="container">
 	<table>
-		<caption>
-			<div class="result-summary">
-				<h4>Search Summary</h4>
+		<tbody>
+			
+			<tr>
+				<td><h4>You searched for&hellip;</h4></td>
+				<td>
 				<jax:dl dt="Anatomical System of Origin" dd="${anatomicalSystemOriginName}"/>
 				<jax:dl dt="Organ/Tissue of Origin" dts="Organs/Tissues of Origin" dds="${organTissueOrigins}" dd="${organOriginName}" />
 				<jax:dl dt="Organ/Tissue of Origin" dd="Contains '${organOfOriginName}'"/>
@@ -34,62 +38,69 @@
 				<jax:dl dt="Accession Id" dd="${accId}"/>
 				<jax:dl dt="Sort By" dd="${sortBy}"/>
 				<jax:dl dt="Display Limit" dd="${maxItems}"/>
-			</div>			
-			<div class="result-count">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+		</div>
+	</section>
+	<section id="detail">
+		<table class="detail-table">
+			<caption>
 				<c:choose>
-				<c:when test="${numberOfResults != totalResults}">
-				<c:choose>
-				<c:when test="${numberOfResults==1}">
-				<c:choose>
-				<c:when test="${tumorFrequencyRecords==1}">
-				${numberOfResults} unique tumor instance representing ${tumorFrequencyRecords} tumor frequency record returned.
-				</c:when>
-				<c:otherwise>
-				${numberOfResults} unique tumor instances (of ${totalResults} total) representing ${tumorFrequencyRecords} tumor frequency records returned.
-				</c:otherwise>
+					<c:when test="${numberOfResults != totalResults}">
+						<c:choose>
+							<c:when test="${numberOfResults==1}">
+								<c:choose>
+									<c:when test="${tumorFrequencyRecords==1}">
+										${numberOfResults} unique tumor instance representing ${tumorFrequencyRecords} tumor frequency record returned.
+									</c:when>
+									<c:otherwise>
+										${numberOfResults} unique tumor instances (of ${totalResults} total) representing ${tumorFrequencyRecords} tumor frequency records returned.
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+						
+									<c:when test="${tumorFrequencyRecords==1}">
+										${numberOfResults} unique tumor instances (of ${totalResults} total) representing ${tumorFrequencyRecords} tumor frequency record returned.
+									</c:when>
+									<c:otherwise>
+										${numberOfResults} unique tumor instances (of ${totalResults} total) representing ${tumorFrequencyRecords} tumor frequency records returned.
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${numberOfResults==1}">
+								<c:choose>
+									<c:when test="${tumorFrequencyRecords==1}">
+										${numberOfResults} unique tumor instance representing ${tumorFrequencyRecords} tumor frequency record returned.
+									</c:when>
+									<c:otherwise>
+										${numberOfResults} unique tumor instances representing ${tumorFrequencyRecords} tumor frequency records returned.
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${tumorFrequencyRecords==1}">
+										${numberOfResults} unique tumor instances representing ${tumorFrequencyRecords} tumor frequency record returned.
+									</c:when>
+									<c:otherwise>
+										${numberOfResults} unique tumor instances representing ${tumorFrequencyRecords} tumor frequency records returned.
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
 				</c:choose>
-				</c:when>
-				<c:otherwise>
-				<c:choose>
-				<c:when test="${tumorFrequencyRecords==1}">
-				${numberOfResults} unique tumor instances (of ${totalResults} total) representing ${tumorFrequencyRecords} tumor frequency record returned.
-				</c:when>
-				<c:otherwise>
-				${numberOfResults} unique tumor instances (of ${totalResults} total) representing ${tumorFrequencyRecords} tumor frequency records returned.
-				</c:otherwise>
-				</c:choose>
-				</c:otherwise>
-				</c:choose>
-				</c:when>
-				<c:otherwise>
-				<c:choose>
-				<c:when test="${numberOfResults==1}">
-				<c:choose>
-				<c:when test="${tumorFrequencyRecords==1}">
-				${numberOfResults} unique tumor instance representing ${tumorFrequencyRecords} tumor frequency record returned.
-				</c:when>
-				<c:otherwise>
-				${numberOfResults} unique tumor instances representing ${tumorFrequencyRecords} tumor frequency records returned.
-				</c:otherwise>
-				</c:choose>
-				</c:when>
-				<c:otherwise>
-				<c:choose>
-				<c:when test="${tumorFrequencyRecords==1}">
-				${numberOfResults} unique tumor instances representing ${tumorFrequencyRecords} tumor frequency record returned.
-				</c:when>
-				<c:otherwise>
-				${numberOfResults} unique tumor instances representing ${tumorFrequencyRecords} tumor frequency records returned.
-				</c:otherwise>
-				</c:choose>
-				</c:otherwise>
-				</c:choose>
-				</c:otherwise>
-				</c:choose>
-			</div>
-		</caption>		
-		<c:choose>
-		<c:when test="${not empty tumors}">
+			</caption>		
+
+			<c:if test="${not empty tumors}">
 		<thead>
 			<tr>
 				<th rowspan="2">Tumor Name</th>
@@ -177,11 +188,8 @@
 			</tr>
 			</c:forEach>
 		</tbody>
-		</c:when>
-		<c:otherwise>
-		<!-- No results found. //-->
-		</c:otherwise>
-		</c:choose>
+		</c:if>
+
 		<!-- ////  End Results  //// -->
 	</table>
 	</jsp:body>

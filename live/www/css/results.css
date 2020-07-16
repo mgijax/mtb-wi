@@ -672,5 +672,14 @@ p.fr {
 	margin:0;
 }
 
+#pdx-results .buttons > td  {
+	background-color:transparent;
+	border-bottom:0;
+}
+
+#pdx-results .buttons > td > table {
+	margin-top:0;
+}
+
 
 

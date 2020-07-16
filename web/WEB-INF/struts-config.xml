@@ -24,7 +24,9 @@
    -->
     <form-beans>
         <form-bean name="DynamicGridForm"
-                  type="org.jax.mgi.mtb.wi.forms.DynamicGridForm"/>   
+                  type="org.jax.mgi.mtb.wi.forms.DynamicGridForm"/> 
+      <form-bean name="TumorSearchForm"
+                 type="org.jax.mgi.mtb.wi.forms.TumorSearchForm"/>
         <form-bean name="PDXForm"
                   type="org.jax.mgi.mtb.wi.forms.PDXForm"/>                 
         <form-bean name="PDXLoginForm"
@@ -192,7 +194,16 @@
         </action>
     
     
-        
+        <action path = "/tumorSearchResults"
+              type = "org.jax.mgi.mtb.wi.actions.TumorSearchResultsAction"
+              name = "TumorSearchForm"
+              validate = "true"
+              input = "/tumorSearch.do"
+              scope="request">
+            <forward name="success" path="/WEB-INF/jsp/tumor/tumorSearchResults.jsp"/>
+            <forward name="failure" path="/tumorSearch.do"/>
+            <forward name="error" path="appError.jsp"/>
+        </action>
        
        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
        <!-- The pdxSearch.do url is mapped to from jax.org/findpdx       -->

@@ -5,7 +5,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %> 
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Dynamic Tumor Frequency Grid 2">
+<jax:mmhcpage title="Tumor Frequency Grid" subtitle="Inbred Strain Family &times; Organ">
+<jsp:attribute name="head">
 	<script type="text/javascript">
 		function checkChecks(){
 			var checked = false;
@@ -139,23 +140,31 @@
 			}
 		}
 	</script>
-	<!-- ////  Start Detail Section  //// -->
-	<h3>Tumor Frequency Grid (Inbred Strain Family x Organ)</h3>
-	<!-- \n -->
-	<!-- \n -->
-	Clicking in a colored box will take you to a summary of the records for
-	spontaneous tumors of that organ or organ system observed in inbred mice
-	of the corresponding strain family and reported in the literature.	<strong>The data
-		represented in the grid is dynamically generated and reflects the most recent 
-	data available in the MTB system.</strong>
-	The records will be sorted based on the highest reported frequency. This
-	summary, in turn, is linked to more detailed information about each of
-	the reported tumors.
-	<p>Additional information associated with a colored cell will be displayed
-		in a popup window of your web browser when you hold your mouse over the
-		cell. <em>(Requires JavaScript support.)</em></p>
-	<!-- \n -->
-	<hr>
+	
+</jsp:attribute>
+<jsp:body>
+
+
+
+
+<section id="summary">
+	<div class="container">	
+		<p>Clicking in a colored box will take you to a summary of the records for
+		spontaneous tumors of that organ or organ system observed in inbred mice
+		of the corresponding strain family and reported in the literature.	<strong>The data
+			represented in the grid is dynamically generated and reflects the most recent 
+		data available in the MTB system.</strong>
+		The records will be sorted based on the highest reported frequency. This
+		summary, in turn, is linked to more detailed information about each of
+		the reported tumors.</p>
+		<p>Additional information associated with a colored cell will be displayed
+			in a popup window of your web browser when you hold your mouse over the
+			cell. <em>(Requires JavaScript support.)</em></p>
+	</div>
+</section>
+<section id="detail">
+
+
 	<html:form action="dynamicGrid" method="GET">
 	<c:set var="rowSpan" value="0"/>
 	<c:set var="totalColumns" value="2"/>
@@ -319,7 +328,7 @@
 				<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='-' ' height='100%'>" />
 				</c:otherwise>
 				</c:choose>
-				<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+				<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
 </c:when>
 <c:otherwise>
 <td></td>
@@ -458,7 +467,11 @@
 </c:otherwise>
 </c:choose>
 </html:form>
-<hr><a NAME="legend"></a><strong>Legend</strong>
+
+
+<div class="container">
+	
+<a NAME="legend"></a><strong>Legend</strong>	
 <ul>
 	<li>
 		"Very High" - includes frequencies reported in the literature as being between
@@ -500,6 +513,8 @@
 		K, Eppig JT. 2000. Mamm Genome 11(9):715-7</a>). The exceptions are DBA/1,
 	NZO, and RIII.</li>
 </ul>
-<!-- ////  End Detail Section  //// -->
+</div>
+</section>
+</jsp:body>
 </jax:mmhcpage>
 
