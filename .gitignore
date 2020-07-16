@@ -14,4 +14,4 @@
 /src/mtb-wi.iml
 /build.number
 build.xml
-
+/conf/build.local-Steve.properties
