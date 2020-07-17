@@ -20,9 +20,9 @@
 				<td>
 				<jax:dl dt="Anatomical System of Origin" dd="${anatomicalSystemOriginName}"/>
 				<jax:dl dt="Organ/Tissue of Origin" dts="Organs/Tissues of Origin" dds="${organTissueOrigins}" dd="${organOriginName}" />
-				<jax:dl dt="Organ/Tissue of Origin" dd="Contains '${organOfOriginName}'"/>
+				<jax:dl dt="Organ/Tissue of Origin" dd="Contains '${organOfOriginName}'" test="${not empty organOfOriginName}"/>
 				<jax:dl dt="Tumor Classification" dds="${tumorClassifications}"/>
-				<jax:dl dt="Tumor Name" dd="Contains '${tumorName}'"/>
+				<jax:dl dt="Tumor Name" dd="Contains '${tumorName}'" test="${not empty tumorName}"/>
 				<jax:dl dt="Treatment Type" dd="${agentType}"/>
 				<jax:dl dt="Treatment" dd="${agent}"/>
 				<jax:dl dt="Restrict search to metastatic tumors only" test="${not empty metastasisLimit}"/>
@@ -36,8 +36,8 @@
 				<jax:dl dt="Strain Family" dd="${strainFamilyName}"/>
 				<jax:dl dt="Strain Type" dds="${strainTypes}"/>
 				<jax:dl dt="Accession Id" dd="${accId}"/>
-				<jax:dl dt="Sort By" dd="${sortBy}"/>
-				<jax:dl dt="Display Limit" dd="${maxItems}"/>
+				<!-- <jax:dl dt="Sort By" dd="${sortBy}"/>
+				<jax:dl dt="Display Limit" dd="${maxItems}"/> -->
 				</td>
 			</tr>
 		</tbody>
