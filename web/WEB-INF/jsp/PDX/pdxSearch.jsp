@@ -180,7 +180,7 @@
 
 <!-- method="GET" -->
 <!-- jax:searchform action="pdxSearchResults" -->
-<html:form action="pdxSearchResults" method="GET" styleClass="search-form" id="pdx-form">
+<html:form action="pdxSearchResults" method="GET" styleClass="search-form" styleId="pdx-form">
 
 <fieldset class="form-buttons">
 	<input type="submit" VALUE="Search">
