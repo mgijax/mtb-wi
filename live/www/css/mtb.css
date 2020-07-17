@@ -447,7 +447,9 @@ main > header h1 {
 	margin-right:200px;
 }
 
-
+#mmhc-summary {
+	font-size:18px;
+}
 
 #subnav {
 	position:absolute;
