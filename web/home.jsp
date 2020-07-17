@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>Mouse Tumor Database Project</title>
+	<title>Mouse Models of Human Cancer</title>
 	<meta content="0; URL=${pageContext.request.contextPath}/index.do" http-equiv="refresh">
 </head>
 <body>

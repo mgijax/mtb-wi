@@ -89,9 +89,9 @@
 		
 				<div>				
 					<h6>Last Software Update</h6>
-					<p>2017-02-06 | version 3.0</p>
+					<p>2020-07-17 | version ${applicationScope.wiVersion}</p>
 					<h6>Last Data Update</h6>
-					<p>2017-02-06</p>
+					<p>${applicationScope.dbLastUpdateDate}</p>
 				</div>
 
 	</jsp:attribute>		
