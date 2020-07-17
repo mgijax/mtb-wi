@@ -56,7 +56,7 @@
 							<td><h4>Links</h4></td>
 							<td>
 								<c:forEach var="info" items="${reference.otherAccessionIds}" varStatus="status">
-                                	${info.data}&nbsp; <a target="_blank" href="${info.value}">${info.label}</a><br>
+                                	<a target="_blank" href="${info.value}">${info.data} &ndash; ${info.label}</a><br>
 								</c:forEach>
 							</td>
 

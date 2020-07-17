@@ -49,9 +49,9 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://tum
 			title: 'Tumor Frequency',
 			terms: [
 				{
-					label: 'Max = 0',
+					label: 'Max is 0',
 					queryKey: 'freqMax',
-					queryValue: '0'
+					queryValue: '[0 TO 0]'
 				},
 				{
 					label: 'Max &le;&nbsp;50%',
