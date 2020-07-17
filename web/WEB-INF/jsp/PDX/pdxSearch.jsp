@@ -6,7 +6,7 @@
 <jsp:attribute name="head">
 
 
-		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
+        <link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
 
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
@@ -246,18 +246,19 @@
 
 <fieldset>
 	<legend>Search by tumor mutation burden (TMB) score range</legend>
-
-	<div>    
-		<label>Minimum:${minTMB}</label>
-	    <html:text size="4" property="TMBGT"/>
-	</div>
-
-    <label data-tip="TMB is calculated for each sample associated with a PDX model.  Models will be returned if any of the samples meet the search criteria. Click for details on how TMB is cacluated.">TMB</label>
-
-	<div>    
-		<label>Maximum:${maxTMB} (TMB > 22  is considered high.)</label>
-	    <html:text size="4" property="TMBLT"/>
-	</div>
+         <table style="width:50%">
+             <tr><td align="center"><label for="TMBGT">Minimum:${minTMB}</label></td>
+                <td></td>
+                <td align="center"><label for="TMBLT">Maximum:${maxTMB}</lable></td>
+                <td>&nbsp;&nbsp; ( TMB > 22  is considered high.)</td>
+            </tr>
+            <tr><td align="center"><html:text size="4" property="TMBGT"/></td>
+                <td align="center"> <b>&lt;=</b>&nbsp;&nbsp;<b><a class="help" href="userHelp.jsp#pdxTMB" >TMB</a></b>&nbsp;&nbsp;<b>&lt;=</b></td>
+                <td align="center"> <html:text size="4" property="TMBLT"/></td>
+                <td></td>
+            </tr>
+        </table>
+	
 </fieldset>
 
 

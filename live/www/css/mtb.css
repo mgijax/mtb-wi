@@ -478,6 +478,10 @@ main > header a.help:after {
 	font-family: FontAwesome;
 }
 
+a.help:after {	
+	content: '\a0\f059';
+	font-family: FontAwesome;
+}
 
 
 
