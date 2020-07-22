@@ -106,13 +106,13 @@
 								<tr>
 									<td>
 								<html:form action="pdxDashboard" method="POST">
-									<input type="submit" name="statusReport" VALUE="PDX Status Report">
+                                                                    <input type="submit" name="statusReport" VALUE="PDX Status Report with Hostpital Data">
 								</html:form>
 									</td>
 									
 									<td>
 								<html:form action="pdxDashboard" method="POST">
-									<input type="submit" name="houseSpecial" VALUE="PDX House Special Report">
+									<input type="submit" name="activeModelSummary" VALUE="PDX Active Model Summary">
 								</html:form>
 									</td>	
 									

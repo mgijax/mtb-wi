@@ -13,9 +13,9 @@
 			<hr>
 			<p>If you need assistance searching the new version of MTB or coding URL links to 
 				specific data in the database please contact <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support</a>.</p>
-			<!--
+			
 			<jsp:useBean id="now" class="java.util.Date" />
-			<strong>Time</strong>: ${now}
+			<%--<strong>Time</strong>: ${now}
 			<pre>
 				Error Details
 				================================================================================
@@ -49,7 +49,7 @@
 				}
 				%>
 			</pre>
-			//-->
+			--%>
 		</section>
 	</jsp:body>
 	

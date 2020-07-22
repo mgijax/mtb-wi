@@ -768,6 +768,8 @@
 		</script>
 	</jsp:attribute>
 	<jsp:body>
+             <form name="AddPDXContentForm" method="GET" action="pdxAddContent.do">
+                 <input type="hidden" value="${modelID}" name="modelID"/>
 	<section id="summary">
 		<div class="container">
 			<c:if test="${empty unavailable}">
@@ -784,7 +786,8 @@
 				</c:if>					
 				<p>The use of this material by a company is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCICompany.pdf">notice</a>.</p>
 				<p>The use of this material by an academic institution is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCIAcademic.pdf">notice</a>.</p>
-			</c:if> 			
+			</c:if> 
+                       
 			<table>
 				<tbody>			
 					
@@ -805,13 +808,30 @@
 						</td>
 					</tr>
 					
-					<c:if test="${not empty sessionScope.pdxEditor}" > 
+					<c:if test="${not empty sessionScope.pdxEditor || not empty referenceLinks}" > 
 					<tr>
 						<td><h4>Publications citing this model</h4></td>
 						<td>
-							<form name="AddPDXContentForm" method="GET" action="pdxAddContent.do">
+                                                    <table>
+                                                    
+                                                     <c:forEach var="link" items="${referenceLinks}" varStatus="status">
+                                                         <tr>
+                                                                <td colspan=2 style=" padding:5px; border-top:none">
+                                                                        ${link.description}&nbsp;<a href="${link.url}">${link.linkText}</a>
+                                                                        <c:if test="${not empty sessionScope.pdxEditor}">
+                                                                                <a href="pdxEditContent.do?contentType=link&contentKey=${link.contentKey}&modelID=${modelID}" class="linkedButton">
+                                                                                        <input type="button" value="Edit"/>
+                                                                                </a>
+                                                                        </c:if>
+                                                                </td>
+                                                            </tr>
+                                                    </c:forEach> 
+                                                    </table>
+                                                <td>
+                                                    
+							<c:if test="${not empty sessionScope.pdxEditor}">
 								<input type="submit" name="reference" value="add">
-							</form>
+                                                </c:if>
 						</td>
 					</tr>
 					</c:if>
@@ -1405,5 +1425,6 @@
                                                         </tr>
         </table>
         </section>
+       </form>
 	</jsp:body>
 </jax:mmhcpage>

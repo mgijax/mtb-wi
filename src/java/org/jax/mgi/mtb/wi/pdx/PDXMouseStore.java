@@ -74,7 +74,7 @@ public class PDXMouseStore {
     private static String pdxPatientHistory = "The PDX Patient History report could not be loaded";
     private static String pdxPTClinical = "The PDX Patient Clinical report could not be loaded";
     private static String pdxStatusReport = "The PDX Status report could not be loaded";
-    private static String pdxHouseSpecialReport = "The PDX House Special report could not be loaded";
+    private static String pdxActiveModelSummary = "The PDX Active Model Summary could not be loaded";
     private static String pdxConsortiumReport = "The PDX Consortium report could not be loaded";
     private static Date reportFreshnessDate = null;
     private static String JSON_PDX_STATUS = "Unable to load data from eLIMS";
@@ -335,12 +335,12 @@ public class PDXMouseStore {
         }
         
         d = new Date();
-        log.info(d + " Loading House Special Report");
-        temp = eu.getPDXHouseSpecialReport();
+        log.info(d + " Loading Active Model Summary");
+        temp = eu.getPDXActiveModelSummary();
         if (temp.length() > 0) {
-            pdxHouseSpecialReport = temp;
+            pdxActiveModelSummary = temp;
         } else {
-            log.error("PDX House Special Report not loaded!");
+            log.error("PDX Active Model Summary not loaded!");
         }
 
         d = new Date();
@@ -727,8 +727,8 @@ public class PDXMouseStore {
         return pdxStatusReport;
     }
     
-    public String getPDXHouseSpecialReport(String delim) {
-        return pdxHouseSpecialReport;
+    public String getPDXActiveModelSummary(String delim) {
+        return pdxActiveModelSummary;
     }
 
     public String getPDXEngraftmentStatusSummary(String delimiter) {

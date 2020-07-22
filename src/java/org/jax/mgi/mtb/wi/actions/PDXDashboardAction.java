@@ -88,9 +88,9 @@ public class PDXDashboardAction extends Action {
             fileName = source + "PDXConsortiumReport";
         }
         
-        if (request.getParameter("houseSpecial") != null) {
-            report = store.getPDXHouseSpecialReport(delimiter);
-            fileName = source + "PDXHouseSpecialReport";
+        if (request.getParameter("activeModelSummary") != null) {
+            report = store.getPDXActiveModelSummary(delimiter);
+            fileName = source + "ActiveModelSummary";
         }
        
 

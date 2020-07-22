@@ -121,22 +121,22 @@
 				store: store,
 				columns: [
 				{
-					id			 :'modelID',
+					id	:'modelID',
 					header	 : 'Model ID', 
-					width		: 70, 
+					width		: 110, 
 					sortable : true, 
 					dataIndex: 'modelID',
 					renderer: idRenderer
 				},
-				//						 {
-					//								 header	 : 'Status', 
-					//								 width		: 110, 
-					//								 sortable : true, 
-					//								 dataIndex: 'status'
-					//						 },
+//						 {
+//								 header	 : 'Status', 
+//								 width		: 110, 
+//								 sortable : true, 
+//								 dataIndex: 'status'
+//						 },
 				{
 					header	 : 'Previous ID', 
-					width		: 75, 
+					width		: 110, 
 					sortable : true, 
 					dataIndex: 'previousID'
 				},
@@ -274,7 +274,7 @@
 				</tbody>
 			</table>
 
-			<!-- <p><a href="pdxRequest.do">Request more information on the JAX PDX program</a></p> -->
+			
 		</div>
     </section>
 	

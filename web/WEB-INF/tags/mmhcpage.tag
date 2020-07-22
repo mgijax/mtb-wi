@@ -57,8 +57,14 @@
 					<li><a href="${pageContext.request.contextPath}/pdxLikeMe.do">PDX Like Me</a></li>
 					<li><a class="link-external" href="http://www.pdxfinder.org" target="_new">PDX Finder</a></li>	
                                         
-                                         <c:if test="${applicationScope.publicDeployment == false}">
+                                         <c:if test="${applicationScope.publicDeployment == false &&  empty sessionScope.pdxUser }">
                                             <li><a href="${pageContext.request.contextPath}/pdxLogin.do">PDX Login</a>
+                                        </c:if>    
+                                                
+                                        <c:if test="${not empty sessionScope.pdxUser}"> 
+                                            <li><a href="pdxDashboard.do">PDX Dashboard</a></li>
+                                            <li><a href="pdxLogin.do?logout=true">PDX Logout</a></li>
+
                                         </c:if>    
                                         
                                         

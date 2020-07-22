@@ -3,9 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Edit PDX Content">
-	<jsp:attribute name="head">
-	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<html>
 	<style type="text/css">
 		.upload-icon {
 			background: url('${applicationScope.urlBase}/extjs/resources/images/image_add.png') no-repeat 0 0 !important;
@@ -368,7 +367,8 @@
 				id:'comment',
 				fieldLabel:'Comment',
 				name:'comment',
-				value:'${comment}'
+				value:'${comment}',
+                                height:300
 			}
 			],
 			buttons: [{
@@ -415,24 +415,18 @@
 		// end onReady
 	});
 </script>		
-</jsp:attribute>
-	<jsp:body>
+<body>
 	
 		<section id="pdx">
-			<div class="container">	
+			<div>	
 				<h2>Additional Content for ${modelID}</h2>
-				<h3></h3>
 				<div id="pi-form"></div>
-				<h3></h3>
 				<div id="link-form"></div>
-				<h3></h3>
 				<div id="document-form"></div>
-				<h3></h3>
 				<div id="graphic-form"></div>
-				<h3></h3>
 				<div id="comment-form"></div>
 			</div>
 		</section>
 	
-	</jsp:body>
-</jax:mmhcpage>
+</body>
+</html>

@@ -11,6 +11,13 @@
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 
+        <style>
+            .trigger {
+                display:initial;
+                max-width: none;
+                height:18px !important;
+            }
+        </style>
  
   
   
@@ -68,6 +75,7 @@
 				triggerAction: 'all',
 				selectOnFocus:true,
 				hideTrigger:false,
+                                triggerClass: "trigger",
 				hiddenName:'modelID',
 				width:360,
 				listEmptyText:'',
@@ -181,7 +189,10 @@
 <!-- method="GET" -->
 <!-- jax:searchform action="pdxSearchResults" -->
 <html:form action="pdxSearchResults" method="GET" styleClass="search-form">
-
+   
+        <input type="submit" VALUE="Search">
+        <input type="button" VALUE="Reset" onclick="resetForm()">
+        <br>
 <fieldset>
 	<legend data-tip="Enter a Model ID (eg TM:00001) as search criteria.">Search by PDX model identifier</legend>
 	<div id ="modelIDCombo"></div>&nbsp;eg. TM00001

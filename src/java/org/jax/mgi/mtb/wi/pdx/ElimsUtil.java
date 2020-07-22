@@ -358,13 +358,13 @@ public class ElimsUtil {
         return report.toString();
     }
     
-     private static final String STATUS_COLUMNS_HOUSE_SPECIAL_REPORT = "Model ID,Model AKA,Gender,Age,Race,Ethnicity,"
+     private static final String STATUS_COLUMNS_ACTIVE_MODEL_SUMMARY = "Model ID,Model AKA,Gender,Age,Race,Ethnicity,"
             + "Specimen Site,Primary Site,Clinical Diagnosis,"
             + "Tumor Type,Grades,Markers,Model Tags,Stages,M-Stage,N-Stage,T-Stage,Sample Type";
     
     
     
-    public String getPDXHouseSpecialReport() {
+    public String getPDXActiveModelSummary() {
         StringBuffer report = new StringBuffer();
         try {
 
@@ -380,7 +380,7 @@ public class ElimsUtil {
 
             if (result.length > 0) {
 
-                report.append(STATUS_COLUMNS_HOUSE_SPECIAL_REPORT).append("\n");
+                report.append(STATUS_COLUMNS_ACTIVE_MODEL_SUMMARY).append("\n");
                 for (int i = 0; i < result.length; i++) {
 
                     String id = result[i].getIdentifier();
@@ -429,7 +429,7 @@ public class ElimsUtil {
             }
 
         } catch (Exception e) {
-            log.error("Error gettting PDX House Special Report", e);
+            log.error("Error gettting PDX Active Model Summary", e);
         }
 
         return report.toString();
