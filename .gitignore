@@ -17,3 +17,4 @@ build.xml
 /conf/build.local-Steve.properties
 /conf/build.local.properties
 /conf/build.properties
+**/conf/
