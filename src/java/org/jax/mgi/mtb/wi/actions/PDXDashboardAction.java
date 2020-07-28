@@ -68,7 +68,7 @@ public class PDXDashboardAction extends Action {
         String fileName = "";
         if (request.getParameter("statusReport") != null) {
             report = store.getPDXStatusReport(delimiter);
-            fileName = source + "PDXStatusReport";
+            fileName = source + "PDXStatusReportWithHospitalData";
         }
         if (request.getParameter("engraftmentSummary") != null) {
             report = store.getPDXEngraftmentStatusSummary(delimiter);
