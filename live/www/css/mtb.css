@@ -447,7 +447,9 @@ main > header h1 {
 	margin-right:200px;
 }
 
-
+#mmhc-summary {
+	font-size:18px;
+}
 
 #subnav {
 	position:absolute;
@@ -814,9 +816,22 @@ textarea:focus {
 
 
 
-
-
 /* Search forms */
+
+@media (min-width:1200px) {
+	#pdx-form {	
+		columns:2;
+		column-gap:30px;
+	}
+	
+	#pdx-form > fieldset {
+		break-inside:avoid-column;
+	}
+	
+	#pdx-form > fieldset.form-buttons {
+		column-span:all;
+	}
+}
 
 
 .search-form {
