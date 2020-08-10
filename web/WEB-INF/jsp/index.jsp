@@ -29,7 +29,7 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th colspan="2"><a href="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2019/cancer-facts-and-figures-2019.pdf" target="_blank">American Cancer Society Facts &amp; Figures 2019</a></th>
+							<th colspan="2"><a href="${pdfLink}" target="_blank">American Cancer Society Facts &amp; Figures ${modelCountsYear}</a></th>
 							<th colspan="4">Mouse Models</th>
 						</tr>
 						<tr>

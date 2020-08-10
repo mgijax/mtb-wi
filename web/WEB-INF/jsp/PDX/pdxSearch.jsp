@@ -111,7 +111,7 @@
 				selectOnFocus:true,
 				hideTrigger:true,
 				hiddenName:'gene',
-				width:260,
+				width:160,
 				listEmptyText:'',
 				renderTo: 'geneSelectOMatic'
 		//		,pageSize:10
@@ -189,7 +189,9 @@
 <!-- method="GET" -->
 <!-- jax:searchform action="pdxSearchResults" -->
 <html:form action="pdxSearchResults" method="GET" styleClass="search-form" styleId="pdx-form">
-
+    
+    
+    
 <fieldset class="form-buttons">
 	<input type="submit" VALUE="Search">
 	<input type="button" VALUE="Reset" onclick="resetForm()">
@@ -210,21 +212,22 @@
     	</html:select>
     </fieldset>
 
-    <fieldset>
+    <fieldset style="max-width:50%;">
         <legend data-tip="Only return models with selected additional information.">Limit results to models</legend>	
     	<html:checkbox property="dosingStudy"/> with dosing study data<br>
     	<html:checkbox property="treatmentNaive"/><label data-tip="PDX models are considered treatment naive if the patient did not receive chemotherapy, immunotherapy, hormone therapy or radiation therapy for this primary cancer within 5 years prior to sample collection and/or within 1 year for a different cancer.">from treatment naive patients.</label>
     </fieldset>
 
+</fieldset>
+    
 	<c:if test="${not empty tagsValues}">    
-    <fieldset>
+    <fieldset >
         <legend data-tip="Only return models tagged as.">Limit results to models tagged as</legend>
-    	<html:select property="tags" size="4" multiple="true">
+    	<html:select property="tags" size="4" multiple="true" style="width:70%;">
     	<html:options collection="tagsValues" property="value" labelProperty="label"/>
     	</html:select>
     </fieldset>
 	</c:if>
-</fieldset>
 
 <fieldset>
 	<legend>Search by diagnosis</legend>
@@ -263,7 +266,7 @@
              <tr><td align="center"><label for="TMBGT">Minimum:${minTMB}</label></td>
                 <td></td>
                 <td align="center"><label for="TMBLT">Maximum:${maxTMB}</lable></td>
-                <td>&nbsp;&nbsp; ( TMB > 22  is considered high.)</td>
+                <td nowrap>&nbsp;&nbsp; ( TMB > 22  is considered high.)</td>
             </tr>
             <tr><td align="center"><html:text size="4" property="TMBGT"/></td>
                 <td align="center"> <b>&lt;=</b>&nbsp;&nbsp;<b><a class="help" href="userHelp.jsp#pdxTMB" >TMB</a></b>&nbsp;&nbsp;<b>&lt;=</b></td>
@@ -288,8 +291,9 @@
 </fieldset>
 
 
-<fieldset>
+<fieldset >
 	<legend>Search by gene variants (in engrafted tumors)</legend>
+        <fieldset style="display:inline-block;">
 	<fieldset>
 		<legend data-tip="Select one or more genes as search criteria">Gene</legend>
 		<div id="geneSelectOMatic"></div>
@@ -320,12 +324,13 @@
 		
 		</c:choose>
 	</fieldset>
+        </fieldset>
 </fieldset>   		
 
 
 
 <fieldset>
-	<legend>Display a chart of gene expression across PDX models for a gene</legend>
+	<legend>Display gene expression across PDX models for a gene</legend>
 	<fieldset>
 		<legend data-tip="Select a gene to view expression values">Gene</legend>	
 		<div id="geneSelectOMatic2"></div>

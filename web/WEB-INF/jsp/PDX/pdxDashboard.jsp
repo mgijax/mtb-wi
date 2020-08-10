@@ -94,55 +94,55 @@
 		</section>
 
 
-					<tr class="buttons">
-						<td colspan="2">
-							<table border=0 cellspacing=2 width="100%">
-								<tr>
-									<td align="center" colspan="7">
-										<b>Download PDX Reports</b>
-									</td>
-								</tr>
+    <tr class="buttons">
+            <td colspan="2">
+                    <table border=0 cellspacing=2 width="100%">
+                            <tr>
+                                    <td align="center" colspan="7">
+                                            <b>Download PDX Reports</b>
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <td>
+                            <html:form action="pdxDashboard" method="POST">
+                                <input type="submit" name="statusReport" VALUE="PDX Status Report with Hospital Data">
+                            </html:form>
+                                    </td>
 
-								<tr>
-									<td>
-								<html:form action="pdxDashboard" method="POST">
-                                                                    <input type="submit" name="statusReport" VALUE="PDX Status Report with Hospital Data">
-								</html:form>
-									</td>
-									
-									<td>
-								<html:form action="pdxDashboard" method="POST">
-									<input type="submit" name="activeModelSummary" VALUE="PDX Active Model Summary">
-								</html:form>
-									</td>	
-									
-									<td>
-								<html:form action="pdxDashboard" method="POST">
-									<input type="submit" name="engraftmentSummary" VALUE="PDX Engraftment Status Summary">
-								</html:form>
-									</td> 
-									<td>
-								<html:form action="pdxDashboard" method="POST">
-									<input type="submit" name="familyHistory" VALUE="PDX Patient History">
-								</html:form>
-									</td>
-									<td>
-									<html:form action="pdxDashboard" method="POST">
-										<input type="submit" name="patientClinical" VALUE="PDX Patient Clinical">
-									</html:form>
-									</td>
+                                    <td>
+                            <html:form action="pdxDashboard" method="POST">
+                                    <input type="submit" name="activeModelSummary" VALUE="PDX Active Model Summary">
+                            </html:form>
+                                    </td>	
 
-									<td>
-									<html:form action="pdxDashboard" method="POST">
-										<input type="submit" name="consortium" VALUE="PDX Consortium Report"> 
-									</html:form>
-									</td>
-			
- 			<td>
-			
- 				<a class="none" href="http://bhmtbdb01.jax.org/usrlocalmgi/mtb/live/www/pdx/treatment_response_summary.xlsx"><input type="button"  VALUE="Drug Response Summary"></a>
-			
-			</td>
+                                    <td>
+                            <html:form action="pdxDashboard" method="POST">
+                                    <input type="submit" name="engraftmentSummary" VALUE="PDX Engraftment Status Summary">
+                            </html:form>
+                                    </td> 
+                                    <td>
+                            <html:form action="pdxDashboard" method="POST">
+                                    <input type="submit" name="familyHistory" VALUE="PDX Patient History">
+                            </html:form>
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <td>
+                            <html:form action="pdxDashboard" method="POST">
+                                    <input type="submit" name="patientClinical" VALUE="PDX Patient Clinical">
+                            </html:form>
+                                    </td>
+                                    <td>
+                            <html:form action="pdxDashboard" method="POST">
+                                    <input type="submit" name="consortium" VALUE="PDX Consortium Report"> 
+                            </html:form>
+                            </td>
+                            <td>
+                            <html:form action="pdxDashboard" method="POST">
+                                <input type="submit"  VALUE="Drug Response Summary" onclick="window.open('http://bhmtbdb01.jax.org/usrlocalmgi/mtb/live/www/pdx/treatment_response_summary.xlsx');">
+                            </html:form>
+
+                            </td>
 			</tr>
 			<tr>
 				<td colspan="6">

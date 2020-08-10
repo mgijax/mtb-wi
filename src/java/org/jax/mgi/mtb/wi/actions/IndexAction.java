@@ -100,7 +100,7 @@ public class IndexAction extends Action {
             request.setAttribute("dataYear", dataYear);
             request.setAttribute("modelCountsObject",mc.getDataObject());
             request.setAttribute("modelCountsYear", mc.YEAR);
-            request.setAttribute("pdxLink", mc.PDF_LINK);
+            request.setAttribute("pdfLink", mc.PDF_LINK);
 
         }
 
