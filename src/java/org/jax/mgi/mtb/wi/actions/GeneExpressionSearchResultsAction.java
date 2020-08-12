@@ -49,8 +49,7 @@ public class GeneExpressionSearchResultsAction extends Action{
       GeneExpressionForm geForm = (GeneExpressionForm) form;
       
       List<String> organs = WIUtils.arrayToCleanKeyList(geForm.getOrgan());
-      List<String> platforms = WIUtils.arrayToCleanList(geForm.getPlatform());
-     
+    
       
       List<String> tumorClassifications = WIUtils.arrayToCleanKeyList(geForm.getTumorClassification());
       
@@ -81,13 +80,9 @@ public class GeneExpressionSearchResultsAction extends Action{
      
       MTBSeriesSampleUtilDAO ssuDAO = MTBSeriesSampleUtilDAO.getInstance();
       
-      ArrayList<LabelValueBean<String,String>> realPlatforms = ssuDAO.getPlatforms();
+   
       ArrayList<String> cleanPlatforms = new ArrayList<String>();
-      for(LabelValueBean<String,String> lvb : realPlatforms){
-          if(platforms.contains(lvb.getLabel())){
-              cleanPlatforms.add(lvb.getLabel());
-          }
-      } 
+   
        
       
       ArrayList<MTBSeriesSampleSearchDTO> results = ssuDAO.searchSeries(tumorClassifications, organs ,cleanPlatforms,strainName,strainLikeClause,tfKey, seriesId);

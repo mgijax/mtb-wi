@@ -35,6 +35,11 @@
                   type="org.jax.mgi.mtb.wi.forms.PDXDashboardForm"/>                  
         <form-bean name="AddPDXContentForm"
                   type="org.jax.mgi.mtb.wi.forms.PDXAddContentForm"/>
+        
+         <form-bean name="GeneExpressionForm"
+                  type="org.jax.mgi.mtb.wi.forms.GeneExpressionForm"/>
+      
+        
     </form-beans>
 
 
@@ -365,6 +370,16 @@
             scope="request">
             <forward name="success" path="/WEB-INF/jsp/solr/markerGrid.jsp"/>
         </action>
+        
+         <action path="/geneExpressionSearchResults"
+            type="org.jax.mgi.mtb.wi.actions.GeneExpressionSearchResultsAction"
+            name="GeneExpressionForm"
+            scope="request">
+            <forward name="success" path="/WEB-INF/jsp/expression/geneExpressionSearchResults.jsp"/>  
+             <forward name="subtable" path="/WEB-INF/jsp/expression/geneExpressionSearchResultsSubtable.jsp"/>      
+            <forward name="failure" path="appError.jsp"/>
+        </action>
+       
     
     </action-mappings>
     <message-resources parameter="org.jax.mgi.mtb.wi.ApplicationResources"/>

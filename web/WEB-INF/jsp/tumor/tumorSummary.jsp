@@ -258,8 +258,6 @@
 	
 						<c:if test="${rec.numSamples > 0}">
 							<li data-detail="subtable" data-expression="true" class="is-collapsible"><h5>Gene Expression Data</h5></li>
-                                                        <li><a href="geneExpressionSearchResults.do?tfKey=${rec.tumorFrequencyKey}">Expression Data</a></li>
-                                                       
 						</c:if>
 	
 						</ul>

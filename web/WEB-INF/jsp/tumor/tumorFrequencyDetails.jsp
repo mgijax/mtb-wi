@@ -217,9 +217,10 @@
 		<td><c:out value="${genetics.chromosome}" escapeXml="false"/></td>
 		<td><c:out value="${genetics.alleleType}" escapeXml="false"/></td>
 		<td>
-			<c:forEach var="row" items="${genetics.genotypes}" varStatus="status">
+		<%--	<c:forEach var="row" items="${genetics.genotypes}" varStatus="status">
 				${row.allele1Symbol} / ${row.allele2Symbol}
 			</c:forEach>
+                 --%>
 		</td>
 	</tr>
 	</c:forEach>

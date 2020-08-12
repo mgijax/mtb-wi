@@ -739,13 +739,11 @@ info = function(r) {
 		h += '<p>' + r.cytoCount + ' Cytogenetic Image' + (r.cytoCount == 1 ? '' : 's') + '</p>';		
 	}
 	
-/*
+
 	if (r.geneExpression) {
-		h += '<p><a href="' + baseUrl +
-			'/geneExpressionSearchResults.do?tfKeys=' + fk +'" target="_blank">' +
-			'Gene Expression Data</a></p>';
+		h += '<p>Gene Expression Data</p>';
 	}
-*/
+
 
 	return h;	
 };

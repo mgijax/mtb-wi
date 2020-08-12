@@ -120,7 +120,7 @@
 				<td><c:out value="${sample.title}" escapeXml="false"/></td>
 				<td><c:out value="${sample.summary}" escapeXml="false"/></td>
 				<td><c:out value="${sample.platform}" escapeXml="false"/></td>
-				<td><a href="summaryByExample.do?tumorFrequencyKeys=${sample.dataBean['tfKey']}"><c:out value="${sample.dataBean['tfDetail']}" escapeXml="false"/></a></td>
+				<td><a href="tumorSummary.do?tumorFrequencyKeys=${sample.dataBean['tfKey']}"><c:out value="${sample.dataBean['tfDetail']}" escapeXml="false"/></a></td>
 			</tr>
 			</c:forEach> <!-- sample -->
 			</c:forEach> <!-- series -->
