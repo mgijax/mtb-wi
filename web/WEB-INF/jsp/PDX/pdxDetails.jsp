@@ -768,7 +768,7 @@
 		</script>
 	</jsp:attribute>
 	<jsp:body>
-             <form name="AddPDXContentForm" method="GET" action="pdxAddContent.do">
+             <form name="AddPDXContentForm" style="font-size:1em;" method="GET" action="pdxAddContent.do">
                  <input type="hidden" value="${modelID}" name="modelID"/>
 	<section id="summary">
 		<div class="container">
@@ -794,8 +794,7 @@
 					<tr>
 						<td><h4>Model Details</h4></td>
 						<td>
-							<jax:dl dt="Model ID (Previous ID)" dd="${mouse.modelID}"/>
-							<jax:dl dt="Previous ID" dd="${mouse.previousID}"/>
+							<jax:dl dt="Model ID (Previous ID)" dd="${mouse.modelID} (${mouse.previousID})"/>
 							<jax:dl dt="Model Status" dd="${mouse.modelStatus}" test="${applicationScope.publicDeployment == false}" />
 							<jax:dl dt="Primary Site" dd="${mouse.primarySite}" />
 							<jax:dl dt="Tumor Site" dd="${mouse.tissue}" />
