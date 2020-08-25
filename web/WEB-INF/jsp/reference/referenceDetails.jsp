@@ -95,7 +95,7 @@
 					<tbody>
 						<c:forEach var="tumor" items="${reference.tumors}" varStatus="status">
 						<tr>
-							<td><c:out value="${tumor.strainName}" escapeXml="false"/></td>
+                                                    <td><a href="strainDetails.do?key=${tumor.strainKey}"><c:out value="${tumor.strainName}" escapeXml="false"/></a></td>
 							<td><c:out value="${tumor.tumorName}" escapeXml="false"/></td>
 							<td>
 								<c:if test="${fn:length(tumor.agents) > 0}">

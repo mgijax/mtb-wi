@@ -189,6 +189,7 @@ public class PDXEditContentAction extends DispatchAction {
             link.setLinkText(request.getParameter("linkText"));
             link.setDescription(request.getParameter("linkDescription"));
             link.setUrl(request.getParameter("linkURL"));
+            link.setPubMedID(request.getParameter("pubMedID"));
             link.setUser(user);
             store.updateLink(link);
 
@@ -201,6 +202,7 @@ public class PDXEditContentAction extends DispatchAction {
         request.setAttribute("linkDescription", link.getDescription());
         request.setAttribute("linkText", link.getLinkText());
         request.setAttribute("linkURL", link.getUrl());
+        request.setAttribute("linkPubMedID", link.getPubMedID());
 
         request.setAttribute("contentKey", contentKey);
         request.setAttribute("modelID", modelID);

@@ -127,7 +127,7 @@
 			title: 'Edit Link',
 			autoHeight: true,
 			bodyStyle: 'padding: 10px 10px 0 10px;',
-			labelWidth: 70,
+			labelWidth: 90,
 			fileCount:1,
 			defaults: {
 				anchor: '95%',
@@ -151,7 +151,12 @@
 				fieldLabel:'Link Text',
 				name:'linkText',
 				value:'${linkText}'
-			}],
+			},{ xtype:'textfield',
+                                id:'pubMedID',
+                                fieldLabel:'PubMed ID (if available)',
+                                name:'pubMedID',
+                                value:'${linkPubMedID}'
+                        }],
 			buttons: [{
 				text: 'Edit',
 				handler: function(){

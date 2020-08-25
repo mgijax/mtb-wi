@@ -129,7 +129,7 @@
 				title: 'Add Link',
 				autoHeight: true,
 				bodyStyle: 'padding: 10px 10px 0 10px;',
-				labelWidth: 70,
+				labelWidth: 90,
 				fileCount:1,
 				defaults: {
 					anchor: '95%',
@@ -150,6 +150,11 @@
 					id:'linkText',
 					fieldLabel:'Link Text',
 					name:'linkText'
+				}
+                                ,{ xtype:'textfield',
+					id:'pubMedID',
+					fieldLabel:'PubMed ID (if available)',
+					name:'pubMedID'
 				}],
 				buttons: [{
 					text: 'Add Link',

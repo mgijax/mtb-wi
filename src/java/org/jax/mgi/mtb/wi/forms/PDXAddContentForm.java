@@ -31,6 +31,7 @@ public class PDXAddContentForm  extends ActionForm {
     private String linkDescription;
    private String linkURL;
    private String linkText;
+   private String pubMedID;
    
    // for documents
    private String documentDescription;
@@ -305,6 +306,20 @@ public class PDXAddContentForm  extends ActionForm {
      */
     public void setGraphicSort(double graphicSort) {
         this.graphicSort = graphicSort;
+    }
+
+    /**
+     * @return the pubMedID
+     */
+    public String getPubMedID() {
+        return pubMedID;
+    }
+
+    /**
+     * @param pubMedID the pubMedID to set
+     */
+    public void setPubMedID(String pubMedID) {
+        this.pubMedID = pubMedID;
     }
 
   

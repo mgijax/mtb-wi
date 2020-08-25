@@ -817,7 +817,7 @@
                                                      <c:forEach var="link" items="${referenceLinks}" varStatus="status">
                                                          <tr>
                                                                 <td colspan=2 style=" padding:5px; border-top:none">
-                                                                        ${link.description}&nbsp;<a href="${link.url}">${link.linkText}</a>
+                                                                        ${link.description}&nbsp;<a href="${link.url}" target="_blank">${link.linkText}</a>
                                                                         <c:if test="${not empty sessionScope.pdxEditor}">
                                                                                 <a href="pdxEditContent.do?contentType=link&contentKey=${link.contentKey}&modelID=${modelID}" class="linkedButton">
                                                                                         <input type="button" value="Edit"/>

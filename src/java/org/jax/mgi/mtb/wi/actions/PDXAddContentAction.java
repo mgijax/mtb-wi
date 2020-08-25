@@ -220,6 +220,7 @@ public class PDXAddContentAction extends Action {
       link.setDescription(contentForm.getLinkDescription());
       link.setLinkText(contentForm.getLinkText());
       link.setUrl(contentForm.getLinkURL());
+      link.setPubMedID(contentForm.getPubMedID());
       link.setModelID(contentForm.getModelID());
       link.setCharacterization(contentForm.getCharacterizationKey());
       link.setUser(userName);
