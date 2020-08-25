@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
+    <style>
+        li{
+            margin-bottom: 5px;
+        }
+    </style>
 <body>
-<h3>Last Updated: July 2017</h3>
-<h1>Measuring treatment response in Patient Derived Xenograft (PDX) models at The 
+<h3>Last Updated: August 2020</h3>
+<h1>Patient Derived Xenograft (PDX) protocols at The 
 Jackson Laboratory </h1>
 
-<h2>Experimental Design Frequently Asked Questions (FAQ) </h2>
+<h2>Frequently Asked Questions (FAQ) </h2>
 
 <ul>
+    <li>
+        <a href="#generation">How are PDX models generated at The Jackson Laboratory?</a>
+    </li>
+    <li>
+        <a href="#qcprocedures">What Quality Control procedures are in place?</a>
+    </li>
 <li> 
     <a href="#cohorts">How are cohorts of tumor bearing mice established for dosing studies?</a>
 </li>
@@ -23,7 +34,61 @@ Jackson Laboratory </h1>
 <li>
     <a href="#graphics">How are the results of dosing studies represented graphically?</a>
 </li>
+<li>
+    <a href="#software">Can I get the software for generating the dosing study graphics displayed on the MMHCdb web site?</a>
+</li>
+<li>    
+    <a href="#access">How do I access data and information about models in the JAX PDX Resource?</a>
+</li>
+
 </ul>
+
+<a name="generation"></a>
+<h2>How are PDX models generated at The Jackson Laboratory (JAX)? </h2>
+<ul>
+    <li>
+        The JAX PDX Resource employs <a href="https://www.jax.org/strain/005557">NOD.Cg-Prkdc<sup>scid</sup> Il2rg<sup>tm1Wjl</sup>/SzJ</a>
+        mice (aka, NSG mice) as the host strain for xenografts. NSG mice lack mature T and B cells, do not have functional natural killer (NK) cells,
+        and are deficient in cytokine signaling. Consequently, the NSG mouse is a robust host for engraftment of human cells and tissues.
+    </li>
+    <li>
+        We do not implant tumors from patients that are known to be HIV, HCV or HBV positive. 
+        The only human pathogen that is tested for is the rodent borne Lymphocytic choriomeningitis virus (LCMV).
+        We follow BSL-2 procedures in the handling of untested human tissue. 
+        The model development process is shown in <b>Figure 1</b>. 
+        Patient tumor cells are implanted with a trocar subcutaneously in the right flank of up to five, 6-8 week old female NSG mice. 
+        An exception to the use of female NSG mice is made for engraftment of prostate tumor tissue. 
+        Engrafted mice are held in quarantine until the LCMV test results are confirmed negative, at which time mice are moved into the PDX Resource vivarium. 
+        If sufficient patient tumor is available, we assess tumor cell content and concordance with histological diagnosis provided by the donating center.
+    </li>
+    <li>
+        Implantations at each passage are considered successful if the tumor grows to 1000 mm<sup>3</sup> within five months. 
+        When a graft establishes, we expect 1-3 P0 tumors and all P1 and P2 tumors reach the target volume within that time frame. 
+        All P0 and P1 are cryopreserved in 10% DMSO to allow for future development as needed. 
+        The tertiary passage (P2) is banked to serve as the working stock for future expansion.  
+        A portion of each tumor is sent for identity testing (via short tandem repeat, STR) and histology. 
+    </li>
+    <li>
+        Detail methods regarding the characterization of the genomes of engrafted tumors can be found in <a href="https://pubmed.ncbi.nlm.nih.gov/31262303/">Woo et al., 2019. </a>
+    </li>
+    <li>
+        <b>Figure 1</b>. Process for developing PDX models, including pathogen testing, genomic characterization and quality control (QC).
+        <br>
+        <img src="../img/PDXProcess.png" width="900" height="500"/>
+    </li>
+    
+</ul>
+<a name="qcprocedures"></a>
+<h2>What Quailty Control Procedures are in place?</h2>
+The PDX models in the JAX PDX Resource are subject to the following Quality Control (QC) validation steps:  
+<ol>
+<li>The histology of the engrafted tumor retains morphologic features of the primary patient tumor as determined by a Board Certified pathologist.</li>
+<li>Immunohistochemistry (IHC) for human Ki67 validates that the engrafted tumor cells are actively dividing and are of human origin.</li>
+<li>IHC for CD45 and cytokeratin (AE1/AE3) rules out a xenograft-associated lymphocytic tumor. </li>
+<li>Simple Tandem Repeat (STR) analysis validates provenance of engrafted tumor.</li>
+</ol>
+
+
 <a name="cohorts"></a> 
 <h2>How are cohorts of tumor bearing mice established for dosing studies? </h2>
 
@@ -31,7 +96,8 @@ Jackson Laboratory </h1>
     <li>
 For cohort expansion donor mice are created using viable, cryopreserved low-passage tumor fragments 
 (P2-P5 unless otherwise noted). With the exception of prostate tumors, all tumors are implanted in female 
-NSG<sup>TM</sup> mice. Mice are between 6-8 weeks of age at the time of implantation. Tumors are typically 
+<a href="https://www.jax.org/strain/005557">NSG<sup>TM</sup></a> mice. 
+Mice are between 6-8 weeks of age at the time of implantation. Tumors are typically 
 implanted subcutaneously into the right flank using a trocar. Breast cancer tumors are sometimes 
 implanted in the mouse mammary fat pad. Implantation site is subcutaneous unless otherwise noted. 
 </li>
@@ -46,21 +112,23 @@ volumes are established and dosing initiation begins on Day 0 or Day 1.
 </li>
 <li>
 Typical routes of drug administration are as follows: 
-<ul><li>
-Intravenous (IV) 
-</li>
-<li>
-Intraperitoneal (IP) 
-</li>
-<li>
-Oral gavage (PO) 
-</li>
-<li>
-Subcutaneous (SC) 
-</li>
+<ul>
+    <li>
+        Intravenous (IV) 
+    </li>
+    <li>
+        Intraperitoneal (IP) 
+    </li>
+    <li>
+        Oral gavage (PO) 
+    </li>
+    <li>
+        Subcutaneous (SC) 
+    </li>
 </ul>
 </li>
-</ul><a name="protocol"></a>
+</ul>
+<a name="protocol"></a>
 <h2>What is the protocol for dosing and measuring drug response in PDX models? </h2>
 
 <ul>
@@ -77,16 +145,21 @@ Step 1: Calculate percent change in tumor volume for each animal as V: ((end_vol
 Step 2: Within each group find the minimum V as Vm <br>
 Step 3: Within each group find the mean (average) V as Va <br>
 Step 4: Determine RECIST category as shown in the table below <br>
+    <ul style="list-style-type:none;">
+        <li>
+            <a name="recist"></a>
+            <table border ="1" style="border-collapse: collapse;">
+            <tr><th>RECIST Category</th><th>Best Response: Vm </th><th>Average Response: Va</th></tr> 
+            <tr><td>Complete Response (CR)</td><td align="center"> < -95% </td><td align="center">< -40% </td></tr>
+            <tr><td>Partial Response (PR)</td><td align="center"> < -50%</td><td align="center"> <-20% </td></tr>
+            <tr><td>Stable Disease (SD)</td><td align="center"> < 35%</td><td align="center"> < 30% </td></tr>
+            <tr><td>Progressive Disease (PD)</td><td colspan="2"  align="center"> Anything else </td></tr>
+            </table>
+        </li>
+    </ul>
 </li>
-<a name="recist"></a>
-<table border ="1" style="border-collapse: collapse;">
-<tr><th>RECIST Category</th><th>Best Response: Vm </th><th>Average Response: Va</th></tr> 
-<tr><td>Complete Response (CR)</td><td align="center"> < -95% </td><td align="center">< -40% </td></tr>
-<tr><td>Partial Response (PR)</td><td align="center"> < -50%</td><td align="center"> <-20% </td></tr>
-<tr><td>Stable Disease (SD)</td><td align="center"> < 35%</td><td align="center"> < 30% </td></tr>
-<tr><td>Progressive Disease (PD)</td><td colspan="2"  align="center"> Anything else </td></tr>
-</table>
 </ul>
+
 <a name="welfare"></a>
 <h2>How is animal welfare monitored during dosing studies? </h2>
 
@@ -103,56 +176,76 @@ recommendations are followed.
 <h2>What is the procedure for measuring tumor volume? </h2>
 <ul>
 <li>
-Tumor volume measurements are taken up to 3X weekly throughout the duration of each study to assess 
-tumor response to therapy. It is possible for tumor responses to initially exhibit regression (shrinkage) in 
-response to therapy and then resume progressive growth, therefore tumors must be continually monitored 
-throughout the study or risk missing this response. Tumor volumes are calculated from digital caliper raw 
-data by using the formula: 
-<ul>
-	<h2> Volume (mm<sup>3</sup>) = (l x w<sup>2</sup>) / 2 </h2>
-</ul>
+    Tumor volume measurements are taken up to 3X weekly throughout the duration of each study to assess 
+    tumor response to therapy. It is possible for tumor responses to initially exhibit regression (shrinkage) in 
+    response to therapy and then resume progressive growth, therefore tumors must be continually monitored 
+    throughout the study or risk missing this response. Tumor volumes are calculated from digital caliper raw 
+    data by using the formula: 
+
+            <h2> Volume (mm<sup>3</sup>) = (l x w<sup>2</sup>) / 2 </h2>
+
 </li>
 </ul>
 <ul>
-The value <b>w</b> (width) is the smaller of two perpendicular tumor axes and the value <b>l</b> (length) is the larger of two 
-perpendicular axes. Mean tumor volume growth curves and means are calculated for each treatment group. 
+    <li>
+        The value <b>w</b> (width) is the smaller of two perpendicular tumor axes and the value <b>l</b> (length) is the larger of two 
+        perpendicular axes. Mean tumor volume growth curves and means are calculated for each treatment group. 
+    </li>
 </ul>
 
 <a name="graphics"></a>
 <h2>How are the results of dosing studies represented graphically? </h2>
 
 <ul>
-<li>
-The results of dosing studies are presented using 4 types of plots: Waterfall, Treatment Group, Spider, and 
-Tumor Growth Inhibition. Each plot type is described briefly below. 
-</li>
+    <li>
+    The results of dosing studies are presented using 4 types of plots: Waterfall, Treatment Group, Spider, and 
+    Tumor Growth Inhibition. Each plot type is described briefly below. 
+    <ul>
+        <li>
+        <b><a name="treatmentGroup">Treatment Group plot.</a></b> A Treatment Group plot is a line plot showing the average change in tumor volume for 
+        all of the tumor bearing mice in a particular treatment arm (one line per treatment arm). Standard error bars are 
+        typically included for each time point measured. 
+        </li>
+        <li>
+        <b><a name="spiderPlot">Spider plot.</a></b> A Spider plot is a line plot showing the change in tumor volume from baseline for each tumor 
+        bearing mouse in a study. 
+        </li>
+        <li>
+        <b><a name="waterfallPlot">Waterfall plot.</a></b> A Waterfall plot presents the response to a treatment for each individual animal in a study as 
+        indicated by change in tumor volume. The data displayed on the graphic are limited to those mice that remain on study for the full duration of the project. 
+        The plot reflects the difference in tumor volume at the end of the study 
+        compared to initial tumor volume calculated on Day 0 of therapeutic dosing initiation. The horizontal (x) axis is 
+        baseline; vertical bars are drawn for each tumor bearing mouse, either above or below the baseline. The 
+        vertical (y) axis represents the % tumor volume change. Vertical lines above the x axis represent non-
+        responders; vertical bars below the x axis represent response to treatment. Waterfall plots are typically 
+        displayed left to right from worst response to best. 
+        </li>
+        <li>
+        <b><a name="tgiPlot">Tumor Growth Inhibition (TGI) plot.</a></b> The bars in the TGI plot summarize the % of tumor volume change in 
+        treatment arms relative to the control. The % TGI is defined as (1 - (mean volume of treated tumors)/(mean 
+        volume of control tumors)) x 100%. 
+        </li>
+    </ul>
+    </li>
+</ul>
+<a name="software"></a>
+<h2>Can I get the software for generating dosing study graphics displayed on the MMHCdb web site?</h2>
 <ul>
-<li>
-<b><a name="treatmentGroup">Treatment Group plot.</a></b> A Treatment Group plot is a line plot showing the average change in tumor volume for 
-all of the tumor bearing mice in a particular treatment arm (one line per treatment arm). Standard error bars are 
-typically included for each time point measured. 
-</li>
-<li>
-<b><a name="spiderPlot">Spider plot.</a></b> A Spider plot is a line plot showing the change in tumor volume from baseline for each tumor 
-bearing mouse in a study. 
-</li>
-<li>
-<b><a name="waterfallPlot">Waterfall plot.</a></b> A Waterfall plot presents the response to a treatment for each individual animal in a study as 
-indicated by change in tumor volume. The data displayed on the graphic are limited to those mice that remain on study for the full duration of the project. 
-The plot reflects the difference in tumor volume at the end of the study 
-compared to initial tumor volume calculated on Day 0 of therapeutic dosing initiation. The horizontal (x) axis is 
-baseline; vertical bars are drawn for each tumor bearing mouse, either above or below the baseline. The 
-vertical (y) axis represents the % tumor volume change. Vertical lines above the x axis represent non-
-responders; vertical bars below the x axis represent response to treatment. Waterfall plots are typically 
-displayed left to right from worst response to best. 
-</li>
-<li>
-<b><a name="tgiPlot">Tumor Growth Inhibition (TGI) plot.</a></b> The bars in the TGI plot summarize the % of tumor volume change in 
-treatment arms relative to the control. The % TGI is defined as (1 - (mean volume of treated tumors)/(mean 
-volume of control tumors)) x 100%. 
-</li>
+    <li>
+        Yes. The software is available from a <a href="https://github.com/TheJacksonLaboratory/PDX-SOC">GitHub repository</a>.
+    </li>
 </ul>
+<a name="access"></a>
+<h2>How do I access data and information about models in the JAX PDX Resource?</h2>
+<ul>
+    <li>
+        Data and information about PDXs in the JAX repository are available from the Mouse Models of Human Cancer (MMHCdb) database <a href="http://tumor.informatics.jax.org/mtbwi/pdxSearch.do">PDX portal</a> and also from the <a href="https://www.pdxfinder.org">PDX Finder database</a>.
+    </li>
+    <li>
+        Help documentation for PDX related data in MMHCdb can be found <a href="http://tumor.informatics.jax.org/mtbwi/userHelp.jsp#pdxsearch">here</a>.
+    </li>
 </ul>
+
 </body>
 </html>
 

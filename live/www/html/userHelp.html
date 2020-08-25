@@ -1,106 +1,56 @@
 <a name="top"></a>
 
-<h2>MMHCdb Background</h2>
+
 <ul>
 	<li><a href="#data">What information can I find in the Mouse Models of Human Cancer Database?</a></li>
+        <li><a href="#citing">How do I cite MMHCdb?</a></li>
 	<li><a href="#submitting">How can I contribute my data to MMHCdb?</a></li>
-	<li><a href="#citing">How do I cite MMHCdb?</a></li>
-	<li><a href="#error">What should I do if I get an error message?</a></li>
 </ul>
 
-<h2>How to query the Mouse Models of Human Cancer Database&hellip;</h2>
-<ul>
-	
-	<li><a href="#dynamicgrid">How do I use the Tumor Frequency Grid</a></li>
-</ul>
-
-
-
-<h2>How do I interpret my search results?</h2>
-<ul>
-	
-	<li><a href="#tumorresults">Advanced Search Results</a></li>
-	<li><a href="#modeldetails">Model Details</a></li>
-        <li><a href="#straindetails">Strain Details</a></li>
-	<li><a href="#referencedetails">Reference Details</a></li>
-	<li><a href="#pdxsearch">PDX Search</a></li>
-	<li><a href="#pdxdetails">PDX Details</a></li>
-        
-      
-	
-</ul>
-
-<h2>See Also:</h2>
-<ul>
-	<li><a href="http://www.informatics.jax.org/javawi2/servlet/WIFetch?page=glossaryIndex&print=no" target="_blank">MGI Glossary</a></li>
-</ul>
-
-<a href="/">MMHCdb Home Page</a>
 
 <hr>
 
-<a name="data"></a>
-<h2>MMHCdb Background</h2>
-<h3>What information can I find in the Mouse Models of Human Cancer (MMHCdb) Database?</h3>
-
-<p>The Mouse Models of Human Cancer Database (MMHCdb) was designed to aid researchers in such areas as choosing experimental models, reviewing patterns of mutations in specific cancers, and identifying genes that are commonly mutated across a spectrum of cancers.</p>
-
-<p>MMHCdb supports the use of the mouse as a model system of hereditary cancer by providing electronic access to:</p>
-
+<a name="basics"></a>
+<h2>MMHCdb Basics</h2>
+<h3>What information can I find in the <a href="https://en.wikipedia.org/wiki/Mouse_Models_of_Human_Cancer_database"> Mouse Models of Human Cancer (MMHCdb) Database?</a></h3>
 <ol>
-	<li> Descriptions of tumors (data are organized by strain and organ of tumor origin)</li>
-	<li>Tumor frequency and latency data</li>
-	<li>Information on genetic factors associated with tumors and tumor development</li>
-	<li>Tumor pathology reports and images</li>
-	<li>References, both published and unpublished</li>
-	<li>Links to related online resources, including:</li>
-	<li><ul>
-		<li><a href="http://www.informatics.jax.org/" target="_blank">Mouse Genome Informatics (MGI)</a></li>
-		<li><a href="http://www.jax.org/phenome" target="_blank">Mouse Phenome Database (MPD)</a></li>
-		<li><a href="http://jaxmice.jax.org/" target="_blank">JAX&reg; Mice</a></li>
-		<li><a href="http://mouse.ncifcrf.gov/" target="_blank">NCI Mouse Repository</a></li>
-	</ul></li>
+    <li>The focus of MMHCdb is on in vivo mouse models, including:
+        <ul>
+            <li>spontaneous and induced tumors in mice</li>
+            <li>genetically engineered mouse models of cancer </li>
+            <li>diversity panels (e.g., Diversity Outbred, Collaborative Cross, etc.)</li>
+            <li>Patient Derived Xenograft (PDX) models</li>
+        </ul>
+    </li>
+    <li>
+        Information about cancer models includes the spectrum of tumor types observed and the frequency of specific tumor types.  We emphasize the effect of genetic background on the cancer characteristics of mouse models. For PDX models, genomics data for engrafted tumors and treatment response data for cohorts of tumor bearing mice are available for most models. 
+    </li>
+    <li>The data about mouse models of human cancer in MMHCdb are acquired from the following sources: 
+        <ul>
+            <li>the published scientific literature, and</li>
+            <li>the direct submission of model information and pathology images from  cancer researchers.</li>
+        </ul>
+    </li>
+    <li>Priority for biocuration activities are determined by the novelty of the mouse model, the quality of the data, and the organ system involved. High priority is given to models associated with the cancers with the highest reported mortality in the United States population.</li>
+    <li>MMHCdb reports negative as well as positive data. For example, strains of mice that are reported to have a zero frequency of a particular tumor type are included in the database.</li>
+    <li>Except for PDX models, the mouse model information accessible from MMHCdb is <b>NOT</b> limited to the strains distributed by The Jackson Laboratory. 
+        However, if a strain listed in MMHCdb is distributed by The Jackson Laboratory, a link to the data sheet in the JAX Mice database is provided. 
+        <b>MMHCdb collaborates with the European Bioinformatics Institute (EBI) to develop and maintain PDX Finder, a global catalog of PDX models which can be accessed at <a href="https://www.pdxfinder.org">https://www.pdxfinder.org</a></b></li>
+
 </ol>
 
-<h4>Important information for users of MMHCdb</h4>
-<ol>
-	<li><strong>MMHCdb reports negative as well as positive data.</strong> For example, strains of mice that are reported to have a zero frequency of a particular tumor type are included
-	in the database.</li>
-	<li><strong>Tumor data in MMHCdb are from studies of tumors that arise in mice either spontaneously or after administration of some sort of agent.</strong> MMHCdb does not include data on
-	tumors that arise in humans or other species and are subsequently transplanted into mice.</li>
-	<li><strong>MMHCdb is NOT current with the published literature.</strong> Populating MMHCdb is a high priority, but the volume of data available for mouse cancer biology is very large and
-	it will take some time to enter the data. Descriptions of the data sources and data entry priorities for MMHCdb are described below.</li>
-	<li><strong>The mouse strain information in MMHCdb is NOT limited to the strains distributed by the Jackson Laboratory.</strong> However, if a strain in MMHCdb is distributed by The Jackson
-	Laboratory, a link to the data sheet in the JAX&reg; Mice database is provided.</li>
-	<li><strong>The data in the Mouse Models of Human Cancer Database come from the following sources:</strong>
-		<ul>
-			<li>the published literature (current and retrospective),</li>
-			<li>the submission of tumor pathology slides and/or images from investigators (from published or unpublished data), and</li>
-			<li>tumor frequency and pathology data from routine animal health screenings of mouse colonies (often unpublished data).</li>
-		</ul>
-	</li>
-	<li><strong>Priority for entering data in the database is determined by the novelty of the mouse model, the quality of the data, and the organ system involved.</strong> The organ systems of high priority are those with the highest reported mortality rate among the United States population, according to the National Cancer Institute.
-	</li>
-</ol>
+
 
 <a class="jump-nav" href="#top">Back to Top</a>
 <hr>
 
-<a name="submitting"></a>
-<h3>How can I contribute my data to MMHCdb?</h3>
-
-<p>Data in the Mouse Models of Human Cancer Database come both from the published scientific literature and from unpublished, routine animal health screenings of mouse colonies. Data
-submissions from the scientific community are welcome by contacting <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support</a> for information on the data submission process.</p>
-
-<a class="jump-nav" href="#top">Back to Top</a>
-<hr>
 
 <a name="citing"></a>
 <h3>How do I cite MMHCdb?</h3>
 
 
-<p>MMHCdb is supported by grant CA89713, entitled "Electronic Access to Mouse Tumor Data", awarded to Janan T. Eppig from the National Cancer Institute (NCI) of the National Institutes
-of Health (NIH).</p>
+<p>
+    MMHCdb is supported by grant CA89713, entitled "Electronic Access to Mouse Tumor Data", awarded to Carol J. Bult from the National Cancer Institute (NCI) of the National Institutes of Health (NIH).</p>
 
 <p>Please use the following citation when referring to the Mouse Models of Human Cancer Database.
 <ul><li><b>Debra M. Krupke, Dale A. Begley, John P. Sundberg, Joel E. Richardson, Steven B. Neuhauser and Carol J. Bult, The Mouse Models of Human Cancer Database: A Comprehensive Resource for Mouse Models of Human Cancer., Cancer Res October 31 2017 77 (21) e67-e70.</b></li></ul>
@@ -108,11 +58,18 @@ of Health (NIH).</p>
 <ul><li><b>Some tumor data for this paper were retrieved from the Mouse Models of Human Cancer Database (MMHC, formerly MTB), Mouse Genome Informatics, The Jackson Laboratory, Bar Harbor, Maine. World Wide Web (URL: http://tumor.informatics.jax.org/). (February, 2019 i.e., the date you retrieved the data cited).</b></li></ul>
 
 <p><a href="#top">Back to Top</a>
-<center><hr width=80%></center>
+<hr>
 
+<a name="submitting"></a>
+<h3>How can I contribute my data about mouse models of human cancer to MMHCdb?</h3>
 
+<p>
+    Submissions of supporting data for new and existing mouse models of human cancer from the research community are welcome. 
+    Contact <a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support</a> to request a consultation with an MMHCdb Biocuration Scientist about submitting.
+    
+</p>
 
-
+<a class="jump-nav" href="#top">Back to Top</a>
 <hr>
 	
 	<a name="dynamicgrid"></a><h2>Dynamic Tumor Frequency Grid</h2>
@@ -427,75 +384,7 @@ and only those with associated drug efficacy or cancer-related evidences are rep
 <a href="#top">Back to Top</a>
 
 <hr>
-	
-	<a name="pdxcomparison"></a><h2>PDX Comparison Results</h2>
-	<table>
-		<tr><td><p>Rank Z based expression scale</p></td>
-		<tr>
-				<td>
-						<table class="pdx-result-expression">
-								<tr>
-								<td style="background-color:#006900">-15</td>
-								<td style="background-color:#007300">-14</td>
-								<td style="background-color:#007d00">-13</td>
-								<td style="background-color:#008700">-12</td>
-								<td style="background-color:#009100">-11</td>
-								<td style="background-color:#009b00">-10</td>
-								<td style="background-color:#00a500">-9</td>
-								<td style="background-color:#00af00">-8</td>
-								<td style="background-color:#00b900">-7</td>
-								<td style="background-color:#00c300">-6</td>
-								<td style="background-color:#00cd00">-5</td>
-								<td style="background-color:#00d700">-4</td>
-								<td style="background-color:#00e100">-3</td>
-								<td style="background-color:#00eb00">-2</td>
-								<td style="background-color:#00f500">-1</td>
-								<td style="background-color:#808080"> 0 </td>
-								<td style="background-color:#f50000">+1</td>
-								<td style="background-color:#eb0000">+2</td>
-								<td style="background-color:#e10000">+3</td>
-								<td style="background-color:#d70000">+4</td>
-								<td style="background-color:#cd0000">+5</td>
-								<td style="background-color:#c30000">+6</td>
-								<td style="background-color:#b90000">+7</td>
-								<td style="background-color:#af0000">+8</td>
-								<td style="background-color:#a50000">+9</td>
-								<td style="background-color:#9b0000">+10</td>
-								<td style="background-color:#910000">+11</td>
-								<td style="background-color:#870000">+12</td>
-								<td style="background-color:#7d0000">+13</td>
-								<td style="background-color:#730000">+14</td>
-								<td style="background-color:#690000">+15</td>
-								<td style="text-align:center;background-color:#FFFFFF">No Value</td>
-								</tr>
-						</table>
-						
-				</td>
-		</tr>
-		<tr><td>
-						<table class="pdx-result-cnv">
-								<tr><td><p>CNV color coding</p></td></tr>
-								<tr>
-										<td style="background-color:#FFA500">Amplification</td>
-										<td style="background-color:#0000FF">Deletion</td>
-										<td style="background-color:#808080">Normal</td>
-										<td style="background-color:#FFFFFF">No Value</td>
-								</tr>
-						</table>
-				</td>
-		</tr>
-	</table>
-<p>Click a sample name along the top of the table to go to the PDX details page for that sample.</p>
 
-<p>Click on a row (gene) in the mutation section to display the descriptions of the mutations.</p>
-
-<p>Click on the "+" at the top of the mutation section to display all the mutation descriptions.</p>
-
-<p>Click on the "-" to hide all the mutation descriptions.</p>
-
-<a href="#top">Back to Top</a>
-
-<hr>
 
 <p><a href="citation.jsp">Citing MMHCdb</a></p>
 
