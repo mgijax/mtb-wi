@@ -107,9 +107,9 @@ public class RelatedModels {
         proxeIds.put("J000106143", "DFAM-84910-V1");
         proxeIds.put("J000106141", "DFAM-72078-V2");
         
-        proxeIds.put("J000106574","DFAL-48392-V1");
-        proxeIds.put("J000106567","DFAL-49600-V2");
-        proxeIds.put("J000106570","DFAM-62736-V1");
+        proxeIds.put("J000106574", "DFAL-48392-V1");
+        proxeIds.put("J000106567", "DFAL-49600-V2");
+        proxeIds.put("J000106570", "DFAM-62736-V1");
         
 
 

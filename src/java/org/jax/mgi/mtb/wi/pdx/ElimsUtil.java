@@ -1,3 +1,5 @@
+
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -346,6 +348,7 @@ public class ElimsUtil {
                         report.append(cleanDate(result[i].getP2_Engraftment_Date())).append(",");
                         report.append(cleanDate(result[i].getP2_Success_Date())).append(",");
                         report.append(clean(result[i].getComments())).append("\n");
+                        
                     }
                 }
 
@@ -719,9 +722,17 @@ public class ElimsUtil {
                             }
                             
                             if(pid != null && pid.trim().length()>0){
-                                // oh the humanity, the ExtJS combobox widget won't work if IDs are duplicated so we need to pad these id with a space right here ---V
+                                // oh the humanity, the ExtJS combobox won't work if IDs are duplicated so we need to pad these  with a space right here ---V
                                 idMap.put( pid+ " ("+mouse.getModelID()+") "+mouse.getPrimarySite() + " " + mouse.getInitialDiagnosis(),mouse.getModelID()+" ");
+                                
+                            
                             }
+                            
+                            if(RelatedModels.getProxeId(mouse.getModelID()) != null){
+                                idMap.put(RelatedModels.getProxeId(mouse.getModelID())+ " ("+mouse.getModelID()+") "+mouse.getPrimarySite() + " " + mouse.getInitialDiagnosis(),mouse.getModelID()+"  ");
+                            }
+                            
+                           
                         } else {
                             log.debug("skipping suspended model " + mouse.getModelID());
                         }
