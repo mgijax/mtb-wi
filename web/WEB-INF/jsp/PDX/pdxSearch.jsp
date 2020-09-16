@@ -77,7 +77,7 @@
 				hideTrigger:false,
                                 triggerClass: "trigger",
 				hiddenName:'modelID',
-				width:360,
+				width:560,
 				listEmptyText:'',
 				renderTo: 'modelIDCombo'
 		//		,pageSize:10
