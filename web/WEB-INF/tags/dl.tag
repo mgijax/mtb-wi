@@ -13,7 +13,7 @@
 </c:if>
 <dl>
 	<c:choose>
-	<c:when test="${fn:length(items)>1}">
+	<c:when test="${fn:length(dds)>1}">
 	<dt><c:out value="${dts}" escapeXml="false" /></dt>
 	</c:when>
 	<c:otherwise>
@@ -31,12 +31,24 @@
 	<c:if test="${not empty dd}">
 	<dd><c:out value="${dd}" escapeXml="false" /></dd>
 	</c:if>
+        
+        <c:if test="${empty dd}">
+            <dd><i>no data</i></dd>
+	</c:if>
+        
 </dl>
 </c:when>
 <c:when test="${not empty dd && test != false}">
 <dl>
 	<dt><c:out value="${dt}" escapeXml="false" /></dt>
 	<dd><c:out value="${dd}" escapeXml="false" /></dd>
+</dl>
+</c:when>
+    
+    <c:when test="${empty dd && test != false}">
+<dl>
+	<dt><c:out value="${dt}" escapeXml="false" /></dt>
+        <dd><i>no data</i></dd>
 </dl>
 </c:when>
 </c:choose>

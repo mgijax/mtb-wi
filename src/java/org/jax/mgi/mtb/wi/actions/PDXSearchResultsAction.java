@@ -250,6 +250,7 @@ public class PDXSearchResultsAction extends Action {
         StringBuilder unavailable = new StringBuilder();
         buffer.append("[");
         for (PDXMouse mouse : mice) {
+            
         
             if (buffer.length() > 1) {
                 buffer.append(",");

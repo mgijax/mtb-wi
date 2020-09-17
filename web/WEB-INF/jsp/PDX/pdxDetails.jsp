@@ -770,165 +770,174 @@
 	<jsp:body>
              <form name="AddPDXContentForm" style="font-size:1em;" method="GET" action="pdxAddContent.do">
                  <input type="hidden" value="${modelID}" name="modelID"/>
-	<section id="summary">
-		<div class="container">
+                 <div class="container">
+                   
+		
 			<c:if test="${empty unavailable}">
-				<p><a href="pdxRequest.do?mice=${mouse.modelID}">Request more information on this PDX model.</a></p>
+				<p style="text-align:right;"><a href="pdxRequest.do?mice=${mouse.modelID}">Request more information on this PDX model.</a></p>
 			</c:if>
 			<c:if test="${not empty unavailable}">
-				<p>This PDX model is not available. (No inventory)</p>
+				<p style="text-align:right;">This PDX model is not available. (No inventory)</p>
 			</c:if>			
 			<c:if test="${fn:contains(mouse.institution,'Dana-Farber')}">
+                           
 				<c:if test="${not empty proxeID}">
-					<p>This model is being distributed by The Jackson Laboratory on behalf of the Lymphoma Xenograft core at Dana-Farber Cancer Institute (DFCI).</p>
-					<p>Additional information can be found by registering at DFCI's PRoXe (<a href="https://www.proxe.org/">https://www.proxe.org/</a>) web site.</p>
-					<p>PRoXe model id: ${proxeID}</p>
+					<p style="font-size: 14px;">This model is being distributed by The Jackson Laboratory on behalf of the Lymphoma Xenograft core at Dana-Farber Cancer Institute (DFCI).
+					<br>Additional information can be found by registering at DFCI's PRoXe (<a href="https://www.proxe.org/" target="_blank">https://www.proxe.org/</a>) web site.
+                                        <br>PRoXe model id: ${proxeID}
+                                        </p>
 				</c:if>					
-				<p>The use of this material by a company is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCICompany.pdf">notice</a>.</p>
-				<p>The use of this material by an academic institution is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCIAcademic.pdf">notice</a>.</p>
+				<p style="font-size: 14px;">The use of this material by a company is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCICompany.pdf">notice</a>.
+				<br>The use of this material by an academic institution is subject to the terms of the attached <a target="_blank" href="${applicationScope.urlBase}/html/DFCIAcademic.pdf">notice</a>.
+                                </p>
+                           
 			</c:if> 
+                       <section id="summary">
                        
 			<table>
 				<tbody>			
-					
+                                    <tr>
+                                        <td colspan="2">
+                                            <h2>PDX Model Summary </h2>
+                                        </td>
+                                    </tr>
 					<tr>
-						<td><h4>Model Details</h4></td>
+						<td width="15%"><h4>Model Details</h4></td>
 						<td>
+                                                        <c:if test="${not empty mouse.previousID}">
 							<jax:dl dt="Model ID (Previous ID)" dd="${mouse.modelID} (${mouse.previousID})"/>
+                                                        </c:if>
+                                                        <c:if test="${empty mouse.previousID}">
+							<jax:dl dt="Model ID" dd="${mouse.modelID}"/>
+                                                        </c:if>
+                                                        <jax:dl dt="Initial Diagnosis" dd="${mouse.initialDiagnosis}" />
+							<jax:dl dt="Final Diagnosis" dd="${mouse.clinicalDiagnosis}" />
+                                                        <c:if test="${empty mouse.stage && empty mouse.grade}">
+                                                            <jax:dl dt="Stage/Grade" dd="" />
+                                                        </c:if>
+							<c:if test="${not empty mouse.stage || not empty mouse.grade}">
+                                                            <jax:dl dt="Stage/Grade" dd="${mouse.stage} / ${mouse.grade}" />
+                                                        </c:if>
 							<jax:dl dt="Model Status" dd="${mouse.modelStatus}" test="${applicationScope.publicDeployment == false}" />
 							<jax:dl dt="Primary Site" dd="${mouse.primarySite}" />
-							<jax:dl dt="Tumor Site" dd="${mouse.tissue}" />
+							<jax:dl dt="Sample Site" dd="${mouse.tissue}" />
 							<jax:dl dt="Tumor Type" dd="${mouse.tumorType}" />   				
-							<jax:dl dt="Initial Diagnosis" dd="${mouse.initialDiagnosis}" />
-							<jax:dl dt="Final Diagnosis" dd="${mouse.clinicalDiagnosis}" />
-							<jax:dl dt="Stage/Grade" dd="${mouse.stage} / ${mouse.grade}" />
-							<jax:dl dt="Related Models" dd="${relatedModels}" />
-							<jax:dl dt="Fusion Genes" dd="${mouse.fusionGenes}" />
+							
 						</td>
 					</tr>
+                                        
+                                         <c:if test="${not empty relatedModels}">
+                                             <tr>
+                                                 <td><h4>Related Models</h4></td>
+						<td>
+                                                    ${relatedModels}
+                                                    
+                                                </td>
+                                             </tr>
+                                         </c:if>
 					
 					<c:if test="${not empty sessionScope.pdxEditor || not empty referenceLinks}" > 
 					<tr>
 						<td><h4>Publications citing this model</h4></td>
 						<td>
-                                                    <table>
-                                                    
                                                      <c:forEach var="link" items="${referenceLinks}" varStatus="status">
-                                                         <tr>
-                                                                <td colspan=2 style=" padding:5px; border-top:none">
-                                                                        ${link.description}&nbsp;<a href="${link.url}" target="_blank">${link.linkText}</a>
-                                                                        <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                <a href="pdxEditContent.do?contentType=link&contentKey=${link.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                        <input type="button" value="Edit"/>
-                                                                                </a>
-                                                                        </c:if>
-                                                                </td>
-                                                            </tr>
+                                                        ${link.description}&nbsp;<a href="${link.url}" target="_blank">${link.linkText}</a>
+                                                        <c:if test="${not empty sessionScope.pdxEditor}">
+                                                                <a href="pdxEditContent.do?contentType=link&contentKey=${link.contentKey}&modelID=${modelID}" class="linkedButton">
+                                                                        <input type="button" value="Edit"/>
+                                                                </a>
+                                                        </c:if>
+                                                        <br>
                                                     </c:forEach> 
-                                                    </table>
-                                                <td>
-                                                    
-							<c:if test="${not empty sessionScope.pdxEditor}">
-								<input type="submit" name="reference" value="add">
-                                                </c:if>
+                                                   
+                                                    <c:if test="${not empty sessionScope.pdxEditor}">
+                                                            <input type="submit" name="reference" value="add">
+                                                    </c:if>
 						</td>
 					</tr>
 					</c:if>
 					
-					
-					
-
 					<tr>
 						<td><h4>Patient</h4></td>
 						<td>			
 							<jax:dl dt="Sex" dd="${mouse.sex}"/>
-							<jax:dl dt="Age" dd="${mouse.age}"/>
-							<jax:dl dt="Race/Ethnicity" dd="${mouse.race} / ${mouse.ethnicity}" />
+							<jax:dl dt="Age (at time of tissue collection)" dd="${mouse.age}"/>
+                                                        <c:if test="${empty mouse.race && empty mouse.ethnicity}">
+                                                            <jax:dl dt="Race/Ethnicity" dd="" />
+                                                        </c:if>
+                                                        <c:if test="${not empty mouse.race || not empty mouse.ethnicity}">
+                                                            <jax:dl dt="Race/Ethnicity" dd="${mouse.race} / ${mouse.ethnicity}" />
+                                                        </c:if>
 							<jax:dl dt="Treatment Na&iuml;ve" dd="${mouse.treatmentNaive}" />
 						</td>
 					</tr>			
 					
 					<tr>
-						<td><h4>Engraftment Host</h4></td>
+						<td><h4>Engraftment</h4></td>
 						<td>			
-							<jax:dl dt="Strain" dd="${mouse.strain}" />
-							<jax:dl dt="Implantation Site" dd="${mouse.location}" />
-							<jax:dl dt="Sample Type" dd="${mouse.sampleType}" />
+							<jax:dl dt="Host Strain" dd="${mouse.strain}" />
+                                                        <jax:dl dt="Sample Type" dd="${mouse.sampleType}" />
+							<jax:dl dt="Engraftment Site" dd="${mouse.location}" />
+							
 						</td>
 					</tr>   	
-					
-					<c:if test="${not empty tmb}">
-					<tr>
-                                            <td><h4>Tumor Mutation Burden <a class="help" href="userHelp.jsp#pdxTMB"></a></h4></td>
-						<td>			
-							<jax:dl dt="Sample" dts="Samples" dds="${tmb}" />
-							<jax:dl dt="TMB Range" dd="${minTMB}-${maxTMB} (across all JAX PDX models; TMB &gt; 22 is considered high)"/>
-						</td>
-					</tr>
-					</c:if>
-					
-					<c:if test="${not empty msiData}">
-					<tr>
-						<td><h4>Microsatellite Instability<a class="help" href="userHelp.jsp#pdxMSI"></a></h4></td>
-						<td>			
-							<jax:dl dt="Sample" dts="Samples" dds="${msiData}" />
-						</td>
-					</tr>
-					</c:if>			
-				</tbody>
-			</table>
-	
-		</div>
-	</section>
-	
-	<section id="detail">
-		
-            <table>
-                <tr><td style="width: 10%;">
-                        <h2>Variant Summary</h2>
-                    </td>
-                    <td>
-				<p id="noVariantSummary" style="display: none">Variant Summary currently not available.</p>
-			</div>
-			<div id="variantSummary"></div>
-			<input id="variantData" type="button" value="Download summary data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">			
-                    </td>
-                </tr>
-                <td>
-                    <h2>Gene Expression</h2>
-                </td>
-                <td>
-                                <c:if test="${empty geneExpressionData}">
-					<p>No gene expression data currently available.</p>
-				</c:if>
-				<c:if test="${not empty geneExpressionData}">
-					<p>Platforms: ${platforms}</p>
-					<c:if test="${fn:contains(platforms,'RNA_Seq')}">
-						<p>Hatched bars indicate genes with expression levels determined to be mildly affected by alignment calculations. <a href="userHelp.jsp#pdxalternateloci">Details</a>.</p>
-					</c:if>
-					<c:if test="${fn:contains(mouse.institution,'Dana-Farber') or fn:contains(mouse.institution,'Baylor')}">
-						<p><b>Please Note:</b> Expression data for this model is calculated as Log2(TPM+1)</p>
-					</c:if>
-				</c:if>								
-		
-			<c:if test="${not empty geneExpressionData}">
-				<div id="geneExpressionDiv"></div>
-			</c:if>
-                </td></tr>
+                        </table>
+                                                        
+                       </section>
+                 </div>
+                       <section id="detail">
+                        <table>
+                                        <tr>
+                                        <td colspan="2">
+                                            <h2>Molecular Data (Engrafted Tumor)<a class="help" href="${pageContext.request.contextPath}/userHelp.jsp#pdxdetails"></a> </h2>
+                                        </td>
+                                    </tr>				
+				
+                                    <tr><td width="15%">
+                                            <h4>Variants</h4>
+                                        </td>
+                                        <td>
+                                                    <p id="noVariantSummary" style="display: none">Variants data currently not available.</p>
+                                            </div>
+                                            <div id="variantSummary"></div>
+                                            <input id="variantData" type="button" value="Download variants data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">			
+                                        </td>
+                                    </tr>
+                                    <td>
+                                        <h4>Gene Expression</h4>
+                                    </td>
+                                    <td>
+                                        <c:if test="${empty geneExpressionData}">
+                                                <p>No gene expression data currently available.</p>
+                                        </c:if>
+                                        <c:if test="${not empty geneExpressionData}">
+                                                <p>Platforms: ${platforms}</p>
+                                                <c:if test="${fn:contains(platforms,'RNA_Seq')}">
+                                                        <p>Hatched bars indicate genes with expression levels determined to be mildly affected by alignment calculations. <a href="userHelp.jsp#pdxalternateloci">Details</a>.</p>
+                                                </c:if>
+                                                <c:if test="${fn:contains(mouse.institution,'Dana-Farber') or fn:contains(mouse.institution,'Baylor')}">
+                                                        <p><b>Please Note:</b> Expression data for this model is calculated as Log2(TPM+1)</p>
+                                                </c:if>
+                                        </c:if>								
+
+                                <c:if test="${not empty geneExpressionData}">
+                                        <div id="geneExpressionDiv"></div>
+                                </c:if>
+                                </td></tr>
+                                 <tr><td>
+                                                <h4>Gene CNV</h4></td>
+                                <td>
+                                                <c:if test="${empty geneCNVData}">
+                                                        <p>No gene CNV data currently available.</p>
+                                                </c:if>
+                                        </div>
+                                        <c:if test="${not empty geneCNVData}">
+                                                <div id="geneCNV"></div>
+                                        </c:if>	
+                                </td>
+                            </tr>
             <tr><td>
-				<h2>Gene CNV</h2></td>
-                <td>
-				<c:if test="${empty geneCNVData}">
-					<p>No gene CNV data currently available.</p>
-				</c:if>
-			</div>
-			<c:if test="${not empty geneCNVData}">
-				<div id="geneCNV"></div>
-			</c:if>	
-                </td>
-            </tr>
-            <tr><td>
-		<h2>CNV Plots</h2></td>
+		<h4>CNV Plots</h4></td>
                 <td>
 				<c:if test="${empty cnvPlots}">
 					<p>No gene CNV plots currently available.</p>
@@ -938,492 +947,249 @@
 				<div id="cnvPlots"></div>
 			</c:if>
                 </td></tr>
-                    <tr><td>
+            
+                
+                <tr>
+                    <td><h4>Tumor Mutation Burden</h4></td>
+                        <td>
+                            <c:if test="${empty tmb}">
+                                <i>no data</i>
+                            </c:if>
+                            <c:if test="${not empty tmb}">
+                            <section id="tmb">
+                                <jax:dl dt="Sample" dts="Samples" dds="${tmb}" />
+
+                                <jax:dl dt="TMB Range" dd="${minTMB}-${maxTMB} (across all JAX PDX models; TMB &gt; 22 is considered high)"/>
+
+                                </section>
+                            </c:if>
+                        </td>
+                </tr>
+                
+
+                <tr>
+                        <td><h4>Microsatellite Instability</h4></td>
+                        <td>		
+                            <c:if test="${empty msiData}">
+                                <i>no data</i>
+                            </c:if>
+                            <c:if test="${not empty msiData}">
+                                <jax:dl dt="Sample" dts="Samples" dds="${msiData}" />
+                             </c:if>
+                        </td>
+                </tr>
+                
+                <tr>
+                    <td><h4>Gene Fusion</h4></td>
+                    <td>
+                         <c:if test="${empty mouse.fusionGenes}">
+                                <i>no data</i>
+                        </c:if>
+                        <c:if test="${not empty mouse.fusionGenes}">
+                            <jax:dl dt="Fusion Genes" dd="${mouse.fusionGenes}" />
+                        </c:if>
+                    </td>
+                </tr>
+             </table>
+                    <hr>
+             <table>
+            
+                    <tr><td colspan="2">
                             <h2>Model Characterization</h2></td>
                         <td>
-
-                        <table  border=0 cellpadding=5 cellspacing=0 width="100%">
-
-                                <!-- Histology -->				
-                                <c:choose>
-                                        <c:when test="${not empty histology  ||  not empty sessionScope.pdxEditor || not empty histologySummary}">
-                                                <tr>
-                                                        <td class="label" style="padding:5px; width:12%; vertical-align:top;">
-                                                                Histology:
-
-
-                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-
-                                                                        <c:if test="${empty histologySummary}">
-                                                                                <input type="submit" name="histologySummary" value="add summary"><br>
-                                                                        </c:if>
-
-                                                                        <c:if test="${empty pathologist}">
-                                                                                <input type="submit" name="pathologist" value="add pathologist"><br>
-                                                                        </c:if>
-
-                                                                        <br>
-                                                                        <input type="submit" name="histology" value="add histology">
+                    </tr>
+                   
+                    <tr>
+                        <td td width="15%"><h4>Histology</h4></td>
+                    <td>
+                        <c:if test="${empty histology}">
+                             <i>no data</i>
+                        </c:if>
+             				
+                        
+                        <c:if test="${not empty histology  ||  not empty sessionScope.pdxEditor || not empty histologySummary}">
 
 
-                                                                </c:if>
+                            <c:if test="${not empty sessionScope.pdxEditor}" >
+                                
+                                     <c:if test="${empty tumorMarkers}" > 
+                                            <input type="submit" name="tumorMarkers" value="Add tumor markers"><br>
+                                    </c:if>
 
-                                                        </td>
+                                    <c:if test="${empty histologySummary}">
+                                            <input type="submit" name="histologySummary" value="Add summary"><br>
+                                    </c:if>
 
+                                    <c:if test="${empty pathologist}">
+                                            <input type="submit" name="pathologist" value="Add pathologist"><br>
+                                    </c:if>
 
+                                    <br>
+                                    <input type="submit" name="histology" value="Add histology">
+                            </c:if>
+                                    
+                                 
+                            <c:if test="${not empty tumorMarkers}">
+                                <b>Tumor Markers:</b><br>
+                                <c:forEach var="comment" items="${tumorMarkers}" varStatus="status">
 
-                                                        </td>
-                                                        <td style="padding:5px; vertical-align:top;">
+                                    ${comment.comment}
+                                    <c:if test="${not empty sessionScope.pdxEditor}">
+                                            <a href="pdxEditContent.do?contentType=comment&contentKey=${comment.contentKey}&modelID=${modelID}" class="linkedButton">
+                                                    <input type="button" value="Edit"/></a>
+                                    </c:if>
+                                    <br>
 
+                                </c:forEach>
 
-                                                                <c:choose>
-                                                                        <c:when test="${not empty tumorMarkers  ||  not empty sessionScope.pdxEditor}">
-                                                                                Tumor Markers:<br>
-                                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-                                                                                        <input type="submit" name="tumorMarkers" value="add"><br>
-                                                                                </c:if>
+                            </c:if>
+                                   
+                               
+                    
+                           
 
-                                                                                <table>
-                                                                                        <c:forEach var="comment" items="${tumorMarkers}" varStatus="status">
-                                                                                                <tr>
-                                                                                                        <td style="border:none;  padding:1px; width:500px;">
-                                                                                                                ${comment.comment}
-                                                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                                        <a href="pdxEditContent.do?contentType=comment&contentKey=${comment.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                                                                <input type="button" value="Edit"/></a>
-                                                                                                                        </c:if>
-                                                                                                        </td>
-                                                                                                </tr>
+                            <c:if test="${not empty histologySummary}">
+                                <b>Summary:</b><br>${histologySummary.comment}<br>
 
-                                                                                        </c:forEach>
-                                                                                </table>
-                                                                        </c:when>
-                                                                </c:choose> 
+                                    <c:if test="${not empty sessionScope.pdxEditor}">
+                                            <a href="pdxEditContent.do?contentType=comment&contentKey=${histologySummary.contentKey}&modelID=${modelID}" class="linkedButton">  
+                                                    <input type="button" value="Edit"/>
+                                            </a><br>
+                                    </c:if>
+                                           
 
+                            </c:if>
 
-                                                                <c:if test="${not empty histologySummary}">
-                                                                        Summary:<br>
-                                                                        <table><tr><td style="border:none;  padding:1px; width:500px;">${histologySummary.comment}</td></tr></table>
+                            <c:if test="${not empty pathologist}">
+                                <b>Pathologist:</b><br>${pathologist.comment}<br>
+                                    <c:if test="${not empty sessionScope.pdxEditor}">
+                                            <a href="pdxEditContent.do?contentType=comment&contentKey=${pathologist.contentKey}&modelID=${modelID}" class="linkedButton"> 
+                                                    <input type="button" value="Edit"/>
+                                            </a><br>
+                                    </c:if>
 
-                                                                        <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                <a href="pdxEditContent.do?contentType=comment&contentKey=${histologySummary.contentKey}&modelID=${modelID}" class="linkedButton">  
-                                                                                        <input type="button" value="Edit"/>
-                                                                                </a><br>
-                                                                        </c:if>
+                            </c:if>	
 
-                                                                </c:if>
+                            <table>
 
-                                                                <c:if test="${not empty pathologist}">
-                                                                        Pathologist:<br>
-                                                                        <table><tr><td style="border:none;  padding:1px; width:500px;">${pathologist.comment}</td></tr></table>
-                                                                        <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                <a href="pdxEditContent.do?contentType=comment&contentKey=${pathologist.contentKey}&modelID=${modelID}" class="linkedButton"> 
-                                                                                        <input type="button" value="Edit"/>
-                                                                                </a><br>
-                                                                        </c:if>
+                                <c:forEach var="graphic" items="${histology}" varStatus="status">
 
-                                                                </c:if>	
-
-                                                                <table>
-
-                                                                        <c:forEach var="graphic" items="${histology}" varStatus="status">
-
-                                                                                <c:choose>
-                                                                                        <c:when test="${status.index%2==0}">
-                                                                                                <tr>
-                                                                                                </c:when>
-                                                                                        </c:choose>
-
-
-                                                                                        <td style=" padding:5px; border:none; vertical-align:top; width:250px">
-                                                                                                <a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
-                                                                                                        <img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
-                                                                                                </a>
-                                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton"> 
-                                                                                                                <input type="button" value="Edit"/></a>
-                                                                                                        </c:if>
-                                                                                                <br>${graphic.description}
-                                                                                        </td>
-                                                                                        <c:choose>
-                                                                                                <c:when test="${status.index%2==1 || status.last}">
-                                                                                                </tr>
-                                                                                        </c:when>
-                                                                                </c:choose>
-                                                                        </c:forEach>
-                                                                </table>
-                                                        </td>
-                                                </tr>					
-                                        </c:when>
-
-                                </c:choose>		
-
-
-                                <!-- Gene Expresssion --> 				
-
-                                <c:choose>
-                                        <c:when test="${not empty geneExpression  || not empty sessionScope.pdxEditor}">
-                                                <tr>
-                                                        <td class="label" style=" padding:5px; width:10%; vertical-align:top;">
-                                                                Gene Expression:
-
-
-                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-
-                                                                        <br>
-                                                                        <input type="submit" name="geneExpression" value="add">
-
-
-                                                                </c:if>
-                                                        </td>
-                                                        <td>
-                                                                <table>
-                                                                        <c:forEach var="graphic" items="${geneExpressionImages}" varStatus="status">
-                                                                                <c:choose>
-                                                                                        <c:when test="${status.index%2==0}">
-                                                                                                <tr>
-                                                                                                </c:when>
-                                                                                        </c:choose>
-
-                                                                                        <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
-                                                                                                <a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
-                                                                                                        <img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
-                                                                                                </a>
-                                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton"> 
-                                                                                                                <input type="button" value="Edit"/>
-                                                                                                        </a>
-                                                                                                </c:if>
-                                                                                                <br>${graphic.description}
-                                                                                        </td>
-                                                                                        <c:choose>
-                                                                                                <c:when test="${status.index%2==1  || status.last}">
-                                                                                                </tr>
-                                                                                        </c:when>
-                                                                                </c:choose>
-
-                                                                        </c:forEach>
-
-                                                                        <c:forEach var="link" items="${geneExpressionLinks}" varStatus="status">
-                                                                                <tr>
-                                                                                        <td colspan=2 style=" padding:5px; ">
-                                                                                                ${link.description}&nbsp;<a href="${link.url}">${link.linkText}</a>
-                                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=link&contentKey=${link.contentKey}&modelID=${modelID}" class="linkedButton">  
-                                                                                                                <input type="button" value="Edit"/>
-                                                                                                        </a>
-                                                                                                </c:if>
-                                                                                        </td>
-                                                                                </tr>
-
-                                                                        </c:forEach>				
-                                                                </table>
-                                                        </td>
-                                                </tr>   
-
-                                        </c:when>
-
-                                </c:choose>		
-
-                                <!--- Copy Number Variation ----> 		
-
-                                <c:choose>
-                                        <c:when test="${not empty cnv  ||  not empty sessionScope.pdxEditor}">
-                                                <tr>
-                                                        <td class="label" style=" padding:5px; width:10%; vertical-align:top;">
-                                                                Copy Number Variation:
-                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-                                                                        <br>
-                                                                        <input type="submit" name="CNV" value="add">
-                                                                </c:if>
-                                                        </td>
-                                                        <td>
-                                                                <table>
-                                                                        <c:forEach var="graphic" items="${cnvImages}" varStatus="status">
-                                                                                <c:choose>
-                                                                                        <c:when test="${status.index%2==0}">
-                                                                                                <tr>
-                                                                                                </c:when>
-                                                                                        </c:choose>
-                                                                                        <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
-                                                                                                <a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
-                                                                                                        <img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
-                                                                                                </a>
-                                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton"> 
-                                                                                                                <input type="button" value="Edit"/>
-                                                                                                        </a>
-                                                                                                </c:if>
-                                                                                                <br>${graphic.description}
-                                                                                        </td>
-                                                                                        <c:choose>
-                                                                                                <c:when test="${status.index%2==1  || status.last}">
-                                                                                                </tr>
-                                                                                        </c:when>
-                                                                                </c:choose>			
-                                                                        </c:forEach>
-
-
-                                                                        <c:forEach var="link" items="${cnvLinks}" varStatus="status">
-                                                                                <tr>
-                                                                                        <td colspan=2 style=" padding:5px; "">
-                                                                                                ${link.description}&nbsp;<a href="${link.url}">${link.linkText}</a>
-                                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=link&contentKey=${link.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                                                <input type="button" value="Edit"/>
-                                                                                                        </a>
-                                                                                                </c:if>
-                                                                                        </td>
-                                                                                </tr>
-                                                                        </c:forEach> 
-                                                                </table>
+                                        <c:choose>
+                                                <c:when test="${status.index%2==0}">
+                                                        <tr>
                                                         </c:when>
-                                                </c:choose>		
+                                                </c:choose>
 
 
-                                                <!-- Mutation -->
-
-
-
+                                                <td style=" padding:5px; border:none; vertical-align:top; width:250px">
+                                                        <a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
+                                                                <img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
+                                                        </a>
+                                                        <c:if test="${not empty sessionScope.pdxEditor}">
+                                                                <a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton"> 
+                                                                        <input type="button" value="Edit"/></a>
+                                                                </c:if>
+                                                        <br>${graphic.description}
+                                                </td>
                                                 <c:choose>
-                                                        <c:when test="${not empty mutation  ||  not empty sessionScope.pdxEditor}">
-                                                <tr>
-                                                        <td class="label" style=" padding:5px;  width:10%; vertical-align:top;">
-                                                                Mutation:
-
-
-                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-                                                                        <br>
-                                                                        <input type="submit" name="mutation" value="add">
-                                                                </c:if>
-                                                        </td>
-                                                        <td>
-                                                                <table>
-                                                                        <c:forEach var="comment" items="${mutationComments}" varStatus="status">
-                                                                                <tr>
-                                                                                        <td style="  padding:5px; border:none">
-                                                                                                ${comment.comment}
-                                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=comment&contentKey=${comment.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                                                <input type="button" value="Edit"/>
-                                                                                                        </a>
-                                                                                                </c:if>
-                                                                                        </td>
-                                                                                </tr>
-                                                                        </c:forEach>
-
-                                                                        <c:forEach var="link" items="${mutationLinks}" varStatus="status">
-                                                                                <tr>
-                                                                                        <td style=" padding:5px; ">
-                                                                                                ${link.description}&nbsp;<a href="${link.url}">${link.linkText}</a>
-                                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=link&contentKey=${link.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                                                <input type="button" value="Edit"/>
-                                                                                                        </a>
-                                                                                                </c:if>
-                                                                                        </td>
-                                                                                </tr>
-                                                                        </c:forEach>
-                                                                </table>
-                                                        </td>
-                                                </tr>
-                                        </c:when>
-                                </c:choose>		
-
-
-                                <!-- Drug Sensitivity --->
-
-                                <c:choose>
-                                        <c:when test="${not empty drugSensitivity  ||  not empty sessionScope.pdxEditor}">
-                                                <tr>
-                                                        <td class="label" style=" padding:5px; width:10%; vertical-align:top;">
-                                                                Drug Response :
-
-
-                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-                                                                        <br>
-                                                                        <input type="submit" name="drugSensitivity" value="add">
-                                                                </c:if>
-                                                        </td>
-                                                        <td>
-                                                                <table>
-                                                                        <c:forEach var="graphic" items="${drugSensitivityGraphics}" varStatus="status">
-                                                                                <c:choose>
-                                                                                        <c:when test="${status.index%2==0}">
-                                                                                                <tr>
-                                                                                                </c:when>
-                                                                                        </c:choose>
-
-                                                                                        <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
-                                                                                                <a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
-                                                                                                        <img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}"></a>
-                                                                                                        <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                                                <input type="button" value="Edit"/>
-                                                                                                        </a>
-                                                                                                </c:if>
-                                                                                                <br>${graphic.description}
-
-
-                                                                                        </td>
-                                                                                        <c:choose>
-                                                                                                <c:when test="${status.index%2==1 || status.last}">
-                                                                                                </tr>
-                                                                                        </c:when>
-                                                                                </c:choose>
-
-                                                                        </c:forEach>
-
-                                                                        <c:forEach var="doc" items="${drugSensitivityDocs}" varStatus="status">
-                                                                                <tr>
-
-                                                                                        <td style=" padding:5px; ">
-                                                                                                ${doc.description}
-                                                                                                <br>
-                                                                                                <a href="${applicationScope.pdxFileURL}${doc.fileName}">${doc.linkText}</a>
-                                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=document&contentKey=${doc.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                                                <input type="button" value="Edit"/>
-                                                                                                        </a>
-                                                                                                </c:if>
-                                                                                        </td>
-                                                                                </tr>
-                                                                        </c:forEach>			
-
-
-                                                                </table>
-                                                        </td>
-                                                </tr>
-                                        </c:when>
-                                </c:choose>   	
-
-                                <!-- Circos Plots nee Additional Graphics -->
-
-
-                                <c:choose>
-                                        <c:when test="${not empty additionalGraphic  ||  not empty sessionScope.pdxEditor}">
-                                                <tr>
-                                                        <td class="label" style=" padding:5px;  width:10%; vertical-align:top;">
-                                                                <a href ="${applicationScope.pdxFileURL}CircosPlotHelp.pdf">Circos Plots:</a>
-
-
-                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-
-                                                                        <br>
-                                                                        <input type="submit" name="additionalGraphic" value="add">
-
-
-                                                                </c:if>
-                                                        </td>
-                                                        <td>
-                                                                <table>
-                                                                        <c:forEach var="graphic" items="${additionalGraphic}" varStatus="status">
-                                                                                <c:choose>
-                                                                                        <c:when test="${status.index%2==0}">
-                                                                                                <tr>
-                                                                                                </c:when>
-                                                                                        </c:choose>
-                                                                                        <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
-                                                                                                <a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
-                                                                                                        <img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
-                                                                                                </a>
-                                                                                                <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton">
-                                                                                                                <input type="button" value="Edit"/>
-                                                                                                        </a>
-                                                                                                </c:if>
-                                                                                                <br>${graphic.description}
-                                                                                        </td>
-                                                                                        <c:choose>
-                                                                                                <c:when test="${status.index%2==1  || status.last}">
-                                                                                                </tr>
-                                                                                        </c:when>
-                                                                                </c:choose>
-                                                                        </c:forEach>
-
-                                                                </table>
-                                                        </td>
-                                                </tr>   
-                                        </c:when>
-                                </c:choose>		
-
-                                <!----  TUMOR GROWTH RATE ----->
-
-                                <c:choose>
-                                        <c:when test="${not empty tumorGrowthRate  || not empty sessionScope.pdxEditor}">
-                                                <tr>
-                                                        <td class="label" style=" padding:5px;  width:10%; vertical-align:top;">
-                                                                Tumor Growth Rate:
-
-
-                                                                <c:if test="${not empty sessionScope.pdxEditor}" > 
-                                                                        <br>
-                                                                        <input type="submit" name="tumorGrowthRate" value="add">
-                                                                </c:if>
-                                                        </td>
-                                                        <td>
-                                                                <table>
-                                                                        <c:forEach var="graphic" items="${tumorGrowthRate}" varStatus="status">
-                                                                                <c:choose>
-                                                                                        <c:when test="${status.index%2==0}">
-                                                                                                <tr>
-                                                                                                </c:when>
-                                                                                        </c:choose>
-                                                                                        <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
-                                                                                                <a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
-                                                                                                        <img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}"></a>
-                                                                                                        <c:if test="${not empty sessionScope.pdxEditor}">
-                                                                                                        <a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton">  <input type="button" value="Edit"/></a>
-                                                                                                        </c:if>
-                                                                                                <br>${graphic.description}
-                                                                                        </td>
-                                                                                        <c:choose>
-                                                                                                <c:when test="${status.index%2==1  || status.last}">
-                                                                                                </tr>
-                                                                                        </c:when>
-                                                                                </c:choose>
-                                                                        </c:forEach>
-                                                                </table>
-                                                        </td>
-                                                </tr>   
-                                        </c:when>
-                                </c:choose>		
-                        </table>
-                                                            <td></tr>
-                                                        <tr><td>			
-                                                                <h2>Dosing Studies</h2></td>			
-                                                            <td>			
-										
-   								
-									<c:choose>
-										<c:when test="${mouse.socGraph > 0}">
-											<c:forEach var="socGraph" begin="1" end="${mouse.socGraph}" >
-												<tr class="stripe${b}">
-													<td class="cat${b}">
-														<!-- Dosing Studies: -->
-													</td>
-													<td style="border:0px none">
-														<c:choose>
-															<c:when test="${mouse.socGraph == 1}">
-																<iframe width="100%" height="1300px" src='${applicationScope.socURL}${mouse.modelID}.html' style="border:0px none">
-																</iframe>
-															</c:when>
-															<c:otherwise>  
-																<iframe width="100%" height="1300px" src='${applicationScope.socURL}${mouse.modelID}_${socGraph}.html' style="border:0px none">
-																</iframe>
-															</c:otherwise>
-														</c:choose>
-													</td>
-												</tr>
-											</c:forEach>
-
-										</c:when>
-									</c:choose>
-
-                                                        </td>
+                                                        <c:when test="${status.index%2==1 || status.last}">
                                                         </tr>
+                                                </c:when>
+                                        </c:choose>
+                                </c:forEach>
+                            </table>
+
+                                       
+                                       			
+                        </c:if>
+
+                 	
+                    </td>
+                    
+                   
+                        </tr>
+                        <tr>
+                            <td><h4>Circos Plots</h4></td>
+                            <td>
+                                
+                                <c:if test="${ empty additionalGraphic}">
+                                     <i>no data</i>
+                                </c:if>
+                               <c:if test="${not empty additionalGraphic  ||  not empty sessionScope.pdxEditor}">
+
+                                    <c:if test="${not empty sessionScope.pdxEditor}" > 
+                                            <input type="submit" name="additionalGraphic" value="add">
+                                            <br>
+                                    </c:if>
+                                                       
+                                    <table>
+                                        <c:forEach var="graphic" items="${additionalGraphic}" varStatus="status">
+                                                <c:choose>
+                                                        <c:when test="${status.index%2==0}">
+                                                                <tr>
+                                                                </c:when>
+                                                        </c:choose>
+                                                        <td style=" padding:5px;  border:none; vertical-align:top; width:250px">
+                                                                <a target="_blank" href="pdxDetailsTabs.do?tab=graphicDetails&contentKey=${graphic.contentKey}&modelID=${modelID}">
+                                                                        <img height="250" width="250" src="${applicationScope.pdxFileURL}${graphic.fileName}">
+                                                                </a>
+                                                                <c:if test="${not empty sessionScope.pdxEditor}">
+                                                                        <a href="pdxEditContent.do?contentType=graphic&contentKey=${graphic.contentKey}&modelID=${modelID}" class="linkedButton">
+                                                                                <input type="button" value="Edit"/>
+                                                                        </a>
+                                                                </c:if>
+                                                                <br>${graphic.description}
+                                                        </td>
+                                                        <c:choose>
+                                                                <c:when test="${status.index%2==1  || status.last}">
+                                                                </tr>
+                                                        </c:when>
+                                                </c:choose>
+                                        </c:forEach>
+
+                                    </table>
+                                   
+                                </c:if>
+                            </td>
+                        </tr>   
+
+                              
+                       
+                        <tr>
+                            <td><h4>Dosing Studies</h4></td>			
+                            <td>			
+
+                                                <c:if test="${mouse.socGraph > 0}">
+                                                        <c:forEach var="socGraph" begin="1" end="${mouse.socGraph}" >
+                                                                <tr class="stripe${b}">
+                                                                        <td class="cat${b}">
+                                                                                <!-- Dosing Studies: -->
+                                                                        </td>
+                                                                        <td style="border:0px none">
+                                                                                <c:choose>
+                                                                                        <c:when test="${mouse.socGraph == 1}">
+                                                                                                <iframe width="100%" height="1300px" src='${applicationScope.socURL}${mouse.modelID}.html' style="border:0px none">
+                                                                                                </iframe>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>  
+                                                                                                <iframe width="100%" height="1300px" src='${applicationScope.socURL}${mouse.modelID}_${socGraph}.html' style="border:0px none">
+                                                                                                </iframe>
+                                                                                        </c:otherwise>
+                                                                                </c:choose>
+                                                                        </td>
+                                                                </tr>
+                                                        </c:forEach>
+
+                                                </c:if>
+                                         <c:if test="${mouse.socGraph == 0}">
+                                              <i>no data</i>
+                                         </c:if>
+
+                        </td>
+                        </tr>
         </table>
         </section>
+             </div>
        </form>
 	</jsp:body>
 </jax:mmhcpage>

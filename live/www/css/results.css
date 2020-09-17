@@ -1,6 +1,18 @@
 
 
+#detail dl {
+	width:25%;
+	margin:0;
+	padding:0 15px 15px 0;
+	box-sizing:border-box;
+        min-width:210px;
+}
 
+#detail dt {
+	margin-top:0;
+        white-space: nowrap;
+        min-width:210px;
+}
 
 #detail > section > .cap,
 table.detail-table > caption,
@@ -232,10 +244,27 @@ th.sorting_disabled {
 	margin:0;
 	padding:0 15px 15px 0;
 	box-sizing:border-box;
+        min-width:210px;
 }
 
 #summary dt {
 	margin-top:0;
+        white-space: nowrap;
+        min-width:210px;
+}
+
+#tmb dl {
+	width:50%;
+	margin:0;
+	padding:0 15px 15px 0;
+	box-sizing:border-box;
+        min-width:210px;
+}
+
+#tmb dt {
+	margin-top:0;
+        white-space: nowrap;
+        min-width:210px;
 }
 
 
