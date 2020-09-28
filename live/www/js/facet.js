@@ -834,7 +834,13 @@ $(function() {
 	$('#result-next').on('click', function() {		
 		pageQuery.start = Math.min(totalRows, pageQuery.start + pageQuery.rows);
 		doQuery();		
-	});	
+	});
+	
+	$('#result-25').on('click', function() { pageQuery.rows = 25; doQuery(); });
+	$('#result-100').on('click', function() { pageQuery.rows = 100; doQuery(); });
+	$('#result-500').on('click', function() { pageQuery.rows = 500; doQuery(); });
+	
+	
 	
 	doQuery(true);
 	

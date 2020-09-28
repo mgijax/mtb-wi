@@ -108,7 +108,7 @@ body > section {
 #result-count a {
 	display:block;
 	position:absolute;
-	top:0;
+	top:-1px;
 }
 
 #result-prev {
@@ -123,6 +123,32 @@ body > section {
 #result-count span {
 	font-weight:600;
 }
+
+#facet-results caption {
+	position:relative;
+}
+
+#result-settings {
+	position:absolute;
+	bottom:0;
+	right:0;	
+	text-align:right;
+	margin:0;
+	padding:0 30px 0 0;
+}
+
+#result-settings h4 {
+	display:inline;
+	font-size:1em;
+}
+
+#result-download {
+	display:none;
+}
+
+
+
+
 
 th > em,
 td > em {
@@ -437,27 +463,27 @@ body.scrolled #facet-ui {
 */
 
 .facet-detail .terms {
-	max-height:140px;
+	max-height:288px; /* 140 */
 	overflow-y:auto;
 	display:none;
 }
 
 @media (max-height:1280px) {
 	.facet-detail .terms {
-		max-height:112px;
+		max-height:224px; /* 112 */
 	}	
 }
 
 
 @media (max-height:1024px) {
 	.facet-detail .terms {
-		max-height:84px;
+		max-height:160px; /* 84 */
 	}	
 }
 
 @media (max-height:768px) {
 	.facet-detail .terms {
-		max-height:56px;
+		max-height:96px; /* 56 */
 	}	
 }
 
