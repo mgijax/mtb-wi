@@ -437,27 +437,27 @@ body.scrolled #facet-ui {
 */
 
 .facet-detail .terms {
-	max-height:140px;
+	max-height:288px; /* 140 */
 	overflow-y:auto;
 	display:none;
 }
 
 @media (max-height:1280px) {
 	.facet-detail .terms {
-		max-height:112px;
+		max-height:224px; /* 112 */
 	}	
 }
 
 
 @media (max-height:1024px) {
 	.facet-detail .terms {
-		max-height:84px;
+		max-height:160px; /* 84 */
 	}	
 }
 
 @media (max-height:768px) {
 	.facet-detail .terms {
-		max-height:56px;
+		max-height:96px; /* 56 */
 	}	
 }
 
