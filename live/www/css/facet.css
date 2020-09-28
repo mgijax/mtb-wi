@@ -142,6 +142,10 @@ body > section {
 	font-size:1em;
 }
 
+#result-download {
+	display:none;
+}
+
 
 
 
