@@ -108,7 +108,7 @@ body > section {
 #result-count a {
 	display:block;
 	position:absolute;
-	top:0;
+	top:-1px;
 }
 
 #result-prev {
@@ -123,6 +123,28 @@ body > section {
 #result-count span {
 	font-weight:600;
 }
+
+#facet-results caption {
+	position:relative;
+}
+
+#result-settings {
+	position:absolute;
+	bottom:0;
+	right:0;	
+	text-align:right;
+	margin:0;
+	padding:0 30px 0 0;
+}
+
+#result-settings h4 {
+	display:inline;
+	font-size:1em;
+}
+
+
+
+
 
 th > em,
 td > em {

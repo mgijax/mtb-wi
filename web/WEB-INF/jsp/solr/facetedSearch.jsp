@@ -28,6 +28,15 @@
 					<div id="no-results">
 						No results found
 					</div>
+					<div id="result-settings">
+						<div id="result-page-size">
+							<h4>Page size:</h4>
+							<a id="result-25" href="#">25</a>
+							<a id="result-100" href="#">100</a>
+							<a id="result-500" href="#">500</a>
+						</div>
+						<a id="result-download" href="#">Download CSV</a>
+					</div>
 				</caption>
 				<thead>
 					<tr>
