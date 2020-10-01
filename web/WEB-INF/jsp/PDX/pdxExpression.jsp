@@ -3,8 +3,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
-<jax:mmhcpage title="Patient Derived Xenograft Gene Expression">
+<jax:mmhcpage title="Patient Derived Xenograft Gene Expression" help="userHelp.jsp#pdxexpression">
 	<jsp:attribute name="head">
+            <link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
 			google.load("visualization", "1", {packages:["corechart"]});
@@ -45,35 +46,21 @@
 		</script>
 	</jsp:attribute>
 	<jsp:body>
+            <div class="container">
 		<section id="summary">
-			<div class="container">
-				<table>
-					<tbody>						
-						<tr>
-							<td><h4>Model ID</h4></td>
-							<td>${modelID}</td>
-						</tr>		
-						<tr>
-							<td><h4>Primary Site</h4></td>
-							<td>${primarySites}</td><!-- any -->
-						</tr>	
-						<tr>
-							<td><h4>Diagnosis</h4></td>
-							<td>${diagnoses}</td><!-- any -->
-						</tr>	
-						<tr>
-							<td><h4>Gene</h4></td>
-							<td>${gene2}</td>
-						</tr>	
-						<tr>
-							<td><h4>Variant</h4></td>
-							<td>"${variant}</td>
-						</tr>	
-					</tbody>
-				</table>	
-				<p><a href="pdxRequest.do">Request more information on the JAX PDX program</a></p>
+			
+                            
+                            <jax:dl dt="Model ID" dd="${mouse.location}" />
+                            <jax:dl dt="Primary Site" dts="Primary Sites" dds="${primarySites}" />
+                            <jax:dl dt="Diagnosis" dts="Diagnoses" dds="${diagnoses}" />
+                            <jax:dl dt="Gene" dd="${gene2}" />
+                            <jax:dl dt="Variant" dd="${variant}" />
+                            
+                            
+                          
+				</section>	
 			</div>
-		</section>																					
+																						
 		
 		<section id="detail">
 			<c:choose>

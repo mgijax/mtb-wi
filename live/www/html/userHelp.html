@@ -99,28 +99,29 @@
 
 <hr>
 	
-	<a name="pdxsearch"></a><h2>PDX Search Form</h2>
-<p>Search for PDX models by primary cancer site, diagnosis, and gene variant.</p>
 
-<strong>Tumor type</strong>
+<a name="pdxsearch"></a><h2>PDX Search Form</h2>
 
-<p>The primary site and diagnosis fields are string searches and are not hierarchical.</p>
+<p><b>PDX model identifier:</b> A unique identifier assigned by the database management system to unambiguously identify a PDX model. </p>
 
-<p>So "non-small cell lung cancer" will not return "lung squamous cell carcinoma."</p>
+<p><b>Primary cancer site:</b> The primary cancer site is the anatomical site of the cancer origin. More than one primary site can be selected for a search.</p>
 
-<strong>Gene list</strong>
+<p><b>Cancer type tags:</b> Tags are used to group models that share clinical characteristics.</p>
 
-<p>The gene lists in the drop down menus are not comprehensive.</p>
+<p><b>Diagnosis:</b> Cancer diagnoses are standardized using terms from the <a href="https://disease-ontology.org" target="_blank">Disease Ontology (DO)</a>. More than one term can be selected for a search. </p>
 
-<p>They are a subset of genes that are of interest in cancer (derived from the CTP panel).</p>
+<p><b>PDX Dosing studies:</b> PDXs that have been used in dosing studies can be searched by treatment and/or treatment responses. Treatment responses are based on modified RECIST criteria. Read more on dosing study design and interpretation <a href="http://tumor.informatics.jax.org/mtbwi/live/www/html/SOCHelp.html" target="_blank">here</a>.</p>
 
-<p>The gene variant field contains any gene for which our assays find variants.</p>
+<p><b>Tumor mutation burden (TMB):</b> Tumor mutation burden is a measurement of the number of mutations carried by tumor cells. TMB is potentially a predictive biomarker to identify tumors that are likely to respond to immunotherapy. In the JAX collection of PDXs, a score of 22 is considered high TMB. Read more about how TMB is calculated<a href="userHelp.jsp#pdxTMB" target="_blank"> here</a>.</p>
 
-<p>This field only recognizes the official HGNC gene symbol.</p>
+<p><b>Gene fusion:</b> Search for PDX models whose engrafted tumor harbors a gene fusion. Only gene fusions associated drug efficacy or cancer-related evidences are reported. Read more about the methods <a href="userHelp.jsp#genefusion" target="_blank">here</a>.</p>
 
-<p>Or select a gene to see expression levels for that gene across PDX models.</p>
+<p><b>Gene variants:</b>  Search for PDX models whose engrafted human tumors harbor specific gene variants. Gene symbols must be official <a href="https://www.genenames.org/" target="_blank">HGNC</a> symbols. Once a gene symbol is specified, the variants/mutations observed in the PDX collection are displayed. More than one variant/mutation per gene can be selected.  Genes that can be searched are restricted to those genes on the <a href="https://pubmed.ncbi.nlm.nih.gov/25562415/" target="_blank">JAX Cancer Treatment Profile (CTP) gene panel</a>. Read more about the methods and results <a href="userHelp.jsp#pdxdetails" target="_blank">here</a>.</p>
 
-<p>Or select a gene to see models where that gene is amplified or deleted.</p>
+<p><b>Gene expression across PDX models:</b> Displays a graphical summary of expression levels across PDX models for a gene. Only genes on the <a href="https://www.jax.org/clinical-genomics/clinical-offerings/jax-cancer-treatment-profile" target="_blank">JAX CTP</a> panel can be searched. Gene symbols must be official  <a href="https://www.genenames.org/" target="_blank">HGNC</a> symbols. Read more about gene expression data <a href="userHelp.jsp#pdxExpression"target="_blank">here</a>.</p>
+
+<p><b>Gene amplification/deletion across PDX models:</b> Displays a graphical summary of gene expression across PDX models for a gene with the bars representing expression colored according to amplification/deletion status of the gene. Only genes on the <a href="https://www.jax.org/clinical-genomics/clinical-offerings/jax-cancer-treatment-profile" target="_blank">JAX CTP</a> panel can be searched. Gene symbols must be official  <a href="https://www.genenames.org/" target="_blank">HGNC</a> symbols. Read more about copy number aberration data <a href="userHelp.jsp#pdxCNV" target="_blank">here</a>.</p>
+ 
 
 <a href="#top">Back to Top</a>
 
@@ -133,7 +134,7 @@
 
 <p>Click the model ID to go to the model details page to see any additional data.</p>
 
-<p>To send an email requesting additional information on PDX models select models using the check boxes and click 'Request Details' button.</p>
+<p>To send an email requesting additional information on PDX models select models using the check boxes and click the 'Request Details' button.</p>
 
 <a href="#top">Back to Top</a>
 
@@ -156,17 +157,11 @@
 
 <p>BWA, GATK, and SnpEff are utilized for alignment (GRCh38 human reference), variant calling and annotation.</p>
 
-<p>The variant results also include clinical annotations using the JAX proprietary clinical knowledge base (CKB).</p>
+<p>The variant results also include clinical annotations using the JAX proprietary clinical knowledge base (<a href="http://ckb.jax.org" target="_blank">CKB</a>).</p>
 
-<p>The high quality variants are further filtered to remove likely false positives,</p>
+<p>The high quality variants are further filtered to remove likely false positives, variants with low and modifier impact based on SnpEff annotations, and putative germline variants.</p>
 
-<p>variants with low and modifier impact based on SnpEff annotations, and putative germline variants.</p>
-
-<p>However, all high quality variants that are listed in the JAX CKB database with associated drug efficacy</p>
-
-<p>or cancer-related evidences are retained regardless of the filters. 
-
-	The following table describes the fields used in the variant summary data.</p>
+<p>However, all high quality variants that are listed in the JAX CKB database with associated drug efficacy or cancer-related evidences are retained regardless of the filters. The following table describes the fields used in the variant summary data.</p>
 
 <table>
 	<tr>
@@ -272,13 +267,13 @@
 		<td><p>NCT IDs of clinical trials directly associated with the variant </p></td>
 	</tr>
 </table>
-
+<a name="pdxexpression"></a>
 <strong>Expression data</strong>
 
 <p>The expression data are analyzed from microarray or RNAseq platforms.</p>
 
 <ul>
-		<li><h4>Affymetrix microarray HU133 or HG1.0ST (deprecated)</h4>
+<li><h4>Affymetrix microarray HU133 or HG1.0ST (deprecated)</h4>
 
 <p>The arrays were processed with the AffyPLM R package, using quantile normalization,</p>
 
@@ -289,7 +284,7 @@
 <p>The array effect is the "summarized expression" that is equivalent to the median polished value produced by standard RMA analysis.</p>
 </li>
 
-		<li><h4>RNAseq</h4>
+<li><h4>RNAseq</h4>
 
 <p>RNAseq data is first processed with Xenome to extract human sequences.</p>
 
@@ -318,19 +313,18 @@ Using the extended reference genome introduces complications in interpreting the
 
 <p>We are flagging the genes where the alternate loci are sufficiently different from primary to caution users that expression of these genes could be artifactually lowered.</p>
 
+<a name="genefusion"></a>
+<h4>Gene Fusion</h4>
 <p>For gene fusion, the gene symbols upstream and downstream of the fusion are reported and whether the downstream fusion partner is frame-shift or in-frame-shift. Only those with associated drug efficacy or cancer-related evidences are reported to minimize false-positives. Other detected fusions and additional information (e.g. breakpoint coordinates) can be made available upon request.</p>
 
 <a name="pdxCNV"></a>
 <h4>Copy number</h4>
 
-<p>The copy number variation is analyzed from the Affymetrix Human SNP 6.0 array. PennCNV-Affy and ASCAT 2.2 is used to predict allele-specific copy number and ploidy. Gene-level copy number is obtained by intersecting copy number segments with genome coordinates of Ensembl genes. In cases where a segment boundary is contained within a gene's coordinates, the most conservative estimate of copy number is used.</p>
-
+<p>The copy number variation is analyzed from the Affymetrix Human SNP 6.0 array. PennCNV-Affy and ASCAT 2.2 are used to predict allele-specific copy number and ploidy. Gene-level copy number is obtained by intersecting copy number segments with genome coordinates of Ensembl genes. In cases where a segment boundary is contained within a gene's coordinates, the most conservative estimate of copy number is used.</p>
 
 <p>In Gene CNV, the copy number of the CTP panel genes is displayed as a chart of log2(cn raw / sample ploidy). The CNV Plots present the difference from sample ploidy along the chromosomes (orange) and indicate where loss of heterozygosity occurs (blue).</p>
 
-
 <p>Values for specific genes not listed on the MMHCdb site can be made available upon request.</p>
-
 
 <a name="pdxTMB"></a>
 <h4>Tumor mutation burden (TMB) estimation:</h4>
@@ -340,23 +334,20 @@ Using the extended reference genome introduces complications in interpreting the
 <ul>
     <li>(i) met all quality criteria (coverage, mapping quality etc.), </li>
     <li>(ii) were not present in an in-house curated blacklist of false positive variants from loci that prone to sequencing and analysis errors and/or 
-        are associated with highly polymorphic genes (i.e., MUC4, MUC5B, MUC16, MUC17, and HLA-A </li>
+        are associated with highly polymorphic genes (i.e., MUC4, MUC5B, MUC16, MUC17, and HLA-A), </li>
     <li>(iii) are likely somatic mutations, and  </li>
     <li>(iv) have a high or moderate functional impact (i.e., non-synonymous changes, frame-shifts, stop losses/gains, and splice-site acceptor/donor changes).</li>
 </ul>
 
-
   <p> TMB was estimated by dividing the number of variants that met the criteria list above by the length (in Mb) of The Jackson Laboratory <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4481190">Cancer Treatment Profile (CTP)</a> targeted gene panel.</p>
    
-
-   <p>We defined high TMB as 22 mutations/Mb, which was calculated based on the TMB distribution of all PDX models analyzed as follows: Q3 (third quartile of TMB) + 1.5 x inter-quartile range of TMB.</p>
+  <p>We defined high TMB as 22 mutations/Mb, which was calculated based on the TMB distribution of all PDX models analyzed as follows: Q3 (third quartile of TMB) + 1.5 x inter-quartile range of TMB.</p>
 
 
 <a name="pdxMSI"></a>
 <h4>Microsatellite Instability (MSI)</h4>
 
-<p>The <a href="http://tumor.informatics.jax.org/mtbwi/live/www/html/MSIDocumentation.pdf" target="_blank">MSIsensor2</a> algorithm was used to determine MSI status of JAX samples. The samples with MSI Score (MSI-Percentage > 20%)  are considered at MSI-H. This threshold demonstrates good differentiation between MSI-High (MSI-H) and MSI-Stable (MSI-S) samples during MSIsensor2 algorithm development and our internal benchmarking. </p>
-
+<p>The <a href="${applicationScope.urlBase}/html/MSIDocumentation.pdf" target="_blank">MSIsensor2</a> algorithm was used to determine MSI status of JAX samples. The samples with MSI-Percentage > 20% are considered MSI-High. This threshold demonstrates good differentiation between MSI-High (MSI-H) and MSI-Stable (MSI-S) samples during MSIsensor2 algorithm development and our internal benchmarking. </p>
 
 <a href="#top">Back to Top</a>
 
@@ -365,23 +356,6 @@ and only those with associated drug efficacy or cancer-related evidences are rep
 
 <p>Other detected fusions and additional information (e.g. breakpoint coordinates) can be made available upon request.</p>
 
-<h4>Copy number</h4>
-
-<p>The copy number variation is analyzed from the Affymetrix Human SNP 6.0 array.</p>
-
-<p>PennCNV-Affy and ASCAT 2.2 is used to predict allele-specific copy number and ploidy.</p>
-
-<p>Gene-level copy number is obtained by intersecting copy number segments with genome coordinates of Ensembl genes.</p>
-
-<p>In cases where a segment boundary is contained within a gene's coordinates, the most conservative estimate of copy number is used.</p>
-
-<p>The copy number of the CTP panel genes is displayed as a chart of log2(cn raw / sample ploidy).</p>
-
-<p>Other forms of copy number values (e.g. gain and loss relative to ploidy, loss of heterozygosity)</p>
-
-<p>and copy number of other genes not listed on the MMHCdb site can be made available upon request.</p>
-
-<a href="#top">Back to Top</a>
 
 <hr>
 

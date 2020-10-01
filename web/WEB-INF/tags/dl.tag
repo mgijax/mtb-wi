@@ -6,49 +6,41 @@
 <%@ attribute name="dd" required="false" %>
 <%@ attribute name="dds" type="java.util.Collection" required="false" %>
 <%@ attribute name="test" type="java.lang.Boolean" required="false" %>
-<c:choose>
-<c:when test="${not empty dds && test != false}">
-<c:if test="${empty dts}">
-<c:set var="dts" value="${dt}"/>
-</c:if>
-<dl>
-	<c:choose>
-	<c:when test="${fn:length(dds)>1}">
-	<dt><c:out value="${dts}" escapeXml="false" /></dt>
-	</c:when>
-	<c:otherwise>
-	<dt><c:out value="${dt}" escapeXml="false" /></dt>
-	</c:otherwise>
-	</c:choose>
-	<c:forEach var="item" items="${dds}">
-	<dd><c:out value="${item}" escapeXml="false" /></dd>
-	</c:forEach>
-</dl>
-</c:when>
-<c:when test="${test}">
-<dl>
-	<dt><c:out value="${dt}" escapeXml="false" /></dt>
-	<c:if test="${not empty dd}">
-	<dd><c:out value="${dd}" escapeXml="false" /></dd>
-	</c:if>
-        
-        <c:if test="${empty dd}">
-            <dd><i>no data</i></dd>
-	</c:if>
-        
-</dl>
-</c:when>
-<c:when test="${not empty dd && test != false}">
-<dl>
-	<dt><c:out value="${dt}" escapeXml="false" /></dt>
-	<dd><c:out value="${dd}" escapeXml="false" /></dd>
-</dl>
-</c:when>
+<%@ attribute name="showNoData" type="java.lang.Boolean" required="false" %>
+    <%-- false test do nothing --%>
+<c:if test="${test != false}">
     
-    <c:when test="${empty dd && test != false}">
-<dl>
-	<dt><c:out value="${dt}" escapeXml="false" /></dt>
-        <dd><i>no data</i></dd>
-</dl>
-</c:when>
-</c:choose>
+    <c:if test="${not empty dds}">
+        <c:if test="${empty dts}">
+            <c:set var="dts" value="${dt}"/>
+        </c:if>
+        <dl>
+                <c:choose>
+                <c:when test="${fn:length(dds)>1}">
+                <dt><c:out value="${dts}" escapeXml="false" /></dt>
+                </c:when>
+                <c:otherwise>
+                <dt><c:out value="${dt}" escapeXml="false" /></dt>
+                </c:otherwise>
+                </c:choose>
+                <c:forEach var="item" items="${dds}">
+                <dd><c:out value="${item}" escapeXml="false" /></dd>
+                </c:forEach>
+        </dl>
+     
+    </c:if>
+    <c:if test="${not empty dd && empty dds}">
+      <dl>
+        <dt><c:out value="${dt}" escapeXml="false" /></dt>
+        <dd><c:out value="${dd}" escapeXml="false" /></dd>
+      </dl>
+     
+    </c:if>
+    <c:if test="${empty dd && empty dds && showNoData}">
+    <dl>
+            <dt><c:out value="${dt}" escapeXml="false" /></dt>
+            <dd><i>no data</i></dd>
+    </dl>
+    </c:if>
+
+  </c:if>

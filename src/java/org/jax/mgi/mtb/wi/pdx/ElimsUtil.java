@@ -34,10 +34,10 @@ public class ElimsUtil {
     private static String userName;
     private static String password;
     
-    private static final String BCM = "BCM"; // to identify Bayolor MRN IDs for search by ID and show as previous ID
+    private static final String BCM = "BCM"; // to identify Baylor MRN IDs for search by ID and show as previous ID
     
     private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ  (aka NSG or NOD Scid gamma)";
-    private static final String NSG_HTML_NAME = "NOD.Cg-Prkdc<sup>scid</sup> Il2rg<sup>tm1Wjl</sup>/SzJ<br>(aka NSG or NOD Scid gamma)";
+    private static final String NSG_HTML_NAME = "NOD.Cg-<i>Prkdc<sup>scid</sup> Il2rg<sup>tm1Wjl</sup></i>/SzJ<br>(aka NSG or NOD Scid gamma)";
     
     // strains starting with this get turned into one of the above.
     private static final String NSG = "NSG";

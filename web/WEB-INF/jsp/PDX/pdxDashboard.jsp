@@ -139,7 +139,7 @@
                             </td>
                             <td>
                             <html:form action="pdxDashboard" method="POST">
-                                <input type="submit"  VALUE="Drug Response Summary" onclick="window.open('http://bhmtbdb01.jax.org/usrlocalmgi/mtb/live/www/pdx/treatment_response_summary.xlsx');">
+                                <input type="submit"  VALUE="Drug Response Summary" onclick="window.open('http://bhmtbdb01.jax.org/usrlocalmgi/mtb/live/www/pdx/trs.xlsx');">
                             </html:form>
 
                             </td>

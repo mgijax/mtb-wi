@@ -31,13 +31,13 @@
 		<div class="container">
 			<c:choose>
 				<c:when test="${not empty mice}">
-					<p>You are requesting details on PDX model ID <b> ${mice} </b>.</p>
+					<p>PDX model ID <b> ${mice} </b>.</p>
 				</c:when>
 				<c:otherwise>
-					<p>You are requesting general information on the PDX program.</p>
+					<p>General information on the PDX program.</p>
 				</c:otherwise>
 			</c:choose>	
-			<p>Fill out the web form below and a Jackson Laboratory Technical Information Specialist will contact you in 1-2 business days.</p>
+			<p>After you submit this form, a Jackson Laboratory Technical Information Specialist will contact you in 1-2 business days.</p>
 			<p class="required">Designates required information</p>
 			
 		</div>

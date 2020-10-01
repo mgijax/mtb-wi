@@ -825,7 +825,7 @@ textarea:focus {
 	}
 	
 	#pdx-form > fieldset {
-		break-inside:avoid-column;
+		break-inside:avoid;
                 padding:5px 5px 5px;
 	}
 	

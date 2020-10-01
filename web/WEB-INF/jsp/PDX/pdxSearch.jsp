@@ -175,9 +175,23 @@
 
 <section id="summary">
 	<div class="container">
-		<p>Patient Derived Xenograft (PDX) models for cancer research are created by the implantation of human cells and tumor tissue into immune compromised mouse hosts.  PDX models provide a platform for in vivo cancer biology studies and pre-clinical cancer drug efficacy testing.  The current state of the art mouse host is the "NOD-SCID-Gamma2" (NSG) mouse. NSG mice lack mature T and B cells, have no functional natural killer cells, and are deficient in both innate immunity and cytokine signaling.</p>
-		<p><a href="pdxRequest.do">Request more information on the JAX PDX program</a></p>
-		<p><a href="userHelp.jsp#pdxsearch" target="_blank">Help and Documentation</a></p>
+            <p>
+		Patient-Derived Xenografts (PDX) are generated through the engraftment and passaging of tissue or cells from a patient's tumor into an immunodeficient or humanized mouse host. 
+                PDX models are an in vivo platform for cancer biology research and for pre-clinical testing of cancer drug efficacy.
+            </p>
+            <p>
+                The Mouse Models of Human Cancer Database provides access to information on hundreds of PDX models distributed by The Jackson Laboratory (JAX). 
+                Researchers can search for JAX PDXs by such criteria as primary cancer site, diagnosis, genomic characteristics of engrafted tumors, and PDX dosing study results.
+            </p>
+            <p >Related Resources:
+            <ul style="font-size:14px">
+                <li>Try MMHCdb's <a href="${pageContext.request.contextPath}/pdxLikeMe.do">PDX Like Me </a> search tool to find models in the JAX repository that match multiple genomic criteria.</li>
+                <li>MMHCdb has partnered with the European Bioinformatics Institute to develop <a href="https://www.pdxfinder.org" target="_blank">PDX Finder</a>, a global catalog of over 4,000 PDX models.</li>
+                <li><a href="pdxRequest.do" target="_blank">Contact</a> The Jackson Laboratory Mice, Research and Clinical Services group to request information on the JAX PDX program's capabilities and services.</li>
+                <li>Learn <a href="${applicationScope.urlBase}/html/SOCHelp.html" target="_blank" >more</a> about how PDX models are generated at The Jackson Laboratory.</li>
+                <li>See MMHCdb's <a href="userHelp.jsp#pdxsearch" target="_blank"> Help Documentation </a> for details on PDX search options and results.</li>
+            </ul></p>
+		
 	</div>
 </section>
 
@@ -222,7 +236,7 @@
     
 	<c:if test="${not empty tagsValues}">    
     <fieldset >
-        <legend data-tip="Only return models tagged as.">Limit results to models tagged as</legend>
+        <legend data-tip="Return models tagged with clinical cancer characteristics. More than one tag can be selected.">Search for models tagged as:</legend>
     	<html:select property="tags" size="4" multiple="true" style="width:70%;">
     	<html:options collection="tagsValues" property="value" labelProperty="label"/>
     	</html:select>
@@ -230,20 +244,19 @@
 	</c:if>
 
 <fieldset>
-	<legend>Search by diagnosis</legend>
-	<fieldset>	
-		<legend data-tip="Select a diagnosis or diagnoses as search criteria.">Diagnosis</legend>
-		<html:select property="diagnoses" size="8" multiple="true">
+	<legend data-tip="Return models that match the diagnostic term(s). More than one diagnosis can be selected">Search by diagnosis</legend>
+	
+		<html:select property="diagnoses" size="8" style="width:70%" multiple="true">
 			<html:option value="">ANY</html:option>
 			<html:options collection="diagnosesValues" property="value" labelProperty="label"/>
 		</html:select>
-	</fieldset>
+	
 </fieldset>
 
 <fieldset>
-	<legend>Search by dosing study results</legend>   
+	<legend>Search by PDX dosing study results</legend>   
     <fieldset>
-	    <legend data-tip="RECIST drug.">Drug</legend>
+	    <legend>Treatment</legend>
     	<html:select property="recistDrugs" size="4" >
     	<html:options collection="recistDrugs" property="value" labelProperty="label"/>
     	</html:select>
@@ -306,8 +319,8 @@
 	
 	<fieldset>
 
-		<c:choose>
-			<c:when test="${not empty variantsValues}">
+		
+			<c:if test="${not empty variantsValues}">
 			<legend data-tip="Select one or more variants as search criteria">Variants</legend>	
 
 				<html:select property="variants" size="8" multiple="false" styleId="variantSelect">
@@ -316,13 +329,16 @@
 				</html:select>
 			
 				<div id="variantResult"></div>
-			</c:when>
-			<c:otherwise>
+			</c:if>
+                        <c:if test="${not empty gene && empty variantsValues}">
 			<legend>Variants</legend>	
-				<div id="variantResult">No variants for selected gene.</div>
-			</c:otherwise>
+				<div id="variantResult">No variants for ${gene}.</div>
+			</c:if>
+                                
+                        <c:if test="${empty gene}">	
+				<div id="variantResult"></div>
+			</c:if>
 		
-		</c:choose>
 	</fieldset>
         </fieldset>
 </fieldset>   		
@@ -330,17 +346,17 @@
 
 
 <fieldset>
-	<legend>Display gene expression across PDX models for a gene</legend>
+	<legend>Display gene expression across PDX models</legend>
 	<fieldset>
-		<legend data-tip="Select a gene to view expression values">Gene</legend>	
+		<legend data-tip="Start typing to select a gene to view expression values">Gene</legend>	
 		<div id="geneSelectOMatic2"></div>
 	</fieldset>
 </fieldset>
 
 <fieldset>
-	<legend>Search by gene amplification and deletion</legend>
+	<legend>Display amplification and deletion data across PDX models</legend>
 	<fieldset>
-		<legend data-tip="Select a gene">Gene</legend>
+		<legend data-tip="Start typing to select a gene to view amplifications and deletions">Gene</legend>
 		<div id="geneSelectOMatic3"></div>
 	</fieldset>
 </fieldset>

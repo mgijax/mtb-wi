@@ -266,7 +266,7 @@
 					<jax:dl dt="Tumor Growth Data" test="${not empty tumorGrowth}" dd="Required"/>
 					<jax:dl dt="Dosing Studies" test="${not empty dosingStudy}" dd="Required"/>
 					<jax:dl dt="Treatment Naive Patient" test="${not empty treatmentNaive}" dd="Required"/>
-					<jax:dl dt="RECIST Drug" dd="${recistDrug}"/>
+					<jax:dl dt="Treatment" dd="${recistDrug}"/>
 					<jax:dl dt="RECIST Response" dd="${recistResponse}"/>
 					<jax:dl dt="TMB" dd="${tmb}"/>
 						</td>

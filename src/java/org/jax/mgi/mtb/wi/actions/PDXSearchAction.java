@@ -50,7 +50,7 @@ public class PDXSearchAction extends Action {
 
         String geneStr = pdxForm.getGene();
 
-        if (geneStr != null) {
+        if (geneStr != null && geneStr.trim().length()>0) {
 
             
             ArrayList<String> variants = pdxMouseStore.getVariants(geneStr);
@@ -64,8 +64,6 @@ public class PDXSearchAction extends Action {
             }
             request.setAttribute("gene", geneStr);
             request.setAttribute("update", "update");
-        } else {
-            request.setAttribute("gene", "");
         }
 
         request.setAttribute("diagnosesValues", pdxMouseStore.getDiagnosesLVB());

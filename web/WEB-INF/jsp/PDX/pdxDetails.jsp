@@ -743,10 +743,10 @@
 						titleCollapse: true,
 						hideCollapseTool: true,
    						items: [{html:'<c:forEach var="imageData" items="${cnvPlots}" varStatus="status">
-												<div style="text-align:center">\
-												${imageData.get(0)}<br>\
-												<img src="${applicationScope.pdxFileURL}../cnvPlots/tumor_only/${imageData.get(1)}" height="450" width="975"/></div><br>\
- 											</c:forEach>'
+                                                                        <div style="text-align:center">\
+                                                                        ${imageData.get(0)}<br>\
+                                                                        <img src="${applicationScope.pdxFileURL}../cnvPlots/tumor_only/${imageData.get(1)}" height="450" width="975"/></div><br>\
+                                                                </c:forEach>'
    								}]
 
    					});
@@ -770,11 +770,11 @@
 	<jsp:body>
              <form name="AddPDXContentForm" style="font-size:1em;" method="GET" action="pdxAddContent.do">
                  <input type="hidden" value="${modelID}" name="modelID"/>
-                 <div class="container">
+                    <div class="container">
                    
 		
 			<c:if test="${empty unavailable}">
-				<p style="text-align:right;"><a href="pdxRequest.do?mice=${mouse.modelID}">Request more information on this PDX model.</a></p>
+				<p style="text-align:right;"><a href="pdxRequest.do?mice=${mouse.modelID}">Request information on the availability of this model.</a></p>
 			</c:if>
 			<c:if test="${not empty unavailable}">
 				<p style="text-align:right;">This PDX model is not available. (No inventory)</p>
@@ -805,23 +805,23 @@
 						<td width="15%"><h4>Model Details</h4></td>
 						<td>
                                                         <c:if test="${not empty mouse.previousID}">
-							<jax:dl dt="Model ID (Previous ID)" dd="${mouse.modelID} (${mouse.previousID})"/>
+							<jax:dl showNoData="true"  dt="Model ID (Previous ID)" dd="${mouse.modelID} (${mouse.previousID})"/>
                                                         </c:if>
                                                         <c:if test="${empty mouse.previousID}">
-							<jax:dl dt="Model ID" dd="${mouse.modelID}"/>
+							<jax:dl showNoData="true"  dt="Model ID" dd="${mouse.modelID}"/>
                                                         </c:if>
-                                                        <jax:dl dt="Initial Diagnosis" dd="${mouse.initialDiagnosis}" />
-							<jax:dl dt="Final Diagnosis" dd="${mouse.clinicalDiagnosis}" />
+                                                        <jax:dl showNoData="true"  dt="Initial Diagnosis" dd="${mouse.initialDiagnosis}" />
+							<jax:dl showNoData="true"  dt="Final Diagnosis" dd="${mouse.clinicalDiagnosis}" />
                                                         <c:if test="${empty mouse.stage && empty mouse.grade}">
-                                                            <jax:dl dt="Stage/Grade" dd="" />
+                                                            <jax:dl showNoData="true"  dt="Stage/Grade" dd="" />
                                                         </c:if>
 							<c:if test="${not empty mouse.stage || not empty mouse.grade}">
-                                                            <jax:dl dt="Stage/Grade" dd="${mouse.stage} / ${mouse.grade}" />
+                                                            <jax:dl showNoData="true"  dt="Stage/Grade" dd="${mouse.stage} / ${mouse.grade}" />
                                                         </c:if>
-							<jax:dl dt="Model Status" dd="${mouse.modelStatus}" test="${applicationScope.publicDeployment == false}" />
-							<jax:dl dt="Primary Site" dd="${mouse.primarySite}" />
-							<jax:dl dt="Sample Site" dd="${mouse.tissue}" />
-							<jax:dl dt="Tumor Type" dd="${mouse.tumorType}" />   				
+							<jax:dl showNoData="true"  dt="Model Status" dd="${mouse.modelStatus}" test="${applicationScope.publicDeployment == false}" />
+							<jax:dl showNoData="true"  dt="Primary Site" dd="${mouse.primarySite}" />
+							<jax:dl showNoData="true"  dt="Sample Site" dd="${mouse.tissue}" />
+							<jax:dl showNoData="true"  dt="Tumor Type" dd="${mouse.tumorType}" />   				
 							
 						</td>
 					</tr>
@@ -860,31 +860,39 @@
 					<tr>
 						<td><h4>Patient</h4></td>
 						<td>			
-							<jax:dl dt="Sex" dd="${mouse.sex}"/>
-							<jax:dl dt="Age (at time of tissue collection)" dd="${mouse.age}"/>
+							<jax:dl showNoData="true"  dt="Sex" dd="${mouse.sex}"/>
+							<jax:dl showNoData="true"  dt="Age (at time of tissue collection)" dd="${mouse.age}"/>
                                                         <c:if test="${empty mouse.race && empty mouse.ethnicity}">
-                                                            <jax:dl dt="Race/Ethnicity" dd="" />
+                                                            <jax:dl showNoData="true"  dt="Race/Ethnicity" dd="" />
                                                         </c:if>
                                                         <c:if test="${not empty mouse.race || not empty mouse.ethnicity}">
-                                                            <jax:dl dt="Race/Ethnicity" dd="${mouse.race} / ${mouse.ethnicity}" />
+                                                            <jax:dl showNoData="true"  dt="Race/Ethnicity" dd="${mouse.race} / ${mouse.ethnicity}" />
                                                         </c:if>
-							<jax:dl dt="Treatment Na&iuml;ve" dd="${mouse.treatmentNaive}" />
+							
+                                                        <jax:dl showNoData="true"  dt="Treatment Na&iuml;ve?" dd="${mouse.treatmentNaive}" />
+                                                        
+                                                        <c:if test="${empty mouse.currentSmoker &&  empty mouse.formerSmoker}">
+                                                            <jax:dl showNoData="true"  dt="Current Smoker/Former Smoker" dd="" />
+                                                        </c:if>
+                                                        <c:if test="${not empty mouse.currentSmoker ||  not empty mouse.formerSmoker}">
+                                                            <jax:dl showNoData="true"  dt="Current Smoker/Former Smoker" dd="${mouse.currentSmoker} / ${mouse.formerSmoker}" />
+                                                        </c:if>
 						</td>
 					</tr>			
 					
 					<tr>
 						<td><h4>Engraftment</h4></td>
 						<td>			
-							<jax:dl dt="Host Strain" dd="${mouse.strain}" />
-                                                        <jax:dl dt="Sample Type" dd="${mouse.sampleType}" />
-							<jax:dl dt="Engraftment Site" dd="${mouse.location}" />
+							<jax:dl showNoData="true"  dt="Host Strain" dd="${mouse.strain}" />
+                                                        <jax:dl showNoData="true"  dt="Sample Type" dd="${mouse.sampleType}" />
+							<jax:dl showNoData="true"  dt="Engraftment Site" dd="${mouse.location}" />
 							
 						</td>
 					</tr>   	
                         </table>
                                                         
                        </section>
-                 </div>
+                     </div>
                        <section id="detail">
                         <table>
                                         <tr>
@@ -897,7 +905,7 @@
                                             <h4>Variants</h4>
                                         </td>
                                         <td>
-                                                    <p id="noVariantSummary" style="display: none">Variants data currently not available.</p>
+                                            <p id="noVariantSummary" style="display: none"><i>no data</i></p>
                                             </div>
                                             <div id="variantSummary"></div>
                                             <input id="variantData" type="button" value="Download variants data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">			
@@ -908,7 +916,7 @@
                                     </td>
                                     <td>
                                         <c:if test="${empty geneExpressionData}">
-                                                <p>No gene expression data currently available.</p>
+                                                <p><i>no data</i></p>
                                         </c:if>
                                         <c:if test="${not empty geneExpressionData}">
                                                 <p>Platforms: ${platforms}</p>
@@ -928,7 +936,7 @@
                                                 <h4>Gene CNV</h4></td>
                                 <td>
                                                 <c:if test="${empty geneCNVData}">
-                                                        <p>No gene CNV data currently available.</p>
+                                                        <p><i>no data</i></p>
                                                 </c:if>
                                         </div>
                                         <c:if test="${not empty geneCNVData}">
@@ -936,11 +944,11 @@
                                         </c:if>	
                                 </td>
                             </tr>
-            <tr><td>
+                            <tr><td>
 		<h4>CNV Plots</h4></td>
                 <td>
 				<c:if test="${empty cnvPlots}">
-					<p>No gene CNV plots currently available.</p>
+                                    <p><i>no data</i></p>
 				</c:if>				
 			</div>
 			<c:if test="${not empty cnvPlots}">
@@ -957,9 +965,9 @@
                             </c:if>
                             <c:if test="${not empty tmb}">
                             <section id="tmb">
-                                <jax:dl dt="Sample" dts="Samples" dds="${tmb}" />
+                                <jax:dl showNoData="true"  dt="Sample" dts="Samples" dds="${tmb}" />
 
-                                <jax:dl dt="TMB Range" dd="${minTMB}-${maxTMB} (across all JAX PDX models; TMB &gt; 22 is considered high)"/>
+                                <jax:dl showNoData="true"  dt="TMB Range" dd="${minTMB}-${maxTMB} (across all JAX PDX models; TMB &gt; 22 is considered high)"/>
 
                                 </section>
                             </c:if>
@@ -974,7 +982,7 @@
                                 <i>no data</i>
                             </c:if>
                             <c:if test="${not empty msiData}">
-                                <jax:dl dt="Sample" dts="Samples" dds="${msiData}" />
+                                <jax:dl showNoData="true"  dt="Sample" dts="Samples" dds="${msiData}" />
                              </c:if>
                         </td>
                 </tr>
@@ -986,21 +994,26 @@
                                 <i>no data</i>
                         </c:if>
                         <c:if test="${not empty mouse.fusionGenes}">
-                            <jax:dl dt="Fusion Genes" dd="${mouse.fusionGenes}" />
+                            <jax:dl showNoData="true"  dt="Fusion Genes" dd="${mouse.fusionGenes}" />
                         </c:if>
                     </td>
                 </tr>
              </table>
                     <hr>
-             <table>
+                    <table>
             
-                    <tr><td colspan="2">
-                            <h2>Model Characterization</h2></td>
-                        <td>
+                    <tr>
+                        <td colspan="2">
+                            <h2>Model Characterization</h2>
+                        </td>
+                       
                     </tr>
                    
+                    
                     <tr>
-                        <td td width="15%"><h4>Histology</h4></td>
+                        <td td width="15%">
+                            <h4>Histology</h4>
+                        </td>
                     <td>
                         <c:if test="${empty histology}">
                              <i>no data</i>
@@ -1098,16 +1111,48 @@
                                         </c:choose>
                                 </c:forEach>
                             </table>
-
-                                       
-                                       			
+   			
                         </c:if>
 
                  	
                     </td>
-                    
-                   
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Dosing Studies</h4>
+                        </td>			
+                        <td>	
+
+                             <c:if test="${mouse.socGraph == 0}">
+                                          <i>no data</i>
+                             </c:if>
+
+                                <c:if test="${mouse.socGraph > 0}">
+                                    <table>
+                                    <c:forEach var="socGraph" begin="1" end="${mouse.socGraph}" >
+                                        <tr>
+
+                                            <td style="border:0px none">
+                                                <c:choose>
+                                                    <c:when test="${mouse.socGraph == 1}">
+                                                            <iframe width="100%" height="1300px" src='${applicationScope.socURL}${mouse.modelID}.html' style="border:0px none">
+                                                            </iframe>
+                                                    </c:when>
+                                                    <c:otherwise>  
+                                                            <iframe width="100%" height="1300px" src='${applicationScope.socURL}${mouse.modelID}_${socGraph}.html' style="border:0px none">
+                                                            </iframe>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </table>
+                                </c:if>
+                                        
+
+                        </td>
                         </tr>
+
                         <tr>
                             <td><h4>Circos Plots</h4></td>
                             <td>
@@ -1152,44 +1197,10 @@
                                 </c:if>
                             </td>
                         </tr>   
-
-                              
-                       
-                        <tr>
-                            <td><h4>Dosing Studies</h4></td>			
-                            <td>			
-
-                                                <c:if test="${mouse.socGraph > 0}">
-                                                        <c:forEach var="socGraph" begin="1" end="${mouse.socGraph}" >
-                                                                <tr class="stripe${b}">
-                                                                        <td class="cat${b}">
-                                                                                <!-- Dosing Studies: -->
-                                                                        </td>
-                                                                        <td style="border:0px none">
-                                                                                <c:choose>
-                                                                                        <c:when test="${mouse.socGraph == 1}">
-                                                                                                <iframe width="100%" height="1300px" src='${applicationScope.socURL}${mouse.modelID}.html' style="border:0px none">
-                                                                                                </iframe>
-                                                                                        </c:when>
-                                                                                        <c:otherwise>  
-                                                                                                <iframe width="100%" height="1300px" src='${applicationScope.socURL}${mouse.modelID}_${socGraph}.html' style="border:0px none">
-                                                                                                </iframe>
-                                                                                        </c:otherwise>
-                                                                                </c:choose>
-                                                                        </td>
-                                                                </tr>
-                                                        </c:forEach>
-
-                                                </c:if>
-                                         <c:if test="${mouse.socGraph == 0}">
-                                              <i>no data</i>
-                                         </c:if>
-
-                        </td>
-                        </tr>
+                        
         </table>
-        </section>
-             </div>
-       </form>
+                        </section>
+            
+                </form>
 	</jsp:body>
 </jax:mmhcpage>

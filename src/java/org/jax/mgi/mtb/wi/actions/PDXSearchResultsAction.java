@@ -228,7 +228,7 @@ public class PDXSearchResultsAction extends Action {
 
             request.setAttribute("unavailableModels", results[1]);
 
-            request.setAttribute("genes", gene);
+            request.setAttribute("gene", gene);
             request.setAttribute("hideGene", hideGene);
             request.setAttribute("hideFusionGenes", hideFusionGenes);
 

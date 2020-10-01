@@ -373,11 +373,13 @@ let facet,
 		}	
 
 		// Force the least recently expanded facets to collapse
-		while (uh > wh && i < recentExpanded.length) {
-			facets[recentExpanded[i]].forceCollapse();
-			uh = $facets.outerHeight() + $('#facet-controls').outerHeight() + 124;
-			i += 1;
-		}				
+                // This prevents the facets from opening if the window is small
+                // allow for overflow instead
+	//	while (uh > wh && i < recentExpanded.length) {
+	//		facets[recentExpanded[i]].forceCollapse();
+	//		uh = $facets.outerHeight() + $('#facet-controls').outerHeight() + 124;
+	//		i += 1;
+	//	}				
 	},
 
 	updateWithResponse = function(o) {
