@@ -10,39 +10,63 @@
 		<script type="text/javascript">
 			google.load("visualization", "1", {packages:["corechart"]});
 			google.setOnLoadCallback(drawBarCharts); 
+                        
+                        var showDiagnosis = false;
+                        
 			function drawBarCharts(){
 				rankData = google.visualization.arrayToDataTable([${rank}]);
 				rankBarChart = new google.visualization.BarChart(document.getElementById('bar_chart_div3'));
-				rank();		
+				rank(showDiagnosis);		
 			}
 			function rankSelectHandler(e){
 				var selection = rankBarChart.getSelection();
 				var item = selection[0];
 				if (item.row != null){
-					window.open("pdxDetails.do?modelID="+rankData.getValue(item.row,2),"rankData.getValue(item.row,2)");
+					window.open("pdxDetails.do?modelID="+rankData.getValue(item.row,3),"rankData.getValue(item.row,3)");
 				}	
 			}
-			function rank() { 
-				if(rankData.getNumberOfRows()>0){
-					rankData.sort(1);
-					var rankView = new google.visualization.DataView(rankData);
-					if(rankData.getNumberOfColumns()==3){
-						rankView.setColumns([0, 1]);
-					}
-					if(rankData.getNumberOfColumns() == 4){
-						rankView.setColumns([0, 1, 3]);
-					}
-					var options = {
-						fontSize:10,
-						vAxis: {title: 'Model : Sample', titleTextStyle: {color: 'red'}},
-						legend: {position: 'none'},
-						chartArea:{top:20, height:${chartSize}},
-						bar:{groupWidth:10}
+                        
+                        var options = {
+                                        fontSize:10,
+                                        vAxis: {title: 'Model : Sample', titleTextStyle: {color: 'red'}},
+                                        legend: {position: 'none'},
+                                        chartArea:{top:20, height:${chartSize}, left:400, width:'80%'},
+                                        bar:{groupWidth:10}
 					};
+                        
+			function rank(showDiagnosis) {
+                                firstCol = 0;
+                                sortCol = 2;
+                                if(showDiagnosis){
+                                    firstCol = 1;
+                                    sortCol = 1;
+                                }
+				if(rankData.getNumberOfRows()>0){
+					rankData.sort(sortCol);
+					var rankView = new google.visualization.DataView(rankData);
+					if(rankData.getNumberOfColumns()==4){
+						rankView.setColumns([firstCol, 2]);
+					}
+					if(rankData.getNumberOfColumns() == 5){
+						rankView.setColumns([firstCol, 2, 4]);
+					}
+					
 					google.visualization.events.addListener(rankBarChart, 'select', rankSelectHandler);
 					rankBarChart.draw(rankView, options);
 				}
 			}
+                        
+                        function toggleDisplay(){
+                            showDiagnosis = !showDiagnosis;
+                            rank(showDiagnosis);
+                            if(showDiagnosis){
+                                document.getElementById("toggleButton").value="Order by expression"
+                            }else{
+                                document.getElementById("toggleButton").value="Order by diagnosis"
+                            }
+                        }
+                        
+                        
 		</script>
 	</jsp:attribute>
 	<jsp:body>
@@ -68,13 +92,20 @@
 					<h3>${noResults}</h3>
 				</c:when>
 				<c:otherwise>
+                                    <html:form action="pdxSearchResults" method="POST">
+                                    <section style="padding-left: 10px; font-size:12px;">
 					<h3>Rank based Z score expression of ${gene2}</h3>
 					<p>${message}</p>
 					<p>Click on a rank bar to go to the model's details page.</p>
-					<div id="bar_chart_div3" style="height:${divSize}px"></div>
+                                        <p><input type="button" onclick="toggleDisplay();" value="Order by diagnosis" id="toggleButton"/></p><br><br>
+                                        <div id="bar_chart_div3" style="height:${divSize}px"></div><br>
+                                        <p><input type="submit" value="Download as CSV"/></p>
+                                    </section>
+                                    <input type="hidden" name="csv" value="${rank}">
+                                    </html:form>
 				</c:otherwise>
 			</c:choose>
 		</section>
-
+                            
 	</jsp:body>
 </jax:mmhcpage>

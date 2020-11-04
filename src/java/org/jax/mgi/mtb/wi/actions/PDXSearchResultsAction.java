@@ -148,7 +148,8 @@ public class PDXSearchResultsAction extends Action {
             if (mice.size() > 0) {
                 String expr = pdxMouseStore.getExpressionGraph(mice,genes2,false);
                 if (expr != null && expr.length() > 1) {
-                    String data = "['Expression','Expression Level', 'Model Name']," + expr;
+                    
+                    String data = "['Model:Sample','Diagnosis','Expression Level', 'Model Name']," + expr;
                     request.setAttribute("rank", data);
                     String[] lines = data.split("\\[");
                     int size = 50 + lines.length * 15;
@@ -177,7 +178,9 @@ public class PDXSearchResultsAction extends Action {
                 
                 String expr = pdxMouseStore.getExpressionGraph(mice, genesCNV, true);
                 if (expr != null && expr.length() > 1) {
-                    String data = "['Expression','Expression Level', 'Model Name',{ role: 'style' }]," + expr;
+                   
+                    
+                    String data = "['Model:Sample','Diagnosis','Expression Level', 'Model Name',{ role: 'style' }]," + expr;
                     data = data.replaceAll("Amplification", "orange");
                     data = data.replaceAll("Deletion", "blue");
                     data = data.replaceAll("Normal", "grey");
@@ -218,6 +221,30 @@ public class PDXSearchResultsAction extends Action {
                 response.setContentType("text/csv");
                 response.setHeader("Content-disposition", "attachment; filename=PDXMice.csv");
                 response.getWriter().write(pdxMouseStore.getPDXReportWithNoName());
+
+                response.flushBuffer();
+                return null;
+
+            }
+            
+            // requesting expression data as CSV
+             if (request.getParameter("csv") != null) {
+                 
+                String csv = request.getParameter("csv"); 
+                
+                csv = csv.replaceAll("\\[", "").replaceAll("\\],", "\n").replaceAll("\\]", "");
+                csv = csv.replaceAll("hodgkins lymphoma, nodular sclerosis","hodgkins lymphoma nodular sclerosis");
+                
+                if(csv.contains("{ role: 'style' }")){
+                    csv = csv.replace("{ role: 'style' }","CNV").replaceAll("'","");
+                    csv = csv.replaceAll("orange","Amplification" );
+                    csv = csv.replaceAll("blue", "Deletion");
+                    csv = csv.replaceAll("grey", "Normal");
+                }
+                
+                response.setContentType("text/csv");
+                response.setHeader("Content-disposition", "attachment; filename=PDXExpression.csv");
+                response.getWriter().write(csv);
 
                 response.flushBuffer();
                 return null;

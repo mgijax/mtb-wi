@@ -139,7 +139,7 @@ public class InitializationServlet extends HttpServlet {
 
 
                 }catch(Error e){
-                    log.error("Cant load ElimsUtil",e);
+                    log.error("Cant load ElimsUtil (OK if public deployment)",e);
                 }
 
              
@@ -236,7 +236,7 @@ public class InitializationServlet extends HttpServlet {
     
         new PDXMouseStore();
 
-        log.info("MTBWI up.");
+        log.error("No Error but : MTBWI up.");
         System.out.println("MTBWI up.");
     }
 

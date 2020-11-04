@@ -1925,15 +1925,20 @@ public class PDXMouseStore {
         int i = 0;
         String model, sample, passage, ampDelStr;
         Double rankZ;
+        HashMap<String,String> modelDiagnosis = new HashMap();
+        
         while (i < mice.size()) {
 
             StringBuffer mouseIDs = new StringBuffer();
             for (int j = 0; (j < 100) && (i < mice.size()); j++) {
                 if (!DANA_FARBER.equals(mice.get(i).getInstitution()) && !BAYLOR.equals(mice.get(i).getInstitution())) {
                     mouseIDs.append(mice.get(i).getModelID()).append(",");
+                    
+                    modelDiagnosis.put(mice.get(i).getModelID(),mice.get(i).getClinicalDiagnosis().replaceAll("'","").toLowerCase());
                 }
                 i++;
             }
+            
 
             mouseIDs.deleteCharAt(mouseIDs.length() - 1);
             
@@ -1958,11 +1963,12 @@ public class PDXMouseStore {
                         if (ampDel.containsKey(model)) {
                             ampDelStr = ampDel.get(model);
                         }
-                        result.append("['" + model + " : " + sample + "'," + df.format(rankZ) + ",'" + model + "','" + ampDelStr + "'],");
+                        result.append("['" + model + " : " + sample + "','"+modelDiagnosis.get(model)+"'," + df.format(rankZ) + ",'" + model + "','" + ampDelStr + "'],");
                     } else {
                         result.append("['").append(model).append(" : ").append(sample);
-                        result.append(" ").append(passage);
-                        result.append("',").append(df.format(rankZ)).append(",'").append(model).append("'],");
+                        result.append(" ").append(passage).append("',");
+                        result.append("'").append(modelDiagnosis.get(model)).append("',");
+                        result.append(df.format(rankZ)).append(",'").append(model).append("'],");
                     }
                 }
 

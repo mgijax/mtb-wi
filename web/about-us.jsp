@@ -17,6 +17,9 @@
 
                     </p>
                     <p>
+                        See the <a href="https://en.wikipedia.org/wiki/Mouse_Models_of_Human_Cancer_database" target="_blank">MMHCdb Wikipedia page</a>.  
+                    </p>
+                    <p>
                         MMHCdb has partnered with the European Bioinformatics Institute to develop <a href="https://www.pdxfinder.org">PDX Finder</a>, a global catalog of Patient Derived Xenograft models.
                     </p>
 			
