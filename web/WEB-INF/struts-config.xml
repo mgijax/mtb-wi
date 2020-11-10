@@ -35,7 +35,6 @@
                   type="org.jax.mgi.mtb.wi.forms.PDXDashboardForm"/>                  
         <form-bean name="AddPDXContentForm"
                   type="org.jax.mgi.mtb.wi.forms.PDXAddContentForm"/>
-        
          <form-bean name="GeneExpressionForm"
                   type="org.jax.mgi.mtb.wi.forms.GeneExpressionForm"/>
       
@@ -185,10 +184,6 @@
             <forward name="error" path="appError.jsp"/>
         </action>
     
-       
-    
-
-    
         <action path="/dynamicGrid"
             type="org.jax.mgi.mtb.wi.actions.DynamicGridAction"
             name="DynamicGridForm"
@@ -267,22 +262,7 @@
             <forward name="edit" path="/WEB-INF/jsp/PDX/pdxEditContent.jsp"/>
             <forward name="submit" path="/WEB-INF/jsp/PDX/pdxDetails.jsp"/>
         </action>
-    
-        <action path="/pdxEntry"
-            type="org.jax.mgi.mtb.wi.actions.PDXEntryAction"
-            name="PDXEntryForm"
-            scope="request">
-            <forward name="success" path="/WEB-INF/jsp/PDX/pdxEntry.jsp"/>
-            <forward name="failure" path="appError.jsp"/>
-        </action>
-    
-        <action path="/pdxSubmitEntry"
-            type="org.jax.mgi.mtb.wi.actions.PDXSubmitEntryAction"
-            name="PDXEntryForm"
-            scope="request">
-            <forward name="success" path="/WEB-INF/jsp/PDX/pdxEntry.jsp"/>
-            <forward name="failure" path="appError.jsp"/>
-        </action>
+      
     
         <action path="/pdxLogin"
             type="org.jax.mgi.mtb.wi.actions.PDXLoginAction"

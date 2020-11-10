@@ -7,6 +7,8 @@ package org.jax.mgi.mtb.wi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Properties;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,13 +16,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
+import org.jax.mgi.mtb.dao.custom.mtb.MTBPathologyImageUtilDAO;
+import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceUtilDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBSynchronizationUtilDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
 import org.jax.mgi.mtb.dao.mtb.DAOManagerMTB;
 import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.wi.pdx.ElimsUtil;
+import org.jax.mgi.mtb.wi.pdx.ModelCounts;
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
-import org.jax.mgi.mtb.wi.pdx.SOCLoader;
 
 /**
  * The servlet that starts when the server starts.  Configured via the web.xml
@@ -223,6 +227,10 @@ public class InitializationServlet extends HttpServlet {
         
         getServletContext().setAttribute("socURL",
                 WIConstants.getInstance().getSocURL());
+        
+        getServletContext().setAttribute("tumorFrequencyCount",
+                NumberFormat.getNumberInstance(Locale.US).format(WIConstants.getInstance().getTumorFrequencyCount()));
+        
 
         // google analytics only on public
         // fyi not all pages include the meta.jsp which is where the google snippet is
@@ -234,9 +242,30 @@ public class InitializationServlet extends HttpServlet {
 
         // loads static mice
     
-        new PDXMouseStore();
+        PDXMouseStore pdxStore = new PDXMouseStore();
+       
+        
+        // values for About Us data counts
+        
+        // we show PDX Model Numbers from PDXFinder not just JAX
+        getServletContext().setAttribute("pdxModelCount",
+                NumberFormat.getNumberInstance(Locale.US).format(pdxStore.getPDXFinderModelCount()));
+        
+        MTBReferenceUtilDAO refUtil = MTBReferenceUtilDAO.getInstance();
+        getServletContext().setAttribute("referenceCount",
+                NumberFormat.getNumberInstance(Locale.US).format(refUtil.getReferenceCount()));
+        
+        ModelCounts mc  = new ModelCounts();
+        getServletContext().setAttribute("modelCount",
+                NumberFormat.getNumberInstance(Locale.US).format(new Integer(mc.getModelCount())));
+        
+        MTBPathologyImageUtilDAO imageDAO = MTBPathologyImageUtilDAO.getInstance();
+        getServletContext().setAttribute("pathologyImageCount",
+                NumberFormat.getNumberInstance(Locale.US).format(imageDAO.getImageCount()));
+        
+        
 
-        log.error("No Error but : MTBWI up.");
+        log.error("No Errors! : MTBWI up.");
         System.out.println("MTBWI up.");
     }
 

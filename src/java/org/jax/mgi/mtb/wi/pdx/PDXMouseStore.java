@@ -363,6 +363,10 @@ public class PDXMouseStore {
         log.info(d + " Done loading reports");
         reportFreshnessDate = d;
     }
+    
+    public int getModelCount(){
+        return allMice.size();
+    }
 
     // keep a cached copy of the PDXStatus JSON but use a new one if available
     // used by pdx dashboard (external to MTB)
@@ -1982,6 +1986,22 @@ public class PDXMouseStore {
 
         return result.toString();
 
+    }
+    
+    public int getPDXFinderModelCount(){
+        int count =0;
+        try{
+            JSONObject json = new JSONObject(getJSON("https://www.pdxfinder.org/data/graphdata"));
+            JSONArray providers = json.getJSONArray("providers");
+            for(int i =0; i < providers.length(); i++){
+                count += providers.getJSONObject(i).getInt("number");
+            }
+            
+        }catch(JSONException jse){
+            log.error("Can not get PDXFinder model count.",jse);
+            
+        }
+        return count;
     }
 
     private HashMap<String, String> getAmpDel(String gene) {

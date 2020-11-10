@@ -785,7 +785,7 @@ public class WIConstants {
             initMethods();
 
             // get the tumor frequency count
-            //initTumorFrequencyCount();
+            initTumorFrequencyCount();
             // init the database information
             log.info("Initializing database info...");
             initDatabaseInfo();
@@ -890,6 +890,11 @@ public class WIConstants {
         } catch (Exception e) {
             log.error("Error getting grid data.", e);
         }
+    }
+    
+    private void initTumorFrequencyCount(){
+         MTBTumorUtilDAO daoTumorUtil = MTBTumorUtilDAO.getInstance();
+         nTumorFrequencyCount = daoTumorUtil.getTumorFrequencyCount();
     }
 
     /**

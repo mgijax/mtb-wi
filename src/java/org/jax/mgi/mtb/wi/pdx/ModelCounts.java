@@ -251,6 +251,8 @@ public class ModelCounts {
 
         return count;
     }
+    
+    
 
     private String getJSON(URL url) throws Exception {
 
@@ -338,7 +340,26 @@ public class ModelCounts {
         return html.toString();
     }
     
-    
+    public int getModelCount() {
+
+        int count = 0;
+        try {
+
+     
+            URL url = null;
+            url = new URL(solrURL);
+
+            String json = getJSON(url);
+
+            String countStr = json.substring(json.indexOf(NUMFOUND) + NUMFOUND.length());
+            count = new Integer(countStr.substring(0, countStr.indexOf(",")));
+
+        } catch (Exception e) {
+            log.error("Unable to get model counts from Solr.",e);
+        }
+
+        return count;
+    }
    
 
 }
