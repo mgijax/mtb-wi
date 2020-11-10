@@ -68,34 +68,9 @@ public class WIConstants {
     private final int SITE_ID_LOTHAR = 100;
     private final int SITE_ID_NCIMR = 101;
     private final int SITE_ID_CARDIFF = 102;
-    public final String WHATS_NEW_LABEL = "What's New";
-    public final String WHATS_NEW_NAME = "whatsNew";
+    
     public final String WHATS_NEW_URL = "whatsNew.jsp";
-    public final String SEARCH_LABEL_TUMOR = "Tumor Search Results";
-    public final String SEARCH_LABEL_ALL = "all";
-    public final String SEARCH_LABEL_MAIN_TUMOR = "Advanced Tumor Search";
-    public final String SEARCH_NAME_ORGAN = "organSearch";
-    public final String SEARCH_NAME_TUMOR = "tumorSearch";
-    public final String SEARCH_URL_TUMOR = "tumorSearch.do";
-    public final String SEARCH_RESULTS_TUMOR_URL = "tumorSearchResults.do?maxItems=10&tumorName=";
-    public final String SEARCH_RESULTS_TUMOR_URL_ALL = "tumorSearchResults.do?maxItems=No+Limit&tumorName=";
-    public final String SEARCH_LABEL_MAIN_ORGAN = "Advanced Organ Search";
-    public final String SEARCH_LABEL_ORGAN = "Organ Search Results";
-    public final String SEARCH_URL_ORGAN = "tumorSearch.do";
-    public final String SEARCH_RESULTS_ORGAN_URL = "tumorSearchResults.do?maxItems=10&organOriginName=";
-    public final String SEARCH_RESULTS_ORGAN_URL_ALL = "tumorSearchResults.do?maxItems=No+Limit&organOriginName=";
-    public final String SEARCH_LABEL_MAIN_STRAIN = "Advanced Strain Search";
-    public final String SEARCH_LABEL_STRAIN = "Strain Search Results";
-    public final String SEARCH_NAME_STRAIN = "strainSearch";
-    public final String SEARCH_URL_STRAIN = "strainSearch.do";
-    public final String SEARCH_RESULTS_STRAIN_URL = "strainSearchResults.do?maxItems=10&strainName=";
-    public final String SEARCH_RESULTS_STRAIN_URL_ALL = "strainSearchResults.do?maxItems=No+Limit&strainName=";
-    public final String SEARCH_LABEL_MAIN_GENETICS = "Advanced Genetics Search";
-    public final String SEARCH_LABEL_GENETICS = "Genetics Search Results";
-    public final String SEARCH_NAME_GENETICS = "geneticsSearch";
-    public final String SEARCH_URL_GENETICS = "geneticsSearch.do";
-    public final String SEARCH_RESULTS_GENETICS_URL = "geneticsSearchResults.do?maxItems=10&markerName=";
-    public final String SEARCH_RESULTS_GENETICS_URL_ALL = "geneticsSearchResults.do?maxItems=No+Limit&markerName=";
+   
     public final String PUBLIC_DEPLOYMENT = "public";
     // these strings are used by the quick search to pull out search results from jsps/urls
     //they must match the comments in the jsp (see tumorSearchResults.jsp)
@@ -133,9 +108,7 @@ public class WIConstants {
     private final static String SITE_LONG_NAME_MPD = "Mouse Phenome Database (MPD)";
     private final static String SITE_LONG_NAME_FESTINGS = "Festing's List of Inbred Strains";
     private final static String SITE_LONG_NAME_JAXMICE = "JAX<sup>&reg;</sup>Mice";
-    private final static String QTL_FILE = "qtl.file";
-    private final static String GVIEWER_PATH = "gviewer.path";
-    private final static String MOUSE_IDEO_FILE = "mouse.ideo.file";
+   
     private final static String PDX_FILE_PATH = "pdx.file.path";
     private final static String PDX_FILE_URL = "pdx.file.url";
     private final static String PDX_EMAIL = "pdx.email";
@@ -152,19 +125,16 @@ public class WIConstants {
     /* ----------------------------------------------------- Instance Variables */
     private static WIConstants instance = new WIConstants();
     /* Q: Why use a map here instead of a hashtable? */
- /* A: Because a LinkedHashMap keeps the order of insertion */
-    private Map<Long, LabelValueBean<String, Long>> mapAgents = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
-    private Map<Long, LabelValueBean<String, Long>> mapAgentTypes = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
-    private Map<Long, LabelValueBean<String, Long>> mapAlleleGroupTypes = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
-    private Map<Long, LabelValueBean<String, Long>> mapAlleleTypes = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
-    private Map<Long, LabelValueBean<String, Long>> mapAnatomicalSystems = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
-    private Map<Long, LabelValueBean<String, Long>> mapChromosomes = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
-    private Map<Long, LabelValueBean<String, Long>> mapOrgans = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
-    private Map<Long, LabelValueBean<String, Long>> mapProbes = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
-    private Map<Long, LabelValueBean<String, Long>> mapStrainTypes = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
-    private Map<Long, LabelValueBean<String, Long>> mapTumorClassifications = new LinkedHashMap<Long, LabelValueBean<String, Long>>();
-    private Map<String, LabelValueBean<String, String>> mapMethods = new LinkedHashMap<String, LabelValueBean<String, String>>();
-    private ArrayList<LabelValueBean<String, Long>> referenceOrgans = new ArrayList<LabelValueBean<String, Long>>();
+    /* A: Because a LinkedHashMap keeps the order of insertion */
+    private Map<Long, LabelValueBean<String, Long>> mapAgents = new LinkedHashMap<>();
+    private Map<Long, LabelValueBean<String, Long>> mapAgentTypes = new LinkedHashMap<>();
+   
+    private Map<Long, LabelValueBean<String, Long>> mapChromosomes = new LinkedHashMap<>();
+    private Map<Long, LabelValueBean<String, Long>> mapOrgans = new LinkedHashMap<>();
+    private Map<Long, LabelValueBean<String, Long>> mapProbes = new LinkedHashMap<>();
+    private Map<Long, LabelValueBean<String, Long>> mapStrainTypes = new LinkedHashMap<>();
+    private Map<Long, LabelValueBean<String, Long>> mapTumorClassifications = new LinkedHashMap<>();
+   
     private int nTumorFrequencyCount = -1;
     private String strURLBase;
     private String strURLImageDir;
@@ -251,45 +221,15 @@ public class WIConstants {
         return this.mapAgents;
     }
 
-    /**
-     * Get a <code>Map</code> of <code>LabelValueBean</code> objects
-     * representing <code>AgentType</code> data.
-     *
-     * @return a <code>Map</code> of <code>LabelValueBean</code> objects
-     */
+   
     public Map<Long, LabelValueBean<String, Long>> getAgentTypes() {
         return this.mapAgentTypes;
     }
+    
 
-    /**
-     * Get a <code>Map</code> of <code>LabelValueBean</code> objects
-     * representing <code>AlleleGroupType</code> data.
-     *
-     * @return a <code>Map</code> of <code>LabelValueBean</code> objects
-     */
-    public Map<Long, LabelValueBean<String, Long>> getAlleleGroupTypes() {
-        return this.mapAlleleGroupTypes;
-    }
+   
 
-    /**
-     * Get a <code>Map</code> of <code>LabelValueBean</code> objects
-     * representing <code>AlleleType</code> data.
-     *
-     * @return a <code>Map</code> of <code>LabelValueBean</code> objects
-     */
-    public Map<Long, LabelValueBean<String, Long>> getAlleleTypes() {
-        return this.mapAlleleTypes;
-    }
-
-    /**
-     * Get a <code>Map</code> of <code>LabelValueBean</code> objects
-     * representing <code>AnatomicalSystem</code> data.
-     *
-     * @return a <code>Map</code> of <code>LabelValueBean</code> objects
-     */
-    public Map<Long, LabelValueBean<String, Long>> getAnatomicalSystems() {
-        return this.mapAnatomicalSystems;
-    }
+   
 
     /**
      * Get a <code>Map</code> of <code>LabelValueBean</code> objects
@@ -365,100 +305,10 @@ public class WIConstants {
         return this.strJDBCUser;
     }
 
-    /**
-     *
-     * @param section
-     * @return
-     */
-    public String getLabelForSection(String strSection) {
-        if (strSection.equals(SEARCH_NAME_TUMOR)) {
-            return SEARCH_LABEL_TUMOR;
-        } else if (strSection.equals(SEARCH_NAME_STRAIN)) {
-            return SEARCH_LABEL_STRAIN;
-        } else if (strSection.equals(SEARCH_NAME_ORGAN)) {
-            return SEARCH_LABEL_ORGAN;
-        } else if (strSection.equals(SEARCH_NAME_GENETICS)) {
-            return SEARCH_LABEL_GENETICS;
-        }
+    
 
-        return null;
-    }
-
-    /**
-     *
-     * @param section
-     * @return
-     */
-    public String getMainLabelForSection(String strSection) {
-        if (strSection.equals(SEARCH_NAME_TUMOR)) {
-            return SEARCH_LABEL_MAIN_TUMOR;
-        } else if (strSection.equals(SEARCH_NAME_STRAIN)) {
-            return SEARCH_LABEL_MAIN_STRAIN;
-        } else if (strSection.equals(SEARCH_NAME_ORGAN)) {
-            return SEARCH_LABEL_MAIN_ORGAN;
-        } else if (strSection.equals(SEARCH_NAME_GENETICS)) {
-            return SEARCH_LABEL_MAIN_GENETICS;
-        }
-
-        return null;
-    }
-
-    /**
-     *
-     * @param section
-     * @return
-     */
-    public String getSearchUrlForSection(String strSection) {
-        if (strSection.equals(SEARCH_NAME_TUMOR)) {
-            return SEARCH_URL_TUMOR;
-        } else if (strSection.equals(SEARCH_NAME_STRAIN)) {
-            return SEARCH_URL_STRAIN;
-        } else if (strSection.equals(SEARCH_NAME_ORGAN)) {
-            return SEARCH_URL_ORGAN;
-        } else if (strSection.equals(SEARCH_NAME_GENETICS)) {
-            return SEARCH_URL_GENETICS;
-        }
-
-        return null;
-    }
-
-    /**
-     *
-     * @param section
-     * @return
-     */
-    public String getSearchResultsUrlAllForSection(String strSection) {
-        if (strSection.equals(SEARCH_NAME_TUMOR)) {
-            return SEARCH_RESULTS_TUMOR_URL_ALL;
-        } else if (strSection.equals(SEARCH_NAME_STRAIN)) {
-            return SEARCH_RESULTS_STRAIN_URL_ALL;
-        } else if (strSection.equals(SEARCH_NAME_ORGAN)) {
-            return SEARCH_RESULTS_ORGAN_URL_ALL;
-        } else if (strSection.equals(SEARCH_NAME_GENETICS)) {
-            return SEARCH_RESULTS_GENETICS_URL_ALL;
-        }
-
-        return null;
-    }
-
-    /**
-     *
-     * @param section
-     * @return
-     */
-    public String getSearchResultsUrlForSection(String strSection) {
-        if (strSection.equals(SEARCH_NAME_TUMOR)) {
-            return SEARCH_RESULTS_TUMOR_URL;
-        } else if (strSection.equals(SEARCH_NAME_STRAIN)) {
-            return SEARCH_RESULTS_STRAIN_URL;
-        } else if (strSection.equals(SEARCH_NAME_ORGAN)) {
-            return SEARCH_RESULTS_ORGAN_URL;
-        } else if (strSection.equals(SEARCH_NAME_GENETICS)) {
-            return SEARCH_RESULTS_GENETICS_URL;
-        }
-
-        return null;
-    }
+    
+    
 
     /**
      *
@@ -490,13 +340,7 @@ public class WIConstants {
         }
     }
 
-    /**
-     *
-     * @return
-     */
-    public Map<String, LabelValueBean<String, String>> getMethods() {
-        return this.mapMethods;
-    }
+   
 
     /**
      *
@@ -717,9 +561,7 @@ public class WIConstants {
         this.strMouseIdeoFile = strMouseIdeoFile;
     }
 
-    public ArrayList<LabelValueBean<String, Long>> getReferenceOrgans() {
-        return this.referenceOrgans;
-    }
+   
 
     public boolean getPublicDeployment() {
         return "public".equals(this.mtbDeployment);
@@ -744,13 +586,7 @@ public class WIConstants {
             log.info("Initializing chromosomes...");
             initChromosomes();
 
-            // get the allele types
-            log.info("Initializing allele types...");
-            initAlleleTypes();
-
-            // get the allele group types
-            log.info("Initializing allele groups...");
-            initAlleleGroupTypes();
+           
 
             // get the agent types
             log.info("Initializing agent types...");
@@ -760,17 +596,13 @@ public class WIConstants {
             log.info("Initializing agents...");
             initAgents();
 
-            // get the anatomical systems
-            log.info("Initializing anatomical systems...");
-            initAnatomicalSystems();
+           
 
             // get the organs
             log.info("Initializing organs...");
             initOrgans();
 
-            // get the probes (antibodies)
-            log.info("Initializing probes...");
-            initProbes();
+           
 
             // get the strain types
             log.info("Initializing strain types...");
@@ -780,9 +612,7 @@ public class WIConstants {
             log.info("Initializing tumor classifications...");
             initTumorClassifications();
 
-            // init methods and/or stains
-            log.info("Initializing methods/stains...");
-            initMethods();
+            
 
             // get the tumor frequency count
             initTumorFrequencyCount();
@@ -795,7 +625,7 @@ public class WIConstants {
             initTFGrid();
             log.info("Finished initializing tumor frequency grid.");
 
-            initReferenceOrgans();
+            
 
         } catch (Exception e) {
             log.error("Fatal Initialization Error", e);
@@ -832,9 +662,7 @@ public class WIConstants {
             strPathologyImageURL = props.getProperty(PATHOLOGY_IMAGE_URL);
             strPathologyImagePath = props.getProperty(PATHOLOGY_IMAGE_PATH);
 
-            strQTLFile = props.getProperty(QTL_FILE);
-            strGViewerPath = props.getProperty(GVIEWER_PATH);
-            setMouseIdeoFile(props.getProperty(MOUSE_IDEO_FILE));
+           
             this.pdxFilePath = props.getProperty(PDX_FILE_PATH);
             this.pdxFileURL = props.getProperty(PDX_FILE_URL);
             this.pdxEmail = props.getProperty(PDX_EMAIL);
@@ -944,69 +772,10 @@ public class WIConstants {
         }
     }
 
-    /**
-     * Initialize a <code>Map</code> of <code>LabelValueBean</code> objects
-     * representing <code>AlleleGroupType</code> data.
-     */
-    private void initAlleleGroupTypes() {
-        try {
-            // get the allele types
-            AlleleGroupTypeDAO daoAlleleGroupType = AlleleGroupTypeDAO.getInstance();
-            List<AlleleGroupTypeDTO> listAlleleGroupTypes = daoAlleleGroupType.loadAll();
+   
 
-            Collections.sort(listAlleleGroupTypes, new AlleleGroupTypeComparator(AlleleGroupTypeDAO.ID_NAME));
 
-            for (AlleleGroupTypeDTO dto : listAlleleGroupTypes) {
-                mapAlleleGroupTypes.put(dto.getAlleleGroupTypeKey(),
-                        new LabelValueBean<String, Long>(dto.getName(), dto.getAlleleGroupTypeKey()));
-            }
-        } catch (Exception e) {
-            log.error("Error initializing allele group types", e);
-        }
-    }
-
-    /**
-     * Initialize a <code>Map</code> of <code>LabelValueBean</code> objects
-     * representing <code>AlleleType</code> data.
-     */
-    private void initAlleleTypes() {
-        try {
-            // get the allele types
-            AlleleTypeDAO daoAlleleType = AlleleTypeDAO.getInstance();
-            List<AlleleTypeDTO> listAlleleTypes = daoAlleleType.loadAll();
-
-            Collections.sort(listAlleleTypes, new AlleleTypeComparator(AlleleTypeDAO.ID_SORTORDER));
-
-            for (AlleleTypeDTO dto : listAlleleTypes) {
-                mapAlleleTypes.put(dto.getAlleleTypeKey(),
-                        new LabelValueBean<String, Long>(dto.getType(), dto.getAlleleTypeKey()));
-            }
-        } catch (Exception e) {
-            log.error("Error initializing allele types", e);
-        }
-    }
-
-    /**
-     * Initialize a <code>Map</code> of <code>LabelValueBean</code> objects
-     * representing <code>AnatomicalSystem</code> data.
-     */
-    private void initAnatomicalSystems() {
-        try {
-            // get the organs
-            AnatomicalSystemDAO daoAnatomicalSystem = AnatomicalSystemDAO.getInstance();
-            List<AnatomicalSystemDTO> listAnatomicalSystems = daoAnatomicalSystem.loadAll();
-
-            Collections.sort(listAnatomicalSystems, new AnatomicalSystemComparator(AnatomicalSystemDAO.ID_NAME));
-
-            for (AnatomicalSystemDTO dto : listAnatomicalSystems) {
-                mapAnatomicalSystems.put(dto.getAnatomicalSystemKey(),
-                        new LabelValueBean<String, Long>(dto.getName(),
-                                dto.getAnatomicalSystemKey()));
-            }
-        } catch (Exception e) {
-            log.error("Error initializing anatomical systems", e);
-        }
-    }
+   
 
     /**
      * Initialize a <code>Map</code> of <code>LabelValueBean</code> objects
@@ -1054,19 +823,7 @@ public class WIConstants {
         }
     }
 
-    private void initMethods() {
-        try {
-            // get the probes (antibodies)
-            MTBPathologyImageUtilDAO daoPathUtil = MTBPathologyImageUtilDAO.getInstance();
-            List<LabelValueBean<String, String>> listMethods = daoPathUtil.getMethods();
-
-            for (LabelValueBean<String, String> bean : listMethods) {
-                mapMethods.put(bean.getValue(), new LabelValueBean<String, String>(bean.getLabel(), bean.getValue()));
-            }
-        } catch (Exception e) {
-            log.error("Error initializing methods", e);
-        }
-    }
+    
 
     private void initOrgans() {
         try {
@@ -1087,29 +844,7 @@ public class WIConstants {
         }
     }
 
-    private void initReferenceOrgans() {
-
-        referenceOrgans = MTBReferenceUtilDAO.getInstance().getReferenceOrgans();
-
-    }
-
-    private void initProbes() {
-        try {
-            // get the probes (antibodies)
-            ProbeDAO daoProbe = ProbeDAO.getInstance();
-            List<ProbeDTO> listProbes = daoProbe.loadAll();
-
-            Collections.sort(listProbes, new ProbeComparator(ProbeDAO.ID_NAME));
-
-            for (ProbeDTO dto : listProbes) {
-                mapProbes.put(dto.getProbeKey(),
-                        new LabelValueBean<String, Long>(dto.getName(), dto.getProbeKey()));
-            }
-        } catch (Exception e) {
-            log.error("Error initializing probes", e);
-        }
-    }
-
+   
     private void initStrainTypes() {
         try {
             // get the strain types

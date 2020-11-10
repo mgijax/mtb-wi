@@ -170,58 +170,7 @@ public class WIUtils {
         return colInfo;
     }
 
-    /**
-     * Perform a "screen scrape" of the designated urls.
-     *
-     * @param arrUrls a List of QuickSearchDataBeans
-     * @return A populated List of QuickSearchDataBean
-     */
-    public static List<QuickSearchDataBean> quickUrlSearch(List<QuickSearchDataBean> arrUrls) {
-        if (arrUrls == null) {
-            return null;
-        }
-
-        if (arrUrls.size() == 0) {
-            return null;
-        }
-
-        List<URLDownloader> arrThreads = new ArrayList<URLDownloader>();
-
-        // create the threads and start them
-        for (int i = 0; i < arrUrls.size(); i++) {
-            String strUrl = arrUrls.get(i).getSearchUrl();
-            URLDownloader urldownloader = new URLDownloader(strUrl);
-
-            arrThreads.add(urldownloader);
-            urldownloader.start();
-        }
-
-        // wait until all the threads are finished
-        boolean bDone = false;
-
-        while (!bDone) {
-            bDone = true;
-            for (int i = 0; i < arrUrls.size(); i++) {
-                if (arrThreads.get(i).isAlive()) {
-                    bDone = false;
-                }
-            }
-        }
-
-        // get the data
-        List<QuickSearchDataBean> arrRet = new ArrayList<QuickSearchDataBean>();
-
-        for (int i = 0; i < arrUrls.size(); i++) {
-            QuickSearchDataBean oldBean = arrUrls.get(i);
-            QuickSearchDataBean newBean = new QuickSearchDataBean();
-            newBean.copy(oldBean);
-            newBean.setSearchText(arrThreads.get(i).getData());
-            arrRet.add(newBean);
-        }
-
-        return arrRet;
-    }
-
+    
     /**
      * Convert the values in the Mao specified by the array.
      *
@@ -321,7 +270,7 @@ public class WIUtils {
      */
     public static List<String> strainTypeKeysToLabel(Collection<String> colKeys) {
         List<String> arrLabels = new ArrayList<String>();
-
+     
         if ((colKeys != null) && (colKeys.size() > 0)) {
             arrLabels = new ArrayList<String>();
             final Map<Long,LabelValueBean<String,Long>> strainTypes =
@@ -380,74 +329,8 @@ public class WIUtils {
         return arrLabels;
     }
 
-    /**
-     * Convert a collection of keys to their associated name values.
-     *
-     * @param colChromosomes A collection of unique keys
-     * @return A Collection of Strings containing the chromosomes
-     */
-    public static List<String> chromosomeKeysToLabel(Collection<String> colChromosomes) {
-        // create the collection of matching chromosomes to return
-        List<String> arrLabels = new ArrayList<String>();
-
-        if ((colChromosomes != null) && (colChromosomes.size() > 0)) {
-            arrLabels = new ArrayList<String>();
-            final Map<Long,LabelValueBean<String,Long>> allChromosomes =
-                    WIConstants.getInstance().getChromosomes();
-
-            for (String s : colChromosomes) {
-                arrLabels.add(allChromosomes.get(Long.valueOf(s)).getLabel());
-            }
-        }
-
-        return arrLabels;
-    }
-
-    /**
-     * Convert a collection of keys to their associated name values.
-     *
-     * @param colMutations A collection of unique keys
-     * @return A Collection of Strings containing the mutations
-     */
-    public static List<String> mutationKeysToLabel(Collection<String> colMutations) {
-        // create the collection of matching mutations to return
-        List<String> arrLabels = new ArrayList<String>();
-
-        if ((colMutations != null) && (colMutations.size() > 0)) {
-            arrLabels = new ArrayList<String>();
-            final Map<Long,LabelValueBean<String,Long>> allMutations =
-                    WIConstants.getInstance().getAlleleGroupTypes();
-
-            for (String s : colMutations) {
-                arrLabels.add(allMutations.get(Long.valueOf(s)).getLabel());
-            }
-        }
-
-        return arrLabels;
-    }
-
-    /**
-     * Convert a collection of keys to their associated name values.
-     *
-     * @param colProbes A collection of unique keys
-     * @return A Collection of Strings containing the mutations
-     */
-    public static Collection<String> probeKeysToLabel(Collection<String> colProbes) {
-        // create the collection of matching mutations to return
-        List<String> arrLabels = new ArrayList<String>();
-
-        if ((colProbes != null) && (colProbes.size() > 0)) {
-            arrLabels = new ArrayList<String>();
-            final Map<Long,LabelValueBean<String,Long>> allProbes =
-                    WIConstants.getInstance().getProbes();
-
-            for (String s : colProbes) {
-                arrLabels.add(allProbes.get(Long.valueOf(s)).getLabel());
-            }
-        }
-
-        return arrLabels;
-    }
+   
+   
 
     public static String agenttypeKeyToLabel(long lKey) {
         Map<Long,LabelValueBean<String,Long>> mapAgentTypes = null;

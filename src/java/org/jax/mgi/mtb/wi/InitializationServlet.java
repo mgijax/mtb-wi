@@ -204,17 +204,12 @@ public class InitializationServlet extends HttpServlet {
         getServletContext().setAttribute("assayImagePath",
                 WIConstants.getInstance().getAssayImagePath());
 
-        getServletContext().setAttribute("gViewerPath",
-                WIConstants.getInstance().getGViewerPath());
-
         getServletContext().setAttribute("pathologyImagePath",
                 WIConstants.getInstance().getPathologyImagePath());
 
         getServletContext().setAttribute("pathologyImageUrl",
                 WIConstants.getInstance().getPathologyImageURL());
 
-        getServletContext().setAttribute("mouseIdeoFile",
-                WIConstants.getInstance().getMouseIdeoFile());
 
         getServletContext().setAttribute("pdxFileURL",
                 WIConstants.getInstance().getPDXFileURL());

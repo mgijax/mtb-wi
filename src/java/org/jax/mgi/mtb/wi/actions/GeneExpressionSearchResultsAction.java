@@ -108,8 +108,8 @@ public class GeneExpressionSearchResultsAction extends Action{
       request.setAttribute("seriesWSamples", seriesWSamples);
       request.setAttribute("samplesWOSeries", samplesWOSeries);
       request.setAttribute("results", results);
-      request.setAttribute("organs",WIUtils.organKeysToLabel(organs));
-      request.setAttribute("tumorClassifications", WIUtils.tumorclassificationKeysToLabel(tumorClassifications));
+   //   request.setAttribute("organs",WIUtils.organKeysToLabel(organs));
+   //   request.setAttribute("tumorClassifications", WIUtils.tumorclassificationKeysToLabel(tumorClassifications));
       request.setAttribute("platforms",cleanPlatforms);
       
       if(seriesId != null && seriesId.length()>0){

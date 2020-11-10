@@ -161,7 +161,8 @@
             <forward name="failure" path="/WEB-INF/jsp/genetics/geneticsSummaryFailure.jsp"/>
             <forward name="error" path="appError.jsp"/>
         </action>
-        <action path="/advancedSearch"
+        
+ <!--       <action path="/advancedSearch"
               type="org.jax.mgi.mtb.wi.actions.AdvancedSearchAction"
               scope="request">
             <forward name="success" path="/WEB-INF/jsp/advanced/advancedSearch.jsp"/>
@@ -177,6 +178,8 @@
             <forward name="failure" path="advancedSearch.do"/>
             <forward name="error" path="appError.jsp"/>
         </action>
+  
+-->
         <action path = "/serverInfo"
               type = "org.jax.mgi.mtb.wi.actions.ServerInfo"
               scope="request">
