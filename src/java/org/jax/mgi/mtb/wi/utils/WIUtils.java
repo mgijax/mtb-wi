@@ -14,9 +14,8 @@ import org.jax.mgi.mtb.dao.gen.mtb.StrainSynonymsDAO;
 import org.jax.mgi.mtb.dao.gen.mtb.StrainSynonymsDTO;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.utils.StringUtils;
-import org.jax.mgi.mtb.utils.URLDownloader;
 import org.jax.mgi.mtb.wi.WIConstants;
-import org.jax.mgi.mtb.wi.beans.QuickSearchDataBean;
+
 
 /**
  * WIUtils
@@ -331,6 +330,31 @@ public class WIUtils {
 
    
    
+
+   
+
+    /**
+     * Convert a collection of keys to their associated name values.
+     *
+     * @param colProbes A collection of unique keys
+     * @return A Collection of Strings containing the mutations
+     */
+    public static Collection<String> probeKeysToLabel(Collection<String> colProbes) {
+        // create the collection of matching mutations to return
+        List<String> arrLabels = new ArrayList<String>();
+
+        if ((colProbes != null) && (colProbes.size() > 0)) {
+            arrLabels = new ArrayList<String>();
+            final Map<Long,LabelValueBean<String,Long>> allProbes =
+                    WIConstants.getInstance().getProbes();
+
+            for (String s : colProbes) {
+                arrLabels.add(allProbes.get(Long.valueOf(s)).getLabel());
+            }
+        }
+
+        return arrLabels;
+    }
 
     public static String agenttypeKeyToLabel(long lKey) {
         Map<Long,LabelValueBean<String,Long>> mapAgentTypes = null;

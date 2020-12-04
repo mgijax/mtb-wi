@@ -102,7 +102,7 @@
 				<table>
 					<tr>
 						<td>
-							<a href="nojavascript.jsp" onClick="popPathWin('pathologyImageDetails.do?key=${image.imageId}', 'ImageId${image.imageId}');return false;">
+							<a href="pathologyImageDetails.do?key=${image.imageId}" target="_blank">
 							<img width=150 src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${image.imageThumbName}" alt="${image.imageId}"></a>
 						</td>
 						<td width=250>

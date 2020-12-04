@@ -27,10 +27,12 @@
 		<td><c:out value="${rec.ageAtNecropsy}" escapeXml="false" default="&nbsp;"/></td>	
 	</tr>
 	<c:if test="${not empty rec.images}">
-	<tr>
-		<td class="tumor-images" colspan="3">
+	
 			
-			<c:forEach var="image" items="${rec.images}" varStatus="status2">																
+			<c:forEach var="image" items="${rec.images}" varStatus="status2">	
+                            
+                        <tr>
+                            <td class="tumor-images" colspan="3">    
 			<figure>
 				<a href="pathologyImageDetails.do?key=${image.imageId}">
 					<img src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${image.imageThumbName}">
@@ -55,11 +57,13 @@
 					<h5>Image Caption</h5>
 					<p>${image.imageCaption}</p>
 				</figcaption>
-			</figure>
+                        </figure>
+                                
+                                </td>
+                            </tr>
 			</c:forEach>
 			
-		</td>
-	</tr>
+		
 	</c:if>
 	</tbody>
 	</c:forEach>

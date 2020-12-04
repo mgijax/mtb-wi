@@ -602,6 +602,9 @@ public class WIConstants {
             log.info("Initializing organs...");
             initOrgans();
 
+            // get the probes (antibodies)
+            log.info("Initializing probes...");
+            initProbes();
            
 
             // get the strain types
@@ -845,6 +848,25 @@ public class WIConstants {
     }
 
    
+     
+
+    private void initProbes() {
+        try {
+            // get the probes (antibodies)
+            ProbeDAO daoProbe = ProbeDAO.getInstance();
+            List<ProbeDTO> listProbes = daoProbe.loadAll();
+
+            Collections.sort(listProbes, new ProbeComparator(ProbeDAO.ID_NAME));
+
+            for (ProbeDTO dto : listProbes) {
+                mapProbes.put(dto.getProbeKey(),
+                        new LabelValueBean<String, Long>(dto.getName(), dto.getProbeKey()));
+            }
+        } catch (Exception e) {
+            log.error("Error initializing probes", e);
+        }
+    }
+
     private void initStrainTypes() {
         try {
             // get the strain types

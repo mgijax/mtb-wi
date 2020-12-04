@@ -37,7 +37,8 @@
                   type="org.jax.mgi.mtb.wi.forms.PDXAddContentForm"/>
          <form-bean name="GeneExpressionForm"
                   type="org.jax.mgi.mtb.wi.forms.GeneExpressionForm"/>
-      
+         <form-bean name="PathologyImageSearchForm"
+                 type="org.jax.mgi.mtb.wi.forms.PathologyImageSearchForm"/>
         
     </form-beans>
 
@@ -104,6 +105,31 @@
             <forward name="failure" path="/WEB-INF/jsp/reference/referenceDetailsFailure.jsp"/>
             <forward name="error"   path="/WEB-INF/jsp/reference/referenceDetailsError.jsp"/>
         </action>
+        
+        
+         <action path="/pathologyImageSearch"
+              type="org.jax.mgi.mtb.wi.actions.PathologyImageSearchAction"
+              scope="request">
+            <forward name="success" path="/WEB-INF/jsp/pathologyImage/pathologyImageSearch.jsp"/>
+            <forward name="failure" path="appError.jsp"/>
+        </action>
+        
+        
+        <action path = "/pathologyImageSearchResults"
+              type = "org.jax.mgi.mtb.wi.actions.PathologyImageSearchResultsAction"
+              name = "PathologyImageSearchForm"
+              validate = "true"
+              input = "/pathologyImageSearch.do"
+              scope="request">
+            <forward name="success" path="/WEB-INF/jsp/pathologyImage/pathologyImageSearchResults.jsp"/>
+           
+            <forward name="error" path="appError.jsp"/>
+        </action>
+       
+        
+        
+        
+        
         
         <action path = "/pathologyImageDetails"
               type = "org.jax.mgi.mtb.wi.actions.PathologyImageDetailsAction"
