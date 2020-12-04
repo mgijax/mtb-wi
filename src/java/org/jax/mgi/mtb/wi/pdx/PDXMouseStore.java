@@ -1835,6 +1835,12 @@ public class PDXMouseStore {
 
     // returns an array list of plot URLs
     public ArrayList<ArrayList<String>> getCNVPlotsForModel(String modelID) {
+        
+        if("J000112064".equals(modelID) || "J000111644".equals(modelID)){
+            log.warn("hiding CNV plots for model "+modelID);
+            return null;
+        }
+        
         return cnvPlots.get(modelID);
     }
 

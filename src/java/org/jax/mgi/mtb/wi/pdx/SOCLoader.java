@@ -46,11 +46,7 @@ public class SOCLoader {
             log.error("Unable to load SOC model data", e);
         }
 
-        // requested by S Grubb 12-04-2020
         
-         models.remove("J000111644");
-         models.remove("J000112064");
-      //  models.remove("TM00204");
 
         return models;
     }
