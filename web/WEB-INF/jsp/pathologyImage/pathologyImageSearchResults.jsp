@@ -9,14 +9,15 @@
 		<script type="text/javascript" src="./live/www/js/results.js"></script>
 	</jsp:attribute>
 	<jsp:body>
-	<table>
+        <div style="padding-left:20px; font-size: 14px">
+	<table >
 		<caption>
 			<div class="result-summary">
 				<h4>Search Summary</h4>
 				<jax:dl dt="Organ/Tissue of Origin" dts="Organs/Tissues of Origin" dds="${organOriginSelected}"/>
 				<jax:dl dt="Tumor Classification" dds="${tumorClassificationsSelected}"/>
 				<jax:dl dt="Organ/Tissue Affected" dd="${organsAffectedSelected}"/>
-				<jax:dl dt="Diagnosis or Description" dd="Contains '${diagnosisDescription}'"/>
+				<jax:dl dt="Diagnosis or Description" dd="Contains ${diagnosisDescription}"/>
 				<jax:dl dt="Method" dd="${methodSelected}"/>
 				<jax:dl dt="Antibody" dts="Antibodies" dds="${antibodiesSelected}"/>
 				<jax:dl dt="Contributor" dds="${imageContributors}"/>
@@ -39,118 +40,108 @@
 
 	<c:choose>
 	<c:when test="${not empty pathologyImages}">
+        <table style="padding-left:20px;">
 	<c:forEach var="pathRec" items="${pathologyImages}" varStatus="status">
 	<!-- \n -->
 	<!-- \n -->
-	<table>
+                <tr>
+                    <td colspan="12"><hr></td>
+                </tr>
 		<tr>
-			<td width="8%" class="results-header">MTB ID</td>
-			<td width="14%" class="results-header">Tumor Name</td>
-			<td width="13%" class="results-header">Organ(s) Affected</td>
-			<td width="13%" class="results-header">Treatment Type
-				<!-- \n -->
-				<span class="small"><em>Agents</em></span></td>
-			<td width="14%" class="results-header">Strain Name
-				<!-- \n -->
-				<span class="small">Strain Sex
-					<!-- \n -->
-			Reproductive Status</span></td>
-			<td width="9%" class="results-header">Tumor
-				<!-- \n -->
-			Frequency</td>
-			<td width="9%" class="results-header">Age at
-				<!-- \n -->
-			Necropsy</td>
-			<td width="13%" class="results-header">Description</td>
-			<td width="7%" class="results-header">Reference</td>
+                        <td><b>MTB ID</b></td>
+			<td><b>Tumor Name</b></td>
+			<td><b>Organ(s) Affected</b></td>
+			<td><b>Treatment Type</b></td>
+			<td><b>Agents</b></td>
+                        <td><b>Strain Name</b></td>
+                        <td><b>Strain Sex</b></td>
+			<td><b>Reproductive Status</b></td>
+			<td><b>Tumor Frequency</b></td>
+			<td><b>Age at Necropsy</b></td>
+			<td><b>Description</b></td>
+			<td><b>Reference</b></td>
 		</tr>
 		<tr>
 			<td><a href="tumorSummary.do?tumorFrequencyKeys=${pathRec.tumorFrequencyKey}">MTB:${pathRec.tumorFrequencyKey}</a></td>
 			<td>${pathRec.organOriginName} &nbsp; ${pathRec.tumorClassName}</td>
 			<td>${pathRec.organAffectedName}</td>
-			<td>
-				<c:out value="${pathRec.treatmentType}" escapeXml="false"/>
-				<c:if test="${not empty pathRec.agents}">
-				<!-- \n -->
-				<em>
+                        <td><c:out value="${pathRec.treatmentType}" escapeXml="false"/></td>
+                        <td>	
+                            <c:if test="${not empty pathRec.agents}">	
 					<c:forEach var="agent" items="${pathRec.agents}" varStatus="status">
 					<c:out value="${agent}" escapeXml="false"/>
 					<c:if test="${status.last != true}">
-					<!-- \n -->
+                                            <c:out value=", "/>
 					</c:if>
 					</c:forEach>
-				</em> 
 				</c:if>
 			</td>
-			<td>
-				<h5><a href="strainDetails.do?key=${pathRec.strainKey}"><c:out value="${pathRec.strainName}" escapeXml="false"/></a></h5>
-				<!-- \n -->
-				${pathRec.strainSex}
-				<c:if test="${not empty pathRec.reproductiveStatus}">
-				<!-- \n -->
-				${pathRec.reproductiveStatus}
-				</c:if>
-			</td>
+                        <td><h5><a href="strainDetails.do?key=${pathRec.strainKey}"><c:out value="${pathRec.strainName}" escapeXml="false"/></a></h5></td>
+                        <td>${pathRec.strainSex}</td>
+                        <td>${pathRec.reproductiveStatus}</td>
 			<td>${pathRec.frequencyString}</td>
 			<td>${pathRec.ageAtNecropsy}</td>
 			<td>${pathRec.note}</td>
 			<td><a href="referenceDetails.do?accId=${pathRec.accID}">${pathRec.accID}</a></td>
 		</tr>
-		<c:forEach var="image" items="${pathRec.images}" varStatus="status">
-		<tr>
-			<td colspan="9">
-				<table>
-					<tr>
-						<td>
-							<a href="pathologyImageDetails.do?key=${image.imageId}" target="_blank">
-							<img width=150 src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${image.imageThumbName}" alt="${image.imageId}"></a>
-						</td>
-						<td width=250>
-							<table>
-								<tr>
-									<td class="small"><div class="nowrap"><h5 class="label">Image ID:</h5></div></td>
-									<td class="small">${image.imageId}</td>
-								</tr>
-								<tr>
-									<td class="small"><div class="nowrap"><h5 class="label">Source of Image:</h5></div></td>
-									<td class="small">
-										${image.sourceOfImage}
-									</td>
-								</tr>
-								<tr>
-									<td class="small"><div class="nowrap"><h5 class="label">Pathologist:</h5></div></td>
-									<td class="small">
-										${image.pathologist}
-									</td>
-								</tr>
-								<c:choose>
-								<c:when test="${not empty image.stainMethod}">
-								<tr>
-									<td class="small"><div class="nowrap"><h5 class="label">Method / Stain:</h5></div></td>
-									<td class="small">${image.stainMethod}</td>
-								</tr>
-								</c:when>
-								</c:choose>
-							</table>
-						</td>
-						<td class="small" colspan=5>
-							<h5 class="label">Image Caption</h5>:
-							<!-- \n -->
-							${image.imageCaption}
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
+                <tr>
+                    <td colspan="12">
+			<table>
+                            <c:forEach var="image" items="${pathRec.images}" varStatus="status">
+                                <tr>
+                                    <td colspan="2">
+                                        <b>Image Caption:</b>${image.imageCaption}</div>
+                                    </td>
+                                <tr>
+                                    <td width="300px">
+                                            <a href="pathologyImageDetails.do?key=${image.imageId}" target="_blank">
+                                            <img width="300" src="${applicationScope.pathologyImageUrl}/${applicationScope.pathologyImagePath}/${image.imageThumbName}" alt="${image.imageId}"></a>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <b>Image ID:<b>${image.imageId}
+                                                </td>    
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Source of Image:</b>${image.sourceOfImage}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Pathologist:</b>${image.pathologist}
+                                                </td>
+                                            </tr>
+                                            <c:choose>
+                                            <c:when test="${not empty image.stainMethod}">
+                                            <tr>
+                                                <td>
+                                                    <b>Method / Stain:</b>${image.stainMethod}
+                                                </td>
+                                            </tr>
+                                            </c:when>
+                                            </c:choose>
+                                        </table>
+                                    </td>
+                                   
+                                </tr>
+				
 		</c:forEach>
-	</table>
+              </table>
+	</td>
+	</tr>
+       
 	</c:forEach>
+        </table>
 	</c:when>
 	<c:otherwise>
 	<!-- No results found. //-->
 	</c:otherwise>
 	</c:choose>
 	<!-- ////  End Results  //// -->
+        </div>
 	</jsp:body>
 </jax:mmhcpage>
 
