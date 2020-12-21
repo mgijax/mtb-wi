@@ -20,7 +20,7 @@ public class MSIModels {
         return msiMap.get(modelID);
     }
     
-    private static void addMSI(String model, String msi){
+    static void addMSI(String model, String msi){
         if(msiMap.containsKey(model)){
             msiMap.get(model).add(msi);
         }else{
@@ -32,7 +32,7 @@ public class MSIModels {
 
     }
     
-    
+    /*
     static{
         addMSI("TM01258","Sample:TM01258F643P0216P1    &nbsp; &nbsp; Score:MSI-S");
      //   addMSI("TM01231","Sample:TM01231FPT    &nbsp; &nbsp; Score:MSI-S");
@@ -437,5 +437,5 @@ public class MSIModels {
         addMSI("J000097253","Sample:J000100910    &nbsp; &nbsp; Score:MSI-S");
         addMSI("TM01325","Sample:SA0602F056P0    &nbsp; &nbsp; Score:MSI-S");
     }
-    
+    */
 }

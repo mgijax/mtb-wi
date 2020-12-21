@@ -37,6 +37,7 @@ import org.jax.mgi.mtb.dao.utils.DAOUtils;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.wi.WIConstants;
+import static org.jax.mgi.mtb.wi.pdx.MSIModels.addMSI;
 
 /**
  * Manages PDX data Initialized on startup; loads mice, reports and vocabularies
@@ -103,7 +104,7 @@ public class PDXMouseStore {
 
     private static final String SAMPLE_PASSAGE = baseURL + "inventory?model=MODEL_ID&sample=SAMPLE_ID&reqitems=passage_num";
     
-    private static final String TMB_URI = baseURL+"inventory?platform=CTP&reqitems=model_name,sample_name,passage_num,tmb_score";
+    private static final String TMB_URI = baseURL+"inventory?platform=CTP&reqitems=model_name,sample_name,passage_num,tmb_score,msi_score";
 
     private static HashMap<String, String> fusionModelsMap = new HashMap<>();
 
@@ -1836,10 +1837,10 @@ public class PDXMouseStore {
     // returns an array list of plot URLs
     public ArrayList<ArrayList<String>> getCNVPlotsForModel(String modelID) {
         
-        if("J000112064".equals(modelID) || "J000111644".equals(modelID)){
-            log.warn("hiding CNV plots for model "+modelID);
-            return null;
-        }
+//        if("J000112064".equals(modelID) || "J000111644".equals(modelID)){
+//            log.warn("hiding CNV plots for model "+modelID);
+//            return null;
+//        }
         
         return cnvPlots.get(modelID);
     }
@@ -1883,7 +1884,7 @@ public class PDXMouseStore {
                      
                     
                     if(passage != null && !passage.equals("null")){
-                        sample = " from passage "+passage;
+                        sample += " from passage "+passage;
                     }
                 
                     Double tmb = new Double(df.format(job.getDouble("tmb_score")));
@@ -1901,6 +1902,19 @@ public class PDXMouseStore {
                         HashMap<String,Double> map = new HashMap<>();
                         map.put(sample, tmb);
                         tmbMap.put(model,map);
+                    }
+                    try{
+                        Double msi = job.getDouble("msi_score");
+                        String msiStr = "MSI-S";
+                        if(msi > 20){
+                            msiStr = "MSI-H";
+                        }
+                        
+                        MSIModels.addMSI(model, "Sample:"+sample+" &nbsp; &nbsp; Score:"+msiStr );
+                        
+                        
+                    }catch(Exception e){
+                        //not sure what to log
                     }
                      
                 }catch(Exception e){
