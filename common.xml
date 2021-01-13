@@ -254,7 +254,7 @@ developer wants to create Javadocs independently.
         <classpath refid="defaultClasspath"/>
         <classpath refid="project.classpath"/>
         <bottom>
-            Copyright © 2009 The Jackson Laboratory. All Rights Reserved.
+            Copyright © 2021 The Jackson Laboratory. All Rights Reserved.
         </bottom>
     </javadoc>
 

@@ -11,7 +11,7 @@
 </description>
 
 <!--===================== Property Definitions =============================-->
-<property name="tomcat.root"      value="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/"/>
+<!--<property name="tomcat.root"      value="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/"/>-->
 <property name="app.version"      value="1"/>
 <property name="app.name"         value="mtbwi"/>
 <property name="app.path"         value="/mtbwi"/>
@@ -35,9 +35,9 @@
 <!--===================== Custom Classpath =================================-->
 
 <path id="project.classpath">
-    <fileset dir="${tomcat.root}/lib">
+ <!--   <fileset dir="${tomcat.root}/lib">
       <include name="*.jar"/>
-    </fileset>
+    </fileset> -->
     <fileset dir="lib/jstl-1.1.2">
         <include name="**/*.jar"/>
     </fileset> 
