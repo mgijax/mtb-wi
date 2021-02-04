@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 
 <html>
-	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/GViewer/javascript/fileUpload.css"/>
+	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/css/fileUpload.css"/>
 	<style type="text/css">
 		.upload-icon {
 			background: url('${applicationScope.urlBase}/extjs/resources/images/image_add.png') no-repeat 0 0 !important;
@@ -22,7 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
-	<script type="text/javascript" src="${applicationScope.urlBase}/GViewer/javascript/FileUploadField.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/FileUploadField.js"></script>
 	<script type="text/javascript">
 		Ext.onReady(function(){
 			Ext.apply(Ext.form.VTypes, {
@@ -42,7 +42,7 @@
 				hidden:${hidePImage},
 				renderTo: 'pi-form',
 				fileUpload: true,
-				width: 500,
+				width: 550,
 				frame: true,
 				title: 'Add Pathology Image',
 				autoHeight: true,
@@ -124,7 +124,7 @@
 				hidden:${hideLink},
 				renderTo: 'link-form',
 				fileUpload: false,
-				width: 500,
+				width: 550,
 				frame: true,
 				title: 'Add Link',
 				autoHeight: true,
@@ -189,7 +189,7 @@
 				hidden:${hideDocument},
 				renderTo: 'document-form',
 				fileUpload: true,
-				width: 500,
+				width: 550,
 				frame: true,
 				title: 'Add Document',
 				autoHeight: true,
@@ -254,7 +254,7 @@
 				hidden:${hideGraphic},
 				renderTo: 'graphic-form',
 				fileUpload: true,
-				width: 500,
+				width: 550,
 				frame: true,
 				title: 'Add Graphic',
 				autoHeight: true,
@@ -322,7 +322,7 @@
 				hidden:${hideComment},
 				renderTo: 'comment-form',
 				fileUpload: false,
-				width: 500,
+				width: 550,
 				frame: true,
 				title: 'Add Comment',
 				autoHeight: true,
