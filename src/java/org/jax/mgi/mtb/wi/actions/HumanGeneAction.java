@@ -27,21 +27,18 @@ public class HumanGeneAction extends Action {
             HttpServletResponse response)
             throws Exception {
 
+        boolean ctpOnly = false;
         String query = request.getParameter("query");
-        String page = request.getParameter("page");
-        String limit = request.getParameter("limit");
-
-        if (page == null || page.trim().length() == 0) {
-            page = "0";
+       
+        if("ctpOnly".equals(request.getParameter("ctpOnly"))){
+            ctpOnly = true;
         }
 
-        if (limit == null || limit.trim().length() == 0) {
-            limit = "1000";
-        }
+       
 
         response.setContentType("application/json");
 
-        String json = PDXDAO.getInstance().getHumanGenes(query, page, limit);
+        String json = PDXDAO.getInstance().getHumanGenes(query, ctpOnly);
 
         response.getWriter().write(json);
         response.flushBuffer();

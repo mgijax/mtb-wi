@@ -266,17 +266,19 @@ public class PDXMouseStore {
             log.info("Loaded " + allGenesList.size() + " genes.");
 
             loadCTPGenes();
-            genesBuffer = new StringBuffer();
-            genesBuffer.append("[");
-            for (String gene : ctpGeneList) {
-                if (genesBuffer.length() > 1) {
-                    genesBuffer.append(",");
-                }
-                genesBuffer.append("['" + gene + "']");
+//            genesBuffer = new StringBuffer();
+//            genesBuffer.append("[");
+//            for (String gene : ctpGeneList) {
+//                if (genesBuffer.length() > 1) {
+//                    genesBuffer.append(",");
+//                }
+//                genesBuffer.append("['" + gene + "']");
+//
+//            }
+//            genesBuffer.append("]");
+//            ctpGenesWebFormat = genesBuffer.toString();
 
-            }
-            genesBuffer.append("]");
-            ctpGenesWebFormat = genesBuffer.toString();
+            ctpGenesWebFormat = PDXDAO.getInstance().getCTPGenes();
 
             loadCNVPlots();
             log.info("Loaded cnv plots for " + cnvPlots.size() + " models.");
@@ -1456,6 +1458,7 @@ public class PDXMouseStore {
                 String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit;
                 JSONObject job = new JSONObject(getJSON(VARIANTS + params));
 
+                // from public logs this fails occasinally
                 int total = (Integer) job.get("total_rows");
 
                 done = (total < start);

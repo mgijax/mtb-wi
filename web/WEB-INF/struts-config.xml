@@ -25,7 +25,7 @@
     <form-beans>
         <form-bean name="DynamicGridForm"
                   type="org.jax.mgi.mtb.wi.forms.DynamicGridForm"/> 
-      <form-bean name="TumorSearchForm"
+        <form-bean name="TumorSearchForm"
                  type="org.jax.mgi.mtb.wi.forms.TumorSearchForm"/>
         <form-bean name="PDXForm"
                   type="org.jax.mgi.mtb.wi.forms.PDXForm"/>                 
@@ -35,9 +35,9 @@
                   type="org.jax.mgi.mtb.wi.forms.PDXDashboardForm"/>                  
         <form-bean name="AddPDXContentForm"
                   type="org.jax.mgi.mtb.wi.forms.PDXAddContentForm"/>
-         <form-bean name="GeneExpressionForm"
+        <form-bean name="GeneExpressionForm"
                   type="org.jax.mgi.mtb.wi.forms.GeneExpressionForm"/>
-         <form-bean name="PathologyImageSearchForm"
+        <form-bean name="PathologyImageSearchForm"
                  type="org.jax.mgi.mtb.wi.forms.PathologyImageSearchForm"/>
         
     </form-beans>

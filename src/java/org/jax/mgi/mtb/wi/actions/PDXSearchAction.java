@@ -81,7 +81,7 @@ public class PDXSearchAction extends Action {
 
         // request.setAttribute("genesValuesCNV",pdxMouseStore.getExomePanelGenesLVB());
 
-        request.setAttribute("exomePanelGenes", pdxMouseStore.getCTPGenesWebFormat());
+        request.setAttribute("ctpGenes", pdxMouseStore.getCTPGenesWebFormat());
 
         Map mapChromosomes = WIConstants.getInstance().getChromosomes();
 

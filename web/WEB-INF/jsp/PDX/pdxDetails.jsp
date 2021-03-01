@@ -965,7 +965,7 @@
                             </c:if>
                             <c:if test="${not empty tmb}">
                             <section id="tmb">
-                                <jax:dl showNoData="true"  dt="Sample" dts="Samples" dds="${tmb}" />
+                                <jax:dl showNoData="true"  dt="" dts="" dds="${tmb}" />
 
                                 <jax:dl showNoData="true"  dt="TMB Range" dd="${minTMB}-${maxTMB} (across all JAX PDX models; TMB &gt; 22 is considered high)"/>
 
@@ -982,7 +982,7 @@
                                 <i>no data</i>
                             </c:if>
                             <c:if test="${not empty msiData}">
-                                <jax:dl showNoData="true"  dt="Sample" dts="Samples" dds="${msiData}" />
+                                <jax:dl showNoData="true"  dt="" dts="" dds="${msiData}" />
                              </c:if>
                         </td>
                 </tr>

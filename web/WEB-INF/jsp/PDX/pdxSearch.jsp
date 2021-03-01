@@ -85,9 +85,10 @@
 			
   		
 			
-			var dataProxy = new Ext.data.HttpProxy({
+			var humanGeneProxy = new Ext.data.HttpProxy({
 				url: '/mtbwi/pdxHumanGenes.do'
 			})
+                        
 		
 			var humanGenestore = new Ext.data.ArrayStore({
 				id:'thestore',
@@ -95,7 +96,7 @@
 				root:'data',
 				totalProperty: 'total',
 				fields: [{name:'symbol'}, {name:'display'}],
-				proxy: dataProxy,
+				proxy: humanGeneProxy,
 				autoLoad:false
 			});
 			
@@ -111,57 +112,60 @@
 				selectOnFocus:true,
 				hideTrigger:true,
 				hiddenName:'gene',
-				width:160,
+				width:300,
 				listEmptyText:'',
 				renderTo: 'geneSelectOMatic'
 		//		,pageSize:10
 			});
 	
-	
- 		
 			combo.setValue('${gene}');
 			
-			
+			var ctpGeneProxy = new Ext.data.HttpProxy({
+                                url: '/mtbwi/pdxHumanGenes.do?ctpOnly=ctpOnly'
+			})
+                        
+                        
 			var ctpStore = new Ext.data.ArrayStore({
-							id: 0,
-							fields: [
-								'symbol'
-							],
-							data: ${exomePanelGenes}
+                                                id: ctpStore,
+                                                root:'data',
+                                                totalProperty:'total',
+                                                fields: [{name:'symbol'},{name:'display'}],
+                                                proxy:ctpGeneProxy,
+                                                autoLoad:false
 						})
 			
 			var combo2 = new Ext.form.ComboBox({
 				store: ctpStore,
-				minChars:1,
+				minChars:2,
 				valueField:'symbol',
-				displayField:'symbol',
+				displayField:'display',
 				typeAhead: true,
-				lazyRender:true,
-				mode: 'local',
+			//	lazyRender:true,
+				mode: 'remote',
 				forceSelection: false,
 				triggerAction: 'all',
 				selectOnFocus:true,
 				hideTrigger:true,
 				hiddenName:'genes2',
-				width:260,
+				width:300,
 				listEmptyText:'',
 				renderTo: 'geneSelectOMatic2'
 			});
 			
 			var combo3 = new Ext.form.ComboBox({
 				store: ctpStore,
-				minChars:1,
+				minChars:2,
 				valueField:'symbol',
-				displayField:'symbol',
+				displayField:'display',
 				typeAhead: true,
-				lazyRender:true,
-				mode: 'local',
+			//	lazyRender:true,
+				mode: 'remote',
 				forceSelection: false,
 				triggerAction: 'all',
 				selectOnFocus:true,
 				hideTrigger:true,
 				hiddenName:'genesCNV',
-				width:260,
+				width:300,
 				listEmptyText:'',
 				renderTo: 'geneSelectOMatic3'
 			});
