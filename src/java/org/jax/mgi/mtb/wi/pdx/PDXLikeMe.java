@@ -72,6 +72,7 @@ public class PDXLikeMe {
     HashMap<String, ArrayList<String>> allMice = new HashMap<>();
     private static HashMap<String, String> detailsMap = new HashMap<>();
     private static ArrayList<String> ctpGenes = new ArrayList<>();
+    private HashMap<String,String> synonymNotes = new HashMap<>();
     private HashMap<String, String> expMap = new HashMap<>();
     private HashMap<String, String> lrpMap = new HashMap<>();
 
@@ -185,13 +186,13 @@ public class PDXLikeMe {
             vals = gene.split(":");
             if (vals.length > 2) {
                 if (vals[2].trim().equals("K")) {
-                    k.add(vals[0].trim() + ":" + vals[1].trim());
+                    k.add(checkSynonyms(vals[0].trim()) + ":" + vals[1].trim());
                 } else if (vals[2].trim().equals("U")) {
-                    u.add(vals[0] + ":" + vals[1]);
+                    u.add(checkSynonyms(vals[0]) + ":" + vals[1]);
                 }
             } else if (vals.length == 2) {
                 // no explicit K or U so default to Known
-                k.add(vals[0].trim() + ":" + vals[1].trim());
+                k.add(checkSynonyms(vals[0].trim()) + ":" + vals[1].trim());
             } else {
                 return caseNo + "\n" + gene + " is in the wrong format";
             }
@@ -225,18 +226,30 @@ public class PDXLikeMe {
             if (vals.length != 2) {
                 return "Error\n" + gene + " is not in the correct format.";
             }
-            mice = getMice(vals[0], vals[1]);
+            
+            // check for gene synonyms valid symbol etc here
+            // vals[0] is gene
+            // is valid synonym replace with comment
+            
+            String geneSymbol = vals[0];
+            String criteria = vals[1];
+            
+           
+            
+            
+            
+            mice = getMice(geneSymbol, criteria);
             if (mice == null) {
-                return "Error\n" + vals[0] + ":" + vals[1] + " is not in the correct format.";
+                return "Error\n" + geneSymbol + ":" + criteria + " is not in the correct format.";
             }
             for (String id : mice) {
                 if (modelsMap.containsKey(id)) {
-                    if (!modelsMap.get(id).genes.contains(vals[0] + vals[1])) {
-                        modelsMap.get(id).genes.add(vals[0] + vals[1]);
+                    if (!modelsMap.get(id).genes.contains(geneSymbol + criteria)) {
+                        modelsMap.get(id).genes.add(geneSymbol + criteria);
                     }
                 } else {
                     ModelRow mr = new ModelRow(id);
-                    mr.genes.add(vals[0] + vals[1]);
+                    mr.genes.add(geneSymbol + criteria);
                     modelsMap.put(id, mr);
                 }
             }
@@ -245,10 +258,10 @@ public class PDXLikeMe {
                 HashMap<String, ArrayList<String>> aMice = getMiceByActionableVariants(vals[0]);
                 for (String id : aMice.keySet()) {
                     if (modelsMap.containsKey(id)) {
-                        modelsMap.get(id).addActionable(vals[0], aMice.get(id));
+                        modelsMap.get(id).addActionable(geneSymbol, aMice.get(id));
                     } else {
                         ModelRow mr = new ModelRow(id);
-                        mr.addActionable(vals[0], aMice.get(id));
+                        mr.addActionable(geneSymbol, aMice.get(id));
                         modelsMap.put(id, mr);
                     }
                 }
@@ -266,17 +279,20 @@ public class PDXLikeMe {
             table.append("<tr><th>Model ID</th>");
             for (String kGene : k) {
                 table.append("<th style=\"text-align:center;padding:5px\">").append(kGene.replace(":", " "));
-                if (!ctpGenes.contains(kGene.toUpperCase().split(":")[0])) {
-                    table.append("<br>Not in CTP");
-                }
+              
+//                if (!ctpGenes.contains(kGene.toUpperCase().split(":")[0])) {
+//                    table.append("<br>Not in CTP");
+//                }
+                  table.append(getNotes(kGene.toUpperCase().split(":")[0],format));
                 table.append("</th>");
 
             }
             for (String uGene : u) {
                 table.append("<th style=\"text-align:center;padding:5px\">").append(uGene.replace(":", " "));
-                if (!ctpGenes.contains(uGene.toUpperCase().split(":")[0])) {
-                    table.append("<br>Not in CTP");
-                }
+//                if (!ctpGenes.contains(uGene.toUpperCase().split(":")[0])) {
+//                    table.append("<br>Not in CTP");
+//                }
+                  table.append(getNotes(uGene.toUpperCase().split(":")[0],format));  
                 table.append("</th>");
             }
             table.append("</thead><tbody>");
@@ -292,9 +308,10 @@ public class PDXLikeMe {
 
                 table.append(kGene.replace(":", " "));
                 
-                if (!ctpGenes.contains(kGene.toUpperCase().split(":")[0])) {
-                    table.append(" (Not in CTP)");
-                }
+//                if (!ctpGenes.contains(kGene.toUpperCase().split(":")[0])) {
+//                    table.append(" (Not in CTP)");
+//                }
+                    table.append(getNotes(kGene.toUpperCase().split(":")[0],format));
                 
                 table.append(",");
 
@@ -314,9 +331,10 @@ public class PDXLikeMe {
 
                 table.append(uGene.replace(":", " "));
                 
-                if (!ctpGenes.contains(uGene.toUpperCase().split(":")[0])) {
-                    table.append(" (Not in CTP)");
-                }        
+//                if (!ctpGenes.contains(uGene.toUpperCase().split(":")[0])) {
+//                    table.append(" (Not in CTP)");
+//                }  
+                  table.append(getNotes(uGene.toUpperCase().split(":")[0],format));
                         
                 table.append(",");
 
@@ -581,7 +599,23 @@ public class PDXLikeMe {
                 html.append("</tr>\n");
             }
             html.append("</tbody></table><br><br></div>\n");
+            
            
+            StringBuilder sNotes = new StringBuilder();
+            
+                sNotes.append("<b>Gene synonym notes:</b><br>");
+                boolean showSNotes = false;
+                for(String gene: synonymNotes.keySet()){
+                    String note = synonymNotes.get(gene);
+                     if(note != null &&  note.trim().length()>1){
+                        sNotes.append("<b>").append(gene).append("</b>:").append(synonymNotes.get(gene).replaceAll(",",", ")).append("<br>");
+                        showSNotes = true;
+                     }
+                }
+                if(showSNotes){
+                    html.append(sNotes);
+                }
+            
             table = html;
         }
             
@@ -898,6 +932,40 @@ public class PDXLikeMe {
                 log.error("Error getting pdx like me model details", e);
             }
         }
+    }
+    
+    // check if the gene is a offical symbol, synonym or unknown
+    // storea note of what it is if not offical, return offical symbol if possible
+    private String checkSynonyms(String gene){
+       
+        ArrayList<String> results = pdxDAO.checkSynonyms(gene);
+        synonymNotes.put(results.get(0).toUpperCase(),results.get(1));
+        return results.get(0).toUpperCase();
+        
+    }
+    HashMap<String,String> synonyms = new HashMap<>();
+    
+    private String getNotes(String gene, String format){
+        StringBuilder notes = new StringBuilder("");
+        
+       
+        
+        if(format.equals(FORMAT_HTML)){
+            if(synonymNotes.containsKey(gene)){
+               notes.append("<br>").append(synonymNotes.get(gene).replaceAll(",", "<br>"));
+            }
+            if(!ctpGenes.contains(gene)){
+                notes.append("<br>Not in CTP");
+            }
+        }else{
+            if(synonymNotes.containsKey(gene)){
+               notes.append(" ").append(synonymNotes.get(gene).replaceAll(",", " "));
+            }
+            if(!ctpGenes.contains(gene)){
+                notes.append(" (Not in CTP)");
+            }
+        }
+        return notes.toString();
     }
     
     private String expToColor(String exp){
