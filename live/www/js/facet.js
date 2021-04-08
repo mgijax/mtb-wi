@@ -116,6 +116,11 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://tum
 			name: 'humanTissue',
 			title: 'Human Tissue',
 			isExpanded: false
+		},	
+                {
+			name: 'quickSearch',
+			title: 'Quick Search',
+			isExpanded: false
 		}	
 	],
 

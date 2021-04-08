@@ -55,6 +55,11 @@
 					<li><a href="${pageContext.request.contextPath}/dynamicGrid.do">Tumor Frequency Grid (inbred strains)</a></li>
 					<li><a href="${pageContext.request.contextPath}/pdxSearch.do">Patient Derived Xenograft (PDX) Search</a></li>
 					<li><a href="${pageContext.request.contextPath}/pdxLikeMe.do">PDX Like Me</a></li>
+                                        
+                                         <c:if test="${applicationScope.publicDeployment == false }">
+                                            <li><a href="${pageContext.request.contextPath}/pdxComparison.do">PDX Comparison</a>
+                                        </c:if>    
+                                        
 					<li><a class="link-external" href="http://www.pdxfinder.org" target="_new">PDX Finder</a></li>	
                                         
                                          <c:if test="${applicationScope.publicDeployment == false &&  empty sessionScope.pdxUser }">

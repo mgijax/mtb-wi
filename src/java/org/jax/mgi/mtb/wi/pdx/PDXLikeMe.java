@@ -73,6 +73,7 @@ public class PDXLikeMe {
     private static HashMap<String, String> detailsMap = new HashMap<>();
     private static ArrayList<String> ctpGenes = new ArrayList<>();
     private HashMap<String,String> synonymNotes = new HashMap<>();
+    private HashMap<String,String> synonyms = new HashMap<>();
     private HashMap<String, String> expMap = new HashMap<>();
     private HashMap<String, String> lrpMap = new HashMap<>();
 
@@ -279,20 +280,13 @@ public class PDXLikeMe {
             table.append("<tr><th>Model ID</th>");
             for (String kGene : k) {
                 table.append("<th style=\"text-align:center;padding:5px\">").append(kGene.replace(":", " "));
-              
-//                if (!ctpGenes.contains(kGene.toUpperCase().split(":")[0])) {
-//                    table.append("<br>Not in CTP");
-//                }
-                  table.append(getNotes(kGene.toUpperCase().split(":")[0],format));
+                table.append(getNotes(kGene.toUpperCase().split(":")[0],format));
                 table.append("</th>");
 
             }
             for (String uGene : u) {
                 table.append("<th style=\"text-align:center;padding:5px\">").append(uGene.replace(":", " "));
-//                if (!ctpGenes.contains(uGene.toUpperCase().split(":")[0])) {
-//                    table.append("<br>Not in CTP");
-//                }
-                  table.append(getNotes(uGene.toUpperCase().split(":")[0],format));  
+                table.append(getNotes(uGene.toUpperCase().split(":")[0],format));  
                 table.append("</th>");
             }
             table.append("</thead><tbody>");
@@ -935,7 +929,7 @@ public class PDXLikeMe {
     }
     
     // check if the gene is a offical symbol, synonym or unknown
-    // storea note of what it is if not offical, return offical symbol if possible
+    // store a note of what it is if not offical, return offical symbol if possible
     private String checkSynonyms(String gene){
        
         ArrayList<String> results = pdxDAO.checkSynonyms(gene);
@@ -943,7 +937,7 @@ public class PDXLikeMe {
         return results.get(0).toUpperCase();
         
     }
-    HashMap<String,String> synonyms = new HashMap<>();
+    
     
     private String getNotes(String gene, String format){
         StringBuilder notes = new StringBuilder("");
@@ -952,14 +946,14 @@ public class PDXLikeMe {
         
         if(format.equals(FORMAT_HTML)){
             if(synonymNotes.containsKey(gene)){
-               notes.append("<br>").append(synonymNotes.get(gene).replaceAll(",", "<br>"));
+               notes.append("<br><br><p class='note'>").append(synonymNotes.get(gene).replaceAll(";", "<br>"));
             }
             if(!ctpGenes.contains(gene)){
-                notes.append("<br>Not in CTP");
+                notes.append("<br><br>Not in CTP");
             }
         }else{
             if(synonymNotes.containsKey(gene)){
-               notes.append(" ").append(synonymNotes.get(gene).replaceAll(",", " "));
+               notes.append(" ").append(synonymNotes.get(gene).replaceAll(";", " "));
             }
             if(!ctpGenes.contains(gene)){
                 notes.append(" (Not in CTP)");

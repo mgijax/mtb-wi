@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBStrainDetailDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBStrainUtilDAO;
+import org.jax.mgi.mtb.dao.gen.mtb.StrainNotesDTO;
 import org.jax.mgi.mtb.dao.gen.mtb.StrainSynonymsDTO;
 import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.utils.Timer;
@@ -109,6 +110,14 @@ public class StrainDetailsAction extends Action {
                                                  dtoStrainDetail.getName());
 
             dtoStrainDetail.setSynonyms(arrFilteredSynonyms);
+            
+            if(dtoStrainDetail.getNotes()== null || dtoStrainDetail.getNotes().size() == 0){
+                dtoStrainDetail.setNotes(null);
+            }else{
+                for(StrainNotesDTO note : dtoStrainDetail.getNotes()){
+                    
+                }
+            }
 
             // put the strain in the request
             request.setAttribute("strain", dtoStrainDetail);

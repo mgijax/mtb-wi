@@ -63,7 +63,7 @@
 	<section id="detail">		
 	
 	<html:form action="pdxComparison" method="GET">
-	<table class="detail-table" style="width:100%;">
+	<table class="detail-table" >
 
 		<caption>
 			<div class="result-legend">

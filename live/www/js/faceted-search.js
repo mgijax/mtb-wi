@@ -1,7 +1,7 @@
 
 var	rsp;
-var	f_field=['organParent','agentType','tcParent','strainType','metsTo','strainMarker','humanTissue'];
-var	f_field_display=['Organ of Origin','Agent Type','Tumor Classification','Strain Type','Mets. To','Germline Mutant Alleles','Human Tissue Model'];
+var	f_field=['organParent','agentType','tcParent','strainType','metsTo','strainMarker','humanTissue','quickSearch'];
+var	f_field_display=['Organ of Origin','Agent Type','Tumor Classification','Strain Type','Mets. To','Germline Mutant Alleles','Human Tissue Model','Quick Search Term'];
 var	sortCols = ['organOrigin','organAffected','strain','freqNum'];
 var	filters =[];
 var	displayFilters=[];

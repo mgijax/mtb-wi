@@ -39,6 +39,9 @@
                 width:100%;
                 padding:10px;
             }
+            .note{
+                font-size: 90%;
+            }
 
         </style>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
@@ -79,7 +82,8 @@
         <section id="summary">
             <div class="container">
                 <p>Use PDX Like Me to search for PDX models with tumor samples that meet multiple genomic criteria. Molecular profiles can combine mutation, expression, and/or copy number aberration criteria. Multiple profiles can be searched at one time.</p>            
-                <p><a href="${pageContext.request.contextPath}/pdxlikemehelp.jsp" target="_blank">Learn how to use PDX Like Me </a></p>         
+                <p><a href="${pageContext.request.contextPath}/pdxlikemehelp.jsp" target="_blank">Learn how to use PDX Like Me </a></p>  
+                <p>Please verify your gene list uses the correct nomenclature at: <a target ="_blank" href="https://www.genenames.org/tools/multi-symbol-checker/">HUGO</a></p>
             </div>
         </section>
         

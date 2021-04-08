@@ -90,7 +90,7 @@
 			})
                         
 		
-			var humanGenestore = new Ext.data.ArrayStore({
+			var humanGeneStore = new Ext.data.ArrayStore({
 				id:'thestore',
  	//   		pageSize: 10, 
 				root:'data',
@@ -101,7 +101,7 @@
 			});
 			
 			var combo = new Ext.form.ComboBox({
-				store: humanGenestore,
+				store: humanGeneStore,
 				minChars:2,
 				valueField:'symbol',
 				displayField:'display',
@@ -135,7 +135,7 @@
 						})
 			
 			var combo2 = new Ext.form.ComboBox({
-				store: ctpStore,
+				store: humanGeneStore,
 				minChars:2,
 				valueField:'symbol',
 				displayField:'display',
@@ -153,7 +153,7 @@
 			});
 			
 			var combo3 = new Ext.form.ComboBox({
-				store: ctpStore,
+				store: humanGeneStore,
 				minChars:2,
 				valueField:'symbol',
 				displayField:'display',

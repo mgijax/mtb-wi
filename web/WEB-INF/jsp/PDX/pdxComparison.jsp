@@ -4,6 +4,12 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Patient Derived Xenograft Comparison Form">
 	<jsp:attribute name="head">
+            
+              <link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
+
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+            
     <script type="text/javascript">
          
         function resetForm(){
@@ -14,7 +20,7 @@
         
         window.onload = function() {
             if (typeof(Storage) !== "undefined") {
-                var save = document.getElementById("savedGenes");
+                var save = document.getElementById("saved-genes");
                 var genes = localStorage.getItem("savedMTBPDXComparisonGenes");
                 if (genes !== null && genes.length > 0) {
                     var gList = genes.split(",");
@@ -28,7 +34,7 @@
                         }
                     }
                 }
-                document.getElementById("savedGenesList").value=genes;
+                document.getElementById("saved-genes-list").value=genes;
             }else{
                 var hide = document.getElementsByName("geneSave");
                 for (var i = 0; i < hide.length; i++) {
@@ -38,23 +44,11 @@
             }
         }
 
-        function addGenes(){
-            var sel = document.getElementById("genes");
-            var save = document.getElementById("savedGenes");
-            for (var i = 0; i < sel.length; i++) {
-                if (sel.options[i].selected) {
-                    var opt = document.createElement("option");
-                    opt.value = sel.options[i].value;
-                    opt.text = sel.options[i].text;
-                    save.add(opt);
-                }
-            }
-            doStorage();
-        }
         
-        function addGenesNew(){
-            var sel = document.forms[1].gene.value;
-            var save = document.getElementById("savedGenes");
+        
+        function addGeneNew(){
+            var sel = document.getElementById("gene").value;
+            var save = document.getElementById("saved-genes");
             var opt = document.createElement("option");
             opt.value = sel;
             opt.text = sel;
@@ -66,7 +60,7 @@
         
 
         function removeGenes() {
-            var save = document.getElementById("savedGenes");
+            var save = document.getElementById("saved-genes");
             for (var i = save.length-1; i >= 0; i--) {
                 if (save.options[i].selected) {
                     save.remove(i);
@@ -77,7 +71,7 @@
         }
 
         function clearGenes() {
-            var save = document.getElementById("savedGenes");
+            var save = document.getElementById("saved-genes");
             for (var i = save.length-1; i >= 0; i--) {
                 save.remove(i);
             }
@@ -86,34 +80,35 @@
 
         function doStorage() {
             var geneList ="";
-            var save = document.getElementById("savedGenes");
+            var save = document.getElementById("saved-genes");
             for(var i = 0; i < save.length; i++) {
                 geneList += save.options[i].text + ",";
             }
             if(typeof(Storage) !== "undefined") {
                 localStorage.setItem("savedMTBPDXComparisonGenes", geneList);
             }
-            document.getElementById("savedGenesList").value=geneList;
+            document.getElementById("saved-genes-list").value=geneList;
         }
         
           Ext.onReady(function(){
         
-          var dataProxy = new Ext.data.HttpProxy({
-                url: '/mtbwi/pdxHumanGenes.do'
-            })
-        
-            var humanGenestore = new Ext.data.ArrayStore({
-                id:'thestore',
-     //           pageSize: 10, 
-                root:'data',
-                totalProperty: 'total',
-                fields: [{name:'symbol'}, {name:'display'}],
-                proxy: dataProxy,
-                autoLoad:false
+            var humanGeneProxy = new Ext.data.HttpProxy({
+				url: '/mtbwi/pdxHumanGenes.do'
+			})
+                        
+		
+            var humanGeneStore = new Ext.data.ArrayStore({
+                    id:'thestore',
+//   		pageSize: 10, 
+                    root:'data',
+                    totalProperty: 'total',
+                    fields: [{name:'symbol'}, {name:'display'}],
+                    proxy: humanGeneProxy,
+                    autoLoad:false
             });
             
             var combo = new Ext.form.ComboBox({
-                store: humanGenestore,
+                store: humanGeneStore,
                 minChars:2,
                 valueField:'symbol',
                 displayField:'display',
@@ -129,6 +124,8 @@
                 renderTo: 'geneSelect'
         //        ,pageSize:10
             });
+            
+            
 	
         });
         
@@ -167,11 +164,9 @@
 		<legend>Select genes for comparison</legend>
 		<fieldset>
 			<legend data-tip="Select one or more genes as display criteria">Gene</legend>
-			<html:select property="genes" size="8"	styleId="genes" multiple="true" >
-			<html:options collection="genesValues" property="value" labelProperty="label"/>
-			</html:select>
+                        <div id="geneSelect"></div>
 		</fieldset>
-		<input name="geneSave" type="button" value="Add" onclick="addGenes();"/>
+		<input name="geneSave" type="button" value="Add" onclick="addGeneNew();"/>
 		<fieldset>
 			<legend data-tip="Create a list of saved genes for display criteria.&#10;The saved gene list will be used by default.">Saved Genes</legend>
 			<select name="geneSave" id="saved-genes" multiple="multiple" size="8" style="width:100px">

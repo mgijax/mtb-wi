@@ -91,7 +91,7 @@ public class PDXComparisonAction extends Action {
                 // this, right here, is a real peice of work...
                 mice = pdxMouseStore.findMice("", primarySites, diagnoses, no, no, "", no, false, false, no, "",false, null,null, null,null);
 
-               StringBuffer table = new StringBuffer("<table id=\"comparisonTable\" style=\"width:100%\" class=\"cell-border compact\"><thead><tr><th>&nbsp;</th>");
+               StringBuffer table = new StringBuffer("<table id=\"comparisonTable\"  class=\"cell-border compact\"><thead><tr><th>&nbsp;</th>");
                 
 
                 if (mice.size() > 0) {
