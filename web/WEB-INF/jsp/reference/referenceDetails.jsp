@@ -56,13 +56,52 @@
 							<td><h4>Links</h4></td>
 							<td>
 								<c:forEach var="info" items="${reference.otherAccessionIds}" varStatus="status">
-                                	<a target="_blank" href="${info.value}">${info.data} &ndash; ${info.label}</a><br>
+                                                                    <a target="_blank" href="${info.value}">${info.data} &ndash; ${info.label}</a><br>
 								</c:forEach>
 							</td>
 
 						</tr>
 						
 						</c:if>
+                                              
+                                                 <c:if test="${not empty notes}">
+                                                     <tr>
+                                                         <td colspan="2"><h4>Strain Notes</h4>
+                                                            <table style="width:95%;margin-left: auto">
+                                                            <head>
+                                                                <tr>
+                                                                    <th>Strain</th>
+                                                                    <th>Note</th>
+                                                                </tr>
+                                                            </head>
+                                                            <c:forEach var="note" items="${notes}" varStatus="status">
+                                                                <tr>
+                                                                    <td>
+                                                                        <a href="strainDetails.do?key=${note.dataBean['STRKEY']}">${note.dataBean['STRNAME']}</a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <c:out value="${note.note}" escapeXml="false"/>
+                                                                    </td>
+                                                                </tr>   
+                                                            </c:forEach>
+                                                            </table>
+                                                         </td>
+                                                     </tr>
+                                              <%--       <tr><td colspan="2"><h4>OR Somthing like this</h4> </td><tr>
+                                                      <tr>
+                                                          <td><h4>Strain Notes</h4>
+                                                          <td>
+                                                             <c:forEach var="note" items="${notes}" varStatus="status">
+
+                                                                         &#8226;&nbsp;<a href="strainDetails.do?key=${note.dataBean['STRKEY']}">${note.dataBean['STRNAME']}</a>
+                                                                         &ndash;<c:out value="${note.note}" escapeXml="false"/>
+                                                                     
+                                                             </c:forEach>
+
+                                                          </td>
+                                                      </tr>
+                                              --%>
+                                                     </c:if>
 
 
 
@@ -74,6 +113,10 @@
 		</section>
 		
 	<section id="detail">
+            
+            
+                
+            
 
 		<c:choose>
 		<c:when test="${not empty reference.tumors}">

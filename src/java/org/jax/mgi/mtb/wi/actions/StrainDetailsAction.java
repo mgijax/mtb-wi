@@ -113,12 +113,8 @@ public class StrainDetailsAction extends Action {
             
             if(dtoStrainDetail.getNotes()== null || dtoStrainDetail.getNotes().size() == 0){
                 dtoStrainDetail.setNotes(null);
-            }else{
-                for(StrainNotesDTO note : dtoStrainDetail.getNotes()){
-                    
-                }
             }
-
+            
             // put the strain in the request
             request.setAttribute("strain", dtoStrainDetail);
         }

@@ -4,6 +4,8 @@
  */
 package org.jax.mgi.mtb.wi.actions;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -13,7 +15,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceDetailDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceUtilDAO;
-import org.jax.mgi.mtb.utils.FieldPrinter;
+import org.jax.mgi.mtb.dao.gen.mtb.StrainNotesDTO;
 import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.utils.Timer;
 
@@ -92,6 +94,7 @@ public class ReferenceDetailsAction extends Action {
             // search by accession id
             try {
                 dtoRefDetail = getReferenceByAccession(strAccId);
+                
             } catch (Exception e) {
                 request.setAttribute("accId", strAccId);
                 return mapping.findForward("error");
@@ -119,6 +122,7 @@ public class ReferenceDetailsAction extends Action {
         } else {
             // put the reference DTO in the request
             request.setAttribute("reference", dtoRefDetail);
+            request.setAttribute("notes", getStrainNotes(dtoRefDetail));
         }
         
      //   log.debug(FieldPrinter.getFieldsAsString(dtoRefDetail));
@@ -179,5 +183,18 @@ public class ReferenceDetailsAction extends Action {
         }
 
         return dtoRefDetail;
+    }
+    
+    private List<StrainNotesDTO> getStrainNotes(MTBReferenceDetailDTO detail) {
+        // create a MTBReferenceUtilDAO
+        MTBReferenceUtilDAO daoRefUtil = MTBReferenceUtilDAO.getInstance();
+         List<StrainNotesDTO> notes = new ArrayList<>();
+        try {
+          notes  = daoRefUtil.getStrainNotes(detail.getKey(),"<br>");
+        } catch (Exception e) {
+            log.warn("Error retrieving reference for " + detail.getKey(), e);
+        }
+
+        return notes;
     }
 }

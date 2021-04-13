@@ -60,17 +60,34 @@
 						<td>${strain.description}</td>
 					</tr>
 					</c:if>
-                                        
+               
+                                        <%-- Moved to reference details
                                         <c:if test="${not empty strain.notes}">
 					<tr>
 						<td><h4>Strain Notes</h4></td>
                                                 <td>
 						<c:forEach var="note" items="${strain.notes}" varStatus="status">
 							
-                                                            <c:out value="${note.note}" escapeXml="false"/>
+                                                            <c:out value="${note.note}" escapeXml="false"/>&nbsp;
                                                              <a href="referenceDetails.do?accId=${note.dataBean['ACCID']}">${note.dataBean['CITE']}}</a>
                                                             <c:if test="${status.last != true}">
                                                                 &nbsp;&#8226;&nbsp;<br>
+                                                            </c:if>
+                                                    
+						</c:forEach>
+                                                </td>
+					</tr>
+					</c:if>
+                                        --%>
+                                         <c:if test="${not empty strain.links}">
+					<tr>
+						<td><h4>Strain Links</h4></td>
+                                                <td>
+						<c:forEach var="link" items="${strain.links}" varStatus="status">
+							
+                                                            &#8226;&nbsp;<a href="${link.accessionUrl}" target="_new">${link.siteName}</a>
+                                                            <c:if test="${status.last != true}">
+                                                                <br>
                                                             </c:if>
                                                     
 						</c:forEach>
