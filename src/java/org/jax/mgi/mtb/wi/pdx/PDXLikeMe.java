@@ -26,7 +26,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
 import org.jax.mgi.mtb.wi.WIConstants;
-import org.jax.mgi.mtb.wi.actions.PDXComparisonAction;
+
 
 /**
  * Parse the PDX Like Me queries, get the results, and convert to HTML or CSV

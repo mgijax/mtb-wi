@@ -13,7 +13,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.JspFactory;
+//import javax.servlet.jsp.JspFactory;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -340,12 +340,11 @@ public class ServerInfo extends Action {
 
         String servletSpec = context.getMajorVersion() + "." +
                              context.getMinorVersion();
-        String jspSpec =
-                JspFactory.getDefaultFactory().getEngineInfo().getSpecificationVersion();
+        //String jspSpec = JspFactory.getDefaultFactory().getEngineInfo().getSpecificationVersion();
 
         request.setAttribute("sysProps", arrSystemProperties);
         request.setAttribute("servletSpec", servletSpec);
-        request.setAttribute("jspSpec", jspSpec);
+       // request.setAttribute("jspSpec", jspSpec);
         request.setAttribute("sessionInfo", arrSessionInfo);
         request.setAttribute("cookies", arrCooks);
         request.setAttribute("headers", arrHeaders);
