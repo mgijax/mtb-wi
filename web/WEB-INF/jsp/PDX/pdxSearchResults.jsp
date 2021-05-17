@@ -92,7 +92,7 @@
 				{name: 'primarySite'},
 				{name: 'tumorMarkers'},
 				{name: 'sex'},
-				{name: 'age'},
+				{name: 'age', sortType:'asInt'},
 				{name: 'strain'},
 				{name: 'assocData'},
 				{name: 'tag'},
