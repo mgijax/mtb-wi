@@ -155,11 +155,12 @@
 
         
         <div id="loading" style="top:0px;left:0px;background-color:grey; z-index:99; width:100%;height:100%;position: fixed;
-   display: block;
-   opacity: 0.7;
-   text-align: center; 
-   line-height:500px;
-   font-size:40px;">Loading please wait....<br></div>
+            display: block;
+            opacity: 0.7;
+            text-align: center; 
+            line-height:500px;
+            font-size:40px;">Loading please wait....<br>
+        </div>
 
 
  

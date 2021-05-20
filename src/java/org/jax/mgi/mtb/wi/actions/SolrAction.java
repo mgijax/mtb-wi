@@ -17,6 +17,9 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.jax.mgi.mtb.dao.custom.SearchResults;
+import org.jax.mgi.mtb.dao.custom.mtb.MTBGeneticsUtilDAO;
+import org.jax.mgi.mtb.dao.gen.mtb.AlleleDTO;
 import org.jax.mgi.mtb.wi.WIConstants;
 
 /**
@@ -43,7 +46,13 @@ public class SolrAction extends Action {
 
         URL url = null;
         if(request.getQueryString()  != null){
-          url = new URL(solrURL + "?" + request.getQueryString());
+          String query = request.getQueryString();
+          if(query.contains("alleleID")){
+              request.setAttribute("url",getAlleleIDURL(query));
+              return mapping.findForward("pleaseWait");
+          }else{
+            url = new URL(solrURL + "?" + query);
+          }
         }else{
            
             StringBuilder queryStr = new StringBuilder();
@@ -99,5 +108,21 @@ public class SolrAction extends Action {
         response.getWriter().write(responseStr.toString());
 
         return null;
+    }
+    
+    private String getAlleleIDURL(String query){
+        StringBuilder url = new StringBuilder("/mtbwi/facetedSearch.do");
+        try{
+        String[] parts = query.split("=");
+        if(parts[1].startsWith("MGI:")){
+           
+           SearchResults<AlleleDTO> results = MTBGeneticsUtilDAO.getInstance().searchAllele(parts[1],0,null,null,null,null,1);
+           url.append("#fq=strainMarker%253A%2522");
+           url.append(results.getList().get(0).getSymbol()).append("%2522");
+        }
+        }catch(Exception e){
+            log.error("Unable to get allele symbol for "+query,e);
+        }
+        return url.toString();
     }
 }

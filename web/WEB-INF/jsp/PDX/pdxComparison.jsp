@@ -5,10 +5,18 @@
 <jax:mmhcpage title="Patient Derived Xenograft Comparison Form">
 	<jsp:attribute name="head">
             
-              <link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
+        <link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" /> 
 
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
+        
+         <style>
+            .trigger {
+                display:initial;
+                max-width: none;
+                height:18px !important;
+            }
+        </style>
             
     <script type="text/javascript">
          
@@ -120,11 +128,50 @@
                 hideTrigger:true,
                 hiddenName:'gene',
                 width:260,
+                height:30,
                 listEmptyText:'no matching gene',
                 renderTo: 'geneSelect'
         //        ,pageSize:10
             });
             
+            
+            // to clear value on reset. from sencha forum.
+			Ext.form.ComboBox.prototype.initQuery = Ext.form.ComboBox.prototype.initQuery.createInterceptor(function(e)
+			{
+				var v = this.getRawValue();
+				
+				if (typeof v === 'undefined' || v === null || v === '')
+					this.clearValue();
+			});
+			
+  			var idStore = new Ext.data.ArrayStore({
+							id: 0,
+							fields: [
+								'id',
+								'display'
+							],
+							data:${modelIDs}
+						})
+			
+ 			var modelIDcombo = new Ext.form.ComboBox({
+				store: idStore,
+				minChars:1,
+				valueField:'id',
+				displayField:'display',
+				typeAhead: true,
+				lazyRender:true,
+				mode: 'local',
+				forceSelection: false,
+				triggerAction: 'all',
+				selectOnFocus:true,
+				hideTrigger:false,
+                                triggerClass: "trigger",
+				hiddenName:'modelID',
+				width:560,
+				listEmptyText:'',
+				renderTo: 'modelIDCombo'
+		//		,pageSize:10
+			});
             
 	
         });
@@ -132,14 +179,25 @@
          
     </script>
 	</jsp:attribute>
+	<jsp:attribute name="subnav">
+	<a href="pdxRequest.do">Request more information on the JAX PDX program</a>
+	</jsp:attribute>
 	<jsp:body>
 	
-	<a href="pdxRequest.do" target="_blank">Request more information on the JAX PDX program.</a>
 	
     <section>
         <div class="container">
             
 	<jax:searchform action="pdxComparison">
+            
+            <fieldset>
+                <legend>Select a model ID</legend>
+                <fieldset>
+                    <legend data-tip="Select a specific model ID">Model ID</legend>
+                    <div id="modelIDCombo"></div>
+                </fieldset>
+                
+            </fieldset>    
 	<fieldset>
 		<legend>Limit models by primary cancer site</legend>
 		<fieldset>

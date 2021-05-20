@@ -371,6 +371,7 @@
             type="org.jax.mgi.mtb.wi.actions.SolrAction"
             scope="request">
             <forward path="/WEB-INF/jsp/solr/facetedSearch.jsp"/>
+            <forward name="pleaseWait" path="/WEB-INF/jsp/pleaseWait.jsp"/>
         </action>
         
         
@@ -387,6 +388,12 @@
             <forward name="success" path="/WEB-INF/jsp/expression/geneExpressionSearchResults.jsp"/>  
              <forward name="subtable" path="/WEB-INF/jsp/expression/geneExpressionSearchResultsSubtable.jsp"/>      
             <forward name="failure" path="appError.jsp"/>
+        </action>
+        
+        <action path="/alleleIDReport"
+            type="org.jax.mgi.mtb.wi.actions.MGDAlleleIDAction"
+                scope="request">
+            <forward name="error" path="appError.jsp"/>
         </action>
        
     

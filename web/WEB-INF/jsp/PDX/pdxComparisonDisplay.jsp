@@ -5,7 +5,22 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <jax:mmhcpage title="Patient Derived Xenograft Comparison">
 	<jsp:attribute name="head">
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	<script type="text/javascript">
+             $(document).ready(function () {
+             table = $('#comparisonTable').DataTable( {
+                    searching:      false,
+                    info:           false,
+                    scrollY:        '50vh',
+                    scrollX:        '50vh',
+                    scrollCollapse: true,
+                    paging:         false,
+                    ordering:       false,
+                    stripe:         true
+                    } );
+            
+             });
 		function showAllMutations(){
 			var genes = document.getElementsByName("mtGene");
 			for(var i=0; i<genes.length; i++){
@@ -38,7 +53,7 @@
 	
 	</jsp:attribute>
 	<jsp:attribute name="subnav">
-	<a href="pdxRequest.do">Request more information on the JAX PDX program</a>
+	<%--<a href="pdxRequest.do">Request more information on the JAX PDX program</a> --%>
 	</jsp:attribute>
 	<jsp:body>
 	
@@ -48,19 +63,17 @@
 			<table>
 				<tbody>
 					<tr>
-						<td><h4>Primary Site</h4></td>	
-						<td>${primarySites}</td>
+                                            <jax:dl dt="Primary Site" dts="Primary Sites" dds="${primarySites}" dd="Any"/>
 					</tr>
 					<tr>
-						<td><h4>Diagnosis</h4></td>	
-						<td>${diagnoses}</td>
+                                            <jax:dl dt="Diagnosis" dts="Diagnoses" dds="${diagnoses}" dd="Any"/>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</section>		
 	
-	<section id="detail">		
+	<section id="detail" style="background-color: inherit">		
 	
 	<html:form action="pdxComparison" method="GET">
 	<table class="detail-table" >
@@ -120,14 +133,13 @@
 				
 			</div>
 		</caption>
-		<tbody>
-			<tr>
-				<td>
-					${table}
-				</td>
-			</tr>
-		</tbody>
-	</table>
+		</table>
+            <br>
+			
+                ${table}
+				
+		
+	
 	</html:form>
 	</section>
 	</jsp:body>
