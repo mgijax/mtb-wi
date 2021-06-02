@@ -124,6 +124,7 @@ public class RelatedModels {
         return relations.get(modelID);
     }
 
+   //  proxe IDs moved to PDXDAO
     public static String getProxeId(String modelID) {
         if (proxeIds.size() == 0) {
             load();

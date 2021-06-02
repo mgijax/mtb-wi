@@ -97,7 +97,7 @@ public class PDXComparisonAction extends Action {
                 ArrayList<PDXMouse> mice = null;
 
                 // this, right here, is a real peice of work...
-                mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, no, no, "", no, false, false, no, "",false, null,null, null,null);
+                mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, no, "", no, false, false, no, "",false, null,null, null,null);
 
                StringBuilder table = new StringBuilder("<table id=\"comparisonTable\"  style=\"width:auto;table-layout:auto;\"><thead><tr><th style=\"width:50px\">&nbsp;</th>");
                 

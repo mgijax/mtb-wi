@@ -194,8 +194,7 @@ public class ModelCounts {
         ArrayList<String> diagnoses = new ArrayList<String>();
         ArrayList<String> tags = new ArrayList<String>();
         ArrayList<String> types = new ArrayList<String>();
-        ArrayList<String> markers = new ArrayList<String>();
-
+    
         String gene = "";
         ArrayList<String> variants = null;
 
@@ -206,7 +205,7 @@ public class ModelCounts {
         boolean treatmentNaive = false;
 
         ArrayList<PDXMouse> mice = store.findMice(modelID, primarySites, diagnoses,
-                types, markers, gene, variants, drugResponse, tumorGrowth, tags,
+                types, gene, variants, drugResponse, tumorGrowth, tags,
                 fusionGenes,treatmentNaive,recist,recist,null,null);
 
         return mice.size() + "";

@@ -70,18 +70,11 @@ public class PDXSearchAction extends Action {
         request.setAttribute("primarySitesValues", pdxMouseStore.getPrimarySitesLVB());
         request.setAttribute("tagsValues", pdxMouseStore.getTagsLVB());
 
-        request.setAttribute("genesArray", pdxMouseStore.getAllGenesWebFormat());
+      
         request.setAttribute("fusionGenes", pdxMouseStore.getFusionGenesLVB());
         
         request.setAttribute("recistDrugs", pdxMouseStore.getRECISTDrugsLVB());
         request.setAttribute("recistResponses", pdxMouseStore.getRECISTResponsesLVB());
-
-        //  this is the list of genes used to populate MTB's pdxexpression table
-        //   request.setAttribute("genesValues2", pdxMouseStore.getExomePanelGenesLVB());
-
-        // request.setAttribute("genesValuesCNV",pdxMouseStore.getExomePanelGenesLVB());
-
-        request.setAttribute("ctpGenes", pdxMouseStore.getCTPGenesWebFormat());
 
         Map mapChromosomes = WIConstants.getInstance().getChromosomes();
 

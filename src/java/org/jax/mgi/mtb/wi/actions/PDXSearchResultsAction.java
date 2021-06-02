@@ -43,8 +43,7 @@ public class PDXSearchResultsAction extends Action {
         ArrayList<String> diagnoses = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getDiagnoses());
         ArrayList<String> tags = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getTags());
         ArrayList<String> types = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getTumorTypes());
-        ArrayList<String> markers = new ArrayList<String>();
-
+      
         
         String gene = pdxForm.getGene();
         String genes2 = pdxForm.getGenes2();
@@ -52,7 +51,7 @@ public class PDXSearchResultsAction extends Action {
 
         String genesCNV = pdxForm.getGenesCNV();
         
-        String fusionGenes = pdxForm.getFusionGenes();
+        String fusionGene = pdxForm.getFusionGenes();
         
         boolean dosingStudy = pdxForm.getDosingStudy();
         
@@ -66,13 +65,13 @@ public class PDXSearchResultsAction extends Action {
         Double tmbGT = null;
         Double tmbLT = null;
         try{
-            tmbGT = new Double(pdxForm.getTMBGT());
+            tmbGT =  Double.parseDouble(pdxForm.getTMBGT());
         }catch(Exception e){
             //do nothing
         }
         
         try{
-            tmbLT = new Double(pdxForm.getTMBLT());
+            tmbLT = Double.parseDouble(pdxForm.getTMBLT());
         }catch(Exception e){
             //do nothing
         }
@@ -103,8 +102,8 @@ public class PDXSearchResultsAction extends Action {
             request.setAttribute("tissuseOfOrigin", toa);
         } else {
             mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, types,
-                    markers, gene, variants, dosingStudy, tumorGrowth, tags, 
-                    fusionGenes,treatmentNaive, recistDrug, recistResponse, tmbGT, tmbLT);
+                     gene, variants, dosingStudy, tumorGrowth, tags, 
+                    fusionGene,treatmentNaive, recistDrug, recistResponse, tmbGT, tmbLT);
         }
 
         request.setAttribute("modelID", modelID);
@@ -112,9 +111,9 @@ public class PDXSearchResultsAction extends Action {
         request.setAttribute("diagnoses", diagnoses);
         request.setAttribute("types", types);
         request.setAttribute("tags", tags);
-        request.setAttribute("fusionGenes",fusionGenes);
+        request.setAttribute("fusionGenes",fusionGene);
         
-        if(fusionGenes != null && fusionGenes.trim().length() > 0){
+        if(fusionGene != null && fusionGene.trim().length() > 0){
             hideFusionGenes = "false";
         }
 

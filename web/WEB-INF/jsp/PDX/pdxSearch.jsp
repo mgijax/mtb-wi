@@ -39,6 +39,7 @@
 			document.forms[0].gene.value="";
 			document.forms[0].genes2.value="";
 			document.forms[0].genesCNV.value="";
+                        document.forms[0].fusionGenes.value="";
  		
 			
 		}

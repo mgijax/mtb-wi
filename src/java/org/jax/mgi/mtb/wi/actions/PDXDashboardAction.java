@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -16,7 +15,7 @@ import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.wi.forms.PDXDashboardForm;
 import org.jax.mgi.mtb.utils.LabelValueBeanComparator;
-import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
+import org.jax.mgi.mtb.wi.pdx.PDXReports;
 
 /**
  * @author sbn
@@ -57,39 +56,39 @@ public class PDXDashboardAction extends Action {
         }
 
    
-        PDXMouseStore store = new PDXMouseStore();
+        PDXReports reports = PDXReports.getInstance();
         String source = "ELIMS-";
         String report = null;
         boolean tabDelimited = false;
-        String delimiter = ",";  // this is also hard coded in the mousestore fyi
+        String delimiter = ",";  // this is also hard coded in the mousereports fyi
         Date d = new Date(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(d);
         String fileName = "";
         if (request.getParameter("statusReport") != null) {
-            report = store.getPDXStatusReport(delimiter);
+            report = reports.getPDXStatusReport(delimiter);
             fileName = source + "PDXStatusReportWithHospitalData";
         }
         if (request.getParameter("engraftmentSummary") != null) {
-            report = store.getPDXEngraftmentStatusSummary(delimiter);
+            report = reports.getPDXEngraftmentStatusSummary(delimiter);
             fileName = source + "PDXEngraftmentStatusSummary";
         }
         
         if (request.getParameter("familyHistory") != null) {
-            report = store.getPDXPatientHistory(delimiter);
+            report = reports.getPDXPatientHistory(delimiter);
             fileName = source + "PDXPatientHistory";
         }
         if (request.getParameter("patientClinical") != null) {
-            report = store.getPDXPTClinical(delimiter);
+            report = reports.getPDXPTClinical(delimiter);
             fileName = source + "PDXPatientClinical";
         }
         if (request.getParameter("consortium") != null) {
-            report = store.getPDXConsortiumReport(delimiter);
+            report = reports.getPDXConsortiumReport(delimiter);
             fileName = source + "PDXConsortiumReport";
         }
         
         if (request.getParameter("activeModelSummary") != null) {
-            report = store.getPDXActiveModelSummary(delimiter);
+            report = reports.getPDXActiveModelSummary(delimiter);
             fileName = source + "ActiveModelSummary";
         }
        
@@ -104,7 +103,7 @@ public class PDXDashboardAction extends Action {
         }
 
         if (request.getParameter("refresh") != null) {
-            store.refreshReports();
+            reports.refresh();
         }
 
 
@@ -134,7 +133,7 @@ public class PDXDashboardAction extends Action {
 
 
             
-            status = store.getPDXModelStatus();
+            status = reports.getPDXModelStatus();
 
             if (status == null || status.size() < 1) {
                 result = "noData";
@@ -210,7 +209,7 @@ public class PDXDashboardAction extends Action {
                 request.setAttribute("siteValues", lvbSites);
                 request.setAttribute("tissue", tissue);
                 request.setAttribute("tissue2", site2);
-                request.setAttribute("freshnessDate", store.getReportFreshnessDate());
+                request.setAttribute("freshnessDate", reports.getReportFreshnessDate());
 
                 site = site.replace("\'", "");
                 request.setAttribute("site", site);

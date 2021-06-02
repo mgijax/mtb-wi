@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.HashMap;
 //import org.apache.axiom.soap.SOAP11Constants;
 import org.apache.log4j.Logger;
+import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 
@@ -89,12 +90,6 @@ public class ElimsUtil {
         }
         return report.toString();
     }
-
-    
-    
-     
-
- 
 
     public String getPDXPatientHistory() {
         StringBuffer report = new StringBuffer();
@@ -205,9 +200,6 @@ public class ElimsUtil {
 
             if (result.length > 0) {
                 
-                
-                
-
                 report.append("Model,Name,Primary Site,Laterality,Stage,Grade,Path Report Available,Path Report Link,Cisplatin Resistant, Other Resistance, Histology,");
                 report.append("Tumor Markers,Other Markers,Chromosome Analysis,Genetic Mutation Analysis, Tumor Notes\n");
 
@@ -585,15 +577,15 @@ public class ElimsUtil {
 
         PDXMouseSearchData searchData = new PDXMouseSearchData();
 
-        ArrayList<String> diagnosis = new ArrayList<String>();
-        ArrayList<String> primarySites = new ArrayList<String>();
-        ArrayList<String> tags = new ArrayList<String>();
-        ArrayList<PDXMouse> mice = new ArrayList<PDXMouse>();
+        ArrayList<String> diagnosis = new ArrayList<>();
+        ArrayList<String> primarySites = new ArrayList<>();
+        ArrayList<String> tags = new ArrayList<>();
+        ArrayList<PDXMouse> mice = new ArrayList<>();
 
         // to get unique values for these fields
-        HashMap<String, String> diagnosisMap = new HashMap<String, String>();
-        HashMap<String, String> primarySitesMap = new HashMap<String, String>();
-        HashMap<String, String> tagsMap = new HashMap<String, String>();
+        HashMap<String, String> diagnosisMap = new HashMap<>();
+        HashMap<String, String> primarySitesMap = new HashMap<>();
+        HashMap<String, String> tagsMap = new HashMap<>();
         HashMap<String, String> idMap = new HashMap<>();
 
         try {
@@ -685,6 +677,8 @@ public class ElimsUtil {
                         mouse.setGrade(results[i].getGrades());
 
                         mouse.setTag(results[i].getModelTags());
+                        
+                        mouse.setMrn(results[i].getMedical_Record_Number());
 
                         // don't display models taged as Suspended on the public install
                         String tag = results[i].getModelTags();
@@ -715,7 +709,7 @@ public class ElimsUtil {
                             
                             
                             // for Baylor models we want to use MRN as previous ID
-                            String mrn = results[i].getMedical_Record_Number();
+                            String mrn = mouse.getMrn();
                             if(mrn != null && mrn.startsWith(BCM)){
                                 pid = mrn;
                                 mouse.setPreviousID(pid);
@@ -741,6 +735,9 @@ public class ElimsUtil {
                //              System.out.println(status+"\t"+numericID+"\tREJECTED");
                     }
                 }
+                
+   //             PDXDAO.getInstance().updateModels(mice);
+   //             log.error(PDXDAO.getInstance().getModels().size()+" pdx models loaded from database.");
 
                 diagnosis.addAll(diagnosisMap.keySet());
                 Collections.sort(diagnosis);

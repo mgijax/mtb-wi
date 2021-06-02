@@ -78,14 +78,13 @@ public class PDXDetailsAction extends Action {
             request.setAttribute("ctpOnly","&all_ctp_genes=yes");
         }
 
-        ArrayList<PDXMouse> mice = store.findStaticMouseByID(modelID);
+        PDXMouse mouse = store.findStaticMouseByID(modelID);
 
-        if (mice == null || mice.isEmpty()) {
+        if (mouse == null) {
             result = "noMatch";
             request.setAttribute("modelID", modelID);
 
         } else {
-            PDXMouse mouse = mice.get(0);
             mouse.setGene(gene);
             mouse.setVariant(variant);
 

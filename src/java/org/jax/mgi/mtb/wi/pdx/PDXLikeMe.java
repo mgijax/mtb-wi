@@ -301,11 +301,8 @@ public class PDXLikeMe {
                 thing = kGene.split(":")[1].toUpperCase();
 
                 table.append(kGene.replace(":", " "));
-                
-//                if (!ctpGenes.contains(kGene.toUpperCase().split(":")[0])) {
-//                    table.append(" (Not in CTP)");
-//                }
-                    table.append(getNotes(kGene.toUpperCase().split(":")[0],format));
+                              
+                table.append(getNotes(kGene.toUpperCase().split(":")[0],format));
                 
                 table.append(",");
 
@@ -324,11 +321,8 @@ public class PDXLikeMe {
                 thing = uGene.split(":")[1].toUpperCase();
 
                 table.append(uGene.replace(":", " "));
-                
-//                if (!ctpGenes.contains(uGene.toUpperCase().split(":")[0])) {
-//                    table.append(" (Not in CTP)");
-//                }  
-                  table.append(getNotes(uGene.toUpperCase().split(":")[0],format));
+                           
+                table.append(getNotes(uGene.toUpperCase().split(":")[0],format));
                         
                 table.append(",");
 
