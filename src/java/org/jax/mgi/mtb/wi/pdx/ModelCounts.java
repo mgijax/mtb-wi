@@ -38,7 +38,7 @@ public class ModelCounts {
 
      String[] pdxTerms = {"Lung",
         "Blood,Bone marrow,Lymph node",
-        "Anal,Appendix,Cecum,Colon,Duodenum,Rectum,ampulla of Vater",
+        "Anal,Appendix,Cecum,Colon,Duodenum,Rectum,Ampulla of Vater",
         "Pancreas",
         "Breast",
         "Prostate gland",
@@ -59,7 +59,7 @@ public class ModelCounts {
 
     // for mouseover
     String[] labels = {"Lung, Bronchus, Larynx, Paranasal sinus, Trachea",
-        "Leukemia, Lymphoma, Myeloma, Leukocyte, Blood, Bone marrow, Dendritic cell, Erythroblast, Erythrocyte, Hematopoietic stem cell, Lymph node, Lymphatic vessel, Lymphoid tissue, Peyer\\'s patch, Reticular cell, Reticulocyte, Spleen, Thymus",
+        "Leukemia, Lymphoma, Myeloma, Leukocyte, Blood, Bone marrow, Dendritic cell, Erythroblast, Erythrocyte, Hematopoietic stem cell, Lymph node, Lymphatic vessel, Lymphoid tissue, Peyer&apos;s patch, Reticular cell, Reticulocyte, Spleen, Thymus",
         "Intestine, Small Intestine, Large Intestine, Duodenum, Jejunum, Ileum, Ileocecal Junction, Cecum, Colon, Rectum, Anus",
         "Pancreas",
         "Mammary gland",
