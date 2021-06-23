@@ -44,6 +44,7 @@ public class PDXReports {
     }
     
     public void refresh(){
+        status = null;
         singleton = new PDXReports();
     }
 
@@ -113,7 +114,7 @@ public class PDXReports {
                 d = new Date();
                 log.info(d + " Loading Patient History");
                 temp = eu.getPDXPatientHistory();
-                if (temp.length() > 0) {
+                 if (temp.length() > 0) {
                     pdxPatientHistory = temp;
                 } else {
                     log.error("PDX Patient History not loaded!");
