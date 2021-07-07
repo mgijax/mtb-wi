@@ -91,10 +91,7 @@
         <action path = "/strainDetails"
               type = "org.jax.mgi.mtb.wi.actions.StrainDetailsAction"
               scope="request">
-            <forward name="success" path="/WEB-INF/jsp/strain/strainDetailsSimple.jsp"/>
-            <forward name="collapsed" path="/WEB-INF/jsp/strain/strainDetailsCollapsed.jsp"/>
-            <forward name="expanded" path="/WEB-INF/jsp/strain/strainDetailsExpanded.jsp"/>
-            <forward name="failure" path="/WEB-INF/jsp/strain/strainDetailsFailure.jsp"/>
+            <forward name="success" path="/WEB-INF/jsp/strain/strainDetailsCollapsed.jsp"/>
             <forward name="error" path="appError.jsp"/>
         </action>
         

@@ -141,16 +141,35 @@
 
 									<td>
 											<div style="float:right;">
-											<a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele1Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele1Symbol} allele</a>
-											<c:if test="${not empty genetics.allele2Symbol}">
+                                                                                        <c:if test="${not fn:endsWith(genetics.allele1Symbol,'+</sup>')}">
+                                                                                            <a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele1Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele1Symbol} allele</a>
+                                                                                        </c:if>
+											<c:if test="${not empty genetics.allele2Symbol && not fn:endsWith(genetics.allele2Symbol,'+</sup>')}">
 												<br><a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele2Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele2Symbol} allele</a>
 											</c:if>
 											</div>
+                                                                                        
+                                                                                         <c:choose>
+                                                                                                <c:when test="${not fn:endsWith(genetics.allele1Symbol,'+</sup>')}">
+                                                                                                    <a href="${genetics.allele1Url}" target="_blank">${genetics.allele1Symbol}</a>
+                                                                                                </c:when>
+                                                                                                <c:otherwise>
+                                                                                                    ${genetics.allele1Symbol}
+                                                                                                </c:otherwise>
+                                                                                         </c:choose>
 											
 											<a href="${genetics.allele1Url}" target="_blank">${genetics.allele1Symbol}</a>
 											
 											<c:if test="${not empty genetics.allele2Symbol}">
-											 / <a href="${genetics.allele2Url}" target="_blank">${genetics.allele2Symbol}</a>
+                                                                                         /
+                                                                                            <c:choose>
+                                                                                                <c:when test="${not fn:endsWith(genetics.allele2Symbol,'+</sup>')}">
+                                                                                                    <a href="${genetics.allele2Url}" target="_blank">${genetics.allele2Symbol}</a>
+                                                                                                </c:when>
+                                                                                                <c:otherwise>
+                                                                                                    ${genetics.allele2Symbol}
+                                                                                                </c:otherwise>
+                                                                                         </c:choose>
 											</c:if>
 									</td>
 								</tr>

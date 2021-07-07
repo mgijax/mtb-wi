@@ -71,17 +71,15 @@ public class StrainDetailsAction extends Action {
         timer.start();
 
         String strKey = request.getParameter("key");
-        String strPage = StringUtils.nvl(request.getParameter("page"),
-                                         "collapsed");
-        strTarget = strPage.toLowerCase();
+        
+        
         MTBStrainDetailDTO dtoStrainDetail = null;
         Timer daoTimer = new Timer();
         daoTimer.start();
 
         if (StringUtils.hasValue(strKey)) {
             try {
-                dtoStrainDetail = getStrain(Long.parseLong(strKey),
-                                   strTarget.equals("collapsed"));
+                dtoStrainDetail = getStrain(Long.parseLong(strKey),true);
 
             } catch (Exception e) {
                 log.error("Error retrieving strain detail, key =" + strKey, e);
@@ -95,7 +93,7 @@ public class StrainDetailsAction extends Action {
                         daoTimer.toString());
         }
 
-        // set the target to failure if we could not retrieve the strain types
+        // set the target to error if we could not retrieve the strain types
         if (dtoStrainDetail == null) {
             strTarget = "error";
         } else {
