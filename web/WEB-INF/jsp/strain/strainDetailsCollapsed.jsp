@@ -126,8 +126,6 @@
 							<c:set var="a2" value="${empty genetics.allele2Symbol ? 'none' : genetics.allele2Symbol}" />
 
 							
-							<c:if test="${a1 != a2}">
-							
 								<tr>
 									
 									<c:choose>
@@ -144,7 +142,7 @@
                                                                                         <c:if test="${not fn:endsWith(genetics.allele1Symbol,'+</sup>')}">
                                                                                             <a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele1Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele1Symbol} allele</a>
                                                                                         </c:if>
-											<c:if test="${not empty genetics.allele2Symbol && not fn:endsWith(genetics.allele2Symbol,'+</sup>')}">
+											<c:if test="${not empty genetics.allele2Symbol && not fn:endsWith(genetics.allele2Symbol,'+</sup>')  &&  (a1 != a2) }">
 												<br><a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele2Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele2Symbol} allele</a>
 											</c:if>
 											</div>
@@ -158,7 +156,7 @@
                                                                                                 </c:otherwise>
                                                                                          </c:choose>
 											
-											<a href="${genetics.allele1Url}" target="_blank">${genetics.allele1Symbol}</a>
+											
 											
 											<c:if test="${not empty genetics.allele2Symbol}">
                                                                                          /
@@ -176,7 +174,7 @@
 								
 								<c:set var="firstGenetics" value="false" />
 								
-							</c:if>
+							
 						
 						</c:forEach>
 
