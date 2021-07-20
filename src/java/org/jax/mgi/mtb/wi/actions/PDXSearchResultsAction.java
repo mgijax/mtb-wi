@@ -205,7 +205,7 @@ public class PDXSearchResultsAction extends Action {
             result = "expression";
 
         } else {
-            if (request.getParameter("asCSV") != null && WIConstants.getInstance().getPublicDeployment() != true) {
+            if (request.getParameter("asCSV") != null ) {
 
                 response.setContentType("text/csv");
                 response.setHeader("Content-disposition", "attachment; filename=PDXMice.csv");

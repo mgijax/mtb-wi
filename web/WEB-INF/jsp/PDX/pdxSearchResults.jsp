@@ -323,10 +323,10 @@
 						</tr>
 						<tr>
 							<td>
-								<c:if test="${applicationScope.publicDeployment == false}">
-								<!-- This should not be available on public until there is a go-ahead from Ed L. -->
+								
+								
 								<input type="button" value="Download results as spreadsheet" onclick="window.location=document.URL+'&asCSV=true'" />
-								</c:if>
+							
 							</td>
 						</tr>
 					</table>
