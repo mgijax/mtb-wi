@@ -118,15 +118,6 @@
 	
 	<section id="detail">
 
-
-
-	<table>
-	</table>
-
-
-
-
-
 	<c:set var="rowSpan" value="0"/>
 	<c:set var="totalColumns" value="2"/>
 	<c:set var="strainName" value=""/>

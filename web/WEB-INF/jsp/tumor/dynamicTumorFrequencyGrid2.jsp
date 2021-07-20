@@ -162,312 +162,321 @@
 			cell. <em>(Requires JavaScript support.)</em></p>
 	</div>
 </section>
-<section id="detail">
-
-
-	<html:form action="dynamicGrid" method="GET">
-	<c:set var="rowSpan" value="0"/>
-	<c:set var="totalColumns" value="2"/>
-	<c:set var="strainName" value=""/>
-	<c:set var="organName" value=""/>
-	<input type="hidden" name="expandColapse" value ="false">
-	<input type="hidden" name="whichGrid" value="two">
-	<c:choose>
-	<c:when test="${not empty anatomicalSystems}">
-	<table class="grid">
-		<!-- ////  START HEADER  //// -->
-		<tr class="grid">
-			<td colspan="2" rowspan="2">
-				<table>
-					<tr><td><img src="${applicationScope.urlImageDir}/grid/veryhigh.png" alt="VH"></td><td class="grid">Very High</td></tr>
-					<tr><td><img src="${applicationScope.urlImageDir}/grid/high.png" alt="HI"></td><td class="grid">High</td></tr>
-					<tr><td><img src="${applicationScope.urlImageDir}/grid/moderate.png" alt="MO"></td><td class="grid">Moderate</td></tr>
-					<tr><td><img src="${applicationScope.urlImageDir}/grid/low.png" alt="LO"></td><td class="grid">Low</td></tr>
-					<tr><td><img src="${applicationScope.urlImageDir}/grid/verylow.png" alt="VL"></td><td class="grid">Very Low</td></tr>
-					<tr><td><img src="${applicationScope.urlImageDir}/grid/observed.png" alt="OB"></td><td class="grid">Observed</td></tr>
-					<tr><td bgcolor="#ffffff" width="20">0</td><td class="grid">Zero</td></tr>
-				</table>
-			</td>
-			<c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
-			<c:set var="colspan" value="${fn:length(anatomicalSystem.organs)}"/>
-			<c:forEach var="organParent" items="${anatomicalSystem.organs}" varStatus="status">
-			<c:set var="colspan" value="${fn:length(organParent.organs) + colspan - 1}"/>
-			</c:forEach>
-			<th colspan="${colspan}"><img src="dynamicText?text=${anatomicalSystem.anatomicalSystemName}&amp;size=10" alt="X">
-				<!-- \n -->
-			<img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" "></th>
-			</c:forEach>
-		</tr>
-		<tr class="grid">
-			<c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
-			<c:forEach var="organParent" items="${anatomicalSystem.organs}" varStatus="status">
-			<c:forEach var="organ" items="${organParent.organs}" varStatus="status">
-			<c:set var="totalColumns" value="${totalColumns + 1}"/> 
-			<th>
-				<img src="${applicationScope.urlImageDir}/grid/${organ.organKey}.png" alt="X">
-				<!-- \n -->
-				<img src="${applicationScope.urlImageDir}/grid/grid_spacer.png">
-				<!-- \n -->
-				<img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">
-				<!-- \n -->
-				<input type ="checkbox" name="organChk" value="${organ.organKey}" >
-			</th>
-			</c:forEach>
-			</c:forEach>
-			</c:forEach>
-		</tr>
-		<!-- ////  END HEADER  //// -->
-		<c:forEach var="rowHeredity" items="${strains}" varStatus="status1">
-		<tr style="background-color:black; height:1px">
-			<td colspan="${totalColumns}" style='border:solid 1px #000000; height:1px;'></td>
-		</tr>
-		<tr class="grid">
-			<c:set var="heredityGrid" value =""/>
-			<c:set var="heredityAll" value =""/>
-			<c:set var="familyGrid" value =""/>
-			<c:set var="familyAll" value =""/>
-			<%--Getting heredity...for ${rowHeredity.strainHeredityName}
-			<!-- \n -->
-			--%>
-			<%--Figure out how many rows each Heredity label needs to span
-			If all strains are displayed count all the strains for each family
-			otherwise just count the selected strains for each family
-			--%>
-			<c:forEach var="heredityItem" items="${gridData}" varStatus="status2">
-			<c:if test="${empty heredityGrid}">
-			<c:if test="${heredityItem.value.strainHeredityKey == rowHeredity.strainHeredityKey}">
-			<c:set var="heredityGrid" value="${heredityItem.value}"/>
-			<c:set var="heredityAll" value="${rowHeredity}"/>
-			</c:if>
-			</c:if>
-			</c:forEach>
-			<c:set var="rowSpan" value="${fn:length(rowHeredity.families)}"/>
-			<c:if test="${not empty heredityGrid}">
-			<c:choose>
-			<c:when test="${not empty showAllStrains}">
-			<c:forEach var="fam" items="${heredityAll.families}" varStatus="status3">
-			<c:set var="rowSpan" value="${fn:length(fam.strains) + rowSpan}"/>	
-			</c:forEach>
-			</c:when>
-			<c:otherwise>
-			<c:forEach var="fam" items="${heredityAll.families}" varStatus="status3">
-			<c:forEach var="st" items="${fam.strains}">
-			<c:forEach var="checkStrain" items="${strainChk}">
-			<c:if test="${st.strainKey == checkStrain}">
-			<c:set var="rowSpan" value="${rowSpan + 1}"/>	
-			</c:if>
-			</c:forEach>
-			</c:forEach>
-			</c:forEach>
-			</c:otherwise>
-			</c:choose>
-			<%-- else need to add only fam.strains that have been selected --%>
-			</c:if>
-			<td class="grid" rowspan="${rowSpan}">
-				<img src="${applicationScope.urlImageDir}/grid/sh${rowHeredity.strainHeredityKey}.png" alt="${rowHeredity.strainHeredityName}">
-			<img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" "></td>
-			<%--Done Heredity!
-			<!-- \n -->
-			--%>
-			<c:choose>
-			<c:when test="${not empty heredityGrid}">
-			<c:forEach var="fam" items="${heredityAll.families}" varStatus="status3">
-			<c:set var="familyGrid" value =""/>
-			<c:set var="familyAll" value =""/>	
-			<c:if test="${!status3.first}">
-			<tr class="grid">
-				</c:if>
-				<c:forEach var="familyItem" items="${heredityGrid.strainFamilies}" varStatus="status3">
-				<%--===> looking for ${fam.strainFamilyName}
-				<!-- \n -->
-				--%>
-				<c:if test="${familyItem.value.strainFamilyKey == fam.strainFamilyKey}">
-				<c:set var="familyGrid" value="${familyItem.value}"/>
-				<c:set var="familyAll" value="${fam}"/>
-				</c:if>
-				</c:forEach>
-				<c:choose>
-				<c:when test="${not empty familyGrid}">
-				<c:forEach var="strainFam" items="${strainFamilyChk}" >
-				<c:if test="${strainFam == familyGrid.strainFamilyKey}">
-				<%-- DETERMINE STRAIN FAMILY IMAGE EXPANDED OR COLLAPSED --%>
-				<td class="grid"> 
-					<span style="white-space:nowrap">
-						&nbsp;${familyGrid.strainFamilyName} (Summary)<html:multibox property="strainFamilyChk" value="${familyGrid.strainFamilyKey}" />
-					</span>
-				</td>
-				<%-- DETERMINE IF WE HAVE EXPANDED STRAINS OR NOT --%>
-				<%----------------------------------- START Strain Family and expanded Strains ---------------------------%>
-				<%----------------------------------- START Strain Family ------------------------------------------------%>																											 
-				<c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
-				<c:forEach var="organParent" items="${anatomicalSystem.organs}" varStatus="status">
-				<c:set var="organ" value=""/>
-				<%-- ------------ LOOP THROUGH SUB ORGANS ------------------
-				<!-- \n -->
-				--%>
-				<c:forEach var="subOrgan" items="${organParent.organs}" varStatus="status">
-				<%-- SUBORGAN NAME: ${subOrgan.organName}
-				<!-- \n -->
-				--%>
-				<c:set var="organ" value=""/>
-				<c:forEach var="organItem" items="${familyGrid.organs}" varStatus="status">
-				<c:forEach var="subOrganItem" items="${organItem.value.organs}" varStatus="status">
-				<c:if test="${subOrgan.organKey == subOrganItem.value.organKey}">
-				<c:set var="organ" value="${subOrganItem.value}"/>
-				</c:if>
-				</c:forEach>
-				</c:forEach>
-				<c:choose>
-				<c:when test="${not empty organ}">
-				<c:set var="tdOut" value=""/>
-				<c:choose>
-				<c:when test="${organ.frequencyDetail.noTumors}">
-				<c:set var="tdOut" value="0"/>
-				</c:when>
-				<c:otherwise>
-				<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='-' ' height='100%'>" />
-				</c:otherwise>
-				</c:choose>
-				<td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
-</c:when>
-<c:otherwise>
-<td></td>
-</c:otherwise>
-</c:choose>
-<c:set var="organ" value=""/>
-</c:forEach>
-</c:forEach>
-</c:forEach>
-</tr>
-</c:if>
-</c:forEach>
-<c:set var="theStrain" value=""/>
-<c:forEach var="strainCat" items="${familyAll.strains}" varStatus="status2000">
-<c:set var="showStrain" value=""/>
-<c:if test="${not empty showAllStrains}">
-<c:set var="showStrain" value="true"/>
-</c:if>
-<c:forEach var="selectStrain" items="${strainChk}">
-<c:if test="${selectStrain == strainCat.strainKey}" >
-<c:set var="showStrain" value="true"/>
-</c:if>
-</c:forEach>
-<c:if test="${not empty showStrain}" > 
-<c:set var="theStrain" value=""/>
-<c:forEach var="strainItem" items="${familyGrid.strains}" varStatus="status2001">
-<c:if test="${strainCat.strainKey == strainItem.value.strainKey}">
-<c:set var="theStrain" value="${strainItem.value}"/>
-</c:if>
-</c:forEach>
-<tr class="grid">
-	<td class="grid" >
-		<span style="white-space:nowrap">
-			<c:out value="${strainCat.strainName}" escapeXml="false"/>
-			<input type="checkbox" name="strainChk" value="${strainCat.strainKey}" >
-		</span>
-	</td>
-	<c:choose>
-	<c:when test="${not empty theStrain}">
-	<c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
-	<c:forEach var="organParent" items="${anatomicalSystem.organs}" varStatus="status">
-	<c:set var="organ" value=""/>
-	<%-- ------------ LOOP THROUGH SUB ORGANS ------------------
-	<!-- \n -->
-	--%>
-	<c:forEach var="subOrgan" items="${organParent.organs}" varStatus="status">
-	<%-- SUBORGAN NAME: ${subOrgan.organName}
-	<!-- \n -->
-	--%>
-	<c:set var="organ" value=""/>
-	<c:forEach var="organItem" items="${theStrain.organs}" varStatus="status">
-	<c:forEach var="subOrganItem" items="${organItem.value.organs}" varStatus="status">
-	<c:if test="${subOrgan.organKey == subOrganItem.value.organKey}">
-	<c:set var="organ" value="${subOrganItem.value}"/>
-	</c:if>
-	</c:forEach>
-	</c:forEach>
-	<c:choose>
-	<c:when test="${not empty organ}">
-	<c:set var="tdOut" value=""/>
-	<c:choose>
-	<c:when test="${organ.frequencyDetail.noTumors}">
-	<c:set var="tdOut" value="0"/>
-	</c:when>
-	<c:otherwise>
-	<c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
-	</c:otherwise>
-	</c:choose>
-	<td><a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain:</td><td class="gridDetails">${theStrain.strainName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
-</c:when>
-<c:otherwise>
-<td></td>
-</c:otherwise>
-</c:choose>
-<c:set var="organ" value=""/>
-</c:forEach>
-</c:forEach>
-</c:forEach>
-</c:when>
-<c:otherwise>
-<%--We <strong>DO NOT</strong> have a strain value...dump out a row of empty values.
-<!-- \n -->
---%>
-<c:set var="startColumn" value="3"/>
-<c:forEach var="i" begin="${startColumn}" end="${totalColumns}">
-<td bgcolor="#ffffff"></td>
-</c:forEach>
-</c:otherwise>
-</c:choose>
-</tr>
-</c:if>
-</c:forEach>
-</c:when>
-<c:otherwise>
-<%--We <strong>DO NOT</strong> have a family value...dump out a row of empty values.
-<!-- \n -->
---%>
-<td class="grid"><img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">&nbsp;${fam.strainFamilyName}</td>
-<c:set var="startColumn" value="4"/>
-<c:forEach var="i" begin="${startColumn}" end="${totalColumns}">
-<td bgcolor="#ffffff"></td>
-</c:forEach>
-</c:otherwise>
-</c:choose>
-</tr> 
-</c:forEach>
-</c:when>
-<c:otherwise>
-<%--We <strong>DO NOT</strong> have a heredity value...dump out a row of empty values.
-<!-- \n -->
---%>
-<c:forEach var="fam" items="${rowHeredity.families}" varStatus="status3">
-<c:if test="${!status3.first}">
-<tr class="grid">
-	</c:if>
-	<td class="grid" bgcolor="#ffffff">
-		<img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">&nbsp;${fam.strainFamilyName}
-	</td>
-	<c:set var="startColumn" value="4"/> 
-	<c:forEach var="i" begin="${startColumn}" end="${totalColumns}">
-	<td bgcolor="#ffffff"></td>
-	</c:forEach>
-</tr>	 
-</c:forEach>
-</c:otherwise>
-</c:choose>
-</c:forEach>
-</table>
-<input type="button" value="Generate Grid" onClick="javascrpt: checkChecks();" >
-<input type="button" value="Invert Selected Organs" onClick="javascript: toggleOrgans()">
-<input type="button" value="Invert Selected Strains" onClick="javascript: toggleStrains()">
-<input type="button" value="hide/show checkboxes" onClick="javascript: hideChecks()">
-</c:when>
-<c:otherwise>
-<h2> <strong> ${message} </strong> </h2>
-</c:otherwise>
-</c:choose>
-</html:form>
-
+<section id="detail" style>
+    
+     <html:form action="dynamicGrid" method="GET">
+            <c:set var="rowSpan" value="0"/>
+            <c:set var="totalColumns" value="2"/>
+            <c:set var="strainName" value=""/>
+            <c:set var="organName" value=""/>
+            <input type="hidden" name="expandColapse" value ="false">
+            <input type="hidden" name="whichGrid" value="two">
+    <c:choose>
+            <c:when test="${not empty anatomicalSystems}">
+    <table style="width:100%">
+        <tr align="center">
+            
+        <td>  
+            <table class="grid" style="width:auto">
+                    <!-- ////  START HEADER  //// -->
+                    <tr class="grid">
+                            <td colspan="2" rowspan="2">
+                                    <table>
+                                            <tr><td><img src="${applicationScope.urlImageDir}/grid/veryhigh.png" alt="VH"></td><td class="grid">Very High</td></tr>
+                                            <tr><td><img src="${applicationScope.urlImageDir}/grid/high.png" alt="HI"></td><td class="grid">High</td></tr>
+                                            <tr><td><img src="${applicationScope.urlImageDir}/grid/moderate.png" alt="MO"></td><td class="grid">Moderate</td></tr>
+                                            <tr><td><img src="${applicationScope.urlImageDir}/grid/low.png" alt="LO"></td><td class="grid">Low</td></tr>
+                                            <tr><td><img src="${applicationScope.urlImageDir}/grid/verylow.png" alt="VL"></td><td class="grid">Very Low</td></tr>
+                                            <tr><td><img src="${applicationScope.urlImageDir}/grid/observed.png" alt="OB"></td><td class="grid">Observed</td></tr>
+                                            <tr><td bgcolor="#ffffff" width="20">0</td><td class="grid">Zero</td></tr>
+                                    </table>
+                            </td>
+                            <c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
+                            <c:set var="colspan" value="${fn:length(anatomicalSystem.organs)}"/>
+                            <c:forEach var="organParent" items="${anatomicalSystem.organs}" varStatus="status">
+                            <c:set var="colspan" value="${fn:length(organParent.organs) + colspan - 1}"/>
+                            </c:forEach>
+                            <th colspan="${colspan}"><img src="dynamicText?text=${anatomicalSystem.anatomicalSystemName}&amp;size=10" alt="X">
+                                    <!-- \n -->
+                            <img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" "></th>
+                            </c:forEach>
+                    </tr>
+                    <tr class="grid">
+                            <c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
+                            <c:forEach var="organParent" items="${anatomicalSystem.organs}" varStatus="status">
+                            <c:forEach var="organ" items="${organParent.organs}" varStatus="status">
+                            <c:set var="totalColumns" value="${totalColumns + 1}"/> 
+                            <th>
+                                    <img src="${applicationScope.urlImageDir}/grid/${organ.organKey}.png" alt="X">
+                                    <!-- \n -->
+                                    <img src="${applicationScope.urlImageDir}/grid/grid_spacer.png">
+                                    <!-- \n -->
+                                    <img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">
+                                    <!-- \n -->
+                                    <input type ="checkbox" name="organChk" value="${organ.organKey}" >
+                            </th>
+                            </c:forEach>
+                            </c:forEach>
+                            </c:forEach>
+                    </tr>
+                    <!-- ////  END HEADER  //// -->
+                    <c:forEach var="rowHeredity" items="${strains}" varStatus="status1">
+                    <tr style="background-color:black; height:1px">
+                            <td colspan="${totalColumns}" style='border:solid 1px #000000; height:1px;'></td>
+                    </tr>
+                    <tr class="grid">
+                            <c:set var="heredityGrid" value =""/>
+                            <c:set var="heredityAll" value =""/>
+                            <c:set var="familyGrid" value =""/>
+                            <c:set var="familyAll" value =""/>
+                            <%--Getting heredity...for ${rowHeredity.strainHeredityName}
+                            <!-- \n -->
+                            --%>
+                            <%--Figure out how many rows each Heredity label needs to span
+                            If all strains are displayed count all the strains for each family
+                            otherwise just count the selected strains for each family
+                            --%>
+                            <c:forEach var="heredityItem" items="${gridData}" varStatus="status2">
+                            <c:if test="${empty heredityGrid}">
+                            <c:if test="${heredityItem.value.strainHeredityKey == rowHeredity.strainHeredityKey}">
+                            <c:set var="heredityGrid" value="${heredityItem.value}"/>
+                            <c:set var="heredityAll" value="${rowHeredity}"/>
+                            </c:if>
+                            </c:if>
+                            </c:forEach>
+                            <c:set var="rowSpan" value="${fn:length(rowHeredity.families)}"/>
+                            <c:if test="${not empty heredityGrid}">
+                            <c:choose>
+                            <c:when test="${not empty showAllStrains}">
+                            <c:forEach var="fam" items="${heredityAll.families}" varStatus="status3">
+                            <c:set var="rowSpan" value="${fn:length(fam.strains) + rowSpan}"/>	
+                            </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                            <c:forEach var="fam" items="${heredityAll.families}" varStatus="status3">
+                            <c:forEach var="st" items="${fam.strains}">
+                            <c:forEach var="checkStrain" items="${strainChk}">
+                            <c:if test="${st.strainKey == checkStrain}">
+                            <c:set var="rowSpan" value="${rowSpan + 1}"/>	
+                            </c:if>
+                            </c:forEach>
+                            </c:forEach>
+                            </c:forEach>
+                            </c:otherwise>
+                            </c:choose>
+                            <%-- else need to add only fam.strains that have been selected --%>
+                            </c:if>
+                            <td class="grid" rowspan="${rowSpan}">
+                                    <img src="${applicationScope.urlImageDir}/grid/sh${rowHeredity.strainHeredityKey}.png" alt="${rowHeredity.strainHeredityName}">
+                            <img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" "></td>
+                            <%--Done Heredity!
+                            <!-- \n -->
+                            --%>
+                            <c:choose>
+                            <c:when test="${not empty heredityGrid}">
+                            <c:forEach var="fam" items="${heredityAll.families}" varStatus="status3">
+                            <c:set var="familyGrid" value =""/>
+                            <c:set var="familyAll" value =""/>	
+                            <c:if test="${!status3.first}">
+                            <tr class="grid">
+                                    </c:if>
+                                    <c:forEach var="familyItem" items="${heredityGrid.strainFamilies}" varStatus="status3">
+                                    <%--===> looking for ${fam.strainFamilyName}
+                                    <!-- \n -->
+                                    --%>
+                                    <c:if test="${familyItem.value.strainFamilyKey == fam.strainFamilyKey}">
+                                    <c:set var="familyGrid" value="${familyItem.value}"/>
+                                    <c:set var="familyAll" value="${fam}"/>
+                                    </c:if>
+                                    </c:forEach>
+                                    <c:choose>
+                                    <c:when test="${not empty familyGrid}">
+                                    <c:forEach var="strainFam" items="${strainFamilyChk}" >
+                                    <c:if test="${strainFam == familyGrid.strainFamilyKey}">
+                                    <%-- DETERMINE STRAIN FAMILY IMAGE EXPANDED OR COLLAPSED --%>
+                                    <td class="grid"> 
+                                            <span style="white-space:nowrap">
+                                                    &nbsp;${familyGrid.strainFamilyName} (Summary)<html:multibox property="strainFamilyChk" value="${familyGrid.strainFamilyKey}" />
+                                            </span>
+                                    </td>
+                                    <%-- DETERMINE IF WE HAVE EXPANDED STRAINS OR NOT --%>
+                                    <%----------------------------------- START Strain Family and expanded Strains ---------------------------%>
+                                    <%----------------------------------- START Strain Family ------------------------------------------------%>																											 
+                                    <c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
+                                    <c:forEach var="organParent" items="${anatomicalSystem.organs}" varStatus="status">
+                                    <c:set var="organ" value=""/>
+                                    <%-- ------------ LOOP THROUGH SUB ORGANS ------------------
+                                    <!-- \n -->
+                                    --%>
+                                    <c:forEach var="subOrgan" items="${organParent.organs}" varStatus="status">
+                                    <%-- SUBORGAN NAME: ${subOrgan.organName}
+                                    <!-- \n -->
+                                    --%>
+                                    <c:set var="organ" value=""/>
+                                    <c:forEach var="organItem" items="${familyGrid.organs}" varStatus="status">
+                                    <c:forEach var="subOrganItem" items="${organItem.value.organs}" varStatus="status">
+                                    <c:if test="${subOrgan.organKey == subOrganItem.value.organKey}">
+                                    <c:set var="organ" value="${subOrganItem.value}"/>
+                                    </c:if>
+                                    </c:forEach>
+                                    </c:forEach>
+                                    <c:choose>
+                                    <c:when test="${not empty organ}">
+                                    <c:set var="tdOut" value=""/>
+                                    <c:choose>
+                                    <c:when test="${organ.frequencyDetail.noTumors}">
+                                    <c:set var="tdOut" value="0"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>" />
+                                    </c:otherwise>
+                                    </c:choose>
+                                    <td><a href="tumorSearchResults.do?grid=1&amp;strainFamilyKey=${familyGrid.strainFamilyKey}&amp;organKey=${organ.organKey}" class="tip">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain Family:</td><td class="gridDetails">${familyGrid.strainFamilyName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+    </c:when>
+    <c:otherwise>
+    <td></td>
+    </c:otherwise>
+    </c:choose>
+    <c:set var="organ" value=""/>
+    </c:forEach>
+    </c:forEach>
+    </c:forEach>
+    </tr>
+    </c:if>
+    </c:forEach>
+    <c:set var="theStrain" value=""/>
+    <c:forEach var="strainCat" items="${familyAll.strains}" varStatus="status2000">
+    <c:set var="showStrain" value=""/>
+    <c:if test="${not empty showAllStrains}">
+    <c:set var="showStrain" value="true"/>
+    </c:if>
+    <c:forEach var="selectStrain" items="${strainChk}">
+    <c:if test="${selectStrain == strainCat.strainKey}" >
+    <c:set var="showStrain" value="true"/>
+    </c:if>
+    </c:forEach>
+    <c:if test="${not empty showStrain}" > 
+    <c:set var="theStrain" value=""/>
+    <c:forEach var="strainItem" items="${familyGrid.strains}" varStatus="status2001">
+    <c:if test="${strainCat.strainKey == strainItem.value.strainKey}">
+    <c:set var="theStrain" value="${strainItem.value}"/>
+    </c:if>
+    </c:forEach>
+    <tr class="grid">
+            <td class="grid" >
+                    <span style="white-space:nowrap">
+                            <c:out value="${strainCat.strainName}" escapeXml="false"/>
+                            <input type="checkbox" name="strainChk" value="${strainCat.strainKey}" >
+                    </span>
+            </td>
+            <c:choose>
+            <c:when test="${not empty theStrain}">
+            <c:forEach var="anatomicalSystem" items="${anatomicalSystems}" varStatus="status">
+            <c:forEach var="organParent" items="${anatomicalSystem.organs}" varStatus="status">
+            <c:set var="organ" value=""/>
+            <%-- ------------ LOOP THROUGH SUB ORGANS ------------------
+            <!-- \n -->
+            --%>
+            <c:forEach var="subOrgan" items="${organParent.organs}" varStatus="status">
+            <%-- SUBORGAN NAME: ${subOrgan.organName}
+            <!-- \n -->
+            --%>
+            <c:set var="organ" value=""/>
+            <c:forEach var="organItem" items="${theStrain.organs}" varStatus="status">
+            <c:forEach var="subOrganItem" items="${organItem.value.organs}" varStatus="status">
+            <c:if test="${subOrgan.organKey == subOrganItem.value.organKey}">
+            <c:set var="organ" value="${subOrganItem.value}"/>
+            </c:if>
+            </c:forEach>
+            </c:forEach>
+            <c:choose>
+            <c:when test="${not empty organ}">
+            <c:set var="tdOut" value=""/>
+            <c:choose>
+            <c:when test="${organ.frequencyDetail.noTumors}">
+            <c:set var="tdOut" value="0"/>
+            </c:when>
+            <c:otherwise>
+            <c:set var="tdOut" value="<img src='${applicationScope.urlImageDir}/grid/${organ.frequencyDetail.descriptionHighest}.png' alt='H' height='100%'>"/>
+            </c:otherwise>
+            </c:choose>
+            <td><a href="tumorSearchResults.do?grid=1&amp;strainKey=${theStrain.strainKey}&amp;organKey=${organ.organKey}">${tdOut}<div role="tooltip"><table class="gridDetails"><tr><td class="gridDetails">Strain:</td><td class="gridDetails">${theStrain.strainName}</td></tr><tr><td class="gridDetails">Organ:</td><td class="gridDetails">${organ.organName}</td></tr><tr><td class="gridDetails">Highest reported tumor frequency:</td><td class="gridDetails">${organ.frequencyDetail.longDescriptionHighest}</td></tr><tr><td class="gridDetails"># Tumor Frequency Records:</td><td class="gridDetails">${organ.frequencyDetail.count}</td></tr></table></div></a></td>
+    </c:when>
+    <c:otherwise>
+    <td></td>
+    </c:otherwise>
+    </c:choose>
+    <c:set var="organ" value=""/>
+    </c:forEach>
+    </c:forEach>
+    </c:forEach>
+    </c:when>
+    <c:otherwise>
+    <%--We <strong>DO NOT</strong> have a strain value...dump out a row of empty values.
+    <!-- \n -->
+    --%>
+    <c:set var="startColumn" value="3"/>
+    <c:forEach var="i" begin="${startColumn}" end="${totalColumns}">
+    <td bgcolor="#ffffff"></td>
+    </c:forEach>
+    </c:otherwise>
+    </c:choose>
+    </tr>
+    </c:if>
+    </c:forEach>
+    </c:when>
+    <c:otherwise>
+    <%--We <strong>DO NOT</strong> have a family value...dump out a row of empty values.
+    <!-- \n -->
+    --%>
+    <td class="grid"><img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">&nbsp;${fam.strainFamilyName}</td>
+    <c:set var="startColumn" value="4"/>
+    <c:forEach var="i" begin="${startColumn}" end="${totalColumns}">
+    <td bgcolor="#ffffff"></td>
+    </c:forEach>
+    </c:otherwise>
+    </c:choose>
+    </tr> 
+    </c:forEach>
+    </c:when>
+    <c:otherwise>
+    <%--We <strong>DO NOT</strong> have a heredity value...dump out a row of empty values.
+    <!-- \n -->
+    --%>
+    <c:forEach var="fam" items="${rowHeredity.families}" varStatus="status3">
+    <c:if test="${!status3.first}">
+    <tr class="grid">
+            </c:if>
+            <td class="grid" bgcolor="#ffffff">
+                    <img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">&nbsp;${fam.strainFamilyName}
+            </td>
+            <c:set var="startColumn" value="4"/> 
+            <c:forEach var="i" begin="${startColumn}" end="${totalColumns}">
+            <td bgcolor="#ffffff"></td>
+            </c:forEach>
+    </tr>	 
+    </c:forEach>
+    </c:otherwise>
+    </c:choose>
+    </c:forEach>
+        </table>
+                </td>
+            </tr>
+            <tr align="center"><td>
+        <input type="button" value="Generate Grid" onClick="javascrpt: checkChecks();" >
+        <input type="button" value="Invert Selected Organs" onClick="javascript: toggleOrgans()">
+        <input type="button" value="Invert Selected Strains" onClick="javascript: toggleStrains()">
+        <input type="button" value="hide/show checkboxes" onClick="javascript: hideChecks()">
+         </td>
+    </tr>
+    </table>
+    </c:when>
+    <c:otherwise>
+    <h2> <strong> ${message} </strong> </h2>
+    </c:otherwise>
+    </c:choose>
+    </html:form>
+   
 
 <div class="container">
 	
