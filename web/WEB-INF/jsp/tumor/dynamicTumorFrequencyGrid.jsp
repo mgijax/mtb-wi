@@ -806,7 +806,7 @@
 <%--We <strong>DO NOT</strong> have a family value...dump out a row of empty values.
 <!-- \n -->
 --%>
-<td class="grid"><img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">&nbsp;${fam.strainFamilyName}</td>
+<td class="grid"><span style="white-space:nowrap"><img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">&nbsp;${fam.strainFamilyName}<img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" "></span></td>
 <c:set var="startColumn" value="3"/>
 <c:if test="${not empty organKey}">
 <c:set var="startColumn" value="4"/>
@@ -830,7 +830,7 @@
 <c:if test="${!status3.first}">
 <tr class="grid">
 	</c:if>
-	<td class="grid" bgcolor="#ffffff"><img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">&nbsp;${fam.strainFamilyName}</td>
+    <td class="grid" bgcolor="#ffffff"><span style="white-space:nowrap"><img src="${applicationScope.urlImageDir}/grid/grid_spacer.png" alt=" ">&nbsp;${fam.strainFamilyName}</span></td>
 	<c:set var="startColumn" value="3"/>
 	<c:if test="${not empty organKey}">
 	<c:set var="startColumn" value="4"/>
