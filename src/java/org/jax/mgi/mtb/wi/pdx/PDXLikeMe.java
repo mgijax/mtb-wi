@@ -25,6 +25,7 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
+import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 
 
@@ -104,7 +105,7 @@ public class PDXLikeMe {
 
     public PDXLikeMe() {
         this.getModelDetails();
-        this.ctpGenes = new PDXMouseStore().getCTPGenes();
+        this.ctpGenes = pdxDAO.getCTPGenes();
 
     }
 
@@ -896,7 +897,7 @@ public class PDXLikeMe {
 
     }
 
-    private void getModelDetails() {
+    private void dontgetModelDetails() {
         if (detailsMap == null || detailsMap.size() == 0) {
             try {
                 JSONObject job = new JSONObject(getJSON("http://tumor.informatics.jax.org/PDXInfo/JSONData.do?allModels=gimme", null));
@@ -921,6 +922,33 @@ public class PDXLikeMe {
             }
         }
     }
+    
+     private void getModelDetails() {
+        if (detailsMap == null || detailsMap.size() == 0) {
+            try {
+                ArrayList<PDXMouse> models = pdxDAO.getModels(WIConstants.getInstance().getPublicDeployment());
+                for (PDXMouse mouse : models) {
+                    String id = mouse.getModelID();
+                    String site = mouse.getPrimarySite();
+                    String iDiag = mouse.getInitialDiagnosis();
+                    String cDiag = mouse.getClinicalDiagnosis();
+                    if (cDiag.trim().length() == 0) {
+                        cDiag = iDiag;
+                    }
+                    String firstLetter = cDiag.charAt(0)+"";
+                    firstLetter = firstLetter.toUpperCase();
+                    cDiag = firstLetter+cDiag.substring(1);
+                    
+                    detailsMap.put(id, cDiag + ":" + site);
+
+                }
+            } catch (Exception e) {
+                log.error("Error getting pdx like me model details", e);
+            }
+        }
+    }
+    
+    
     
     // check if the gene is a offical symbol, synonym or unknown
     // store a note of what it is if not offical, return offical symbol if possible
