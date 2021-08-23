@@ -12,13 +12,16 @@
 				var name = document.requestForm.name.value;
 				var title = document.requestForm.title.value;
 				var org = document.requestForm.org.value;
-				var comments = document.requestForm.comments.value;
 				
-				if((email.length > 0 ) && (name.length >0) &&(title.length>0) &&(org.length>0) &&(comments.length > 0)
+				
+				if((email.length > 0 ) && (name.length >0) &&(title.length>0) &&(org.length>0) 
 				&& (email.indexOf("@")>=1) &&(email == document.requestForm.vemail.value)){
-					document.requestForm.submit();
+					
+                                        document.getElementById("verify").style.display="none";
+                                        document.getElementById("submitting").style.display="inline";
+                                        document.requestForm.submit();
 				}else{
-					document.getElementById("msgtxt").style.display="inline";
+					document.getElementById("verify").style.display="inline";
 				}
 			}  	
 		</script>   
@@ -49,12 +52,16 @@
 			<form action="pdxRequest.do" method="GET" name="requestForm" class="simple-form">
 					
 
-									<!-- 
-										<td colspan="2" style="display:hidden"><div id="msgtxt" style="display:none">
-												<b>Please verify that both emails match and all fields are completed</b>
-											</div>
-										
-									 -->
+									 
+                            <td colspan="2" style="display:hidden">
+                                    <div id="verify" style="display:none">
+                                            <b>Please verify that both emails match and all fields are completed.</b>
+                                    </div>
+                                    <div id="submitting" style="display:none">
+                                            <b>Your request is being submitted.</b>
+                                    </div>
+
+									
 
 				<div>
 				 	<label class="required">*Email</label>
@@ -132,7 +139,6 @@
 						<option value="Bolivia" >Bolivia</option>
 						<option value="BosniaandHerzego" >Bosnia and Herzegovina</option>
 						<option value="Botswana" >Botswana</option>
-						<option value="BouvetIsland" >Bouvet Island</option>
 						<option value="Brazil" >Brazil</option>
 						<option value="BritishIndianOce" >British Indian Ocean Territory</option>
 	
