@@ -44,8 +44,8 @@ public class ModelCounts {
         "Prostate gland",
         "Liver,Bile duct",
         "Brain",
-        "Bladder",
         "Uterus,Endometrium",
+        "Bladder",
         "Esophagus",
         "Kidney",
         "Ovary",
@@ -66,8 +66,8 @@ public class ModelCounts {
         "Prostate gland",
         "Liver, Bile duct",
         "Brain, Meninges, Spinal cord, Nerve, Neuroblast, Neuroectoderm, Ganglion, Nerve sheath, Schwann cell",
-        "Urinary bladder",
         "Uterus, Cervix",
+        "Urinary bladder",
         "Esophagus",
         "Kidney, Renal pelvis",
         "Ovary",
@@ -81,31 +81,31 @@ public class ModelCounts {
 
     // display tissue, rank, fatalaties, solr term
     String[] tissues = {
-        "Lung & other respiratory", "1", "140,730", "Lung",
-        "Lymphohematopoietic", "2", "56,840", "Lymphohematopoietic",
-        "Colon & other intestine", "3", "56,250", "Colon and other intestine",
-        "Pancreas", "4", "47,050", "Pancreas",
-        "Breast", "5", "42,690", "Breast", 
-        "Prostate", "6", "33,330", "Prostate",
-        "Liver & bile duct", "7", "30,160", "Liver and bile duct",
-        "Brain & other nervous system", "8", "18,020", "Brain and other nervous system",
-        "Urinary bladder", "9", "17,980", "Urinary bladder",
-        "Uterus & cervix", "10", "16,880", "Uterus and cervix",
-        "Esophagus", "11", "16,170", "Esophagus",
-        "Kidney & renal pelvis", "12", "14,830", "Kidney and renal pelvis",
-        "Ovary", "13", "13,940", "Ovary",
-        "Skin", "14", "11,480", "Skin",
-        "Stomach", "15", "11,010", "Stomach",
-        "Oral cavity & pharynx", "16", "10,750", "Oral cavity",
+        "Lung & other respiratory", "1", "137,040", "Lung",
+        "Lymphohematopoietic", "2", "57,750", "Lymphohematopoietic",
+        "Colon & other intestine", "3", "56,510", "Colon and other intestine",
+        "Pancreas", "4", "48,220", "Pancreas",
+        "Breast", "5", "44,130", "Breast", 
+        "Prostate", "6", "34,130", "Prostate",
+        "Liver & bile duct", "7", "30,230", "Liver and bile duct",
+        "Brain & other nervous system", "8", "18,600", "Brain and other nervous system",
+        "Uterus & cervix", "9", "17,230", "Uterus and cervix",
+        "Urinary bladder", "10", "17,200", "Urinary bladder",
+        "Esophagus", "11", "15,530", "Esophagus",
+        "Kidney & renal pelvis", "12", "13,780", "Kidney and renal pelvis",
+        "Ovary", "13", "13,770", "Ovary",
+        "Skin", "14", "11,540", "Skin",
+        "Stomach", "15", "11,180", "Stomach",
+        "Oral cavity & pharynx", "16", "10,850", "Oral cavity",
         "Soft tissue including heart", "17", "5,350", "Soft tissue including heart",
-        "Gallbladder & other biliary", "18", "4,090", "Gallbladder",
-        "Endocrine system", "19", "3,260", "Endocrine system",
-        "Bones & joints", "20", "1,720", "Bone and joint"};
+        "Gallbladder & other biliary", "18", "4,310", "Gallbladder",
+        "Endocrine system", "19", "3,290", "Endocrine system",
+        "Bones & joints", "20", "2,060", "Bone and joint"};
 
     ArrayList<ArrayList<String>> tissuesListList = new ArrayList<ArrayList<String>>();
 
-    public static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2020/cancer-facts-and-figures-2020.pdf";
-    public static final String YEAR = "2020";
+    public static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2021/cancer-facts-and-figures-2021.pdf";
+    public static final String YEAR = "2021";
     private String solrURL;
     private String minFC = "fq=minFC:1";
     private static String HTML = "";
