@@ -84,9 +84,9 @@ public class PDXMouseStore {
 
     private static final String VARIANTS = baseURL + "variants";
 
-    private static final String FUSION_MODELS_BY_GENE = baseURL + "fusions?ckb_class=B&gene_symbol=";
+    private static final String FUSION_MODELS_BY_GENE = baseURL + "starfusion?ckb_class=relevant";
 
-    private static final String FUSION_GENES = baseURL + "fusion_genes?ckb_class=B";
+    private static final String FUSION_GENES = baseURL + "all_genes?datatype=fusions&ckb_class=relevant";
 
     private static final String VARIANTS_FOR_GENE = baseURL + "gene_variants?gene_symbol=";
 
@@ -198,6 +198,8 @@ public class PDXMouseStore {
         buildIDList();
 
         loadFusionGenes();
+        
+        loadFusionModels();
 
         loadTMBData();
 
@@ -405,6 +407,7 @@ public class PDXMouseStore {
             String recistDrug, String recistResponse, Double tmbGT, Double tmbLT) {
 
         ArrayList<PDXMouse> mice = new ArrayList<>();
+        System.out.println("finding static mice");
 
         ArrayList<String> ids = PDXDAO.getInstance().findModels(modelID, tissues, diagnoses, tumorTypes, tags, treatmentNaive);
 
@@ -1379,7 +1382,7 @@ public class PDXMouseStore {
         ArrayList<String> models = new ArrayList<>();
         HashMap<String, String> modelsMap = new HashMap<>();
         try {
-            String url = FUSION_MODELS_BY_GENE + fusionGenes;
+            String url = FUSION_MODELS_BY_GENE +"&gene="+ fusionGenes;
             JSONObject job = new JSONObject(getJSON(url));
             JSONArray jarray = (JSONArray) job.get("data");
             for (int i = 0; i < jarray.length(); i++) {
@@ -1394,7 +1397,7 @@ public class PDXMouseStore {
     }
 
     private void loadFusionGenes() {
-        StringBuilder fusionGeneList = new StringBuilder();
+      //  StringBuilder fusionGeneList = new StringBuilder();
         try {
             JSONObject job = new JSONObject(getJSON(FUSION_GENES));
             JSONArray jarray = (JSONArray) job.get("data");
@@ -1404,30 +1407,30 @@ public class PDXMouseStore {
                 bean.setValue(jarray.getString(i).trim());
 
                 fusionGenesLVB.add(bean);
-                fusionGeneList.append(jarray.getString(i).trim()).append(",");
+               // fusionGeneList.append(jarray.getString(i).trim()).append(",");
             }
 
         } catch (Exception e) {
             log.error("Unable to load fusion genes", e);
         }
-        loadFusionModels(fusionGeneList.toString());
+       
     }
 
-    private void loadFusionModels(String allFusionGenes) {
+    private void loadFusionModels() {
 
         // models have samples, samples have variants 
         HashMap<String, HashMap<String, HashMap<String, String>>> map = new HashMap<>();
 
         try {
 
-            JSONObject job = new JSONObject(getJSON(FUSION_MODELS_BY_GENE + allFusionGenes));
+            JSONObject job = new JSONObject(getJSON(FUSION_MODELS_BY_GENE));
             JSONArray jarray = (JSONArray) job.get("data");
             for (int i = 0; i < jarray.length(); i++) {
                 try {
                     String model = jarray.getJSONObject(i).getString("model_name");
 
                     String sample = jarray.getJSONObject(i).getString("sample_name");
-                    String variant = jarray.getJSONObject(i).getString("up_gene") + " - " + jarray.getJSONObject(i).getString("dw_gene");
+                    String variant = jarray.getJSONObject(i).getString("fusion_name");
 
                     if (map.containsKey(model)) {
                         if (map.get(model).containsKey(sample)) {
@@ -1470,7 +1473,7 @@ public class PDXMouseStore {
                 fusionModelsMap.put(model, display.toString());
             }
         } catch (Exception e) {
-            log.error("Unable to load fusion models from" + FUSION_MODELS_BY_GENE + allFusionGenes, e);
+            log.error("Unable to load fusion models from" + FUSION_MODELS_BY_GENE + e);
         }
     }
 
