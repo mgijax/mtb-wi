@@ -231,7 +231,7 @@ public class PDXMouseStore {
 
                 if (fusionModelsMap.get(id) != null) {
                     mouse.setFusionGenes(fusionModelsMap.get(id));
-
+                   
                 }
 
                 if (tmbMap.get(id) != null) {
@@ -300,7 +300,7 @@ public class PDXMouseStore {
      * @return ArrayList<PDXMouse> mice matching search parameters
      */
     public ArrayList<PDXMouse> findMice(String modelID, ArrayList<String> tissues,
-            ArrayList<String> diagnoses, ArrayList<String> tumorTypes,
+            ArrayList<String> diagnoses,
             String gene, ArrayList<String> variants, boolean dosingStudy,
             boolean tumorGrowth, ArrayList<String> tags, String fusionGene,
             boolean treatmentNaive, String recistDrug, String recistResponse, Double tmbGT, Double tmbLT) {
@@ -311,8 +311,8 @@ public class PDXMouseStore {
         // find by gene variant --> populate variants and consequence if variant is used
         ArrayList<PDXMouse> mice = new ArrayList<>();
 
-        // get a list of mice based on search criteria that are in ELIMS
-        mice = findStaticMice(modelID, tissues, diagnoses, tumorTypes,
+       
+        mice = findStaticMice(modelID, tissues, diagnoses,
                 dosingStudy, tumorGrowth, tags, fusionGene, treatmentNaive, recistDrug, recistResponse, tmbGT, tmbLT);
 
         ArrayList<String> ids = new ArrayList<>();
@@ -390,8 +390,6 @@ public class PDXMouseStore {
     }
 
     /**
-     * Use the cached list of mice to get models matching the search criteria
-     * This getting pretty lame
      *
      * @param modelID String TM#####
      * @param tissues ArrayList<String>
@@ -401,15 +399,18 @@ public class PDXMouseStore {
      * @return ArrayList<PDXMouse> matching mice
      */
     private ArrayList<PDXMouse> findStaticMice(String modelID, ArrayList<String> tissues,
-            ArrayList<String> diagnoses, ArrayList<String> tumorTypes,
+            ArrayList<String> diagnoses,
             boolean dosingStudy, boolean tumorGrowth, ArrayList<String> tags,
             String fusionGene, boolean treatmentNaive,
             String recistDrug, String recistResponse, Double tmbGT, Double tmbLT) {
 
         ArrayList<PDXMouse> mice = new ArrayList<>();
-        System.out.println("finding static mice");
-
-        ArrayList<String> ids = PDXDAO.getInstance().findModels(modelID, tissues, diagnoses, tumorTypes, tags, treatmentNaive);
+        
+        // need to validate values for ID, tissues,diagnosese tumortypes and tags match controled vocab from search
+        // this will prevent any sql injection 
+        validateSearchParams(tissues,diagnoses,tags);
+        
+        ArrayList<String> ids = PDXDAO.getInstance().findModels(modelID, tissues, diagnoses, tags, treatmentNaive, WIConstants.getInstance().getPublicDeployment());
 
         ArrayList<String> fusionModels = null;
         if (fusionGene != null && fusionGene.trim().length()>0) {
@@ -1361,6 +1362,42 @@ public class PDXMouseStore {
     public Double getMaxTMB() {
         return maxTMB;
     }
+    
+    private void validateSearchParams(ArrayList<String> tissues, ArrayList<String> diagnoses,ArrayList<String> tags){
+        
+        ArrayList<String> ps = this.getPrimarySitesList();
+        ArrayList<String> diags = this.getDiagnosesList();
+        ArrayList<String> tgs = this.getTagsList();
+        
+        
+        ArrayList<String> cleanTissues = new ArrayList<String>();
+        for(String tissue : tissues){
+        
+            if(ps.contains(tissue)){
+               cleanTissues.add(tissue);
+            }
+        }
+        tissues = cleanTissues;
+        
+        ArrayList<String> cleanDiagnoses = new ArrayList<String>();
+        for(String diagnosis : diagnoses){
+            
+            if(diags.contains(diagnosis)){
+               cleanDiagnoses.add(diagnosis);
+            }
+        }
+        diagnoses = cleanDiagnoses;
+        
+        ArrayList<String> cleanTags = new ArrayList<String>();
+        for(String tag : tags){
+            
+            if(tgs.contains(tag)){
+               cleanTags.add(tag);
+            }
+        }
+        tags = cleanTags;
+        
+    }
 
     private String getField(JSONObject job, String field) {
         String val = "";
@@ -1468,6 +1505,8 @@ public class PDXMouseStore {
                     if (map.get(model).size() > 1) {
                         display.append("<br>");
                     }
+                    
+                  
                 }
 
                 fusionModelsMap.put(model, display.toString());

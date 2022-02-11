@@ -393,6 +393,11 @@
             <forward name="error" path="appError.jsp"/>
         </action>
        
+       <action path="/pivot"
+       type="org.jax.mgi.mtb.wi.actions.PivotAction"
+                scope="request">
+            <forward name="pivot" path="/WEB-INF/jsp/pivot/pivot.jsp"/>
+       </action>
     
     </action-mappings>
     <message-resources parameter="org.jax.mgi.mtb.wi.ApplicationResources"/>

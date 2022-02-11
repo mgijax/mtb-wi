@@ -42,8 +42,7 @@ public class PDXSearchResultsAction extends Action {
         ArrayList<String> primarySites = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getPrimarySites());
         ArrayList<String> diagnoses = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getDiagnoses());
         ArrayList<String> tags = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getTags());
-        ArrayList<String> types = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getTumorTypes());
-      
+       
         
         String gene = pdxForm.getGene();
         String genes2 = pdxForm.getGenes2();
@@ -101,7 +100,7 @@ public class PDXSearchResultsAction extends Action {
             mice = pdxMouseStore.findStaticMiceByTissueOfOrigin(toa);
             request.setAttribute("tissuseOfOrigin", toa);
         } else {
-            mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses, types,
+            mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses,
                      gene, variants, dosingStudy, tumorGrowth, tags, 
                     fusionGene,treatmentNaive, recistDrug, recistResponse, tmbGT, tmbLT);
         }
@@ -109,7 +108,7 @@ public class PDXSearchResultsAction extends Action {
         request.setAttribute("modelID", modelID);
         request.setAttribute("primarySites", primarySites);
         request.setAttribute("diagnoses", diagnoses);
-        request.setAttribute("types", types);
+        
         request.setAttribute("tags", tags);
         request.setAttribute("fusionGenes",fusionGene);
         
