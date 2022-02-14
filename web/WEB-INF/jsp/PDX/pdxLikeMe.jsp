@@ -96,7 +96,7 @@
                     <div>
                         <fieldset>
                             <legend>Enter case information here<c:if test="${empty cases}"> (example shown)</c:if></legend>               
-                            <textarea rows="10" cols="45" name="cases" placeholder="Example search:&#10;CASE 1&#10;KRAS:AMP&#10;TP53:MUT=A159V&#10;ALB:DEL&#10;KIT:EXP&gt;2.0"><c:if test="${empty cases}">CASE 1&#10;KRAS:AMP&#10;TP53:MUT=A159V&#10;ALB:DEL&#10;KIT:EXP&gt;2.5</c:if>${cases}</textarea>
+                            <textarea rows="10" cols="45" name="cases" placeholder="Example search:&#10;CASE 1&#10;KRAS:AMP&#10;TP53:MUT=A159V&#10;ALB:DEL&#10;KIT:EXP&gt;2.0"><c:if test="${empty cases}">CASE 1&#10;KRAS:AMP&#10;TP53:MUT=A159V&#10;ALB:DEL&#10;KIT:EXP&gt;2.0</c:if>${cases}</textarea>
                         </fieldset>
                     </div>
                     
