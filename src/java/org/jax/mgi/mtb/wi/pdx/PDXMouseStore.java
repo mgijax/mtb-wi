@@ -4,16 +4,8 @@
  */
 package org.jax.mgi.mtb.wi.pdx;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.math.RoundingMode;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -34,6 +26,8 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.dao.utils.DAOUtils;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.utils.StringUtils;
+import org.jax.mgi.mtb.wi.JSONUtils;
+import static org.jax.mgi.mtb.wi.JSONUtils.getJSON;
 import org.jax.mgi.mtb.wi.WIConstants;
 
 /**
@@ -416,6 +410,14 @@ public class PDXMouseStore {
         if (fusionGene != null && fusionGene.trim().length()>0) {
             fusionModels = getFusionModels(fusionGene);
         }
+        
+         ArrayList<String> socIDs = new ArrayList<>();
+         boolean checkSOC = false;
+        
+        if (StringUtils.hasValue(recistDrug) || StringUtils.hasValue(recistResponse)) {
+            checkSOC = true;
+            socIDs = SOCLoader.getRECISTModels(recistDrug, recistResponse);
+        }
 
         for (String id : ids) {
             boolean match = true;
@@ -447,11 +449,9 @@ public class PDXMouseStore {
 
             }
 
-            if (StringUtils.hasValue(recistDrug) || StringUtils.hasValue(recistResponse)) {
+            if (checkSOC) {
                 match = false;
-                ArrayList<String> recistIDs = SOCLoader.getRECISTModels(recistDrug, recistResponse);
-
-                if (recistIDs.contains(mouse.getModelID())) {
+                if (socIDs.contains(mouse.getModelID())) {
                     match = true;
                 }
             }
@@ -735,7 +735,7 @@ public class PDXMouseStore {
         String url = MODEL_EXPRESSION + modelID;
 
         try {
-            JSONObject job = new JSONObject(getJSON(url));
+            JSONObject job = new JSONObject(JSONUtils.getJSON(url));
             JSONArray array = (JSONArray) job.get("data");
             for (int i = 0; i < array.length(); i++) {
                 JSONObject data = array.getJSONObject(i);
@@ -1803,104 +1803,9 @@ public class PDXMouseStore {
         return ampDel;
     }
 
-    private String getFilterStr() {
-        String filterStr = "filter=no";
-        if (WIConstants.getInstance().getPublicDeployment()) {
-            filterStr = "filter=yes";
-        }
-        return filterStr;
-    }
+    
 
-    private String getJSON(String uri) {
-        return getJSON(uri, null);
-    }
-
-    private String getJSON(String uri, String json) {
-
-        if (uri.contains("?")) {
-            uri = uri + "&" + getFilterStr();
-        } else {
-            uri = uri + "?" + getFilterStr();
-        }
-
-        uri = uri.replaceAll(" ", "+");
-
-        boolean post = true;
-        if (json == null || json.length() == 0) {
-            post = false;
-        } else {
-            json = json.replaceAll(" ", "+");
-        }
-
-        String responseSingle = "";
-        StringBuffer response = new StringBuffer();
-
-        HttpURLConnection connection = null;
-        try {
-            URL url = new URL(uri);
-            connection
-                    = (HttpURLConnection) url.openConnection();
-            if (post) {
-                connection.setRequestMethod("POST");
-                connection.setDoOutput(true); // sending stuff
-            } else {
-                connection.setRequestMethod("GET");
-            }
-
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Accept", "application/json");
-
-            connection.setDoInput(true); //we want a response
-            connection.setUseCaches(false);
-
-            if (post) {
-                OutputStream out = connection.getOutputStream();
-                try {
-
-                    OutputStreamWriter wr = new OutputStreamWriter(out);
-                    wr.write(json.toString());
-                    wr.flush();
-                    wr.close();
-                } catch (IOException e) {
-
-                    log.error("Error writing to webservice " + uri, e);
-
-                } finally {
-                    if (out != null) {
-                        out.close();
-                    }
-                }
-            }
-
-            // Open a stream which can read the server response
-            InputStream in = connection.getInputStream();
-            try {
-                BufferedReader rd = new BufferedReader(new InputStreamReader(in));
-                while ((responseSingle = rd.readLine()) != null) {
-                    response.append(responseSingle);
-                }
-                rd.close(); //close the reader
-
-            } catch (IOException e) {
-
-                log.error("Error reading from webservice " + uri, e);
-
-            } finally {
-                if (in != null) {
-                    in.close();
-                }
-            }
-        } catch (IOException e) {
-            log.error("Error connecting to webservice " + uri, e);
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
-
-        return response.toString();
-
-    }
+   
 
     private class Compy implements Comparator<ArrayList<String>> {
 

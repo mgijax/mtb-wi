@@ -9,10 +9,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.log4j.Logger;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONObject;
+import static org.jax.mgi.mtb.wi.JSONUtils.getJSON;
 import org.jax.mgi.mtb.wi.WIConstants;
 
 /**
@@ -25,165 +27,105 @@ public class SOCLoader {
     private static final Logger log
             = Logger.getLogger(SOCLoader.class.getName());
 
+    private static String baseURL = WIConstants.getInstance().getPDXWebservice();
+    private static String termsURL = baseURL + "drugstudies/drugterms";
+    private static String socSearchURL = baseURL + "drugstudies/find_models";
+    private static String allModelsURL = baseURL + "drugstudies/available/all";
+
     public static HashMap<String, Integer> loadSOCModels() {
 
-        String path = WIConstants.getInstance().getSOCDB();
         HashMap<String, Integer> models = new HashMap<>();
 
         try {
-            Connection liteCon = null;
-            Class.forName("org.sqlite.JDBC");
-            liteCon = DriverManager.getConnection("jdbc:sqlite:/" + path);
 
-            Statement stmt = liteCon.createStatement();
-            ResultSet rs = stmt.executeQuery("select model_TM, count(*) from studies group by model_TM");
-            while (rs.next()) {
-                models.put(rs.getString(1), rs.getInt(2));
-
+            JSONObject job = new JSONObject(getJSON(allModelsURL));
+            JSONArray jarray = job.getJSONArray("data");
+            for (int i = 0; i < jarray.length(); i++) {
+                JSONObject subjob = jarray.getJSONObject(i);
+                String[] id = subjob.getString("study_id").split("_");
+                if (models.containsKey(id[0])) {
+                    int count = models.get(id[0]);
+                    models.put(id[0], count++);
+                } else {
+                    models.put(id[0], 1);
+                }
             }
-            log.error("Loaded " + models.size() + " pdx model with SOC data.");
-        } catch (Exception e) {
-            log.error("Unable to load SOC model data", e);
-        }
 
-        
+        } catch (Exception e) {
+            log.error("Unable to load SOC model counts", e);
+        }
 
         return models;
     }
 
     /**
-     * Drug -> Response -> list of models
+     * Drug + Response -> list of models
      *
      * @return
      */
     public static ArrayList<String> getRECISTModels(String drug, String response) {
 
-        String path = WIConstants.getInstance().getSOCDB();
         ArrayList<String> models = new ArrayList<>();
-
+        StringBuilder query = new StringBuilder();
         try {
-
-            Connection liteCon = null;
-            Class.forName("org.sqlite.JDBC");
-            liteCon = DriverManager.getConnection("jdbc:sqlite:/" + path);
-
-            StringBuilder sql = new StringBuilder("SELECT distinct s.model_TM from groups g, studies s where g.study_number = s.study_number ");
-            if (drug != null && drug.trim().length() > 0) {
-                sql.append("and g.drug = ?");
+            if (drug != null && drug.trim().length()>0) {
+                query.append("?drug_term=" + drug);
             }
-            if (response != null && response.trim().length() > 0) {
-                sql.append("and g.recist= ?");
-            }
-
-            PreparedStatement stmt = liteCon.prepareStatement(sql.toString());
-            int index = 1;
-
-            if (drug != null && drug.trim().length() > 0) {
-                stmt.setString(index++, drug);
-            }
-            if (response != null && response.trim().length() > 0) {
-                stmt.setString(index++, response);
+            if (response != null && response.trim().length()>0) {
+                if (query.length() > 0) {
+                    query.append("&");
+                }else{
+                    query.append("?");
+                }
+                    
+                query.append("recist_term=" + response);
             }
 
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                models.add(rs.getString(1));
+            JSONObject job = new JSONObject(getJSON(socSearchURL+query.toString()));
+            JSONArray jarray = job.getJSONArray("data");
+            for (int i = 0; i < jarray.length(); i++) {
+                models.add(jarray.getString(i));
             }
 
         } catch (Exception e) {
-            log.error("Unable to load SOC recist model data", e);
+            log.error("Unable to find model for "+drug+" with response"+response, e);
         }
 
         return models;
     }
 
+    //('Complete Response', 'Partial Response', 'Progressive Disease', 'Stable Disease')
     public static ArrayList<String> loadRECISTResponses() {
-
-        String path = WIConstants.getInstance().getSOCDB();
         ArrayList<String> response = new ArrayList<>();
-
-        try {
-            Connection liteCon = null;
-            Class.forName("org.sqlite.JDBC");
-            liteCon = DriverManager.getConnection("jdbc:sqlite:/" + path);
-
-            Statement stmt = liteCon.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT distinct recist from groups order by recist");
-            while (rs.next()) {
-                response.add(rs.getString(1));
-
-            }
-        } catch (Exception e) {
-            log.error("Unable to load SOC recist response data", e);
-        }
-
+        response.add("Complete Response");
+        response.add("Partial Response");
+        response.add("Progressive Disease");
+        response.add("Stable Disease");
         return response;
+
     }
 
+    //http://pdxdata.jax.org/api/drugstudies/drugterms
+    // with is_control = 0;
     public static ArrayList<String> loadRECISTDrugs() {
 
-        String path = WIConstants.getInstance().getSOCDB();
-        ArrayList<String> response = new ArrayList<>();
+        ArrayList<String> treatments = new ArrayList<>();
 
         try {
-            Connection liteCon = null;
-            Class.forName("org.sqlite.JDBC");
-            liteCon = DriverManager.getConnection("jdbc:sqlite:/" + path);
-
-            Statement stmt = liteCon.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT distinct drug from groups where drug != \"None\" order by drug ");
-            while (rs.next()) {
-                response.add(rs.getString(1));
-
+            JSONObject job = new JSONObject(getJSON(termsURL));
+            JSONArray jarray = job.getJSONArray("data");
+            for (int i = 0; i < jarray.length(); i++) {
+                job = jarray.getJSONObject(i);
+                if (job.getInt("is_control") == 0) {
+                    treatments.add(job.getString("drug_term"));
+                }
             }
+
         } catch (Exception e) {
             log.error("Unable to load SOC recist drug data", e);
         }
 
-        return response;
+        return treatments;
     }
 
-    /**
-     * For all models with RECIST data return a mapping modelId -> list of pairs
-     * of drug, response
-     *
-     * @ return HashMap<String,ArrayList<ArrayList<String>>>
-     */
-    public static HashMap<String, ArrayList<ArrayList<String>>> getRECISTMap() {
-
-        String path = WIConstants.getInstance().getSOCDB();
-        HashMap<String, ArrayList<ArrayList<String>>> modelsMap = new HashMap<>();
-        try {
-
-            Connection liteCon = null;
-            Class.forName("org.sqlite.JDBC");
-            liteCon = DriverManager.getConnection("jdbc:sqlite:/" + path);
-
-            String sql = "SELECT distinct s.model_TM, g.drug, g.recist from groups g, studies s where g.study_number = s.study_number ";
-            PreparedStatement stmt = liteCon.prepareStatement(sql);
-
-            ResultSet rs = stmt.executeQuery();
-            String id;
-            while (rs.next()) {
-                id = rs.getString(1);
-                ArrayList<String> pair = new ArrayList<>();
-                pair.add(rs.getString(2));
-                pair.add(rs.getString(3));
-                if (modelsMap.containsKey(id)) {
-                    modelsMap.get(id).add(pair);
-                } else {
-                    ArrayList<ArrayList<String>> list = new ArrayList<>();
-                    list.add(pair);
-                    modelsMap.put(id, list);
-                }
-
-            }
-
-        } catch (Exception e) {
-            log.error("Unable to load SOC recist model data", e);
-        }
-
-        return modelsMap;
-    }
 }
