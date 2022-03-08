@@ -7,9 +7,8 @@
 	<jsp:body>	
 		<section class="container content">
 			<ul>
-				<li><a target="_blank" href="http://pdx-dashboard.jax.org/v4/">Open PDX Genomics Dashboard</a></li>
-				<li><a target="_blank" href="http://pdx-dashboard/elims/submission-lookup">Open PDX Sample Name Checker</a></li>
-				<li><a target="_blank" href="http://pdx-dashboard/elims/generate-sheet">Open PDX Sample Sheet Generator</a></li>
+				<li><a target="_blank" href="http://pdxdash.jax.org">PDX Genomics Dashboard</a></li>
+				
 			</ul>
 			<c:choose>
 			<c:when test="${not empty failure}">

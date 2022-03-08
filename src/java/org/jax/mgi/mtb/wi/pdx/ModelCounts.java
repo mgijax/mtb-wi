@@ -19,9 +19,9 @@ import org.jax.mgi.mtb.wi.WIConstants;
 /**
  * Get data and build data structure to generate the mouse models table.
  *
- * Soft tissue is an issue
+ * 
  *
- * Need to add sort order for PDX query
+ *
  *
  */
 public class ModelCounts {
@@ -36,6 +36,7 @@ public class ModelCounts {
 
     public static final String NUMFOUND = "numFound\":";
 
+    // search tissues for pdx models that correspond to tissues
      String[] pdxTerms = {"Lung",
         "Blood,Bone marrow,Lymph node",
         "Anal,Appendix,Cecum,Colon,Duodenum,Rectum,Ampulla of Vater",
@@ -44,14 +45,14 @@ public class ModelCounts {
         "Prostate gland",
         "Liver,Bile duct",
         "Brain",
-        "Uterus,Endometrium",
         "Bladder",
+        "Uterus,Endometrium",
         "Esophagus",
         "Kidney",
         "Ovary",
         "Skin",
-        "Stomach",
         "Salivary gland,Tonsil",
+        "Stomach",
         "Soft tissue,Pleural cavity",
         "--",
         "Adrenal gland",
@@ -66,46 +67,46 @@ public class ModelCounts {
         "Prostate gland",
         "Liver, Bile duct",
         "Brain, Meninges, Spinal cord, Nerve, Neuroblast, Neuroectoderm, Ganglion, Nerve sheath, Schwann cell",
-        "Uterus, Cervix",
         "Urinary bladder",
+        "Uterus, Cervix",
         "Esophagus",
         "Kidney, Renal pelvis",
         "Ovary",
         "Skin, Skin gland",
-        "Stomach, Forestomach (mouse-specific)",
         "Oral cavity, Pharynx, Gingiva, Mouth, Salivary gland, Tongue, Tooth",
+        "Stomach, Forestomach (mouse-specific)",
         "Abdominal cavity, Abdominal wall, Adipose tissue, Connective tissue, Mediastinum, Mesodermal cell/mesoblast, Mesothelium, Muscle, Myoepithelial cell, Notochord, Pericardium, Pericyte, Periosteum, Perirenal tissue, Peritoneal cavity, Peritoneum, Pleura, Pleural cavity, Retroperitoneum, Thoracic cavity, Blood vessel, Heart",
         "Gallbladder",
         "Adrenal gland, Parathyroid gland, Pineal gland, Pituitary gland, Thyroid gland",
         "Bone, Cartilage, Ligament, Synovium, Tendon"};
 
-    // display tissue, rank, fatalaties, solr term
+    // display tissue, rank (there may be a tie), fatalaties, solr term
     String[] tissues = {
-        "Lung & other respiratory", "1", "137,040", "Lung",
-        "Lymphohematopoietic", "2", "57,750", "Lymphohematopoietic",
-        "Colon & other intestine", "3", "56,510", "Colon and other intestine",
-        "Pancreas", "4", "48,220", "Pancreas",
-        "Breast", "5", "44,130", "Breast", 
-        "Prostate", "6", "34,130", "Prostate",
-        "Liver & bile duct", "7", "30,230", "Liver and bile duct",
-        "Brain & other nervous system", "8", "18,600", "Brain and other nervous system",
-        "Uterus & cervix", "9", "17,230", "Uterus and cervix",
-        "Urinary bladder", "10", "17,200", "Urinary bladder",
-        "Esophagus", "11", "15,530", "Esophagus",
-        "Kidney & renal pelvis", "12", "13,780", "Kidney and renal pelvis",
-        "Ovary", "13", "13,770", "Ovary",
-        "Skin", "14", "11,540", "Skin",
-        "Stomach", "15", "11,180", "Stomach",
-        "Oral cavity & pharynx", "16", "10,850", "Oral cavity",
-        "Soft tissue including heart", "17", "5,350", "Soft tissue including heart",
-        "Gallbladder & other biliary", "18", "4,310", "Gallbladder",
-        "Endocrine system", "19", "3,290", "Endocrine system",
-        "Bones & joints", "20", "2,060", "Bone and joint"};
+        "Lung & other respiratory", "1", "135,360", "Lung",
+        "Lymphohematopoietic", "2", "57,810", "Lymphohematopoietic",
+        "Colon & other intestine", "3", "56,210", "Colon and other intestine",
+        "Pancreas", "4", "49,830", "Pancreas",
+        "Breast", "5", "43,780", "Breast", 
+        "Prostate", "6", "34,500", "Prostate",
+        "Liver & bile duct", "7", "30,520", "Liver and bile duct",
+        "Brain & other nervous system", "8", "18,280", "Brain and other nervous system",
+        "Urinary bladder", "9", "17,100", "Urinary bladder",
+        "Uterus & cervix", "10", "16,830", "Uterus and cervix",
+        "Esophagus", "11", "16,410", "Esophagus",
+        "Kidney & renal pelvis", "12", "13,920", "Kidney and renal pelvis",
+        "Ovary", "13", "12,810", "Ovary",
+        "Skin", "14", "11,990", "Skin",
+        "Oral cavity & pharynx", "15", "11,230", "Oral cavity",
+        "Stomach", "16", "11,090", "Stomach",
+        "Soft tissue including heart", "17", "5,130", "Soft tissue including heart",
+        "Gallbladder & other biliary", "18", "4,400", "Gallbladder",
+        "Endocrine system", "19", "3,330", "Endocrine system",
+        "Bones & joints", "20", "2,100", "Bone and joint"};
 
     ArrayList<ArrayList<String>> tissuesListList = new ArrayList<ArrayList<String>>();
 
-    public static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2021/cancer-facts-and-figures-2021.pdf";
-    public static final String YEAR = "2021";
+    public static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2022/cancer-facts-and-figures-2022.pdf";
+    public static final String YEAR = "2022";
     private String solrURL;
     private String minFC = "fq=minFC:1";
     private static String HTML = "";
