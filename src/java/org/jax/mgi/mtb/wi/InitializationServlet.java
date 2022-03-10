@@ -243,8 +243,12 @@ public class InitializationServlet extends HttpServlet {
         // values for About Us data counts
         
         // we show PDX Model Numbers from PDXFinder not just JAX
-        getServletContext().setAttribute("pdxModelCount",
-                NumberFormat.getNumberInstance(Locale.US).format(pdxStore.getPDXFinderModelCount()));
+        int count = pdxStore.getPDXFinderModelCount();
+        String number = "over 4500";
+        if(count > 0){
+            number = NumberFormat.getNumberInstance(Locale.US).format(pdxStore.getPDXFinderModelCount());
+        }
+        getServletContext().setAttribute("pdxModelCount",number);
         
         MTBReferenceUtilDAO refUtil = MTBReferenceUtilDAO.getInstance();
         getServletContext().setAttribute("referenceCount",
