@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.jax.mgi.mtb.dao.custom.mtb.pdx.GenomicsLink;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXComment;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDocument;
@@ -87,6 +88,8 @@ public class PDXMouseStore {
     private static final String SAMPLE_PASSAGE = baseURL + "inventory?model=MODEL_ID&sample=SAMPLE_ID&reqitems=passage_num";
 
     private static final String TMB_URI = baseURL + "inventory?platform=CTP&reqitems=model_name,sample_name,passage_num,tmb_score,msi_score";
+    
+    private static final String linkOuts = baseURL + "public_archive_linkouts/";
 
     private static HashMap<String, String> fusionModelsMap = new HashMap<>();
 
@@ -196,6 +199,8 @@ public class PDXMouseStore {
         loadFusionModels();
 
         loadTMBData();
+        
+        loadGenomicsLinks();
 
         ctpGenes = PDXDAO.getInstance().getCTPGenes();
 
@@ -1677,6 +1682,53 @@ public class PDXMouseStore {
         }
 
     }
+    
+    private void loadGenomicsLinks(){
+        for(PDXMouse mouse : allMice){
+            try{
+                 ArrayList<GenomicsLink> cnv = new ArrayList<>();
+                 ArrayList<GenomicsLink> expression = new ArrayList<>();
+                 ArrayList<GenomicsLink> variation = new ArrayList<>();
+                
+                JSONArray jArray = new JSONArray(getJSON(linkOuts+mouse.getModelID()));
+                for(int i = 0; i < jArray.length(); i++){
+                   
+                    JSONObject job = jArray.getJSONObject(i);
+                    String type = job.getString("datatype");
+                    GenomicsLink link = new GenomicsLink();
+                    link.setDerivedLink(job.getString("derived_data_url"));
+                    link.setPassage(job.getString("passage_num"));
+                    link.setPlatform(job.getString("platform"));
+                    link.setSample(job.getString("sample_name"));
+                    JSONArray rawLinks = job.getJSONArray("raw_data_urls");
+                    for(int j=0; j < rawLinks.length(); j++){
+                        link.addRawLinks(rawLinks.getString(j));
+                    }
+                    if("expression".equalsIgnoreCase(type)){
+                        expression.add(link);
+                        continue;
+                    }
+                    if("variation".equalsIgnoreCase(type)){
+                        variation.add(link);
+                        continue;
+                    }
+                    if("cnv".equalsIgnoreCase(type)){
+                        cnv.add(link);
+                    }
+                    
+                }
+                mouse.setExpressionLinks(expression);
+                mouse.setCnvLinks(cnv);
+                mouse.setVariationLinks(variation);
+                
+            }catch(Exception e){
+                log.error("error getting linkouts",e);
+            }
+            
+        }
+        
+    }
+    
 
     /**
      *

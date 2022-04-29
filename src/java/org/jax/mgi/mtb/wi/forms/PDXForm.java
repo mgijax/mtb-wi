@@ -45,6 +45,8 @@ public class PDXForm extends ActionForm {
     private boolean treatmentNaive = false;
     private String TMBLT = null;
     private String TMBGT = null;
+    private String pTMBLT = null;
+    private String pTMBGT = null;
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -511,5 +513,33 @@ public class PDXForm extends ActionForm {
      */
     public void setTMBGT(String TMBGT) {
         this.TMBGT = TMBGT;
+    }
+
+    /**
+     * @return the pTMBLT
+     */
+    public String getpTMBLT() {
+        return pTMBLT;
+    }
+
+    /**
+     * @param pTMBLT the pTMBLT to set
+     */
+    public void setpTMBLT(String pTMBLT) {
+        this.pTMBLT = pTMBLT;
+    }
+
+    /**
+     * @return the pTMBGT
+     */
+    public String getpTMBGT() {
+        return pTMBGT;
+    }
+
+    /**
+     * @param pTMBGT the pTMBGT to set
+     */
+    public void setpTMBGT(String pTMBGT) {
+        this.pTMBGT = pTMBGT;
     }
 }

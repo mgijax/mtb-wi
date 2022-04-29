@@ -905,7 +905,19 @@
                                             <h4>Variants</h4>
                                         </td>
                                         <td>
-                                            <p id="noVariantSummary" style="display: none"><i>no data</i></p>
+                                        <c:if test="${not empty mouse.variationLinks}">
+                                            Data Links:<br>
+                                        </c:if>
+                                        <c:forEach var="link" items="${mouse.variationLinks}" >
+                                             <p>Sample:${link.sample} from passage:${link.passage}&nbsp;Platform:${link.platform}&nbsp;<a target="_blank" href="${link.derivedLink}">Derived Data</a>&nbsp;
+                                                 <c:forEach var="raw" items="${link.rawLinks}" varStatus="status">
+                                                 <a target="_blank" href="${raw}">Raw data ${status.index+1}</a>&nbsp;
+                                                 </c:forEach>
+                                             </p></br>
+                                        </c:forEach>
+                                            
+                                            
+                                            <p id="noVariantSummary" style="display: none"><i>no variation plots</i></p>
                                             </div>
                                             <div id="variantSummary"></div>
                                             <input id="variantData" type="button" value="Download variants data in CSV format" onClick="window.location = 'pdxDetails.do?csvSummary=true&modelID=${modelID}'">			
@@ -915,8 +927,19 @@
                                         <h4>Gene Expression</h4>
                                     </td>
                                     <td>
+                                        <c:if test="${not empty mouse.expressionLinks}">
+                                            Data Links:<br>
+                                        </c:if>
+                                        <c:forEach var="link" items="${mouse.expressionLinks}" >
+                                             <p>Sample:${link.sample} from passage:${link.passage}&nbsp;Platform:${link.platform}&nbsp;<a target="_blank" href="${link.derivedLink}">Derived Data</a>&nbsp;
+                                                 <c:forEach var="raw" items="${link.rawLinks}" varStatus="status">
+                                                 <a target="_blank" href="${raw}">Raw data ${status.index+1}</a>&nbsp;
+                                                 </c:forEach>
+                                                 </p></br>
+                                        </c:forEach>
+
                                         <c:if test="${empty geneExpressionData}">
-                                                <p><i>no data</i></p>
+                                                <p><i>no expression plots</i></p>
                                         </c:if>
                                         <c:if test="${not empty geneExpressionData}">
                                                 <p>Platforms: ${platforms}</p>
@@ -933,10 +956,21 @@
                                 </c:if>
                                 </td></tr>
                                  <tr><td>
-                                                <h4>Gene CNV</h4></td>
+                                <h4>Gene CNV</h4></td>
                                 <td>
+                                     <c:if test="${not empty mouse.cnvLinks}">
+                                            Data Links:<br>
+                                        </c:if>
+                                        <c:forEach var="link" items="${mouse.cnvLinks}" >
+                                             <p>Sample:${link.sample} from passage:${link.passage}&nbsp;Platform:${link.platform}&nbsp;<a target="_blank" href="${link.derivedLink}">Derived Data</a>&nbsp;
+                                                 <c:forEach var="raw" items="${link.rawLinks}" varStatus="status">
+                                                 <a target="_blank" href="${raw}">Raw data ${status.index+1}</a>&nbsp;
+                                                 </c:forEach>
+                                                 </p></br>
+                                        </c:forEach>
+
                                                 <c:if test="${empty geneCNVData}">
-                                                        <p><i>no data</i></p>
+                                                        <p><i>no CNV plots</i></p>
                                                 </c:if>
                                         </div>
                                         <c:if test="${not empty geneCNVData}">
