@@ -234,7 +234,7 @@
     <fieldset style="max-width:50%;">
         <legend data-tip="Only return models with selected additional information.">Limit results to models</legend>	
     	<html:checkbox property="dosingStudy"/> with dosing study data<br>
-    	<html:checkbox property="treatmentNaive"/><label data-tip="PDX models are considered treatment naive if the patient did not receive chemotherapy, immunotherapy, hormone therapy or radiation therapy for this primary cancer within 5 years prior to sample collection and/or within 1 year for a different cancer.">from treatment naive patients.</label>
+    	<html:checkbox property="treatmentNaive"/><label data-tip="PDX models are considered treatment naive if the patient did not receive chemotherapy, immunotherapy, hormone therapy or radiation therapy for this primary cancer within 5 years prior to sample collection and/or within 1 year for a different cancer.">from treatment naive patients</label>
     </fieldset>
 
 </fieldset>
@@ -283,7 +283,7 @@
          <table style="width:50%">
              <tr><td align="center"><label for="TMBGT">Minimum:${minTMB}</label></td>
                 <td></td>
-                <td align="center"><label for="TMBLT">Maximum:${maxTMB}</lable></td>
+                <td align="center"><label for="TMBLT">Maximum:${maxTMB}</label></td>
                 <td nowrap>&nbsp;&nbsp; ( TMB > 22  is considered high.)</td>
             </tr>
             <tr><td align="center"><html:text size="4" property="TMBGT"/></td>
@@ -291,6 +291,11 @@
                 <td align="center"> <html:text size="4" property="TMBLT"/></td>
                 <td></td>
             </tr>
+            <tr>
+                <td colspan="2" align="right"><html:checkbox property="pediatric"/><b><a class="help" href="userHelp.jsp#pdxPediatricTMB" >Use pediatric TMB</a></b></td>
+                <td align="center">Maximum:38.3</td>
+                <td nowrap>&nbsp; &nbsp; ( TMB > 3.0 is considered high.)</td></tr>
+           
         </table>
 	
 </fieldset>

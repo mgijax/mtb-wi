@@ -43,6 +43,7 @@ public class PDXForm extends ActionForm {
     private boolean loh = false;
     private boolean dosingStudy = false;
     private boolean treatmentNaive = false;
+    private boolean pediatric = false;
     private String TMBLT = null;
     private String TMBGT = null;
     private String pTMBLT = null;
@@ -541,5 +542,19 @@ public class PDXForm extends ActionForm {
      */
     public void setpTMBGT(String pTMBGT) {
         this.pTMBGT = pTMBGT;
+    }
+
+    /**
+     * @return the pediatric
+     */
+    public boolean getPediatric() {
+        return pediatric;
+    }
+
+    /**
+     * @param pediatric the pediatric to set
+     */
+    public void setPediatric(boolean pediatric) {
+        this.pediatric = pediatric;
     }
 }
