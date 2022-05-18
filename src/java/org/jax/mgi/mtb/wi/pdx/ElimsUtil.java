@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.HashMap;
 //import org.apache.axiom.soap.SOAP11Constants;
 import org.apache.log4j.Logger;
-import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 
