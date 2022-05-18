@@ -21,20 +21,9 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBGeneticsUtilDAO;
  */
 public class MGDAlleleIDAction extends Action {
 
-    // -------------------------------------------------------------- Constants
-    // none
-
-    // ----------------------------------------------------- Instance Variables
-
-    private final static Logger log = Logger.getLogger(RedirectAction.class.getName());
-
-    // ----------------------------------------------------------- Constructors
-    // none
-
-    // --------------------------------------------------------- Public Methods
-
+ 
     /**
-     * Retrieve the required information needed on the home page.
+     * Provide a list of Alleles for MMHCdb strains so MGI knows if they should create a link to us
      *
      * @param mapping the action mapping that determines where we need to go
      * @param form the form bean
