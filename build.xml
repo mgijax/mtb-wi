@@ -174,7 +174,7 @@ invocation even though it may be called more than once.
    <antcall target="projectPrepare"/>
    <antcall target="webdist"/>
    <copy file="dist/mtbwi.war" 
-         tofile="C:/Program Files/Apache Software Foundation/Apache Tomcat 8.0.27/webapps/mtbwi.war"
+         tofile="C:/LocalMTBWI/mtbwi.war"
          overwrite="true"/>
    <tstamp>
     <format property="current.time" pattern="MM/dd/yyyy hh:mm:ss aa" />
