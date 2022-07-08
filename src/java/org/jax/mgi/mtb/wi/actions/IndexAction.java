@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -18,7 +18,6 @@ import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBTumorUtilDAO;
 import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.utils.LabelValueBean;
-import org.jax.mgi.mtb.utils.Timer;
 import org.jax.mgi.mtb.utils.StringUtils;
 import org.jax.mgi.mtb.utils.URLDownloader;
 import org.jax.mgi.mtb.wi.pdx.ModelCounts;
@@ -39,8 +38,8 @@ public class IndexAction extends Action {
 
     // ----------------------------------------------------- Instance Variables
 
-    private final static Logger log =
-            Logger.getLogger(IndexAction.class.getName());
+    private final static Logger log = 
+            org.apache.logging.log4j.LogManager.getLogger(IndexAction.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -69,8 +68,7 @@ public class IndexAction extends Action {
 
         // default target to success
         String strTarget = "success";
-        Timer timer = new Timer();
-        timer.start();
+       
 
         String strWhatsNew = getWhatsNew(request.getRequestURL());
         List arrOrganTissues = getTumorFrequencyOrgansofOrigin();
@@ -103,12 +101,6 @@ public class IndexAction extends Action {
             request.setAttribute("pdfLink", mc.PDF_LINK);
 
         }
-
-        timer.stop();
-
-       
-        log.debug("IndexAction: " + timer.toString());
-        
 
         // forward to the appropriate View
         return mapping.findForward(strTarget);

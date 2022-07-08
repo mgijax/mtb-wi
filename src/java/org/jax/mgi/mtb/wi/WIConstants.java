@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBPathologyImageUtilDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceUtilDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBTumorUtilDAO;
@@ -57,7 +57,7 @@ public class WIConstants {
 
     // -------------------------------------------------------------- Constants
     public static final String EOL = System.getProperty("line.separator");
-    private final static Logger log = Logger.getLogger(WIConstants.class.getName());
+    private final static Logger log = org.apache.logging.log4j.LogManager.getLogger(WIConstants.class.getName());
     public final int DO_NOT_SEARCH = -1;
     public final int SEARCH = 0;
     public final static int TYPE_MARKER = 1;

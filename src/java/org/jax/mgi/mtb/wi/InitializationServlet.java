@@ -15,7 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBPathologyImageUtilDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceUtilDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBSynchronizationUtilDAO;
@@ -54,7 +54,7 @@ public class InitializationServlet extends HttpServlet {
     private final String ELIMS_USER = "elims.username";
     private final String ELIMS_PWD = "elims.password";
     private final static Logger log =
-            Logger.getLogger(InitializationServlet.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(InitializationServlet.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none

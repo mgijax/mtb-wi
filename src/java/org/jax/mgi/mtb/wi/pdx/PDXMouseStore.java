@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -41,7 +41,7 @@ import org.jax.mgi.mtb.wi.WIConstants;
 public class PDXMouseStore {
 
     private static final Logger log
-            = Logger.getLogger(PDXMouseStore.class.getName());
+            = org.apache.logging.log4j.LogManager.getLogger(PDXMouseStore.class.getName());
     private static ArrayList<PDXMouse> allMice;
     // use the numeric part of the model id as an index to the mouse object
     //  private static HashMap<Integer,PDXMouse> mouseMap = new HashMap<Integer,PDXMouse>();

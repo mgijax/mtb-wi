@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Scanner;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -31,7 +31,7 @@ import org.jax.mgi.mtb.wi.WIConstants;
 public class PDXLikeMe {
 
     private static final Logger log
-            = Logger.getLogger(PDXLikeMe.class.getName());
+            = org.apache.logging.log4j.LogManager.getLogger(PDXLikeMe.class.getName());
 
     private static final String baseURL = WIConstants.getInstance().getPDXWebservice();
     //static final String baseURL = "http://pdxdata.jax.org/api/";

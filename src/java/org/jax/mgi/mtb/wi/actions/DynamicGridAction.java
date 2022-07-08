@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -26,7 +26,7 @@ import org.jax.mgi.mtb.wi.forms.DynamicGridForm;
  */
 public class DynamicGridAction extends Action {
 
-  private final static Logger log = Logger.getLogger(DynamicGridAction.class.getName());
+  private final static Logger log = org.apache.logging.log4j.LogManager.getLogger(DynamicGridAction.class.getName());
 
   public ActionForward execute(ActionMapping mapping,
           ActionForm form,

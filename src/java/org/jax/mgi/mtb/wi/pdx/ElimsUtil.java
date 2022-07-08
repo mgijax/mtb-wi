@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 //import org.apache.axiom.soap.SOAP11Constants;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 
@@ -30,7 +30,7 @@ import org.jax.mgi.mtb.wi.WIConstants;
 public class ElimsUtil {
 
     private static final Logger log
-            = Logger.getLogger(ElimsUtil.class.getName());
+            = org.apache.logging.log4j.LogManager.getLogger(ElimsUtil.class.getName());
     private static String userName;
     private static String password;
     

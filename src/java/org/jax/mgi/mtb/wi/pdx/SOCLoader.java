@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 import static org.jax.mgi.mtb.wi.JSONUtils.getJSON;
@@ -25,7 +25,7 @@ import org.jax.mgi.mtb.wi.WIConstants;
 public class SOCLoader {
 
     private static final Logger log
-            = Logger.getLogger(SOCLoader.class.getName());
+            = org.apache.logging.log4j.LogManager.getLogger(SOCLoader.class.getName());
 
     private static String baseURL = WIConstants.getInstance().getPDXWebservice();
     private static String termsURL = baseURL + "drugstudies/drugterms";

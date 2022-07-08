@@ -6,14 +6,13 @@ package org.jax.mgi.mtb.wi.actions;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBGeneticsSummaryDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBGeneticsUtilDAO;
-import org.jax.mgi.mtb.utils.Timer;
 
 /**
  * Retreives the genetics summary.
@@ -32,7 +31,7 @@ public class GeneticsSummaryAction extends Action {
     // ----------------------------------------------------- Instance Variables
 
     private final static Logger log =
-            Logger.getLogger(GeneticsSummaryAction.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(GeneticsSummaryAction.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -61,12 +60,10 @@ public class GeneticsSummaryAction extends Action {
 
         // default target to success
         String strTarget = "success";
-        Timer timerTotal = new Timer();
-        Timer timerDao = new Timer();
+       
         MTBGeneticsUtilDAO daoG = null;
         MTBGeneticsSummaryDTO dtoG = null;
 
-        timerTotal.start();
 
         // parameters
         String strAlleleTypeKey = request.getParameter("alleleTypeKey");
@@ -74,7 +71,7 @@ public class GeneticsSummaryAction extends Action {
         long lAlleleTypeKey = -1l;
         long lMarkerKey = -1l;
 
-        timerDao.start();
+      
 
         // create the DAO
         daoG = MTBGeneticsUtilDAO.getInstance();
@@ -90,12 +87,6 @@ public class GeneticsSummaryAction extends Action {
             log.error("markerKey=" + lMarkerKey);
         }
 
-        timerDao.stop();
-        if (log.isDebugEnabled()) {
-            log.debug("GeneticsSummaryAction: DAO TIME: " + 
-                        timerDao.toString());
-        }
-
         // set the target to failure if we could not retrieve the strain types
         if (dtoG == null) {
             log.error("GeneticsSummaryAction: ERROR: genetics == null");
@@ -103,12 +94,6 @@ public class GeneticsSummaryAction extends Action {
         } else {
             // put the genetics summary in the request
             request.setAttribute("genetics", dtoG);
-        }
-
-        timerTotal.stop();
-
-        if (log.isDebugEnabled()) {
-            log.debug("TOTAL TIME: " + timerTotal.toString());
         }
 
         // forward to the appropriate View

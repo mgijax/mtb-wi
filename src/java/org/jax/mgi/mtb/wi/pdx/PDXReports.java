@@ -7,7 +7,7 @@ package org.jax.mgi.mtb.wi.pdx;
 
 import java.util.ArrayList;
 import java.util.Date;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 
@@ -27,7 +27,7 @@ public class PDXReports {
     private static ArrayList<ArrayList<String>> status = new ArrayList<>();
 
     private static final Logger log
-            = Logger.getLogger(PDXReports.class.getName());
+            = org.apache.logging.log4j.LogManager.getLogger(PDXReports.class.getName());
 
     
     private static PDXReports singleton;

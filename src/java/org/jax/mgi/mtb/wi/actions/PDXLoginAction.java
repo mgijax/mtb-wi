@@ -4,7 +4,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -20,7 +20,7 @@ import org.jax.mgi.mtb.wi.forms.PDXLoginForm;
 public class PDXLoginAction extends Action {
     
        private static final Logger log =
-            Logger.getLogger(PDXLoginAction.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(PDXLoginAction.class.getName());
 
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,

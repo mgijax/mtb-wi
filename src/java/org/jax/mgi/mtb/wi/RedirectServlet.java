@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.jax.mgi.mtb.dao.gen.mtb.AccessionDAO;
 import org.jax.mgi.mtb.dao.gen.mtb.AccessionDTO;
 import org.jax.mgi.mtb.dao.gen.mtb.SiteLinksDAO;
@@ -36,7 +36,7 @@ public class RedirectServlet extends HttpServlet {
     // ----------------------------------------------------- Instance Variables
 
     private final static Logger log =
-            Logger.getLogger(RedirectServlet.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(RedirectServlet.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none

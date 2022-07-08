@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -17,7 +17,6 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceDetailDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceUtilDAO;
 import org.jax.mgi.mtb.dao.gen.mtb.StrainNotesDTO;
 import org.jax.mgi.mtb.utils.StringUtils;
-import org.jax.mgi.mtb.utils.Timer;
 
 /**
  * Retrieve the detail information about a reference record.
@@ -36,7 +35,7 @@ public class ReferenceDetailsAction extends Action {
     // ----------------------------------------------------- Instance Variables
 
     private final static Logger log =
-            Logger.getLogger(ReferenceDetailsAction.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(ReferenceDetailsAction.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -69,14 +68,12 @@ public class ReferenceDetailsAction extends Action {
 
         // default target to success
         String strTarget = "success";
-        Timer timer = new Timer();
-        timer.start();
+        
 
         String strKey = request.getParameter("key");
         String strAccId = request.getParameter("accId");
         MTBReferenceDetailDTO dtoRefDetail = null;
-        Timer timerDao = new Timer();
-        timerDao.start();
+        
 
         if (StringUtils.hasValue(strKey) && StringUtils.hasValue(strAccId)) {
             // both parameters should not be used because there could
@@ -109,12 +106,7 @@ public class ReferenceDetailsAction extends Action {
             }
         }
 
-        timerDao.stop();
-
-        if (log.isDebugEnabled()) {
-            log.debug("ReferenceDetailsAction: DAO TIME: " + 
-                        timerDao.toString());
-        }
+    
 
         // set the target to failure if we could not retrieve the reference
         if (dtoRefDetail == null) {
@@ -127,10 +119,6 @@ public class ReferenceDetailsAction extends Action {
         
      //   log.debug(FieldPrinter.getFieldsAsString(dtoRefDetail));
 
-        timer.stop();
-        if (log.isDebugEnabled()) {
-            log.debug("ReferenceDetailsAction: " + timer.toString());
-        }
 
         // forward to the appropriate View
         return mapping.findForward(strTarget);

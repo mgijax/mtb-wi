@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -23,7 +23,6 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBUtilitiesDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.param.StrainSearchParams;
 import org.jax.mgi.mtb.dao.custom.mtb.param.TumorFrequencySearchParams;
 import org.jax.mgi.mtb.utils.StringUtils;
-import org.jax.mgi.mtb.utils.Timer;
 import org.jax.mgi.mtb.wi.forms.TumorSearchForm;
 import org.jax.mgi.mtb.wi.utils.WIUtils;
 
@@ -45,7 +44,7 @@ public class TumorSearchResultsAction extends Action {
     // ----------------------------------------------------- Instance Variables
 
     private final static Logger log =
-            Logger.getLogger(TumorSearchResultsAction.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(TumorSearchResultsAction.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -75,11 +74,6 @@ public class TumorSearchResultsAction extends Action {
         // default target to success
         String strTarget = "success";
 
-        // time the overall execution
-        Timer timer = new Timer();
-        timer.start();
-
-        // retrieve the parameters
 
         ///////////////////////////////////////////////////////////////////////
         // from the tumor search form
@@ -281,9 +275,7 @@ public class TumorSearchResultsAction extends Action {
         strainParams.setExactStrainTypes(bExactStrainTypes);
         strainParams.setStrainKeyComparison("=");
         
-        // time the dao
-        Timer timerDao = new Timer();
-        timerDao.start();
+       
 
         // perform the search
         MTBTumorUtilDAO daoTumorUtil = MTBTumorUtilDAO.getInstance();
@@ -297,13 +289,6 @@ public class TumorSearchResultsAction extends Action {
                                                    lMaxItems);
         } catch (Exception e) {
             log.error("Error searching for tumors", e);
-        }
-
-        timerDao.stop();
-
-        if (log.isDebugEnabled()) {
-            log.debug("TumorSearchResultsAction: DAO TIME: " +
-                      timerDao.toString());
         }
 
         List<MTBStrainTumorSummaryDTO> colTumors = null;
@@ -395,12 +380,6 @@ public class TumorSearchResultsAction extends Action {
         request.setAttribute("sortBy", strSortBy);
         request.setAttribute("maxItems", strMaxItems);
 
-        timer.stop();
-
-        if (log.isDebugEnabled()) {
-            log.debug("TumorSearchResultsAction: TOTAL TIME: " +
-                        timer.toString());
-        }
 
         // forward to the appropriate View
         return mapping.findForward(strTarget);

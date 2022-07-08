@@ -8,17 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBStrainDetailDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBStrainUtilDAO;
-import org.jax.mgi.mtb.dao.gen.mtb.StrainNotesDTO;
 import org.jax.mgi.mtb.dao.gen.mtb.StrainSynonymsDTO;
 import org.jax.mgi.mtb.utils.StringUtils;
-import org.jax.mgi.mtb.utils.Timer;
+
 import org.jax.mgi.mtb.wi.utils.WIUtils;
 
 /**
@@ -38,7 +37,7 @@ public class StrainDetailsAction extends Action {
     // ----------------------------------------------------- Instance Variables
 
     private final static Logger log = 
-            Logger.getLogger(StrainDetailsAction.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(StrainDetailsAction.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -67,16 +66,12 @@ public class StrainDetailsAction extends Action {
 
         // default target to success
         String strTarget = "success";
-        Timer timer = new Timer();
-        timer.start();
-
+       
         String strKey = request.getParameter("key");
         
         
         MTBStrainDetailDTO dtoStrainDetail = null;
-        Timer daoTimer = new Timer();
-        daoTimer.start();
-
+    
         if (StringUtils.hasValue(strKey)) {
             try {
                 dtoStrainDetail = getStrain(Long.parseLong(strKey),true);
@@ -84,13 +79,6 @@ public class StrainDetailsAction extends Action {
             } catch (Exception e) {
                 log.error("Error retrieving strain detail, key =" + strKey, e);
             }
-        }
-
-        daoTimer.stop();
-
-        if (log.isDebugEnabled()) {
-            log.debug("StrainDetailsAction: DAO TIME: " +
-                        daoTimer.toString());
         }
 
         // set the target to error if we could not retrieve the strain types
@@ -117,14 +105,9 @@ public class StrainDetailsAction extends Action {
             request.setAttribute("strain", dtoStrainDetail);
         }
 
-        timer.stop();
+       
 
-        if (log.isDebugEnabled()) {
-            log.debug("StrainDetailsAction: " + timer.toString());
-            log.debug("StrainDetailsAction: " + strTarget);
-        }
-
-        timer = null;
+        
 
         // forward to the appropriate View
         return mapping.findForward(strTarget);

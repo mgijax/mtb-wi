@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -23,7 +23,6 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBTumorGeneticChangesDTO;
 import org.jax.mgi.mtb.dao.gen.mtb.StrainSynonymsDTO;
 import org.jax.mgi.mtb.dao.gen.mtb.StrainTypeDTO;
 import org.jax.mgi.mtb.utils.StringUtils;
-import org.jax.mgi.mtb.utils.Timer;
 import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.wi.utils.WIUtils;
 
@@ -42,7 +41,7 @@ public class TumorSummaryAction extends Action {
     // none
     // ----------------------------------------------------- Instance Variables
     private final static Logger log =
-            Logger.getLogger(TumorSummaryAction.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(TumorSummaryAction.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -69,9 +68,7 @@ public class TumorSummaryAction extends Action {
         // default target to success
         String strTarget = "success";
 
-        // time the overall execution
-        Timer timer = new Timer();
-        timer.start();
+        
 
         // retrieve the parameters
         String strStrainKey = request.getParameter("strainKey");
@@ -85,8 +82,7 @@ public class TumorSummaryAction extends Action {
 
         try {
 
-            Timer timerDao = new Timer();
-            timerDao.start();
+           
 
             MTBTumorUtilDAO daoTumorUtil = MTBTumorUtilDAO.getInstance();
             long arrnTFKeys[] = parseKeys(strTFKeys);
@@ -152,12 +148,7 @@ public class TumorSummaryAction extends Action {
                 request.setAttribute("tumor", results);
 
             }
-            timerDao.stop();
-
-            if (log.isDebugEnabled()) {
-                log.debug("TumorSummaryAction: DAO TIME: "
-                        + timerDao.toString());
-            }
+         
 
         } catch (Exception e) {
             log.error("Error in tumor summary", e);
@@ -168,11 +159,7 @@ public class TumorSummaryAction extends Action {
             log.error(sb.toString());
         }
 
-        timer.stop();
-
-        if (log.isDebugEnabled()) {
-            log.debug("TumorSummaryAction: " + timer.toString());
-        }
+       
 
         // forward to the appropriate View
         return mapping.findForward(strTarget);

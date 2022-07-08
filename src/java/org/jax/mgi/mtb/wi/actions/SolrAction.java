@@ -12,7 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse; 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -36,7 +36,7 @@ public class SolrAction extends Action {
     private final static String solrURL = WIConstants.getInstance().getSolrURL();
 
     private final static Logger log =
-            Logger.getLogger(SolrAction.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(SolrAction.class.getName());
 
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
@@ -71,7 +71,7 @@ public class SolrAction extends Action {
        
         }
  
-        log.debug(url);
+        //log.debug(url);
         HttpURLConnection connection =
                 (HttpURLConnection) url.openConnection();
 
@@ -118,10 +118,16 @@ public class SolrAction extends Action {
            
            SearchResults<AlleleDTO> results = MTBGeneticsUtilDAO.getInstance().searchAllele(parts[1],0,null,null,null,null,1);
            url.append("#fq=strainMarker%253A%2522");
-           url.append(results.getList().get(0).getSymbol()).append("%2522");
+           
+           // replace any #'s with %2523
+           String symbol = results.getList().get(0).getSymbol();
+           symbol = symbol.replaceAll("#", "%2523");
+           
+           url.append(symbol).append("%2522");
         }
         }catch(Exception e){
             log.error("Unable to get allele symbol for "+query,e);
+            url = new StringBuilder("/mtbwi/facetedSearch.do");
         }
         return url.toString();
     }

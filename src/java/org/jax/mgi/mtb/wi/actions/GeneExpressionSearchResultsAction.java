@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -30,7 +30,7 @@ public class GeneExpressionSearchResultsAction extends Action{
 
   
    private final static Logger log =
-            Logger.getLogger(GeneExpressionSearchResultsAction.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(GeneExpressionSearchResultsAction.class.getName());
    
    
     public ActionForward execute(ActionMapping mapping,

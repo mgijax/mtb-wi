@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -17,7 +17,6 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBPathologyImageDetailDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBPathologyImageUtilDAO;
 import org.jax.mgi.mtb.dao.gen.mtb.StrainSynonymsDTO;
 import org.jax.mgi.mtb.utils.StringUtils;
-import org.jax.mgi.mtb.utils.Timer;
 import org.jax.mgi.mtb.wi.utils.WIUtils;
 
 
@@ -38,7 +37,7 @@ public class PathologyImageDetailsAction extends Action {
     // ----------------------------------------------------- Instance Variables
 
     private final static Logger log =
-            Logger.getLogger(PathologyImageDetailsAction.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(PathologyImageDetailsAction.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -68,13 +67,11 @@ public class PathologyImageDetailsAction extends Action {
         // default target to success
         String strTarget = "success";
 
-        Timer timer = new Timer();
-        timer.start();
+        
 
         String strKey = request.getParameter("key");
         MTBPathologyImageDetailDTO dtoPathologyDetail = null;
-        Timer timerDao = new Timer();
-        timerDao.start();
+        
 
         if (StringUtils.hasValue(strKey)) {
             try {
@@ -84,13 +81,7 @@ public class PathologyImageDetailsAction extends Action {
             }
         }
 
-        timerDao.stop();
-
-        if (log.isDebugEnabled()) {
-            log.debug("PathologyImageDetailsAction: DAO TIME: " +
-                        timerDao.toString());
-        }
-
+        
         // set the target to error if we could not retrieve the detail record
         if (dtoPathologyDetail == null) {
             strTarget = "error";
@@ -128,9 +119,7 @@ public class PathologyImageDetailsAction extends Action {
             request.setAttribute("pathology", dtoPathologyDetail);
         }
 
-        if (log.isDebugEnabled()) {
-            log.debug("PathologyImageDetailsAction: " + timer.toString());
-        }
+        
 
         // forward to the appropriate View
         return mapping.findForward(strTarget);

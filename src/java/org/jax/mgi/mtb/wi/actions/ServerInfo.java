@@ -14,13 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 //import javax.servlet.jsp.JspFactory;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.utils.LabelValueBean;
-import org.jax.mgi.mtb.utils.Timer;
 
 /**
  * Debugging struts servlet.
@@ -39,7 +38,7 @@ public class ServerInfo extends Action {
     // ----------------------------------------------------- Instance Variables
 
     private final static Logger log =
-            Logger.getLogger(ServerInfo.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(ServerInfo.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -67,8 +66,7 @@ public class ServerInfo extends Action {
 
         log.warn("Server Info invoked!");
 
-        Timer totalTime = new Timer();
-        totalTime.start();
+       
         String strTarget="success";
         response.setContentType("text/plain");
 

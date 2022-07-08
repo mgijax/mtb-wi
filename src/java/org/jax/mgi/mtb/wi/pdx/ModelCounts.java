@@ -12,7 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 
@@ -27,7 +27,7 @@ import org.jax.mgi.mtb.wi.WIConstants;
 public class ModelCounts {
 
     private final static Logger log
-            = Logger.getLogger(ModelCounts.class.getName());
+            = org.apache.logging.log4j.LogManager.getLogger(ModelCounts.class.getName());
 
     public static final String HTISSUE = "&fq=humanTissue%3A";
     public static final String MUTANT = "&fq=mutant%3Atrue";

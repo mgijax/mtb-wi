@@ -6,12 +6,11 @@ package org.jax.mgi.mtb.wi.actions;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.jax.mgi.mtb.utils.Timer;
 import org.jax.mgi.mtb.utils.StringUtils;
 
 /**
@@ -30,7 +29,7 @@ public class RedirectAction extends Action {
 
     // ----------------------------------------------------- Instance Variables
 
-    private final static Logger log = Logger.getLogger(RedirectAction.class.getName());
+    private final static Logger log = org.apache.logging.log4j.LogManager.getLogger(RedirectAction.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -59,8 +58,7 @@ public class RedirectAction extends Action {
 
         // default target to success
         String strTarget = "success";
-        Timer timer = new Timer();
-        timer.start();
+      
 
         String strUrl = request.getParameter("url");
 
@@ -70,12 +68,6 @@ public class RedirectAction extends Action {
             request.setAttribute("url", strUrl);
         } else {
             strTarget = "error";
-        }
-
-        timer.stop();
-
-        if (log.isDebugEnabled()) {
-            log.debug("RedirectAction: " + timer.toString());
         }
 
         // forward to the appropriate View

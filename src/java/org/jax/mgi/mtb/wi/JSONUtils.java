@@ -13,7 +13,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
  */
 public class JSONUtils {
 
-    private static final Logger log = Logger.getLogger(JSONUtils.class.getName());
+    private final static org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(JSONUtils.class.getName());
 
     private static String getFilterStr() {
         String filterStr = "filter=no";

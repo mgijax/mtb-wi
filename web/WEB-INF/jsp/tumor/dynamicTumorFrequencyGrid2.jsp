@@ -504,7 +504,7 @@
 	<li>
 	"Zero" - the literature reported that no tumors were observed</li>
 	<li>
-	&nbsp;empty cell - no data in MTB</li>
+	&nbsp;empty cell - no data in MMHCdb</li>
 </ul>
 <hr><strong>Notes</strong>
 <ul>

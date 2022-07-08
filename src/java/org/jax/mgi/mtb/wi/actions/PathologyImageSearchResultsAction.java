@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -21,7 +21,6 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBPathologyImageUtilDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceUtilDAO;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.utils.StringUtils;
-import org.jax.mgi.mtb.utils.Timer;
 import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.wi.forms.PathologyImageSearchForm;
 import org.jax.mgi.mtb.wi.utils.WIUtils;
@@ -42,7 +41,7 @@ public class PathologyImageSearchResultsAction extends Action {
     // none
     // ----------------------------------------------------- Instance Variables
     private final static Logger log =
-            Logger.getLogger(PathologyImageSearchResultsAction.class.getName());
+            org.apache.logging.log4j.LogManager.getLogger(PathologyImageSearchResultsAction.class.getName());
 
     // ----------------------------------------------------------- Constructors
     // none
@@ -71,8 +70,6 @@ public class PathologyImageSearchResultsAction extends Action {
         // default target to success
         String strTarget = "success";
 
-        Timer timer = new Timer();
-        timer.start();
 
         SearchResults<MTBPathologyImageSearchDTO> resPathImages = null;
         MTBPathologyImageUtilDAO dao = MTBPathologyImageUtilDAO.getInstance();
@@ -135,8 +132,7 @@ public class PathologyImageSearchResultsAction extends Action {
                 strMethod = null;
             }
 
-            Timer daoTimer = new Timer();
-            daoTimer.start();
+            
 
             try {
                 // search for the pathology images
@@ -153,13 +149,6 @@ public class PathologyImageSearchResultsAction extends Action {
                 log.error("Error searching for pathology images", e);
             }
 
-            daoTimer.stop();
-
-            if (log.isDebugEnabled()) {
-                log.debug("PathologySearchResultsAction : DAO TIME: "
-                        + daoTimer.toString());
-            }
-
             request.setAttribute("organsAffectedSelected",
                     strOrganAffected);
             request.setAttribute("organOriginSelected",
@@ -173,11 +162,7 @@ public class PathologyImageSearchResultsAction extends Action {
             request.setAttribute("sortBy", StringUtils.initCap(strSortBy));
             request.setAttribute("maxItems", strMaxItems);
 
-            timer.stop();
-
-            if (log.isDebugEnabled()) {
-                log.debug("PathologySearchResultsAction: " + timer.toString());
-            }
+           
 
         } else {
 
