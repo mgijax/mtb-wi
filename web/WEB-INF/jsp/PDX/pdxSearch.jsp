@@ -291,11 +291,11 @@
                 <td align="center"> <html:text size="4" property="TMBLT"/></td>
                 <td></td>
             </tr>
-            <tr>
+        <!--    <tr>
                 <td colspan="2" align="right"><html:checkbox property="pediatric"/><b><a class="help" href="userHelp.jsp#pdxPediatricTMB" >Use pediatric TMB</a></b></td>
                 <td align="center">Maximum:38.3</td>
                 <td nowrap>&nbsp; &nbsp; ( TMB > 3.0 is considered high.)</td></tr>
-           
+           -->
         </table>
 	
 </fieldset>

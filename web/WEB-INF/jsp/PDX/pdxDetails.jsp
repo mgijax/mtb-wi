@@ -915,8 +915,6 @@
                                                  </c:forEach>
                                              </p></br>
                                         </c:forEach>
-                                            
-                                            
                                             <p id="noVariantSummary" style="display: none"><i>no variation plots</i></p>
                                             </div>
                                             <div id="variantSummary"></div>
@@ -956,11 +954,12 @@
                                 </c:if>
                                 </td></tr>
                                  <tr><td>
-                                <h4>Gene CNV</h4></td>
-                                <td>
+                                    <h4>Gene CNV</h4>
+                                     </td>
+                                    <td>
                                      <c:if test="${not empty mouse.cnvLinks}">
                                             Data Links:<br>
-                                        </c:if>
+                                       </c:if>
                                         <c:forEach var="link" items="${mouse.cnvLinks}" >
                                              <p>Sample:${link.sample} from passage:${link.passage}&nbsp;Platform:${link.platform}&nbsp;<a target="_blank" href="${link.derivedLink}">Derived Data</a>&nbsp;
                                                  <c:forEach var="raw" items="${link.rawLinks}" varStatus="status">
@@ -968,10 +967,10 @@
                                                  </c:forEach>
                                                  </p></br>
                                         </c:forEach>
-
-                                                <c:if test="${empty geneCNVData}">
-                                                        <p><i>no CNV plots</i></p>
-                                                </c:if>
+                                                 
+                                        <c:if test="${empty geneCNVData}">
+                                                <p><i>no CNV data</i></p>
+                                        </c:if>
                                         </div>
                                         <c:if test="${not empty geneCNVData}">
                                                 <div id="geneCNV"></div>
@@ -979,10 +978,12 @@
                                 </td>
                             </tr>
                             <tr><td>
-		<h4>CNV Plots</h4></td>
+		
+                                    
+                <h4>CNV Plots</h4></td>
                 <td>
 				<c:if test="${empty cnvPlots}">
-                                    <p><i>no data</i></p>
+                                    <p><i>no CNV plots</i></p>
 				</c:if>				
 			</div>
 			<c:if test="${not empty cnvPlots}">

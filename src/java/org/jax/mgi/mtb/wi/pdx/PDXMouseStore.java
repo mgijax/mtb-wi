@@ -200,7 +200,7 @@ public class PDXMouseStore {
 
         loadTMBData();
         
-        loadGenomicsLinks();
+        if(!forPublic)loadGenomicsLinks();
 
         ctpGenes = PDXDAO.getInstance().getCTPGenes();
 
@@ -1684,6 +1684,7 @@ public class PDXMouseStore {
     }
     
     private void loadGenomicsLinks(){
+        
         for(PDXMouse mouse : allMice){
             try{
                  ArrayList<GenomicsLink> cnv = new ArrayList<>();
