@@ -182,6 +182,7 @@
 						<c:out value="${rec.strainSex}" escapeXml="false" default="&nbsp;"/>
 					</td>
 					
+                                        <fmt:setLocale value="en_US"/>
 					<c:catch var="error">
 						<fmt:parseNumber var="freq" type="number" value="${rec.incidence}" />
 					</c:catch>

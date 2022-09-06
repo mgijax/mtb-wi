@@ -165,7 +165,7 @@ public class PDXMouseStore {
         recistDrugsLVB.clear();
         recistResponsesLVB.clear();
 
-        log.info("loading mice from eLIMS");
+        //log.info("loading mice from eLIMS");
         //  ElimsUtil eu = new ElimsUtil();
 
         allMice = PDXDAO.getInstance().getModels(forPublic);
@@ -201,6 +201,7 @@ public class PDXMouseStore {
         loadTMBData();
         
         if(!forPublic)loadGenomicsLinks();
+       // loadGenomicsLinks();
 
         ctpGenes = PDXDAO.getInstance().getCTPGenes();
 
@@ -1766,39 +1767,41 @@ public class PDXMouseStore {
                 i++;
             }
 
-            mouseIDs.deleteCharAt(mouseIDs.length() - 1);
+            if(mouseIDs.length()>0){
+                mouseIDs.deleteCharAt(mouseIDs.length() - 1);
 
-            StringBuffer query = new StringBuffer(GENE_EXPRESSION).append(gene);
-            query.append("&model=").append(mouseIDs);
+                StringBuffer query = new StringBuffer(GENE_EXPRESSION).append(gene);
+                query.append("&model=").append(mouseIDs);
 
-            try {
+                try {
 
-                JSONObject job = new JSONObject(getJSON(query.toString()));
+                    JSONObject job = new JSONObject(getJSON(query.toString()));
 
-                JSONArray jarray = job.getJSONArray("data");
+                    JSONArray jarray = job.getJSONArray("data");
 
-                for (int k = 0; k < jarray.length(); k++) {
-                    model = jarray.getJSONObject(k).getString("model_name");
-                    sample = jarray.getJSONObject(k).getString("sample_name");
-                    passage = getField(jarray.getJSONObject(k), "passage_num");
-                    rankZ = jarray.getJSONObject(k).getDouble("z_score_percentile_rank");
+                    for (int k = 0; k < jarray.length(); k++) {
+                        model = jarray.getJSONObject(k).getString("model_name");
+                        sample = jarray.getJSONObject(k).getString("sample_name");
+                        passage = getField(jarray.getJSONObject(k), "passage_num");
+                        rankZ = jarray.getJSONObject(k).getDouble("z_score_percentile_rank");
 
-                    if (cnv) {
-                        ampDelStr = "Normal";
-                        if (ampDel.containsKey(model)) {
-                            ampDelStr = ampDel.get(model);
+                        if (cnv) {
+                            ampDelStr = "Normal";
+                            if (ampDel.containsKey(model)) {
+                                ampDelStr = ampDel.get(model);
+                            }
+                            result.append("['" + model + " : " + sample + "','" + modelDiagnosis.get(model) + "'," + df.format(rankZ) + ",'" + model + "','" + ampDelStr + "'],");
+                        } else {
+                            result.append("['").append(model).append(" : ").append(sample);
+                            result.append(" ").append(passage).append("',");
+                            result.append("'").append(modelDiagnosis.get(model)).append("',");
+                            result.append(df.format(rankZ)).append(",'").append(model).append("'],");
                         }
-                        result.append("['" + model + " : " + sample + "','" + modelDiagnosis.get(model) + "'," + df.format(rankZ) + ",'" + model + "','" + ampDelStr + "'],");
-                    } else {
-                        result.append("['").append(model).append(" : ").append(sample);
-                        result.append(" ").append(passage).append("',");
-                        result.append("'").append(modelDiagnosis.get(model)).append("',");
-                        result.append(df.format(rankZ)).append(",'").append(model).append("'],");
                     }
-                }
 
-            } catch (JSONException e) {
-                log.error(e);
+                } catch (JSONException e) {
+                    log.error(e);
+                }
             }
         }
         if (result.length() > 0) {

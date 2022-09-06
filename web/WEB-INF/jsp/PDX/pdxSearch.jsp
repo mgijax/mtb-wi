@@ -235,6 +235,7 @@
         <legend data-tip="Only return models with selected additional information.">Limit results to models</legend>	
     	<html:checkbox property="dosingStudy"/> with dosing study data<br>
     	<html:checkbox property="treatmentNaive"/><label data-tip="PDX models are considered treatment naive if the patient did not receive chemotherapy, immunotherapy, hormone therapy or radiation therapy for this primary cancer within 5 years prior to sample collection and/or within 1 year for a different cancer.">from treatment naive patients</label>
+     <!--   <html:checkbox property="currentlyAvailable"/><label data-tip="Some models only have data. This will return models available for order form JAX.">currently available</label>  -->
     </fieldset>
 
 </fieldset>

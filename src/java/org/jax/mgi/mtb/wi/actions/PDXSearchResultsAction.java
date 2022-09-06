@@ -58,6 +58,8 @@ public class PDXSearchResultsAction extends Action {
         boolean tumorGrowth = false;
         boolean treatmentNaive = pdxForm.getTreatmentNaive();
         
+        boolean currentlyAvaialble = pdxForm.getCurrentlyAvailable();
+        
         String recistDrug = pdxForm.getRecistDrugs();
         String recistResponse = pdxForm.getRecistResponses();
         
@@ -270,6 +272,7 @@ public class PDXSearchResultsAction extends Action {
     }
 
     // the order of the fields here needs to correspond to the order of the arraystore fields in pdxSearchResults.jsp
+    // this would be a good place to remove currentlyUnavailable (Inventory) mice if the currentlyAvaialbe checkbox is implemented
     private String[] miceToArray(ArrayList<PDXMouse> mice) {
         StringBuilder buffer = new StringBuilder();
         StringBuilder unavailable = new StringBuilder();

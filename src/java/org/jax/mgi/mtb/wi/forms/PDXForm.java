@@ -44,6 +44,7 @@ public class PDXForm extends ActionForm {
     private boolean dosingStudy = false;
     private boolean treatmentNaive = false;
     private boolean pediatric = false;
+    private boolean currentlyAvailable = false;
     private String TMBLT = null;
     private String TMBGT = null;
     private String pTMBLT = null;
@@ -556,5 +557,19 @@ public class PDXForm extends ActionForm {
      */
     public void setPediatric(boolean pediatric) {
         this.pediatric = pediatric;
+    }
+
+    /**
+     * @return the currentlyAvailable
+     */
+    public boolean getCurrentlyAvailable() {
+        return currentlyAvailable;
+    }
+
+    /**
+     * @param currentlyAvailable the currentlyAvailable to set
+     */
+    public void setCurrentlyAvailable(boolean currentlyAvailable) {
+        this.currentlyAvailable = currentlyAvailable;
     }
 }

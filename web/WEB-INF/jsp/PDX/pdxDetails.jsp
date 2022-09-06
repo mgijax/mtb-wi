@@ -754,6 +754,64 @@
    					panel5.render();
    					panel5.doLayout();
 				}
+                                
+                                
+                                
+                                
+                                if (document.getElementById("dataLinks") != null) {
+
+					linksPanel = new Ext.Panel({
+						applyTo: 'dataLinks',
+						collapsible: true,
+						collapsed: true,
+						collapseFirst: false,
+						title: 'Click to expand/collapse',
+						forceLayout: true,
+						layout: {
+							type: 'fit',
+							align: 'stretch',
+							pack: 'start'
+						},
+						titleCollapse: true,
+						hideCollapseTool: true,
+						items: [{html: '<b>Fantastic explanatory text here</b><br>'<c:if test="${not empty mouse.variationLinks}">
+                                                                    +'<b>Variation Links:</b><br>'
+                                                                </c:if>
+                                                                <c:forEach var="link" items="${mouse.variationLinks}" >
+                                                                     +'<p>&nbsp;&nbsp;&nbsp;Sample:${link.sample} from passage:${link.passage}&nbsp;Platform:${link.platform}&nbsp;<a target="_blank" href="${link.derivedLink}">Derived Data</a>&nbsp;'
+                                                                         <c:forEach var="raw" items="${link.rawLinks}" varStatus="status">
+                                                                         +'<a target="_blank" href="${raw}">Raw data ${status.index+1}</a>&nbsp;'
+                                                                         </c:forEach>
+                                                                     +'</p>'
+                                                                </c:forEach>
+                                                                <c:if test="${not empty mouse.expressionLinks}">
+                                                                    +'<br><b>Expression Links:</b><br>'
+                                                                </c:if>
+                                                                <c:forEach var="link" items="${mouse.expressionLinks}" >
+                                                                     +'<p>&nbsp;&nbsp;&nbsp;Sample:${link.sample} from passage:${link.passage}&nbsp;Platform:${link.platform}&nbsp;<a target="_blank" href="${link.derivedLink}">Derived Data</a>&nbsp;'
+                                                                         <c:forEach var="raw" items="${link.rawLinks}" varStatus="status">
+                                                                         +'<a target="_blank" href="${raw}">Raw data ${status.index+1}</a>&nbsp;'
+                                                                         </c:forEach>
+                                                                         +'</p>'
+                                                                </c:forEach>
+                                                                <c:if test="${not empty mouse.cnvLinks}">
+                                                                 +'<br><b>CNV Links:</b><br>'
+                                                                </c:if>
+                                                                <c:forEach var="link" items="${mouse.cnvLinks}" >
+                                                                     +'<p>&nbsp;&nbsp;&nbsp;Sample:${link.sample} from passage:${link.passage}&nbsp;Platform:${link.platform}&nbsp;<a target="_blank" href="${link.derivedLink}">Derived Data</a>&nbsp;'
+                                                                         <c:forEach var="raw" items="${link.rawLinks}" varStatus="status">
+                                                                         +'<a target="_blank" href="${raw}">Raw data ${status.index+1}</a>&nbsp;'
+                                                                         </c:forEach>
+                                                                         +'</p>'
+                                                                </c:forEach>
+                                                         }]
+
+					});
+
+					
+					linksPanel.render();
+					linksPanel.doLayout();
+				}
 				
 				
 			});
@@ -763,6 +821,8 @@
 			}
 			
    		
+                        
+				
 				
 
 		</script>
@@ -777,7 +837,7 @@
 				<p style="text-align:right;"><a href="pdxRequest.do?mice=${mouse.modelID}">Request information on the availability of this model.</a></p>
 			</c:if>
 			<c:if test="${not empty unavailable}">
-				<p style="text-align:right;">This PDX model is not available. (No inventory)</p>
+				<p style="font-size:20px;text-align:right;">This PDX model is not available. (No inventory)</p>
 			</c:if>			
 			<c:if test="${fn:contains(mouse.institution,'Dana-Farber')}">
                            
@@ -977,8 +1037,36 @@
                                         </c:if>	
                                 </td>
                             </tr>
+                            
+                            <!----
                             <tr><td>
 		
+                                    
+                                    
+                                     <h4>Data Links</h4>
+                                     </td>
+                                    <td>
+                                    
+                                                 
+                                        <c:if test="${empty dataLinks}">
+                                                <p><i>no data links</i></p>
+                                        </c:if>
+                                        </div>
+                                        <c:if test="${not empty dataLinks}">
+                                                <div id="dataLinks"></div>
+                                        </c:if>	
+                                </td>
+                            </tr>
+                            
+                            -->
+                            <tr><td>
+		
+                                    
+                                    
+                                    
+                                    
+                                    
+                                  
                                     
                 <h4>CNV Plots</h4></td>
                 <td>

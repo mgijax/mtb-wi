@@ -201,16 +201,19 @@ public class PDXDetailsAction extends Action {
             if (cnvLinks.size() > 0) {
                 request.setAttribute("cnv", true);
                 request.setAttribute("cnvLinks", cnvLinks);
+                
             }
 
             if (cnvImages.size() > 0) {
                 request.setAttribute("cnv", true);
                 request.setAttribute("cnvImages", cnvImages);
+                
             }
 
             if (mutationLinks.size() > 0) {
                 request.setAttribute("mutation", true);
                 request.setAttribute("mutationLinks", mutationLinks);
+                request.setAttribute("dataLinks", "dataLinks");
             }
 
             if (mutationComments.size() > 0) {
@@ -313,6 +316,14 @@ public class PDXDetailsAction extends Action {
             request.setAttribute("modelID", modelID);
 
             request.setAttribute("mouse", mouse);
+            
+            try{
+                if(mouse.getCnvLinks().size() != 0 || mouse.getVariationLinks().size() != 0 || mouse.getExpressionLinks().size() != 0){
+                    request.setAttribute("dataLinks", "dataLinks");
+                }
+            }catch(NullPointerException npe){
+                //do nothing
+            }
 
             // check if no inventory remaining
             if (mouse.getModelStatus().indexOf("Inventory") != -1) {
