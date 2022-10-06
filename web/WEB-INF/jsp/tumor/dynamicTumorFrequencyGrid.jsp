@@ -287,7 +287,7 @@
 			<tr class="grid">
 				</c:if>
 				<c:forEach var="familyItem" items="${heredityGrid.strainFamilies}" varStatus="status3">
-				<%--===> looking for ${fam.strainFamilyName}
+				<%-- looking for ${fam.strainFamilyName}
 				<!-- \n -->
 				--%>
 				<c:if test="${familyItem.value.strainFamilyKey == fam.strainFamilyKey}">
@@ -907,17 +907,18 @@
 <ul>
 	<li>
 		The colors of the cells are based on the highest reported frequency for
-	each strain family/organ or organ system combination.</li>
+	each strain family/organ or organ system combination.
+        </li>
 	<li>
 		The strain families used in this grid are grouped according to the mouse
 		strain genealogy published in Beck JA, Lloyd S, Hafezparast M, Lennon-Pierce
 		M, Eppig JT, Festing MFW, Fisher EMC. 2000. Nature Genetics 24: 23-25.
-		The strain genealogy chart from that reference may be accessed via <a href="http://www.informatics.jax.org/mgihome/genealogy/">http://www.informatics.jax.org/mgihome/genealogy/</a>.</li>
+		The strain genealogy chart from that reference may be accessed via <a href="http://www.informatics.jax.org/mgihome/genealogy/">http://www.informatics.jax.org/mgihome/genealogy/</a>.
+        </li>
 	<li>
 		Most of the above strains are projected to be used in the Mouse Phenome
-		Project (<a href="http://link.springer-ny.com/link/service/journals/00335/bibs/0011009/00110715.html">Paigen
-		K, Eppig JT. 2000. Mamm Genome 11(9):715-7</a>). The exceptions are DBA/1,
-	NZO, and RIII.</li>
+		Project (<a href="http://link.springer-ny.com/link/service/journals/00335/bibs/0011009/00110715.html">Paigen K, Eppig JT. 2000. Mamm Genome 11(9):715-7</a>). The exceptions are DBA/1, NZO, and RIII.
+        </li>
 </ul>
 <!-- ////  End Detail Section  //// -->
 </div>

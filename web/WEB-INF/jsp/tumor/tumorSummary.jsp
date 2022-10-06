@@ -141,6 +141,7 @@
 					<!--There are no synonyms associated with this strain. //-->
 					</c:otherwise>
 					</c:choose>
+                                      
 				</tbody>
 			</table>
 		</div>

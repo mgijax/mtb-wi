@@ -29,8 +29,20 @@
 		ga('create', '${applicationScope.googleID}', 'auto');
 		ga('send', 'pageview');
                     
-                    
                 </script>
+                
+                <!-- Google tag (gtag.js) -->
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-XH2N5PQ3DT"></script>
+                <script>
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+
+                  gtag('config', 'G-XH2N5PQ3DT');
+                </script>
+
+                
+                
 		<jsp:invoke fragment="head" />
 	</jsp:attribute>		
 	<jsp:attribute name="header">

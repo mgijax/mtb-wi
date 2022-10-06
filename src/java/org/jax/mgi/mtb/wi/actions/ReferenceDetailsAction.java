@@ -17,6 +17,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceDetailDTO;
 import org.jax.mgi.mtb.dao.custom.mtb.MTBReferenceUtilDAO;
 import org.jax.mgi.mtb.dao.gen.mtb.StrainNotesDTO;
 import org.jax.mgi.mtb.utils.StringUtils;
+import org.jax.mgi.mtb.wi.utils.RefGridsList;
 
 /**
  * Retrieve the detail information about a reference record.
@@ -115,6 +116,7 @@ public class ReferenceDetailsAction extends Action {
             // put the reference DTO in the request
             request.setAttribute("reference", dtoRefDetail);
             request.setAttribute("notes", getStrainNotes(dtoRefDetail));
+            request.setAttribute("grid",RefGridsList.getGrid(dtoRefDetail.getKey()+""));
         }
         
      //   log.debug(FieldPrinter.getFieldsAsString(dtoRefDetail));

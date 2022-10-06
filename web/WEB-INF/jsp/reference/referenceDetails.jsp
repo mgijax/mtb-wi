@@ -104,6 +104,16 @@
                                                      </c:if>
 
 
+                                                       <c:choose>
+                                                        <c:when test="${not empty grid}">
+                                                            <tr><td colspan="2">
+                                                                    <img src="${applicationScope.pathologyImageUrl}/refgrids/${grid}" alt="Visual Summary Grid"/>
+                                                                </td></tr>
+                                                        </c:when>
+                                                            <c:otherwise>
+                                                            
+                                                            </c:otherwise>
+                                                         </c:choose>
 
 					</tbody>
 		
