@@ -51,7 +51,11 @@ public class SolrAction extends Action {
               request.setAttribute("url",getAlleleIDURL(query));
               return mapping.findForward("pleaseWait");
           }else{
-            url = new URL(solrURL + "?" + query);
+              
+              // not sure when this would happen 
+              log.error("Bad solr query:"+query);
+              request.setAttribute("url","/mtbwi/facetedSearch.do");
+              return mapping.findForward("pleaseWait");
           }
         }else{
            
@@ -66,10 +70,23 @@ public class SolrAction extends Action {
             }
                  // drop the trailing &
             queryStr.deleteCharAt(queryStr.length()-1);
+            
+            
            
             url = new URL(solrURL+queryStr.toString().replaceAll(" ","%20"));
+            
+            if(queryStr.indexOf("wt=json") == -1){
+                //hokey params
+              log.error("Bad solr query:"+queryStr.toString());
+              request.setAttribute("url","/mtbwi/facetedSearch.do");
+              return mapping.findForward("pleaseWait");
+                
+            }
        
         }
+        
+        
+       
  
         //log.debug(url);
         HttpURLConnection connection =
@@ -115,6 +132,10 @@ public class SolrAction extends Action {
         try{
         String[] parts = query.split("=");
         if(parts[1].startsWith("MGI:")){
+           // verify its is MGI:###### and nothing else to prevent SQL injection
+           // if this fails its isn't valid'
+           Integer.parseInt(parts[1].replace("MGI:",""));
+            
            
            SearchResults<AlleleDTO> results = MTBGeneticsUtilDAO.getInstance().searchAllele(parts[1],0,null,null,null,null,1);
            url.append("#fq=strainMarker%253A%2522");

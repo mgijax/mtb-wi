@@ -53,6 +53,11 @@ public class PDXMouseStore {
     private static ArrayList<LabelValueBean<String, String>> diagnosesLVB = new ArrayList<>();
     private static ArrayList<LabelValueBean<String, String>> primarySitesLVB = new ArrayList<>();
     private static ArrayList<LabelValueBean<String, String>> tagsLVB = new ArrayList<>();
+    
+    private static HashMap<String,String> diagnosesMap = new HashMap<>();
+    private static HashMap<String,String> primarySitesMap = new HashMap<>();
+    private static HashMap<String,String> tagsMap = new HashMap<>();
+    
     private static ArrayList<LabelValueBean<String, String>> tumorMarkersLVB = new ArrayList<>();
     private static ArrayList<LabelValueBean<String, String>> fusionGenesLVB = new ArrayList<>();
     private static ArrayList<LabelValueBean<String, String>> recistDrugsLVB = new ArrayList<>();
@@ -164,6 +169,10 @@ public class PDXMouseStore {
         fusionGenesLVB.clear();
         recistDrugsLVB.clear();
         recistResponsesLVB.clear();
+        
+        diagnosesMap.clear();
+        primarySitesMap.clear();
+        tagsMap.clear();
 
         //log.info("loading mice from eLIMS");
         //  ElimsUtil eu = new ElimsUtil();
@@ -180,16 +189,19 @@ public class PDXMouseStore {
         for (String tissue : primarySitesList) {
             LabelValueBean<String, String> lvb = new LabelValueBean<>(tissue, tissue);
             primarySitesLVB.add(lvb);
+            primarySitesMap.put(tissue, tissue);
         }
 
         for (String diagnosis : diagnosesList) {
             LabelValueBean<String, String> lvb = new LabelValueBean<>(diagnosis, diagnosis);
             diagnosesLVB.add(lvb);
+            diagnosesMap.put(diagnosis, diagnosis);
         }
 
         for (String tag : tagsList) {
             LabelValueBean<String, String> lvb = new LabelValueBean<>(tag, tag);
             tagsLVB.add(lvb);
+            tagsMap.put(tag,tag);
         }
 
         buildIDList();
@@ -544,6 +556,18 @@ public class PDXMouseStore {
 
     public ArrayList<LabelValueBean<String, String>> getRECISTResponsesLVB() {
         return recistResponsesLVB;
+    }
+    
+    public HashMap<String,String> getPrimarySitesMap(){
+        return primarySitesMap;
+    }
+    
+    public HashMap<String,String> getDiagnosesMap(){
+        return diagnosesMap;
+    }
+    
+    public HashMap<String,String> getTagsMap(){
+        return tagsMap;
     }
 
     // get, add, update and delete methods for additional content types

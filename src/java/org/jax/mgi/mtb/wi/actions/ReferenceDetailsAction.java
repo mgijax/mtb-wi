@@ -167,6 +167,9 @@ public class ReferenceDetailsAction extends Action {
         MTBReferenceDetailDTO dtoRefDetail = null;
 
         try {
+            // validate accid is J:######
+            Integer.parseInt(strAccId.replace("J:", ""));
+            
             dtoRefDetail = daoRefUtil.getReferenceByAccession(strAccId);
         } catch (Exception e) {
             log.warn("Error retrieving reference, accId = " + strAccId, e);

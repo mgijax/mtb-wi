@@ -5,6 +5,7 @@
 package org.jax.mgi.mtb.wi.actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -36,17 +37,55 @@ public class PDXSearchResultsAction extends Action {
 
         PDXForm pdxForm = (PDXForm) form;
         String modelID = pdxForm.getModelID();
+        
+        String validIDs = pdxMouseStore.getIds();
+        
         if(modelID != null){
             modelID = modelID.trim();
+            if(!validIDs.contains(modelID)){
+                modelID = null;
+            }
         }
+        
+      
+        
+        
         ArrayList<String> primarySites = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getPrimarySites());
         ArrayList<String> diagnoses = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getDiagnoses());
         ArrayList<String> tags = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getTags());
        
+        ArrayList<String> validPrimarySites  = new ArrayList<>();
+        ArrayList<String> validDiagnoses  = new ArrayList<>();
+        ArrayList<String> validTags  = new ArrayList<>();
+        
         
         String gene = pdxForm.getGene();
         String genes2 = pdxForm.getGenes2();
         ArrayList<String> variants = (ArrayList<String>) WIUtils.arrayToCleanList(pdxForm.getVariants());
+        
+        // need to validate against these.. this could be done in the store itself
+        HashMap<String, String> diagsMap = pdxMouseStore.getDiagnosesMap();
+        HashMap<String, String> sitesMap = pdxMouseStore.getPrimarySitesMap();
+        HashMap<String, String> tagsMap = pdxMouseStore.getTagsMap();
+
+        for(String site : primarySites){
+            if(sitesMap.containsKey(site)){
+                validPrimarySites.add(site);
+            }
+                
+        }
+        
+        for(String diagnosis : diagnoses){
+            if(diagsMap.containsKey(diagnosis)){
+                validDiagnoses.add(diagnosis);
+            }
+        }
+        
+        for(String tag :tags){
+            if(tagsMap.containsKey(tag)){
+                validTags.add(tag);
+            }
+        }
 
         String genesCNV = pdxForm.getGenesCNV();
         
@@ -102,16 +141,16 @@ public class PDXSearchResultsAction extends Action {
             mice = pdxMouseStore.findStaticMiceByTissueOfOrigin(toa);
             request.setAttribute("tissuseOfOrigin", toa);
         } else {
-            mice = pdxMouseStore.findMice(modelID, primarySites, diagnoses,
-                     gene, variants, dosingStudy, tumorGrowth, tags, 
+            mice = pdxMouseStore.findMice(modelID, validPrimarySites, validDiagnoses,
+                     gene, variants, dosingStudy, tumorGrowth, validTags, 
                     fusionGene,treatmentNaive, recistDrug, recistResponse, tmbGT, tmbLT);
         }
 
         request.setAttribute("modelID", modelID);
-        request.setAttribute("primarySites", primarySites);
-        request.setAttribute("diagnoses", diagnoses);
+        request.setAttribute("primarySites", validPrimarySites);
+        request.setAttribute("diagnoses", validDiagnoses);
         
-        request.setAttribute("tags", tags);
+        request.setAttribute("tags", validTags);
         request.setAttribute("fusionGenes",fusionGene);
         
         if(fusionGene != null && fusionGene.trim().length() > 0){
