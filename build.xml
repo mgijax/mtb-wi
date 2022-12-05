@@ -128,6 +128,10 @@ invocation even though it may be called more than once.
     <copy file="${src.java.home}/log4j.properties" todir="${build.home}/WEB-INF/classes" overwrite="true"/>
     <replace file="${build.home}/WEB-INF/classes/log4j.properties"
              replacefilterfile="conf/build.properties"/>
+    
+     <copy file="${src.java.home}/log4j2.properties" todir="${build.home}/WEB-INF/classes" overwrite="true"/>
+    <replace file="${build.home}/WEB-INF/classes/log4j2.properties"
+             replacefilterfile="conf/build.properties"/>
 
     <copy file="web/WEB-INF/web.xml" todir="build/WEB-INF" overwrite="true"/>
     <replace file="build/WEB-INF/web.xml"
