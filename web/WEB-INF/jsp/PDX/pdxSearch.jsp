@@ -191,7 +191,7 @@
             <p >Related Resources:
             <ul style="font-size:14px">
                 <li>Try MMHCdb's <a href="${pageContext.request.contextPath}/pdxLikeMe.do">PDX Like Me </a> search tool to find models in the JAX repository that match multiple genomic criteria.</li>
-                <li>MMHCdb has partnered with the European Bioinformatics Institute to develop <a href="https://www.pdxfinder.org" target="_blank">PDX Finder</a>, a global catalog of over 4,000 PDX models.</li>
+                <li>MMHCdb has partnered with the European Bioinformatics Institute to develop <a href="https://www.cancermodels.org" target="_blank">PDCM Finder</a>, which includes a global catalog of over 4,000 PDX models.</li>
                 <li><a href="pdxRequest.do" target="_blank">Contact</a> The Jackson Laboratory Mice, Research and Clinical Services group to request information on the JAX PDX program's capabilities and services.</li>
                 <li>Learn <a href="${applicationScope.urlBase}/html/SOCHelp.html" target="_blank" >more</a> about how PDX models are generated at The Jackson Laboratory.</li>
                 <li>See MMHCdb's <a href="userHelp.jsp#pdxsearch" target="_blank"> Help Documentation </a> for details on PDX search options and results.</li>

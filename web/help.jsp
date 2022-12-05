@@ -26,7 +26,7 @@
 						
 						<p>MMHCdb Web Interface:<a href="https://www.github.com/mgijax/mtb-wi">https://www.github.com/mgijax/mtb-wi</a></p>
 						<p>MMHCdb Data Layer:<a href="https://www.github.com/mgijax/mtb-dao">https://www.github.com/mgijax/mtb-dao</a></p>
-						<p>MMHCdb Web interface:<a href="https://www.github.com/PDXFinder/pdxfinder">https://www.github.com/PDXFinder/pdxfinder</a></p>
+						
 
 		</section>
 	</jsp:body>

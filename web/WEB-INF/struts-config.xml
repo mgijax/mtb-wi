@@ -363,7 +363,7 @@
             forward="/WEB-INF/jsp/solr/facetedSearch.jsp">
         </action>
         
-        <!-- This always returns null since its for an XmlHTTPReq so forward path is moot -->
+       
          <action path="/solrQuery"
             type="org.jax.mgi.mtb.wi.actions.SolrAction"
             scope="request">

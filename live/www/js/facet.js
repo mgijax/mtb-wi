@@ -36,7 +36,7 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://tum
 		{
 			name: 'strain',
 			title: 'Strain',
-			fields: ['strain', 'strainNames'],
+        		fields: ['strainNames'],
 			isExpanded: true
 		},
 		{
@@ -68,7 +68,7 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://tum
 		{
 			name: 'colonyMax',
 			title: 'Study Size',
-			format: l => { let n = parseInt(l, 10); return n == 0 ? ('' + n) : ('&le;&nbsp;' + n); }
+			format: l => { let n = parseInt(l, 10); return n == 0 ? ('not specified' ) : ('&le;&nbsp;' + n); }
 		},
 		{
 			name: 'reference',
@@ -259,7 +259,7 @@ let facet,
 					facetQuery.push(f.query);
 				}
 			});
-			console.log('facetQuery from ui: %o', facetQuery);
+			console.log('facetQuery from ui: %o', facetQuery);                     
 			facetQueryParams = facetQuery.join('&');
 		}
 		if (facetQueryParams) {
@@ -292,11 +292,17 @@ let facet,
 				
 				let terms = [];
 
-				for (let i = 0; i < termsRaw.length; i += 2) {					
+				for (let i = 0; i < termsRaw.length; i += 2) {	
+                                    // dont include terms where the child matches the parent ie "Lung - Lung"
+                                    let both = termsRaw[i].split(" - ");
+                                    if(both[0] !== both[1]){
 					terms.push({
 						'label': termsRaw[i],
 						'resultCount': termsRaw[i + 1]
 					});
+                                    }
+                                        
+                                       
 				}
 				
 				if (config.fields) {
@@ -365,8 +371,8 @@ let facet,
 			uh = $facets.outerHeight() + $('#facet-controls').outerHeight() + 124,
 			i = 0;
 			
-		console.log('resizeFacetUi: recentForcedCollapse: %o', recentForcedCollapse);
-		console.log('resizeFacetUi: recentExpanded: %o', recentExpanded);
+		//console.log('resizeFacetUi: recentForcedCollapse: %o', recentForcedCollapse);
+		//console.log('resizeFacetUi: recentExpanded: %o', recentExpanded);
 
 		if (shouldFill && !hasAllCollapsed) {
 			// Expand the most recent force-collapsed facets, while there is room
@@ -391,7 +397,36 @@ let facet,
 
 		
 		let orderedConfigs = getOrderedConfigs(o.facet_counts.facet_fields);
+                
+                // assumes query comes from the home page if these are true
+                // put the defaulted selected factets at the top so it is obvious what has been selected
+                // for the canned query
+                try{
+                    if (Array.isArray(o.responseHeader.params.fq)){
+                        let query = o.responseHeader.params.fq.join();
+                        if(query.indexOf("minFC") !== -1 && query.indexOf("human") !== -1){
+                            let info = orderedConfigs.find(c=> c.name == "info");
+                            let human = orderedConfigs.find(c=> c.name == "humanTissue");
+                            orderedConfigs  = orderedConfigs.filter(c => c.name !== "info" && c.name !== "humanTissue");
+                            orderedConfigs = [human,info].concat(orderedConfigs);
+          //                  console.log(orderedConfigs);
+                        }
+                    }else{
+                        let query = o.responseHeader.params.fq;
+                        // do the same for the quick search
 
+                        if(query.indexOf("quickSearch") !== -1 ){
+                            let quick = orderedConfigs.find(c=> c.name == "quickSearch");
+
+                            orderedConfigs  = orderedConfigs.filter(c => c.name !== "quickSearch" );
+                            orderedConfigs = [quick].concat(orderedConfigs);
+          //                  console.log(orderedConfigs);
+                        }
+                }
+                }catch(e){
+                    console.log(e);
+                }
+                
 		orderedConfigs.forEach(updateFacet); 
 		console.log('recentExpanded: %o', recentExpanded);
 
@@ -543,8 +578,11 @@ facet = function(config) {
 	});
 
 	$facets.append($ui);
+        
 		
 	appendTerms = function(isAll) {
+            
+           
 		
 		let chunkSize = isAll ? (o.terms.length - termIndex + 1) : termChunkSize,
 			chunk = document.createDocumentFragment();
@@ -557,6 +595,7 @@ facet = function(config) {
 			termLi = document.createElement('li');
 			if ($selectedLi.length > 0) {
 				termLi.className = 'term-selected';
+                               
 			}
 			termLi.setAttribute('data-term-key', termKey);
 			if (t.queryKey) {
@@ -718,7 +757,7 @@ info = function(r) {
 		fk = r.tumorFrequencyKey.join(',');
 	
 	if (r.referenceID) {
-		console.log('ref: %o', r);
+	//	console.log('ref: %o', r);
 		h += '<p>' + r.referenceID.length + '&nbsp;Reference' + (r.referenceID.length == 1 ? '' : 's');
 		h += ': ' + r.referenceID.map((a, i) => '<a href="' + baseUrl +
 			'/referenceDetails.do?accId=' + a + '" target="_blank">' + r.citation[i] + '</a>').join('&nbsp;&nbsp;&sdot;&nbsp;&nbsp;') + '</p>';		

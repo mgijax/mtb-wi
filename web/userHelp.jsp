@@ -4,8 +4,7 @@
 <jax:mmhcpage title="Mouse Models of Human Cancer Database User Help Reference">
 
 	<jsp:body>	
-		<section class="container">			exit
-                    
+		<section class="container">			
 			<c:import url="/live/www/html/userHelp.html"/>
 		</section>
 	</jsp:body>

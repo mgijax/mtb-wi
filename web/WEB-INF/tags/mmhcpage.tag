@@ -32,13 +32,13 @@
                 </script>
                 
                 <!-- Google tag (gtag.js) -->
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-XH2N5PQ3DT"></script>
+                <script async src="https://www.googletagmanager.com/gtag/js?id=${applicationScope.googleGAID}"></script>
                 <script>
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
 
-                  gtag('config', 'G-XH2N5PQ3DT');
+                  gtag('config', '${applicationScope.googleGAID}');
                 </script>
 
                 
@@ -72,7 +72,7 @@
                                             <li><a href="${pageContext.request.contextPath}/pdxComparison.do">PDX Comparison</a>
                                         </c:if>    
                                         
-					<li><a class="link-external" href="http://www.pdxfinder.org" target="_new">PDX Finder</a></li>	
+					<li><a class="link-external" href="http://www.cancermodels.org" target="_new">PDCM Finder</a></li>	
                                         
                                          <c:if test="${applicationScope.publicDeployment == false &&  empty sessionScope.pdxUser }">
                                             <li><a href="${pageContext.request.contextPath}/pdxLogin.do">PDX Login</a>

@@ -227,12 +227,11 @@ public class InitializationServlet extends HttpServlet {
                 NumberFormat.getNumberInstance(Locale.US).format(WIConstants.getInstance().getTumorFrequencyCount()));
         
 
-        // google analytics only on public
-        // fyi not all pages include the meta.jsp which is where the google snippet is
-        // fyi which don't?
+        // this should be moved to properteis
         
         if(WIConstants.getInstance().getPublicDeployment()){
            getServletContext().setAttribute("googleID","UA-38295128-2");
+           getServletContext().setAttribute("googleGAID","G-XH2N5PQ3DT");
         }
 
         // loads static mice
@@ -243,6 +242,7 @@ public class InitializationServlet extends HttpServlet {
         // values for About Us data counts
         
         // we show PDX Model Numbers from PDXFinder not just JAX
+        
         int count = pdxStore.getPDXFinderModelCount();
         String number = "over 4500";
         if(count > 0){
@@ -256,7 +256,7 @@ public class InitializationServlet extends HttpServlet {
         
         ModelCounts mc  = new ModelCounts();
         getServletContext().setAttribute("modelCount",
-                NumberFormat.getNumberInstance(Locale.US).format(new Integer(mc.getModelCount())));
+                NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(mc.getModelCount()+"")));
         
         MTBPathologyImageUtilDAO imageDAO = MTBPathologyImageUtilDAO.getInstance();
         getServletContext().setAttribute("pathologyImageCount",
