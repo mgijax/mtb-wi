@@ -8,14 +8,13 @@ package org.jax.mgi.mtb.wi.pdx;
 import java.util.ArrayList;
 import java.util.Date;
 import org.apache.logging.log4j.Logger;
-import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXMouse;
 import org.jax.mgi.mtb.wi.WIConstants;
 
 /**
  *
  * @author sbn
  */
-public class PDXReports {
+public class PDXReportsNoMore {
 
     private static String pdxEngraftmentStatusSummary = "The PDX Customer report could not be loaded;";
     private static String pdxPatientHistory = "The PDX Patient History report could not be loaded";
@@ -27,25 +26,25 @@ public class PDXReports {
     private static ArrayList<ArrayList<String>> status = new ArrayList<>();
 
     private static final Logger log
-            = org.apache.logging.log4j.LogManager.getLogger(PDXReports.class.getName());
+            = org.apache.logging.log4j.LogManager.getLogger(PDXReportsNoMore.class.getName());
 
     
-    private static PDXReports singleton;
+    private static PDXReportsNoMore singleton;
     
-    private PDXReports(){
+    private PDXReportsNoMore(){
             loadReports();
     }
     
-     public static PDXReports getInstance() {
+     public static PDXReportsNoMore getInstance() {
         if (singleton == null) {
-            singleton = new PDXReports();
+            singleton = new PDXReportsNoMore();
         }
         return singleton;
     }
     
     public void refresh(){
         status = null;
-        singleton = new PDXReports();
+        singleton = new PDXReportsNoMore();
     }
 
     public String getReportFreshnessDate() {
@@ -92,6 +91,7 @@ public class PDXReports {
     
     private void loadReports() {
 
+        
         if (!WIConstants.getInstance().getPublicDeployment()) {
             if (status == null || status.isEmpty()) {
 

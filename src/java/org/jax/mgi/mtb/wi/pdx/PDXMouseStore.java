@@ -161,7 +161,7 @@ public class PDXMouseStore {
         log.info("Loading eLIMS-PDX Data");
         boolean forPublic = WIConstants.getInstance().getPublicDeployment();
 
-        PDXReports.getInstance();
+     //   PDXReports.getInstance();
 
         primarySitesLVB.clear();
         diagnosesLVB.clear();
@@ -267,18 +267,7 @@ public class PDXMouseStore {
         return allMice.size();
     }
 
-    // keep a cached copy of the PDXStatus JSON but use a new one if available
-    // used by pdx dashboard (external to MTB)
-    public String getJSONPDXStatus() {
-        ElimsUtil eu = new ElimsUtil();
-        String newData = eu.getJSONPDXStatusReport();
-        if (newData != null && newData.trim().length() != 80) {
-            this.JSON_PDX_STATUS = newData;
-        } else {
-            log.error("Unable to load JSON for PDX status.");
-        }
-        return this.JSON_PDX_STATUS;
-    }
+   
 
     /**
      * Return the mouse model with ID using cached mouse list Result will be a

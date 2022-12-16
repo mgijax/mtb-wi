@@ -30,7 +30,7 @@
 						<tr>
 							<th></th>
 							<th colspan="2"><a href="${pdfLink}" target="_blank">American Cancer Society Facts &amp; Figures ${modelCountsYear}</a></th>
-							<th colspan="4">Mouse Models</th>
+							<th colspan="4" data-tip="Human Models exclude tumors classified as : Atypia, Cyst, Dysplasia, Foci, Hyperplasia, Lesion, Metaplasia, Preneoplastic lesion, Squamous cell hyperplasia, Nevus and Transitional cell hyperplasia">Mouse Models</th>
 						</tr>
 						<tr>
 							<th>Cancer Site</th>

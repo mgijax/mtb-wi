@@ -22,7 +22,6 @@ import org.jax.mgi.mtb.dao.custom.mtb.MTBSynchronizationUtilDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
 import org.jax.mgi.mtb.dao.mtb.DAOManagerMTB;
 import org.jax.mgi.mtb.utils.StringUtils;
-import org.jax.mgi.mtb.wi.pdx.ElimsUtil;
 import org.jax.mgi.mtb.wi.pdx.ModelCounts;
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
 
@@ -134,17 +133,7 @@ public class InitializationServlet extends HttpServlet {
                 
                 log.info("set pdx info");
 
-                try{
-                ElimsUtil eu = new ElimsUtil();
-                eu.setAuthentication(
-                        properties.getProperty(ELIMS_USER),
-                        properties.getProperty(ELIMS_PWD));
-                   log.info("=> ELIMS properties set!");
-
-
-                }catch(Error e){
-                    log.error("Cant load ElimsUtil (OK if public deployment)",e);
-                }
+                
 
              
                 // this is simple, just instantiate the constants class to

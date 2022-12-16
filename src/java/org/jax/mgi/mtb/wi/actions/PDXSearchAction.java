@@ -32,15 +32,7 @@ public class PDXSearchAction extends Action {
 
            PDXMouseStore pdxMouseStore = new PDXMouseStore();
 
-         // steve grub uses this to populate data on the pdx dashboard
-        if (request.getParameter("pdxStatusJSON") != null && !WIConstants.getInstance().getPublicDeployment()) {
-           
-            response.setContentType("application/json");
-            response.getWriter().write(pdxMouseStore.getJSONPDXStatus());
-            response.flushBuffer();
-            return null;
-        }
-
+        
         PDXForm pdxForm = (PDXForm) form;
 
         String result = "success";

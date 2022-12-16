@@ -15,7 +15,6 @@ import org.apache.struts.action.ActionMapping;
 import org.jax.mgi.mtb.utils.LabelValueBean;
 import org.jax.mgi.mtb.wi.forms.PDXDashboardForm;
 import org.jax.mgi.mtb.utils.LabelValueBeanComparator;
-import org.jax.mgi.mtb.wi.pdx.PDXReports;
 
 /**
  * @author sbn
@@ -56,72 +55,72 @@ public class PDXDashboardAction extends Action {
         }
 
    
-        PDXReports reports = PDXReports.getInstance();
-        String source = "ELIMS-";
-        String report = null;
-        boolean tabDelimited = false;
-        String delimiter = ",";  // this is also hard coded in the mousereports fyi
-        Date d = new Date(System.currentTimeMillis());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(d);
-        String fileName = "";
-        if (request.getParameter("statusReport") != null) {
-            report = reports.getPDXStatusReport(delimiter);
-            fileName = source + "PDXStatusReportWithHospitalData";
-        }
-        if (request.getParameter("engraftmentSummary") != null) {
-            report = reports.getPDXEngraftmentStatusSummary(delimiter);
-            fileName = source + "PDXEngraftmentStatusSummary";
-        }
-        
-        if (request.getParameter("familyHistory") != null) {
-            report = reports.getPDXPatientHistory(delimiter);
-            fileName = source + "PDXPatientHistory";
-        }
-        if (request.getParameter("patientClinical") != null) {
-            report = reports.getPDXPTClinical(delimiter);
-            fileName = source + "PDXPatientClinical";
-        }
-        if (request.getParameter("consortium") != null) {
-            report = reports.getPDXConsortiumReport(delimiter);
-            fileName = source + "PDXConsortiumReport";
-        }
-        
-        if (request.getParameter("activeModelSummary") != null) {
-            report = reports.getPDXActiveModelSummary(delimiter);
-            fileName = source + "ActiveModelSummary";
-        }
-       
+//    //    PDXReports reports = PDXReports.getInstance();
+//        String source = "ELIMS-";
+//        String report = null;
+//        boolean tabDelimited = false;
+//        String delimiter = ",";  // this is also hard coded in the mousereports fyi
+//        Date d = new Date(System.currentTimeMillis());
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        String date = sdf.format(d);
+//        String fileName = "";
+//        if (request.getParameter("statusReport") != null) {
+//            report = reports.getPDXStatusReport(delimiter);
+//            fileName = source + "PDXStatusReportWithHospitalData";
+//        }
+//        if (request.getParameter("engraftmentSummary") != null) {
+//            report = reports.getPDXEngraftmentStatusSummary(delimiter);
+//            fileName = source + "PDXEngraftmentStatusSummary";
+//        }
+//        
+//        if (request.getParameter("familyHistory") != null) {
+//            report = reports.getPDXPatientHistory(delimiter);
+//            fileName = source + "PDXPatientHistory";
+//        }
+//        if (request.getParameter("patientClinical") != null) {
+//            report = reports.getPDXPTClinical(delimiter);
+//            fileName = source + "PDXPatientClinical";
+//        }
+//        if (request.getParameter("consortium") != null) {
+//            report = reports.getPDXConsortiumReport(delimiter);
+//            fileName = source + "PDXConsortiumReport";
+//        }
+//        
+//        if (request.getParameter("activeModelSummary") != null) {
+//            report = reports.getPDXActiveModelSummary(delimiter);
+//            fileName = source + "ActiveModelSummary";
+//        }
+//       
+//
+//        if (request.getParameter("aipReportSheet") != null) {
+//            report = getActiveModelReport(0);
+//            fileName = source + "ActiveInProgress";
+//        }
+//        if (request.getParameter("aipReport5Sheet") != null) {
+//            report = getActiveModelReport(5);
+//            fileName = source + "ActiveInProgressOver5";
+//        }
+//
+//        if (request.getParameter("refresh") != null) {
+//            reports.refresh();
+//        }
 
-        if (request.getParameter("aipReportSheet") != null) {
-            report = getActiveModelReport(0);
-            fileName = source + "ActiveInProgress";
-        }
-        if (request.getParameter("aipReport5Sheet") != null) {
-            report = getActiveModelReport(5);
-            fileName = source + "ActiveInProgressOver5";
-        }
 
-        if (request.getParameter("refresh") != null) {
-            reports.refresh();
-        }
-
-
-        if (report != null) {
-            if (tabDelimited) {
-                response.setContentType("text");
-                response.setHeader("Content-disposition", "attachment; filename=" + fileName + "-" + date + ".txt");
-                response.getWriter().write(report);
-            } else {
-                // csv
-                response.setContentType("text/csv");
-                response.setHeader("Content-disposition", "attachment; filename=" + fileName + "-" + date + ".csv");
-                response.getWriter().write(report);
-
-            }
-            response.flushBuffer();
-            return null;
-        }
+//        if (report != null) {
+//            if (tabDelimited) {
+//                response.setContentType("text");
+//                response.setHeader("Content-disposition", "attachment; filename=" + fileName + "-" + date + ".txt");
+//                response.getWriter().write(report);
+//            } else {
+//                // csv
+//                response.setContentType("text/csv");
+//                response.setHeader("Content-disposition", "attachment; filename=" + fileName + "-" + date + ".csv");
+//                response.getWriter().write(report);
+//
+//            }
+//            response.flushBuffer();
+//            return null;
+//        }
 
         
 
@@ -133,7 +132,7 @@ public class PDXDashboardAction extends Action {
 
 
             
-            status = reports.getPDXModelStatus();
+            status = null;//reports.getPDXModelStatus();
 
             if (status == null || status.size() < 1) {
                 result = "noData";
@@ -209,7 +208,7 @@ public class PDXDashboardAction extends Action {
                 request.setAttribute("siteValues", lvbSites);
                 request.setAttribute("tissue", tissue);
                 request.setAttribute("tissue2", site2);
-                request.setAttribute("freshnessDate", reports.getReportFreshnessDate());
+                request.setAttribute("freshnessDate", "PDX Data frozen 12-09-22");
 
                 site = site.replace("\'", "");
                 request.setAttribute("site", site);
