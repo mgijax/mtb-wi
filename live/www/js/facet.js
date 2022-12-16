@@ -227,8 +227,12 @@ let facet,
 						if (config.terms) {
 							
 							// selectedTerm = config.terms.find(t => t.queryValue == queryValue);
-							selectedTerm = config.terms.find(t => t.queryKey == q[0]);
+							selectedTerm = config.terms.find(t => t.queryKey === q[0]);
 							
+                                                        // there are two mutant terms mutant:true and mutant:false need to get the right one
+                                                        if(q[0] === 'mutant'){
+                                                            selectedTerm = config.terms.find(t => t.queryKey === q[0] && t.queryValue === q[1])
+                                                        }
 							
 							
 						} else {
@@ -650,9 +654,14 @@ facet = function(config) {
 		
 		$selectedLis.each(function() {
 			let $li = $(this);
+//                        if(typeof $li.data('query-key') !== 'undefined' && $li.data('query-key').includes('mutant')){
+//                            queryTerms.push(encodeURIComponent('mutant:'+$li.data('query-value')));
+//                            console.log('mutant:'+$li.data('query-value'));
+//                        }else{
 			queryTerms.push(encodeURIComponent(
 				($li.data('query-key') || o.name) + ':' + 
 				($li.data('query-value') || ('"' + $li.find('span').html() + '"'))));
+       //                 }
 		});
 		o.query = $.param({ 'fq': queryTerms }, true).replace('%2B', '');
 		
@@ -798,11 +807,28 @@ addRow = function(i, r) {
 	
 	let $r = $('<tr>'),
 		mu = modelUrl(r),
+                // both organ origin and tumor classification may be duplicated with a '-' 
 		$name = cell(r, r => {
-			return r.organOrigin + ' ' + r.tumorClassification;
+                        let oo = r.organOrigin;
+                        let tc = r.tumorClassification;
+                        
+                        if(oo.includes(" - ")){
+                            oo = oo.split(" - ")[0];
+                        }
+                        
+                        if(tc.includes(" - ")){
+                            tc = tc.split(" - ")[0];
+                        }
+                                    
+			return oo + ' ' + tc;
 		}),
 		$organ = cell(r.organAffected, a => {
-			if (a !== r.organOrigin) {
+                         let oo = r.organOrigin;
+                        
+                        if(oo.includes(" - ")){
+                            oo = oo.split(" - ")[0];
+                        }
+			if (a !== oo) {
 				$table.addClass('has-organ-affected');
 				return a;
 			}
