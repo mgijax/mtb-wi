@@ -6,7 +6,7 @@
 <jax:mmhcpage title="Strain Summary" subtitle="${strain.name}">
 	<jsp:attribute name="head">
 		<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
-		<script type="text/javascript" src="/_res/js/datatables.min.js"></script>	
+		<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>	
 	</jsp:attribute>
 	<jsp:body>
 
@@ -139,16 +139,16 @@
 
 									<td>
 											<div style="float:right;">
-                                                                                        <c:if test="${not fn:endsWith(genetics.allele1Symbol,'+</sup>')}">
+                                                                                        <c:if test="${not fn:endsWith(genetics.allele1Symbol,'+</sup>') && not fn:endsWith(genetics.allele1Symbol,'?</sup>')}">
                                                                                             <a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele1Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele1Symbol} allele</a>
                                                                                         </c:if>
-											<c:if test="${not empty genetics.allele2Symbol && not fn:endsWith(genetics.allele2Symbol,'+</sup>')  &&  (a1 != a2) }">
+											<c:if test="${not empty genetics.allele2Symbol && not fn:endsWith(genetics.allele2Symbol,'+</sup>')  && not fn:endsWith(genetics.allele2Symbol,'?</sup>') &&  (a1 != a2) }">
 												<br><a href="facetedSearch.do#fq=strainMarker%3A%22${genetics.allele2Symbol}%22">List all models in MMHCdb carrying the ${genetics.allele2Symbol} allele</a>
 											</c:if>
 											</div>
                                                                                         
                                                                                          <c:choose>
-                                                                                                <c:when test="${not fn:endsWith(genetics.allele1Symbol,'+</sup>')}">
+                                                                                                <c:when test="${not fn:endsWith(genetics.allele1Symbol,'+</sup>') && not fn:endsWith(genetics.allele1Symbol,'?</sup>')}">
                                                                                                     <a href="${genetics.allele1Url}" target="_blank">${genetics.allele1Symbol}</a>
                                                                                                 </c:when>
                                                                                                 <c:otherwise>
@@ -161,7 +161,7 @@
 											<c:if test="${not empty genetics.allele2Symbol}">
                                                                                          /
                                                                                             <c:choose>
-                                                                                                <c:when test="${not fn:endsWith(genetics.allele2Symbol,'+</sup>')}">
+                                                                                                <c:when test="${not fn:endsWith(genetics.allele2Symbol,'+</sup>') && not fn:endsWith(genetics.allele2Symbol,'?</sup>')}">
                                                                                                     <a href="${genetics.allele2Url}" target="_blank">${genetics.allele2Symbol}</a>
                                                                                                 </c:when>
                                                                                                 <c:otherwise>
