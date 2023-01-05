@@ -6,13 +6,13 @@
 <jax:mmhcpage title="Patient Derived Xenograft" subtitle="PDX Like Me Visualization">
 <jsp:attribute name="head">
 
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+         <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+			  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+			  crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/cr-1.5.2/fc-3.3.0/datatables.min.css"/>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/cr-1.5.2/fc-3.3.0/datatables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         
-          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-            
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
        
         <script type="text/javascript" src="${applicationScope.urlBase}/js/overlib.js"></script>
 

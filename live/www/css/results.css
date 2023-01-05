@@ -144,17 +144,17 @@ table table caption {
 }
 
 
-th.sorting_desc:after {
+th.sorting sorting_desc:after {
 	font-family:FontAwesome;
 	content:'\a0\f161';
 }
 
-th.sorting_asc:after {
+th.sorting sorting_asc:after {
 	font-family:FontAwesome;
 	content:'\a0\f160';
 }
 
-th.sorting:after {
+th.sorting sorting:after {
 	font-family:FontAwesome;
 	content:'\a0\f160';
 	opacity:0.25;
@@ -172,8 +172,23 @@ th.sorting_disabled {
 }
 
 
+table.dataTable thead th.sorting:after{
+    font-family:FontAwesome;
+	content:'\a0\f160';
+	opacity:0.25;
+}
 
+table.dataTable thead th.sorting_asc:after{
+    font-family:FontAwesome;
+	content:'\a0\f160';
+        opacity:1;
+}
 
+table.dataTable thead th.sorting_desc:after{
+    font-family:FontAwesome;
+	content:'\a0\f161';
+        opacity:1;
+}
 
 
 

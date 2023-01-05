@@ -44,5 +44,5 @@
 </fieldset>
 </html:form>
 <script type="text/javascript">
-	mods.push('jquery-ui-tag-it.min.js', 'tag-it.min.js', 'tag-it.css', 'search-form');	
+	mods.push('tag-it.min.js', 'tag-it.css', 'search-form');	
 </script>

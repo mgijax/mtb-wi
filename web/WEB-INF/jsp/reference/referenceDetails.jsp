@@ -6,7 +6,7 @@
 <jax:mmhcpage title="Reference Summary" subtitle="${reference.shortCitation}">
 	<jsp:attribute name="head">
 		<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
-		<script type="text/javascript" src="/_res/js/datatables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 	</jsp:attribute>
 	<jsp:body>
 	

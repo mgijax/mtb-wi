@@ -123,7 +123,7 @@
 		
 				<div>				
 					<h6>Last Software Update</h6>
-					<p>2020-07-17 | version ${applicationScope.wiVersion}</p>
+					<p>2023-01-04 | version ${applicationScope.wiVersion}</p>
 					<h6>Last Data Update</h6>
 					<p>${applicationScope.dbLastUpdateDate}</p>
 				</div>

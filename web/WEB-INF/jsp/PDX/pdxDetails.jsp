@@ -6,7 +6,7 @@
 <jax:mmhcpage title="PDX Model Details" subtitle="${mouse.modelID}">
 	<jsp:attribute name="head">
 	<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
-	<script type="text/javascript" src="/_res/js/datatables.min.js"></script>	
+	<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>	
 		<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 
 		<style type="text/css">
@@ -43,7 +43,9 @@
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/ext-all.js"></script>
 		<script type="text/javascript" src="${applicationScope.urlBase}/extjs/columnHeader.js"></script>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		 <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+			  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+			  crossorigin="anonymous"></script>
 
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 

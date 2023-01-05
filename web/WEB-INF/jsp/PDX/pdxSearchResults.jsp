@@ -6,7 +6,7 @@
 <jax:mmhcpage title="Patient Derived Xenograft Search Results">
 	<jsp:attribute name="head">
 	<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
-	<script type="text/javascript" src="/_res/js/datatables.min.js"></script>	
+	<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>	
 	<link rel="stylesheet" type="text/css" href="${applicationScope.urlBase}/extjs/resources/css/ext-all.css" />
 	<link rel="stylesheet" type="text/css" href="./live/www/css/results.css"/>
 	<script type="text/javascript" src="${applicationScope.urlBase}/extjs/adapter/ext/ext-base.js"></script>
