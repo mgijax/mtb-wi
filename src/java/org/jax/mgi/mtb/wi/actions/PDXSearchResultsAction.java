@@ -97,7 +97,6 @@ public class PDXSearchResultsAction extends Action {
         boolean tumorGrowth = false;
         boolean treatmentNaive = pdxForm.getTreatmentNaive();
         
-        boolean currentlyAvaialble = pdxForm.getCurrentlyAvailable();
         
         String recistDrug = pdxForm.getRecistDrugs();
         String recistResponse = pdxForm.getRecistResponses();
@@ -257,11 +256,8 @@ public class PDXSearchResultsAction extends Action {
             }
             if (request.getParameter("asCSVPlus") != null && WIConstants.getInstance().getPublicDeployment() != true) {
 
-                response.setContentType("text/csv");
-                response.setHeader("Content-disposition", "attachment; filename=PDXMice.csv");
-                response.getWriter().write(pdxMouseStore.getPDXReportWithNoName());
-
-                response.flushBuffer();
+               // this was used by Julius Henderson and Tony Marchetti
+               // came from ELIMS now is static PDXMicePlus.csv available from email 12/7/2022
                 return null;
 
             }

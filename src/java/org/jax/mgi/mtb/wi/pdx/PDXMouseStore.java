@@ -494,9 +494,7 @@ public class PDXMouseStore {
 
     }
 
-    public String getPDXReportWithNoName() {
-        return new ElimsUtil().getPDXReportWithNoName(allMice);
-    }
+   
 
     public ArrayList<String> getDiagnosesList() {
         return (ArrayList<String>) diagnosesList.clone();
