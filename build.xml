@@ -44,9 +44,6 @@
     <fileset dir="lib/struts-1.2.8">
         <include name="**/*.jar"/>
     </fileset>
-     <fileset dir="lib/axis2">
-        <include name="**/*.jar"/>
-    </fileset>
 </path>
 
 <!-- Import here to inherit the properties set from above. -->

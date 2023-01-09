@@ -14,6 +14,7 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXComment;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDocument;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXGraphic;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXLink;
+import org.apache.logging.log4j.Logger;
 
 import org.jax.mgi.mtb.wi.pdx.PDXMouseStore;
 
@@ -124,7 +125,7 @@ public class PDXEditContentAction extends DispatchAction {
             try{    
                 graphic.setSortOrder(new Double(request.getParameter("graphicSort")));
             }catch(Exception e){
-                log.error("Unable to create sort order from "+request.getParameter("graphicSort"),e);
+               
             }
             graphic.setUser(user);
 
