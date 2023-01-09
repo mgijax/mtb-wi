@@ -30,7 +30,7 @@
                     <caption>Genetic Changes</caption>
                     <tbody>
                         <tr>
-                            <th>Mouse Chromosomes</th>
+                            <th>Mouse Chromosome</th>
                             <th>Name</th>
                             <th>Cytogenetic Type</th>
                             <th>Assay Type</th>
