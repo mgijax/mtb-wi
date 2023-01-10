@@ -76,7 +76,7 @@ public class WIUtils {
         if (arr != null) {
             for(int i = 0; i < arr.length; i++){
                try{
-                ret.add(new Integer(arr[i].trim()).toString());
+                ret.add(Integer.valueOf(arr[i].trim()).toString());
                }catch(Exception e){
                   
                }

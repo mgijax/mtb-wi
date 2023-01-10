@@ -367,7 +367,6 @@
          <action path="/solrQuery"
             type="org.jax.mgi.mtb.wi.actions.SolrAction"
             scope="request">
-            <forward path="/WEB-INF/jsp/solr/facetedSearch.jsp"/>
             <forward name="pleaseWait" path="/WEB-INF/jsp/pleaseWait.jsp"/>
         </action>
         
