@@ -46,7 +46,7 @@
 	<link rel="stylesheet" type="text/css" href="/_res/css/fonts.css"/>	
 	<link rel="stylesheet" type="text/css" href="/_res/css/tool-base.css"/>
 	<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="/_res/js/tool-base.js"></script>
+	<!--<script type="text/javascript" src="/_res/js/tool-base.js"></script> -->
 	
 	<jsp:invoke fragment="defaultHead" />
 </head>

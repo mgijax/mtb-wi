@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
   <description>Mouse Models of Human Cancer Web Interface</description>
-  <display-name>MTBWI</display-name>
+  <display-name>MMHCdb</display-name>
  <!--===========================================================================
          Standard Action Servlet Configuration (with debugging)
 ============================================================================-->
@@ -111,7 +111,7 @@
   <!--===========================================================================
          Filters
 ============================================================================-->
-  <filter>
+ <!-- <filter>
         <description>Cache generated content</description>
         <filter-name>cacheFilter</filter-name>
         <filter-class>us.jawsoft.web.CacheFilter.CacheFilter</filter-class>
@@ -139,7 +139,7 @@
             <param-name>cache.do.not.cache</param-name>
             <param-value>jaxpath:geneExpression:gViewer:viewer:test:pdx:solrQuery</param-value>
         </init-param>
-    </filter>
+    </filter>  -->
   <filter>
         <description>Compress content</description>
         <filter-name>Compress</filter-name>
@@ -153,7 +153,7 @@
             <param-value>0</param-value>
         </init-param>
     </filter>
-    <filter>
+   <!-- <filter>
         <filter-name>timerFilter</filter-name>
         <filter-class>org.jax.mgi.mtb.webutils.filters.TimerFilter</filter-class>
     </filter>
@@ -168,7 +168,8 @@
     <filter-mapping>
         <filter-name>timerFilter</filter-name>
         <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>
+    </filter-mapping> -->
+      
   <!-- Note the ordering is important.  
          We first cache the content, then compress it -->
   <filter-mapping>
@@ -183,7 +184,7 @@
         <filter-name>Compress</filter-name>
         <url-pattern>*.html</url-pattern>
     </filter-mapping>
-mtb.cachefilter.startcomment
+<!--
   <filter-mapping>
         <filter-name>cacheFilter</filter-name>
         <url-pattern>*.jsp</url-pattern>
@@ -192,7 +193,7 @@ mtb.cachefilter.startcomment
         <filter-name>cacheFilter</filter-name>
         <url-pattern>*.do</url-pattern>
     </filter-mapping> 
-mtb.cachefilter.endcomment
+-->
   <!--===========================================================================
          Exception Handling
 

@@ -171,6 +171,7 @@ public class ModelCounts {
         int cnt = 0;
         for (ArrayList<String> list : tissuesListList) {
 
+            // if the reqeust to solr fails this goes on making requests up to 60 times
             list.add(getCounts(list.get(3), ModelCounts.MUTANT));
             list.add(getCounts(list.get(3), ModelCounts.NONMUTANT));
             list.add(getCounts(list.get(3), ModelCounts.ANY));

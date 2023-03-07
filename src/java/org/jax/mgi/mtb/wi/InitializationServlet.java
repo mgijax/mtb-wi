@@ -233,7 +233,7 @@ public class InitializationServlet extends HttpServlet {
         // we show PDX Model Numbers from PDXFinder not just JAX
         
         int count = pdxStore.getPDXFinderModelCount();
-        String number = "over 4500";
+        String number = "over 4800";
         if(count > 0){
             number = NumberFormat.getNumberInstance(Locale.US).format(pdxStore.getPDXFinderModelCount());
         }

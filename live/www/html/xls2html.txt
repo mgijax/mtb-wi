@@ -1,1 +1,3 @@
-Save as html, add css file to generated html in generated resources folder, save as html
+Save as html, add css file to generated html in generated resources folder, strip out javascript and other junk, save as html.
+Look for mso-spacerun spans as they don't display properly. Also other funky non html friendly characters.
+

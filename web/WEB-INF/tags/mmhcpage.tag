@@ -60,6 +60,7 @@
 				<ul>		
 					<li><a href="${pageContext.request.contextPath}/antibody.jsp">Antibody Staining Report</a></li>
 					<li><a href="${pageContext.request.contextPath}/lymphoma.jsp">Lymphoma Pathology Report</a></li>
+                                        <li><a href="https://www.youtube.com/@MMHCdb" target="_blank">MMHCdb Video Tutorial</a></li>
 				</ul>
 			</li>	
 			<li class="dropdown"><span>Searches/Tools</span>

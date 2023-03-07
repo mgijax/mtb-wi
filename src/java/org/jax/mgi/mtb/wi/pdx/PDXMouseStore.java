@@ -1823,21 +1823,21 @@ public class PDXMouseStore {
 
     }
 
-    // this site has moved but this is working as of 11-2022
-    // we probably don't want organoid and cell line model counts either
+    // not working as of 02-2023 
+    // we don't want organoid and cell line model counts 
     public int getPDXFinderModelCount() {
         int count = 0;
-        try {
-            JSONObject json = new JSONObject(getJSON("https://www.pdxfinder.org/data/graphdata"));
-            JSONArray providers = json.getJSONArray("providers");
-            for (int i = 0; i < providers.length(); i++) {
-                count += providers.getJSONObject(i).getInt("number");
-            }
-
-        } catch (JSONException jse) {
-            log.error("Can not get PDXFinder model count.", jse);
-
-        }
+//        try {
+//            JSONObject json = new JSONObject(getJSON("https://www.pdxfinder.org/data/graphdata"));
+//            JSONArray providers = json.getJSONArray("providers");
+//            for (int i = 0; i < providers.length(); i++) {
+//                count += providers.getJSONObject(i).getInt("number");
+//            }
+//
+//        } catch (JSONException jse) {
+//            log.error("Can not get PDXFinder model count.", jse);
+//
+//        }
         return count;
     }
 

@@ -16,6 +16,7 @@
 			</ul>
 
 						<p>Contact Us!
+                                                <p><a href="https://www.youtube.com/@MMHCdb" target="_blank">MMHCdb Video Tutorial</a>
 						<p>MMHCdb On-line <a href ="${pageContext.request.contextPath}/userHelp.jsp"> User Documentation </a></p>
 						<p>User Support email:<a href="mailto:mgi-help@jax.org">mgi-help@jax.org</a></p>
 						<p><a href="http://www.informatics.jax.org/mgihome/support/mgi_inbox.shtml">User Support contact web form</a></p>
