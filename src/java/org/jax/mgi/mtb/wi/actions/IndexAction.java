@@ -96,7 +96,6 @@ public class IndexAction extends Action {
             request.setAttribute("modelCounts",modelCounts);
             request.setAttribute("allModelCounts",allModelCounts);
             request.setAttribute("dataYear", dataYear);
-            request.setAttribute("modelCountsObject",mc.getDataObject());
             request.setAttribute("modelCountsYear", mc.YEAR);
             request.setAttribute("pdfLink", mc.PDF_LINK);
 

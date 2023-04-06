@@ -45,8 +45,8 @@ public class ModelCounts {
         "Prostate gland",
         "Liver,Bile duct",
         "Brain",
-        "Bladder",
         "Uterus,Endometrium",
+        "Bladder",
         "Esophagus",
         "Kidney",
         "Ovary",
@@ -67,8 +67,8 @@ public class ModelCounts {
         "Prostate gland",
         "Liver, Bile duct",
         "Brain, Meninges, Spinal cord, Nerve, Neuroblast, Neuroectoderm, Ganglion, Nerve sheath, Schwann cell",
-        "Urinary bladder",
         "Uterus, Cervix",
+        "Urinary bladder",
         "Esophagus",
         "Kidney, Renal pelvis",
         "Ovary",
@@ -82,31 +82,31 @@ public class ModelCounts {
 
     // display tissue, rank (there may be a tie), fatalaties, solr term
     String[] tissues = {
-        "Lung & other respiratory", "1", "135,360", "Lung",
-        "Lymphohematopoietic", "2", "57,810", "Lymphohematopoietic",
-        "Colon & other intestine", "3", "56,210", "Colon and other intestine",
-        "Pancreas", "4", "49,830", "Pancreas",
-        "Breast", "5", "43,780", "Breast", 
-        "Prostate", "6", "34,500", "Prostate",
-        "Liver & bile duct", "7", "30,520", "Liver and bile duct",
-        "Brain & other nervous system", "8", "18,280", "Brain and other nervous system",
-        "Urinary bladder", "9", "17,100", "Urinary bladder",
-        "Uterus & cervix", "10", "16,830", "Uterus and cervix",
-        "Esophagus", "11", "16,410", "Esophagus",
-        "Kidney & renal pelvis", "12", "13,920", "Kidney and renal pelvis",
-        "Ovary", "13", "12,810", "Ovary",
-        "Skin", "14", "11,990", "Skin",
-        "Oral cavity & pharynx", "15", "11,230", "Oral cavity",
-        "Stomach", "16", "11,090", "Stomach",
-        "Soft tissue including heart", "17", "5,130", "Soft tissue including heart",
-        "Gallbladder & other biliary", "18", "4,400", "Gallbladder",
-        "Endocrine system", "19", "3,330", "Endocrine system",
-        "Bones & joints", "20", "2,100", "Bone and joint"};
+        "Lung & other respiratory", "1", "132,330", "Lung",
+        "Lymphohematopoietic", "2", "57,380", "Lymphohematopoietic",
+        "Colon & other intestine", "3", "56,490", "Colon and other intestine",
+        "Pancreas", "4", "50,550", "Pancreas",
+        "Breast", "5", "43,700", "Breast", 
+        "Prostate", "6", "34,700", "Prostate",
+        "Liver & bile duct", "7", "29,380", "Liver and bile duct",
+        "Brain & other nervous system", "8", "18,990", "Brain and other nervous system",
+        "Uterus & cervix", "9", "17,340", "Uterus and cervix",
+        "Urinary bladder", "10", "16,710", "Urinary bladder",
+        "Esophagus", "11", "16,120", "Esophagus",
+        "Kidney & renal pelvis", "12", "14,890", "Kidney and renal pelvis",
+        "Ovary", "13", "13,270", "Ovary",
+        "Skin", "14", "12,470", "Skin",
+        "Oral cavity & pharynx", "15", "11,580", "Oral cavity",
+        "Stomach", "16", "11,130", "Stomach",
+        "Soft tissue including heart", "17", "5,140", "Soft tissue including heart",
+        "Gallbladder & other biliary", "18", "4,510", "Gallbladder",
+        "Endocrine system", "19", "3,240", "Endocrine system",
+        "Bones & joints", "20", "2,140", "Bone and joint"};
 
     ArrayList<ArrayList<String>> tissuesListList = new ArrayList<ArrayList<String>>();
 
-    public static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2022/2022-cancer-facts-and-figures.pdf";
-    public static final String YEAR = "2022";
+    public static final String PDF_LINK ="https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2023/2023-cancer-facts-and-figures.pdf";
+    public static final String YEAR = "2023";
     private String solrURL;
     private String minFC = "fq=minFC:1";
     private static String HTML = "";
@@ -151,10 +151,6 @@ public class ModelCounts {
         return HTMLALL;
     }
     
-    // does nothing, unused need to refactor IndexAction
-    public String getDataObject(){
-        return "empty";
-    }
    
 
     private void buildListList() {
