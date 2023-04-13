@@ -21,7 +21,7 @@
 		<section class="container" id="mmhc-detail">
 		
 	
-			<div id="model-counts">
+			<div id="model-counts" style="overflow:visible">
 				<table>
 					<caption>
 						<h2>Top Mouse Models of Human Cancer</h2>
