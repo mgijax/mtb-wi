@@ -19,7 +19,7 @@ $(function() {
 				return 'l-observed';
 			} else {
 				n = Math.ceil(parseFloat(d) / 10) * 10;
-				return 'r-' + n;
+				return 'fr-' + n;
 			}
 
 		};

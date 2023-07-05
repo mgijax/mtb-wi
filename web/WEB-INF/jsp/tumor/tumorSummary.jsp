@@ -173,7 +173,7 @@
 					<c:set var="currentParent" value="${rec.sortOrder}"/>
 					<c:set var="parentAttr" value="data-parent=\"${rec.parentFrequencyKey}\""/>
 	
-				<tr data-key="${rec.tumorFrequencyKey}" ${rec.tumorFrequencyKey != rec.parentFrequencyKey ? parentAttr : '' } data-test="${rec.strainSex}" data-freq="${rec.frequency}">
+				<tr data-key="${rec.tumorFrequencyKey}" ${rec.tumorFrequencyKey != rec.parentFrequencyKey ? parentAttr : '' } data-test="${rec.strainSex}" data-freq="${rec.incidence}">
 	
 					<td class="organ">
 						<c:out value="${rec.organAffected}" escapeXml="false" default="&nbsp;"/>

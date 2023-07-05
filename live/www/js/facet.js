@@ -59,8 +59,8 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://tum
 					queryValue: '[0 TO 50]'
 				},
 				{
-					label: 'Min &ge;&nbsp;50%',
-					queryKey: 'freqMin',
+					label: 'Max &ge;&nbsp;50%',
+					queryKey: 'freqMax',
 					queryValue: '[50 TO 100]'
 				}
 			]
@@ -68,7 +68,7 @@ const baseUrl = (typeof contextPath !== 'undefined') ? contextPath : 'http://tum
 		{
 			name: 'colonyMax',
 			title: 'Study Size',
-			format: l => { let n = parseInt(l, 10); return n == 0 ? ('not specified' ) : ('&le;&nbsp;' + n); }
+			format: l => { let n = parseInt(l, 10); return n == 0 ? ('not specified' ) : ('&nbsp;' + n); }
 		},
 		{
 			name: 'reference',
