@@ -808,16 +808,25 @@ addRow = function(i, r) {
 	let $r = $('<tr>'),
 		mu = modelUrl(r),
                 // both organ origin and tumor classification may be duplicated with a '-' 
+        
+                // if the are (not always as it currently does) remove the duplicate
 		$name = cell(r, r => {
                         let oo = r.organOrigin;
                         let tc = r.tumorClassification;
                         
                         if(oo.includes(" - ")){
-                            oo = oo.split(" - ")[0];
+                            
+                            split = oo.split(" - ");
+                            if(split[0] == split[1]){
+                                oo = split[0];
+                            }
                         }
                         
                         if(tc.includes(" - ")){
-                            tc = tc.split(" - ")[0];
+                            split = tc.split(" - ");
+                            if(split[0] == split[1]){
+                                tc = split[0];
+                            }
                         }
                                     
 			return oo + ' ' + tc;
