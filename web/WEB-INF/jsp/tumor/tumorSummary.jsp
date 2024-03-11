@@ -6,7 +6,7 @@
 <%@ taglib prefix="jax" tagdir="/WEB-INF/tags" %>
 <c:choose>
 <c:when test="${tumor.organOfOrigin != tumor.organAffected}">
-	<c:set var="subtitle" value="${tumor.organOfOrigin} ${tumor.tumorClassification} ${tumor.organAffected}" />
+	<c:set var="subtitle" value="${tumor.organOfOrigin} ${tumor.tumorClassification}(${tumor.organAffected})" />
 </c:when>
 <c:otherwise>
 	<c:set var="subtitle" value="${tumor.organOfOrigin} ${tumor.tumorClassification}" />

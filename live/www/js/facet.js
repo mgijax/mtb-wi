@@ -807,9 +807,9 @@ addRow = function(i, r) {
 	
 	let $r = $('<tr>'),
 		mu = modelUrl(r),
+                
                 // both organ origin and tumor classification may be duplicated with a '-' 
-        
-                // if the are (not always as it currently does) remove the duplicate
+               
 		$name = cell(r, r => {
                         let oo = r.organOrigin;
                         let tc = r.tumorClassification;
