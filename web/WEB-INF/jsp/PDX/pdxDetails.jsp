@@ -29,12 +29,7 @@
 			}
 
 
-			a.ckb:link{
-			color:red;
-			}
-			a.ckb:visited{
-			color:red;
-			}
+			
 			
 
 		</style>
@@ -196,15 +191,6 @@
 					{name: 'filter'},
 					{name: 'passage_num'},
 					{name: 'entrez_gene_id'},
-					{name: 'ckb_molpro_link'},
-					{name: 'ckb_molpro_name'},
-					{name: 'ckb_potential_treat_link'},
-					{name: 'ckb_potential_treat_approach'},
-					{name: 'ckb_protein_effect'},
-					{name: 'ckb_nclinical_resist'},
-					{name: 'ckb_nclinical_sens'},
-					{name: 'ckb_npreclinical_resist'},	
-					{name: 'ckb_npreclinical_sens'},
 					{name: 'count_human_reads'},
 					{name: 'pct_human_reads'}
 					
@@ -226,13 +212,7 @@
 					
 				});
 				
-				var ckb = [{header: '', colspan: 2, align: 'center'},
-						{header: '<a href="https://ckbhome.jax.org" onclick="openCKB()">JAX Clinical Knowledgebase (CKB)</a> annotations<br><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to CKB Boost users with active subscriptions only."> Details available to CKB Boost users with active subscriptions only.', colspan: 6, align: 'center'},
-						{header: '', colspan: 16, align: 'center'}]
 				
- 				var group = new Ext.ux.grid.ColumnHeaderGroup({
-					rows: [ckb]
-				});
 
 				store.setDefaultSort('gene_symbol', 'ASC');
 
@@ -253,13 +233,7 @@
    						
 						},
 						
-						{
-							header: 'Variant',
-							width: 120,
-							sortable: true,
-							dataIndex: 'ckb_molpro_name',
-							renderer: ckbMolProRenderer
-						},
+						
 						{
 							header: 'Variant effect',
 							width: 100,
@@ -267,36 +241,7 @@
 							dataIndex: 'consequence'
 						},
   									
-						{
-							header: 'CKB<br>protein<br>effect',
-							width: 80,
-							sortable: true,
-							dataIndex: 'ckb_protein_effect'
-						},
-									
-						{
-							header: '# Annotations<br>predicting<br><b>sensitivity<b>',
-							width: 140,
-							sortable: true,
-							dataIndex: 'ckb_nclinical_sens',
-							renderer: ckbSensitivityRenderer
-						},
-   			
-						{
-							header: '# Annotations<br>predicting<br><b>resistance</b>',
-							width: 140,
-							sortable: true,
-							dataIndex: 'ckb_nclinical_resist',
-							renderer: ckbResistanceRenderer
-						}, 
-  			
-						{
-							header: 'Potential<br>treatment<br>approaches',
-							width: 110,
-							sortable: true,
-							dataIndex: 'ckb_potential_treat_approach',
-							renderer: ckbPotTreatRenderer
-						}, 
+						
 						
 						{
 							header: 'Platform',
@@ -412,90 +357,14 @@
 						store: store,
 						displayInfo: true,
 						displayMsg: 'Displaying results {0} - {1} of {2}'
-					}),
-					plugins:group
-
-
+					})
+					
 
 				});
 				
-				// not used
- 				function ckbGeneRenderer(value, p, record){
-					if(record.get("ckb_gene_id").length>0){
-						return String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_gene_id"),record.get("gene_symbol"));
-					}else{
-						if(record.get("gene_symbol")){
-							return record.get("gene_symbol");
-						}else{
-							return "";
-						}
-					}
-   				
-				}
-				
- 				function ckbMolProRenderer(value, p, record){
- 					val = record.get("ckb_molpro_name");
- 					
- 					if(record.get("ckb_molpro_name").length>0 && record.get("ckb_molpro_link").length>0){
-						val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
-						
-						if(record.get("ckb_molpro_link").indexOf("ckbhome") != -1){
-							val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_molpro_name"));
-						}
-					}
-						
-					return val;
-					
-				}
-				
-				function ckbPotTreatRenderer(value, p, record){
- 					val = record.get("ckb_potential_treat_approach");
- 					
- 					if(record.get("ckb_potential_treat_approach").trim().length>0 && record.get("ckb_molpro_link").length>0){
-						val =  String.format('<a href="{0}" target="_blank">{1}</a>',record.get("ckb_molpro_link")+"?tabType=TREATMENT_APPROACH_EVIDENCE", record.get("ckb_potential_treat_approach"));
-						
-						if(record.get("ckb_molpro_link").indexOf("ckbhome") != -1){
-							val =  String.format('<a href="{0}" class="ckb" title="red links require CKB registration" target="_blank">{1}</a><img src="${applicationScope.urlImageDir}/CKBPrivate.png" width="10px" height="10px" border=0 alt="Details available to registerd CKB users only">',record.get("ckb_molpro_link"), record.get("ckb_potential_treat_approach"));
-						}
-					}
-						
-					return val;
-					
-				}
-				
-				function ckbResistanceRenderer(value, p, record){
-					val = "";
-					if(record.get("ckb_nclinical_resist").trim().length>0 || record.get("ckb_npreclinical_resist").trim().length>0){
-						val = "0 clinical/";
-						if(record.get("ckb_nclinical_resist").trim().length>0){
-							val = record.get("ckb_nclinical_resist")+" clinical /"
-						}			
-						if(record.get("ckb_npreclinical_resist").trim().length>0){
-							val = val+record.get("ckb_npreclinical_resist")+" preclinical";
-						}else{
-							val = val+"0 preclinical";
-						}
-					}
-					return val;
-				}
 				
 				
-				function ckbSensitivityRenderer(value, p, record){
-					val = "";
-					if(record.get("ckb_nclinical_sens").trim().length>0 || record.get("ckb_npreclinical_sens").trim().length>0){
-						val = "0 clinical/";
-						if(record.get("ckb_nclinical_sens").trim().length>0){
-							val = record.get("ckb_nclinical_sens")+" clinical /"
-						}			
-						if(record.get("ckb_npreclinical_sens").trim().length>0){
-							val = val+record.get("ckb_npreclinical_sens")+" preclinical";
-						}else{
-							val = val+"0 preclinical";
-						}
-					}
-					return val;
-				}
-				
+ 				
 				
 				function civicLinkRenderer(value, p, record, row, col, store){
 					
@@ -562,15 +431,7 @@
 				var colNames = [];
 				colNames.push( 'sample_name');
 				colNames.push( 'gene_symbol');
-				colNames.push( 'ckb_molpro_name');
 				colNames.push( 'consequence');
-				colNames.push( 'ckb_protein_effect');
-				colNames.push( 'ckb_nclinical_sens');
-				colNames.push( 'ckb_nclinical_resist');
-				colNames.push('ckb_potential_treat_approach');
-				colNames.push( 'platform');
-				colNames.push( 'chromosome');
-				colNames.push( 'seq_position');
 				colNames.push( 'ref_allele');
 				colNames.push( 'alt_allele');
 				colNames.push( 'amino_acid_change');
@@ -818,9 +679,6 @@
 				
 			});
 			
-			function openCKB(){
-				window.open("https://ckbhome.jax.org","ckb");
-			}
 			
    		
                         

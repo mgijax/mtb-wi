@@ -184,7 +184,7 @@ public class PDXSearchResultsAction extends Action {
         if (genes2 != null && genes2.trim().length() > 0) {
 
             if (mice.size() > 0) {
-                String expr = pdxMouseStore.getExpressionGraph(mice,genes2,false);
+                String expr = pdxMouseStore.getExpressionGraph(mice,genes2);
                 if (expr != null && expr.length() > 1) {
                     
                     String data = "['Model:Sample','Diagnosis','Expression Level', 'Model Name']," + expr;
@@ -214,14 +214,15 @@ public class PDXSearchResultsAction extends Action {
             if (mice.size() > 0) {
 
                 
-                String expr = pdxMouseStore.getExpressionGraph(mice, genesCNV, true);
+                String expr = pdxMouseStore.getCNVGraph(mice, genesCNV);
                 if (expr != null && expr.length() > 1) {
                    
                     
-                    String data = "['Model:Sample','Diagnosis','Expression Level', 'Model Name',{ role: 'style' }]," + expr;
+                    String data = "['Model:Sample','Diagnosis','LRP Level', 'Model Name',{ role: 'style' }]," + expr;
                     data = data.replaceAll("Amplification", "orange");
                     data = data.replaceAll("Deletion", "blue");
                     data = data.replaceAll("Normal", "grey");
+                   
                     request.setAttribute("rank", data);
                     
                     String[] lines = data.split("\\[");
@@ -230,7 +231,8 @@ public class PDXSearchResultsAction extends Action {
                     size = size + 200;
                     request.setAttribute("gene2", genesCNV);
                     request.setAttribute("divSize", size + "");
-                    request.setAttribute("message", "Orange bars indicate gene amplification (log2(cn raw/sample ploidy) > 0.5).<br>Blue bars indicate gene deletion (log2(cn raw/sample ploidy)< -0.5).<br>Grey bars indicate no significant copy number change.");
+                    request.setAttribute("message", "Orange bars indicate gene amplification (log2(cn raw/sample ploidy) > 0.5)."+
+                            "<br>Blue bars indicate gene deletion (log2(cn raw/sample ploidy)< -0.5).<br>Grey bars indicate no significant copy number change.");
                 } else {
                     // no expression
                     request.setAttribute("noResults", "There are no matching models.");
@@ -241,7 +243,7 @@ public class PDXSearchResultsAction extends Action {
             }
             
 
-            result = "expression";
+            result = "cnv";
 
         } else {
             if (request.getParameter("asCSV") != null ) {
@@ -264,6 +266,7 @@ public class PDXSearchResultsAction extends Action {
             
             // requesting expression data as CSV
              if (request.getParameter("csv") != null) {
+                 String fileName ="PDXExpression.csv";      
                  
                 String csv = request.getParameter("csv"); 
                 
@@ -275,10 +278,11 @@ public class PDXSearchResultsAction extends Action {
                     csv = csv.replaceAll("orange","Amplification" );
                     csv = csv.replaceAll("blue", "Deletion");
                     csv = csv.replaceAll("grey", "Normal");
+                    fileName = "PDXCNV.csv";
                 }
                 
                 response.setContentType("text/csv");
-                response.setHeader("Content-disposition", "attachment; filename=PDXExpression.csv");
+                response.setHeader("Content-disposition", "attachment; filename="+fileName);
                 response.getWriter().write(csv);
 
                 response.flushBuffer();

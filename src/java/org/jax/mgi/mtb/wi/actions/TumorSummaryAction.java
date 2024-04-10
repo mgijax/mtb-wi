@@ -27,7 +27,7 @@ import org.jax.mgi.mtb.wi.WIConstants;
 import org.jax.mgi.mtb.wi.utils.WIUtils;
 
 /**
- * Retreives the tumor summary.
+ * Retrieves the tumor summary.
  *
  * @author $Author$
  * @date $Date$
@@ -87,7 +87,11 @@ public class TumorSummaryAction extends Action {
             MTBTumorUtilDAO daoTumorUtil = MTBTumorUtilDAO.getInstance();
             long arrnTFKeys[] = parseKeys(strTFKeys);
 
-            if (strStrainKey != null && strOrganOfOriginKey != null) {
+            if (strStrainKey != null && strOrganOfOriginKey != null  && arrnTFKeys.length > 0) {
+                
+                //at this point if arrnTFKeys is null or empty query might not terminate
+                // see /mtbwi/tumorSummary.do?organOfOriginKey=140&strainKey=8886
+                // but why is the code explicity checking for a case where both and only strain and organ are populated? (just added third clause)
 
                 long nStrainKey = Long.parseLong(strStrainKey);
                 long nOrganOriginKey = Long.parseLong(strOrganOfOriginKey);
@@ -123,9 +127,6 @@ public class TumorSummaryAction extends Action {
                     request.setAttribute("tumor", dtoTumorSummary);
                 }
             } else if (arrnTFKeys != null && arrnTFKeys.length != 0) {
-
-
-
 
                 dtoTumorSummary = daoTumorUtil.getTumorSumary(arrnTFKeys);
                 request.setAttribute("tumor", dtoTumorSummary);

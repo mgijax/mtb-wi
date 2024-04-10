@@ -81,6 +81,7 @@ public class PDXMouseStore {
 
     private static final String CNV_AMP = baseURL + "cnv_gene?min_lr_ploidy=0.5&gene_symbol=";
     private static final String CNV_DEL = baseURL + "cnv_gene?max_lr_ploidy=-0.5&gene_symbol=";
+    private static final String CNV = baseURL + "cnv_gene?gene_symbol=";
 
     private static final String VARIANTS = baseURL + "variants";
 
@@ -106,14 +107,7 @@ public class PDXMouseStore {
     private static final String RNA_SEQ = "RNA_Seq";
     private static final HashMap<String, String> AFFECTED_GENES = new HashMap<>();
 
-    private static final String CKB_MOLPRO_PUBLIC = "https://ckb.jax.org/molecularProfile/show/";
-    //   private static final String CKB_GENE_PUBLIC = "https://ckb.jax.org/gene/show?geneId=";
-
-    private static final String CKB_MOLPRO_INTERNAL = "https://myckb.jax.org/molecularProfile/show/";
-    //  private static final String CKB_GENE_INTERNAL = "https://myckb.jax.org/gene/show?geneId=";
-
-    private static final String CKB_HOME = "https://ckbhome.jax.org/";
-
+   
     public static final String BAYLOR = "Baylor College of Medicine";
     public static final String DANA_FARBER = "Dana-Farber Cancer Institute";
 
@@ -1166,12 +1160,7 @@ public class PDXMouseStore {
     public String getVariationData(String model, String limit, String start, String sort, String dir, String ctp) {
 
         StringBuffer result = new StringBuffer("{'total':");
-        boolean ckbSort = false;
-        try {
-            ckbSort = sort.startsWith("ckb_");
-        } catch (Exception e) {
-            log.debug("'" + sort + "' cant be parsed as sort field");
-        }
+      
 
         String params = "?keepnulls=yes&model=" + model + "&skip=" + start + "&limit=" + limit + "&sort_by=" + sort + "&sort_dir=" + dir;
 
@@ -1195,7 +1184,7 @@ public class PDXMouseStore {
 
             result.append(",'variation':[ ");
 
-            result.append(getVariantFields(array, ckbSort));
+            result.append(getVariantFields(array));
 
             result.replace(result.length() - 1, result.length(), "]}");
 
@@ -1217,8 +1206,7 @@ public class PDXMouseStore {
 
         StringBuilder result = new StringBuilder("Model,Sample,Gene,Platform,Chromosome,Seq Position,Ref Allele,Alt Allele,");
         result.append("Consequence,Amino Acid Change,RS Variants,Read Depth,Allele Frequency,Transcript ID,Filtered Rationale,Filter,");
-        result.append("Passage Num,CKB Molecular Profile Link, CKB Molecular Profile Name, CKB Gene Link,CKB Potential Treatment Appr,CKB Protein Effect,No. clinical annotations predicting sensitivity,");
-        result.append("No. preclinical annotations predicting sensitivity,No. clinical annotations predicting resistance,No. preclinical annotations predicting resistance,");
+        result.append("Passage Num,");
         result.append("Count Human Reads,PCT Human Reads");
 
         int start = 0;
@@ -1242,7 +1230,7 @@ public class PDXMouseStore {
 
                 result.append("\n ");
 
-                result.append(getVariantFields(array, false).replaceAll("'", "").replaceAll("null", " ").replaceAll("\\[", "").replaceAll("\\],", "\n"));
+                result.append(getVariantFields(array).replaceAll("'", "").replaceAll("null", " ").replaceAll("\\[", "").replaceAll("\\],", "\n"));
 
                 start += limit;
 
@@ -1257,18 +1245,14 @@ public class PDXMouseStore {
 
     }
 
-    private String getVariantFields(JSONArray array, boolean ckbSort) throws JSONException {
+    private String getVariantFields(JSONArray array) throws JSONException {
 
-        // some ckb annotations are private if a ckb field is used to sort we want the private ones at the end
-        // otherwise the sort has gaps where private values are hidden.
-        // so stash the private results and append them at the end.
-        // will have odd effect over pagination but better than nothing...
-        StringBuilder finalResult = new StringBuilder();
+       
+      
         StringBuilder result = new StringBuilder();
-        StringBuilder stashedResult = new StringBuilder();
-
+  
         for (int i = 0; i < array.length(); i++) {
-            boolean stash = false;
+            
             result.append("['").append(getField(array.getJSONObject(i), "model_id")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "sample_name")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "gene_symbol")).append("',");
@@ -1293,83 +1277,19 @@ public class PDXMouseStore {
 
             result.append("'").append(getField(array.getJSONObject(i), "passage_num")).append("',");
 
-            String ckbGeneID = getField(array.getJSONObject(i), "ckb_gene_id");
+           
             String entrezGeneID = getField(array.getJSONObject(i), "entrez_gene_id");
 
             result.append("'").append(entrezGeneID).append("',");
 
-            String ckbMolProID = getField(array.getJSONObject(i), "ckb_molpro_id");
-            String ckbMolProName = getField(array.getJSONObject(i), "ckb_molpro_name");
-            String ckbTreatment = getField(array.getJSONObject(i), "ckb_potential_treat_approach");
-            boolean ckbPublic = "public".equals(getField(array.getJSONObject(i), "ckb_public_status"));
-
-            if (WIConstants.getInstance().getPublicDeployment()) {
-
-                if (ckbMolProName.length() > 0 && !ckbMolProName.equals("null")) {
-                    if (ckbPublic) {
-                        result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
-                    } else {
-                        result.append("'").append(CKB_HOME).append("',");
-                    }
-                } else {
-                    result.append("'',");
-                }
-
-                result.append("'").append(ckbMolProName).append("',");
-
-                if (ckbTreatment.trim().length() > 0 && !ckbTreatment.equals("null")) {
-                    if (ckbPublic) {
-                        result.append("'").append(CKB_MOLPRO_PUBLIC).append(ckbMolProID).append("',");
-                    } else {
-                        result.append("'").append(CKB_HOME).append("',");
-                    }
-                } else {
-                    result.append("'',");
-                }
-
-                result.append("'").append(ckbTreatment).append("',");
-                result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
-
-            } else {
-                //link to internal site
-                if (ckbMolProName.length() > 0 && !ckbMolProName.equals("null")) {
-                    result.append("'").append(CKB_MOLPRO_INTERNAL).append(ckbMolProID).append("',");
-                    result.append("'").append(ckbMolProName).append("',");
-                } else {
-                    result.append("'',");
-                    result.append("'',");
-
-                }
-                if (ckbTreatment.length() > 0 && !ckbTreatment.equals("null")) {
-                    result.append("'").append(CKB_MOLPRO_INTERNAL).append(ckbMolProID).append("',");
-                } else {
-                    result.append("'',");
-                }
-
-                result.append("'").append(getField(array.getJSONObject(i), "ckb_potential_treat_approach")).append("',");
-                result.append("'").append(getField(array.getJSONObject(i), "ckb_protein_effect")).append("',");
-
-            }
-
-            result.append("'").append(getField(array.getJSONObject(i), "ckb_nclinical_resist")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "ckb_nclinical_sens")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "ckb_npreclinical_resist")).append("',");
-            result.append("'").append(getField(array.getJSONObject(i), "ckb_npreclinical_sens")).append("',");
-
             result.append("'").append(getField(array.getJSONObject(i), "count_human_reads")).append("',");
             result.append("'").append(getField(array.getJSONObject(i), "pct_human_reads")).append("'],");
-
-            if (stash) {
-                stashedResult.append(result);
-
-            } else {
-                finalResult.append(result);
-            }
-            result.delete(0, result.length());
+            
+            
         }
 
-        finalResult.append(stashedResult);
-        return finalResult.toString();
+      
+        return result.toString();
     }
 
     public Double getMinTMB() {
@@ -1480,7 +1400,7 @@ public class PDXMouseStore {
             JSONObject job = new JSONObject(getJSON(FUSION_MODELS_BY_GENE));
             JSONArray jarray = (JSONArray) job.get("data");
             for (int i = 0; i < jarray.length(); i++) {
-                try {
+               
                     String model = jarray.getJSONObject(i).getString("model_name");
 
                     String sample = jarray.getJSONObject(i).getString("sample_name");
@@ -1501,9 +1421,7 @@ public class PDXMouseStore {
                         sampleMap.put(sample, variants);
                         map.put(model, sampleMap);
                     }
-                } catch (Exception e) {
-                    // some data objects don't have ckb_varaint
-                }
+              
             }
             for (String model : map.keySet()) {
                 StringBuilder display = new StringBuilder();
@@ -1598,7 +1516,7 @@ public class PDXMouseStore {
 
             }
         } catch (Exception e) {
-            log.error("Unable to load cnv plots", e);
+            log.error("Unable to load cnv plots");
         }
 
     }
@@ -1749,12 +1667,11 @@ public class PDXMouseStore {
      * @param mice ArrayList<PDXMouse> all mice from query results
      * @return String to graph expression of gene across all mice
      */
-    public String getExpressionGraph(ArrayList<PDXMouse> mice, String gene, boolean cnv) {
+    public String getExpressionGraph(ArrayList<PDXMouse> mice, String gene) {
 
         HashMap<String, String> ampDel = new HashMap<>();
-        if (cnv) {
-            ampDel = getAmpDel(gene);
-        }
+        
+        
 
         DecimalFormat df = new DecimalFormat("#.##");
 
@@ -1776,6 +1693,7 @@ public class PDXMouseStore {
                     modelDiagnosis.put(mice.get(i).getModelID(), mice.get(i).getClinicalDiagnosis().replaceAll("'", "").toLowerCase());
                 }
                 i++;
+               
             }
 
             if(mouseIDs.length()>0){
@@ -1796,25 +1714,70 @@ public class PDXMouseStore {
                         passage = getField(jarray.getJSONObject(k), "passage_num");
                         rankZ = jarray.getJSONObject(k).getDouble("z_score_percentile_rank");
 
-                        if (cnv) {
-                            ampDelStr = "Normal";
-                            if (ampDel.containsKey(model)) {
-                                ampDelStr = ampDel.get(model);
-                            }
-                            result.append("['" + model + " : " + sample + "','" + modelDiagnosis.get(model) + "'," + df.format(rankZ) + ",'" + model + "','" + ampDelStr + "'],");
-                        } else {
-                            result.append("['").append(model).append(" : ").append(sample);
-                            result.append(" ").append(passage).append("',");
-                            result.append("'").append(modelDiagnosis.get(model)).append("',");
-                            result.append(df.format(rankZ)).append(",'").append(model).append("'],");
-                        }
+                        result.append("['").append(model).append(" : ").append(sample);
+                        result.append(" ").append(passage).append("',");
+                        result.append("'").append(modelDiagnosis.get(model)).append("',");
+                        result.append(df.format(rankZ)).append(",'").append(model).append("'],");
+                        
                     }
 
                 } catch (JSONException e) {
                     log.error(e);
                 }
             }
+            
         }
+        if (result.length() > 0) {
+            result.deleteCharAt(result.length() - 1);
+        }
+
+        return result.toString();
+
+    }
+    
+    
+     public String getCNVGraph(ArrayList<PDXMouse> mice, String gene) {
+
+        
+         
+         DecimalFormat df = new DecimalFormat("#.##");
+
+        StringBuffer result = new StringBuffer();
+      
+
+        HashMap<String, String> modelDiagnosis = new HashMap();
+        for(int i =0; i < mice.size(); i++){
+            if (!DANA_FARBER.equals(mice.get(i).getInstitution()) && !BAYLOR.equals(mice.get(i).getInstitution())) {
+               modelDiagnosis.put(mice.get(i).getModelID(), mice.get(i).getClinicalDiagnosis().replaceAll("'", "").toLowerCase());
+            }
+        }
+        
+        try {
+
+            JSONObject job = new JSONObject(getJSON(CNV + gene));
+
+            JSONArray jarray = job.getJSONArray("data");
+
+            for (int i = 0; i < jarray.length(); i++) {
+
+                String model = jarray.getJSONObject(i).getString("model_name");
+                if(modelDiagnosis.containsKey(model)){
+                    String sample = jarray.getJSONObject(i).getString("sample_name");
+                    Double logRatioPloidy = Double.parseDouble(jarray.getJSONObject(i).getString("logratio_ploidy"));
+                    String ampDelStr = "Normal";
+                    if(logRatioPloidy > 0.5){
+                            ampDelStr = "Amplification";
+                    }else if(logRatioPloidy < -0.5){
+                            ampDelStr = "Deletion";
+                    }
+                            
+                    result.append("['" + model + " : " + sample + "','" + modelDiagnosis.get(model) + "'," + df.format(logRatioPloidy) + ",'" + model + "','" + ampDelStr + "'],");
+            }
+            }
+        } catch (JSONException e) {
+            log.error(e);
+        }
+      
         if (result.length() > 0) {
             result.deleteCharAt(result.length() - 1);
         }
@@ -1841,37 +1804,7 @@ public class PDXMouseStore {
         return count;
     }
 
-    private HashMap<String, String> getAmpDel(String gene) {
-        //Amplification, Deletion, Normal
-
-        HashMap<String, String> ampDel = new HashMap<>();
-
-        try {
-
-            JSONObject job = new JSONObject(getJSON(CNV_AMP + gene));
-
-            JSONArray jarray = job.getJSONArray("data");
-
-            for (int i = 0; i < jarray.length(); i++) {
-
-                ampDel.put(jarray.getJSONObject(i).getString("model_name"), "Amplification");
-            }
-
-            job = new JSONObject(getJSON(CNV_DEL + gene));
-
-            jarray = job.getJSONArray("data");
-
-            for (int i = 0; i < jarray.length(); i++) {
-
-                ampDel.put(jarray.getJSONObject(i).getString("model_name"), "Deletion");
-            }
-
-        } catch (JSONException e) {
-            log.error(e);
-        }
-        return ampDel;
-    }
-
+   
     
 
    

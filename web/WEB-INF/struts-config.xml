@@ -261,6 +261,7 @@
             scope="request">
             <forward name="table" path="/WEB-INF/jsp/PDX/pdxSearchResults.jsp"/>      
             <forward name="expression" path="/WEB-INF/jsp/PDX/pdxExpression.jsp"/>      
+             <forward name="cnv" path="/WEB-INF/jsp/PDX/pdxCNV.jsp"/>      
             <forward name="failure" path="appError.jsp"/>
         </action>
     

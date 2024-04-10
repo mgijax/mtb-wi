@@ -229,9 +229,12 @@ public class ModelCounts {
     private String getCounts(String tissue, String mutant) {
 
         String count = "";
+        
+        String queryStr = HTISSUE + "\"" + tissue + "\"" + mutant;
+        
         try {
 
-            String queryStr = HTISSUE + "\"" + tissue + "\"" + mutant;
+            
 
             URL url = null;
             url = new URL(solrURL + queryStr.toString().replaceAll(" ", "%20"));
@@ -242,7 +245,7 @@ public class ModelCounts {
             count = count.substring(0, count.indexOf(","));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("failed to get model counts with query "+queryStr);
         }
 
         return count;
